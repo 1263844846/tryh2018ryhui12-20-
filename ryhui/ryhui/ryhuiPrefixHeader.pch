@@ -1,0 +1,40 @@
+//
+//  ryhuiPrefixHeader.pch
+//  ryhui
+//
+//  Created by 江 云龙 on 15/2/13.
+//  Copyright (c) 2015年 stefan. All rights reserved.
+//
+
+#ifndef ryhui_ryhuiPrefixHeader_pch
+#define ryhui_ryhuiPrefixHeader_pch
+#import "AFNetworking.h"
+#import "AppDelegate.h"
+#import "UIImageView+WebCache.h"
+#import "RHNetworkService.h"
+#import "RHBaseViewController.h"
+#import "RHUtility.h"
+
+#ifdef DEBUG
+#define DLog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+#define ALog(...) [[NSAssertionHandler currentHandler] handleFailureInFunction:[NSString stringWithCString:__PRETTY_FUNCTION__ encoding:NSUTF8StringEncoding] file:[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lineNumber:__LINE__ description:__VA_ARGS__]
+#else
+#define DLog(...) do { } while (0)
+#ifndef NS_BLOCK_ASSERTIONS
+#define NS_BLOCK_ASSERTIONS
+#endif
+#define ALog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+#endif
+
+#define RGB(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
+#define RGBA(r,g,b,a) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]
+#define BASEWINDOW [[UIApplication sharedApplication].windows objectAtIndex:0]
+
+#define SCREENWIDTH [IAUtility screenWidth]
+#define SCREENHEIGHT [IAUtility screenHeight]
+
+#define KEYWINDOW [[UIApplication sharedApplication].windows objectAtIndex:0]
+
+#define INTTIMESTAMP [[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] intValue]
+
+#endif

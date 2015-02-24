@@ -1,0 +1,13 @@
+# Uncomment this line to define a global platform for your project
+# platform :ios, '6.0'
+
+target 'ryhui' do
+pod 'AFNetworking', '~> 2.5.1'
+pod 'SDWebImage', '~> 3.7.1'
+pod 'MBProgressHUD', '~> 0.9'
+end
+
+target 'ryhuiTests' do
+
+end
+

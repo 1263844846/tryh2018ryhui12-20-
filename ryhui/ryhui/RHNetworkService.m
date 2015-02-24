@@ -1,0 +1,49 @@
+//
+//  RHNetworkService.m
+//  ryhui
+//
+//  Created by 江 云龙 on 15/2/13.
+//  Copyright (c) 2015年 stefan. All rights reserved.
+//
+
+#import "RHNetworkService.h"
+
+static RHNetworkService* _instance;
+
+@implementation RHNetworkService
+@synthesize session;
+@synthesize niubiMd5;
+
++(RHNetworkService*)instance
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _instance=[[RHNetworkService alloc]init];
+    });
+    return _instance;
+}
+-(NSString*)doMain
+{
+#ifdef DEBUG
+    return @"http://123.57.133.7/TinyFinance/";
+#else
+    return @"http://www.ryhui.com/";
+#endif
+}
+
+-(AFHTTPRequestOperation*)POST:(NSString *)URLString parameters:(id)parameters success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+{
+    AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
+    if (session&&[session length]>0) {
+        [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
+    }
+    return [manager POST:[NSString stringWithFormat:@"%@%@",[self doMain],URLString]
+              parameters:parameters
+    constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    }
+                 success:success
+                 failure:failure];
+    
+}
+
+@end

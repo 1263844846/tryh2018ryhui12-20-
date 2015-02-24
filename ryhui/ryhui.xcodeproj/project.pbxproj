@@ -1,0 +1,630 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		961AD2F930E8CEFA8FA5D28D /* libPods-ryhui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB95D30F1AE0DCFA27AE1DD7 /* libPods-ryhui.a */; };
+		F80E49441A8E24C000028CD1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F80E49431A8E24C000028CD1 /* main.m */; };
+		F80E49471A8E24C000028CD1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F80E49461A8E24C000028CD1 /* AppDelegate.m */; };
+		F80E494A1A8E24C000028CD1 /* ryhui.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F80E49481A8E24C000028CD1 /* ryhui.xcdatamodeld */; };
+		F80E494D1A8E24C000028CD1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F80E494C1A8E24C000028CD1 /* ViewController.m */; };
+		F80E49501A8E24C000028CD1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F80E494E1A8E24C000028CD1 /* Main.storyboard */; };
+		F80E49521A8E24C000028CD1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F80E49511A8E24C000028CD1 /* Images.xcassets */; };
+		F80E49551A8E24C000028CD1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F80E49531A8E24C000028CD1 /* LaunchScreen.xib */; };
+		F80E49611A8E24C100028CD1 /* ryhuiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F80E49601A8E24C100028CD1 /* ryhuiTests.m */; };
+		F80E496E1A8E27F600028CD1 /* RHNetworkService.m in Sources */ = {isa = PBXBuildFile; fileRef = F80E496D1A8E27F600028CD1 /* RHNetworkService.m */; };
+		F80E49731A8E3A0300028CD1 /* RHBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F80E49721A8E3A0300028CD1 /* RHBaseViewController.m */; };
+		F80E49781A8E3C5400028CD1 /* RHLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F80E49761A8E3C5400028CD1 /* RHLoginViewController.m */; };
+		F80E49791A8E3C5400028CD1 /* RHLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F80E49771A8E3C5400028CD1 /* RHLoginViewController.xib */; };
+		F80E497D1A8E3D1E00028CD1 /* loginBG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F80E497C1A8E3D1E00028CD1 /* loginBG.jpg */; };
+		F80E49801A8E407900028CD1 /* loginButtonDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = F80E497E1A8E407900028CD1 /* loginButtonDefault.png */; };
+		F80E49811A8E407900028CD1 /* loginButtonHightlight.png in Resources */ = {isa = PBXBuildFile; fileRef = F80E497F1A8E407900028CD1 /* loginButtonHightlight.png */; };
+		F80E49841A8E41A300028CD1 /* qrButtonDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = F80E49821A8E41A300028CD1 /* qrButtonDefault.png */; };
+		F80E49851A8E41A300028CD1 /* qrButtonHightLight.png in Resources */ = {isa = PBXBuildFile; fileRef = F80E49831A8E41A300028CD1 /* qrButtonHightLight.png */; };
+		F80E49891A8E444B00028CD1 /* RHALoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F80E49871A8E444B00028CD1 /* RHALoginViewController.m */; };
+		F80E498A1A8E444B00028CD1 /* RHALoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F80E49881A8E444B00028CD1 /* RHALoginViewController.xib */; };
+		F80E498E1A8E46CA00028CD1 /* RHUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = F80E498D1A8E46CA00028CD1 /* RHUtility.m */; };
+		F80E49901A8E47FD00028CD1 /* navBG.png in Resources */ = {isa = PBXBuildFile; fileRef = F80E498F1A8E47FD00028CD1 /* navBG.png */; };
+		F80E49921A8E48AD00028CD1 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = F80E49911A8E48AD00028CD1 /* back.png */; };
+		F80E49951A8E502E00028CD1 /* ALoginButtonDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = F80E49931A8E502E00028CD1 /* ALoginButtonDefault.png */; };
+		F80E49961A8E502E00028CD1 /* ALoginButtonHightLight.png in Resources */ = {isa = PBXBuildFile; fileRef = F80E49941A8E502E00028CD1 /* ALoginButtonHightLight.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F80E495B1A8E24C100028CD1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F80E49361A8E24C000028CD1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F80E493D1A8E24C000028CD1;
+			remoteInfo = ryhui;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		64D0F7EFA66E690954907170 /* Pods-ryhui.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ryhui.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ryhui/Pods-ryhui.debug.xcconfig"; sourceTree = "<group>"; };
+		BB95D30F1AE0DCFA27AE1DD7 /* libPods-ryhui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ryhui.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE5A032DE22EAAF12589E45A /* Pods-ryhui.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ryhui.release.xcconfig"; path = "Pods/Target Support Files/Pods-ryhui/Pods-ryhui.release.xcconfig"; sourceTree = "<group>"; };
+		F80E493E1A8E24C000028CD1 /* ryhui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ryhui.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F80E49421A8E24C000028CD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F80E49431A8E24C000028CD1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F80E49451A8E24C000028CD1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		F80E49461A8E24C000028CD1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F80E49491A8E24C000028CD1 /* ryhui.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ryhui.xcdatamodel; sourceTree = "<group>"; };
+		F80E494B1A8E24C000028CD1 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		F80E494C1A8E24C000028CD1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		F80E494F1A8E24C000028CD1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F80E49511A8E24C000028CD1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F80E49541A8E24C000028CD1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		F80E495A1A8E24C100028CD1 /* ryhuiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ryhuiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F80E495F1A8E24C100028CD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F80E49601A8E24C100028CD1 /* ryhuiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ryhuiTests.m; sourceTree = "<group>"; };
+		F80E496A1A8E26C000028CD1 /* ryhuiPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ryhuiPrefixHeader.pch; sourceTree = "<group>"; };
+		F80E496C1A8E27F600028CD1 /* RHNetworkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHNetworkService.h; sourceTree = "<group>"; };
+		F80E496D1A8E27F600028CD1 /* RHNetworkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHNetworkService.m; sourceTree = "<group>"; };
+		F80E49711A8E3A0300028CD1 /* RHBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHBaseViewController.h; sourceTree = "<group>"; };
+		F80E49721A8E3A0300028CD1 /* RHBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHBaseViewController.m; sourceTree = "<group>"; };
+		F80E49751A8E3C5400028CD1 /* RHLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHLoginViewController.h; sourceTree = "<group>"; };
+		F80E49761A8E3C5400028CD1 /* RHLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHLoginViewController.m; sourceTree = "<group>"; };
+		F80E49771A8E3C5400028CD1 /* RHLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHLoginViewController.xib; sourceTree = "<group>"; };
+		F80E497C1A8E3D1E00028CD1 /* loginBG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = loginBG.jpg; sourceTree = "<group>"; };
+		F80E497E1A8E407900028CD1 /* loginButtonDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginButtonDefault.png; sourceTree = "<group>"; };
+		F80E497F1A8E407900028CD1 /* loginButtonHightlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginButtonHightlight.png; sourceTree = "<group>"; };
+		F80E49821A8E41A300028CD1 /* qrButtonDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qrButtonDefault.png; sourceTree = "<group>"; };
+		F80E49831A8E41A300028CD1 /* qrButtonHightLight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qrButtonHightLight.png; sourceTree = "<group>"; };
+		F80E49861A8E444B00028CD1 /* RHALoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHALoginViewController.h; sourceTree = "<group>"; };
+		F80E49871A8E444B00028CD1 /* RHALoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHALoginViewController.m; sourceTree = "<group>"; };
+		F80E49881A8E444B00028CD1 /* RHALoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHALoginViewController.xib; sourceTree = "<group>"; };
+		F80E498C1A8E46CA00028CD1 /* RHUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHUtility.h; sourceTree = "<group>"; };
+		F80E498D1A8E46CA00028CD1 /* RHUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHUtility.m; sourceTree = "<group>"; };
+		F80E498F1A8E47FD00028CD1 /* navBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navBG.png; sourceTree = "<group>"; };
+		F80E49911A8E48AD00028CD1 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
+		F80E49931A8E502E00028CD1 /* ALoginButtonDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ALoginButtonDefault.png; sourceTree = "<group>"; };
+		F80E49941A8E502E00028CD1 /* ALoginButtonHightLight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ALoginButtonHightLight.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F80E493B1A8E24C000028CD1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				961AD2F930E8CEFA8FA5D28D /* libPods-ryhui.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F80E49571A8E24C100028CD1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0EF68FC40DCEEC7C77CF881D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				64D0F7EFA66E690954907170 /* Pods-ryhui.debug.xcconfig */,
+				DE5A032DE22EAAF12589E45A /* Pods-ryhui.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		4B7547823688CBC5ACDA42D7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BB95D30F1AE0DCFA27AE1DD7 /* libPods-ryhui.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F80E49351A8E24C000028CD1 = {
+			isa = PBXGroup;
+			children = (
+				F80E49401A8E24C000028CD1 /* ryhui */,
+				F80E495D1A8E24C100028CD1 /* ryhuiTests */,
+				F80E493F1A8E24C000028CD1 /* Products */,
+				0EF68FC40DCEEC7C77CF881D /* Pods */,
+				4B7547823688CBC5ACDA42D7 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		F80E493F1A8E24C000028CD1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F80E493E1A8E24C000028CD1 /* ryhui.app */,
+				F80E495A1A8E24C100028CD1 /* ryhuiTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F80E49401A8E24C000028CD1 /* ryhui */ = {
+			isa = PBXGroup;
+			children = (
+				F80E497B1A8E3D0400028CD1 /* Resources */,
+				F80E496F1A8E38DF00028CD1 /* ViewController */,
+				F80E496B1A8E27CD00028CD1 /* Service */,
+				F80E49451A8E24C000028CD1 /* AppDelegate.h */,
+				F80E49461A8E24C000028CD1 /* AppDelegate.m */,
+				F80E494B1A8E24C000028CD1 /* ViewController.h */,
+				F80E494C1A8E24C000028CD1 /* ViewController.m */,
+				F80E494E1A8E24C000028CD1 /* Main.storyboard */,
+				F80E49511A8E24C000028CD1 /* Images.xcassets */,
+				F80E49531A8E24C000028CD1 /* LaunchScreen.xib */,
+				F80E49481A8E24C000028CD1 /* ryhui.xcdatamodeld */,
+				F80E49411A8E24C000028CD1 /* Supporting Files */,
+				F80E498C1A8E46CA00028CD1 /* RHUtility.h */,
+				F80E498D1A8E46CA00028CD1 /* RHUtility.m */,
+			);
+			path = ryhui;
+			sourceTree = "<group>";
+		};
+		F80E49411A8E24C000028CD1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F80E49421A8E24C000028CD1 /* Info.plist */,
+				F80E49431A8E24C000028CD1 /* main.m */,
+				F80E496A1A8E26C000028CD1 /* ryhuiPrefixHeader.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F80E495D1A8E24C100028CD1 /* ryhuiTests */ = {
+			isa = PBXGroup;
+			children = (
+				F80E49601A8E24C100028CD1 /* ryhuiTests.m */,
+				F80E495E1A8E24C100028CD1 /* Supporting Files */,
+			);
+			path = ryhuiTests;
+			sourceTree = "<group>";
+		};
+		F80E495E1A8E24C100028CD1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F80E495F1A8E24C100028CD1 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F80E496B1A8E27CD00028CD1 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				F80E496C1A8E27F600028CD1 /* RHNetworkService.h */,
+				F80E496D1A8E27F600028CD1 /* RHNetworkService.m */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
+		F80E496F1A8E38DF00028CD1 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F80E49741A8E3C3400028CD1 /* LoginViewController */,
+				F80E49701A8E393300028CD1 /* BaseViewController */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		F80E49701A8E393300028CD1 /* BaseViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F80E49711A8E3A0300028CD1 /* RHBaseViewController.h */,
+				F80E49721A8E3A0300028CD1 /* RHBaseViewController.m */,
+			);
+			name = BaseViewController;
+			sourceTree = "<group>";
+		};
+		F80E49741A8E3C3400028CD1 /* LoginViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F80E49751A8E3C5400028CD1 /* RHLoginViewController.h */,
+				F80E49761A8E3C5400028CD1 /* RHLoginViewController.m */,
+				F80E49771A8E3C5400028CD1 /* RHLoginViewController.xib */,
+				F80E49861A8E444B00028CD1 /* RHALoginViewController.h */,
+				F80E49871A8E444B00028CD1 /* RHALoginViewController.m */,
+				F80E49881A8E444B00028CD1 /* RHALoginViewController.xib */,
+			);
+			name = LoginViewController;
+			sourceTree = "<group>";
+		};
+		F80E497B1A8E3D0400028CD1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F80E49931A8E502E00028CD1 /* ALoginButtonDefault.png */,
+				F80E49941A8E502E00028CD1 /* ALoginButtonHightLight.png */,
+				F80E49911A8E48AD00028CD1 /* back.png */,
+				F80E498F1A8E47FD00028CD1 /* navBG.png */,
+				F80E49821A8E41A300028CD1 /* qrButtonDefault.png */,
+				F80E49831A8E41A300028CD1 /* qrButtonHightLight.png */,
+				F80E497E1A8E407900028CD1 /* loginButtonDefault.png */,
+				F80E497F1A8E407900028CD1 /* loginButtonHightlight.png */,
+				F80E497C1A8E3D1E00028CD1 /* loginBG.jpg */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F80E493D1A8E24C000028CD1 /* ryhui */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F80E49641A8E24C100028CD1 /* Build configuration list for PBXNativeTarget "ryhui" */;
+			buildPhases = (
+				345721522B4DC6E9EDA88884 /* Check Pods Manifest.lock */,
+				F80E493A1A8E24C000028CD1 /* Sources */,
+				F80E493B1A8E24C000028CD1 /* Frameworks */,
+				F80E493C1A8E24C000028CD1 /* Resources */,
+				4563FAF9E1B8EE50485DF959 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ryhui;
+			productName = ryhui;
+			productReference = F80E493E1A8E24C000028CD1 /* ryhui.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F80E49591A8E24C100028CD1 /* ryhuiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F80E49671A8E24C100028CD1 /* Build configuration list for PBXNativeTarget "ryhuiTests" */;
+			buildPhases = (
+				F80E49561A8E24C100028CD1 /* Sources */,
+				F80E49571A8E24C100028CD1 /* Frameworks */,
+				F80E49581A8E24C100028CD1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F80E495C1A8E24C100028CD1 /* PBXTargetDependency */,
+			);
+			name = ryhuiTests;
+			productName = ryhuiTests;
+			productReference = F80E495A1A8E24C100028CD1 /* ryhuiTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F80E49361A8E24C000028CD1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = stefan;
+				TargetAttributes = {
+					F80E493D1A8E24C000028CD1 = {
+						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 46GDY25Q25;
+					};
+					F80E49591A8E24C100028CD1 = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = F80E493D1A8E24C000028CD1;
+					};
+				};
+			};
+			buildConfigurationList = F80E49391A8E24C000028CD1 /* Build configuration list for PBXProject "ryhui" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F80E49351A8E24C000028CD1;
+			productRefGroup = F80E493F1A8E24C000028CD1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F80E493D1A8E24C000028CD1 /* ryhui */,
+				F80E49591A8E24C100028CD1 /* ryhuiTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F80E493C1A8E24C000028CD1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F80E497D1A8E3D1E00028CD1 /* loginBG.jpg in Resources */,
+				F80E49801A8E407900028CD1 /* loginButtonDefault.png in Resources */,
+				F80E49841A8E41A300028CD1 /* qrButtonDefault.png in Resources */,
+				F80E49851A8E41A300028CD1 /* qrButtonHightLight.png in Resources */,
+				F80E49951A8E502E00028CD1 /* ALoginButtonDefault.png in Resources */,
+				F80E49791A8E3C5400028CD1 /* RHLoginViewController.xib in Resources */,
+				F80E49501A8E24C000028CD1 /* Main.storyboard in Resources */,
+				F80E498A1A8E444B00028CD1 /* RHALoginViewController.xib in Resources */,
+				F80E49811A8E407900028CD1 /* loginButtonHightlight.png in Resources */,
+				F80E49921A8E48AD00028CD1 /* back.png in Resources */,
+				F80E49901A8E47FD00028CD1 /* navBG.png in Resources */,
+				F80E49551A8E24C000028CD1 /* LaunchScreen.xib in Resources */,
+				F80E49521A8E24C000028CD1 /* Images.xcassets in Resources */,
+				F80E49961A8E502E00028CD1 /* ALoginButtonHightLight.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F80E49581A8E24C100028CD1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		345721522B4DC6E9EDA88884 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4563FAF9E1B8EE50485DF959 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ryhui/Pods-ryhui-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F80E493A1A8E24C000028CD1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F80E49781A8E3C5400028CD1 /* RHLoginViewController.m in Sources */,
+				F80E49471A8E24C000028CD1 /* AppDelegate.m in Sources */,
+				F80E496E1A8E27F600028CD1 /* RHNetworkService.m in Sources */,
+				F80E49441A8E24C000028CD1 /* main.m in Sources */,
+				F80E49731A8E3A0300028CD1 /* RHBaseViewController.m in Sources */,
+				F80E494D1A8E24C000028CD1 /* ViewController.m in Sources */,
+				F80E49891A8E444B00028CD1 /* RHALoginViewController.m in Sources */,
+				F80E498E1A8E46CA00028CD1 /* RHUtility.m in Sources */,
+				F80E494A1A8E24C000028CD1 /* ryhui.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F80E49561A8E24C100028CD1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F80E49611A8E24C100028CD1 /* ryhuiTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F80E495C1A8E24C100028CD1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F80E493D1A8E24C000028CD1 /* ryhui */;
+			targetProxy = F80E495B1A8E24C100028CD1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F80E494E1A8E24C000028CD1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F80E494F1A8E24C000028CD1 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F80E49531A8E24C000028CD1 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F80E49541A8E24C000028CD1 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F80E49621A8E24C100028CD1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		F80E49631A8E24C100028CD1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F80E49651A8E24C100028CD1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 64D0F7EFA66E690954907170 /* Pods-ryhui.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ryhui/ryhuiPrefixHeader.pch;
+				INFOPLIST_FILE = ryhui/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "148effdd-9bce-402c-b86c-58c722e6495f";
+			};
+			name = Debug;
+		};
+		F80E49661A8E24C100028CD1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DE5A032DE22EAAF12589E45A /* Pods-ryhui.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ryhui/ryhuiPrefixHeader.pch;
+				INFOPLIST_FILE = ryhui/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "148effdd-9bce-402c-b86c-58c722e6495f";
+			};
+			name = Release;
+		};
+		F80E49681A8E24C100028CD1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ryhuiTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ryhui.app/ryhui";
+			};
+			name = Debug;
+		};
+		F80E49691A8E24C100028CD1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ryhuiTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ryhui.app/ryhui";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F80E49391A8E24C000028CD1 /* Build configuration list for PBXProject "ryhui" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F80E49621A8E24C100028CD1 /* Debug */,
+				F80E49631A8E24C100028CD1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F80E49641A8E24C100028CD1 /* Build configuration list for PBXNativeTarget "ryhui" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F80E49651A8E24C100028CD1 /* Debug */,
+				F80E49661A8E24C100028CD1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F80E49671A8E24C100028CD1 /* Build configuration list for PBXNativeTarget "ryhuiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F80E49681A8E24C100028CD1 /* Debug */,
+				F80E49691A8E24C100028CD1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F80E49481A8E24C000028CD1 /* ryhui.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F80E49491A8E24C000028CD1 /* ryhui.xcdatamodel */,
+			);
+			currentVersion = F80E49491A8E24C000028CD1 /* ryhui.xcdatamodel */;
+			path = ryhui.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = F80E49361A8E24C000028CD1 /* Project object */;
+}
