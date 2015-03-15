@@ -2,7 +2,7 @@
 //  RHNetworkService.m
 //  ryhui
 //
-//  Created by 江 云龙 on 15/2/13.
+//  Created by stefan on 15/2/13.
 //  Copyright (c) 2015年 stefan. All rights reserved.
 //
 
@@ -24,11 +24,11 @@ static RHNetworkService* _instance;
 }
 -(NSString*)doMain
 {
-#ifdef DEBUG
-    return @"http://123.57.133.7/TinyFinance/";
-#else
+//#ifdef DEBUG
+//    return @"http://123.57.133.7/TinyFinance/";
+//#else
     return @"http://www.ryhui.com/";
-#endif
+//#endif
 }
 
 -(AFHTTPRequestOperation*)POST:(NSString *)URLString parameters:(id)parameters success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
@@ -45,5 +45,7 @@ static RHNetworkService* _instance;
                  failure:failure];
     
 }
+
+
 
 @end

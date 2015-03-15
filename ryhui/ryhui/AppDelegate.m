@@ -2,21 +2,47 @@
 //  AppDelegate.m
 //  ryhui
 //
-//  Created by 江 云龙 on 15/2/13.
+//  Created by stefan on 15/2/13.
 //  Copyright (c) 2015年 stefan. All rights reserved.
 //
 
 #import "AppDelegate.h"
-
+#import "RHLoginViewController.h"
+#import "RHGesturePasswordViewController.h"
+#import "RHMainViewController.h"
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
-
+@synthesize window=_window;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [UIApplication sharedApplication].statusBarStyle=UIStatusBarStyleLightContent;
+    
+    self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    [self.window makeKeyAndVisible];
+    [self.window makeKeyWindow];
+
+    if ([RHUserManager sharedInterface].username&&[[RHUserManager sharedInterface].username length]>0) {
+        
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Gesture"]&&[[[NSUserDefaults standardUserDefaults] objectForKey:@"Gesture"] length]>0) {
+            RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
+            UINavigationController* nav=[[UINavigationController alloc]initWithRootViewController:controller];
+            
+            self.window.rootViewController=nav;
+        
+        }else{
+            [[RHTabbarManager sharedInterface] initTabbar];
+            
+            [[RHTabbarManager sharedInterface] selectTabbarMain];
+        }
+    }else{
+        [[RHTabbarManager sharedInterface] selectLogin];
+    }
+
     return YES;
 }
 

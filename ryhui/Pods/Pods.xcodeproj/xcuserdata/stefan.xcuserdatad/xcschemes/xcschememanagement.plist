@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-ryhui-BDKNotifyHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-ryhui-MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,22 +32,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>38F1323E2766C45B153FF45C</key>
+		<key>050B18241151DFD5840AE411</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AF02A252A3446D79BF0A5607</key>
+		<key>40BA2E1F1BF09A34B0F089D6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CFC1A79F1AA4B3471BADA5FE</key>
+		<key>5F1C10968D13855BA6726F73</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E8E644FB302C5ABC2B3FD485</key>
+		<key>CE2B1063C67AE90F68DB2B2F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D4DE9AA9AF87D3DF4D448CBA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

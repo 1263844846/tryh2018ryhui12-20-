@@ -2,7 +2,7 @@
 //  ryhuiPrefixHeader.pch
 //  ryhui
 //
-//  Created by 江 云龙 on 15/2/13.
+//  Created by stefan on 15/2/13.
 //  Copyright (c) 2015年 stefan. All rights reserved.
 //
 
@@ -14,6 +14,9 @@
 #import "RHNetworkService.h"
 #import "RHBaseViewController.h"
 #import "RHUtility.h"
+#import "BDKNotifyHUD.h"
+#import "RHTabbarManager.h"
+#import "RHUserManager.h"
 
 #ifdef DEBUG
 #define DLog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])

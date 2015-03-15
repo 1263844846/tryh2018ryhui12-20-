@@ -2,7 +2,7 @@
 //  RHBaseViewController.m
 //  ryhui
 //
-//  Created by 江 云龙 on 15/2/13.
+//  Created by stefan on 15/2/13.
 //  Copyright (c) 2015年 stefan. All rights reserved.
 //
 
@@ -24,6 +24,12 @@
     }else{
         [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navBG.png"] forBarMetrics:UIBarMetricsDefault];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)configBackButton
@@ -51,6 +57,11 @@
 -(void)back
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 @end

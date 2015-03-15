@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>AB25BE1F-3052-4857-BF62-D7C5A5FA5271</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ryhui</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D213F881BD7DDEEEEDF7788AB31B99050E70825A</key>
+		<string>106.185.32.212:hugeliang/ryhui.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ryhui/ryhui.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D213F881BD7DDEEEEDF7788AB31B99050E70825A</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>106.185.32.212:hugeliang/ryhui.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D213F881BD7DDEEEEDF7788AB31B99050E70825A</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D213F881BD7DDEEEEDF7788AB31B99050E70825A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ryhuiGitCode</string>
+		</dict>
+	</array>
+</dict>
+</plist>

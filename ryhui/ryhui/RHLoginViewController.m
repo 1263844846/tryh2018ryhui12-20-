@@ -2,12 +2,13 @@
 //  RHLoginViewController.m
 //  ryhui
 //
-//  Created by 江 云龙 on 15/2/13.
+//  Created by stefan on 15/2/13.
 //  Copyright (c) 2015年 stefan. All rights reserved.
 //
 
 #import "RHLoginViewController.h"
 #import "RHALoginViewController.h"
+#import "RHRegisterViewController.h"
 
 @interface RHLoginViewController ()
 
@@ -17,9 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.bgImageView.frame=self.view.bounds;
-    self.buttonView.frame=CGRectMake(0, self.view.frame.size.height-25-15, 320, 25);
-
+    self.bgImageView.frame=[UIScreen mainScreen].bounds;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -41,6 +40,8 @@
 }
 
 - (IBAction)registerAction:(id)sender {
+    RHRegisterViewController* controller=[[RHRegisterViewController alloc]initWithNibName:@"RHRegisterViewController" bundle:nil];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (IBAction)qRegisterAction:(id)sender {
