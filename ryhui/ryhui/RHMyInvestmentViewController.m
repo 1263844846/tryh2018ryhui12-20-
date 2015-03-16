@@ -7,23 +7,54 @@
 //
 
 #import "RHMyInvestmentViewController.h"
-#import "RHMyInvestmentViewCell.h"
+#import "RHInvestmentContentViewController.h"
 
 @interface RHMyInvestmentViewController ()
 
 @end
 
 @implementation RHMyInvestmentViewController
-@synthesize dataArray;
+@synthesize segmentContentView=_segmentContentView;
+@synthesize viewControllers=_viewControllers;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.viewControllers=[[NSMutableArray alloc]initWithCapacity:0];
+    
     // Do any additional setup after loading the view from its nib.
     [self configBackButton];
     [self configTitleWithString:@"我的投资"];
     
     [self initData];
+    
+    self.segmentContentView = [[RHSegmentContentView alloc] initWithFrame:CGRectMake(0, 50, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].applicationFrame.size.height-50-40-self.navigationController.navigationBar.frame.size.height)];
+    DLog(@"%f----%f",[UIScreen mainScreen].applicationFrame.size.height-50-40-self.navigationController.navigationBar.frame.size.height,self.navigationController.navigationBar.frame.size.height);
+    [_segmentContentView setDelegate:self];
+    [self.view addSubview:_segmentContentView];
+    
+    NSString* one=@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"projectStatus\",\"op\":\"in\",\"data\":[\"full\",\"loans\",\"repayment_normal\",\"repayment_abnormal\"]}]}";
+    
+    NSString* two=@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"projectStatus\",\"op\":\"in\",\"data\":[\"published\"]}]}";
+    
+    NSString* three=@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"projectStatus\",\"op\":\"in\",\"data\":[\"finished\"]}]}";
+    
+    RHInvestmentContentViewController* controller1=[[RHInvestmentContentViewController alloc]init];
+    controller1.type=one;
+    [_viewControllers addObject:controller1];
+    
+    RHInvestmentContentViewController* controller2=[[RHInvestmentContentViewController alloc]init];
+    controller2.type=two;
+    [_viewControllers addObject:controller2];
+    
+    RHInvestmentContentViewController* controller3=[[RHInvestmentContentViewController alloc]init];
+    controller3.type=three;
+    [_viewControllers addObject:controller3];
+    
+    [_segmentContentView setViews:_viewControllers];
+
+    [self segmentContentView:_segmentContentView selectPage:0];
 }
+
 -(void)initData
 {
     self.segmentView1.hidden=NO;
@@ -67,46 +98,29 @@
 
 - (void)didSelectSegmentAtIndex:(int)index
 {
-    switch (index) {
+    [_segmentContentView setSelectPage:index];
+
+}
+
+- (void)segmentContentView:(RHSegmentContentView *)segmentContentView selectPage:(NSUInteger)page{
+    switch (page) {
         case 0:
-            
+            [self segmentAction1:nil];
             break;
         case 1:
-            
+            [self segmentAction2:nil];
             break;
         case 2:
-            
+            [self segmentAction3:nil];
             break;
-            
         default:
             break;
     }
-}
-#pragma mark-TableViewDelegate
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 86;
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.dataArray.count;
-}
-
--(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"CellIdentifier";
     
-    RHMyInvestmentViewCell *cell = (RHMyInvestmentViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"RHMyInvestmentViewCell" owner:nil options:nil] objectAtIndex:0];
+    RHInvestmentContentViewController* controller=[_viewControllers objectAtIndex:page];
+    if ([[NSNumber numberWithInteger:[controller.dataArray count]] intValue]<=0) {
+        [controller startPost];
     }
-    
-    NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];
-    
-    [cell updateCell:dataDic];
-    
-    return cell;
 }
+
 @end

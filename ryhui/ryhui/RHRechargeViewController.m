@@ -14,6 +14,7 @@
 @end
 
 @implementation RHRechargeViewController
+@synthesize balance;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,6 +23,9 @@
     
     [self configTitleWithString:@"充值"];
     [self.textField becomeFirstResponder];
+    
+    self.balanceLabel.text=balance;
+    
 }
 
 - (void)didReceiveMemoryWarning {

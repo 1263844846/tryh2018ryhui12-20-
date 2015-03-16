@@ -111,6 +111,8 @@
                 int index=[[NSNumber numberWithInteger:[insuranceImages indexOfObject:insuranceDic]] intValue];
                 UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(index*(45+10),4, 45, 45)];
                 [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[RHNetworkService instance].doMain,[insuranceDic objectForKey:@"filepath"]]]];
+                DLog(@"%@",[NSString stringWithFormat:@"%@common/main/%@",[RHNetworkService instance].doMain,[insuranceDic objectForKey:@"filepath"]]);
+                
                 [self.insuranceScrollView addSubview:imageView];
             }
             self.insuranceScrollView.contentSize=CGSizeMake([insuranceImages count]*55,53);
@@ -123,6 +125,7 @@
                 int index=[[NSNumber numberWithInteger:[projectImages indexOfObject:projectImagesDic]] intValue];
                 UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(index*(45+10),4, 45, 45)];
                 [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[RHNetworkService instance].doMain,[projectImagesDic objectForKey:@"filepath"]]]];
+                DLog(@"%@",[NSString stringWithFormat:@"%@%@",[RHNetworkService instance].doMain,[projectImagesDic objectForKey:@"filepath"]]);
                 [self.projectScrollView addSubview:imageView];
             }
             self.projectScrollView.contentSize=CGSizeMake([projectImages count]*55,53);

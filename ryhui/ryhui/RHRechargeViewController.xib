@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RHRechargeViewController">
             <connections>
+                <outlet property="balanceLabel" destination="yt7-JS-rLs" id="ecj-Ol-PC0"/>
                 <outlet property="textField" destination="o3K-l9-ogP" id="Evg-uA-a64"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

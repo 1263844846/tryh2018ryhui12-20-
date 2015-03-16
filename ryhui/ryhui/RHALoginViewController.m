@@ -30,8 +30,8 @@
     
     [self configTitleWithString:@"登录"];
     
-    self.accountTextField.text=@"weixidream1";
-    self.passwordTextField.text=@"123456";
+    self.accountTextField.text=@"liushunxin";
+    self.passwordTextField.text=@"1476751459";
 }
 
 -(void)changeCaptcha

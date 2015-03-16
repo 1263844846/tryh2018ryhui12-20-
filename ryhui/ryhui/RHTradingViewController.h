@@ -7,12 +7,21 @@
 //
 
 #import "RHBaseViewController.h"
+#import "EGORefreshTableHeaderView.h"
+#import "AITableFooterVew.h"
 
-@interface RHTradingViewController : RHBaseViewController
-
+@interface RHTradingViewController : RHBaseViewController<EGORefreshTableHeaderDelegate>
+{
+    EGORefreshTableHeaderView *_headerView;
+    AITableFooterVew *_footerView;
+    BOOL _reloading;
+    BOOL showLoadMoreButton;
+}
+@property (nonatomic, assign) int currentPageIndex;
 @property(nonatomic,strong)NSMutableArray* dataArray;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 - (IBAction)pushMain:(id)sender;
 
 - (IBAction)pushUser:(id)sender;

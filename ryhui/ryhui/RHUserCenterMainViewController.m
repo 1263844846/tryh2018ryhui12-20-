@@ -18,12 +18,14 @@
 @end
 
 @implementation RHUserCenterMainViewController
+@synthesize balance;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configTitleWithString:@"个人中心"];
     self.username.text=[RHUserManager sharedInterface].username;
     self.ryUsername.text=[NSString stringWithFormat:@"ryh_%@",[RHUserManager sharedInterface].username];
+    [self checkout];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkout) name:@"RHSELECTUSER" object:nil];
 }
@@ -36,8 +38,15 @@
 {
     [[RHNetworkService instance] POST:@"front/payment/account/queryBalance" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"%@",responseObject);
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSString* AvlBal=[responseObject objectForKey:@"AvlBal"];
+            if (AvlBal&&[AvlBal length]>0) {
+                self.balance=AvlBal;
+                self.balanceLabel.text=[NSString stringWithFormat:@"可用余额%@元",AvlBal];
+            }
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        DLog(@"%@",error.userInfo);
+        DLog(@"%@",error);
     }];
 }
 
@@ -77,6 +86,7 @@
 - (IBAction)pushPay:(id)sender {
     
     RHRechargeViewController* controller=[[RHRechargeViewController alloc]initWithNibName:@"RHRechargeViewController" bundle:nil];
+    controller.balance=self.balance;
     [self.navigationController pushViewController:controller animated:YES];
 }
 

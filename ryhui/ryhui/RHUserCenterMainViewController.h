@@ -9,9 +9,13 @@
 #import "RHBaseViewController.h"
 
 @interface RHUserCenterMainViewController : RHBaseViewController
+
+@property(nonatomic,strong)NSString* balance;
+
 @property (weak, nonatomic) IBOutlet UILabel *username;
 @property (weak, nonatomic) IBOutlet UILabel *ryUsername;
 
+@property (weak, nonatomic) IBOutlet UILabel *balanceLabel;
 - (IBAction)pushAccountInfo:(id)sender;
 - (IBAction)pushMyAccount:(id)sender;
 - (IBAction)pushTradingRecord:(id)sender;

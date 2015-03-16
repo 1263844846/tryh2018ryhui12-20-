@@ -7,12 +7,13 @@
 //
 
 #import "RHBaseViewController.h"
+#import "RHSegmentContentView.h"
 
-@interface RHMyInvestmentViewController : RHBaseViewController
+@interface RHMyInvestmentViewController : RHBaseViewController<RHSegmentContentViewDelegate>
 
-@property (nonatomic,strong)NSMutableArray* dataArray;
+@property(nonatomic,strong)RHSegmentContentView* segmentContentView;
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property(nonatomic,strong)NSMutableArray* viewControllers;
 
 @property (weak, nonatomic) IBOutlet UIView *segmentView1;
 @property (weak, nonatomic) IBOutlet UIView *segmentView2;

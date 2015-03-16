@@ -25,23 +25,33 @@
     self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     [self.window makeKeyAndVisible];
     [self.window makeKeyWindow];
+    [[RHTabbarManager sharedInterface] selectGuidan];
+//    NSString* guidan=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHGUIDAN"];
+//    if (!guidan) {
+//        
+//        [[RHTabbarManager sharedInterface] selectGuidan];
+//        
+//        [[NSUserDefaults standardUserDefaults] setObject:@"123" forKey:@"RHGUIDAN"];
+//    }else{
+//        //    if ([RHUserManager sharedInterface].username&&[[RHUserManager sharedInterface].username length]>0) {
+//        //
+//        //        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Gesture"]&&[[[NSUserDefaults standardUserDefaults] objectForKey:@"Gesture"] length]>0) {
+//        //            RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
+//        //            UINavigationController* nav=[[UINavigationController alloc]initWithRootViewController:controller];
+//        //
+//        //            self.window.rootViewController=nav;
+//        //
+//        //        }else{
+//        //            [[RHTabbarManager sharedInterface] initTabbar];
+//        //
+//        //            [[RHTabbarManager sharedInterface] selectTabbarMain];
+//        //        }
+//        //    }else{
+//        [[RHTabbarManager sharedInterface] selectLogin];
+//        //    }
+//
+//    }
 
-    if ([RHUserManager sharedInterface].username&&[[RHUserManager sharedInterface].username length]>0) {
-        
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Gesture"]&&[[[NSUserDefaults standardUserDefaults] objectForKey:@"Gesture"] length]>0) {
-            RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
-            UINavigationController* nav=[[UINavigationController alloc]initWithRootViewController:controller];
-            
-            self.window.rootViewController=nav;
-        
-        }else{
-            [[RHTabbarManager sharedInterface] initTabbar];
-            
-            [[RHTabbarManager sharedInterface] selectTabbarMain];
-        }
-    }else{
-        [[RHTabbarManager sharedInterface] selectLogin];
-    }
 
     return YES;
 }

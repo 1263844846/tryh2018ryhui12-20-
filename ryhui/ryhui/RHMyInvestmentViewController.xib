@@ -10,7 +10,6 @@
                 <outlet property="segmentView1" destination="W0t-bB-TtU" id="frd-PF-8Ft"/>
                 <outlet property="segmentView2" destination="vpR-LR-VRS" id="6ej-Pc-ngb"/>
                 <outlet property="segmentView3" destination="5Gr-Ea-LPC" id="6Mm-IB-5Lt"/>
-                <outlet property="tableView" destination="0ej-Hn-KHf" id="qkq-EW-pcH"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -241,15 +240,6 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="0ej-Hn-KHf">
-                    <rect key="frame" x="0.0" y="49" width="320" height="481"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="SWs-Pb-WUb"/>
-                        <outlet property="delegate" destination="-1" id="77M-fb-Ris"/>
-                    </connections>
-                </tableView>
             </subviews>
             <color key="backgroundColor" red="0.8901960784313725" green="0.8901960784313725" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

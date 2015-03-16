@@ -11,5 +11,9 @@
 @interface RHMyInvestmentViewCell : UITableViewCell
 
 -(void)updateCell:(NSDictionary*)dic;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *investMoneyLabel;
+@property (weak, nonatomic) IBOutlet UILabel *backMoneyLabel;
+@property (weak, nonatomic) IBOutlet UILabel *profitMoneyLabel;
 @end

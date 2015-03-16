@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginBG.jpg" id="K8R-fx-qQG">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg.jpg" id="K8R-fx-qQG">
                     <rect key="frame" x="0.0" y="0.0" width="400" height="500"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -26,7 +26,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4LK-8r-6Sl">
-                            <rect key="frame" x="215.99999950243077" y="10" width="92" height="27"/>
+                            <rect key="frame" x="216" y="10" width="92" height="27"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="立即体验" backgroundImage="qrButtonDefault.png">
@@ -71,7 +71,7 @@
         </view>
     </objects>
     <resources>
-        <image name="loginBG.jpg" width="640" height="1138"/>
+        <image name="bg.jpg" width="640" height="1138"/>
         <image name="loginButtonDefault.png" width="189" height="52"/>
         <image name="loginButtonHightlight.png" width="189" height="52"/>
         <image name="qrButtonDefault.png" width="189" height="52"/>

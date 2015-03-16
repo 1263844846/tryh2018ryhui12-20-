@@ -8,9 +8,13 @@
 
 #import "RHBaseViewController.h"
 
-@interface RHMoreViewController : RHBaseViewController
+@interface RHMoreViewController : RHBaseViewController<UIAlertViewDelegate>
 
 - (IBAction)pushMain:(id)sender;
 - (IBAction)pushUser:(id)sender;
 - (IBAction)pushAbout:(id)sender;
+- (IBAction)callPhone:(id)sender;
+- (IBAction)call:(id)sender;
+- (IBAction)cancelCall:(id)sender;
+@property (strong, nonatomic) IBOutlet UIView *alertView;
 @end

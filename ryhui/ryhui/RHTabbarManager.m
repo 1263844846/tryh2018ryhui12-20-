@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "RHMoreViewController.h"
 #import "RHLoginViewController.h"
+#import "RHGuidanceViewController.h"
 
 static RHTabbarManager* _instance =nil;
 
@@ -83,4 +84,10 @@ static RHTabbarManager* _instance =nil;
     delegate.window.rootViewController=nav;
 }
 
+-(void)selectGuidan
+{
+    RHGuidanceViewController* controller=[[RHGuidanceViewController alloc]initWithNibName:@"RHGuidanceViewController" bundle:nil];
+    AppDelegate* delegate=[UIApplication sharedApplication].delegate;
+    delegate.window.rootViewController=controller;
+}
 @end

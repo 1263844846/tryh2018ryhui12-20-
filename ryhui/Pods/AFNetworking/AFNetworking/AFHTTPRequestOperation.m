@@ -134,9 +134,10 @@ static dispatch_group_t http_request_operation_completion_group() {
                 } else {
                     if (success) {
                         dispatch_group_async(self.completionGroup ?: http_request_operation_completion_group(), self.completionQueue ?: dispatch_get_main_queue(), ^{
-                            NSArray* array=[[self.response.allHeaderFields objectForKey:@"Set-Cookie"] componentsSeparatedByString:@";"];
-                            [[NSUserDefaults standardUserDefaults] setObject:[array objectAtIndex:0] forKey:@"RHSESSION"];
-                            [[NSUserDefaults standardUserDefaults] synchronize];
+//                            NSArray* array=[[self.response.allHeaderFields objectForKey:@"Set-Cookie"] componentsSeparatedByString:@";"];
+//                            NSLog(@"%@",self.response.allHeaderFields);
+//                            [[NSUserDefaults standardUserDefaults] setObject:[array objectAtIndex:0] forKey:@"RHSESSION"];
+//                            [[NSUserDefaults standardUserDefaults] synchronize];
                             success(self, responseObject);
                         });
                     }

@@ -1,44 +1,55 @@
 //
-//  RHTradingViewController.m
+//  RHInvestmentContentViewController.m
 //  ryhui
 //
-//  Created by stefan on 15/3/15.
+//  Created by 江 云龙 on 15/3/16.
 //  Copyright (c) 2015年 stefan. All rights reserved.
 //
 
-#import "RHTradingViewController.h"
-#import "RHTradViewCell.h"
-@interface RHTradingViewController ()
+#import "RHInvestmentContentViewController.h"
+#import "RHMyInvestmentViewCell.h"
+
+@interface RHInvestmentContentViewController ()
 
 @end
 
-@implementation RHTradingViewController
+@implementation RHInvestmentContentViewController
 @synthesize dataArray;
+@synthesize type;
 @synthesize currentPageIndex = _currentPageIndex;
+
+-(instancetype)init
+{
+    self=[super init];
+    if (self) {
+        _currentPageIndex = 1;
+        self.dataArray=[[NSMutableArray alloc]initWithCapacity:0];
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    [self configBackButton];
-    [self configTitleWithString:@"交易记录"];
-    self.dataArray=[[NSMutableArray alloc]initWithCapacity:0];
-    
+
+    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].applicationFrame.size.height-50-40-self.navigationController.navigationBar.frame.size.height) style:UITableViewStylePlain];
+    self.tableView.delegate=self;
+    self.tableView.dataSource=self;
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:self.tableView];
     
     // Do any additional setup after loading the view.
     _headerView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
     _headerView.delegate = self;
     [self.tableView addSubview:_headerView];
     
-    _footerView = [[AITableFooterVew alloc] initWithFrame:CGRectMake(0.0, 0.0, self.tableView.frame.size.width,50.0)];
+    _footerView = [[AITableFooterVew alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width,50.0)];
     [_footerView.footerButton addTarget:self action:@selector(showMoreApp:) forControlEvents:UIControlEventTouchUpInside];
+    [_footerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     self.tableView.tableFooterView = _footerView;
     _footerView.hidden=YES;
-
     showLoadMoreButton=YES;
-    [_headerView egoRefreshScrollViewDataSourceStartManualLoading:self.tableView];
 
-    
 }
+
 - (void)dealloc
 {
     [_footerView.activityIndicatorView stopAnimating];
@@ -49,13 +60,17 @@
     self.tableView = nil;
     _headerView = nil;
 }
-//{"class":"view.JqRow","id":1935,"version":null,"cell":{"id":1935,"fee":null,"custId":"6000060000735977","relatedId":null,"description":"期数:3","userId":"29","money":2293.05,"dateCreated":"2015-09-12 00:02:27","projectId":248,"type":"PenaltyInterest","orderId":"00000000000000014557"}
--(void)getTrading
+-(void)startPost
 {
-  
-    NSDictionary* parameters=@{@"_search":@"true",@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",_currentPageIndex],@"sidx":@"dateCreated",@"sord":@"desc",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};
+    [_headerView egoRefreshScrollViewDataSourceStartManualLoading:self.tableView];
+}
+
+-(void)getinvestListData
+{
     
-    [[RHNetworkService instance] POST:@"front/payment/account/tradeInvestListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSDictionary* parameters=@{@"search":@"true",@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",_currentPageIndex],@"sidx":@"realGiveTime",@"sord":@"desc",@"filters":type};
+    
+    [[RHNetworkService instance] POST:@"front/payment/account/investListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"%@",responseObject);
         NSMutableArray* tempArray=[[NSMutableArray alloc]initWithCapacity:0];
         
@@ -89,10 +104,12 @@
         [dataArray addObjectsFromArray:tempArray];
         [self reloadTableView];
         [_footerView.activityIndicatorView stopAnimating];
-        
+
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DLog(@"%@",error);
-
+        [_footerView.activityIndicatorView stopAnimating];
+        _reloading = NO;
+        [_headerView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
     }];
 }
 
@@ -108,7 +125,7 @@
         DLog(@"加载更多");
         [_footerView.activityIndicatorView startAnimating];
         _reloading=NO;
-        [self getTrading];
+        [self getinvestListData];
     }
 }
 
@@ -116,7 +133,7 @@
     if (!_reloading){
         _reloading = YES;
         self.currentPageIndex = 1;
-        [self getTrading];
+        [self getinvestListData];
     }
 }
 
@@ -160,11 +177,12 @@
     
 }
 
+
 #pragma mark-TableViewDelegate
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 55;
+    return 86;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -176,9 +194,9 @@
 {
     static NSString *CellIdentifier = @"CellIdentifier";
     
-    RHTradViewCell *cell = (RHTradViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    RHMyInvestmentViewCell *cell = (RHMyInvestmentViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"RHTradViewCell" owner:nil options:nil] objectAtIndex:0];
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"RHMyInvestmentViewCell" owner:nil options:nil] objectAtIndex:0];
     }
     
     NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];
@@ -186,17 +204,5 @@
     [cell updateCell:dataDic];
     
     return cell;
-}
-
-- (IBAction)pushMain:(id)sender {
-    [[RHTabbarManager sharedInterface] selectTabbarMain];
-}
-
-- (IBAction)pushUser:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
-
-- (IBAction)pushMore:(id)sender {
-    [[RHTabbarManager sharedInterface] selectTabbarMore];
 }
 @end
