@@ -10,8 +10,6 @@
 
 @interface RHNetworkService : NSObject
 
-@property(nonatomic,strong)NSString* session;
-
 @property(nonatomic,strong)NSString* niubiMd5;
 
 +(RHNetworkService*)instance;

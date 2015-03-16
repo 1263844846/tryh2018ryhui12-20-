@@ -54,6 +54,12 @@
 #define COCOAPODS_VERSION_MINOR_BDKNotifyHUD 1
 #define COCOAPODS_VERSION_PATCH_BDKNotifyHUD 0
 
+// EGOTableViewPullRefreshAndLoadMore
+#define COCOAPODS_POD_AVAILABLE_EGOTableViewPullRefreshAndLoadMore
+#define COCOAPODS_VERSION_MAJOR_EGOTableViewPullRefreshAndLoadMore 1
+#define COCOAPODS_VERSION_MINOR_EGOTableViewPullRefreshAndLoadMore 0
+#define COCOAPODS_VERSION_PATCH_EGOTableViewPullRefreshAndLoadMore 4
+
 // MBProgressHUD
 #define COCOAPODS_POD_AVAILABLE_MBProgressHUD
 #define COCOAPODS_VERSION_MAJOR_MBProgressHUD 0

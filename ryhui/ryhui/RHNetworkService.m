@@ -11,7 +11,6 @@
 static RHNetworkService* _instance;
 
 @implementation RHNetworkService
-@synthesize session;
 @synthesize niubiMd5;
 
 +(RHNetworkService*)instance
@@ -34,6 +33,7 @@ static RHNetworkService* _instance;
 -(AFHTTPRequestOperation*)POST:(NSString *)URLString parameters:(id)parameters success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
+    NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
     if (session&&[session length]>0) {
         [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
     }

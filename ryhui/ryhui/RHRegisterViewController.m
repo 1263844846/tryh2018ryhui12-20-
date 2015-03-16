@@ -65,7 +65,8 @@
             self.captchaImageView.image=responseObject;
         }
         NSArray* array=[[operation.response.allHeaderFields objectForKey:@"Set-Cookie"] componentsSeparatedByString:@";"];
-        [RHNetworkService instance].session=[array objectAtIndex:0];
+        [[NSUserDefaults standardUserDefaults] setObject:[array objectAtIndex:0] forKey:@"RHSESSION"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
