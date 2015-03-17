@@ -111,6 +111,9 @@ static dispatch_group_t http_request_operation_completion_group() {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-retain-cycles"
 #pragma clang diagnostic ignored "-Wgnu"
+    if (self.response.statusCode==302) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"RHSESSIONFAIL" object:nil];
+    }
     self.completionBlock = ^{
         if (self.completionGroup) {
             dispatch_group_enter(self.completionGroup);

@@ -25,35 +25,52 @@
     self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     [self.window makeKeyAndVisible];
     [self.window makeKeyWindow];
-    [[RHTabbarManager sharedInterface] selectGuidan];
-//    NSString* guidan=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHGUIDAN"];
-//    if (!guidan) {
-//        
-//        [[RHTabbarManager sharedInterface] selectGuidan];
-//        
-//        [[NSUserDefaults standardUserDefaults] setObject:@"123" forKey:@"RHGUIDAN"];
-//    }else{
-//        //    if ([RHUserManager sharedInterface].username&&[[RHUserManager sharedInterface].username length]>0) {
-//        //
-//        //        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Gesture"]&&[[[NSUserDefaults standardUserDefaults] objectForKey:@"Gesture"] length]>0) {
-//        //            RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
-//        //            UINavigationController* nav=[[UINavigationController alloc]initWithRootViewController:controller];
-//        //
-//        //            self.window.rootViewController=nav;
-//        //
-//        //        }else{
-//        //            [[RHTabbarManager sharedInterface] initTabbar];
-//        //
-//        //            [[RHTabbarManager sharedInterface] selectTabbarMain];
-//        //        }
-//        //    }else{
-//        [[RHTabbarManager sharedInterface] selectLogin];
-//        //    }
-//
-//    }
-
+    
+    NSString* guidan=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHGUIDAN"];
+    if (!guidan) {
+        
+        [[RHTabbarManager sharedInterface] selectGuidan];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:@"123" forKey:@"RHGUIDAN"];
+    }else{
+        if ([RHUserManager sharedInterface].username&&[[RHUserManager sharedInterface].username length]>0) {
+            [self sessionFail:nil];
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Gesture"]&&[[[NSUserDefaults standardUserDefaults] objectForKey:@"Gesture"] length]>0) {
+                RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
+                UINavigationController* nav=[[UINavigationController alloc]initWithRootViewController:controller];
+                
+                self.window.rootViewController=nav;
+                
+            }else{
+                [[RHTabbarManager sharedInterface] initTabbar];
+                
+                [[RHTabbarManager sharedInterface] selectTabbarMain];
+            }
+        }else{
+            [[RHTabbarManager sharedInterface] selectLogin];
+        }
+        
+    }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionFail:) name:@"RHSESSIONFAIL" object:nil];
 
     return YES;
+}
+
+-(void)sessionFail:(NSNotification*)not
+{
+    NSDictionary* parameters=@{@"account":[RHUserManager sharedInterface].username,@"password":[RHUserManager sharedInterface].md5};
+    
+    [[RHNetworkService instance] POST:@"common/user/login/appLogin" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        DLog(@"%@",responseObject);
+        NSArray* array=[[operation.response.allHeaderFields objectForKey:@"Set-Cookie"] componentsSeparatedByString:@";"];
+        [[NSUserDefaults standardUserDefaults] setObject:[array objectAtIndex:0] forKey:@"RHSESSION"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        DLog(@"%@",operation.response.allHeaderFields);
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        DLog(@"%@",error);
+    }];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

@@ -101,6 +101,9 @@
                             <state key="normal" title="投资" backgroundImage="registerButtonUp.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="pushInvestment:" destination="iN0-l3-epB" eventType="touchUpInside" id="Brq-B3-OTL"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -195,6 +198,9 @@
                             <state key="normal" title="投资" backgroundImage="registerButtonUp.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="pushInvestment:" destination="iN0-l3-epB" eventType="touchUpInside" id="5zb-69-RLR"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

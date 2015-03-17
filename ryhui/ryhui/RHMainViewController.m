@@ -9,6 +9,7 @@
 #import "RHMainViewController.h"
 #import "RHMainViewCell.h"
 #import "RHProjectDetailViewController.h"
+#import "RHProjectListViewController.h"
 
 @interface RHMainViewController ()
 
@@ -120,6 +121,12 @@
         default:
             break;
     }
+}
+
+-(void)didSelectInvestment
+{
+    RHProjectListViewController* controller=[[RHProjectListViewController alloc]initWithNibName:@"RHProjectListViewController" bundle:nil];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark-TableViewDelegate

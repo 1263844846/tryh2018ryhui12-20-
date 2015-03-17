@@ -39,4 +39,8 @@
         [delegate didSelectSegmentAtIndex:1];
     }
 }
+
+- (IBAction)pushInvestment:(id)sender {
+    [delegate didSelectInvestment];
+}
 @end

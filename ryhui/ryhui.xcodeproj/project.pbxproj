@@ -97,6 +97,15 @@
 		F89A3D8C1AB5D6E200B92DF3 /* RHRegisterWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F89A3D8A1AB5D6E200B92DF3 /* RHRegisterWebViewController.xib */; };
 		F89A3D901AB5DA0300B92DF3 /* RHRechargeWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A3D8E1AB5DA0300B92DF3 /* RHRechargeWebViewController.m */; };
 		F89A3D911AB5DA0300B92DF3 /* RHRechargeWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F89A3D8F1AB5DA0300B92DF3 /* RHRechargeWebViewController.xib */; };
+		F8A0EBEC1AB86F1A00F65A7F /* RHProjectListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A0EBEA1AB86F1A00F65A7F /* RHProjectListViewController.m */; };
+		F8A0EBED1AB86F1A00F65A7F /* RHProjectListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8A0EBEB1AB86F1A00F65A7F /* RHProjectListViewController.xib */; };
+		F8A0EBF01AB8704900F65A7F /* 3-1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8A0EBEE1AB8704900F65A7F /* 3-1.png */; };
+		F8A0EBF11AB8704900F65A7F /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = F8A0EBEF1AB8704900F65A7F /* 3.png */; };
+		F8A0EBF41AB8718900F65A7F /* project2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8A0EBF21AB8718900F65A7F /* project2@2x.png */; };
+		F8A0EBF51AB8718900F65A7F /* project1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8A0EBF31AB8718900F65A7F /* project1@2x.png */; };
+		F8A0EBF81AB8719000F65A7F /* 4-1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8A0EBF61AB8719000F65A7F /* 4-1.png */; };
+		F8A0EBF91AB8719000F65A7F /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = F8A0EBF71AB8719000F65A7F /* 4.png */; };
+		F8A0EBFC1AB8778D00F65A7F /* RHProjectListContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A0EBFB1AB8778D00F65A7F /* RHProjectListContentViewController.m */; };
 		F8B6DA5F1AB51BE600CCB13D /* RHUserCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B6DA5D1AB51BE600CCB13D /* RHUserCenterViewController.m */; };
 		F8B6DA601AB51BE600CCB13D /* RHUserCenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8B6DA5E1AB51BE600CCB13D /* RHUserCenterViewController.xib */; };
 		F8B6DA621AB540AD00CCB13D /* userArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = F8B6DA611AB540AD00CCB13D /* userArrow.png */; };
@@ -271,6 +280,17 @@
 		F89A3D8D1AB5DA0300B92DF3 /* RHRechargeWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHRechargeWebViewController.h; sourceTree = "<group>"; };
 		F89A3D8E1AB5DA0300B92DF3 /* RHRechargeWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHRechargeWebViewController.m; sourceTree = "<group>"; };
 		F89A3D8F1AB5DA0300B92DF3 /* RHRechargeWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHRechargeWebViewController.xib; sourceTree = "<group>"; };
+		F8A0EBE91AB86F1A00F65A7F /* RHProjectListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHProjectListViewController.h; sourceTree = "<group>"; };
+		F8A0EBEA1AB86F1A00F65A7F /* RHProjectListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHProjectListViewController.m; sourceTree = "<group>"; };
+		F8A0EBEB1AB86F1A00F65A7F /* RHProjectListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHProjectListViewController.xib; sourceTree = "<group>"; };
+		F8A0EBEE1AB8704900F65A7F /* 3-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3-1.png"; sourceTree = "<group>"; };
+		F8A0EBEF1AB8704900F65A7F /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
+		F8A0EBF21AB8718900F65A7F /* project2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "project2@2x.png"; sourceTree = "<group>"; };
+		F8A0EBF31AB8718900F65A7F /* project1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "project1@2x.png"; sourceTree = "<group>"; };
+		F8A0EBF61AB8719000F65A7F /* 4-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4-1.png"; sourceTree = "<group>"; };
+		F8A0EBF71AB8719000F65A7F /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
+		F8A0EBFA1AB8778D00F65A7F /* RHProjectListContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHProjectListContentViewController.h; sourceTree = "<group>"; };
+		F8A0EBFB1AB8778D00F65A7F /* RHProjectListContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHProjectListContentViewController.m; sourceTree = "<group>"; };
 		F8B6DA5C1AB51BE600CCB13D /* RHUserCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHUserCenterViewController.h; sourceTree = "<group>"; };
 		F8B6DA5D1AB51BE600CCB13D /* RHUserCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHUserCenterViewController.m; sourceTree = "<group>"; };
 		F8B6DA5E1AB51BE600CCB13D /* RHUserCenterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHUserCenterViewController.xib; sourceTree = "<group>"; };
@@ -438,6 +458,7 @@
 		F80E496F1A8E38DF00028CD1 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				F8A0EBE81AB86EEE00F65A7F /* RHProjectListViewController */,
 				F815ED461AB749A4004B2053 /* RHGuidanceViewController */,
 				F815ED3F1AB7259F004B2053 /* segmentViewController */,
 				F8B6DAB71AB5771B00CCB13D /* aboutViewController */,
@@ -485,6 +506,12 @@
 		F80E497B1A8E3D0400028CD1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F8A0EBF21AB8718900F65A7F /* project2@2x.png */,
+				F8A0EBF31AB8718900F65A7F /* project1@2x.png */,
+				F8A0EBF61AB8719000F65A7F /* 4-1.png */,
+				F8A0EBF71AB8719000F65A7F /* 4.png */,
+				F8A0EBEE1AB8704900F65A7F /* 3-1.png */,
+				F8A0EBEF1AB8704900F65A7F /* 3.png */,
 				F815ED521AB752D2004B2053 /* bg.jpg */,
 				F815ED4C1AB74CD0004B2053 /* guidan1.jpg */,
 				F815ED4D1AB74CD1004B2053 /* guidan2.jpg */,
@@ -694,6 +721,18 @@
 				F89A3D7E1AB5B54F00B92DF3 /* RHUserManager.m */,
 			);
 			name = Manager;
+			sourceTree = "<group>";
+		};
+		F8A0EBE81AB86EEE00F65A7F /* RHProjectListViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F8A0EBE91AB86F1A00F65A7F /* RHProjectListViewController.h */,
+				F8A0EBEA1AB86F1A00F65A7F /* RHProjectListViewController.m */,
+				F8A0EBEB1AB86F1A00F65A7F /* RHProjectListViewController.xib */,
+				F8A0EBFA1AB8778D00F65A7F /* RHProjectListContentViewController.h */,
+				F8A0EBFB1AB8778D00F65A7F /* RHProjectListContentViewController.m */,
+			);
+			name = RHProjectListViewController;
 			sourceTree = "<group>";
 		};
 		F8B6DA5B1AB51BCA00CCB13D /* UserCenterViewController */ = {
@@ -918,6 +957,7 @@
 				F8B6DAAB1AB567BE00CCB13D /* 18-4.png in Resources */,
 				F815ED531AB752D2004B2053 /* bg.jpg in Resources */,
 				F88831171AB48069001E4AD1 /* mainNS.png in Resources */,
+				F8A0EBED1AB86F1A00F65A7F /* RHProjectListViewController.xib in Resources */,
 				F8B6DAA81AB567BE00CCB13D /* 18-1.png in Resources */,
 				F815ED591AB7557E004B2053 /* 6.png in Resources */,
 				F89A3D8C1AB5D6E200B92DF3 /* RHRegisterWebViewController.xib in Resources */,
@@ -940,6 +980,7 @@
 				F88831021AB42DBA001E4AD1 /* mainBanner.png in Resources */,
 				F89A3D841AB5D16800B92DF3 /* register1.png in Resources */,
 				F8B6DA851AB55C1500CCB13D /* myAccount1.png in Resources */,
+				F8A0EBF81AB8719000F65A7F /* 4-1.png in Resources */,
 				F815ED5D1AB7557E004B2053 /* 8.png in Resources */,
 				F80E49851A8E41A300028CD1 /* qrButtonHightLight.png in Resources */,
 				F86B8AFF1AA17DB2000D2B8C /* GestureIcon.png in Resources */,
@@ -954,7 +995,9 @@
 				F888311B1AB48069001E4AD1 /* userNS.png in Resources */,
 				F83865B31AA0569C00001D1A /* registerButtonDown.png in Resources */,
 				F8B6DA771AB5517600CCB13D /* phoneIcon.png in Resources */,
+				F8A0EBF01AB8704900F65A7F /* 3-1.png in Resources */,
 				F88830F91AB41E6E001E4AD1 /* segmentBg2.png in Resources */,
+				F8A0EBF51AB8718900F65A7F /* project1@2x.png in Resources */,
 				F88831191AB48069001E4AD1 /* moreNS.png in Resources */,
 				F815ED5A1AB7557E004B2053 /* 7-1.png in Resources */,
 				F88830FF1AB42329001E4AD1 /* newProjectBg.png in Resources */,
@@ -970,6 +1013,7 @@
 				F88830FB1AB41F76001E4AD1 /* RHSegmentView.xib in Resources */,
 				F80E49811A8E407900028CD1 /* loginButtonHightlight.png in Resources */,
 				F815ED4B1AB749FF004B2053 /* RHGuidanceViewController.xib in Resources */,
+				F8A0EBF91AB8719000F65A7F /* 4.png in Resources */,
 				F88831081AB43369001E4AD1 /* RHMainViewCell.xib in Resources */,
 				F8B6DABC1AB5773500CCB13D /* RHAboutViewController.xib in Resources */,
 				F815ED501AB74CD1004B2053 /* guidan2.jpg in Resources */,
@@ -987,6 +1031,7 @@
 				F8B6DA711AB54D7100CCB13D /* RHMoreViewController.xib in Resources */,
 				F80E49521A8E24C000028CD1 /* Images.xcassets in Resources */,
 				F8B6DAA21AB5679000CCB13D /* in2.png in Resources */,
+				F8A0EBF11AB8704900F65A7F /* 3.png in Resources */,
 				F8B6DAA91AB567BE00CCB13D /* 18-2.png in Resources */,
 				F83865B61AA0569C00001D1A /* registerSelect.png in Resources */,
 				F8B6DAAA1AB567BE00CCB13D /* 18-3.png in Resources */,
@@ -1001,6 +1046,7 @@
 				F8B6DA941AB563BA00CCB13D /* RHTradViewCell.xib in Resources */,
 				F8B6DA891AB55C1500CCB13D /* myAccountLine.png in Resources */,
 				F8B6DA8F1AB562EF00CCB13D /* RHTradingViewController.xib in Resources */,
+				F8A0EBF41AB8718900F65A7F /* project2@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1066,6 +1112,7 @@
 				F86B8AF21AA16F53000D2B8C /* RHGestureView.m in Sources */,
 				F8B6DAAF1AB56F7C00CCB13D /* RHMyInvestmentViewCell.m in Sources */,
 				F80E49441A8E24C000028CD1 /* main.m in Sources */,
+				F8A0EBFC1AB8778D00F65A7F /* RHProjectListContentViewController.m in Sources */,
 				F88830F31AB41C02001E4AD1 /* RHSegmentView.m in Sources */,
 				F8B6DA6A1AB5459500CCB13D /* RHUserCenterMainViewController.m in Sources */,
 				F86B8AEF1AA16ED3000D2B8C /* RHGesturePasswordViewController.m in Sources */,
@@ -1087,6 +1134,7 @@
 				F8B6DA931AB563BA00CCB13D /* RHTradViewCell.m in Sources */,
 				F8B6DA5F1AB51BE600CCB13D /* RHUserCenterViewController.m in Sources */,
 				F8B6DA991AB565DF00CCB13D /* RHMyInvestmentViewController.m in Sources */,
+				F8A0EBEC1AB86F1A00F65A7F /* RHProjectListViewController.m in Sources */,
 				F80E494A1A8E24C000028CD1 /* ryhui.xcdatamodeld in Sources */,
 				F879E7551AA355B100339647 /* RHAgreement1ViewController.m in Sources */,
 				F86B8AFD1AA17680000D2B8C /* RHGesturePasswordView.m in Sources */,

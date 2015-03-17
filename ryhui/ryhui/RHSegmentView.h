@@ -12,6 +12,8 @@
 
 - (void)didSelectSegmentAtIndex:(int)index;
 
+-(void)didSelectInvestment;
+
 @end
 
 
@@ -30,5 +32,6 @@
 - (void)setItems:(NSArray *)items; // items is an array of title
 - (IBAction)segment1Action:(id)sender;
 - (IBAction)segment2Action:(id)sender;
+- (IBAction)pushInvestment:(id)sender;
 
 @end

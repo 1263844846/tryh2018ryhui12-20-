@@ -44,15 +44,41 @@
 //studentLoan = 0;
 -(void)updateCell:(NSDictionary*)dic
 {
-    self.nameLabel.text=[dic objectForKey:@"name"];
-    self.paymentNameLabel.text=[dic objectForKey:@"paymentName"];
-    self.investorRateLabel.text=[[dic objectForKey:@"investorRate"] stringValue];
-    self.limitTimeLabel.text=[[dic objectForKey:@"limitTime"] stringValue];
-    self.projectFundLabel.text=[NSString stringWithFormat:@"%.1f",([[dic objectForKey:@"projectFund"] floatValue]/10000.0)];
-    self.insuranceMethodLabel.text=[dic objectForKey:@"insuranceMethod"];
+    NSString* name=@"";
+    if (![[dic objectForKey:@"name"] isKindOfClass:[NSNull class]]) {
+        name=[dic objectForKey:@"name"];
+    }
+    self.nameLabel.text=name;
+    NSString* paymentName=@"";
+    if (![[dic objectForKey:@"paymentName"] isKindOfClass:[NSNull class]]) {
+        paymentName=[dic objectForKey:@"paymentName"];
+    }
+    self.paymentNameLabel.text=paymentName;
+    NSString* investorRate=@"0";
+    if (![[dic objectForKey:@"investorRate"] isKindOfClass:[NSNull class]]) {
+        investorRate=[[dic objectForKey:@"investorRate"] stringValue];
+    }
+    self.investorRateLabel.text=investorRate;
+    NSString* limitTime=@"0";
+    if (![[dic objectForKey:@"limitTime"] isKindOfClass:[NSNull class]]) {
+        limitTime=[[dic objectForKey:@"limitTime"] stringValue];
+    }
+    self.limitTimeLabel.text=limitTime;
+    NSString* projectFund=@"0";
+    if (![[dic objectForKey:@"projectFund"] isKindOfClass:[NSNull class]]) {
+        projectFund=[NSString stringWithFormat:@"%.1f",([[dic objectForKey:@"projectFund"] floatValue]/10000.0)];
+    }
+    self.projectFundLabel.text=projectFund;
+    NSString* insuranceMethod=@"";
+    if (![[dic objectForKey:@"insuranceMethod"] isKindOfClass:[NSNull class]]) {
+        insuranceMethod=[dic objectForKey:@"insuranceMethod"];
+    }
+    self.insuranceMethodLabel.text=insuranceMethod;
     [self.logoImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[RHNetworkService instance].doMain,[dic objectForKey:@"insuranceLogo"]]]];
-    
-    CGFloat percent=[[dic objectForKey:@"percent"] floatValue]/100.0;
+    CGFloat percent=0;
+    if (![[dic objectForKey:@"percent"] isKindOfClass:[NSNull class]]) {
+        percent=[[dic objectForKey:@"percent"] floatValue]/100.0;
+    }
     [self.progressView setProgress:percent];
 }
 @end
