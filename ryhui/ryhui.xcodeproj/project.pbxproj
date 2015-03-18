@@ -45,6 +45,15 @@
 		F815ED5C1AB7557E004B2053 /* 8-1.png in Resources */ = {isa = PBXBuildFile; fileRef = F815ED571AB7557E004B2053 /* 8-1.png */; };
 		F815ED5D1AB7557E004B2053 /* 8.png in Resources */ = {isa = PBXBuildFile; fileRef = F815ED581AB7557E004B2053 /* 8.png */; };
 		F815ED5F1AB756BA004B2053 /* 9.png in Resources */ = {isa = PBXBuildFile; fileRef = F815ED5E1AB756BA004B2053 /* 9.png */; };
+		F83375E01AB9BEBC00944CB1 /* RHInvestmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F83375DE1AB9BEBC00944CB1 /* RHInvestmentViewController.m */; };
+		F83375E11AB9BEBC00944CB1 /* RHInvestmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F83375DF1AB9BEBC00944CB1 /* RHInvestmentViewController.xib */; };
+		F83375E31AB9C3CD00944CB1 /* 8-4.png in Resources */ = {isa = PBXBuildFile; fileRef = F83375E21AB9C3CD00944CB1 /* 8-4.png */; };
+		F83375E51AB9C49100944CB1 /* 82-2.png in Resources */ = {isa = PBXBuildFile; fileRef = F83375E41AB9C49100944CB1 /* 82-2.png */; };
+		F83375E71AB9C49E00944CB1 /* 83-2.png in Resources */ = {isa = PBXBuildFile; fileRef = F83375E61AB9C49E00944CB1 /* 83-2.png */; };
+		F83375EA1AB9C56700944CB1 /* 8-button-2.png in Resources */ = {isa = PBXBuildFile; fileRef = F83375E81AB9C56700944CB1 /* 8-button-2.png */; };
+		F83375EB1AB9C56700944CB1 /* 8-button1.png in Resources */ = {isa = PBXBuildFile; fileRef = F83375E91AB9C56700944CB1 /* 8-button1.png */; };
+		F83375EF1AB9C86B00944CB1 /* RHInvestmentWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F83375ED1AB9C86B00944CB1 /* RHInvestmentWebViewController.m */; };
+		F83375F01AB9C86B00944CB1 /* RHInvestmentWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F83375EE1AB9C86B00944CB1 /* RHInvestmentWebViewController.xib */; };
 		F83865A81AA0525100001D1A /* RHRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F83865A61AA0525100001D1A /* RHRegisterViewController.m */; };
 		F83865A91AA0525100001D1A /* RHRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F83865A71AA0525100001D1A /* RHRegisterViewController.xib */; };
 		F83865B11AA0569C00001D1A /* captchaButtonDown.png in Resources */ = {isa = PBXBuildFile; fileRef = F83865AB1AA0569C00001D1A /* captchaButtonDown.png */; };
@@ -212,6 +221,17 @@
 		F815ED571AB7557E004B2053 /* 8-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "8-1.png"; sourceTree = "<group>"; };
 		F815ED581AB7557E004B2053 /* 8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8.png; sourceTree = "<group>"; };
 		F815ED5E1AB756BA004B2053 /* 9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9.png; sourceTree = "<group>"; };
+		F83375DD1AB9BEBC00944CB1 /* RHInvestmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHInvestmentViewController.h; sourceTree = "<group>"; };
+		F83375DE1AB9BEBC00944CB1 /* RHInvestmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHInvestmentViewController.m; sourceTree = "<group>"; };
+		F83375DF1AB9BEBC00944CB1 /* RHInvestmentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHInvestmentViewController.xib; sourceTree = "<group>"; };
+		F83375E21AB9C3CD00944CB1 /* 8-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "8-4.png"; sourceTree = "<group>"; };
+		F83375E41AB9C49100944CB1 /* 82-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "82-2.png"; sourceTree = "<group>"; };
+		F83375E61AB9C49E00944CB1 /* 83-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "83-2.png"; sourceTree = "<group>"; };
+		F83375E81AB9C56700944CB1 /* 8-button-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "8-button-2.png"; sourceTree = "<group>"; };
+		F83375E91AB9C56700944CB1 /* 8-button1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "8-button1.png"; sourceTree = "<group>"; };
+		F83375EC1AB9C86B00944CB1 /* RHInvestmentWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHInvestmentWebViewController.h; sourceTree = "<group>"; };
+		F83375ED1AB9C86B00944CB1 /* RHInvestmentWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHInvestmentWebViewController.m; sourceTree = "<group>"; };
+		F83375EE1AB9C86B00944CB1 /* RHInvestmentWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHInvestmentWebViewController.xib; sourceTree = "<group>"; };
 		F83865A51AA0525100001D1A /* RHRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHRegisterViewController.h; sourceTree = "<group>"; };
 		F83865A61AA0525100001D1A /* RHRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHRegisterViewController.m; sourceTree = "<group>"; };
 		F83865A71AA0525100001D1A /* RHRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHRegisterViewController.xib; sourceTree = "<group>"; };
@@ -458,6 +478,7 @@
 		F80E496F1A8E38DF00028CD1 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				F83375DC1AB9BE9C00944CB1 /* RHInvestmentViewController */,
 				F8A0EBE81AB86EEE00F65A7F /* RHProjectListViewController */,
 				F815ED461AB749A4004B2053 /* RHGuidanceViewController */,
 				F815ED3F1AB7259F004B2053 /* segmentViewController */,
@@ -506,6 +527,11 @@
 		F80E497B1A8E3D0400028CD1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F83375E81AB9C56700944CB1 /* 8-button-2.png */,
+				F83375E91AB9C56700944CB1 /* 8-button1.png */,
+				F83375E41AB9C49100944CB1 /* 82-2.png */,
+				F83375E61AB9C49E00944CB1 /* 83-2.png */,
+				F83375E21AB9C3CD00944CB1 /* 8-4.png */,
 				F8A0EBF21AB8718900F65A7F /* project2@2x.png */,
 				F8A0EBF31AB8718900F65A7F /* project1@2x.png */,
 				F8A0EBF61AB8719000F65A7F /* 4-1.png */,
@@ -556,6 +582,19 @@
 				F815ED491AB749FF004B2053 /* RHGuidanceViewController.xib */,
 			);
 			name = RHGuidanceViewController;
+			sourceTree = "<group>";
+		};
+		F83375DC1AB9BE9C00944CB1 /* RHInvestmentViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F83375DD1AB9BEBC00944CB1 /* RHInvestmentViewController.h */,
+				F83375DE1AB9BEBC00944CB1 /* RHInvestmentViewController.m */,
+				F83375DF1AB9BEBC00944CB1 /* RHInvestmentViewController.xib */,
+				F83375EC1AB9C86B00944CB1 /* RHInvestmentWebViewController.h */,
+				F83375ED1AB9C86B00944CB1 /* RHInvestmentWebViewController.m */,
+				F83375EE1AB9C86B00944CB1 /* RHInvestmentWebViewController.xib */,
+			);
+			name = RHInvestmentViewController;
 			sourceTree = "<group>";
 		};
 		F83865A41AA0522300001D1A /* RegisterViewController */ = {
@@ -999,10 +1038,12 @@
 				F88830F91AB41E6E001E4AD1 /* segmentBg2.png in Resources */,
 				F8A0EBF51AB8718900F65A7F /* project1@2x.png in Resources */,
 				F88831191AB48069001E4AD1 /* moreNS.png in Resources */,
+				F83375E11AB9BEBC00944CB1 /* RHInvestmentViewController.xib in Resources */,
 				F815ED5A1AB7557E004B2053 /* 7-1.png in Resources */,
 				F88830FF1AB42329001E4AD1 /* newProjectBg.png in Resources */,
 				F888312C1AB49988001E4AD1 /* RHProjectDetailViewCell.xib in Resources */,
 				F8B6DA7E1AB55BA300CCB13D /* RHMyAccountViewController.xib in Resources */,
+				F83375E31AB9C3CD00944CB1 /* 8-4.png in Resources */,
 				F888310A1AB433B9001E4AD1 /* mainCellBg.png in Resources */,
 				F879E75B1AA355C100339647 /* RHAgreement2ViewController.xib in Resources */,
 				F8B6DA9A1AB565DF00CCB13D /* RHMyInvestmentViewController.xib in Resources */,
@@ -1034,15 +1075,20 @@
 				F8A0EBF11AB8704900F65A7F /* 3.png in Resources */,
 				F8B6DAA91AB567BE00CCB13D /* 18-2.png in Resources */,
 				F83865B61AA0569C00001D1A /* registerSelect.png in Resources */,
+				F83375E71AB9C49E00944CB1 /* 83-2.png in Resources */,
 				F8B6DAAA1AB567BE00CCB13D /* 18-3.png in Resources */,
 				F8B6DA9C1AB5664D00CCB13D /* myAccountButton.png in Resources */,
 				F80E49961A8E502E00028CD1 /* ALoginButtonHightLight.png in Resources */,
+				F83375EA1AB9C56700944CB1 /* 8-button-2.png in Resources */,
 				F8B6DA741AB5513100CCB13D /* moreHeader.png in Resources */,
 				F888311A1AB48069001E4AD1 /* moreS.png in Resources */,
 				F8B6DA881AB55C1500CCB13D /* myAccount4.png in Resources */,
+				F83375F01AB9C86B00944CB1 /* RHInvestmentWebViewController.xib in Resources */,
 				F8B6DA871AB55C1500CCB13D /* myAccount3.png in Resources */,
 				F8B6DA781AB5517600CCB13D /* shareIcon.png in Resources */,
 				F86B8B051AA18406000D2B8C /* RHMainViewController.xib in Resources */,
+				F83375EB1AB9C56700944CB1 /* 8-button1.png in Resources */,
+				F83375E51AB9C49100944CB1 /* 82-2.png in Resources */,
 				F8B6DA941AB563BA00CCB13D /* RHTradViewCell.xib in Resources */,
 				F8B6DA891AB55C1500CCB13D /* myAccountLine.png in Resources */,
 				F8B6DA8F1AB562EF00CCB13D /* RHTradingViewController.xib in Resources */,
@@ -1114,6 +1160,7 @@
 				F80E49441A8E24C000028CD1 /* main.m in Sources */,
 				F8A0EBFC1AB8778D00F65A7F /* RHProjectListContentViewController.m in Sources */,
 				F88830F31AB41C02001E4AD1 /* RHSegmentView.m in Sources */,
+				F83375E01AB9BEBC00944CB1 /* RHInvestmentViewController.m in Sources */,
 				F8B6DA6A1AB5459500CCB13D /* RHUserCenterMainViewController.m in Sources */,
 				F86B8AEF1AA16ED3000D2B8C /* RHGesturePasswordViewController.m in Sources */,
 				F815ED3E1AB72545004B2053 /* RHSegmentContentView.m in Sources */,
@@ -1134,6 +1181,7 @@
 				F8B6DA931AB563BA00CCB13D /* RHTradViewCell.m in Sources */,
 				F8B6DA5F1AB51BE600CCB13D /* RHUserCenterViewController.m in Sources */,
 				F8B6DA991AB565DF00CCB13D /* RHMyInvestmentViewController.m in Sources */,
+				F83375EF1AB9C86B00944CB1 /* RHInvestmentWebViewController.m in Sources */,
 				F8A0EBEC1AB86F1A00F65A7F /* RHProjectListViewController.m in Sources */,
 				F80E494A1A8E24C000028CD1 /* ryhui.xcdatamodeld in Sources */,
 				F879E7551AA355B100339647 /* RHAgreement1ViewController.m in Sources */,
@@ -1253,14 +1301,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Hong Du Yi Rong Financial Information Service Co., Ltd. (T8WLWPVY5C)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Hong Du Yi Rong Financial Information Service Co., Ltd. (T8WLWPVY5C)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zhibin Wang (8QX34UNN59)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zhibin Wang (8QX34UNN59)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ryhui/ryhuiPrefixHeader.pch;
 				INFOPLIST_FILE = ryhui/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0ddb2131-2f47-46f4-b710-d8d0b94b181c";
+				PROVISIONING_PROFILE = "312fab15-472e-466c-b3d4-72267f602088";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1271,14 +1319,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Hong Du Yi Rong Financial Information Service Co., Ltd. (T8WLWPVY5C)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Hong Du Yi Rong Financial Information Service Co., Ltd. (T8WLWPVY5C)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zhibin Wang (8QX34UNN59)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zhibin Wang (8QX34UNN59)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ryhui/ryhuiPrefixHeader.pch;
 				INFOPLIST_FILE = ryhui/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0ddb2131-2f47-46f4-b710-d8d0b94b181c";
+				PROVISIONING_PROFILE = "312fab15-472e-466c-b3d4-72267f602088";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

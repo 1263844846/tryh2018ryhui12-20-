@@ -8,6 +8,7 @@
 
 #import "RHBaseViewController.h"
 #import "RHProjectDetailViewCell.h"
+#import "RHInvestmentViewController.h"
 
 @interface RHProjectDetailViewController : RHBaseViewController
 
@@ -54,4 +55,5 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *projectDetail;
 
+- (IBAction)Investment:(id)sender;
 @end

@@ -124,7 +124,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可投金额" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jte-1c-ev5">
-                            <rect key="frame" x="221" y="79" width="49.999999436438088" height="12"/>
+                            <rect key="frame" x="220.99999915781808" y="79" width="50" height="12"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                             <color key="textColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -313,6 +313,9 @@
                             <state key="normal" title="投资">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="Investment:" destination="-1" eventType="touchUpInside" id="WPD-Hf-hHK"/>
+                            </connections>
                         </button>
                         <view contentMode="scaleToFill" id="hra-Ov-cqW">
                             <rect key="frame" x="0.0" y="35" width="320" height="40"/>

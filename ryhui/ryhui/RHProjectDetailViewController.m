@@ -207,4 +207,9 @@
     
     return cell;
 }
+- (IBAction)Investment:(id)sender {
+    RHInvestmentViewController* contoller=[[RHInvestmentViewController alloc]initWithNibName:@"RHInvestmentViewController" bundle:nil];
+    contoller.dataDic=self.dataDic;
+    [self.navigationController pushViewController:contoller animated:YES];
+}
 @end
