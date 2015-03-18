@@ -1,8 +1,10 @@
 /Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHRegisterViewController.o
+/Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHInvestmentContentViewController.o
 /Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHProjectDetailViewCell.o
 /Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHTradingViewController.o
 /Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHTabbarManager.o
 /Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHLoginViewController.o
+/Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/AITableFooterVew.o
 /Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/AppDelegate.o
 /Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHAboutViewController.o
 /Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHNetworkService.o
@@ -11,11 +13,14 @@
 /Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHGestureView.o
 /Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHMyInvestmentViewCell.o
 /Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/main.o
+/Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHProjectListContentViewController.o
 /Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHSegmentView.o
 /Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHUserCenterMainViewController.o
 /Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHGesturePasswordViewController.o
+/Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHSegmentContentView.o
 /Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHRechargeViewController.o
 /Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHBaseViewController.o
+/Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHGuidanceViewController.o
 /Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHMainViewCell.o
 /Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHMoreViewController.o
 /Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHGesturePasswordButton.o
@@ -30,5 +35,6 @@
 /Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHTradViewCell.o
 /Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHUserCenterViewController.o
 /Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHMyInvestmentViewController.o
+/Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHProjectListViewController.o
 /Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHAgreement1ViewController.o
 /Users/stefan/Documents/ryhui/ryhui/Build/Intermediates/ryhui.build/Debug-iphoneos/ryhui.build/Objects-normal/armv7/RHGesturePasswordView.o

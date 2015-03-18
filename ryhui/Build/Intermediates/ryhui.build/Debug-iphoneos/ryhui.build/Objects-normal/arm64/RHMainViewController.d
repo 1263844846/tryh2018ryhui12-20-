@@ -5,4 +5,6 @@ dependencies: \
   /Users/stefan/Documents/ryhui/ryhui/ryhui/RHMainViewCell.h \
   /Users/stefan/Documents/ryhui/ryhui/ryhui/Resources/CircleProgressView.h \
   /Users/stefan/Documents/ryhui/ryhui/ryhui/RHProjectDetailViewController.h \
-  /Users/stefan/Documents/ryhui/ryhui/ryhui/RHProjectDetailViewCell.h
+  /Users/stefan/Documents/ryhui/ryhui/ryhui/RHProjectDetailViewCell.h \
+  /Users/stefan/Documents/ryhui/ryhui/ryhui/RHProjectListViewController.h \
+  /Users/stefan/Documents/ryhui/ryhui/ryhui/RHSegmentContentView.h

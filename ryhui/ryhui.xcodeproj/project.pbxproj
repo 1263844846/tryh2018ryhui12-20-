@@ -1252,14 +1252,15 @@
 			baseConfigurationReference = 64D0F7EFA66E690954907170 /* Pods-ryhui.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: zhibin Wang (8QX34UNN59)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zhibin Wang (8QX34UNN59)";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Hong Du Yi Rong Financial Information Service Co., Ltd. (T8WLWPVY5C)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Hong Du Yi Rong Financial Information Service Co., Ltd. (T8WLWPVY5C)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ryhui/ryhuiPrefixHeader.pch;
 				INFOPLIST_FILE = ryhui/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "0ddb2131-2f47-46f4-b710-d8d0b94b181c";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1269,14 +1270,15 @@
 			baseConfigurationReference = DE5A032DE22EAAF12589E45A /* Pods-ryhui.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: zhibin Wang (8QX34UNN59)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zhibin Wang (8QX34UNN59)";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Hong Du Yi Rong Financial Information Service Co., Ltd. (T8WLWPVY5C)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Hong Du Yi Rong Financial Information Service Co., Ltd. (T8WLWPVY5C)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ryhui/ryhuiPrefixHeader.pch;
 				INFOPLIST_FILE = ryhui/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "0ddb2131-2f47-46f4-b710-d8d0b94b181c";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
