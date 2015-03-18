@@ -141,6 +141,7 @@
             //[self presentViewController:(UIViewController) animated:YES completion:nil];
             [gesturePasswordView.state setTextColor:[UIColor colorWithRed:2/255.f green:174/255.f blue:240/255.f alpha:1]];
             [gesturePasswordView.state setText:@"已保存手势密码"];
+            [self verify];
             return YES;
         }
         else{
