@@ -26,13 +26,13 @@
     [self.view addSubview:_segmentContentView];
     
     UIImageView* imageView1=[[UIImageView alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    imageView1.image=[UIImage imageNamed:@"guidan1.jpg"];
+    imageView1.image=[UIImage imageNamed:@"guidan1"];
     [_views addObject:imageView1];
     UIImageView* imageView2=[[UIImageView alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    imageView2.image=[UIImage imageNamed:@"guidan2.jpg"];
+    imageView2.image=[UIImage imageNamed:@"guidan2"];
     [_views addObject:imageView2];
     UIImageView* imageView3=[[UIImageView alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    imageView3.image=[UIImage imageNamed:@"guidan3.jpg"];
+    imageView3.image=[UIImage imageNamed:@"guidan3"];
     [_views addObject:imageView3];
     
     [_segmentContentView setViews:_views];

@@ -8,6 +8,7 @@
 
 #import "RHUserCenterViewController.h"
 #import "RHMainViewController.h"
+#import "RHForgotPasswordViewController.h"
 
 @interface RHUserCenterViewController ()
 
@@ -53,6 +54,9 @@
 }
 
 - (IBAction)changePasswordAction:(id)sender {
+    RHForgotPasswordViewController* controller=[[RHForgotPasswordViewController alloc]initWithNibName:@"RHForgotPasswordViewController" bundle:nil];
+    
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (IBAction)changePanPasswordAction:(id)sender {

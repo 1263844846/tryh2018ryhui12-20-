@@ -30,8 +30,8 @@
     
     [self configTitleWithString:@"登录"];
     
-    self.accountTextField.text=@"liushunxin";
-    self.passwordTextField.text=@"1476751459";
+    self.accountTextField.text=@"mayun523";
+    self.passwordTextField.text=@"1q2w3e";
 }
 
 -(void)changeCaptcha
@@ -109,7 +109,12 @@
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        if ([error.userInfo.allKeys containsObject:@"com.alamofire.serialization.response.error.data"]) {
+            NSDictionary* errorDic=[NSJSONSerialization JSONObjectWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] options:NSJSONReadingMutableContainers error:nil];
+            if ([errorDic objectForKey:@"msg"]) {
+                [RHUtility showTextWithText:[errorDic objectForKey:@"msg"]];
+            }
+        }
     }];
 }
 

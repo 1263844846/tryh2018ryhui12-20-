@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		961AD2F930E8CEFA8FA5D28D /* libPods-ryhui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB95D30F1AE0DCFA27AE1DD7 /* libPods-ryhui.a */; };
+		D562367C1AC79FC300FEAB7C /* guidan1.png in Resources */ = {isa = PBXBuildFile; fileRef = D56236791AC79FC300FEAB7C /* guidan1.png */; };
+		D562367D1AC79FC300FEAB7C /* guidan2.png in Resources */ = {isa = PBXBuildFile; fileRef = D562367A1AC79FC300FEAB7C /* guidan2.png */; };
+		D562367E1AC79FC300FEAB7C /* guidan3.png in Resources */ = {isa = PBXBuildFile; fileRef = D562367B1AC79FC300FEAB7C /* guidan3.png */; };
+		D56236831AC7A4C900FEAB7C /* RHForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D56236811AC7A4C900FEAB7C /* RHForgotPasswordViewController.m */; };
+		D56236841AC7A4C900FEAB7C /* RHForgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D56236821AC7A4C900FEAB7C /* RHForgotPasswordViewController.xib */; };
+		D562368E1AC7E6AB00FEAB7C /* RHAccountValidateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D562368C1AC7E6AB00FEAB7C /* RHAccountValidateViewController.m */; };
+		D562368F1AC7E6AB00FEAB7C /* RHAccountValidateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D562368D1AC7E6AB00FEAB7C /* RHAccountValidateViewController.xib */; };
 		F80E49441A8E24C000028CD1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F80E49431A8E24C000028CD1 /* main.m */; };
 		F80E49471A8E24C000028CD1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F80E49461A8E24C000028CD1 /* AppDelegate.m */; };
 		F80E494A1A8E24C000028CD1 /* ryhui.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F80E49481A8E24C000028CD1 /* ryhui.xcdatamodeld */; };
@@ -35,9 +42,6 @@
 		F815ED451AB72898004B2053 /* AITableFooterVew.m in Sources */ = {isa = PBXBuildFile; fileRef = F815ED441AB72898004B2053 /* AITableFooterVew.m */; };
 		F815ED4A1AB749FF004B2053 /* RHGuidanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F815ED481AB749FF004B2053 /* RHGuidanceViewController.m */; };
 		F815ED4B1AB749FF004B2053 /* RHGuidanceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F815ED491AB749FF004B2053 /* RHGuidanceViewController.xib */; };
-		F815ED4F1AB74CD1004B2053 /* guidan1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F815ED4C1AB74CD0004B2053 /* guidan1.jpg */; };
-		F815ED501AB74CD1004B2053 /* guidan2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F815ED4D1AB74CD1004B2053 /* guidan2.jpg */; };
-		F815ED511AB74CD1004B2053 /* guidan3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F815ED4E1AB74CD1004B2053 /* guidan3.jpg */; };
 		F815ED531AB752D2004B2053 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F815ED521AB752D2004B2053 /* bg.jpg */; };
 		F815ED591AB7557E004B2053 /* 6.png in Resources */ = {isa = PBXBuildFile; fileRef = F815ED541AB7557E004B2053 /* 6.png */; };
 		F815ED5A1AB7557E004B2053 /* 7-1.png in Resources */ = {isa = PBXBuildFile; fileRef = F815ED551AB7557E004B2053 /* 7-1.png */; };
@@ -168,6 +172,15 @@
 /* Begin PBXFileReference section */
 		64D0F7EFA66E690954907170 /* Pods-ryhui.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ryhui.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ryhui/Pods-ryhui.debug.xcconfig"; sourceTree = "<group>"; };
 		BB95D30F1AE0DCFA27AE1DD7 /* libPods-ryhui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ryhui.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D56236791AC79FC300FEAB7C /* guidan1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guidan1.png; sourceTree = "<group>"; };
+		D562367A1AC79FC300FEAB7C /* guidan2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guidan2.png; sourceTree = "<group>"; };
+		D562367B1AC79FC300FEAB7C /* guidan3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guidan3.png; sourceTree = "<group>"; };
+		D56236801AC7A4C900FEAB7C /* RHForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHForgotPasswordViewController.h; sourceTree = "<group>"; };
+		D56236811AC7A4C900FEAB7C /* RHForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHForgotPasswordViewController.m; sourceTree = "<group>"; };
+		D56236821AC7A4C900FEAB7C /* RHForgotPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHForgotPasswordViewController.xib; sourceTree = "<group>"; };
+		D562368B1AC7E6AB00FEAB7C /* RHAccountValidateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHAccountValidateViewController.h; sourceTree = "<group>"; };
+		D562368C1AC7E6AB00FEAB7C /* RHAccountValidateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHAccountValidateViewController.m; sourceTree = "<group>"; };
+		D562368D1AC7E6AB00FEAB7C /* RHAccountValidateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHAccountValidateViewController.xib; sourceTree = "<group>"; };
 		DE5A032DE22EAAF12589E45A /* Pods-ryhui.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ryhui.release.xcconfig"; path = "Pods/Target Support Files/Pods-ryhui/Pods-ryhui.release.xcconfig"; sourceTree = "<group>"; };
 		F80E493E1A8E24C000028CD1 /* ryhui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ryhui.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F80E49421A8E24C000028CD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -211,9 +224,6 @@
 		F815ED471AB749FF004B2053 /* RHGuidanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHGuidanceViewController.h; sourceTree = "<group>"; };
 		F815ED481AB749FF004B2053 /* RHGuidanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHGuidanceViewController.m; sourceTree = "<group>"; };
 		F815ED491AB749FF004B2053 /* RHGuidanceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHGuidanceViewController.xib; sourceTree = "<group>"; };
-		F815ED4C1AB74CD0004B2053 /* guidan1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = guidan1.jpg; sourceTree = "<group>"; };
-		F815ED4D1AB74CD1004B2053 /* guidan2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = guidan2.jpg; sourceTree = "<group>"; };
-		F815ED4E1AB74CD1004B2053 /* guidan3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = guidan3.jpg; sourceTree = "<group>"; };
 		F815ED521AB752D2004B2053 /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
 		F815ED541AB7557E004B2053 /* 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 6.png; sourceTree = "<group>"; };
 		F815ED551AB7557E004B2053 /* 7-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "7-1.png"; sourceTree = "<group>"; };
@@ -398,6 +408,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D562367F1AC7A32100FEAB7C /* RHForgotPasswordViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D56236801AC7A4C900FEAB7C /* RHForgotPasswordViewController.h */,
+				D56236811AC7A4C900FEAB7C /* RHForgotPasswordViewController.m */,
+				D56236821AC7A4C900FEAB7C /* RHForgotPasswordViewController.xib */,
+			);
+			name = RHForgotPasswordViewController;
+			sourceTree = "<group>";
+		};
+		D56236851AC7E5B200FEAB7C /* RHFindPasswordViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D562368B1AC7E6AB00FEAB7C /* RHAccountValidateViewController.h */,
+				D562368C1AC7E6AB00FEAB7C /* RHAccountValidateViewController.m */,
+				D562368D1AC7E6AB00FEAB7C /* RHAccountValidateViewController.xib */,
+			);
+			name = RHFindPasswordViewController;
+			sourceTree = "<group>";
+		};
 		F80E49351A8E24C000028CD1 = {
 			isa = PBXGroup;
 			children = (
@@ -478,6 +508,8 @@
 		F80E496F1A8E38DF00028CD1 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				D56236851AC7E5B200FEAB7C /* RHFindPasswordViewController */,
+				D562367F1AC7A32100FEAB7C /* RHForgotPasswordViewController */,
 				F83375DC1AB9BE9C00944CB1 /* RHInvestmentViewController */,
 				F8A0EBE81AB86EEE00F65A7F /* RHProjectListViewController */,
 				F815ED461AB749A4004B2053 /* RHGuidanceViewController */,
@@ -527,6 +559,9 @@
 		F80E497B1A8E3D0400028CD1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D56236791AC79FC300FEAB7C /* guidan1.png */,
+				D562367A1AC79FC300FEAB7C /* guidan2.png */,
+				D562367B1AC79FC300FEAB7C /* guidan3.png */,
 				F83375E81AB9C56700944CB1 /* 8-button-2.png */,
 				F83375E91AB9C56700944CB1 /* 8-button1.png */,
 				F83375E41AB9C49100944CB1 /* 82-2.png */,
@@ -539,9 +574,6 @@
 				F8A0EBEE1AB8704900F65A7F /* 3-1.png */,
 				F8A0EBEF1AB8704900F65A7F /* 3.png */,
 				F815ED521AB752D2004B2053 /* bg.jpg */,
-				F815ED4C1AB74CD0004B2053 /* guidan1.jpg */,
-				F815ED4D1AB74CD1004B2053 /* guidan2.jpg */,
-				F815ED4E1AB74CD1004B2053 /* guidan3.jpg */,
 				F815ED3A1AB717E7004B2053 /* 1.png */,
 				F8B6DA9D1AB5678800CCB13D /* Investment */,
 				F8B6DA7F1AB55BE000CCB13D /* myAccount */,
@@ -1007,6 +1039,7 @@
 				F89A3D851AB5D16800B92DF3 /* register2.png in Resources */,
 				F80E49841A8E41A300028CD1 /* qrButtonDefault.png in Resources */,
 				F888311C1AB48069001E4AD1 /* userS.png in Resources */,
+				D562368F1AC7E6AB00FEAB7C /* RHAccountValidateViewController.xib in Resources */,
 				F88830FD1AB42268001E4AD1 /* segmentBgV.png in Resources */,
 				F8B6DA601AB51BE600CCB13D /* RHUserCenterViewController.xib in Resources */,
 				F8B6DAB01AB56F7C00CCB13D /* RHMyInvestmentViewCell.xib in Resources */,
@@ -1024,12 +1057,12 @@
 				F80E49851A8E41A300028CD1 /* qrButtonHightLight.png in Resources */,
 				F86B8AFF1AA17DB2000D2B8C /* GestureIcon.png in Resources */,
 				F83865B11AA0569C00001D1A /* captchaButtonDown.png in Resources */,
+				D562367D1AC79FC300FEAB7C /* guidan2.png in Resources */,
 				F8B6DAB61AB5740600CCB13D /* RHRechargeViewController.xib in Resources */,
 				F88831261AB4885F001E4AD1 /* pd_segment1.png in Resources */,
 				F815ED5F1AB756BA004B2053 /* 9.png in Resources */,
 				F80E49951A8E502E00028CD1 /* ALoginButtonDefault.png in Resources */,
 				F80E49791A8E3C5400028CD1 /* RHLoginViewController.xib in Resources */,
-				F815ED4F1AB74CD1004B2053 /* guidan1.jpg in Resources */,
 				F8B6DAA11AB5679000CCB13D /* in1.png in Resources */,
 				F888311B1AB48069001E4AD1 /* userNS.png in Resources */,
 				F83865B31AA0569C00001D1A /* registerButtonDown.png in Resources */,
@@ -1057,7 +1090,6 @@
 				F8A0EBF91AB8719000F65A7F /* 4.png in Resources */,
 				F88831081AB43369001E4AD1 /* RHMainViewCell.xib in Resources */,
 				F8B6DABC1AB5773500CCB13D /* RHAboutViewController.xib in Resources */,
-				F815ED501AB74CD1004B2053 /* guidan2.jpg in Resources */,
 				F80E49921A8E48AD00028CD1 /* back.png in Resources */,
 				F879E7561AA355B100339647 /* RHAgreement1ViewController.xib in Resources */,
 				F80E49901A8E47FD00028CD1 /* navBG.png in Resources */,
@@ -1065,7 +1097,6 @@
 				F83865B21AA0569C00001D1A /* captchaButtonUp.png in Resources */,
 				F815ED3B1AB717E7004B2053 /* 1.png in Resources */,
 				F8B6DA6B1AB5459500CCB13D /* RHUserCenterMainViewController.xib in Resources */,
-				F815ED511AB74CD1004B2053 /* guidan3.jpg in Resources */,
 				F80E49551A8E24C000028CD1 /* LaunchScreen.xib in Resources */,
 				F83865A91AA0525100001D1A /* RHRegisterViewController.xib in Resources */,
 				F88831271AB4885F001E4AD1 /* pd_segment2.png in Resources */,
@@ -1077,6 +1108,7 @@
 				F83865B61AA0569C00001D1A /* registerSelect.png in Resources */,
 				F83375E71AB9C49E00944CB1 /* 83-2.png in Resources */,
 				F8B6DAAA1AB567BE00CCB13D /* 18-3.png in Resources */,
+				D562367E1AC79FC300FEAB7C /* guidan3.png in Resources */,
 				F8B6DA9C1AB5664D00CCB13D /* myAccountButton.png in Resources */,
 				F80E49961A8E502E00028CD1 /* ALoginButtonHightLight.png in Resources */,
 				F83375EA1AB9C56700944CB1 /* 8-button-2.png in Resources */,
@@ -1091,6 +1123,8 @@
 				F83375E51AB9C49100944CB1 /* 82-2.png in Resources */,
 				F8B6DA941AB563BA00CCB13D /* RHTradViewCell.xib in Resources */,
 				F8B6DA891AB55C1500CCB13D /* myAccountLine.png in Resources */,
+				D56236841AC7A4C900FEAB7C /* RHForgotPasswordViewController.xib in Resources */,
+				D562367C1AC79FC300FEAB7C /* guidan1.png in Resources */,
 				F8B6DA8F1AB562EF00CCB13D /* RHTradingViewController.xib in Resources */,
 				F8A0EBF41AB8718900F65A7F /* project2@2x.png in Resources */,
 			);
@@ -1155,6 +1189,7 @@
 				F80E496E1A8E27F600028CD1 /* RHNetworkService.m in Sources */,
 				F888310F1AB4385D001E4AD1 /* CircleProgressView.m in Sources */,
 				F89A3D7F1AB5B54F00B92DF3 /* RHUserManager.m in Sources */,
+				D56236831AC7A4C900FEAB7C /* RHForgotPasswordViewController.m in Sources */,
 				F86B8AF21AA16F53000D2B8C /* RHGestureView.m in Sources */,
 				F8B6DAAF1AB56F7C00CCB13D /* RHMyInvestmentViewCell.m in Sources */,
 				F80E49441A8E24C000028CD1 /* main.m in Sources */,
@@ -1163,6 +1198,7 @@
 				F83375E01AB9BEBC00944CB1 /* RHInvestmentViewController.m in Sources */,
 				F8B6DA6A1AB5459500CCB13D /* RHUserCenterMainViewController.m in Sources */,
 				F86B8AEF1AA16ED3000D2B8C /* RHGesturePasswordViewController.m in Sources */,
+				D562368E1AC7E6AB00FEAB7C /* RHAccountValidateViewController.m in Sources */,
 				F815ED3E1AB72545004B2053 /* RHSegmentContentView.m in Sources */,
 				F8B6DAB51AB5740600CCB13D /* RHRechargeViewController.m in Sources */,
 				F80E49731A8E3A0300028CD1 /* RHBaseViewController.m in Sources */,
@@ -1308,7 +1344,7 @@
 				INFOPLIST_FILE = ryhui/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "312fab15-472e-466c-b3d4-72267f602088";
+				PROVISIONING_PROFILE = "30b195ab-e22e-4a0a-9919-59a2e9f1bc11";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1326,7 +1362,7 @@
 				INFOPLIST_FILE = ryhui/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "312fab15-472e-466c-b3d4-72267f602088";
+				PROVISIONING_PROFILE = "30b195ab-e22e-4a0a-9919-59a2e9f1bc11";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
