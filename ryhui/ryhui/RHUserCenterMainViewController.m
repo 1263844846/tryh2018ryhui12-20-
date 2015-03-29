@@ -12,6 +12,8 @@
 #import "RHTradingViewController.h"
 #import "RHMyInvestmentViewController.h"
 #import "RHRechargeViewController.h"
+#import "RHMyMessageViewController.h"
+#import "RHWithdrawViewController.h"
 
 @interface RHUserCenterMainViewController ()
 
@@ -91,6 +93,13 @@
 }
 
 - (IBAction)extractPayment:(id)sender {
+    RHWithdrawViewController* controller=[[RHWithdrawViewController alloc] initWithNibName:@"RHWithdrawViewController" bundle:nil];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (IBAction)pushMyMessage:(id)sender {
+    RHMyMessageViewController* controller=[[RHMyMessageViewController alloc] initWithNibName:@"RHMyMessageViewController" bundle:nil];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 @end

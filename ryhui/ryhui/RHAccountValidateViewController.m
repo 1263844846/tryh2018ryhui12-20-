@@ -7,6 +7,7 @@
 //
 
 #import "RHAccountValidateViewController.h"
+#import "RHPhoneValidateViewController.h"
 
 @interface RHAccountValidateViewController ()
 
@@ -16,22 +17,70 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [self configBackButton];
+    [self configTitleWithString:@"用户名验证"];
+    
+    [self changeCaptcha];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)changeCaptcha
+{
+    AFHTTPRequestOperationManager* manager=[AFHTTPRequestOperationManager manager];
+    manager.responseSerializer=[[AFImageResponseSerializer alloc]init];
+    [manager POST:[NSString stringWithFormat:@"%@%@",[RHNetworkService instance].doMain,@"common/user/general/captcha?type=CAPTCHA_GETPWDBACK"] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[UIImage class]]) {
+            self.captchaImageView.image=responseObject;
+        }
+        NSArray* array=[[operation.response.allHeaderFields objectForKey:@"Set-Cookie"] componentsSeparatedByString:@";"];
+        [[NSUserDefaults standardUserDefaults] setObject:[array objectAtIndex:0] forKey:@"RHSESSION"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)nextAction:(id)sender {
+    
+    if ([self.accountTF.text length]<=0) {
+        [RHUtility showTextWithText:@"请输入用户名"];
+        return;
+    }
+    if ([self.captchaTF.text length]<=0) {
+        [RHUtility showTextWithText:@"请输入验证码"];
+        return;
+    }
+    NSDictionary *parameters = @{@"username":self.accountTF.text,@"captcha":self.captchaTF.text};
+    
+    [[RHNetworkService instance] POST:@"common/user/pwdBack/findPwdBack1" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        DLog(@"%@",responseObject);
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSString* result=[responseObject objectForKey:@"msg"];
+            if (result&&[result length]>0) {
+                if ([result isEqualToString:@"success"]) {
+                    
+                    [self pushPhoneValidate];
+                }
+            }
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if ([error.userInfo.allKeys containsObject:@"com.alamofire.serialization.response.error.data"]) {
+            NSDictionary* errorDic=[NSJSONSerialization JSONObjectWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] options:NSJSONReadingMutableContainers error:nil];
+            if ([errorDic objectForKey:@"msg"]) {
+                [RHUtility showTextWithText:[errorDic objectForKey:@"msg"]];
+            }
+        }
+    }];
 }
-*/
 
+-(void)pushPhoneValidate
+{
+    RHPhoneValidateViewController* controller=[[RHPhoneValidateViewController alloc]initWithNibName:@"RHPhoneValidateViewController" bundle:nil];
+    [self.navigationController pushViewController:controller animated:YES];
+    
+}
+
+- (IBAction)changeCaptcha:(id)sender {
+    [self changeCaptcha];
+}
 @end

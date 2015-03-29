@@ -27,4 +27,5 @@
 
 - (IBAction)pushPay:(id)sender;
 - (IBAction)extractPayment:(id)sender;
+- (IBAction)pushMyMessage:(id)sender;
 @end

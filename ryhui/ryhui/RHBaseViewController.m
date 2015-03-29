@@ -41,6 +41,16 @@
     self.navigationItem.leftBarButtonItem= [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 
+- (void)configRightButtonWithTitle:(NSString*)title action:(SEL)action
+{
+    UIButton* button=[UIButton buttonWithType:UIButtonTypeCustom];
+    [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    [button setTitle:title forState:UIControlStateNormal];
+    [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+    button.frame=CGRectMake(0, 0, 100, 20);
+    self.navigationItem.rightBarButtonItem= [[UIBarButtonItem alloc] initWithCustomView:button];
+}
+
 - (void)configTitleWithString:(NSString*)title
 {
     CGFloat font=20;

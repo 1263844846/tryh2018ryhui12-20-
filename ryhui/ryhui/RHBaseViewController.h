@@ -12,4 +12,5 @@
 
 - (void)configBackButton;
 - (void)configTitleWithString:(NSString*)title;
+- (void)configRightButtonWithTitle:(NSString*)title action:(SEL)action;
 @end

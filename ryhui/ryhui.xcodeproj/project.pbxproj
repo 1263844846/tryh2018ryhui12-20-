@@ -77,6 +77,37 @@
 		F879E7561AA355B100339647 /* RHAgreement1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F879E7541AA355B100339647 /* RHAgreement1ViewController.xib */; };
 		F879E75A1AA355C100339647 /* RHAgreement2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F879E7581AA355C100339647 /* RHAgreement2ViewController.m */; };
 		F879E75B1AA355C100339647 /* RHAgreement2ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F879E7591AA355C100339647 /* RHAgreement2ViewController.xib */; };
+		F87B831B1AC8255700EB73A6 /* RHPhoneValidateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F87B83191AC8255700EB73A6 /* RHPhoneValidateViewController.m */; };
+		F87B831C1AC8255700EB73A6 /* RHPhoneValidateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F87B831A1AC8255700EB73A6 /* RHPhoneValidateViewController.xib */; };
+		F87B83201AC827BA00EB73A6 /* RHPasswordConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F87B831E1AC827BA00EB73A6 /* RHPasswordConfirmViewController.m */; };
+		F87B83211AC827BA00EB73A6 /* RHPasswordConfirmViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F87B831F1AC827BA00EB73A6 /* RHPasswordConfirmViewController.xib */; };
+		F87B83251AC82E3A00EB73A6 /* RHFindPWDoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F87B83231AC82E3A00EB73A6 /* RHFindPWDoneViewController.m */; };
+		F87B83261AC82E3A00EB73A6 /* RHFindPWDoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F87B83241AC82E3A00EB73A6 /* RHFindPWDoneViewController.xib */; };
+		F87B83281AC82EA000EB73A6 /* pwDone.png in Resources */ = {isa = PBXBuildFile; fileRef = F87B83271AC82EA000EB73A6 /* pwDone.png */; };
+		F87B832C1AC8346700EB73A6 /* RHMyMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F87B832A1AC8346700EB73A6 /* RHMyMessageViewController.m */; };
+		F87B832D1AC8346700EB73A6 /* RHMyMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F87B832B1AC8346700EB73A6 /* RHMyMessageViewController.xib */; };
+		F87B83321AC8365500EB73A6 /* RHMyMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F87B83301AC8365500EB73A6 /* RHMyMessageCell.m */; };
+		F87B83331AC8365500EB73A6 /* RHMyMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F87B83311AC8365500EB73A6 /* RHMyMessageCell.xib */; };
+		F87B83361AC837BB00EB73A6 /* message1.png in Resources */ = {isa = PBXBuildFile; fileRef = F87B83341AC837BB00EB73A6 /* message1.png */; };
+		F87B83371AC837BB00EB73A6 /* message2.png in Resources */ = {isa = PBXBuildFile; fileRef = F87B83351AC837BB00EB73A6 /* message2.png */; };
+		F87B833C1AC83C6300EB73A6 /* RHWithdrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F87B833A1AC83C6300EB73A6 /* RHWithdrawViewController.m */; };
+		F87B833D1AC83C6300EB73A6 /* RHWithdrawViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F87B833B1AC83C6300EB73A6 /* RHWithdrawViewController.xib */; };
+		F87B83401AC841D500EB73A6 /* withdrawButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F87B833E1AC841D500EB73A6 /* withdrawButton.png */; };
+		F87B83411AC841D500EB73A6 /* withdrawButtonDown.png in Resources */ = {isa = PBXBuildFile; fileRef = F87B833F1AC841D500EB73A6 /* withdrawButtonDown.png */; };
+		F87B834F1AC84AD700EB73A6 /* ABC.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F87B83431AC84AD700EB73A6 /* ABC.jpg */; };
+		F87B83501AC84AD700EB73A6 /* BOC.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F87B83441AC84AD700EB73A6 /* BOC.jpg */; };
+		F87B83511AC84AD700EB73A6 /* BOCOM.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F87B83451AC84AD700EB73A6 /* BOCOM.jpg */; };
+		F87B83521AC84AD700EB73A6 /* BOS.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F87B83461AC84AD700EB73A6 /* BOS.jpg */; };
+		F87B83531AC84AD700EB73A6 /* CCB.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F87B83471AC84AD700EB73A6 /* CCB.jpg */; };
+		F87B83541AC84AD700EB73A6 /* CEB.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F87B83481AC84AD700EB73A6 /* CEB.jpg */; };
+		F87B83551AC84AD700EB73A6 /* CIB.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F87B83491AC84AD700EB73A6 /* CIB.jpg */; };
+		F87B83561AC84AD700EB73A6 /* CMB.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F87B834A1AC84AD700EB73A6 /* CMB.jpg */; };
+		F87B83571AC84AD700EB73A6 /* CMBC.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F87B834B1AC84AD700EB73A6 /* CMBC.jpg */; };
+		F87B83581AC84AD700EB73A6 /* ICBC.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F87B834C1AC84AD700EB73A6 /* ICBC.jpg */; };
+		F87B83591AC84AD700EB73A6 /* PSBC.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F87B834D1AC84AD700EB73A6 /* PSBC.jpg */; };
+		F87B835A1AC84AD700EB73A6 /* SPDB.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F87B834E1AC84AD700EB73A6 /* SPDB.jpg */; };
+		F87B835E1AC8552800EB73A6 /* RHWithdrawWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F87B835C1AC8552800EB73A6 /* RHWithdrawWebViewController.m */; };
+		F87B835F1AC8552800EB73A6 /* RHWithdrawWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F87B835D1AC8552800EB73A6 /* RHWithdrawWebViewController.xib */; };
 		F88830F31AB41C02001E4AD1 /* RHSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = F88830F21AB41C02001E4AD1 /* RHSegmentView.m */; };
 		F88830F81AB41E6E001E4AD1 /* segmentBg1.png in Resources */ = {isa = PBXBuildFile; fileRef = F88830F61AB41E6E001E4AD1 /* segmentBg1.png */; };
 		F88830F91AB41E6E001E4AD1 /* segmentBg2.png in Resources */ = {isa = PBXBuildFile; fileRef = F88830F71AB41E6E001E4AD1 /* segmentBg2.png */; };
@@ -269,6 +300,44 @@
 		F879E7571AA355C100339647 /* RHAgreement2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHAgreement2ViewController.h; sourceTree = "<group>"; };
 		F879E7581AA355C100339647 /* RHAgreement2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHAgreement2ViewController.m; sourceTree = "<group>"; };
 		F879E7591AA355C100339647 /* RHAgreement2ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHAgreement2ViewController.xib; sourceTree = "<group>"; };
+		F87B83181AC8255700EB73A6 /* RHPhoneValidateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHPhoneValidateViewController.h; sourceTree = "<group>"; };
+		F87B83191AC8255700EB73A6 /* RHPhoneValidateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHPhoneValidateViewController.m; sourceTree = "<group>"; };
+		F87B831A1AC8255700EB73A6 /* RHPhoneValidateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHPhoneValidateViewController.xib; sourceTree = "<group>"; };
+		F87B831D1AC827BA00EB73A6 /* RHPasswordConfirmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHPasswordConfirmViewController.h; sourceTree = "<group>"; };
+		F87B831E1AC827BA00EB73A6 /* RHPasswordConfirmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHPasswordConfirmViewController.m; sourceTree = "<group>"; };
+		F87B831F1AC827BA00EB73A6 /* RHPasswordConfirmViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHPasswordConfirmViewController.xib; sourceTree = "<group>"; };
+		F87B83221AC82E3A00EB73A6 /* RHFindPWDoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHFindPWDoneViewController.h; sourceTree = "<group>"; };
+		F87B83231AC82E3A00EB73A6 /* RHFindPWDoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHFindPWDoneViewController.m; sourceTree = "<group>"; };
+		F87B83241AC82E3A00EB73A6 /* RHFindPWDoneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHFindPWDoneViewController.xib; sourceTree = "<group>"; };
+		F87B83271AC82EA000EB73A6 /* pwDone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pwDone.png; sourceTree = "<group>"; };
+		F87B83291AC8346700EB73A6 /* RHMyMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHMyMessageViewController.h; sourceTree = "<group>"; };
+		F87B832A1AC8346700EB73A6 /* RHMyMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHMyMessageViewController.m; sourceTree = "<group>"; };
+		F87B832B1AC8346700EB73A6 /* RHMyMessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHMyMessageViewController.xib; sourceTree = "<group>"; };
+		F87B832F1AC8365500EB73A6 /* RHMyMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHMyMessageCell.h; sourceTree = "<group>"; };
+		F87B83301AC8365500EB73A6 /* RHMyMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHMyMessageCell.m; sourceTree = "<group>"; };
+		F87B83311AC8365500EB73A6 /* RHMyMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHMyMessageCell.xib; sourceTree = "<group>"; };
+		F87B83341AC837BB00EB73A6 /* message1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = message1.png; sourceTree = "<group>"; };
+		F87B83351AC837BB00EB73A6 /* message2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = message2.png; sourceTree = "<group>"; };
+		F87B83391AC83C6300EB73A6 /* RHWithdrawViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHWithdrawViewController.h; sourceTree = "<group>"; };
+		F87B833A1AC83C6300EB73A6 /* RHWithdrawViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHWithdrawViewController.m; sourceTree = "<group>"; };
+		F87B833B1AC83C6300EB73A6 /* RHWithdrawViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHWithdrawViewController.xib; sourceTree = "<group>"; };
+		F87B833E1AC841D500EB73A6 /* withdrawButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = withdrawButton.png; sourceTree = "<group>"; };
+		F87B833F1AC841D500EB73A6 /* withdrawButtonDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = withdrawButtonDown.png; sourceTree = "<group>"; };
+		F87B83431AC84AD700EB73A6 /* ABC.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ABC.jpg; sourceTree = "<group>"; };
+		F87B83441AC84AD700EB73A6 /* BOC.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BOC.jpg; sourceTree = "<group>"; };
+		F87B83451AC84AD700EB73A6 /* BOCOM.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BOCOM.jpg; sourceTree = "<group>"; };
+		F87B83461AC84AD700EB73A6 /* BOS.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BOS.jpg; sourceTree = "<group>"; };
+		F87B83471AC84AD700EB73A6 /* CCB.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = CCB.jpg; sourceTree = "<group>"; };
+		F87B83481AC84AD700EB73A6 /* CEB.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = CEB.jpg; sourceTree = "<group>"; };
+		F87B83491AC84AD700EB73A6 /* CIB.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = CIB.jpg; sourceTree = "<group>"; };
+		F87B834A1AC84AD700EB73A6 /* CMB.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = CMB.jpg; sourceTree = "<group>"; };
+		F87B834B1AC84AD700EB73A6 /* CMBC.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = CMBC.jpg; sourceTree = "<group>"; };
+		F87B834C1AC84AD700EB73A6 /* ICBC.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ICBC.jpg; sourceTree = "<group>"; };
+		F87B834D1AC84AD700EB73A6 /* PSBC.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = PSBC.jpg; sourceTree = "<group>"; };
+		F87B834E1AC84AD700EB73A6 /* SPDB.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SPDB.jpg; sourceTree = "<group>"; };
+		F87B835B1AC8552800EB73A6 /* RHWithdrawWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHWithdrawWebViewController.h; sourceTree = "<group>"; };
+		F87B835C1AC8552800EB73A6 /* RHWithdrawWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHWithdrawWebViewController.m; sourceTree = "<group>"; };
+		F87B835D1AC8552800EB73A6 /* RHWithdrawWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHWithdrawWebViewController.xib; sourceTree = "<group>"; };
 		F88830F11AB41C02001E4AD1 /* RHSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHSegmentView.h; sourceTree = "<group>"; };
 		F88830F21AB41C02001E4AD1 /* RHSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHSegmentView.m; sourceTree = "<group>"; };
 		F88830F61AB41E6E001E4AD1 /* segmentBg1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = segmentBg1.png; sourceTree = "<group>"; };
@@ -424,6 +493,15 @@
 				D562368B1AC7E6AB00FEAB7C /* RHAccountValidateViewController.h */,
 				D562368C1AC7E6AB00FEAB7C /* RHAccountValidateViewController.m */,
 				D562368D1AC7E6AB00FEAB7C /* RHAccountValidateViewController.xib */,
+				F87B83181AC8255700EB73A6 /* RHPhoneValidateViewController.h */,
+				F87B83191AC8255700EB73A6 /* RHPhoneValidateViewController.m */,
+				F87B831A1AC8255700EB73A6 /* RHPhoneValidateViewController.xib */,
+				F87B831D1AC827BA00EB73A6 /* RHPasswordConfirmViewController.h */,
+				F87B831E1AC827BA00EB73A6 /* RHPasswordConfirmViewController.m */,
+				F87B831F1AC827BA00EB73A6 /* RHPasswordConfirmViewController.xib */,
+				F87B83221AC82E3A00EB73A6 /* RHFindPWDoneViewController.h */,
+				F87B83231AC82E3A00EB73A6 /* RHFindPWDoneViewController.m */,
+				F87B83241AC82E3A00EB73A6 /* RHFindPWDoneViewController.xib */,
 			);
 			name = RHFindPasswordViewController;
 			sourceTree = "<group>";
@@ -508,6 +586,8 @@
 		F80E496F1A8E38DF00028CD1 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				F87B83381AC83BF200EB73A6 /* RHWithdrawViewController */,
+				F87B832E1AC8347A00EB73A6 /* RHMyMessageViewController */,
 				D56236851AC7E5B200FEAB7C /* RHFindPasswordViewController */,
 				D562367F1AC7A32100FEAB7C /* RHForgotPasswordViewController */,
 				F83375DC1AB9BE9C00944CB1 /* RHInvestmentViewController */,
@@ -559,6 +639,8 @@
 		F80E497B1A8E3D0400028CD1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F87B83421AC84ACE00EB73A6 /* bank */,
+				F87B83271AC82EA000EB73A6 /* pwDone.png */,
 				D56236791AC79FC300FEAB7C /* guidan1.png */,
 				D562367A1AC79FC300FEAB7C /* guidan2.png */,
 				D562367B1AC79FC300FEAB7C /* guidan3.png */,
@@ -575,6 +657,10 @@
 				F8A0EBEF1AB8704900F65A7F /* 3.png */,
 				F815ED521AB752D2004B2053 /* bg.jpg */,
 				F815ED3A1AB717E7004B2053 /* 1.png */,
+				F87B83341AC837BB00EB73A6 /* message1.png */,
+				F87B83351AC837BB00EB73A6 /* message2.png */,
+				F87B833E1AC841D500EB73A6 /* withdrawButton.png */,
+				F87B833F1AC841D500EB73A6 /* withdrawButtonDown.png */,
 				F8B6DA9D1AB5678800CCB13D /* Investment */,
 				F8B6DA7F1AB55BE000CCB13D /* myAccount */,
 				F8B6DA721AB5512A00CCB13D /* More */,
@@ -703,6 +789,51 @@
 				F879E7591AA355C100339647 /* RHAgreement2ViewController.xib */,
 			);
 			name = AgreenmentViewController;
+			sourceTree = "<group>";
+		};
+		F87B832E1AC8347A00EB73A6 /* RHMyMessageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F87B83291AC8346700EB73A6 /* RHMyMessageViewController.h */,
+				F87B832A1AC8346700EB73A6 /* RHMyMessageViewController.m */,
+				F87B832B1AC8346700EB73A6 /* RHMyMessageViewController.xib */,
+				F87B832F1AC8365500EB73A6 /* RHMyMessageCell.h */,
+				F87B83301AC8365500EB73A6 /* RHMyMessageCell.m */,
+				F87B83311AC8365500EB73A6 /* RHMyMessageCell.xib */,
+			);
+			name = RHMyMessageViewController;
+			sourceTree = "<group>";
+		};
+		F87B83381AC83BF200EB73A6 /* RHWithdrawViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F87B83391AC83C6300EB73A6 /* RHWithdrawViewController.h */,
+				F87B833A1AC83C6300EB73A6 /* RHWithdrawViewController.m */,
+				F87B833B1AC83C6300EB73A6 /* RHWithdrawViewController.xib */,
+				F87B835B1AC8552800EB73A6 /* RHWithdrawWebViewController.h */,
+				F87B835C1AC8552800EB73A6 /* RHWithdrawWebViewController.m */,
+				F87B835D1AC8552800EB73A6 /* RHWithdrawWebViewController.xib */,
+			);
+			name = RHWithdrawViewController;
+			sourceTree = "<group>";
+		};
+		F87B83421AC84ACE00EB73A6 /* bank */ = {
+			isa = PBXGroup;
+			children = (
+				F87B83431AC84AD700EB73A6 /* ABC.jpg */,
+				F87B83441AC84AD700EB73A6 /* BOC.jpg */,
+				F87B83451AC84AD700EB73A6 /* BOCOM.jpg */,
+				F87B83461AC84AD700EB73A6 /* BOS.jpg */,
+				F87B83471AC84AD700EB73A6 /* CCB.jpg */,
+				F87B83481AC84AD700EB73A6 /* CEB.jpg */,
+				F87B83491AC84AD700EB73A6 /* CIB.jpg */,
+				F87B834A1AC84AD700EB73A6 /* CMB.jpg */,
+				F87B834B1AC84AD700EB73A6 /* CMBC.jpg */,
+				F87B834C1AC84AD700EB73A6 /* ICBC.jpg */,
+				F87B834D1AC84AD700EB73A6 /* PSBC.jpg */,
+				F87B834E1AC84AD700EB73A6 /* SPDB.jpg */,
+			);
+			name = bank;
 			sourceTree = "<group>";
 		};
 		F88830F01AB41BC3001E4AD1 /* CustomView */ = {
@@ -1024,24 +1155,33 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F87B83401AC841D500EB73A6 /* withdrawButton.png in Resources */,
 				F815ED5C1AB7557E004B2053 /* 8-1.png in Resources */,
 				F8B6DAAB1AB567BE00CCB13D /* 18-4.png in Resources */,
 				F815ED531AB752D2004B2053 /* bg.jpg in Resources */,
 				F88831171AB48069001E4AD1 /* mainNS.png in Resources */,
 				F8A0EBED1AB86F1A00F65A7F /* RHProjectListViewController.xib in Resources */,
 				F8B6DAA81AB567BE00CCB13D /* 18-1.png in Resources */,
+				F87B83591AC84AD700EB73A6 /* PSBC.jpg in Resources */,
+				F87B83511AC84AD700EB73A6 /* BOCOM.jpg in Resources */,
+				F87B83521AC84AD700EB73A6 /* BOS.jpg in Resources */,
+				F87B83411AC841D500EB73A6 /* withdrawButtonDown.png in Resources */,
 				F815ED591AB7557E004B2053 /* 6.png in Resources */,
 				F89A3D8C1AB5D6E200B92DF3 /* RHRegisterWebViewController.xib in Resources */,
 				F815ED5B1AB7557E004B2053 /* 7.png in Resources */,
 				F80E49801A8E407900028CD1 /* loginButtonDefault.png in Resources */,
 				F88831181AB48069001E4AD1 /* mainS.png in Resources */,
 				F888310C1AB435C7001E4AD1 /* mainLogo.png in Resources */,
+				F87B83501AC84AD700EB73A6 /* BOC.jpg in Resources */,
 				F89A3D851AB5D16800B92DF3 /* register2.png in Resources */,
+				F87B83531AC84AD700EB73A6 /* CCB.jpg in Resources */,
 				F80E49841A8E41A300028CD1 /* qrButtonDefault.png in Resources */,
 				F888311C1AB48069001E4AD1 /* userS.png in Resources */,
 				D562368F1AC7E6AB00FEAB7C /* RHAccountValidateViewController.xib in Resources */,
 				F88830FD1AB42268001E4AD1 /* segmentBgV.png in Resources */,
+				F87B83571AC84AD700EB73A6 /* CMBC.jpg in Resources */,
 				F8B6DA601AB51BE600CCB13D /* RHUserCenterViewController.xib in Resources */,
+				F87B83541AC84AD700EB73A6 /* CEB.jpg in Resources */,
 				F8B6DAB01AB56F7C00CCB13D /* RHMyInvestmentViewCell.xib in Resources */,
 				F8B6DAA31AB5679000CCB13D /* in3.png in Resources */,
 				F83865B41AA0569C00001D1A /* registerButtonUp.png in Resources */,
@@ -1056,6 +1196,7 @@
 				F815ED5D1AB7557E004B2053 /* 8.png in Resources */,
 				F80E49851A8E41A300028CD1 /* qrButtonHightLight.png in Resources */,
 				F86B8AFF1AA17DB2000D2B8C /* GestureIcon.png in Resources */,
+				F87B83581AC84AD700EB73A6 /* ICBC.jpg in Resources */,
 				F83865B11AA0569C00001D1A /* captchaButtonDown.png in Resources */,
 				D562367D1AC79FC300FEAB7C /* guidan2.png in Resources */,
 				F8B6DAB61AB5740600CCB13D /* RHRechargeViewController.xib in Resources */,
@@ -1064,16 +1205,20 @@
 				F80E49951A8E502E00028CD1 /* ALoginButtonDefault.png in Resources */,
 				F80E49791A8E3C5400028CD1 /* RHLoginViewController.xib in Resources */,
 				F8B6DAA11AB5679000CCB13D /* in1.png in Resources */,
+				F87B83261AC82E3A00EB73A6 /* RHFindPWDoneViewController.xib in Resources */,
 				F888311B1AB48069001E4AD1 /* userNS.png in Resources */,
 				F83865B31AA0569C00001D1A /* registerButtonDown.png in Resources */,
 				F8B6DA771AB5517600CCB13D /* phoneIcon.png in Resources */,
 				F8A0EBF01AB8704900F65A7F /* 3-1.png in Resources */,
+				F87B834F1AC84AD700EB73A6 /* ABC.jpg in Resources */,
 				F88830F91AB41E6E001E4AD1 /* segmentBg2.png in Resources */,
 				F8A0EBF51AB8718900F65A7F /* project1@2x.png in Resources */,
 				F88831191AB48069001E4AD1 /* moreNS.png in Resources */,
 				F83375E11AB9BEBC00944CB1 /* RHInvestmentViewController.xib in Resources */,
 				F815ED5A1AB7557E004B2053 /* 7-1.png in Resources */,
+				F87B832D1AC8346700EB73A6 /* RHMyMessageViewController.xib in Resources */,
 				F88830FF1AB42329001E4AD1 /* newProjectBg.png in Resources */,
+				F87B83561AC84AD700EB73A6 /* CMB.jpg in Resources */,
 				F888312C1AB49988001E4AD1 /* RHProjectDetailViewCell.xib in Resources */,
 				F8B6DA7E1AB55BA300CCB13D /* RHMyAccountViewController.xib in Resources */,
 				F83375E31AB9C3CD00944CB1 /* 8-4.png in Resources */,
@@ -1084,6 +1229,7 @@
 				F89A3D861AB5D16800B92DF3 /* register3.png in Resources */,
 				F83865B51AA0569C00001D1A /* registerEnSelect.png in Resources */,
 				F80E498A1A8E444B00028CD1 /* RHALoginViewController.xib in Resources */,
+				F87B835A1AC84AD700EB73A6 /* SPDB.jpg in Resources */,
 				F88830FB1AB41F76001E4AD1 /* RHSegmentView.xib in Resources */,
 				F80E49811A8E407900028CD1 /* loginButtonHightlight.png in Resources */,
 				F815ED4B1AB749FF004B2053 /* RHGuidanceViewController.xib in Resources */,
@@ -1095,28 +1241,37 @@
 				F80E49901A8E47FD00028CD1 /* navBG.png in Resources */,
 				F89A3D871AB5D16800B92DF3 /* register4.png in Resources */,
 				F83865B21AA0569C00001D1A /* captchaButtonUp.png in Resources */,
+				F87B83371AC837BB00EB73A6 /* message2.png in Resources */,
 				F815ED3B1AB717E7004B2053 /* 1.png in Resources */,
 				F8B6DA6B1AB5459500CCB13D /* RHUserCenterMainViewController.xib in Resources */,
 				F80E49551A8E24C000028CD1 /* LaunchScreen.xib in Resources */,
 				F83865A91AA0525100001D1A /* RHRegisterViewController.xib in Resources */,
 				F88831271AB4885F001E4AD1 /* pd_segment2.png in Resources */,
 				F8B6DA711AB54D7100CCB13D /* RHMoreViewController.xib in Resources */,
+				F87B833D1AC83C6300EB73A6 /* RHWithdrawViewController.xib in Resources */,
 				F80E49521A8E24C000028CD1 /* Images.xcassets in Resources */,
 				F8B6DAA21AB5679000CCB13D /* in2.png in Resources */,
 				F8A0EBF11AB8704900F65A7F /* 3.png in Resources */,
 				F8B6DAA91AB567BE00CCB13D /* 18-2.png in Resources */,
+				F87B83551AC84AD700EB73A6 /* CIB.jpg in Resources */,
+				F87B83211AC827BA00EB73A6 /* RHPasswordConfirmViewController.xib in Resources */,
 				F83865B61AA0569C00001D1A /* registerSelect.png in Resources */,
 				F83375E71AB9C49E00944CB1 /* 83-2.png in Resources */,
 				F8B6DAAA1AB567BE00CCB13D /* 18-3.png in Resources */,
+				F87B83361AC837BB00EB73A6 /* message1.png in Resources */,
 				D562367E1AC79FC300FEAB7C /* guidan3.png in Resources */,
 				F8B6DA9C1AB5664D00CCB13D /* myAccountButton.png in Resources */,
 				F80E49961A8E502E00028CD1 /* ALoginButtonHightLight.png in Resources */,
+				F87B83281AC82EA000EB73A6 /* pwDone.png in Resources */,
 				F83375EA1AB9C56700944CB1 /* 8-button-2.png in Resources */,
 				F8B6DA741AB5513100CCB13D /* moreHeader.png in Resources */,
 				F888311A1AB48069001E4AD1 /* moreS.png in Resources */,
 				F8B6DA881AB55C1500CCB13D /* myAccount4.png in Resources */,
+				F87B83331AC8365500EB73A6 /* RHMyMessageCell.xib in Resources */,
 				F83375F01AB9C86B00944CB1 /* RHInvestmentWebViewController.xib in Resources */,
+				F87B835F1AC8552800EB73A6 /* RHWithdrawWebViewController.xib in Resources */,
 				F8B6DA871AB55C1500CCB13D /* myAccount3.png in Resources */,
+				F87B831C1AC8255700EB73A6 /* RHPhoneValidateViewController.xib in Resources */,
 				F8B6DA781AB5517600CCB13D /* shareIcon.png in Resources */,
 				F86B8B051AA18406000D2B8C /* RHMainViewController.xib in Resources */,
 				F83375EB1AB9C56700944CB1 /* 8-button1.png in Resources */,
@@ -1180,11 +1335,13 @@
 				F83865A81AA0525100001D1A /* RHRegisterViewController.m in Sources */,
 				F815ED421AB726AA004B2053 /* RHInvestmentContentViewController.m in Sources */,
 				F888312B1AB49988001E4AD1 /* RHProjectDetailViewCell.m in Sources */,
+				F87B833C1AC83C6300EB73A6 /* RHWithdrawViewController.m in Sources */,
 				F8B6DA8E1AB562EF00CCB13D /* RHTradingViewController.m in Sources */,
 				F8B6DA661AB5435A00CCB13D /* RHTabbarManager.m in Sources */,
 				F80E49781A8E3C5400028CD1 /* RHLoginViewController.m in Sources */,
 				F815ED451AB72898004B2053 /* AITableFooterVew.m in Sources */,
 				F80E49471A8E24C000028CD1 /* AppDelegate.m in Sources */,
+				F87B835E1AC8552800EB73A6 /* RHWithdrawWebViewController.m in Sources */,
 				F8B6DABB1AB5773500CCB13D /* RHAboutViewController.m in Sources */,
 				F80E496E1A8E27F600028CD1 /* RHNetworkService.m in Sources */,
 				F888310F1AB4385D001E4AD1 /* CircleProgressView.m in Sources */,
@@ -1197,14 +1354,18 @@
 				F88830F31AB41C02001E4AD1 /* RHSegmentView.m in Sources */,
 				F83375E01AB9BEBC00944CB1 /* RHInvestmentViewController.m in Sources */,
 				F8B6DA6A1AB5459500CCB13D /* RHUserCenterMainViewController.m in Sources */,
+				F87B832C1AC8346700EB73A6 /* RHMyMessageViewController.m in Sources */,
 				F86B8AEF1AA16ED3000D2B8C /* RHGesturePasswordViewController.m in Sources */,
 				D562368E1AC7E6AB00FEAB7C /* RHAccountValidateViewController.m in Sources */,
+				F87B83201AC827BA00EB73A6 /* RHPasswordConfirmViewController.m in Sources */,
 				F815ED3E1AB72545004B2053 /* RHSegmentContentView.m in Sources */,
 				F8B6DAB51AB5740600CCB13D /* RHRechargeViewController.m in Sources */,
 				F80E49731A8E3A0300028CD1 /* RHBaseViewController.m in Sources */,
 				F815ED4A1AB749FF004B2053 /* RHGuidanceViewController.m in Sources */,
 				F88831071AB43369001E4AD1 /* RHMainViewCell.m in Sources */,
+				F87B831B1AC8255700EB73A6 /* RHPhoneValidateViewController.m in Sources */,
 				F8B6DA701AB54D7100CCB13D /* RHMoreViewController.m in Sources */,
+				F87B83251AC82E3A00EB73A6 /* RHFindPWDoneViewController.m in Sources */,
 				F86B8AF51AA16F75000D2B8C /* RHGesturePasswordButton.m in Sources */,
 				F8B6DA7D1AB55BA300CCB13D /* RHMyAccountViewController.m in Sources */,
 				F86B8B041AA18406000D2B8C /* RHMainViewController.m in Sources */,
@@ -1214,6 +1375,7 @@
 				F80E49891A8E444B00028CD1 /* RHALoginViewController.m in Sources */,
 				F89A3D901AB5DA0300B92DF3 /* RHRechargeWebViewController.m in Sources */,
 				F80E498E1A8E46CA00028CD1 /* RHUtility.m in Sources */,
+				F87B83321AC8365500EB73A6 /* RHMyMessageCell.m in Sources */,
 				F8B6DA931AB563BA00CCB13D /* RHTradViewCell.m in Sources */,
 				F8B6DA5F1AB51BE600CCB13D /* RHUserCenterViewController.m in Sources */,
 				F8B6DA991AB565DF00CCB13D /* RHMyInvestmentViewController.m in Sources */,
@@ -1344,7 +1506,7 @@
 				INFOPLIST_FILE = ryhui/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "30b195ab-e22e-4a0a-9919-59a2e9f1bc11";
+				PROVISIONING_PROFILE = "312fab15-472e-466c-b3d4-72267f602088";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1362,7 +1524,7 @@
 				INFOPLIST_FILE = ryhui/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "30b195ab-e22e-4a0a-9919-59a2e9f1bc11";
+				PROVISIONING_PROFILE = "312fab15-472e-466c-b3d4-72267f602088";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

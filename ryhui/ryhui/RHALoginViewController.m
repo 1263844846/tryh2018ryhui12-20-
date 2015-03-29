@@ -8,6 +8,7 @@
 
 #import "RHALoginViewController.h"
 #import "RHGesturePasswordViewController.h"
+#import "RHAccountValidateViewController.h"
 
 @interface RHALoginViewController ()
 
@@ -31,7 +32,10 @@
     [self configTitleWithString:@"登录"];
     
     self.accountTextField.text=@"mayun523";
+    
     self.passwordTextField.text=@"1q2w3e";
+    
+    [self configRightButtonWithTitle:@"找回密码" action:@selector(findPassword)];
 }
 
 -(void)changeCaptcha
@@ -136,5 +140,11 @@
     }
     
     return YES;
+}
+
+-(void)findPassword
+{
+    RHAccountValidateViewController* controller=[[RHAccountValidateViewController alloc]initWithNibName:@"RHAccountValidateViewController" bundle:nil];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 @end
