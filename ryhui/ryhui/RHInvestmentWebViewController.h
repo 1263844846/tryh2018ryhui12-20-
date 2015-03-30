@@ -8,7 +8,7 @@
 
 #import "RHBaseViewController.h"
 
-@interface RHInvestmentWebViewController : RHBaseViewController
+@interface RHInvestmentWebViewController : RHBaseViewController<UIWebViewDelegate>
 @property(nonatomic,strong)NSString* price;
 @property(nonatomic,strong)NSString* projectId;
 @property (weak, nonatomic) IBOutlet UIWebView *webView;

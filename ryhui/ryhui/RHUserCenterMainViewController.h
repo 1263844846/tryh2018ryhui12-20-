@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *username;
 @property (weak, nonatomic) IBOutlet UILabel *ryUsername;
+@property (weak, nonatomic) IBOutlet UIView *overView;
 
 @property (weak, nonatomic) IBOutlet UILabel *balanceLabel;
 - (IBAction)pushAccountInfo:(id)sender;

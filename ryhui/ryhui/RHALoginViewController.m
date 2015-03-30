@@ -31,9 +31,9 @@
     
     [self configTitleWithString:@"登录"];
     
-    self.accountTextField.text=@"mayun523";
+    self.accountTextField.text=@"zhaobaolintest";
     
-    self.passwordTextField.text=@"1q2w3e";
+    self.passwordTextField.text=@"111111";
     
     [self configRightButtonWithTitle:@"找回密码" action:@selector(findPassword)];
 }
@@ -104,6 +104,12 @@
                 if (_telephone&&[_telephone length]>0) {
                     [RHUserManager sharedInterface].telephone=_telephone;
                     [[NSUserDefaults standardUserDefaults] setObject:[RHUserManager sharedInterface].telephone forKey:@"RHtelephone"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+                NSString* _userid=[[responseObject objectForKey:@"userId"] stringValue];
+                if (_userid&&[_userid length]>0) {
+                    [RHUserManager sharedInterface].userId=_userid;
+                    [[NSUserDefaults standardUserDefaults] setObject:[RHUserManager sharedInterface].userId forKey:@"RHUSERID"];
                     [[NSUserDefaults standardUserDefaults] synchronize];
                 }
                 

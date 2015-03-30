@@ -8,7 +8,7 @@
 
 #import "RHInvestmentContentViewController.h"
 #import "RHMyInvestmentViewCell.h"
-
+#import "RHContractViewContoller.h"
 @interface RHInvestmentContentViewController ()
 
 @end
@@ -17,6 +17,7 @@
 @synthesize dataArray;
 @synthesize type;
 @synthesize currentPageIndex = _currentPageIndex;
+@synthesize nav;
 
 -(instancetype)init
 {
@@ -200,9 +201,13 @@
     }
     
     NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];
-    
+    cell.nav=nav;
     [cell updateCell:dataDic];
-    
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
 }
 @end

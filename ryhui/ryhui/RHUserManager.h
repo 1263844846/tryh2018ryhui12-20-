@@ -22,6 +22,8 @@
 
 @property(nonatomic,strong)NSString* email;
 
+@property(nonatomic,strong)NSString* userId;
+
 +(instancetype)sharedInterface;
 
 -(void)logout;

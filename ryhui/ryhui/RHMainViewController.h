@@ -18,7 +18,8 @@
 @property (nonatomic,strong)NSMutableArray* segment1Array;
 @property (nonatomic,strong)NSMutableArray* segment2Array;
 @property (nonatomic,strong)NSMutableArray* dataArray;
-
+@property (nonatomic,strong)RHSegmentView* segmentView;
+@property (nonatomic,strong)NSString* type;
 - (IBAction)pushUserCenter:(id)sender;
 - (IBAction)pushMore:(id)sender;
 @end

@@ -8,6 +8,7 @@
 
 #import "RHWithdrawViewController.h"
 #import "RHWithdrawWebViewController.h"
+#import "RHBindCardWebViewController.h"
 
 @interface RHWithdrawViewController ()
 {
@@ -24,7 +25,7 @@
     [self configBackButton];
     [self configTitleWithString:@"提现"];
     [self getWithdrawData];
-    
+    self.overView.hidden=YES;
     self.scrollView.contentSize=CGSizeMake(self.scrollView.frame.size.width, 530);
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
@@ -53,6 +54,12 @@
         
         NSArray* qpCard=[responseObject objectForKey:@"qpCard"];
         NSArray* cards=[responseObject objectForKey:@"cards"];
+        
+        if (cards&&[cards count]>0) {
+            self.overView.hidden=YES;
+        }else{
+            self.overView.hidden=NO;
+        }
 
         NSString* bankType=nil;
         NSString* cardId=nil;
@@ -91,6 +98,8 @@
         self.iconImageView.image=[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",bankType]];
         self.cardLabel.text=[NSString stringWithFormat:@"%@ **** **** %@",[cardId substringToIndex:4],[cardId substringFromIndex:[cardId length]-4]];
         free=[[responseObject objectForKey:@"free"] doubleValue];
+        
+        
 
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -112,6 +121,12 @@
     controller.captcha=self.captchaTF.text;
     [self.navigationController pushViewController:controller animated:YES];
 }
+
+- (IBAction)bindCardAction:(id)sender {
+    RHBindCardWebViewController* controller=[[RHBindCardWebViewController alloc]initWithNibName:@"RHBindCardWebViewController" bundle:nil];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
 
 -(void)textFieldTextDidChange:(NSNotification*)not
 {
@@ -175,5 +190,17 @@
         [countDownTimer invalidate];
     }
     
+}
+
+- (IBAction)pushMain:(id)sender {
+    [[RHTabbarManager sharedInterface] selectTabbarMain];
+}
+
+- (IBAction)pushUser:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (IBAction)pushMore:(id)sender {
+    [[RHTabbarManager sharedInterface] selectTabbarMore];
 }
 @end

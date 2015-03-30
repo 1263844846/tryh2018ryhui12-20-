@@ -7,6 +7,7 @@
 //
 
 #import "RHRechargeWebViewController.h"
+#import "MBProgressHUD.h"
 
 @interface RHRechargeWebViewController ()
 
@@ -20,7 +21,7 @@
     [self configBackButton];
     [self configTitleWithString:@"充值"];
     
-    NSURL *url = [NSURL URLWithString: @"http://www.ryhui.com/front/payment/account/recharge"];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/account/recharge",[RHNetworkService instance].doMain]];
     NSString *body = [NSString stringWithFormat: @"money=%@&type=QP",price];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
     [request setHTTPMethod: @"POST"];
@@ -33,19 +34,24 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)webViewDidStartLoad:(UIWebView *)webView
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
-*/
+
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSString* url=[request.URL absoluteString];
+    if ([url isEqualToString:@""]) {
+        
+        return NO;
+    }
+    return YES;
+}
 
 @end

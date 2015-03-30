@@ -72,8 +72,13 @@
 -(void)getinvestListData
 {
     NSDictionary* parameters=@{@"search":@"true",@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",_currentPageIndex],@"sidx":@"",@"sord":@"",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};
-    
-    [[RHNetworkService instance] POST:@"common/main/shangListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSString* url=nil;
+    if ([type isEqualToString:@"0"]) {
+        url=@"common/main/shangListData";
+    }else{
+        url=@"common/main/xueListData";
+    }
+    [[RHNetworkService instance] POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"%@",responseObject);
         NSMutableArray* tempArray=[[NSMutableArray alloc]initWithCapacity:0];
         
@@ -214,6 +219,7 @@
     RHProjectDetailViewController* controller=[[RHProjectDetailViewController alloc]initWithNibName:@"RHProjectDetailViewController" bundle:nil];
     NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];
     controller.dataDic=dataDic;
+    controller.type=type;
     [self.prarentNav pushViewController:controller animated:YES];
     
 }

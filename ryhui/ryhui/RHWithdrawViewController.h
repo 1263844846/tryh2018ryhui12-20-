@@ -12,6 +12,7 @@
 {
     double free;
 }
+@property (weak, nonatomic) IBOutlet UIView *overView;
 
 @property (weak, nonatomic) IBOutlet UIButton *captchaButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -23,4 +24,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *getAmountLabel;
 @property (weak, nonatomic) IBOutlet UITextField *captchaTF;
 - (IBAction)withdrawAction:(id)sender;
+- (IBAction)bindCardAction:(id)sender;
+
+- (IBAction)pushMain:(id)sender;
+- (IBAction)pushUser:(id)sender;
+- (IBAction)pushMore:(id)sender;
 @end

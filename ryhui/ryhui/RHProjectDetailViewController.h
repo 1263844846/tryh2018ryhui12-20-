@@ -13,6 +13,8 @@
 @interface RHProjectDetailViewController : RHBaseViewController
 
 
+@property(nonatomic,strong)NSString* type;
+
 @property(nonatomic,strong)NSString* projectId;
 
 @property(nonatomic,strong)NSDictionary* dataDic;
@@ -47,6 +49,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *segmentView1;
 @property (weak, nonatomic) IBOutlet UIView *segmentView2;
+@property (strong, nonatomic) IBOutlet UIView *segmentView3;
 - (IBAction)segment1Action:(id)sender;
 - (IBAction)segment2Action:(id)sender;
 
@@ -56,4 +59,17 @@
 @property (weak, nonatomic) IBOutlet UILabel *projectDetail;
 
 - (IBAction)Investment:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UILabel *studentNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *studentCityLabel;
+@property (weak, nonatomic) IBOutlet UILabel *studentSchoolLabel;
+@property (weak, nonatomic) IBOutlet UILabel *studentGenderLabel;
+@property (weak, nonatomic) IBOutlet UILabel *studentNationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *studentProfessionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *studentAgeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *studentEducationLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *partnerInfoLabel;
+
+
 @end

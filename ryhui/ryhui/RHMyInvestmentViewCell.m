@@ -7,8 +7,11 @@
 //
 
 #import "RHMyInvestmentViewCell.h"
+#import "RHContractViewContoller.h"
 
 @implementation RHMyInvestmentViewCell
+@synthesize nav;
+@synthesize projectId;
 
 - (void)awakeFromNib {
     // Initialization code
@@ -18,7 +21,8 @@
 -(void)updateCell:(NSDictionary*)dic
 {
     self.nameLabel.text=[dic objectForKey:@"name"];
-    
+    self.projectId=[dic objectForKey:@"id"];
+
     NSString* investMoney=@"0";
     if (![[dic objectForKey:@"investMoney"] isKindOfClass:[NSNull class]]) {
         investMoney=[[dic objectForKey:@"investMoney"] stringValue];
@@ -42,4 +46,9 @@
     self.profitMoneyLabel.text=[NSString stringWithFormat:@"%d",profitMoney+penaltyMoney];
 }
 
+- (IBAction)contractAction:(id)sender {
+    RHContractViewContoller* controller=[[RHContractViewContoller alloc]initWithNibName:@"RHContractViewContoller" bundle:nil];
+    controller.projectId=self.projectId;
+    [nav pushViewController:controller animated:YES];
+}
 @end

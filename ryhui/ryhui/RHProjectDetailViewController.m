@@ -16,6 +16,7 @@
 @synthesize projectId;
 @synthesize dataDic;
 @synthesize dataArray;
+@synthesize type;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,8 +30,11 @@
     [self setupWithDic:self.dataDic];
     
     [self projectInvestmentList];
-    
-    [self appShangDetailData];
+    if ([type isEqualToString:@"0"]) {
+        [self appShangDetailData];
+    }else{
+        [self appXueDetailData];
+    }
 }
 
 
@@ -43,20 +47,58 @@
     
     self.segment2ContentView.frame=CGRectMake(0, 35, self.segmentView2.frame.size.width, self.segmentView2.frame.size.height-35);
     
-    self.segmentView1.hidden=NO;
+    if ([type isEqualToString:@"0"]) {
+        self.segmentView1.hidden=NO;
+        self.segmentView3.hidden=YES;
+    }else{
+        self.segmentView1.hidden=YES;
+        self.segmentView3.hidden=NO;
+    }
     self.segmentView2.hidden=YES;
     [self didSelectSegmentAtIndex:0];
     
-    self.projectId=[dic objectForKey:@"id"];
+    if ([[dic objectForKey:@"id"] isKindOfClass:[NSNull class]]) {
+        self.projectId=@"";
+    }else{
+        self.projectId=[dic objectForKey:@"id"];
+    }
     
-    self.nameLabel.text=[dic objectForKey:@"name"];
-    self.paymentNameLabel.text=[dic objectForKey:@"paymentName"];
-    self.investorRateLabel.text=[[dic objectForKey:@"investorRate"] stringValue];
-    self.limitTimeLabel.text=[[dic objectForKey:@"limitTime"] stringValue];
+    if ([[dic objectForKey:@"name"] isKindOfClass:[NSNull class]]) {
+        self.nameLabel.text=@"";
+    }else{
+        self.nameLabel.text=[dic objectForKey:@"name"];
+    }
+    
+    if ([[dic objectForKey:@"paymentName"] isKindOfClass:[NSNull class]]) {
+        self.paymentNameLabel.text=@"";
+    }else{
+        self.paymentNameLabel.text=[dic objectForKey:@"paymentName"];
+    }
+
+    if ([[dic objectForKey:@"investorRate"] isKindOfClass:[NSNull class]]) {
+        self.investorRateLabel.text=@"";
+    }else{
+        self.investorRateLabel.text=[[dic objectForKey:@"investorRate"] stringValue];
+    }
+    if ([[dic objectForKey:@"limitTime"] isKindOfClass:[NSNull class]]) {
+        self.limitTimeLabel.text=@"";
+    }else{
+        self.limitTimeLabel.text=[[dic objectForKey:@"limitTime"] stringValue];
+
+    }
     self.projectFundLabel.text=[NSString stringWithFormat:@"%.1f",([[dic objectForKey:@"projectFund"] floatValue]/10000.0)];
-    self.insuranceMethodLabel.text=[dic objectForKey:@"insuranceMethod"];
     
-    self.availableLabel.text=[[dic objectForKey:@"available"] stringValue];
+    if ([[dic objectForKey:@"insuranceMethod"] isKindOfClass:[NSNull class]]) {
+        self.insuranceMethodLabel.text=@"";
+    }else{
+        self.insuranceMethodLabel.text=[dic objectForKey:@"insuranceMethod"];
+    }
+    
+    if ([[dic objectForKey:@"available"] isKindOfClass:[NSNull class]]) {
+        self.availableLabel.text=@"";
+    }else{
+        self.availableLabel.text=[[dic objectForKey:@"available"] stringValue];
+    }
     
     CGFloat percent=[[dic objectForKey:@"percent"] floatValue]/100.0;
     
@@ -95,6 +137,55 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DLog(@"%@",error);
+        [RHUtility showTextWithText:@"请求失败"];
+    }];
+}
+//project =     {
+//    available = 0;
+//    available2 = "0.00";
+//    class = "view.ProjectStudentDetailView";
+//    id = 310;
+//    insuranceMethod = "\U5c31\U4e1a\U62c5\U4fdd\U4e0e\U98ce\U9669\U4fdd\U8bc1\U91d1\U53cc\U91cd\U672c\U606f\U4fdd\U969c";
+//    investorRate = 10;
+//    limitTime = "6.0";
+//    name = "\U7231\U59d1\U5a18\U4eec\U554a\U4e24\U4e2a\U4f60";
+//    partnerInfo = fdsfa;
+//    paymentName = "\U6309\U6708\U4ed8\U606f\U3001\U5230\U671f\U8fd8\U672c";
+//    paymentType = 04;
+//    percent = 100;
+//    projectFund = "16,800.00";
+//    projectStatus = finished;
+//    studentAge = 0;
+//    studentCity = "\U5e02\U8f96\U533a";
+//    studentEducation = "\U7855\U58eb\U7814\U7a76\U751f";
+//    studentGender = "\U5973";
+//    studentName = "\U5b66**";
+//    studentNation = "\U8499\U53e4\U65cf";
+//    studentProfession = "\U8f6f\U4ef6\U5de5\U7a0b";
+//    studentSchool = "\U534e\U7535";
+//    version = 13;
+//};
+-(void)appXueDetailData
+{
+    NSDictionary* parameters=@{@"id":projectId};
+    
+    [[RHNetworkService instance] POST:@"common/main/appXueDetailData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        DLog(@"%@",responseObject);
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSDictionary* project=[responseObject objectForKey:@"project"];
+            DLog(@"%@",project);
+            self.studentNameLabel.text=[project objectForKey:@"studentName"];
+            self.studentCityLabel.text=[project objectForKey:@"studentCity"];
+            self.studentSchoolLabel.text=[project objectForKey:@"studentSchool"];
+            self.studentGenderLabel.text=[project objectForKey:@"studentGender"];
+            self.studentNationLabel.text=[project objectForKey:@"studentNation"];
+            self.studentProfessionLabel.text=[project objectForKey:@"studentProfession"];
+            self.studentAgeLabel.text=[[project objectForKey:@"studentAge"] stringValue];
+            self.studentEducationLabel.text=[project objectForKey:@"studentEducation"];
+            self.partnerInfoLabel.text=[project objectForKey:@"partnerInfo"];
+
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [RHUtility showTextWithText:@"请求失败"];
     }];
 }
@@ -151,7 +242,13 @@
 
 - (IBAction)segment1Action:(id)sender {
     if (self.segmentView1.hidden) {
-        self.segmentView1.hidden=NO;
+        if ([type isEqualToString:@"0"]) {
+            self.segmentView1.hidden=NO;
+            self.segmentView3.hidden=YES;
+        }else{
+            self.segmentView1.hidden=YES;
+            self.segmentView3.hidden=NO;
+        }
         self.segmentView2.hidden=YES;
         [self didSelectSegmentAtIndex:0];
     }
@@ -162,6 +259,8 @@
     if (self.segmentView2.hidden) {
         self.segmentView2.hidden=NO;
         self.segmentView1.hidden=YES;
+        self.segmentView3.hidden=YES;
+
         [self didSelectSegmentAtIndex:1];
     }
 }

@@ -8,7 +8,7 @@
 
 #import "RHBaseViewController.h"
 
-@interface RHWithdrawWebViewController : RHBaseViewController
+@interface RHWithdrawWebViewController : RHBaseViewController<UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 

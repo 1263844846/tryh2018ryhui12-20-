@@ -8,7 +8,7 @@
 
 #import "RHBaseViewController.h"
 
-@interface RHRechargeWebViewController : RHBaseViewController
+@interface RHRechargeWebViewController : RHBaseViewController<UIWebViewDelegate>
 @property(nonatomic,strong)NSString* price;
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;

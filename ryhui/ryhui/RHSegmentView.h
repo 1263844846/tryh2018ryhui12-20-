@@ -20,6 +20,10 @@
 @interface RHSegmentView : UIView
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel1;
+@property (weak, nonatomic) IBOutlet UILabel *segmentLabel;
+@property (weak, nonatomic) IBOutlet UILabel *segmentLabel1;
+@property (weak, nonatomic) IBOutlet UILabel *segmentLabel3;
+@property (weak, nonatomic) IBOutlet UILabel *segmentLabel4;
 
 @property (weak, nonatomic) IBOutlet UIView *segmentView1;
 @property (weak, nonatomic) IBOutlet UIView *segmentView2;

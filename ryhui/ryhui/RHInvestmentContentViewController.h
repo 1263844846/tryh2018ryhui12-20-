@@ -16,6 +16,8 @@
     BOOL _reloading;
     BOOL showLoadMoreButton;
 }
+@property(nonatomic,assign)UINavigationController* nav;
+
 @property(nonatomic,strong)UITableView* tableView;
 @property (nonatomic,strong)NSMutableArray* dataArray;
 @property (nonatomic,strong)NSString* type;

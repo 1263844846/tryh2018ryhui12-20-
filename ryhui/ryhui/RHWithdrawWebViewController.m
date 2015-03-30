@@ -7,6 +7,7 @@
 //
 
 #import "RHWithdrawWebViewController.h"
+#import "MBProgressHUD.h"
 
 @interface RHWithdrawWebViewController ()
 
@@ -21,7 +22,7 @@
     [self configBackButton];
     [self configTitleWithString:@"提现"];
     
-    NSURL *url = [NSURL URLWithString: @"http://www.ryhui.com/common/main/invest"];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@common/main/invest",[RHNetworkService instance].doMain]];
     NSString *body = [NSString stringWithFormat: @"money=%@&captcha=%@",amount,captcha];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
     [request setHTTPMethod: @"POST"];
@@ -33,6 +34,27 @@
     [self.webView loadRequest: request];
 }
 
+-(void)webViewDidStartLoad:(UIWebView *)webView
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+}
 
+-(void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+}
 
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSString* url=[request.URL absoluteString];
+    if ([url isEqualToString:[NSString stringWithFormat:@"%@common/paymentResponse/cashClientBackSuccess",[RHNetworkService instance].doMain]]) {
+        
+        return NO;
+    }
+    if ([url isEqualToString:[NSString stringWithFormat:@"%@common/paymentResponse/cashClientBackFailed",[RHNetworkService instance].doMain]]) {
+        
+        return NO;
+    }
+    return YES;
+}
 @end

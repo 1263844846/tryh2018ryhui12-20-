@@ -16,6 +16,7 @@ static RHUserManager* _instance =nil;
 @synthesize md5;
 @synthesize telephone;
 @synthesize email;
+@synthesize userId;
 
 +(id)allocWithZone:(struct _NSZone *)zone{
     static dispatch_once_t onceToken;
@@ -69,7 +70,11 @@ static RHUserManager* _instance =nil;
     if (_username&&[_username length]>0) {
         self.username=_username;
     }
-
+    
+    NSString* _userid=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHUSERID"];
+    if (_userid&&[_userid length]>0) {
+        self.userId=_userid;
+    }
 }
 
 -(void)logout
@@ -90,6 +95,9 @@ static RHUserManager* _instance =nil;
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHUSERNAME"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHUSERID"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [[RHTabbarManager sharedInterface] selectLogin];

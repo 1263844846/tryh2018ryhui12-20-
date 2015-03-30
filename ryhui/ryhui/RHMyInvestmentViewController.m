@@ -39,14 +39,17 @@
     NSString* three=@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"projectStatus\",\"op\":\"in\",\"data\":[\"finished\"]}]}";
     
     RHInvestmentContentViewController* controller1=[[RHInvestmentContentViewController alloc]init];
+    controller1.nav=self.navigationController;
     controller1.type=one;
     [_viewControllers addObject:controller1];
     
     RHInvestmentContentViewController* controller2=[[RHInvestmentContentViewController alloc]init];
+    controller2.nav=self.navigationController;
     controller2.type=two;
     [_viewControllers addObject:controller2];
     
     RHInvestmentContentViewController* controller3=[[RHInvestmentContentViewController alloc]init];
+    controller3.nav=self.navigationController;
     controller3.type=three;
     [_viewControllers addObject:controller3];
     

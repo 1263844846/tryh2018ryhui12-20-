@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14C2055" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RHSegmentView"/>
@@ -216,6 +216,10 @@
             <connections>
                 <outlet property="contentLabel" destination="Kwg-hA-lx9" id="GzL-3z-9HI"/>
                 <outlet property="contentLabel1" destination="K2G-zE-UNx" id="SWo-yh-9Go"/>
+                <outlet property="segmentLabel" destination="mVA-87-pwm" id="7OB-xR-NEQ"/>
+                <outlet property="segmentLabel1" destination="bvG-Fn-dHj" id="gze-Eg-tpW"/>
+                <outlet property="segmentLabel3" destination="UFt-XC-mLw" id="3b2-t1-70a"/>
+                <outlet property="segmentLabel4" destination="2CH-cs-gIJ" id="oi2-Ux-hyN"/>
                 <outlet property="segmentView1" destination="1eF-Tg-0sI" id="alJ-Qa-QZW"/>
                 <outlet property="segmentView2" destination="rPy-xd-37d" id="hRc-8a-P38"/>
             </connections>

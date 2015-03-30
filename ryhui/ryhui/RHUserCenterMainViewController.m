@@ -29,6 +29,10 @@
     self.ryUsername.text=[NSString stringWithFormat:@"ryh_%@",[RHUserManager sharedInterface].username];
     [self checkout];
     
+    if ([RHUserManager sharedInterface].custId) {
+        self.overView.hidden=YES;
+    }
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkout) name:@"RHSELECTUSER" object:nil];
 }
 -(void)dealloc
@@ -102,4 +106,6 @@
     [self.navigationController pushViewController:controller animated:YES];
 }
 
+- (IBAction)openAccount:(id)sender {
+}
 @end

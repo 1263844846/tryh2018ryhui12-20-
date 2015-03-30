@@ -188,6 +188,29 @@
 		F8B6DAB61AB5740600CCB13D /* RHRechargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8B6DAB41AB5740600CCB13D /* RHRechargeViewController.xib */; };
 		F8B6DABB1AB5773500CCB13D /* RHAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B6DAB91AB5773500CCB13D /* RHAboutViewController.m */; };
 		F8B6DABC1AB5773500CCB13D /* RHAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8B6DABA1AB5773500CCB13D /* RHAboutViewController.xib */; };
+		F8C38D8B1AC9800F005C3B1F /* RHRepaymentScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C38D891AC9800F005C3B1F /* RHRepaymentScheduleViewController.m */; };
+		F8C38D8C1AC9800F005C3B1F /* RHRepaymentScheduleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8C38D8A1AC9800F005C3B1F /* RHRepaymentScheduleViewController.xib */; };
+		F8C38D901AC98112005C3B1F /* RHRepaymentScheduleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C38D8E1AC98112005C3B1F /* RHRepaymentScheduleCell.m */; };
+		F8C38D911AC98112005C3B1F /* RHRepaymentScheduleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8C38D8F1AC98112005C3B1F /* RHRepaymentScheduleCell.xib */; };
+		F8C38D961AC982E2005C3B1F /* RepaymentSchedule1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C38D931AC982E2005C3B1F /* RepaymentSchedule1.png */; };
+		F8C38D971AC982E2005C3B1F /* RepaymentSchedule2.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C38D941AC982E2005C3B1F /* RepaymentSchedule2.png */; };
+		F8C38D981AC982E2005C3B1F /* RepaymentSchedule3.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C38D951AC982E2005C3B1F /* RepaymentSchedule3.png */; };
+		F8C38D9A1AC98432005C3B1F /* user1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C38D991AC98432005C3B1F /* user1.png */; };
+		F8C38D9C1AC986F2005C3B1F /* withdraw1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C38D9B1AC986F2005C3B1F /* withdraw1.png */; };
+		F8C38DA11AC98A71005C3B1F /* RHContractViewContoller.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C38D9F1AC98A71005C3B1F /* RHContractViewContoller.m */; };
+		F8C38DA21AC98A71005C3B1F /* RHContractViewContoller.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8C38DA01AC98A71005C3B1F /* RHContractViewContoller.xib */; };
+		F8C38DA71AC98DA8005C3B1F /* RHErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C38DA51AC98DA8005C3B1F /* RHErrorViewController.m */; };
+		F8C38DA81AC98DA8005C3B1F /* RHErrorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8C38DA61AC98DA8005C3B1F /* RHErrorViewController.xib */; };
+		F8C38DB11AC98FE1005C3B1F /* error1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C38DAA1AC98FE1005C3B1F /* error1.png */; };
+		F8C38DB21AC98FE1005C3B1F /* error2.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C38DAB1AC98FE1005C3B1F /* error2.png */; };
+		F8C38DB31AC98FE1005C3B1F /* error3.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C38DAC1AC98FE1005C3B1F /* error3.png */; };
+		F8C38DB41AC98FE1005C3B1F /* error4-1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C38DAD1AC98FE1005C3B1F /* error4-1.png */; };
+		F8C38DB51AC98FE1005C3B1F /* error4.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C38DAE1AC98FE1005C3B1F /* error4.png */; };
+		F8C38DB61AC98FE1005C3B1F /* error5-1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C38DAF1AC98FE1005C3B1F /* error5-1.png */; };
+		F8C38DB71AC98FE1005C3B1F /* error5.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C38DB01AC98FE1005C3B1F /* error5.png */; };
+		F8C38DBB1AC9991E005C3B1F /* RHBindCardWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C38DB91AC9991E005C3B1F /* RHBindCardWebViewController.m */; };
+		F8C38DBC1AC9991E005C3B1F /* RHBindCardWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8C38DBA1AC9991E005C3B1F /* RHBindCardWebViewController.xib */; };
+		F8C38DBE1AC9A321005C3B1F /* projecticon.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C38DBD1AC9A321005C3B1F /* projecticon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -439,6 +462,34 @@
 		F8B6DAB81AB5773500CCB13D /* RHAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHAboutViewController.h; sourceTree = "<group>"; };
 		F8B6DAB91AB5773500CCB13D /* RHAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHAboutViewController.m; sourceTree = "<group>"; };
 		F8B6DABA1AB5773500CCB13D /* RHAboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHAboutViewController.xib; sourceTree = "<group>"; };
+		F8C38D881AC9800F005C3B1F /* RHRepaymentScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHRepaymentScheduleViewController.h; sourceTree = "<group>"; };
+		F8C38D891AC9800F005C3B1F /* RHRepaymentScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHRepaymentScheduleViewController.m; sourceTree = "<group>"; };
+		F8C38D8A1AC9800F005C3B1F /* RHRepaymentScheduleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHRepaymentScheduleViewController.xib; sourceTree = "<group>"; };
+		F8C38D8D1AC98112005C3B1F /* RHRepaymentScheduleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHRepaymentScheduleCell.h; sourceTree = "<group>"; };
+		F8C38D8E1AC98112005C3B1F /* RHRepaymentScheduleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHRepaymentScheduleCell.m; sourceTree = "<group>"; };
+		F8C38D8F1AC98112005C3B1F /* RHRepaymentScheduleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHRepaymentScheduleCell.xib; sourceTree = "<group>"; };
+		F8C38D931AC982E2005C3B1F /* RepaymentSchedule1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RepaymentSchedule1.png; sourceTree = "<group>"; };
+		F8C38D941AC982E2005C3B1F /* RepaymentSchedule2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RepaymentSchedule2.png; sourceTree = "<group>"; };
+		F8C38D951AC982E2005C3B1F /* RepaymentSchedule3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RepaymentSchedule3.png; sourceTree = "<group>"; };
+		F8C38D991AC98432005C3B1F /* user1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user1.png; sourceTree = "<group>"; };
+		F8C38D9B1AC986F2005C3B1F /* withdraw1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = withdraw1.png; sourceTree = "<group>"; };
+		F8C38D9E1AC98A71005C3B1F /* RHContractViewContoller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHContractViewContoller.h; sourceTree = "<group>"; };
+		F8C38D9F1AC98A71005C3B1F /* RHContractViewContoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHContractViewContoller.m; sourceTree = "<group>"; };
+		F8C38DA01AC98A71005C3B1F /* RHContractViewContoller.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHContractViewContoller.xib; sourceTree = "<group>"; };
+		F8C38DA41AC98DA8005C3B1F /* RHErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHErrorViewController.h; sourceTree = "<group>"; };
+		F8C38DA51AC98DA8005C3B1F /* RHErrorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHErrorViewController.m; sourceTree = "<group>"; };
+		F8C38DA61AC98DA8005C3B1F /* RHErrorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHErrorViewController.xib; sourceTree = "<group>"; };
+		F8C38DAA1AC98FE1005C3B1F /* error1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = error1.png; sourceTree = "<group>"; };
+		F8C38DAB1AC98FE1005C3B1F /* error2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = error2.png; sourceTree = "<group>"; };
+		F8C38DAC1AC98FE1005C3B1F /* error3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = error3.png; sourceTree = "<group>"; };
+		F8C38DAD1AC98FE1005C3B1F /* error4-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "error4-1.png"; sourceTree = "<group>"; };
+		F8C38DAE1AC98FE1005C3B1F /* error4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = error4.png; sourceTree = "<group>"; };
+		F8C38DAF1AC98FE1005C3B1F /* error5-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "error5-1.png"; sourceTree = "<group>"; };
+		F8C38DB01AC98FE1005C3B1F /* error5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = error5.png; sourceTree = "<group>"; };
+		F8C38DB81AC9991E005C3B1F /* RHBindCardWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHBindCardWebViewController.h; sourceTree = "<group>"; };
+		F8C38DB91AC9991E005C3B1F /* RHBindCardWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHBindCardWebViewController.m; sourceTree = "<group>"; };
+		F8C38DBA1AC9991E005C3B1F /* RHBindCardWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHBindCardWebViewController.xib; sourceTree = "<group>"; };
+		F8C38DBD1AC9A321005C3B1F /* projecticon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = projecticon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -586,6 +637,9 @@
 		F80E496F1A8E38DF00028CD1 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				F8C38DA31AC98D90005C3B1F /* RHErrorViewController */,
+				F8C38D9D1AC98A58005C3B1F /* RHContractViewContoller */,
+				F8C38D871AC97FF2005C3B1F /* RHRepaymentScheduleViewController */,
 				F87B83381AC83BF200EB73A6 /* RHWithdrawViewController */,
 				F87B832E1AC8347A00EB73A6 /* RHMyMessageViewController */,
 				D56236851AC7E5B200FEAB7C /* RHFindPasswordViewController */,
@@ -639,6 +693,10 @@
 		F80E497B1A8E3D0400028CD1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F8C38DBD1AC9A321005C3B1F /* projecticon.png */,
+				F8C38DA91AC98FAC005C3B1F /* errorView */,
+				F8C38D9B1AC986F2005C3B1F /* withdraw1.png */,
+				F8C38D921AC982BA005C3B1F /* RepaymentSchedule */,
 				F87B83421AC84ACE00EB73A6 /* bank */,
 				F87B83271AC82EA000EB73A6 /* pwDone.png */,
 				D56236791AC79FC300FEAB7C /* guidan1.png */,
@@ -813,6 +871,9 @@
 				F87B835B1AC8552800EB73A6 /* RHWithdrawWebViewController.h */,
 				F87B835C1AC8552800EB73A6 /* RHWithdrawWebViewController.m */,
 				F87B835D1AC8552800EB73A6 /* RHWithdrawWebViewController.xib */,
+				F8C38DB81AC9991E005C3B1F /* RHBindCardWebViewController.h */,
+				F8C38DB91AC9991E005C3B1F /* RHBindCardWebViewController.m */,
+				F8C38DBA1AC9991E005C3B1F /* RHBindCardWebViewController.xib */,
 			);
 			name = RHWithdrawViewController;
 			sourceTree = "<group>";
@@ -953,6 +1014,7 @@
 		F8B6DA631AB540B000CCB13D /* userCenter */ = {
 			isa = PBXGroup;
 			children = (
+				F8C38D991AC98432005C3B1F /* user1.png */,
 				F8B6DA611AB540AD00CCB13D /* userArrow.png */,
 			);
 			name = userCenter;
@@ -1072,6 +1134,63 @@
 			name = aboutViewController;
 			sourceTree = "<group>";
 		};
+		F8C38D871AC97FF2005C3B1F /* RHRepaymentScheduleViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F8C38D881AC9800F005C3B1F /* RHRepaymentScheduleViewController.h */,
+				F8C38D891AC9800F005C3B1F /* RHRepaymentScheduleViewController.m */,
+				F8C38D8A1AC9800F005C3B1F /* RHRepaymentScheduleViewController.xib */,
+				F8C38D8D1AC98112005C3B1F /* RHRepaymentScheduleCell.h */,
+				F8C38D8E1AC98112005C3B1F /* RHRepaymentScheduleCell.m */,
+				F8C38D8F1AC98112005C3B1F /* RHRepaymentScheduleCell.xib */,
+			);
+			name = RHRepaymentScheduleViewController;
+			sourceTree = "<group>";
+		};
+		F8C38D921AC982BA005C3B1F /* RepaymentSchedule */ = {
+			isa = PBXGroup;
+			children = (
+				F8C38D931AC982E2005C3B1F /* RepaymentSchedule1.png */,
+				F8C38D941AC982E2005C3B1F /* RepaymentSchedule2.png */,
+				F8C38D951AC982E2005C3B1F /* RepaymentSchedule3.png */,
+			);
+			name = RepaymentSchedule;
+			sourceTree = "<group>";
+		};
+		F8C38D9D1AC98A58005C3B1F /* RHContractViewContoller */ = {
+			isa = PBXGroup;
+			children = (
+				F8C38D9E1AC98A71005C3B1F /* RHContractViewContoller.h */,
+				F8C38D9F1AC98A71005C3B1F /* RHContractViewContoller.m */,
+				F8C38DA01AC98A71005C3B1F /* RHContractViewContoller.xib */,
+			);
+			name = RHContractViewContoller;
+			sourceTree = "<group>";
+		};
+		F8C38DA31AC98D90005C3B1F /* RHErrorViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F8C38DA41AC98DA8005C3B1F /* RHErrorViewController.h */,
+				F8C38DA51AC98DA8005C3B1F /* RHErrorViewController.m */,
+				F8C38DA61AC98DA8005C3B1F /* RHErrorViewController.xib */,
+			);
+			name = RHErrorViewController;
+			sourceTree = "<group>";
+		};
+		F8C38DA91AC98FAC005C3B1F /* errorView */ = {
+			isa = PBXGroup;
+			children = (
+				F8C38DAA1AC98FE1005C3B1F /* error1.png */,
+				F8C38DAB1AC98FE1005C3B1F /* error2.png */,
+				F8C38DAC1AC98FE1005C3B1F /* error3.png */,
+				F8C38DAD1AC98FE1005C3B1F /* error4-1.png */,
+				F8C38DAE1AC98FE1005C3B1F /* error4.png */,
+				F8C38DAF1AC98FE1005C3B1F /* error5-1.png */,
+				F8C38DB01AC98FE1005C3B1F /* error5.png */,
+			);
+			name = errorView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1155,6 +1274,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8C38D9A1AC98432005C3B1F /* user1.png in Resources */,
 				F87B83401AC841D500EB73A6 /* withdrawButton.png in Resources */,
 				F815ED5C1AB7557E004B2053 /* 8-1.png in Resources */,
 				F8B6DAAB1AB567BE00CCB13D /* 18-4.png in Resources */,
@@ -1173,7 +1293,9 @@
 				F88831181AB48069001E4AD1 /* mainS.png in Resources */,
 				F888310C1AB435C7001E4AD1 /* mainLogo.png in Resources */,
 				F87B83501AC84AD700EB73A6 /* BOC.jpg in Resources */,
+				F8C38D961AC982E2005C3B1F /* RepaymentSchedule1.png in Resources */,
 				F89A3D851AB5D16800B92DF3 /* register2.png in Resources */,
+				F8C38DB51AC98FE1005C3B1F /* error4.png in Resources */,
 				F87B83531AC84AD700EB73A6 /* CCB.jpg in Resources */,
 				F80E49841A8E41A300028CD1 /* qrButtonDefault.png in Resources */,
 				F888311C1AB48069001E4AD1 /* userS.png in Resources */,
@@ -1188,6 +1310,7 @@
 				F89A3D911AB5DA0300B92DF3 /* RHRechargeWebViewController.xib in Resources */,
 				F8B6DA621AB540AD00CCB13D /* userArrow.png in Resources */,
 				F8B6DA861AB55C1500CCB13D /* myAccount2.png in Resources */,
+				F8C38DB21AC98FE1005C3B1F /* error2.png in Resources */,
 				F88830F81AB41E6E001E4AD1 /* segmentBg1.png in Resources */,
 				F88831021AB42DBA001E4AD1 /* mainBanner.png in Resources */,
 				F89A3D841AB5D16800B92DF3 /* register1.png in Resources */,
@@ -1205,13 +1328,17 @@
 				F80E49951A8E502E00028CD1 /* ALoginButtonDefault.png in Resources */,
 				F80E49791A8E3C5400028CD1 /* RHLoginViewController.xib in Resources */,
 				F8B6DAA11AB5679000CCB13D /* in1.png in Resources */,
+				F8C38DA21AC98A71005C3B1F /* RHContractViewContoller.xib in Resources */,
 				F87B83261AC82E3A00EB73A6 /* RHFindPWDoneViewController.xib in Resources */,
+				F8C38D971AC982E2005C3B1F /* RepaymentSchedule2.png in Resources */,
 				F888311B1AB48069001E4AD1 /* userNS.png in Resources */,
 				F83865B31AA0569C00001D1A /* registerButtonDown.png in Resources */,
 				F8B6DA771AB5517600CCB13D /* phoneIcon.png in Resources */,
 				F8A0EBF01AB8704900F65A7F /* 3-1.png in Resources */,
 				F87B834F1AC84AD700EB73A6 /* ABC.jpg in Resources */,
 				F88830F91AB41E6E001E4AD1 /* segmentBg2.png in Resources */,
+				F8C38DB31AC98FE1005C3B1F /* error3.png in Resources */,
+				F8C38DA81AC98DA8005C3B1F /* RHErrorViewController.xib in Resources */,
 				F8A0EBF51AB8718900F65A7F /* project1@2x.png in Resources */,
 				F88831191AB48069001E4AD1 /* moreNS.png in Resources */,
 				F83375E11AB9BEBC00944CB1 /* RHInvestmentViewController.xib in Resources */,
@@ -1219,6 +1346,8 @@
 				F87B832D1AC8346700EB73A6 /* RHMyMessageViewController.xib in Resources */,
 				F88830FF1AB42329001E4AD1 /* newProjectBg.png in Resources */,
 				F87B83561AC84AD700EB73A6 /* CMB.jpg in Resources */,
+				F8C38DB71AC98FE1005C3B1F /* error5.png in Resources */,
+				F8C38DB41AC98FE1005C3B1F /* error4-1.png in Resources */,
 				F888312C1AB49988001E4AD1 /* RHProjectDetailViewCell.xib in Resources */,
 				F8B6DA7E1AB55BA300CCB13D /* RHMyAccountViewController.xib in Resources */,
 				F83375E31AB9C3CD00944CB1 /* 8-4.png in Resources */,
@@ -1227,10 +1356,12 @@
 				F8B6DA9A1AB565DF00CCB13D /* RHMyInvestmentViewController.xib in Resources */,
 				F88831221AB4846B001E4AD1 /* RHProjectDetailViewController.xib in Resources */,
 				F89A3D861AB5D16800B92DF3 /* register3.png in Resources */,
+				F8C38D911AC98112005C3B1F /* RHRepaymentScheduleCell.xib in Resources */,
 				F83865B51AA0569C00001D1A /* registerEnSelect.png in Resources */,
 				F80E498A1A8E444B00028CD1 /* RHALoginViewController.xib in Resources */,
 				F87B835A1AC84AD700EB73A6 /* SPDB.jpg in Resources */,
 				F88830FB1AB41F76001E4AD1 /* RHSegmentView.xib in Resources */,
+				F8C38DBE1AC9A321005C3B1F /* projecticon.png in Resources */,
 				F80E49811A8E407900028CD1 /* loginButtonHightlight.png in Resources */,
 				F815ED4B1AB749FF004B2053 /* RHGuidanceViewController.xib in Resources */,
 				F8A0EBF91AB8719000F65A7F /* 4.png in Resources */,
@@ -1238,11 +1369,13 @@
 				F8B6DABC1AB5773500CCB13D /* RHAboutViewController.xib in Resources */,
 				F80E49921A8E48AD00028CD1 /* back.png in Resources */,
 				F879E7561AA355B100339647 /* RHAgreement1ViewController.xib in Resources */,
+				F8C38D981AC982E2005C3B1F /* RepaymentSchedule3.png in Resources */,
 				F80E49901A8E47FD00028CD1 /* navBG.png in Resources */,
 				F89A3D871AB5D16800B92DF3 /* register4.png in Resources */,
 				F83865B21AA0569C00001D1A /* captchaButtonUp.png in Resources */,
 				F87B83371AC837BB00EB73A6 /* message2.png in Resources */,
 				F815ED3B1AB717E7004B2053 /* 1.png in Resources */,
+				F8C38DB11AC98FE1005C3B1F /* error1.png in Resources */,
 				F8B6DA6B1AB5459500CCB13D /* RHUserCenterMainViewController.xib in Resources */,
 				F80E49551A8E24C000028CD1 /* LaunchScreen.xib in Resources */,
 				F83865A91AA0525100001D1A /* RHRegisterViewController.xib in Resources */,
@@ -1268,6 +1401,7 @@
 				F888311A1AB48069001E4AD1 /* moreS.png in Resources */,
 				F8B6DA881AB55C1500CCB13D /* myAccount4.png in Resources */,
 				F87B83331AC8365500EB73A6 /* RHMyMessageCell.xib in Resources */,
+				F8C38D8C1AC9800F005C3B1F /* RHRepaymentScheduleViewController.xib in Resources */,
 				F83375F01AB9C86B00944CB1 /* RHInvestmentWebViewController.xib in Resources */,
 				F87B835F1AC8552800EB73A6 /* RHWithdrawWebViewController.xib in Resources */,
 				F8B6DA871AB55C1500CCB13D /* myAccount3.png in Resources */,
@@ -1280,7 +1414,10 @@
 				F8B6DA891AB55C1500CCB13D /* myAccountLine.png in Resources */,
 				D56236841AC7A4C900FEAB7C /* RHForgotPasswordViewController.xib in Resources */,
 				D562367C1AC79FC300FEAB7C /* guidan1.png in Resources */,
+				F8C38DB61AC98FE1005C3B1F /* error5-1.png in Resources */,
+				F8C38D9C1AC986F2005C3B1F /* withdraw1.png in Resources */,
 				F8B6DA8F1AB562EF00CCB13D /* RHTradingViewController.xib in Resources */,
+				F8C38DBC1AC9991E005C3B1F /* RHBindCardWebViewController.xib in Resources */,
 				F8A0EBF41AB8718900F65A7F /* project2@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1343,6 +1480,7 @@
 				F80E49471A8E24C000028CD1 /* AppDelegate.m in Sources */,
 				F87B835E1AC8552800EB73A6 /* RHWithdrawWebViewController.m in Sources */,
 				F8B6DABB1AB5773500CCB13D /* RHAboutViewController.m in Sources */,
+				F8C38D8B1AC9800F005C3B1F /* RHRepaymentScheduleViewController.m in Sources */,
 				F80E496E1A8E27F600028CD1 /* RHNetworkService.m in Sources */,
 				F888310F1AB4385D001E4AD1 /* CircleProgressView.m in Sources */,
 				F89A3D7F1AB5B54F00B92DF3 /* RHUserManager.m in Sources */,
@@ -1360,6 +1498,7 @@
 				F87B83201AC827BA00EB73A6 /* RHPasswordConfirmViewController.m in Sources */,
 				F815ED3E1AB72545004B2053 /* RHSegmentContentView.m in Sources */,
 				F8B6DAB51AB5740600CCB13D /* RHRechargeViewController.m in Sources */,
+				F8C38DBB1AC9991E005C3B1F /* RHBindCardWebViewController.m in Sources */,
 				F80E49731A8E3A0300028CD1 /* RHBaseViewController.m in Sources */,
 				F815ED4A1AB749FF004B2053 /* RHGuidanceViewController.m in Sources */,
 				F88831071AB43369001E4AD1 /* RHMainViewCell.m in Sources */,
@@ -1369,14 +1508,17 @@
 				F86B8AF51AA16F75000D2B8C /* RHGesturePasswordButton.m in Sources */,
 				F8B6DA7D1AB55BA300CCB13D /* RHMyAccountViewController.m in Sources */,
 				F86B8B041AA18406000D2B8C /* RHMainViewController.m in Sources */,
+				F8C38D901AC98112005C3B1F /* RHRepaymentScheduleCell.m in Sources */,
 				F88831211AB4846B001E4AD1 /* RHProjectDetailViewController.m in Sources */,
 				F89A3D8B1AB5D6E200B92DF3 /* RHRegisterWebViewController.m in Sources */,
 				F879E75A1AA355C100339647 /* RHAgreement2ViewController.m in Sources */,
 				F80E49891A8E444B00028CD1 /* RHALoginViewController.m in Sources */,
 				F89A3D901AB5DA0300B92DF3 /* RHRechargeWebViewController.m in Sources */,
 				F80E498E1A8E46CA00028CD1 /* RHUtility.m in Sources */,
+				F8C38DA71AC98DA8005C3B1F /* RHErrorViewController.m in Sources */,
 				F87B83321AC8365500EB73A6 /* RHMyMessageCell.m in Sources */,
 				F8B6DA931AB563BA00CCB13D /* RHTradViewCell.m in Sources */,
+				F8C38DA11AC98A71005C3B1F /* RHContractViewContoller.m in Sources */,
 				F8B6DA5F1AB51BE600CCB13D /* RHUserCenterViewController.m in Sources */,
 				F8B6DA991AB565DF00CCB13D /* RHMyInvestmentViewController.m in Sources */,
 				F83375EF1AB9C86B00944CB1 /* RHInvestmentWebViewController.m in Sources */,
