@@ -21,5 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *collectInterestLabel;
 @property (weak, nonatomic) IBOutlet UILabel *collectPrepaymentPenaltyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *balanceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *totalLabel;
+@property (weak, nonatomic) IBOutlet UILabel *FrzBalLabel;
 - (IBAction)pushPay:(id)sender;
 @end

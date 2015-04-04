@@ -14,6 +14,8 @@
 
 @property(nonatomic,strong)NSDictionary* dataDic;
 
+@property(nonatomic,assign)int projectFund;
+
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *investorRateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *limitTimeLabel;

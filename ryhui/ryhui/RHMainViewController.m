@@ -40,13 +40,66 @@
     self.segment1Array=[[NSMutableArray alloc]initWithCapacity:0];
     self.segment2Array=[[NSMutableArray alloc]initWithCapacity:0];
     self.dataArray=[[NSMutableArray alloc]initWithCapacity:0];
+    self.segmentView.segmentLabel.layer.cornerRadius=8;
+    self.segmentView.segmentLabel1.layer.cornerRadius=8;
+    self.segmentView.segmentLabel3.layer.cornerRadius=8;
+    self.segmentView.segmentLabel4.layer.cornerRadius=8;
     self.segmentView.segmentLabel.hidden=YES;
     self.segmentView.segmentLabel1.hidden=YES;
     self.segmentView.segmentLabel3.hidden=YES;
     self.segmentView.segmentLabel4.hidden=YES;
+    [self getSegmentnum1];
+    [self getSegmentnum2];
+    
+    self.tableView.tableFooterView=self.footView;
 }
 
 #pragma mark-network
+-(void)getSegmentnum1
+{
+
+    NSDictionary* parameters=@{@"search":@"true",@"rows":@"1000",@"page":@"1",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"percent\",\"op\":\"lt\",\"data\":100}]}"};
+    
+    [[RHNetworkService instance] POST:@"common/main/shangListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        DLog(@"%@",responseObject);
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            int num=[[responseObject objectForKey:@"records"] intValue];
+            if (num>0) {
+                self.segmentView.segmentLabel.text=[NSString stringWithFormat:@"可投%d",num];
+                self.segmentView.segmentLabel.hidden=NO;
+                self.segmentView.segmentLabel3.text=[NSString stringWithFormat:@"可投%d",num];
+                self.segmentView.segmentLabel3.hidden=NO;
+            }
+  
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        DLog(@"%@",error);
+    }];
+}
+-(void)getSegmentnum2
+{
+
+    
+    NSDictionary* parameters=@{@"search":@"true",@"rows":@"1000",@"page":@"1",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"percent\",\"op\":\"lt\",\"data\":100}]}"};
+    [[RHNetworkService instance] POST:@"common/main/xueListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        DLog(@"%@",responseObject);
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            int num=[[responseObject objectForKey:@"records"] intValue];
+            if (num>0) {
+                self.segmentView.segmentLabel1.text=[NSString stringWithFormat:@"可投%d",num];
+                self.segmentView.segmentLabel1.hidden=NO;
+                self.segmentView.segmentLabel4.text=[NSString stringWithFormat:@"可投%d",num];
+                self.segmentView.segmentLabel4.hidden=NO;
+            }
+
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        DLog(@"%@",error);
+    }];
+}
+
 -(void)segment1Post
 {
     int arrayCount=[[NSNumber numberWithInteger:[segment1Array count]] intValue];
@@ -59,13 +112,7 @@
     [[RHNetworkService instance] POST:@"common/main/shangListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
-            int num=[[responseObject objectForKey:@"records"] intValue];
-            if (num>0) {
-                self.segmentView.segmentLabel.text=[NSString stringWithFormat:@"可投%d",num];
-                self.segmentView.segmentLabel.hidden=NO;
-                self.segmentView.segmentLabel3.text=[NSString stringWithFormat:@"可投%d",num];
-                self.segmentView.segmentLabel3.hidden=NO;
-            }
+
             NSArray* array=[responseObject objectForKey:@"rows"];
             if ([array isKindOfClass:[NSArray class]]) {
                 for (NSDictionary* dic in array) {
@@ -103,13 +150,7 @@
         DLog(@"%@",responseObject);
         
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
-            int num=[[responseObject objectForKey:@"records"] intValue];
-            if (num>0) {
-                self.segmentView.segmentLabel1.text=[NSString stringWithFormat:@"可投%d",num];
-                self.segmentView.segmentLabel1.hidden=NO;
-                self.segmentView.segmentLabel4.text=[NSString stringWithFormat:@"可投%d",num];
-                self.segmentView.segmentLabel4.hidden=NO;
-            }
+
             NSArray* array=[responseObject objectForKey:@"rows"];
             if ([array isKindOfClass:[NSArray class]]) {
                 for (NSDictionary* dic in array) {
@@ -179,7 +220,10 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.dataArray.count;
+    if (dataArray.count>4) {
+        return 4;
+    }
+    return dataArray.count;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -218,5 +262,10 @@
 - (IBAction)pushMore:(id)sender {
     
     [[RHTabbarManager sharedInterface] selectTabbarMore];
+}
+
+- (IBAction)pushProjectList:(id)sender {
+    
+    [self didSelectInvestment];
 }
 @end

@@ -35,7 +35,7 @@
     }else{
         if ([RHUserManager sharedInterface].username&&[[RHUserManager sharedInterface].username length]>0) {
             [self sessionFail:nil];
-            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Gesture"]&&[[[NSUserDefaults standardUserDefaults] objectForKey:@"Gesture"] length]>0) {
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]]&&[[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]] length]>0) {
                 RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
                 UINavigationController* nav=[[UINavigationController alloc]initWithRootViewController:controller];
                 

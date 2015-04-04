@@ -49,7 +49,7 @@
 {
     [[RHNetworkService instance] POST:@"front/payment/account/myCashDataForApp" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"%@",responseObject);
-        NSString* balance=[NSString stringWithFormat:@"%2.f",[[responseObject objectForKey:@"balance"] doubleValue]];
+        NSString* balance=[NSString stringWithFormat:@"%0.2f",[[responseObject objectForKey:@"balance"] doubleValue]];
         self.balanceLabel.text=balance;
         
         NSArray* qpCard=[responseObject objectForKey:@"qpCard"];
@@ -130,24 +130,24 @@
 
 -(void)textFieldTextDidChange:(NSNotification*)not
 {
-    int price=[self.withdrawTF.text intValue];
+    double price=[self.withdrawTF.text doubleValue];
     if (price>[self.balanceLabel.text doubleValue]) {
-        price=[self.balanceLabel.text intValue];
-        self.withdrawTF.text=[NSString stringWithFormat:@"%d",[self.balanceLabel.text intValue]];
+        price=[self.balanceLabel.text doubleValue];
+        self.withdrawTF.text=[NSString stringWithFormat:@"%0.2f",[self.balanceLabel.text doubleValue]];
     }
-    double tempPrice=[[NSNumber numberWithDouble:free] intValue]-price;
+    double tempPrice=free-price;
     if (tempPrice>0) {
-        self.freeLabel.text=@"0";
-        self.getAmountLabel.text=self.withdrawTF.text;
+        self.freeLabel.text=@"0.00";
+        self.getAmountLabel.text=[NSString stringWithFormat:@"%0.2f",[self.withdrawTF.text doubleValue]];
     }else{
-        tempPrice=price-[[NSNumber numberWithDouble:free] intValue];
+        tempPrice=price-free;
         double getAmount=tempPrice*0.005;
         if (getAmount>1) {
-            self.freeLabel.text=[NSString stringWithFormat:@"%d",[[NSNumber numberWithDouble:getAmount] intValue]];
-            self.getAmountLabel.text=[NSString stringWithFormat:@"%d",price-[[NSNumber numberWithDouble:getAmount] intValue]];
+            self.freeLabel.text=[NSString stringWithFormat:@"%0.2f",getAmount];
+            self.getAmountLabel.text=[NSString stringWithFormat:@"%0.2f",price-getAmount];
         }else{
-            self.freeLabel.text=@"1";
-            self.getAmountLabel.text=[NSString stringWithFormat:@"%d",price-1];
+            self.freeLabel.text=@"1.00";
+            self.getAmountLabel.text=[NSString stringWithFormat:@"%0.2f",price-1.00];
         }
     }
     

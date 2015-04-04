@@ -8,6 +8,7 @@
 
 #import "RHRechargeWebViewController.h"
 #import "MBProgressHUD.h"
+#import "RHErrorViewController.h"
 
 @interface RHRechargeWebViewController ()
 
@@ -38,6 +39,10 @@
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
+-(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+}
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView
 {
@@ -47,8 +52,23 @@
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSString* url=[request.URL absoluteString];
-    if ([url isEqualToString:@""]) {
+    DLog(@"%@",url);
+    if ([url containsString:[NSString stringWithFormat:@"%@common/paymentResponse/netSaveClientSuccess",[RHNetworkService instance].doMainhttp]]) {
+        RHErrorViewController* controller=[[RHErrorViewController alloc]initWithNibName:@"RHErrorViewController" bundle:nil];
+        controller.titleStr=[NSString stringWithFormat:@"充值金额%@元",price];
+        controller.tipsStr=@"好项目不等人，快去抢吧~";
+        controller.type=RHPaySucceed;
+        [self.navigationController pushViewController:controller animated:YES];
         
+        return NO;
+    }
+    if ([url containsString:[NSString stringWithFormat:@"%@common/paymentResponse/netSaveClientFailed",[RHNetworkService instance].doMainhttp]]) {
+        
+        RHErrorViewController* controller=[[RHErrorViewController alloc]initWithNibName:@"RHErrorViewController" bundle:nil];
+        controller.titleStr=@"银行卡余额不足";
+        controller.tipsStr=@"快去抢银行吧~";
+        controller.type=RHPayFail;
+        [self.navigationController pushViewController:controller animated:YES];
         return NO;
     }
     return YES;

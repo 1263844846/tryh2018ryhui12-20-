@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "RHSegmentContentView.h"
 
-@interface RHGuidanceViewController : UIViewController<RHSegmentContentViewDelegate>
+@interface RHGuidanceViewController : UIViewController<RHSegmentContentViewDelegate,UIScrollViewDelegate>
 
 @property(nonatomic,strong)RHSegmentContentView* segmentContentView;
 @property(nonatomic,strong)NSMutableArray* views;
+@property (weak, nonatomic) IBOutlet UIScrollView *scollView;
 
 @end

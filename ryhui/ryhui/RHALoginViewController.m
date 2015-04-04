@@ -15,6 +15,8 @@
 @end
 
 @implementation RHALoginViewController
+@synthesize isForgotV;
+@synthesize isPan;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,9 +33,9 @@
     
     [self configTitleWithString:@"登录"];
     
-    self.accountTextField.text=@"zhaobaolintest";
+    self.accountTextField.text=@"asdf5678";
     
-    self.passwordTextField.text=@"111111";
+    self.passwordTextField.text=@"asdf5678";
     
     [self configRightButtonWithTitle:@"找回密码" action:@selector(findPassword)];
 }
@@ -113,8 +115,15 @@
                     [[NSUserDefaults standardUserDefaults] synchronize];
                 }
                 
-                RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
-                [self.navigationController pushViewController:controller animated:NO];
+                if (!isPan) {
+                    RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
+                    controller.isForgotV=self.isForgotV;
+                    [self.navigationController pushViewController:controller animated:NO];
+                }else{
+                    [[RHTabbarManager sharedInterface] initTabbar];
+                    [[RHTabbarManager sharedInterface] selectTabbarMain];
+                }
+
             }
         }
         

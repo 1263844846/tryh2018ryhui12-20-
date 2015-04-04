@@ -8,7 +8,7 @@
 
 #import "RHWithdrawWebViewController.h"
 #import "MBProgressHUD.h"
-
+#import "RHErrorViewController.h"
 @interface RHWithdrawWebViewController ()
 
 @end
@@ -47,12 +47,24 @@
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSString* url=[request.URL absoluteString];
-    if ([url isEqualToString:[NSString stringWithFormat:@"%@common/paymentResponse/cashClientBackSuccess",[RHNetworkService instance].doMain]]) {
+
+    DLog(@"%@",url);
+    if ([url containsString:[NSString stringWithFormat:@"%@common/paymentResponse/cashClientBackSuccess",[RHNetworkService instance].doMainhttp]]) {
+        RHErrorViewController* controller=[[RHErrorViewController alloc]initWithNibName:@"RHErrorViewController" bundle:nil];
+        controller.titleStr=[NSString stringWithFormat:@"申请提现金额%@元",amount];
+        controller.tipsStr=@"资金预计于审核后T+1个工作日到账";
+        controller.type=RHWithdrawSucceed;
+        [self.navigationController pushViewController:controller animated:YES];
         
         return NO;
     }
-    if ([url isEqualToString:[NSString stringWithFormat:@"%@common/paymentResponse/cashClientBackFailed",[RHNetworkService instance].doMain]]) {
+    if ([url containsString:[NSString stringWithFormat:@"%@common/paymentResponse/cashClientBackFailed",[RHNetworkService instance].doMainhttp]]) {
         
+        RHErrorViewController* controller=[[RHErrorViewController alloc]initWithNibName:@"RHErrorViewController" bundle:nil];
+        controller.titleStr=@"余额不足";
+        controller.tipsStr=@"0";
+        controller.type=RHWithdrawFail;
+        [self.navigationController pushViewController:controller animated:YES];
         return NO;
     }
     return YES;

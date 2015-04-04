@@ -15,6 +15,7 @@
 @end
 
 @implementation RHLoginViewController
+@synthesize nav;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -36,14 +37,25 @@
 
 - (IBAction)loginAction:(id)sender {
     RHALoginViewController* controller=[[RHALoginViewController alloc]initWithNibName:@"RHALoginViewController" bundle:nil];
-    [self.navigationController pushViewController:controller animated:YES];
+    if (nav) {
+        [self.nav pushViewController:controller animated:YES];
+    }else{
+        [self.navigationController pushViewController:controller animated:YES];
+    }
 }
 
 - (IBAction)registerAction:(id)sender {
     RHRegisterViewController* controller=[[RHRegisterViewController alloc]initWithNibName:@"RHRegisterViewController" bundle:nil];
-    [self.navigationController pushViewController:controller animated:YES];
-}
+    if (nav) {
+        [self.nav pushViewController:controller animated:YES];
+    }else{
+        [self.navigationController pushViewController:controller animated:YES];
+    }}
 
 - (IBAction)qRegisterAction:(id)sender {
+    
+    [[RHTabbarManager sharedInterface] initTabbar];
+    
+    [[RHTabbarManager sharedInterface] selectTabbarMain];
 }
 @end

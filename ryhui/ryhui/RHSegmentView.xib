@@ -193,7 +193,7 @@
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fyQ-2o-dAw">
                             <rect key="frame" x="107" y="127" width="95" height="25"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                             <state key="normal" title="投资" backgroundImage="registerButtonUp.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -219,7 +219,7 @@
                 <outlet property="segmentLabel" destination="mVA-87-pwm" id="7OB-xR-NEQ"/>
                 <outlet property="segmentLabel1" destination="bvG-Fn-dHj" id="gze-Eg-tpW"/>
                 <outlet property="segmentLabel3" destination="UFt-XC-mLw" id="3b2-t1-70a"/>
-                <outlet property="segmentLabel4" destination="2CH-cs-gIJ" id="oi2-Ux-hyN"/>
+                <outlet property="segmentLabel4" destination="2CH-cs-gIJ" id="zVt-8e-ZQT"/>
                 <outlet property="segmentView1" destination="1eF-Tg-0sI" id="alJ-Qa-QZW"/>
                 <outlet property="segmentView2" destination="rPy-xd-37d" id="hRc-8a-P38"/>
             </connections>

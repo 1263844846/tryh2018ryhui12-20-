@@ -21,9 +21,7 @@
     [super viewDidLoad];
     self.viewControllers=[[NSMutableArray alloc]initWithCapacity:0];
 
-    self.segmentView1.hidden=NO;
-    self.segmentView2.hidden=YES;
-    [self didSelectSegmentAtIndex:0];
+
     
     [self configBackButton];
     [self configTitleWithString:@"项目列表"];
@@ -48,11 +46,72 @@
     
     [self segmentContentView:_segmentContentView selectPage:0];
     
+    self.segmentView1.hidden=NO;
+    self.segmentView2.hidden=YES;
+    [self didSelectSegmentAtIndex:0];
+    self.segmentLabel.layer.cornerRadius=8;
+    self.segmentLabel1.layer.cornerRadius=8;
+    self.segmentLabel3.layer.cornerRadius=8;
+    self.segmentLabel4.layer.cornerRadius=8;
+    self.segmentLabel.hidden=YES;
+    self.segmentLabel1.hidden=YES;
+    self.segmentLabel3.hidden=YES;
+    self.segmentLabel4.hidden=YES;
+    [self getSegmentnum1];
+    [self getSegmentnum2];
+}
 
+#pragma mark-network
+-(void)getSegmentnum1
+{
+    
+    
+    NSDictionary* parameters=@{@"search":@"true",@"rows":@"1000",@"page":@"1",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"percent\",\"op\":\"lt\",\"data\":100}]}"};
+    
+    [[RHNetworkService instance] POST:@"common/main/shangListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        DLog(@"%@",responseObject);
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            int num=[[responseObject objectForKey:@"records"] intValue];
+            if (num>0) {
+                self.segmentLabel.text=[NSString stringWithFormat:@"可投%d",num];
+                self.segmentLabel.hidden=NO;
+                self.segmentLabel3.text=[NSString stringWithFormat:@"可投%d",num];
+                self.segmentLabel3.hidden=NO;
+            }
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        DLog(@"%@",error);
+    }];
+}
+-(void)getSegmentnum2
+{
+    
+    
+    NSDictionary* parameters=@{@"search":@"true",@"rows":@"1000",@"page":@"1",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"percent\",\"op\":\"lt\",\"data\":100}]}"};
+    [[RHNetworkService instance] POST:@"common/main/xueListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        DLog(@"%@",responseObject);
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            int num=[[responseObject objectForKey:@"records"] intValue];
+            if (num>0) {
+                self.segmentLabel1.text=[NSString stringWithFormat:@"可投%d",num];
+                self.segmentLabel1.hidden=NO;
+                self.segmentLabel4.text=[NSString stringWithFormat:@"可投%d",num];
+                self.segmentLabel4.hidden=NO;
+            }
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        DLog(@"%@",error);
+    }];
 }
 
 - (void)didSelectSegmentAtIndex:(int)index
 {
+    RHProjectListContentViewController* controller=[_viewControllers objectAtIndex:index];
+    [controller.tableView setContentOffset:CGPointMake(0,0) animated:YES];
     [_segmentContentView setSelectPage:index];
 
 }

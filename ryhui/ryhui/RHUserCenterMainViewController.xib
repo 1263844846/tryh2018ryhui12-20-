@@ -8,6 +8,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RHUserCenterMainViewController">
             <connections>
                 <outlet property="balanceLabel" destination="0xQ-e9-GOx" id="kBR-zR-dCK"/>
+                <outlet property="errorButton" destination="cxB-co-Ge8" id="abG-Np-51O"/>
+                <outlet property="errorLabel" destination="yGT-30-Ktf" id="UUQ-rv-bxW"/>
                 <outlet property="overView" destination="lzF-N6-ieA" id="2ps-EQ-9DW"/>
                 <outlet property="ryUsername" destination="u11-Ql-U4N" id="zIe-wt-ycG"/>
                 <outlet property="username" destination="iB7-F1-Z82" id="mJo-li-Ass"/>

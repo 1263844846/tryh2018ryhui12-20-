@@ -35,27 +35,51 @@
 {
     [[RHNetworkService instance] POST:@"front/payment/account/myAccountData" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"%@",responseObject);
-        self.averageLabel.text=[[responseObject objectForKey:@"average"] stringValue];
+        
+        NSString* average=@"0";
+        if (![[responseObject objectForKey:@"average"] isKindOfClass:[NSNull class]]) {
+            average=[responseObject objectForKey:@"average"] ;
+        }
+        self.averageLabel.text=average;
+        
+        NSString* FrzBal=@"0";
+        if (![[responseObject objectForKey:@"FrzBal"] isKindOfClass:[NSNull class]]) {
+            FrzBal=[responseObject objectForKey:@"FrzBal"] ;
+        }
+        self.FrzBalLabel.text=FrzBal;
+        
+        NSString* AvlBal=@"0";
+        if (![[responseObject objectForKey:@"AvlBal"] isKindOfClass:[NSNull class]]) {
+            AvlBal=[responseObject objectForKey:@"AvlBal"] ;
+        }
+        self.balanceLabel.text=AvlBal;
+        
+        NSString* total=@"0";
+        if (![[responseObject objectForKey:@"total"] isKindOfClass:[NSNull class]]) {
+            total=[responseObject objectForKey:@"total"] ;
+        }
+        self.totalLabel.text=total;
+        
         NSString* collectCapital=@"0";
         if (![[responseObject objectForKey:@"collectCapital"] isKindOfClass:[NSNull class]]) {
-            collectCapital=[[responseObject objectForKey:@"collectCapital"] stringValue];
+            collectCapital=[responseObject objectForKey:@"collectCapital"] ;
         }
         self.collectCapitalLabel.text=collectCapital;
         NSString* collectInterest=@"0";
         if (![[responseObject objectForKey:@"collectInterest"] isKindOfClass:[NSNull class]]) {
-            collectInterest=[[responseObject objectForKey:@"collectInterest"] stringValue];
+            collectInterest=[responseObject objectForKey:@"collectInterest"] ;
         }
         self.collectInterestLabel.text=collectInterest;
         
-        NSString* collectPrepaymentPenalty=@"0";
-        if (![[responseObject objectForKey:@"collectPrepaymentPenalty"] isKindOfClass:[NSNull class]]) {
-            collectPrepaymentPenalty=[[responseObject objectForKey:@"collectPrepaymentPenalty"] stringValue];
+        NSString* collect=@"0";
+        if (![[responseObject objectForKey:@"collect"] isKindOfClass:[NSNull class]]) {
+            collect=[responseObject objectForKey:@"collect"];
         }
-        self.collectPrepaymentPenaltyLabel.text=collectPrepaymentPenalty;
+        self.collectPrepaymentPenaltyLabel.text=collect;
         
         NSString* earnInterest=@"0";
         if (![[responseObject objectForKey:@"earnInterest"] isKindOfClass:[NSNull class]]) {
-            earnInterest=[[responseObject objectForKey:@"earnInterest"] stringValue];
+            earnInterest=[responseObject objectForKey:@"earnInterest"];
         }
         self.earnInterestLabel.text=earnInterest;
                 

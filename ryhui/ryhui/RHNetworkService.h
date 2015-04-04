@@ -15,6 +15,7 @@
 +(RHNetworkService*)instance;
 
 -(NSString*)doMain;
+-(NSString*)doMainhttp;
 
 - (AFHTTPRequestOperation*)POST:(NSString *)URLString
                      parameters:(id)parameters

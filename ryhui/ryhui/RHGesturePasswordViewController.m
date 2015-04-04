@@ -8,6 +8,7 @@
 
 #import "RHGesturePasswordViewController.h"
 #import <CoreFoundation/CoreFoundation.h>
+#import "RHALoginViewController.h"
 
 @interface RHGesturePasswordViewController ()
 
@@ -21,6 +22,8 @@
 }
 
 @synthesize gesturePasswordView;
+@synthesize isForgotV;
+@synthesize isReset;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,13 +40,20 @@
     // Do any additional setup after loading the view.
     previousString = [NSString string];
     
-    password = [[NSUserDefaults standardUserDefaults] objectForKey:@"Gesture"];
-    if ([password isEqualToString:@""]) {
+    password = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]];
+    if (!password) {
         
         [self reset];
     }
     else {
         [self verify];
+        if (isReset) {
+            [gesturePasswordView.forgetButton setHidden:YES];
+            [gesturePasswordView.changeButton setHidden:YES];
+            [gesturePasswordView.state setTextColor:[UIColor colorWithRed:2/255.f green:174/255.f blue:240/255.f alpha:1]];
+            [gesturePasswordView.state setText:@"请输入密码"];
+        }
+
     }
 }
 
@@ -84,30 +94,38 @@
     //    [gesturePasswordView.imgView setHidden:YES];
     [gesturePasswordView.forgetButton setHidden:YES];
     [gesturePasswordView.changeButton setHidden:YES];
+    [gesturePasswordView.state setTextColor:[UIColor colorWithRed:2/255.f green:174/255.f blue:240/255.f alpha:1]];
+    [gesturePasswordView.state setText:@"请输入新密码"];
     [self.view addSubview:gesturePasswordView];
 }
 
 #pragma mark - 判断是否已存在手势密码
 - (BOOL)exist{
-    password = [[NSUserDefaults standardUserDefaults] objectForKey:@"Gesture"];
-    if ([password isEqualToString:@""])return NO;
+    password = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]];
+    if (!password)return NO;
     return YES;
 }
 
 #pragma mark - 清空记录
 - (void)clear{
-    
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"Gesture"];
+    password=nil;
+    previousString=@"";
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]];
 }
 
 #pragma mark - 改变手势密码
 - (void)change{
+    RHALoginViewController* controller=[[RHALoginViewController alloc]initWithNibName:@"RHALoginViewController" bundle:nil];
+    controller.isPan=YES;
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark - 忘记手势密码
 - (void)forget{
-    
-    [self reset];
+    RHALoginViewController* controller=[[RHALoginViewController alloc]initWithNibName:@"RHALoginViewController" bundle:nil];
+    controller.isForgotV=YES;
+    [self.navigationController pushViewController:controller animated:YES];
+    [self clear];
 }
 
 - (BOOL)verification:(NSString *)result{
@@ -115,8 +133,14 @@
         [gesturePasswordView.state setTextColor:[UIColor colorWithRed:2/255.f green:174/255.f blue:240/255.f alpha:1]];
         [gesturePasswordView.state setText:@"输入正确"];
         
-        [[RHTabbarManager sharedInterface] initTabbar];
-        [[RHTabbarManager sharedInterface] selectTabbarMain];
+        if (isReset) {
+            [self reset];
+            [self clear];
+            
+        }else{
+            [[RHTabbarManager sharedInterface] initTabbar];
+            [[RHTabbarManager sharedInterface] selectTabbarMain];
+        }
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"RHGestureSuccessed" object:nil];
         return YES;
@@ -128,6 +152,7 @@
 
 - (BOOL)resetPassword:(NSString *)result{
     if ([previousString isEqualToString:@""]) {
+        DLog(@"%@",result);
         previousString=result;
         [gesturePasswordView.tentacleView enterArgin];
         [gesturePasswordView.state setTextColor:[UIColor colorWithRed:2/255.f green:174/255.f blue:240/255.f alpha:1]];
@@ -135,13 +160,21 @@
         return YES;
     }
     else {
+        DLog(@"%@",result);
         if ([result isEqualToString:previousString]) {
+            password=result;
             
-            [[NSUserDefaults standardUserDefaults] setObject:result forKey:@"Gesture"];
+            [[NSUserDefaults standardUserDefaults] setObject:result forKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]];
             //[self presentViewController:(UIViewController) animated:YES completion:nil];
             [gesturePasswordView.state setTextColor:[UIColor colorWithRed:2/255.f green:174/255.f blue:240/255.f alpha:1]];
             [gesturePasswordView.state setText:@"已保存手势密码"];
-            [self verify];
+            if (isReset) {
+                [RHUtility showTextWithText:@"手势密码修改成功"];
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+               [self verify];
+            }
+            
             return YES;
         }
         else{

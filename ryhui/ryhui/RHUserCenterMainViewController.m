@@ -14,6 +14,8 @@
 #import "RHRechargeViewController.h"
 #import "RHMyMessageViewController.h"
 #import "RHWithdrawViewController.h"
+#import "RHALoginViewController.h"
+#import "RHRegisterWebViewController.h"
 
 @interface RHUserCenterMainViewController ()
 
@@ -29,9 +31,15 @@
     self.ryUsername.text=[NSString stringWithFormat:@"ryh_%@",[RHUserManager sharedInterface].username];
     [self checkout];
     
-    if ([RHUserManager sharedInterface].custId) {
-        self.overView.hidden=YES;
+    if (![RHUserManager sharedInterface].username) {
+        self.errorLabel.text=@"您尚未登录账号";
+        [self.errorButton setTitle:@"立即登录" forState:UIControlStateNormal];
+    }else{
+        if ([RHUserManager sharedInterface].custId) {
+            self.overView.hidden=YES;
+        }
     }
+
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkout) name:@"RHSELECTUSER" object:nil];
 }
@@ -48,6 +56,7 @@
             NSString* AvlBal=[responseObject objectForKey:@"AvlBal"];
             if (AvlBal&&[AvlBal length]>0) {
                 self.balance=AvlBal;
+                [RHUserManager sharedInterface].balance=AvlBal;
                 self.balanceLabel.text=[NSString stringWithFormat:@"可用余额%@元",AvlBal];
             }
         }
@@ -107,5 +116,14 @@
 }
 
 - (IBAction)openAccount:(id)sender {
+    
+    UIButton * button=sender;
+    if ([button.titleLabel.text isEqualToString:@"立即开户"]) {
+        RHRegisterWebViewController* controller=[[RHRegisterWebViewController alloc] initWithNibName:@"RHRegisterWebViewController" bundle:nil];
+        [self.navigationController pushViewController:controller animated:YES];
+    }else{
+        RHALoginViewController* controller=[[RHALoginViewController alloc] initWithNibName:@"RHALoginViewController" bundle:nil];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
 }
 @end

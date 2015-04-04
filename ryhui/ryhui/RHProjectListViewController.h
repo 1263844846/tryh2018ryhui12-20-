@@ -14,7 +14,10 @@
 @property(nonatomic,strong)RHSegmentContentView* segmentContentView;
 
 @property(nonatomic,strong)NSMutableArray* viewControllers;
-
+@property (weak, nonatomic) IBOutlet UILabel *segmentLabel;
+@property (weak, nonatomic) IBOutlet UILabel *segmentLabel1;
+@property (weak, nonatomic) IBOutlet UILabel *segmentLabel3;
+@property (weak, nonatomic) IBOutlet UILabel *segmentLabel4;
 
 - (IBAction)yearEarnAction:(id)sender;
 - (IBAction)deadlineAction:(id)sender;

@@ -87,7 +87,9 @@ static RHTabbarManager* _instance =nil;
 -(void)selectGuidan
 {
     RHGuidanceViewController* controller=[[RHGuidanceViewController alloc]initWithNibName:@"RHGuidanceViewController" bundle:nil];
+    UINavigationController* nav=[[UINavigationController alloc]initWithRootViewController:controller];
+
     AppDelegate* delegate=[UIApplication sharedApplication].delegate;
-    delegate.window.rootViewController=controller;
+    delegate.window.rootViewController=nav;
 }
 @end

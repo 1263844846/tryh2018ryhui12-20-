@@ -21,6 +21,7 @@
 
 @property (nonatomic,strong)NSMutableArray* dataArray;
 
+@property (weak, nonatomic) IBOutlet UIButton *investmentButton;
 @property (weak, nonatomic) IBOutlet UILabel *limitTimeLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *investorRateLabel;

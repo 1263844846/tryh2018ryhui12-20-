@@ -24,6 +24,8 @@
 
 @property(nonatomic,strong)NSString* userId;
 
+@property(nonatomic,strong)NSString* balance;
+
 +(instancetype)sharedInterface;
 
 -(void)logout;

@@ -31,6 +31,16 @@ static RHNetworkService* _instance;
     return @"https://www.ryhui.com/";
 #endif
 }
+-(NSString*)doMainhttp
+{
+    return @"http://123.57.133.7/TinyFinance/";
+    
+#ifdef DEBUG
+    return @"http://123.57.133.7/TinyFinance/";
+#else
+    return @"http://www.ryhui.com/";
+#endif
+}
 
 -(AFHTTPRequestOperation*)POST:(NSString *)URLString parameters:(id)parameters success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {

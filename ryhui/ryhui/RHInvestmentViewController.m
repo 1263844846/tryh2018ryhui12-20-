@@ -8,6 +8,7 @@
 
 #import "RHInvestmentViewController.h"
 #import "RHInvestmentWebViewController.h"
+#import "RHRechargeViewController.h"
 
 @interface RHInvestmentViewController ()
 
@@ -16,6 +17,7 @@
 @implementation RHInvestmentViewController
 @synthesize projectId;
 @synthesize dataDic;
+@synthesize projectFund;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,7 +33,6 @@
 -(void)setupWithDic:(NSDictionary*)dic
 {
     self.projectId=[dic objectForKey:@"id"];
-    
     self.nameLabel.text=[dic objectForKey:@"name"];
     self.investorRateLabel.text=[[dic objectForKey:@"investorRate"] stringValue];
     self.limitTimeLabel.text=[[dic objectForKey:@"limitTime"] stringValue];
@@ -71,6 +72,11 @@
 - (IBAction)pushAreegment:(id)sender {
 }
 - (IBAction)Investment:(id)sender {
+    int amount=[self.textFiled.text intValue];
+    if (amount%100!=0||amount==0) {
+        [RHUtility showTextWithText:@"投资金额需为100的整数倍"];
+        return;
+    }
     RHInvestmentWebViewController* controller=[[RHInvestmentWebViewController alloc]initWithNibName:@"RHInvestmentWebViewController" bundle:nil];
     controller.price=self.textFiled.text;
     controller.projectId=self.projectId;
@@ -78,8 +84,21 @@
 }
 
 - (IBAction)allIn:(id)sender {
+    int balance=[[RHUserManager sharedInterface].balance intValue];
+    int allinAmount=(balance/100)*100;
+    
+    int project=(projectFund/100)*100;
+    
+    if (allinAmount>project) {
+        
+        self.textFiled.text=[NSString stringWithFormat:@"%d",project];
+    }else{
+        self.textFiled.text=[NSString stringWithFormat:@"%d",project];
+    }
 }
 
 - (IBAction)recharge:(id)sender {
+    RHRechargeViewController* controller=[[RHRechargeViewController alloc]initWithNibName:@"RHRechargeViewController" bundle:nil];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 @end

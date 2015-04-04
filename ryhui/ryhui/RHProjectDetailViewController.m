@@ -9,7 +9,9 @@
 #import "RHProjectDetailViewController.h"
 
 @interface RHProjectDetailViewController ()
-
+{
+    int available;
+}
 @end
 
 @implementation RHProjectDetailViewController
@@ -34,6 +36,14 @@
         [self appShangDetailData];
     }else{
         [self appXueDetailData];
+    }
+    
+    if (![RHUserManager sharedInterface].username) {
+        [self.investmentButton setTitle:@"立即登录" forState:UIControlStateNormal];
+    }else{
+        if (![RHUserManager sharedInterface].custId) {
+            [self.investmentButton setTitle:@"请先开户" forState:UIControlStateNormal];
+        }
     }
 }
 
@@ -94,16 +104,18 @@
         self.insuranceMethodLabel.text=[dic objectForKey:@"insuranceMethod"];
     }
     
-    if ([[dic objectForKey:@"available"] isKindOfClass:[NSNull class]]) {
-        self.availableLabel.text=@"";
-    }else{
-        self.availableLabel.text=[[dic objectForKey:@"available"] stringValue];
-    }
+ 
     
     CGFloat percent=[[dic objectForKey:@"percent"] floatValue]/100.0;
     
-    self.progressImageView.frame=CGRectMake(0, self.progressImageView.frame.origin.y, ([UIScreen mainScreen].bounds.size.width-34-16)*percent, self.progressImageView.frame.size.height);
+    self.progressImageView.frame=CGRectMake(0, self.progressImageView.frame.origin.y, ([UIScreen mainScreen].bounds.size.width-40-16)*percent, self.progressImageView.frame.size.height);
+    self.progressLabel.text=[NSString stringWithFormat:@"%d%%",[[dic objectForKey:@"percent"] intValue]];
     self.progressLabel.frame=CGRectMake(self.progressImageView.frame.size.width+1, 130,34, 14);
+    if ([self.progressLabel.text isEqualToString:@"100%"]) {
+        [self.investmentButton setTitle:@"已满标" forState:UIControlStateNormal];
+        self.investmentButton.enabled=NO;
+        [self.investmentButton setBackgroundColor:[UIColor lightGrayColor]];
+    }
     
 }
 
@@ -183,6 +195,14 @@
             self.studentAgeLabel.text=[[project objectForKey:@"studentAge"] stringValue];
             self.studentEducationLabel.text=[project objectForKey:@"studentEducation"];
             self.partnerInfoLabel.text=[project objectForKey:@"partnerInfo"];
+            
+            if ([[project objectForKey:@"available2"] isKindOfClass:[NSNull class]]) {
+                self.availableLabel.text=@"";
+            }else{
+                self.availableLabel.text=[project objectForKey:@"available2"];
+            }
+            available=[[project objectForKey:@"available"] intValue];
+
 
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -201,8 +221,8 @@
             for (NSDictionary* insuranceDic in insuranceImages) {
                 int index=[[NSNumber numberWithInteger:[insuranceImages indexOfObject:insuranceDic]] intValue];
                 UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(index*(45+10),4, 45, 45)];
-                [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[RHNetworkService instance].doMain,[insuranceDic objectForKey:@"filepath"]]]];
-                DLog(@"%@",[NSString stringWithFormat:@"%@common/main/%@",[RHNetworkService instance].doMain,[insuranceDic objectForKey:@"filepath"]]);
+                [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].doMain,[insuranceDic objectForKey:@"filepath"]]]];
+                DLog(@"%@",[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].doMain,[insuranceDic objectForKey:@"filepath"]]);
                 
                 [self.insuranceScrollView addSubview:imageView];
             }
@@ -215,10 +235,18 @@
             for (NSDictionary* projectImagesDic in projectImages) {
                 int index=[[NSNumber numberWithInteger:[projectImages indexOfObject:projectImagesDic]] intValue];
                 UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(index*(45+10),4, 45, 45)];
-                [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[RHNetworkService instance].doMain,[projectImagesDic objectForKey:@"filepath"]]]];
+                [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].doMain,[projectImagesDic objectForKey:@"filepath"]]]];
                 DLog(@"%@",[NSString stringWithFormat:@"%@%@",[RHNetworkService instance].doMain,[projectImagesDic objectForKey:@"filepath"]]);
                 [self.projectScrollView addSubview:imageView];
             }
+            if ([[projectDic objectForKey:@"available2"] isKindOfClass:[NSNull class]]) {
+                self.availableLabel.text=@"";
+            }else{
+                self.availableLabel.text=[projectDic objectForKey:@"available2"];
+            }
+            
+            available=[[projectDic objectForKey:@"available"] intValue];
+
             self.projectScrollView.contentSize=CGSizeMake([projectImages count]*55,53);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -308,6 +336,7 @@
 }
 - (IBAction)Investment:(id)sender {
     RHInvestmentViewController* contoller=[[RHInvestmentViewController alloc]initWithNibName:@"RHInvestmentViewController" bundle:nil];
+    contoller.projectFund=available;
     contoller.dataDic=self.dataDic;
     [self.navigationController pushViewController:contoller animated:YES];
 }

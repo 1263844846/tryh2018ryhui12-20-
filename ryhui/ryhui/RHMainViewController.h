@@ -10,6 +10,7 @@
 #import "RHSegmentView.h"
 
 @interface RHMainViewController : RHBaseViewController<RHSegmentControlDelegate,UITableViewDataSource,UITableViewDelegate>
+@property (strong, nonatomic) IBOutlet UIView *footView;
 @property (weak, nonatomic) IBOutlet UIScrollView *headerScrollView;
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 
@@ -22,4 +23,5 @@
 @property (nonatomic,strong)NSString* type;
 - (IBAction)pushUserCenter:(id)sender;
 - (IBAction)pushMore:(id)sender;
+- (IBAction)pushProjectList:(id)sender;
 @end
