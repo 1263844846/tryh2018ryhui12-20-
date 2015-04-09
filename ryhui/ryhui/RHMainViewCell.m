@@ -74,7 +74,16 @@
         insuranceMethod=[dic objectForKey:@"insuranceMethod"];
     }
     self.insuranceMethodLabel.text=insuranceMethod;
-    [self.logoImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[RHNetworkService instance].doMain,[dic objectForKey:@"insuranceLogo"]]]];
+    
+    if ([[dic objectForKey:@"insuranceLogo"] isKindOfClass:[NSNull class]]) {
+        CGRect rect=self.insuranceMethodLabel.frame;
+        rect.origin.x=60;
+        self.insuranceMethodLabel.frame=rect;
+        self.logoImageView.hidden=YES;
+    }else{
+        self.logoImageView.hidden=NO;
+        [self.logoImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].doMain,[dic objectForKey:@"insuranceLogo"]]]]; 
+    }
     CGFloat percent=0;
     if (![[dic objectForKey:@"percent"] isKindOfClass:[NSNull class]]) {
         percent=[[dic objectForKey:@"percent"] floatValue]/100.0;

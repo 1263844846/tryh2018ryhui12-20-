@@ -45,6 +45,10 @@
             [self.investmentButton setTitle:@"请先开户" forState:UIControlStateNormal];
         }
     }
+    
+    self.scrollView.frame=CGRectMake(0, 35, self.segmentView1.frame.size.width, [UIScreen mainScreen].applicationFrame.size.height-self.navigationController.navigationBar.frame.size.height-280);
+    
+    self.scrollView.contentSize=CGSizeMake(self.segmentView1.frame.size.width,267);
 }
 
 
@@ -311,7 +315,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 25;
+    return 40;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

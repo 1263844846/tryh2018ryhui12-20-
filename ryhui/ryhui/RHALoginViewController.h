@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *captchaTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *captchaImageView;
+- (IBAction)forgetAction:(id)sender;
 
 - (IBAction)loginAction:(id)sender;
 @end

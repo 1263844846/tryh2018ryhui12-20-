@@ -28,15 +28,22 @@
     [super viewDidLoad];
     [self configTitleWithString:@"个人中心"];
     self.username.text=[RHUserManager sharedInterface].username;
-    self.ryUsername.text=[NSString stringWithFormat:@"ryh_%@",[RHUserManager sharedInterface].username];
-    [self checkout];
+    if ([RHUserManager sharedInterface].username) {
+        self.ryUsername.text=[NSString stringWithFormat:@"ryh_%@",[RHUserManager sharedInterface].username];
+    }
     
     if (![RHUserManager sharedInterface].username) {
         self.errorLabel.text=@"您尚未登录账号";
         [self.errorButton setTitle:@"立即登录" forState:UIControlStateNormal];
+        self.overView.hidden=NO;
+        self.topButton.hidden=YES;
     }else{
+        [self checkout];
+        
         if ([RHUserManager sharedInterface].custId) {
             self.overView.hidden=YES;
+        }else{
+            self.overView.hidden=NO;
         }
     }
 

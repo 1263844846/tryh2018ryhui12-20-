@@ -1649,7 +1649,7 @@
 				INFOPLIST_FILE = ryhui/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5159e2bb-dc2d-4b52-93ab-a81d2b90dc2a";
+				PROVISIONING_PROFILE = "cdc5fc6b-77b3-4df5-a98e-5dee4d9ecda1";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1667,7 +1667,7 @@
 				INFOPLIST_FILE = ryhui/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5159e2bb-dc2d-4b52-93ab-a81d2b90dc2a";
+				PROVISIONING_PROFILE = "cdc5fc6b-77b3-4df5-a98e-5dee4d9ecda1";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

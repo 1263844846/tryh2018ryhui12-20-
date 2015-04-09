@@ -50,9 +50,13 @@
     self.segmentView2.hidden=YES;
     [self didSelectSegmentAtIndex:0];
     self.segmentLabel.layer.cornerRadius=8;
+    self.segmentLabel.layer.masksToBounds=YES;
     self.segmentLabel1.layer.cornerRadius=8;
+    self.segmentLabel1.layer.masksToBounds=YES;
     self.segmentLabel3.layer.cornerRadius=8;
+    self.segmentLabel3.layer.masksToBounds=YES;
     self.segmentLabel4.layer.cornerRadius=8;
+    self.segmentLabel4.layer.masksToBounds=YES;
     self.segmentLabel.hidden=YES;
     self.segmentLabel1.hidden=YES;
     self.segmentLabel3.hidden=YES;

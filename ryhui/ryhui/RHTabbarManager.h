@@ -18,6 +18,7 @@
 -(void)selectTabbarMore;
 -(void)selectLogin;
 -(void)selectGuidan;
+-(void)cleanTabbar;
 
 @property(nonatomic,strong)UINavigationController* tabbarMain;
 @property(nonatomic,strong)UINavigationController* tabbarUser;

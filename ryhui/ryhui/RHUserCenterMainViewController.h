@@ -11,6 +11,7 @@
 @interface RHUserCenterMainViewController : RHBaseViewController
 
 @property(nonatomic,strong)NSString* balance;
+@property (weak, nonatomic) IBOutlet UIButton *topButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *username;
 @property (weak, nonatomic) IBOutlet UILabel *ryUsername;

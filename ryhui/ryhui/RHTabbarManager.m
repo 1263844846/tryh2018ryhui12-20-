@@ -75,6 +75,13 @@ static RHTabbarManager* _instance =nil;
     delegate.window.rootViewController=self.tabbarMore;
 }
 
+-(void)cleanTabbar
+{
+    self.tabbarMain=nil;
+    self.tabbarMore=nil;
+    self.tabbarUser=nil;
+}
+
 -(void)selectLogin
 {
     RHLoginViewController* controller=[[RHLoginViewController alloc]initWithNibName:@"RHLoginViewController" bundle:nil];

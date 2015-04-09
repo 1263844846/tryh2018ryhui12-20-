@@ -8,7 +8,7 @@
 
 #import "RHBaseViewController.h"
 
-@interface RHInvestmentViewController : RHBaseViewController
+@interface RHInvestmentViewController : RHBaseViewController<UITextFieldDelegate>
 
 @property(nonatomic,strong)NSString* projectId;
 

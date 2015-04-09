@@ -9,6 +9,7 @@
 #import "RHALoginViewController.h"
 #import "RHGesturePasswordViewController.h"
 #import "RHAccountValidateViewController.h"
+#import "RHRegisterViewController.h"
 
 @interface RHALoginViewController ()
 
@@ -37,7 +38,9 @@
     
     self.passwordTextField.text=@"asdf5678";
     
-    [self configRightButtonWithTitle:@"找回密码" action:@selector(findPassword)];
+    self.passwordTextField.secureTextEntry=YES;
+    
+    [self configRightButtonWithTitle:@"注册" action:@selector(pushRigster)];
 }
 
 -(void)changeCaptcha
@@ -56,7 +59,17 @@
     }];
 }
 
+-(void)pushRigster
+{
+    RHRegisterViewController* contoller=[[RHRegisterViewController alloc] initWithNibName:@"RHRegisterViewController" bundle:nil];
+    [self.navigationController pushViewController:contoller animated:YES];
+}
 
+
+- (IBAction)forgetAction:(id)sender {
+ 
+    [self findPassword];
+}
 
 - (IBAction)loginAction:(id)sender {
     NSDictionary *parameters = @{@"account":self.accountTextField.text,@"password":self.passwordTextField.text,@"captcha":self.captchaTextField.text};

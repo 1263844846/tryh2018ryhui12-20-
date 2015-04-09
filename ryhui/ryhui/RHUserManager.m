@@ -100,7 +100,19 @@ static RHUserManager* _instance =nil;
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHUSERID"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    [[RHTabbarManager sharedInterface] selectLogin];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHSESSION"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    self.custId=nil;
+    self.email=nil;
+    self.infoType=nil;
+    self.md5=nil;
+    self.telephone=nil;
+    self.userId=nil;
+    self.username=nil;
+    
+    [[RHTabbarManager sharedInterface] cleanTabbar];
+    [[RHTabbarManager  sharedInterface] selectLogin];
 }
 
 @end

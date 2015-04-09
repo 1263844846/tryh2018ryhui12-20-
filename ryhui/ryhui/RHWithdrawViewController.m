@@ -203,4 +203,14 @@
 - (IBAction)pushMore:(id)sender {
     [[RHTabbarManager sharedInterface] selectTabbarMore];
 }
+- (IBAction)hiddenKeyBorad:(id)sender {
+    [self.withdrawTF resignFirstResponder];
+    [self.captchaTF resignFirstResponder];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
 @end

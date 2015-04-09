@@ -47,6 +47,7 @@
             NSString* AvlBal=[responseObject objectForKey:@"AvlBal"];
             if (AvlBal&&[AvlBal length]>0) {
                 self.balanceLabel.text=AvlBal;
+                [RHUserManager sharedInterface].balance=AvlBal;
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -84,21 +85,35 @@
 }
 
 - (IBAction)allIn:(id)sender {
-    int balance=[[RHUserManager sharedInterface].balance intValue];
+    NSArray* stringArray=[[RHUserManager sharedInterface].balance componentsSeparatedByString:@","];
+    NSMutableString* resultString=[NSMutableString string];
+    for (NSString* subStr in stringArray) {
+        [resultString appendString:subStr];
+    }
+    
+    int balance=[resultString intValue];
     int allinAmount=(balance/100)*100;
-    
     int project=(projectFund/100)*100;
-    
+    DLog(@"project=%d",project);
+    DLog(@"allinAmount=%d  balance=%d",allinAmount,balance);
     if (allinAmount>project) {
-        
         self.textFiled.text=[NSString stringWithFormat:@"%d",project];
     }else{
-        self.textFiled.text=[NSString stringWithFormat:@"%d",project];
+        self.textFiled.text=[NSString stringWithFormat:@"%d",allinAmount];
     }
 }
 
 - (IBAction)recharge:(id)sender {
     RHRechargeViewController* controller=[[RHRechargeViewController alloc]initWithNibName:@"RHRechargeViewController" bundle:nil];
     [self.navigationController pushViewController:controller animated:YES];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField) {
+        [textField resignFirstResponder];
+        return NO;
+    }
+    return YES;
 }
 @end

@@ -87,7 +87,8 @@
 }
 
 - (IBAction)pushMyAccount:(id)sender {
-    RHMyAccountViewController* controller=[[RHMyAccountViewController alloc]initWithNibName:@"RHMyAccountViewController" bundle:nil];
-    [self.navigationController pushViewController:controller animated:YES];
+    
+    [[RHTabbarManager sharedInterface] selectTabbarMain];
+    
 }
 @end

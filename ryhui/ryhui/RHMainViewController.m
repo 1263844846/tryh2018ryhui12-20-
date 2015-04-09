@@ -41,9 +41,13 @@
     self.segment2Array=[[NSMutableArray alloc]initWithCapacity:0];
     self.dataArray=[[NSMutableArray alloc]initWithCapacity:0];
     self.segmentView.segmentLabel.layer.cornerRadius=8;
+    self.segmentView.segmentLabel.layer.masksToBounds=YES;
     self.segmentView.segmentLabel1.layer.cornerRadius=8;
+    self.segmentView.segmentLabel1.layer.masksToBounds=YES;
     self.segmentView.segmentLabel3.layer.cornerRadius=8;
+    self.segmentView.segmentLabel3.layer.masksToBounds=YES;
     self.segmentView.segmentLabel4.layer.cornerRadius=8;
+    self.segmentView.segmentLabel4.layer.masksToBounds=YES;
     self.segmentView.segmentLabel.hidden=YES;
     self.segmentView.segmentLabel1.hidden=YES;
     self.segmentView.segmentLabel3.hidden=YES;
