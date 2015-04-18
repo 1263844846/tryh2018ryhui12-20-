@@ -64,9 +64,10 @@
         NSString* bankType=nil;
         NSString* cardId=nil;
         NSString* cardType=nil;
-        if (qpCard&&[qpCard count]>0) {
+        
+        if (![qpCard isKindOfClass:[NSNull class]]&&qpCard&&[qpCard count]>0) {
             for (NSString* idStr in qpCard) {
-                int index=[[NSNumber numberWithInteger:[qpCard indexOfObject:idStr]] intValue];
+                int index=[[NSNumber numberWithUnsignedInteger:[qpCard indexOfObject:idStr]] intValue];
                 if (index==0) {
                     bankType=idStr;
                 }
@@ -78,9 +79,12 @@
                 }
             }
         }else{
-            if (cards&&[cards count]>0) {
+            if (![cards isKindOfClass:[NSNull class]]&&cards&&[cards count]>0) {
+                DLog(@"%@",cards);
                 for (NSString* idStr in [cards objectAtIndex:0]) {
-                    int index=[[NSNumber numberWithInteger:[qpCard indexOfObject:idStr]] intValue];
+                    DLog(@"%@",idStr);
+                    int index=[[NSNumber numberWithUnsignedInteger:[[cards objectAtIndex:0] indexOfObject:idStr]] intValue];
+                    DLog(@"%d",index);
                     if (index==0) {
                         bankType=idStr;
                     }

@@ -61,7 +61,7 @@
                                        defaultContent:nil
                                                 image:[ShareSDK imageWithPath:imagePath]
                                                 title:@"权威专业的投资理财平台“融益汇”，快来下载客户端吧～"
-                                                  url:@"http://www.ryhui.com"
+                                                  url:@"http://www.ryhui.com/appDownload"
                                           description:nil
                                             mediaType:SSPublishContentMediaTypeNews];
     //创建弹出菜单容器

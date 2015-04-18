@@ -173,6 +173,7 @@
 		F87B835F1AC8552800EB73A6 /* RHWithdrawWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F87B835D1AC8552800EB73A6 /* RHWithdrawWebViewController.xib */; };
 		F8838A9F1AE27528005A554E /* noData.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F8838A9E1AE27528005A554E /* noData.jpg */; };
 		F8838AA21AE27562005A554E /* UIViewController+NoData.m in Sources */ = {isa = PBXBuildFile; fileRef = F8838AA11AE27562005A554E /* UIViewController+NoData.m */; };
+		F8838AA71AE2B298005A554E /* downCode.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F8838AA61AE2B298005A554E /* downCode.jpg */; };
 		F88830F31AB41C02001E4AD1 /* RHSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = F88830F21AB41C02001E4AD1 /* RHSegmentView.m */; };
 		F88830F81AB41E6E001E4AD1 /* segmentBg1.png in Resources */ = {isa = PBXBuildFile; fileRef = F88830F61AB41E6E001E4AD1 /* segmentBg1.png */; };
 		F88830F91AB41E6E001E4AD1 /* segmentBg2.png in Resources */ = {isa = PBXBuildFile; fileRef = F88830F71AB41E6E001E4AD1 /* segmentBg2.png */; };
@@ -512,6 +513,7 @@
 		F8838A9E1AE27528005A554E /* noData.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = noData.jpg; sourceTree = "<group>"; };
 		F8838AA01AE27562005A554E /* UIViewController+NoData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NoData.h"; sourceTree = "<group>"; };
 		F8838AA11AE27562005A554E /* UIViewController+NoData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NoData.m"; sourceTree = "<group>"; };
+		F8838AA61AE2B298005A554E /* downCode.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = downCode.jpg; sourceTree = "<group>"; };
 		F88830F11AB41C02001E4AD1 /* RHSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHSegmentView.h; sourceTree = "<group>"; };
 		F88830F21AB41C02001E4AD1 /* RHSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHSegmentView.m; sourceTree = "<group>"; };
 		F88830F61AB41E6E001E4AD1 /* segmentBg1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = segmentBg1.png; sourceTree = "<group>"; };
@@ -1023,6 +1025,7 @@
 				D57006F91ADF803500CEF60A /* defaultRH.jpg */,
 				D537C3771ADD41C4009D3433 /* gitf */,
 				D5C233B71ADCE677006DD91E /* qcode.jpg */,
+				F8838AA61AE2B298005A554E /* downCode.jpg */,
 				F8C38DBD1AC9A321005C3B1F /* projecticon.png */,
 				F8C38DA91AC98FAC005C3B1F /* errorView */,
 				F8C38D9B1AC986F2005C3B1F /* withdraw1.png */,
@@ -1723,6 +1726,7 @@
 				F88831191AB48069001E4AD1 /* moreNS.png in Resources */,
 				D537C37D1ADD4518009D3433 /* giftbg2.png in Resources */,
 				F83375E11AB9BEBC00944CB1 /* RHInvestmentViewController.xib in Resources */,
+				F8838AA71AE2B298005A554E /* downCode.jpg in Resources */,
 				F815ED5A1AB7557E004B2053 /* 7-1.png in Resources */,
 				F8838A9F1AE27528005A554E /* noData.jpg in Resources */,
 				F87B832D1AC8346700EB73A6 /* RHMyMessageViewController.xib in Resources */,

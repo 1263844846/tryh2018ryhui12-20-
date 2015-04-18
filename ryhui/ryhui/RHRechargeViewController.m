@@ -45,6 +45,7 @@
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSArray* array=nil;
             if ([responseObject objectForKey:@"qpCard"]) {
+                array=[responseObject objectForKey:@"qpCard"];
                 if ([array isKindOfClass:[NSArray class]]&&[array count]>0) {
                     isQpCard=YES;
                 }

@@ -32,7 +32,7 @@
     [_segmentContentView setDelegate:self];
     [self.view addSubview:_segmentContentView];
     
-    NSString* one=@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"projectStatus\",\"op\":\"in\",\"data\":[\"full\",\"loans\",\"repayment_normal\",\"repayment_abnormal\"]}]}";
+    NSString* one=@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"projectStatus\",\"op\":\"in\",\"data\":[\"loans\",\"repayment_normal\",\"repayment_abnormal\"]}]}";
     
     NSString* two=@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"projectStatus\",\"op\":\"in\",\"data\":[\"full\",\"published\"]}]}";
     
