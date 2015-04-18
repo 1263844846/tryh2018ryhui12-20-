@@ -11,6 +11,7 @@
 
 @interface RHMyAccountViewController : RHBaseViewController
 @property(nonatomic,strong)NSString* balance;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 - (IBAction)pushMain:(id)sender;
 - (IBAction)pushUser:(id)sender;

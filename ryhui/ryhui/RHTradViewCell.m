@@ -69,12 +69,15 @@
     if ([type isEqualToString:@"Cash_Fee"]) {
         return @"提现手续费";
     }
+    if ([type isEqualToString:@"PrepaymentPenalty"]) {
+        return @"提前还款利息违约金";
+    }
     return @"";
 }
 
 -(int)isAddTypeWithType:(NSString*)type
 {
-    if ([type isEqualToString:@"Recharge"]||[type isEqualToString:@"Interest"]||[type isEqualToString:@"Capital"]||[type isEqualToString:@"PenaltyInterest"]) {
+    if ([type isEqualToString:@"Recharge"]||[type isEqualToString:@"Interest"]||[type isEqualToString:@"Capital"]||[type isEqualToString:@"PenaltyInterest"]||[type isEqualToString:@"PrepaymentPenalty"]) {
         return 0;
     }
     if ([type isEqualToString:@"Cash"]||[type isEqualToString:@"Cash_Fee"]||[type isEqualToString:@"Loans"]) {

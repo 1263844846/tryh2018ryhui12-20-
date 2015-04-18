@@ -41,8 +41,12 @@
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSString* url=[request.URL absoluteString];
-    if ([url isEqualToString:@""]) {
-        
+    DLog(@"%@",url);
+    
+    if ([url rangeOfString:@"front/payment/account/myAccount"].location!=NSNotFound) {
+        [RHUserManager sharedInterface].custId=@"first";
+        [[RHTabbarManager sharedInterface] initTabbar];
+        [[RHTabbarManager sharedInterface] selectTabbarUser];
         return NO;
     }
     return YES;

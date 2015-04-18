@@ -7,14 +7,19 @@
 //
 
 #import "RHRegisterViewController.h"
-#import "RHAgreement1ViewController.h"
+#import "RHRegisterAgreenWebViewController.h"
 #import "RHAgreement2ViewController.h"
 #import "RHRegisterWebViewController.h"
+#import "RHALoginViewController.h"
+#import "RHGesturePasswordViewController.h"
 
 @interface RHRegisterViewController ()
 {
     int secondsCountDown;
     NSTimer* countDownTimer;
+    float changeY;
+    float keyboardHeight;
+
 }
 @end
 
@@ -37,6 +42,29 @@
     self.scrollView.hidden=NO;
     
     [self changeCaptcha];
+    
+    [self configRightButtonWithTitle:@"登录" action:@selector(pushLogin)];
+
+    self.passwordTF1.secureTextEntry=YES;
+    self.passwordTF2.secureTextEntry=YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textBegin:) name:UITextFieldTextDidBeginEditingNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
+    
+    CGRect rect=self.agreementView.frame;
+    rect.origin.x=([UIScreen mainScreen].bounds.size.width-320)/2.0;
+    self.agreementView.frame=rect;
+    
+    self.captchaPhoneButton.layer.cornerRadius=9;
+    self.captchaPhoneButton.layer.masksToBounds=YES;
+        
+}
+
+-(void)pushLogin
+{
+    RHALoginViewController* controller=[[RHALoginViewController alloc] initWithNibName:@"RHALoginViewController" bundle:nil];
+    [self.navigationController pushViewController:controller animated:YES];
+    
 }
 
 -(void)initFrame
@@ -47,7 +75,10 @@
     
     self.scrollView.contentSize=CGSizeMake(self.scrollView.contentSize.width, 370);
     
-    self.scrollView.frame=CGRectMake(0,44, self.scrollView.frame.size.height, [UIScreen mainScreen].bounds.size.height-44-44-20);
+    self.scrollView.frame=CGRectMake(0,44, self.scrollView.frame.size.width, [UIScreen mainScreen].bounds.size.height-44-44-20);
+    
+    self.createAccountView.frame=CGRectMake(0,44, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height-44-44-20);
+    self.createAccountView.contentSize=CGSizeMake(self.createAccountView.contentSize.width, 433);
     
     self.captchaPhoneButton.frame=CGRectMake([UIScreen mainScreen].bounds.size.width-8-80, self.captchaPhoneButton.frame.origin.y, 80, 40);
     
@@ -60,7 +91,7 @@
 {
     AFHTTPRequestOperationManager* manager=[AFHTTPRequestOperationManager manager];
     manager.responseSerializer=[[AFImageResponseSerializer alloc]init];
-    [manager POST:[NSString stringWithFormat:@"%@%@",[RHNetworkService instance].doMain,@"common/user/general/captcha?type=CAPTCHA_LOGIN"] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:[NSString stringWithFormat:@"%@%@",[RHNetworkService instance].doMain,@"common/user/general/captcha?type=CAPTCHA_REGISTER"] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[UIImage class]]) {
             self.captchaImageView.image=responseObject;
         }
@@ -114,7 +145,10 @@
 */
 
 - (IBAction)selectOtherAciton:(id)sender {
- 
+    
+//    [self configRightButtonWithTitle:nil action:nil];
+    self.navigationItem.rightBarButtonItem= nil;
+
     [self selectOther:YES];
     [self selectWeb:NO];
     
@@ -155,15 +189,18 @@
                     DLog(@"result==%@ <<<",[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
                     if ([responseObject isKindOfClass:[NSData class]]) {
                         NSString* restult=[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-                        if ([restult isEqualToString:@"success"]) {
+                        if ([restult isEqualToString:@"{\"msg\":\"手机验证码发送成功\"}"]||[restult isEqualToString:@"{\"msg\":\"success\"}"]) {
                             //短信发送成功
-                            [RHUtility showTextWithText:@"短信发送成功"];
+                            [RHUtility showTextWithText:@"验证码已发送至您的手机"];
                             [self reSendMessage];
+                        }else{
+                            [RHUtility showTextWithText:@"发送失败"];
                         }
                     }
 
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                     DLog(@"%@",error);
+                    [RHUtility showTextWithText:@"发送失败"];
                 }];
             }else{
                 
@@ -184,8 +221,14 @@
 }
 -(void)timeFireMethod
 {
-    secondsCountDown--;
-    [self.captchaPhoneButton setTitle:[NSString stringWithFormat:@"%d后重新发送",secondsCountDown] forState:UIControlStateNormal];
+    if (secondsCountDown>0) {
+        secondsCountDown--;
+    }else{
+        self.captchaPhoneButton.enabled=YES;
+        [self.captchaPhoneButton setTitle:@"获取验证码" forState:UIControlStateNormal];
+        [countDownTimer invalidate];
+    }
+    [self.captchaPhoneButton setTitle:[NSString stringWithFormat:@"重新发送(%d)",secondsCountDown] forState:UIControlStateNormal];
     if (secondsCountDown==0) {
         self.captchaPhoneButton.enabled=YES;
         [self.captchaPhoneButton setTitle:@"获取验证码" forState:UIControlStateNormal];
@@ -198,7 +241,7 @@
     [self changeCaptcha];
 }
 - (IBAction)agreement1Action:(id)sender {
-    RHAgreement1ViewController* controller=[[RHAgreement1ViewController alloc] initWithNibName:@"RHAgreement1ViewController" bundle:nil];
+    RHRegisterAgreenWebViewController* controller=[[RHRegisterAgreenWebViewController alloc] initWithNibName:@"RHRegisterAgreenWebViewController" bundle:nil];
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -241,6 +284,74 @@
     
     [[RHNetworkService instance] POST:@"common/user/register/nextStep" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"%@",responseObject);
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSString* result=[responseObject objectForKey:@"md5"];
+            if (result&&[result length]>0) {
+                NSString* md5=[responseObject objectForKey:@"md5"];
+                [RHNetworkService instance].niubiMd5=md5;
+                
+                [RHUserManager sharedInterface].username=self.accountTF.text;
+                
+                [[NSUserDefaults standardUserDefaults] setObject:[RHUserManager sharedInterface].username forKey:@"RHUSERNAME"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
+                NSString* _custId=[responseObject objectForKey:@"custId"];
+                if (![_custId isKindOfClass:[NSNull class]]&&_custId&&[_custId length]>0) {
+                    [RHUserManager sharedInterface].custId=_custId;
+                    [[NSUserDefaults standardUserDefaults] setObject:[RHUserManager sharedInterface].custId forKey:@"RHcustId"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+                
+                NSString* _email=[responseObject objectForKey:@"email"];
+                if (![_email isKindOfClass:[NSNull class]]&&_email&&[_email length]>0) {
+                    [RHUserManager sharedInterface].email=_email;
+                    [[NSUserDefaults standardUserDefaults] setObject:[RHUserManager sharedInterface].email forKey:@"RHemail"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+                
+                NSString* _infoType=[responseObject objectForKey:@"infoType"];
+                if (_infoType&&[_infoType length]>0) {
+                    [RHUserManager sharedInterface].infoType=_infoType;
+                    [[NSUserDefaults standardUserDefaults] setObject:[RHUserManager sharedInterface].infoType forKey:@"RHinfoType"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+                
+                NSString* _md5=[responseObject objectForKey:@"md5"];
+                if (_md5&&[_md5 length]>0) {
+                    [RHUserManager sharedInterface].md5=_md5;
+                    [[NSUserDefaults standardUserDefaults] setObject:[RHUserManager sharedInterface].md5 forKey:@"RHmd5"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+                
+                NSString* _telephone=[responseObject objectForKey:@"telephone"];
+                if (_telephone&&[_telephone length]>0) {
+                    [RHUserManager sharedInterface].telephone=_telephone;
+                    [[NSUserDefaults standardUserDefaults] setObject:[RHUserManager sharedInterface].telephone forKey:@"RHtelephone"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+                NSString* _userid=[[responseObject objectForKey:@"userId"] stringValue];
+                if (_userid&&[_userid length]>0) {
+                    [RHUserManager sharedInterface].userId=_userid;
+                    [[NSUserDefaults standardUserDefaults] setObject:[RHUserManager sharedInterface].userId forKey:@"RHUSERID"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+                
+                [RHUtility showTextWithText:@"注册成功"];
+                
+                [self selectOtherAciton:nil];
+//                
+//                if (!isPan) {
+                RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
+                controller.isRegister=YES;
+                [self.navigationController pushViewController:controller animated:NO];
+//                }else{
+//                    [[RHTabbarManager sharedInterface] initTabbar];
+//                    [[RHTabbarManager sharedInterface] selectTabbarMain];
+//                }
+                
+            }
+        }
+
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         DLog(@"%@",operation.responseObject);
@@ -257,15 +368,36 @@
     [self.navigationController pushViewController:controller animated:YES];
 }
 
+-(void)textBegin:(NSNotification*)not
+{
+    DLog(@"%@",not.object);
+    UITextField* textField=not.object;
+    changeY=textField.frame.origin.y+textField.frame.size.height+10;
+    if (changeY>(self.view.frame.size.height-keyboardHeight)) {
+        CGRect viewRect=self.view.frame;
+        viewRect.origin.y=(self.view.frame.size.height-keyboardHeight)-changeY;
+        self.view.frame=viewRect;
+    }
+    
+}
+
+-(void)keyboardShow:(NSNotification*)not
+{
+    DLog(@"%@",not.userInfo);
+    NSValue* value=[not.userInfo objectForKey:@"UIKeyboardBoundsUserInfoKey"];
+    
+    CGRect rect=[value CGRectValue];
+    keyboardHeight=rect.size.height;
+}
+
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    CGRect rect=self.view.frame;
+    rect.origin.y=64;
+    self.view.frame=rect;
     
-    if ([textField isEqual:self.captchaPhoneTF]) {
-        [self registerAction:nil];
-        return NO;
-    }else{
-        [textField resignFirstResponder];
-    }
+    [textField resignFirstResponder];
+    
     return YES;
 }
 

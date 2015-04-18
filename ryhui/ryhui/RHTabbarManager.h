@@ -13,12 +13,13 @@
 +(instancetype)sharedInterface;
 
 -(void)initTabbar;
--(void)selectTabbarMain;
--(void)selectTabbarUser;
--(void)selectTabbarMore;
+-(UINavigationController*)selectTabbarMain;
+-(UINavigationController*)selectTabbarUser;
+-(UINavigationController*)selectTabbarMore;
 -(void)selectLogin;
 -(void)selectGuidan;
 -(void)cleanTabbar;
+-(void)selectALogin;
 
 @property(nonatomic,strong)UINavigationController* tabbarMain;
 @property(nonatomic,strong)UINavigationController* tabbarUser;

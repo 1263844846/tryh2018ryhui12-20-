@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RHProjectListViewController">
             <connections>
+                <outlet property="messageNumLabel" destination="POX-Rd-4yG" id="vrh-U9-nf8"/>
                 <outlet property="segmentLabel" destination="4q3-PU-Q5s" id="nC4-Dd-jAJ"/>
                 <outlet property="segmentLabel1" destination="Kbl-TY-cOQ" id="sUZ-Dn-5ae"/>
                 <outlet property="segmentLabel3" destination="2Ud-Lr-t6I" id="Kj4-Qd-0Di"/>
@@ -248,7 +249,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="46p-ZN-92Y">
-                                    <rect key="frame" x="85" y="8" width="65" height="22"/>
+                                    <rect key="frame" x="88" y="9" width="65" height="22"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                     <state key="normal" title="期限" image="project1.png">
@@ -258,19 +259,6 @@
                                     <state key="selected" image="project2.png"/>
                                     <connections>
                                         <action selector="deadlineAction:" destination="-1" eventType="touchUpInside" id="uld-6f-Q20"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Q8i-qz-Xvv">
-                                    <rect key="frame" x="172" y="8" width="65" height="22"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                    <state key="normal" title="总金额" image="project1.png">
-                                        <color key="titleColor" red="0.19215686269999999" green="0.56078431370000004" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <state key="selected" image="project2.png"/>
-                                    <connections>
-                                        <action selector="totalMoneyAction:" destination="-1" eventType="touchUpInside" id="sdQ-O7-QCv"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="75e-LB-aYO">
@@ -287,7 +275,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Yu2-fh-jhL">
-                                    <rect key="frame" x="247" y="8" width="65" height="22"/>
+                                    <rect key="frame" x="247" y="9" width="65" height="22"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                     <state key="normal" title="投资进度" image="project1.png">
@@ -297,6 +285,19 @@
                                     <state key="selected" image="project2.png"/>
                                     <connections>
                                         <action selector="investmentProgressAction:" destination="-1" eventType="touchUpInside" id="Um5-NF-J9U"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Q8i-qz-Xvv">
+                                    <rect key="frame" x="164" y="9" width="65" height="22"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                    <state key="normal" title="总金额" image="project1.png">
+                                        <color key="titleColor" red="0.19215686269999999" green="0.56078431370000004" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="selected" image="project2.png"/>
+                                    <connections>
+                                        <action selector="totalMoneyAction:" destination="-1" eventType="touchUpInside" id="sdQ-O7-QCv"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -377,6 +378,14 @@
                                 <action selector="pushMore:" destination="-1" eventType="touchUpInside" id="dHq-LZ-NAi"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="POX-Rd-4yG">
+                            <rect key="frame" x="102" y="2" width="22" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>

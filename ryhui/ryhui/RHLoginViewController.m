@@ -20,6 +20,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.bgImageView.frame=[UIScreen mainScreen].bounds;
+    
+    [self.view addSubview:self.buttonView];
 }
 
 -(void)viewWillAppear:(BOOL)animated

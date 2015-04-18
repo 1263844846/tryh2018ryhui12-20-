@@ -10,9 +10,11 @@
 
 @interface RHUserCenterMainViewController : RHBaseViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *myMessageNumLabel;
 @property(nonatomic,strong)NSString* balance;
 @property (weak, nonatomic) IBOutlet UIButton *topButton;
 
+- (IBAction)pushMyGift:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *username;
 @property (weak, nonatomic) IBOutlet UILabel *ryUsername;
 @property (weak, nonatomic) IBOutlet UIView *overView;

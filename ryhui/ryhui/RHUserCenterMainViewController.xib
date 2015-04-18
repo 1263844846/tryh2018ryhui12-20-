@@ -10,6 +10,8 @@
                 <outlet property="balanceLabel" destination="0xQ-e9-GOx" id="kBR-zR-dCK"/>
                 <outlet property="errorButton" destination="cxB-co-Ge8" id="abG-Np-51O"/>
                 <outlet property="errorLabel" destination="yGT-30-Ktf" id="UUQ-rv-bxW"/>
+                <outlet property="messageNumLabel" destination="yeW-mi-Gda" id="hD6-5a-qHj"/>
+                <outlet property="myMessageNumLabel" destination="6Ig-hv-LNw" id="Rz9-bk-qpE"/>
                 <outlet property="overView" destination="lzF-N6-ieA" id="2ps-EQ-9DW"/>
                 <outlet property="ryUsername" destination="u11-Ql-U4N" id="zIe-wt-ycG"/>
                 <outlet property="topButton" destination="vSt-2u-BRu" id="RLA-rs-9tY"/>
@@ -72,7 +74,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="MBz-Ez-74k">
-                    <rect key="frame" x="0.0" y="115" width="320" height="160"/>
+                    <rect key="frame" x="0.0" y="115" width="320" height="200"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="WBI-8j-zOY">
@@ -167,6 +169,14 @@
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6Ig-hv-LNw">
+                            <rect key="frame" x="90" y="130" width="22" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userArrow.png" id="CCL-nM-yGa">
                             <rect key="frame" x="293" y="132" width="11" height="16"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
@@ -179,6 +189,32 @@
                             </state>
                             <connections>
                                 <action selector="pushMyMessage:" destination="-1" eventType="touchUpInside" id="k8i-KP-qvw"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="2dR-kU-6Zf">
+                            <rect key="frame" x="0.0" y="160" width="320" height="1"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的红包" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gpP-Rn-whX">
+                            <rect key="frame" x="16" y="160" width="73" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userArrow.png" id="1NJ-PP-5Zv">
+                            <rect key="frame" x="293" y="172" width="11" height="16"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="B3p-Du-qBX">
+                            <rect key="frame" x="0.0" y="160" width="320" height="40"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <state key="normal">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="pushMyGift:" destination="-1" eventType="touchUpInside" id="bIq-VN-Cto"/>
                             </connections>
                         </button>
                     </subviews>
@@ -198,6 +234,18 @@
                             </state>
                             <connections>
                                 <action selector="extractPayment:" destination="-1" eventType="touchUpInside" id="8mg-4Z-hwZ"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vmW-p8-5Ru">
+                            <rect key="frame" x="0.0" y="0.0" width="160" height="35"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <color key="backgroundColor" red="1" green="0.36470588235294116" blue="0.14509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                            <state key="normal" title="充值">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="pushPay:" destination="-1" eventType="touchUpInside" id="2yM-rv-2fz"/>
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" id="N7Z-S3-SZB">
@@ -271,21 +319,17 @@
                                         <action selector="pushMore:" destination="-1" eventType="touchUpInside" id="mWh-0M-eJD"/>
                                     </connections>
                                 </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yeW-mi-Gda">
+                                    <rect key="frame" x="102" y="2" width="22" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vmW-p8-5Ru">
-                            <rect key="frame" x="0.0" y="0.0" width="160" height="35"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <color key="backgroundColor" red="1" green="0.36470588235294116" blue="0.14509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                            <state key="normal" title="充值">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="pushPay:" destination="-1" eventType="touchUpInside" id="2yM-rv-2fz"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
@@ -309,17 +353,24 @@
                                         <action selector="openAccount:" destination="-1" eventType="touchUpInside" id="ZJw-RE-jNh"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您尚未开通资金托管账户" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yGT-30-Ktf">
-                                    <rect key="frame" x="35" y="228" width="250" height="21"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user1.png" id="MJ6-f9-sVJ">
-                                    <rect key="frame" x="59" y="100" width="203" height="112"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </imageView>
+                                <view contentMode="scaleToFill" id="fXT-UF-JjH">
+                                    <rect key="frame" x="40" y="92" width="240" height="162"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user1.png" id="MJ6-f9-sVJ">
+                                            <rect key="frame" x="19" y="12" width="203" height="112"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您尚未开通资金托管账户" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yGT-30-Ktf">
+                                            <rect key="frame" x="-5" y="133" width="250" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.83999999999999997" colorSpace="calibratedWhite"/>
                         </view>

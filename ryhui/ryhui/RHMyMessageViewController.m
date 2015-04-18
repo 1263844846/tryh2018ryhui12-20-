@@ -40,6 +40,32 @@
     [_headerView egoRefreshScrollViewDataSourceStartManualLoading:self.tableView];
 }
 
+-(void)refresh
+{
+    [self refreshApp:YES];
+    [[RHNetworkService instance] POST:@"front/payment/account/countUnReadMessage" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        DLog(@"%@",responseObject);
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSString* numStr=nil;
+            if (![[responseObject objectForKey:@"msgCount"] isKindOfClass:[NSNull class]]) {
+                if ([[responseObject objectForKey:@"msgCount"] isKindOfClass:[NSNumber class]]) {
+                    numStr=[[responseObject objectForKey:@"msgCount"] stringValue];
+                }else{
+                    numStr=[responseObject objectForKey:@"msgCount"];
+                }
+            }
+            if (numStr) {
+                [[NSUserDefaults standardUserDefaults] setObject:numStr forKey:@"RHMessageNumSave"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"RHMessageNum" object:numStr];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+
+}
 
 - (IBAction)pushMain:(id)sender {
     [[RHTabbarManager sharedInterface] selectTabbarMain];
@@ -55,6 +81,8 @@
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
     [_footerView.activityIndicatorView stopAnimating];
     _footerView.activityIndicatorView = nil;
     [_footerView.footerButton removeTarget:self action:@selector(showMoreApp:) forControlEvents:UIControlEventTouchUpInside];
@@ -79,6 +107,9 @@
                 _footerView.hidden=NO;
                 if ([array count]<10) {
                     //已经到底了
+                    if ([array count]==0) {
+                        [_footerView.footerButton setTitle:@"亲暂时没有数据" forState:UIControlStateDisabled];
+                    }
                     [_footerView.footerButton setEnabled:NO];
                     showLoadMoreButton=NO;
                 }else{
@@ -101,6 +132,13 @@
             self.currentPageIndex++;
         }
         [dataArray addObjectsFromArray:tempArray];
+        if ([dataArray count]<10) {
+            if ([dataArray count]==0) {
+                _footerView.hidden=NO;
+            }else{
+                _footerView.hidden=YES;
+            }
+        }
         [self reloadTableView];
         [_footerView.activityIndicatorView stopAnimating];
         
@@ -199,6 +237,20 @@
     [cell updateCell:dataDic];
     
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];
+    
+    RHMyMessageDetailViewController* controller=[[RHMyMessageDetailViewController alloc]initWithNibName:@"RHMyMessageDetailViewController" bundle:nil];
+    controller.delegate=self;
+    controller.ids=[dataDic objectForKey:@"id"];
+    controller.titleStr=[dataDic objectForKey:@"title"];
+    controller.contentStr=[dataDic objectForKey:@"content"];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 @end

@@ -20,6 +20,8 @@
 @synthesize imgView;
 @synthesize forgetButton;
 @synthesize changeButton;
+@synthesize clearButton;
+@synthesize enterButton;
 
 @synthesize tentacleView;
 @synthesize state;
@@ -40,9 +42,16 @@
             // Button Frame
             
             NSInteger distance = 320/3;
-            NSInteger size = distance/1.5;
-            NSInteger margin = size/4;
-            RHGesturePasswordButton * gesturePasswordButton = [[RHGesturePasswordButton alloc]initWithFrame:CGRectMake(col*distance+margin, row*distance, size, size)];
+            NSInteger size = distance/1.7;
+            NSInteger yPoint = size+20;
+            NSInteger margin = size/2+18;
+            if ([UIScreen mainScreen].bounds.size.height>480) {
+                size=distance/1.5;
+                yPoint=distance;
+                margin =size/4;
+            }
+            
+            RHGesturePasswordButton * gesturePasswordButton = [[RHGesturePasswordButton alloc]initWithFrame:CGRectMake(col*yPoint+margin, row*yPoint, size, size)];
             [gesturePasswordButton setTag:i];
             [view addSubview:gesturePasswordButton];
             [buttonArray addObject:gesturePasswordButton];
@@ -59,8 +68,11 @@
         [state setFont:[UIFont systemFontOfSize:14.f]];
         [self addSubview:state];
         
-        
-        imgView = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width/2-50, frame.size.width/2-100, 100, 100)];
+        CGRect imageRect=CGRectMake(frame.size.width/2-40,40, 80, 80);
+        if ([UIScreen mainScreen].bounds.size.height>480) {
+            imageRect=CGRectMake(frame.size.width/2-50, frame.size.width/2-100, 100, 100);
+        }
+        imgView = [[UIImageView alloc]initWithFrame:imageRect];
         [imgView setBackgroundColor:[UIColor clearColor]];
         [imgView.layer setCornerRadius:35];
         [imgView setImage:[UIImage imageNamed:@"GestureIcon.png"]];
@@ -76,9 +88,27 @@
         changeButton = [[UIButton alloc]initWithFrame:CGRectMake(frame.size.width/2+30, frame.size.height-70, 120, 30)];
         [changeButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
         [changeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [changeButton setTitle:@"用其他账号登陆" forState:UIControlStateNormal];
+        [changeButton setTitle:@"用其他账号登录" forState:UIControlStateNormal];
         [changeButton addTarget:self action:@selector(change) forControlEvents:UIControlEventTouchDown];
         [self addSubview:changeButton];
+        
+        clearButton = [[UIButton alloc]initWithFrame:CGRectMake(frame.size.width/2-150, frame.size.height-70, 120, 30)];
+        [clearButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+        [clearButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [clearButton setTitle:@"重绘" forState:UIControlStateNormal];
+        [clearButton addTarget:self action:@selector(cleanPan) forControlEvents:UIControlEventTouchDown];
+        [self addSubview:clearButton];
+        
+        enterButton = [[UIButton alloc]initWithFrame:CGRectMake(frame.size.width/2+30, frame.size.height-70, 120, 30)];
+        [enterButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+        [enterButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [enterButton setTitle:@"继续" forState:UIControlStateNormal];
+        [enterButton addTarget:self action:@selector(enterPan) forControlEvents:UIControlEventTouchDown];
+        [self addSubview:enterButton];
+        
+        [self.clearButton setHidden:YES];
+        [self.enterButton setHidden:YES];
+
     }
     
     return self;
@@ -110,12 +140,27 @@
     [self.state setText:@""];
 }
 
+- (void)gestureStateWithText:(NSString*)text
+{
+    [self.state setTextColor:[UIColor redColor]];
+    [self.state setText:text];
+}
+
 -(void)forget{
     [gesturePasswordDelegate forget];
 }
 
 -(void)change{
     [gesturePasswordDelegate change];
+}
+
+-(void)cleanPan{
+
+    [gesturePasswordDelegate cleanPan];
+}
+
+-(void)enterPan{
+    [gesturePasswordDelegate enterPan];
 }
 
 @end

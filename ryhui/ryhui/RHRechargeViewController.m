@@ -8,9 +8,12 @@
 
 #import "RHRechargeViewController.h"
 #import "RHRechargeWebViewController.h"
-
+#import "MBProgressHUD.h"
+#import "RHBindCardViewController.h"
 @interface RHRechargeViewController ()
-
+{
+    BOOL isQpCard;
+}
 @end
 
 @implementation RHRechargeViewController
@@ -24,30 +27,89 @@
     [self configTitleWithString:@"充值"];
     [self.textField becomeFirstResponder];
     
-    self.balanceLabel.text=balance;
+    if (balance&&[balance length]>0) {
+        self.balanceLabel.text=balance;
+    }else{
+        self.balanceLabel.text=@"0.00";
+    }
     
+    [self getBindCard];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)getBindCard
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    [[RHNetworkService instance] POST:@"front/payment/account/myCashDataForApp" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        DLog(@"%@",responseObject);
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSArray* array=nil;
+            if ([responseObject objectForKey:@"qpCard"]) {
+                if ([array isKindOfClass:[NSArray class]]&&[array count]>0) {
+                    isQpCard=YES;
+                }
+            }
+        }
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    }];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)recharge:(id)sender {
-    
-    RHRechargeWebViewController* controllers=[[RHRechargeWebViewController alloc]initWithNibName:@"RHRegisterWebViewController" bundle:nil];
-    controllers.price=self.textField.text;
-    [self.navigationController pushViewController:controllers animated:YES];
+    if ([self.textField.text length]<=0) {
+        [RHUtility showTextWithText:@"请输入充值金额"];
+        return;
+    }else{
+        if ([self.textField.text floatValue]<=0) {
+            [RHUtility showTextWithText:@"请输入正确金额"];
+            return;
+        }
+    }
+    if (!isQpCard) {
+        RHBindCardViewController* contoller=[[RHBindCardViewController alloc] initWithNibName:@"RHBindCardViewController" bundle:nil];
+        contoller.amountStr=self.textField.text;
+        [self.navigationController pushViewController:contoller animated:YES];
+    }else{
+        RHRechargeWebViewController* controllers=[[RHRechargeWebViewController alloc]initWithNibName:@"RHRegisterWebViewController" bundle:nil];
+        controllers.price=self.textField.text;
+        [self.navigationController pushViewController:controllers animated:YES];
+    }
+
     
 }
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    NSCharacterSet *cs;
+    NSString* str=@"0123456789.";
+    cs = [[NSCharacterSet characterSetWithCharactersInString:str] invertedSet];
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    BOOL basicTest = [string isEqualToString:filtered];
+    if(!basicTest)
+    {
+        return NO;
+    }
+    
+    NSString* result=[NSString stringWithFormat:@"%@%@",textField.text,string];
+    NSArray* array=[result componentsSeparatedByString:@"."];
+    if (array&&[array count]>2) {
+        return NO;
+    }
+    NSRange ranges=[result rangeOfString:@"."];
+    if (ranges.location!=NSNotFound) {
+        NSString* temp=[result substringFromIndex:ranges.location+1];
+        DLog(@"%@",temp);
+        if ([temp length]>2) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
 @end

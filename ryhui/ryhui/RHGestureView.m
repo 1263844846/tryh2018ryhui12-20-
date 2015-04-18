@@ -98,11 +98,17 @@
         if(![num objectForKey:@"num"])break;
         [resultString appendString:[num objectForKey:@"num"]];
     }
-    if(style==1){
-        success = [rerificationDelegate verification:resultString];
-    }
-    else {
-        success = [resetDelegate resetPassword:resultString];
+    if ([resultString length]<=3) {
+        success=NO;
+        [touchBeginDelegate gestureStateWithText:@"最少输入四个点"];
+    }else{
+        if(style==1){
+            success = [rerificationDelegate verification:resultString];
+        }
+        else {
+            success = [resetDelegate resetPassword:resultString];
+        }
+
     }
     
     for (int i=0; i<touchesArray.count; i++) {
@@ -121,6 +127,8 @@
     // Drawing code
     //    if (touchesArray.count<2)return;
     for (int i=0; i<touchesArray.count; i++) {
+        DLog(@"xPoint=%f",[[[touchesArray objectAtIndex:i] objectForKey:@"x"] floatValue]);
+        DLog(@"yPoint=%f",[[[touchesArray objectAtIndex:i] objectForKey:@"y"] floatValue]);
         CGContextRef context = UIGraphicsGetCurrentContext();
         if (![[touchesArray objectAtIndex:i] objectForKey:@"num"]) { //防止过快滑动产生垃圾数据
             [touchesArray removeObjectAtIndex:i];

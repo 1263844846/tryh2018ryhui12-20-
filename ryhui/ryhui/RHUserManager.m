@@ -111,8 +111,19 @@ static RHUserManager* _instance =nil;
     self.userId=nil;
     self.username=nil;
     
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHMessageNumSave"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"RHMessageNum" object:@"0"];
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
     [[RHTabbarManager sharedInterface] cleanTabbar];
-    [[RHTabbarManager  sharedInterface] selectLogin];
+    [[RHTabbarManager  sharedInterface] selectALogin];
+    
+
+
 }
 
 @end

@@ -24,7 +24,13 @@
 -(void)updateCell:(NSDictionary*)dic{
     self.titleLabel.text=[dic objectForKey:@"content"];
     self.timeLabel.text=[dic objectForKey:@"postDate"];
-    NSString* type=[dic objectForKey:@"type"];
+    NSString* type=nil;
+    if ([[dic objectForKey:@"state"] isKindOfClass:[NSNumber class]]) {
+        type=[[dic objectForKey:@"state"] stringValue];
+    }else{
+        type=[dic objectForKey:@"state"];
+    }
+    
     if ([type isEqualToString:@"2"]) {
         self.typeImageView.image=[UIImage imageNamed:@"message1"];
     }else{

@@ -9,8 +9,9 @@
 #import "RHBaseViewController.h"
 #import "EGORefreshTableHeaderView.h"
 #import "AITableFooterVew.h"
+#import "RHMyMessageDetailViewController.h"
 
-@interface RHMyMessageViewController : RHBaseViewController<EGORefreshTableHeaderDelegate>
+@interface RHMyMessageViewController : RHBaseViewController<EGORefreshTableHeaderDelegate,UITableViewDataSource,UITableViewDelegate,RHMessageDetailDelegate>
 {
     EGORefreshTableHeaderView *_headerView;
     AITableFooterVew *_footerView;

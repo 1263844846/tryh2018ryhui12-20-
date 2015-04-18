@@ -53,6 +53,8 @@
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
     [_footerView.activityIndicatorView stopAnimating];
     _footerView.activityIndicatorView = nil;
     [_footerView.footerButton removeTarget:self action:@selector(showMoreApp:) forControlEvents:UIControlEventTouchUpInside];
@@ -69,8 +71,8 @@
 -(void)getinvestListData
 {
     
-    NSDictionary* parameters=@{@"search":@"true",@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",_currentPageIndex],@"sidx":@"realGiveTime",@"sord":@"desc",@"filters":type};
-    
+    NSDictionary* parameters=@{@"_search":@"true",@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",_currentPageIndex],@"forApp":@"true",@"sidx":@"realGiveTime",@"sord":@"desc",@"filters":type};
+    DLog(@"%@",type);
     [[RHNetworkService instance] POST:@"front/payment/account/investListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"%@",responseObject);
         NSMutableArray* tempArray=[[NSMutableArray alloc]initWithCapacity:0];
@@ -81,6 +83,9 @@
                 _footerView.hidden=NO;
                 if ([array count]<10) {
                     //已经到底了
+                    if ([array count]==0) {
+                        [_footerView.footerButton setTitle:@"亲暂时没有数据" forState:UIControlStateDisabled];
+                    }
                     [_footerView.footerButton setEnabled:NO];
                     showLoadMoreButton=NO;
                 }else{
@@ -103,6 +108,9 @@
             self.currentPageIndex++;
         }
         [dataArray addObjectsFromArray:tempArray];
+        if ([dataArray count]<10) {
+            _footerView.hidden=YES;
+        }
         [self reloadTableView];
         [_footerView.activityIndicatorView stopAnimating];
 

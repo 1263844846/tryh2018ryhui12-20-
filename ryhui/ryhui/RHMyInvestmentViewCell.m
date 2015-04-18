@@ -8,6 +8,7 @@
 
 #import "RHMyInvestmentViewCell.h"
 #import "RHContractViewContoller.h"
+#import "RHInvestDetailViewController.h"
 
 @implementation RHMyInvestmentViewCell
 @synthesize nav;
@@ -20,34 +21,41 @@
 
 -(void)updateCell:(NSDictionary*)dic
 {
+    DLog(@"%@",dic);
     self.nameLabel.text=[dic objectForKey:@"name"];
     self.projectId=[dic objectForKey:@"id"];
 
-    NSString* investMoney=@"0";
+    NSString* investMoney=@"0.00";
     if (![[dic objectForKey:@"investMoney"] isKindOfClass:[NSNull class]]) {
-        investMoney=[[dic objectForKey:@"investMoney"] stringValue];
+        investMoney=[NSString stringWithFormat:@"%.2f",[[dic objectForKey:@"investMoney"] floatValue]];
     }
     self.investMoneyLabel.text=investMoney;
-    NSString* backMoney=@"0";
+    NSString* backMoney=@"0.00";
     if (![[dic objectForKey:@"backMoney"] isKindOfClass:[NSNull class]]) {
-        backMoney=[[dic objectForKey:@"backMoney"] stringValue];
+        backMoney=[NSString stringWithFormat:@"%.2f",[[dic objectForKey:@"backMoney"] floatValue]];
     }
     self.backMoneyLabel.text=backMoney;
     
-    int profitMoney=0;
+    float profitMoney=0.00;
     if (![[dic objectForKey:@"profitMoney"] isKindOfClass:[NSNull class]]) {
-        profitMoney=[[dic objectForKey:@"profitMoney"] intValue];
+        profitMoney=[[dic objectForKey:@"profitMoney"] floatValue];
     }
-    int penaltyMoney=0;
+    float penaltyMoney=0.00;
     if (![[dic objectForKey:@"penaltyMoney"] isKindOfClass:[NSNull class]]) {
-        penaltyMoney=[[dic objectForKey:@"penaltyMoney"] intValue];
+        penaltyMoney=[[dic objectForKey:@"penaltyMoney"] floatValue];
     }
     
-    self.profitMoneyLabel.text=[NSString stringWithFormat:@"%d",profitMoney+penaltyMoney];
+    self.profitMoneyLabel.text=[NSString stringWithFormat:@"%.2f",profitMoney+penaltyMoney];
 }
 
 - (IBAction)contractAction:(id)sender {
     RHContractViewContoller* controller=[[RHContractViewContoller alloc]initWithNibName:@"RHContractViewContoller" bundle:nil];
+    controller.projectId=self.projectId;
+    [nav pushViewController:controller animated:YES];
+}
+
+- (IBAction)pushInvestDetail:(id)sender {
+    RHInvestDetailViewController* controller=[[RHInvestDetailViewController alloc] initWithNibName:@"RHInvestDetailViewController" bundle:nil];
     controller.projectId=self.projectId;
     [nav pushViewController:controller animated:YES];
 }

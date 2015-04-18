@@ -24,5 +24,6 @@
 @property (nonatomic, assign) int currentPageIndex;
 -(void)getinvestListData;
 -(void)startPost;
-
+-(void)refreshWithData:(NSString*)data;
+-(void)sordListWithSidx:(NSString*)sidx sord:(NSString*)sord;
 @end

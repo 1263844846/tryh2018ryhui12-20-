@@ -8,6 +8,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RHErrorViewController">
             <connections>
                 <outlet property="errorImageView" destination="wda-7J-aQc" id="Wg5-45-PeN"/>
+                <outlet property="errorView" destination="IdZ-BS-ung" id="EaQ-3Z-SWa"/>
+                <outlet property="secButton" destination="xHf-wZ-H76" id="PEc-kB-1e4"/>
                 <outlet property="tipsLabel" destination="FkR-bc-gln" id="FcZ-75-Yxg"/>
                 <outlet property="titleLabel" destination="wUn-ba-3ck" id="3tU-EV-b2v"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -40,7 +42,7 @@
                             <rect key="frame" x="17" y="27" width="50" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FkR-bc-gln">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FkR-bc-gln">
                             <rect key="frame" x="17" y="85" width="204" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -63,9 +65,6 @@
                     <state key="normal" title="前往首页" backgroundImage="error5.png">
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
-                    <connections>
-                        <action selector="pushMyAccount:" destination="-1" eventType="touchUpInside" id="YEu-QE-hPJ"/>
-                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

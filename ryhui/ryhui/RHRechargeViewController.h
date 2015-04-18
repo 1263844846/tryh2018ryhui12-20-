@@ -8,7 +8,7 @@
 
 #import "RHBaseViewController.h"
 
-@interface RHRechargeViewController : RHBaseViewController
+@interface RHRechargeViewController : RHBaseViewController<UITextFieldDelegate>
 @property(nonatomic,strong)NSString* balance;
 
 @property (weak, nonatomic) IBOutlet UITextField *textField;

@@ -9,15 +9,24 @@
 #import "RHInvestmentViewController.h"
 #import "RHInvestmentWebViewController.h"
 #import "RHRechargeViewController.h"
+#import "RHContractViewContoller.h"
 
 @interface RHInvestmentViewController ()
-
+{
+    float changeY;
+    float keyboardHeight;
+    
+    float currentThreshold;
+    
+    int currentMoney;
+}
 @end
 
 @implementation RHInvestmentViewController
 @synthesize projectId;
 @synthesize dataDic;
 @synthesize projectFund;
+@synthesize giftId=_giftId;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,6 +37,20 @@
     [self setupWithDic:self.dataDic];
 
     [self checkout];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textBegin:) name:UITextFieldTextDidBeginEditingNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textchange:) name:UITextFieldTextDidChangeNotification object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
+    
+    CGRect rect=self.contentView.frame;
+    rect.origin.x=([UIScreen mainScreen].bounds.size.width-320)/2.0;
+    
+    self.contentView.frame=rect;
+    
+    currentThreshold=0.0;
+    self.giftView.hidden=YES;
+    self.gifticon.image=[UIImage imageNamed:@"gift.png"];
+    self.giftId=@"";
 }
 
 -(void)setupWithDic:(NSDictionary*)dic
@@ -36,7 +59,7 @@
     self.nameLabel.text=[dic objectForKey:@"name"];
     self.investorRateLabel.text=[[dic objectForKey:@"investorRate"] stringValue];
     self.limitTimeLabel.text=[[dic objectForKey:@"limitTime"] stringValue];
-    self.projectFundLabel.text=[NSString stringWithFormat:@"%.1f",([[dic objectForKey:@"projectFund"] floatValue]/10000.0)];
+    self.projectFundLabel.text=[NSString stringWithFormat:@"%.2f",(projectFund/10000.0)];
 }
 
 - (void)checkout
@@ -71,6 +94,9 @@
 */
 
 - (IBAction)pushAreegment:(id)sender {
+    RHContractViewContoller* controller=[[RHContractViewContoller alloc]initWithNibName:@"RHContractViewContoller" bundle:nil];
+    controller.isAgreen=YES;
+    [self.navigationController pushViewController:controller animated:YES];
 }
 - (IBAction)Investment:(id)sender {
     int amount=[self.textFiled.text intValue];
@@ -78,9 +104,19 @@
         [RHUtility showTextWithText:@"投资金额需为100的整数倍"];
         return;
     }
+    if ([self.textFiled.text length]<=0) {
+        [RHUtility showTextWithText:@"请输入投资金额"];
+        return;
+    }
+    if ([self.textFiled.text floatValue]>projectFund) {
+        [RHUtility showTextWithText:@"请输入可投范围内的金额"];
+        return;
+    }
+    [self.textFiled resignFirstResponder];
     RHInvestmentWebViewController* controller=[[RHInvestmentWebViewController alloc]initWithNibName:@"RHInvestmentWebViewController" bundle:nil];
     controller.price=self.textFiled.text;
     controller.projectId=self.projectId;
+    controller.giftId=self.giftId;
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -89,6 +125,9 @@
     NSMutableString* resultString=[NSMutableString string];
     for (NSString* subStr in stringArray) {
         [resultString appendString:subStr];
+    }
+    if ([resultString length]<=0) {
+        [resultString appendString:@"0"];
     }
     
     int balance=[resultString intValue];
@@ -101,19 +140,108 @@
     }else{
         self.textFiled.text=[NSString stringWithFormat:@"%d",allinAmount];
     }
+    
+    if (!self.giftView.hidden) {
+        self.label1.text=[NSString stringWithFormat:@"实际扣减账户金额%d元",[self.textFiled.text intValue]-currentMoney];
+    }
 }
 
 - (IBAction)recharge:(id)sender {
+    [self.textFiled resignFirstResponder];
     RHRechargeViewController* controller=[[RHRechargeViewController alloc]initWithNibName:@"RHRechargeViewController" bundle:nil];
+    controller.balance=self.balanceLabel.text;
     [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (IBAction)chooseGift:(id)sender {
+    [self.textFiled resignFirstResponder];
+
+    RHChooseGiftViewController* controller=[[RHChooseGiftViewController alloc] initWithNibName:@"RHChooseGiftViewController" bundle:nil];
+    int investNum=0;
+    if ([self.textFiled.text length]>0) {
+        investNum=[self.textFiled.text intValue];
+    }
+    controller.investNum=investNum;
+    controller.delegate=self;
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+-(void)chooseGiftWithnNum:(NSString *)num threshold:(NSString *)threshold giftId:(NSString *)giftId
+{
+    self.giftId=giftId;
+    currentMoney=[num intValue];
+    
+    currentThreshold=[threshold floatValue];
+    
+    self.label0.text=[NSString stringWithFormat:@"红包抵扣金额%@元",num];
+    self.label1.text=[NSString stringWithFormat:@"实际扣减账户金额%d元",[self.textFiled.text intValue]-[num intValue]];
+    self.chooseButton.hidden=YES;
+    self.giftView.hidden=NO;
+    self.gifticon.image=[UIImage imageNamed:@"gift1.png"];
+
+}
+
+-(void)textBegin:(NSNotification*)not
+{
+    DLog(@"%@",not.object);
+    
+}
+
+-(void)keyboardShow:(NSNotification*)not
+{
+    DLog(@"%@",not.userInfo);
+    NSValue* value=[not.userInfo objectForKey:@"UIKeyboardBoundsUserInfoKey"];
+    
+    CGRect rect=[value CGRectValue];
+    keyboardHeight=rect.size.height;
+    
+    changeY=self.textFiled.frame.origin.y+self.textFiled.frame.size.height+10;
+    if (changeY>(self.view.frame.size.height-keyboardHeight)) {
+        CGRect viewRect=self.view.frame;
+        viewRect.origin.y=(self.view.frame.size.height-keyboardHeight)-changeY;
+        self.view.frame=viewRect;
+    }
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if (textField) {
-        [textField resignFirstResponder];
-        return NO;
-    }
+    CGRect rect=self.view.frame;
+    rect.origin.y=64;
+    self.view.frame=rect;
+    
+    [textField resignFirstResponder];
+    
     return YES;
 }
+
+-(void)textchange:(NSNotification*)not
+{
+    if ([self.textFiled.text floatValue]<currentThreshold) {
+        self.chooseButton.hidden=NO;
+        self.giftView.hidden=YES;
+        self.gifticon.image=[UIImage imageNamed:@"gift.png"];
+        self.giftId=@"";
+        currentMoney=0;
+        
+    }else{
+        self.label1.text=[NSString stringWithFormat:@"实际扣减账户金额%d元",[self.textFiled.text intValue]-currentMoney];
+    }
+
+}
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSCharacterSet *cs;
+    NSString* str=@"0123456789";
+    cs = [[NSCharacterSet characterSetWithCharactersInString:str] invertedSet];
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    BOOL basicTest = [string isEqualToString:filtered];
+    if(!basicTest)
+    {
+        return NO;
+    }
+    
+    return YES;
+}
+
 @end

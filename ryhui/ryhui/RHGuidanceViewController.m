@@ -37,14 +37,31 @@
     imageView3.image=[UIImage imageNamed:@"guidan3"];
     [_views addObject:imageView3];
     
+//    UIView* view=[[UIView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+//    UIImageView* imageView4=[[UIImageView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+//    imageView4.image=[UIImage imageNamed:@"bg.jpg"];
+//    [view addSubview:imageView4];
+//    UIButton * button=[UIButton buttonWithType:UIButtonTypeCustom];
+//    button.frame=[UIScreen mainScreen].bounds;
+//    [button addTarget:self action:@selector(pushLogin) forControlEvents:UIControlEventTouchUpInside];
+//    [view addSubview:button];
+//    [_views addObject:view]
+    
     self.loginVC=[[RHLoginViewController alloc]initWithNibName:@"RHLoginViewController" bundle:nil];
     self.loginVC.nav=self.navigationController;
     [_views addObject:self.loginVC.view];
-    
+
     
     [_segmentContentView setViews:_views];
     
+    [self.view addSubview:self.pageController];
+        
 }
+
+//-(void)pushLogin
+//{
+//    [[RHTabbarManager sharedInterface] selectLogin];
+//}
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -60,7 +77,7 @@
 }
 
 - (void)segmentContentView:(RHSegmentContentView *)segmentContentView selectPage:(NSUInteger)page{
-
+    self.pageController.currentPage=page;
 }
 
 -(BOOL)prefersStatusBarHidden

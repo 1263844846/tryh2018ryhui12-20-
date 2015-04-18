@@ -13,13 +13,21 @@
 @end
 
 @implementation RHContractViewContoller
+@synthesize isAgreen;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configBackButton];
-    [self configTitleWithString:@"合同"];
+    NSURL *url = nil;
+    if (isAgreen) {
+        [self configTitleWithString:@"借款协议"];
+        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/agreement/ agreementInvestorApp?projectId=256&userId=89",[RHNetworkService instance].doMain]];
+    }else{
+        [self configTitleWithString:@"合同"];
+        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/agreement/agreementInvestor?projectId=%@&userId=%@",[RHNetworkService instance].doMain,self.projectId,[RHUserManager sharedInterface].userId]];
+    }
     
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/agreement/agreementInvestor?projectId=%@&userId=%@",[RHNetworkService instance].doMain,self.projectId,[RHUserManager sharedInterface].userId]];
+    [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/agreement/agreementInvestor?projectId=%@&userId=%@",[RHNetworkService instance].doMain,self.projectId,[RHUserManager sharedInterface].userId]];
 
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
     [request setHTTPMethod: @"POST"];

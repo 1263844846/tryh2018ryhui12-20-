@@ -16,6 +16,8 @@
 
 @property(nonatomic,assign)BOOL isReset;
 
+@property(nonatomic,assign)BOOL isRegister;
+
 - (void)clear;
 
 - (BOOL)exist;

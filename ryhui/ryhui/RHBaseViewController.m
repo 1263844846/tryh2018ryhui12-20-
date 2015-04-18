@@ -24,6 +24,58 @@
     }else{
         [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navBG.png"] forBarMetrics:UIBarMetricsDefault];
     }
+    
+    self.messageNumLabel.layer.cornerRadius=8;
+    self.messageNumLabel.layer.masksToBounds=YES;
+    NSString* num=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHMessageNumSave"];
+    DLog(@"%@",num);
+    if (num&&[num length]>0) {
+        if ([RHUserManager sharedInterface].custId) {
+            if ([num intValue]>99) {
+                self.messageNumLabel.text=@"99+";
+                self.messageNumLabel.hidden=NO;
+            }else{
+                if ([num isEqualToString:@"0"]) {
+                    self.messageNumLabel.hidden=YES;
+                }else{
+                    self.messageNumLabel.text=num;
+                    self.messageNumLabel.hidden=NO;
+                }
+            }
+        }else{
+            self.messageNumLabel.hidden=YES;
+        }
+    }else{
+        self.messageNumLabel.hidden=YES;
+    }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setMessageNum:) name:@"RHMessageNum" object:nil];
+}
+
+-(void)setMessageNum:(NSNotification*)notss
+{
+    NSString* numStr=notss.object;
+    if ([RHUserManager sharedInterface].custId) {
+        if ([numStr intValue]>99) {
+            self.messageNumLabel.text=@"99+";
+            self.messageNumLabel.hidden=NO;
+        }else{
+            if ([numStr isEqualToString:@"0"]) {
+                self.messageNumLabel.hidden=YES;
+            }else{
+                self.messageNumLabel.text=numStr;
+                self.messageNumLabel.hidden=NO;
+            }
+        }
+    }else{
+        self.messageNumLabel.hidden=YES;
+    }
+}
+
+
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -47,7 +99,7 @@
     [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
     [button setTitle:title forState:UIControlStateNormal];
     [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-    button.frame=CGRectMake(0, 0, 100, 20);
+    button.frame=CGRectMake(0, 0, 50, 20);
     self.navigationItem.rightBarButtonItem= [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 

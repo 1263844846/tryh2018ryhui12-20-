@@ -16,6 +16,7 @@
 #import "RHWithdrawViewController.h"
 #import "RHALoginViewController.h"
 #import "RHRegisterWebViewController.h"
+#import "RHMyGiftViewController.h"
 
 @interface RHUserCenterMainViewController ()
 
@@ -28,13 +29,13 @@
     [super viewDidLoad];
     [self configTitleWithString:@"个人中心"];
     self.username.text=[RHUserManager sharedInterface].username;
-    if ([RHUserManager sharedInterface].username) {
+    if ([RHUserManager sharedInterface].custId) {
         self.ryUsername.text=[NSString stringWithFormat:@"ryh_%@",[RHUserManager sharedInterface].username];
     }
     
     if (![RHUserManager sharedInterface].username) {
         self.errorLabel.text=@"您尚未登录账号";
-        [self.errorButton setTitle:@"立即登录" forState:UIControlStateNormal];
+        [self.errorButton setTitle:@"账号登录" forState:UIControlStateNormal];
         self.overView.hidden=NO;
         self.topButton.hidden=YES;
     }else{
@@ -47,14 +48,72 @@
         }
     }
 
+    [[RHNetworkService instance] POST:@"front/payment/account/countUnReadMessage" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        DLog(@"%@",responseObject);
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSString* numStr=nil;
+            if (![[responseObject objectForKey:@"msgCount"] isKindOfClass:[NSNull class]]) {
+                if ([[responseObject objectForKey:@"msgCount"] isKindOfClass:[NSNumber class]]) {
+                    numStr=[[responseObject objectForKey:@"msgCount"] stringValue];
+                }else{
+                    numStr=[responseObject objectForKey:@"msgCount"];
+                }
+            }
+            if (numStr) {
+                [[NSUserDefaults standardUserDefaults] setObject:numStr forKey:@"RHMessageNumSave"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"RHMessageNum" object:numStr];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
     
+    AFHTTPRequestOperationManager* manager=[AFHTTPRequestOperationManager manager];
+    manager.responseSerializer=[[AFCompoundResponseSerializer alloc]init];
+    NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
+    if (session&&[session length]>0) {
+        [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
+    }
+    [manager POST:[NSString stringWithFormat:@"%@front/payment/account/queryAccountFinishedBonuses",[RHNetworkService instance].doMain] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        DLog(@"result==%@ <<<",[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        if ([responseObject isKindOfClass:[NSData class]]) {
+            NSString* restult=[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            if ([restult isEqualToString:@"true"]) {
+                //手机号没有绑定
+        
+      
+            }else{
+                
+            }
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        DLog(@"%@",[[NSString alloc] initWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] encoding:NSUTF8StringEncoding]);
+    }];
+
+    
+    
+    self.myMessageNumLabel.layer.cornerRadius=8;
+    self.myMessageNumLabel.layer.masksToBounds=YES;
+    self.myMessageNumLabel.hidden=YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkout) name:@"RHSELECTUSER" object:nil];
 }
 -(void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RHSELECTUSER" object:nil];
 }
-
+-(void)setMessageNum:(NSNotification*)nots
+{
+    [super setMessageNum:nots];
+    if ([RHUserManager sharedInterface].custId) {
+        self.myMessageNumLabel.hidden=self.messageNumLabel.hidden;
+        self.myMessageNumLabel.text=self.messageNumLabel.text;
+    }
+}
 - (void)checkout
 {
     [[RHNetworkService instance] POST:@"front/payment/account/queryBalance" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -132,5 +191,9 @@
         RHALoginViewController* controller=[[RHALoginViewController alloc] initWithNibName:@"RHALoginViewController" bundle:nil];
         [self.navigationController pushViewController:controller animated:YES];
     }
+}
+- (IBAction)pushMyGift:(id)sender {
+    RHMyGiftViewController* controller=[[RHMyGiftViewController alloc] initWithNibName:@"RHMyGiftViewController" bundle:nil];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 @end

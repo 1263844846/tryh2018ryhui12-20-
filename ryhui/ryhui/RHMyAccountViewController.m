@@ -21,6 +21,7 @@
     [self configTitleWithString:@"我的账户"];
     [self getMyAccountData];
     [self checkout];
+    self.scrollView.contentSize=CGSizeMake(self.scrollView.frame.size.width, 414);
 }
 //average = "9.35";
 //collectCapital = 241400;
@@ -36,31 +37,31 @@
     [[RHNetworkService instance] POST:@"front/payment/account/myAccountData" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"%@",responseObject);
         
-        NSString* average=@"0";
+        NSString* average=@"0.00";
         if (![[responseObject objectForKey:@"average"] isKindOfClass:[NSNull class]]) {
             average=[responseObject objectForKey:@"average"] ;
         }
         self.averageLabel.text=average;
         
-        NSString* FrzBal=@"0";
+        NSString* FrzBal=@"0.00";
         if (![[responseObject objectForKey:@"FrzBal"] isKindOfClass:[NSNull class]]) {
             FrzBal=[responseObject objectForKey:@"FrzBal"] ;
         }
         self.FrzBalLabel.text=FrzBal;
         
-        NSString* AvlBal=@"0";
+        NSString* AvlBal=@"0.00";
         if (![[responseObject objectForKey:@"AvlBal"] isKindOfClass:[NSNull class]]) {
             AvlBal=[responseObject objectForKey:@"AvlBal"] ;
         }
         self.balanceLabel.text=AvlBal;
         
-        NSString* total=@"0";
+        NSString* total=@"0.00";
         if (![[responseObject objectForKey:@"total"] isKindOfClass:[NSNull class]]) {
             total=[responseObject objectForKey:@"total"] ;
         }
         self.totalLabel.text=total;
         
-        NSString* collectCapital=@"0";
+        NSString* collectCapital=@"0.00";
         if (![[responseObject objectForKey:@"collectCapital"] isKindOfClass:[NSNull class]]) {
             collectCapital=[responseObject objectForKey:@"collectCapital"] ;
         }
@@ -71,13 +72,13 @@
         }
         self.collectInterestLabel.text=collectInterest;
         
-        NSString* collect=@"0";
+        NSString* collect=@"0.00";
         if (![[responseObject objectForKey:@"collect"] isKindOfClass:[NSNull class]]) {
             collect=[responseObject objectForKey:@"collect"];
         }
         self.collectPrepaymentPenaltyLabel.text=collect;
         
-        NSString* earnInterest=@"0";
+        NSString* earnInterest=@"0.00";
         if (![[responseObject objectForKey:@"earnInterest"] isKindOfClass:[NSNull class]]) {
             earnInterest=[responseObject objectForKey:@"earnInterest"];
         }
@@ -97,6 +98,9 @@
             if (AvlBal&&[AvlBal length]>0) {
                 self.balance=AvlBal;
                 self.balanceLabel.text=AvlBal;
+            }else{
+                self.balance=@"0";
+                self.balanceLabel.text=@"0.00";
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

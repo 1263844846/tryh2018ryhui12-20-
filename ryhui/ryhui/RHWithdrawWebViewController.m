@@ -22,7 +22,7 @@
     [self configBackButton];
     [self configTitleWithString:@"提现"];
     
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@common/main/invest",[RHNetworkService instance].doMain]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/account/cash",[RHNetworkService instance].doMain]];
     NSString *body = [NSString stringWithFormat: @"money=%@&captcha=%@",amount,captcha];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
     [request setHTTPMethod: @"POST"];
@@ -49,7 +49,7 @@
     NSString* url=[request.URL absoluteString];
 
     DLog(@"%@",url);
-    if ([url containsString:[NSString stringWithFormat:@"%@common/paymentResponse/cashClientBackSuccess",[RHNetworkService instance].doMainhttp]]) {
+    if ([url rangeOfString:@"common/paymentResponse/cashClientBackSuccess"].location!=NSNotFound) {
         RHErrorViewController* controller=[[RHErrorViewController alloc]initWithNibName:@"RHErrorViewController" bundle:nil];
         controller.titleStr=[NSString stringWithFormat:@"申请提现金额%@元",amount];
         controller.tipsStr=@"资金预计于审核后T+1个工作日到账";
@@ -58,11 +58,21 @@
         
         return NO;
     }
-    if ([url containsString:[NSString stringWithFormat:@"%@common/paymentResponse/cashClientBackFailed",[RHNetworkService instance].doMainhttp]]) {
+    if ([url rangeOfString:@"common/paymentResponse/cashClientBackFailed"].location!=NSNotFound) {
         
         RHErrorViewController* controller=[[RHErrorViewController alloc]initWithNibName:@"RHErrorViewController" bundle:nil];
-        controller.titleStr=@"余额不足";
-        controller.tipsStr=@"0";
+        controller.titleStr=@"失败";
+        NSArray* array=nil;
+        if ([url rangeOfString:@"&RespDesc"].location!=NSNotFound) {
+            array=[url componentsSeparatedByString:@"&RespDesc="];
+        }
+        if ([url rangeOfString:@"&result="].location!=NSNotFound) {
+            array=[url componentsSeparatedByString:@"&result="];
+        }
+       
+        if ([array count]>1) {
+            controller.tipsStr=[[[array objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        }
         controller.type=RHWithdrawFail;
         [self.navigationController pushViewController:controller animated:YES];
         return NO;

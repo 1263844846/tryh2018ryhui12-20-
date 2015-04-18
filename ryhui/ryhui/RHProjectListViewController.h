@@ -12,6 +12,7 @@
 @interface RHProjectListViewController : RHBaseViewController<RHSegmentContentViewDelegate>
 
 @property(nonatomic,strong)RHSegmentContentView* segmentContentView;
+@property(nonatomic,strong)NSString* type;
 
 @property(nonatomic,strong)NSMutableArray* viewControllers;
 @property (weak, nonatomic) IBOutlet UILabel *segmentLabel;

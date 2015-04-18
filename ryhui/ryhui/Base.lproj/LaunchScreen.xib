@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg.jpg" id="EFo-bO-4cQ">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultRH.jpg" id="EFo-bO-4cQ">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
@@ -23,7 +23,7 @@
         </view>
     </objects>
     <resources>
-        <image name="bg.jpg" width="640" height="1138"/>
+        <image name="defaultRH.jpg" width="640" height="1138"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

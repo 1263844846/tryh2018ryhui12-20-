@@ -23,20 +23,20 @@ static RHNetworkService* _instance;
 }
 -(NSString*)doMain
 {
-    return @"https://123.57.133.7/TinyFinance/";
+    return @"https://app.ryhui.com/";
 
 #ifdef DEBUG
-    return @"https://123.57.133.7/TinyFinance/";
+    return @"https://app.ryhui.com/";
 #else
     return @"https://www.ryhui.com/";
 #endif
 }
 -(NSString*)doMainhttp
 {
-    return @"http://123.57.133.7/TinyFinance/";
+    return @"http://app.ryhui.com/";
     
 #ifdef DEBUG
-    return @"http://123.57.133.7/TinyFinance/";
+    return @"https://app.ryhui.com/";
 #else
     return @"http://www.ryhui.com/";
 #endif

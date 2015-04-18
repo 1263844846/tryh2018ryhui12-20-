@@ -53,9 +53,15 @@
     showLoadMoreButton=YES;
 
 }
+-(void)refreshWithData:(NSString *)data
+{
+    
+}
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
     [_footerView.activityIndicatorView stopAnimating];
     _footerView.activityIndicatorView = nil;
     [_footerView.footerButton removeTarget:self action:@selector(showMoreApp:) forControlEvents:UIControlEventTouchUpInside];
@@ -69,9 +75,15 @@
     [_headerView egoRefreshScrollViewDataSourceStartManualLoading:self.tableView];
 }
 
--(void)getinvestListData
+-(void)sordListWithSidx:(NSString*)sidx sord:(NSString*)sord
 {
-    NSDictionary* parameters=@{@"search":@"true",@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",_currentPageIndex],@"sidx":@"",@"sord":@"",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};
+    _reloading=YES;
+    [self getListDataWithFilters:sidx sord:sord];
+}
+
+-(void)getListDataWithFilters:(NSString*)filters sord:(NSString*)sord
+{
+    NSDictionary* parameters=@{@"_search":@"true",@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",_currentPageIndex],@"sidx":filters,@"sord":sord,@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};
     NSString* url=nil;
     if ([type isEqualToString:@"0"]) {
         url=@"common/main/shangListData";
@@ -88,6 +100,9 @@
                 _footerView.hidden=NO;
                 if ([array count]<10) {
                     //已经到底了
+                    if ([array count]==0) {
+                        [_footerView.footerButton setTitle:@"亲暂时没有数据" forState:UIControlStateNormal];
+                    }
                     [_footerView.footerButton setEnabled:NO];
                     showLoadMoreButton=NO;
                 }else{
@@ -119,6 +134,11 @@
         _reloading = NO;
         [_headerView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
     }];
+}
+
+-(void)getinvestListData
+{
+    [self getListDataWithFilters:@"" sord:@"desc"];
 }
 
 - (void)reloadTableView{

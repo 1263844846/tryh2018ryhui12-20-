@@ -23,6 +23,7 @@
 @protocol TouchBeginDelegate <NSObject>
 
 - (void)gestureTouchBegin;
+- (void)gestureStateWithText:(NSString*)text;
 
 @end
 

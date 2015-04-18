@@ -83,4 +83,10 @@
 - (IBAction)changeCaptcha:(id)sender {
     [self changeCaptcha];
 }
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
 @end

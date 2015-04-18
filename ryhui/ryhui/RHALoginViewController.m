@@ -77,7 +77,7 @@
     [[RHNetworkService instance] POST:@"common/user/login/login" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
-            NSString* result=[responseObject objectForKeyedSubscript:@"md5"];
+            NSString* result=[responseObject objectForKey:@"md5"];
             if (result&&[result length]>0) {
                 NSString* md5=[responseObject objectForKey:@"md5"];
                 [RHNetworkService instance].niubiMd5=md5;
@@ -133,14 +133,16 @@
                     controller.isForgotV=self.isForgotV;
                     [self.navigationController pushViewController:controller animated:NO];
                 }else{
-                    [[RHTabbarManager sharedInterface] initTabbar];
-                    [[RHTabbarManager sharedInterface] selectTabbarMain];
+                    RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
+                    controller.isReset=YES;
+                    [self.navigationController pushViewController:controller animated:NO];
                 }
 
             }
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        DLog(@"%@",error);
         if ([error.userInfo.allKeys containsObject:@"com.alamofire.serialization.response.error.data"]) {
             NSDictionary* errorDic=[NSJSONSerialization JSONObjectWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] options:NSJSONReadingMutableContainers error:nil];
             if ([errorDic objectForKey:@"msg"]) {
@@ -152,20 +154,21 @@
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if ([textField isEqual:self.accountTextField]) {
-        [self.passwordTextField becomeFirstResponder];
-        return YES;
-    }
-    
-    if ([textField isEqual:self.passwordTextField]) {
-        [self.captchaTextField becomeFirstResponder];
-        return YES;
-    }
-    
-    if ([textField isEqual:self.captchaTextField]) {
-        [self loginAction:nil];
-        return NO;
-    }
+    [textField resignFirstResponder];
+//    if ([textField isEqual:self.accountTextField]) {
+//        [self.passwordTextField becomeFirstResponder];
+//        return YES;
+//    }
+//    
+//    if ([textField isEqual:self.passwordTextField]) {
+//        [self.captchaTextField becomeFirstResponder];
+//        return YES;
+//    }
+//    
+//    if ([textField isEqual:self.captchaTextField]) {
+//        [self loginAction:nil];
+//        return NO;
+//    }
     
     return YES;
 }

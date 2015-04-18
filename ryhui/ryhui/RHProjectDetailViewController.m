@@ -7,11 +7,17 @@
 //
 
 #import "RHProjectDetailViewController.h"
+#import "RHALoginViewController.h"
+#import "RHRegisterWebViewController.h"
 
 @interface RHProjectDetailViewController ()
 {
     int available;
+    CGRect tempRect;
 }
+@property(nonatomic,strong)NSMutableArray* array1;
+@property(nonatomic,strong)NSMutableArray* array2;
+
 @end
 
 @implementation RHProjectDetailViewController
@@ -38,28 +44,32 @@
         [self appXueDetailData];
     }
     
-    if (![RHUserManager sharedInterface].username) {
-        [self.investmentButton setTitle:@"立即登录" forState:UIControlStateNormal];
-    }else{
-        if (![RHUserManager sharedInterface].custId) {
-            [self.investmentButton setTitle:@"请先开户" forState:UIControlStateNormal];
-        }
-    }
+    self.array1=[[NSMutableArray alloc]initWithCapacity:0];
+    self.array2=[[NSMutableArray alloc]initWithCapacity:0];
     
     self.scrollView.frame=CGRectMake(0, 35, self.segmentView1.frame.size.width, [UIScreen mainScreen].applicationFrame.size.height-self.navigationController.navigationBar.frame.size.height-280);
     
     self.scrollView.contentSize=CGSizeMake(self.segmentView1.frame.size.width,267);
+    
+    self.scrollView1.frame=CGRectMake(0, 35, self.segmentView1.frame.size.width, [UIScreen mainScreen].applicationFrame.size.height-self.navigationController.navigationBar.frame.size.height-280);
+    
+    self.scrollView1.contentSize=CGSizeMake(self.segmentView1.frame.size.width,267);
+    
+    
+    
 }
 
 
 -(void)setupWithDic:(NSDictionary*)dic
 {
-    self.segmentView1.frame=CGRectMake(8, 170, self.segmentView1.frame.size.width, [UIScreen mainScreen].applicationFrame.size.height-self.navigationController.navigationBar.frame.size.height-75);
+    self.segmentView1.frame=CGRectMake(8, 170, [UIScreen mainScreen].bounds.size.width-16, [UIScreen mainScreen].applicationFrame.size.height-self.navigationController.navigationBar.frame.size.height-75);
     self.scrollView.frame=CGRectMake(0, 35, self.segmentView1.frame.size.width, self.segmentView1.frame.size.height-35);
     
-    self.segmentView2.frame=CGRectMake(8, 170, self.segmentView2.frame.size.width, [UIScreen mainScreen].applicationFrame.size.height-self.navigationController.navigationBar.frame.size.height-75);
+    self.segmentView2.frame=CGRectMake(8, 170, [UIScreen mainScreen].bounds.size.width-16, [UIScreen mainScreen].applicationFrame.size.height-self.navigationController.navigationBar.frame.size.height-75-170);
     
     self.segment2ContentView.frame=CGRectMake(0, 35, self.segmentView2.frame.size.width, self.segmentView2.frame.size.height-35);
+    
+    self.tableView.frame=CGRectMake(0, 40, self.segmentView2.frame.size.width, self.segment2ContentView.frame.size.height-40);
     
     if ([type isEqualToString:@"0"]) {
         self.segmentView1.hidden=NO;
@@ -100,7 +110,7 @@
         self.limitTimeLabel.text=[[dic objectForKey:@"limitTime"] stringValue];
 
     }
-    self.projectFundLabel.text=[NSString stringWithFormat:@"%.1f",([[dic objectForKey:@"projectFund"] floatValue]/10000.0)];
+    self.projectFundLabel.text=[NSString stringWithFormat:@"%.2f",([[dic objectForKey:@"projectFund"] floatValue]/10000.0)];
     
     if ([[dic objectForKey:@"insuranceMethod"] isKindOfClass:[NSNull class]]) {
         self.insuranceMethodLabel.text=@"";
@@ -115,10 +125,19 @@
     self.progressImageView.frame=CGRectMake(0, self.progressImageView.frame.origin.y, ([UIScreen mainScreen].bounds.size.width-40-16)*percent, self.progressImageView.frame.size.height);
     self.progressLabel.text=[NSString stringWithFormat:@"%d%%",[[dic objectForKey:@"percent"] intValue]];
     self.progressLabel.frame=CGRectMake(self.progressImageView.frame.size.width+1, 130,34, 14);
+
     if ([self.progressLabel.text isEqualToString:@"100%"]) {
         [self.investmentButton setTitle:@"已满标" forState:UIControlStateNormal];
         self.investmentButton.enabled=NO;
         [self.investmentButton setBackgroundColor:[UIColor lightGrayColor]];
+    }else{
+        if (![RHUserManager sharedInterface].username) {
+            [self.investmentButton setTitle:@"请先登录" forState:UIControlStateNormal];
+        }else{
+            if (![RHUserManager sharedInterface].custId) {
+                [self.investmentButton setTitle:@"请先开户" forState:UIControlStateNormal];
+            }
+        }
     }
     
 }
@@ -130,7 +149,7 @@
     
     NSString* page=[[NSNumber numberWithInt:(arrayCount/10+1)] stringValue];
     
-    NSDictionary* parameters=@{@"projectId":self.projectId,@"search":@"true",@"rows":@"10",@"page":page,@"sidx":@"",@"sord":@"",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};    [[RHNetworkService instance] POST:@"common/main/projectInvestmentList" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSDictionary* parameters=@{@"projectId":self.projectId,@"_search":@"true",@"rows":@"10",@"page":page,@"sidx":@"investTime",@"sord":@"desc",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};    [[RHNetworkService instance] POST:@"common/main/projectInvestmentList" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
@@ -200,6 +219,13 @@
             self.studentEducationLabel.text=[project objectForKey:@"studentEducation"];
             self.partnerInfoLabel.text=[project objectForKey:@"partnerInfo"];
             
+            
+            CGRect rect1=self.partnerInfoLabel.frame;
+            rect1.size.height=[[project objectForKey:@"partnerInfo"] sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(self.partnerInfoLabel.frame.size.width, MAXFLOAT) lineBreakMode:NSLineBreakByCharWrapping].height+5;
+            self.partnerInfoLabel.frame=rect1;
+
+            self.scrollView1.contentSize=CGSizeMake(self.scrollView1.frame.size.width,self.partnerInfoLabel.frame.origin.y+self.partnerInfoLabel.frame.size.height+10);
+
             if ([[project objectForKey:@"available2"] isKindOfClass:[NSNull class]]) {
                 self.availableLabel.text=@"";
             }else{
@@ -224,8 +250,15 @@
             NSArray* insuranceImages=[responseObject objectForKey:@"insuranceImages"];
             for (NSDictionary* insuranceDic in insuranceImages) {
                 int index=[[NSNumber numberWithInteger:[insuranceImages indexOfObject:insuranceDic]] intValue];
+            
                 UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(index*(45+10),4, 45, 45)];
+                imageView.userInteractionEnabled=YES;
                 [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].doMain,[insuranceDic objectForKey:@"filepath"]]]];
+                UIButton* button=[UIButton buttonWithType:UIButtonTypeCustom];
+                button.frame=imageView.bounds;
+                [button addTarget:self action:@selector(touch1:) forControlEvents:UIControlEventTouchUpInside];
+                [imageView addSubview:button];
+                [self.array1 addObject:imageView];
                 DLog(@"%@",[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].doMain,[insuranceDic objectForKey:@"filepath"]]);
                 
                 [self.insuranceScrollView addSubview:imageView];
@@ -235,20 +268,37 @@
             NSDictionary* projectDic=[responseObject objectForKey:@"project"];
             self.projectDetail.text=[projectDic objectForKey:@"projectInfo"];
             
+            CGRect rect1=self.projectDetail.frame;
+            rect1.size.height=[[projectDic objectForKey:@"projectInfo"] sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(self.projectDetail.frame.size.width, MAXFLOAT) lineBreakMode:NSLineBreakByCharWrapping].height+5;
+            self.projectDetail.frame=rect1;
+            
+            self.projectImageLabel.frame=CGRectMake(self.projectImageLabel.frame.origin.x, self.projectDetail.frame.origin.y+self.projectDetail.frame.size.height+5, self.projectImageLabel.frame.size.width, self.projectImageLabel.frame.size.height);
+            self.projectScrollView.frame=CGRectMake(self.projectScrollView.frame.origin.x, self.projectImageLabel.frame.origin.y+self.projectImageLabel.frame.size.height+5, self.projectScrollView.frame.size.width, self.projectScrollView.frame.size.height);
+            
+            self.projectImageLabel1.frame=CGRectMake(self.projectImageLabel1.frame.origin.x, self.projectScrollView.frame.origin.y+self.projectScrollView.frame.size.height+5, self.projectImageLabel1.frame.size.width, self.projectImageLabel1.frame.size.height);
+            self.insuranceScrollView.frame=CGRectMake(self.insuranceScrollView.frame.origin.x, self.projectImageLabel1.frame.origin.y+self.projectImageLabel1.frame.size.height+5, self.insuranceScrollView.frame.size.width, self.insuranceScrollView.frame.size.height);
+            self.scrollView.contentSize=CGSizeMake(self.scrollView.frame.size.width, self.insuranceScrollView.frame.origin.y+self.insuranceScrollView.frame.size.height+10);
+            
             NSArray* projectImages=[responseObject objectForKey:@"projectImages"];
             for (NSDictionary* projectImagesDic in projectImages) {
                 int index=[[NSNumber numberWithInteger:[projectImages indexOfObject:projectImagesDic]] intValue];
                 UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(index*(45+10),4, 45, 45)];
+                imageView.userInteractionEnabled=YES;
                 [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].doMain,[projectImagesDic objectForKey:@"filepath"]]]];
                 DLog(@"%@",[NSString stringWithFormat:@"%@%@",[RHNetworkService instance].doMain,[projectImagesDic objectForKey:@"filepath"]]);
+                UIButton* button=[UIButton buttonWithType:UIButtonTypeCustom];
+                button.frame=imageView.bounds;
+                [button addTarget:self action:@selector(touch2:) forControlEvents:UIControlEventTouchUpInside];
+                [imageView addSubview:button];
+                [self.array2 addObject:imageView];
                 [self.projectScrollView addSubview:imageView];
             }
-            if ([[projectDic objectForKey:@"available2"] isKindOfClass:[NSNull class]]) {
-                self.availableLabel.text=@"";
-            }else{
-                self.availableLabel.text=[projectDic objectForKey:@"available2"];
-            }
-            
+//            if ([[projectDic objectForKey:@"available2"] isKindOfClass:[NSNull class]]) {
+//                self.availableLabel.text=@"";
+//            }else{
+//                self.availableLabel.text=[projectDic objectForKey:@"available2"];
+//            }
+            self.availableLabel.text=[NSString stringWithFormat:@"%d",[[projectDic objectForKey:@"available"] intValue]];
             available=[[projectDic objectForKey:@"available"] intValue];
 
             self.projectScrollView.contentSize=CGSizeMake([projectImages count]*55,53);
@@ -257,6 +307,59 @@
         [RHUtility showTextWithText:@"请求失败"];
     }];
 }
+
+-(void)touch1:(id)sender
+{
+    UIButton* button=sender;
+    if (button.frame.size.width<100) {
+        for (UIImageView* imageview in self.array1) {
+            for (UIButton* temp in imageview.subviews) {
+                if ([temp isEqual:button]) {
+                    tempRect=imageview.frame;
+                    UIWindow* window=[UIApplication sharedApplication].keyWindow;
+                    [UIView animateWithDuration:0.25 animations:^{
+                        imageview.frame=[UIScreen mainScreen].bounds;
+                        temp.frame=imageview.bounds;
+                        [window addSubview:imageview];
+                    }];
+                }
+            }
+        }
+    }else{
+        [button.superview removeFromSuperview];
+        
+        button.superview.frame=tempRect;
+        
+        button.frame=button.superview.bounds;
+        
+        [self.insuranceScrollView addSubview:button.superview];
+    }
+}
+-(void)touch2:(id)sender
+{
+    UIButton* button=sender;
+    if (button.frame.size.width<100) {
+        for (UIImageView* imageview in self.array2) {
+            for (UIButton* temp in imageview.subviews) {
+                if ([temp isEqual:button]) {
+                    tempRect=imageview.frame;
+                    UIWindow* window=[UIApplication sharedApplication].keyWindow;
+                    [UIView animateWithDuration:0.25 animations:^{
+                        imageview.frame=[UIScreen mainScreen].bounds;
+                        temp.frame=imageview.bounds;
+                        [window addSubview:imageview];
+                    }];
+                }
+            }
+        }
+    }else{
+        [button.superview removeFromSuperview];
+        button.superview.frame=tempRect;
+        button.frame=button.superview.bounds;
+        [self.projectScrollView addSubview:button.superview];
+    }
+}
+
 - (IBAction)pushMain:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
@@ -339,9 +442,21 @@
     return cell;
 }
 - (IBAction)Investment:(id)sender {
-    RHInvestmentViewController* contoller=[[RHInvestmentViewController alloc]initWithNibName:@"RHInvestmentViewController" bundle:nil];
-    contoller.projectFund=available;
-    contoller.dataDic=self.dataDic;
-    [self.navigationController pushViewController:contoller animated:YES];
+    UIButton* button=sender;
+    if ([button.titleLabel.text isEqualToString:@"请先登录"]) {
+        RHALoginViewController* controller=[[RHALoginViewController alloc] initWithNibName:@"RHALoginViewController" bundle:nil];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    if ([button.titleLabel.text isEqualToString:@"请先开户"]) {
+        RHRegisterWebViewController* controller=[[RHRegisterWebViewController alloc]initWithNibName:@"RHRegisterWebViewController" bundle:nil];
+        [self.navigationController pushViewController:controller animated:YES];
+
+    }
+    if ([button.titleLabel.text isEqualToString:@"投资"]) {
+        RHInvestmentViewController* contoller=[[RHInvestmentViewController alloc]initWithNibName:@"RHInvestmentViewController" bundle:nil];
+        contoller.projectFund=available;
+        contoller.dataDic=self.dataDic;
+        [self.navigationController pushViewController:contoller animated:YES];
+    }
 }
 @end

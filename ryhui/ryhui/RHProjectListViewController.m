@@ -10,12 +10,15 @@
 #import "RHProjectListContentViewController.h"
 
 @interface RHProjectListViewController ()
-
+{
+    int currentPage;
+}
 @end
 
 @implementation RHProjectListViewController
 @synthesize segmentContentView=_segmentContentView;
 @synthesize viewControllers=_viewControllers;
+@synthesize type=_type;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -44,11 +47,20 @@
     
     [_segmentContentView setViews:_viewControllers];
     
-    [self segmentContentView:_segmentContentView selectPage:0];
-    
-    self.segmentView1.hidden=NO;
-    self.segmentView2.hidden=YES;
-    [self didSelectSegmentAtIndex:0];
+    if ([_type isEqualToString:@"0"]) {
+        [self segmentContentView:_segmentContentView selectPage:0];
+        
+        self.segmentView1.hidden=NO;
+        self.segmentView2.hidden=YES;
+        [self didSelectSegmentAtIndex:0];
+    }else{
+        [self segmentContentView:_segmentContentView selectPage:1];
+        
+        self.segmentView1.hidden=YES;
+        self.segmentView2.hidden=NO;
+        [self didSelectSegmentAtIndex:1];
+
+    }
     self.segmentLabel.layer.cornerRadius=8;
     self.segmentLabel.layer.masksToBounds=YES;
     self.segmentLabel1.layer.cornerRadius=8;
@@ -70,7 +82,7 @@
 {
     
     
-    NSDictionary* parameters=@{@"search":@"true",@"rows":@"1000",@"page":@"1",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"percent\",\"op\":\"lt\",\"data\":100}]}"};
+    NSDictionary* parameters=@{@"_search":@"true",@"rows":@"1000",@"page":@"1",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"percent\",\"op\":\"lt\",\"data\":100}]}"};
     
     [[RHNetworkService instance] POST:@"common/main/shangListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"%@",responseObject);
@@ -93,7 +105,7 @@
 {
     
     
-    NSDictionary* parameters=@{@"search":@"true",@"rows":@"1000",@"page":@"1",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"percent\",\"op\":\"lt\",\"data\":100}]}"};
+    NSDictionary* parameters=@{@"_search":@"true",@"rows":@"1000",@"page":@"1",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"percent\",\"op\":\"lt\",\"data\":100}]}"};
     [[RHNetworkService instance] POST:@"common/main/xueListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
@@ -121,6 +133,8 @@
 }
 
 - (void)segmentContentView:(RHSegmentContentView *)segmentContentView selectPage:(NSUInteger)page{
+    
+    currentPage=[[NSNumber numberWithInteger:page] intValue];
     switch (page) {
         case 0:
             [self segmentAction1:nil];
@@ -140,15 +154,51 @@
 
 
 - (IBAction)yearEarnAction:(id)sender {
+    UIButton* button=sender;
+    RHProjectListContentViewController* controller=[_viewControllers objectAtIndex:currentPage];
+    if (!button.selected) {
+        [controller sordListWithSidx:@"investorRate" sord:@"desc"];
+        button.selected=YES;
+    }else{
+        [controller sordListWithSidx:@"investorRate" sord:@"asc"];
+        button.selected=NO;
+    }
 }
 
 - (IBAction)deadlineAction:(id)sender {
+    RHProjectListContentViewController* controller=[_viewControllers objectAtIndex:currentPage];
+    UIButton* button=sender;
+    if (!button.selected) {
+        [controller sordListWithSidx:@"limitTime" sord:@"desc"];
+        button.selected=YES;
+    }else{
+        [controller sordListWithSidx:@"limitTime" sord:@"asc"];
+        button.selected=NO;
+    }
 }
 
 - (IBAction)totalMoneyAction:(id)sender {
+    RHProjectListContentViewController* controller=[_viewControllers objectAtIndex:currentPage];
+    UIButton* button=sender;
+    if (!button.selected) {
+        [controller sordListWithSidx:@"projectFund" sord:@"desc"];
+        button.selected=YES;
+    }else{
+        [controller sordListWithSidx:@"projectFund" sord:@"asc"];
+        button.selected=NO;
+    }
 }
 
 - (IBAction)investmentProgressAction:(id)sender {
+    RHProjectListContentViewController* controller=[_viewControllers objectAtIndex:currentPage];
+    UIButton* button=sender;
+    if (!button.selected) {
+        [controller sordListWithSidx:@"percent" sord:@"desc"];
+        button.selected=YES;
+    }else{
+        [controller sordListWithSidx:@"percent" sord:@"asc"];
+        button.selected=NO;
+    }
 }
 
 - (IBAction)segmentAction1:(id)sender {

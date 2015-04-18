@@ -8,7 +8,7 @@
 
 #import "RHBaseViewController.h"
 
-@interface RHAccountValidateViewController : RHBaseViewController
+@interface RHAccountValidateViewController : RHBaseViewController<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *accountTF;
 @property (weak, nonatomic) IBOutlet UITextField *captchaTF;

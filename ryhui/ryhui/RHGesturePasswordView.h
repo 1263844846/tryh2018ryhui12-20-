@@ -10,6 +10,8 @@
 
 - (void)forget;
 - (void)change;
+-(void)cleanPan;
+-(void)enterPan;
 
 @end
 
@@ -27,5 +29,6 @@
 @property (nonatomic,strong) UIImageView * imgView;
 @property (nonatomic,strong) UIButton * forgetButton;
 @property (nonatomic,strong) UIButton * changeButton;
-
+@property (nonatomic,strong) UIButton * clearButton;
+@property (nonatomic,strong) UIButton * enterButton;
 @end

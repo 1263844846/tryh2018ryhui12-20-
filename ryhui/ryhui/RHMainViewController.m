@@ -35,7 +35,8 @@
     
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor=[UIColor clearColor];
-    self.tableView.frame=CGRectMake(0, 305, [UIScreen mainScreen].applicationFrame.size.width, [UIScreen mainScreen].applicationFrame.size.height-self.navigationController.navigationBar.frame.size.height-40-305);
+    self.tableView.frame=CGRectMake(0, 148, [UIScreen mainScreen].applicationFrame.size.width, [UIScreen mainScreen].applicationFrame.size.height-self.navigationController.navigationBar.frame.size.height-40-148);
+    self.tableView.tableHeaderView=self.tbHeaderView;
     
     self.segment1Array=[[NSMutableArray alloc]initWithCapacity:0];
     self.segment2Array=[[NSMutableArray alloc]initWithCapacity:0];
@@ -56,13 +57,51 @@
     [self getSegmentnum2];
     
     self.tableView.tableFooterView=self.footView;
+    
+    [[RHNetworkService instance] POST:@"front/payment/account/countUnReadMessage" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        DLog(@"%@",responseObject);
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSString* numStr=nil;
+            if (![[responseObject objectForKey:@"msgCount"] isKindOfClass:[NSNull class]]) {
+                if ([[responseObject objectForKey:@"msgCount"] isKindOfClass:[NSNumber class]]) {
+                    numStr=[[responseObject objectForKey:@"msgCount"] stringValue];
+                }else{
+                    numStr=[responseObject objectForKey:@"msgCount"];
+                }
+            }
+            if (numStr) {
+                [[NSUserDefaults standardUserDefaults] setObject:numStr forKey:@"RHMessageNumSave"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"RHMessageNum" object:numStr];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self refesh];
+}
+
+-(void)refesh
+{
+    [self getSegmentnum1];
+    [self getSegmentnum2];
+    if (self.type&&[type isEqualToString:@"1"]) {
+        [self segment2Post];
+    }else{
+        [self segment1Post];  
+    }
+}
 #pragma mark-network
 -(void)getSegmentnum1
 {
 
-    NSDictionary* parameters=@{@"search":@"true",@"rows":@"1000",@"page":@"1",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"percent\",\"op\":\"lt\",\"data\":100}]}"};
+    NSDictionary* parameters=@{@"_search":@"true",@"rows":@"1000",@"page":@"1",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"percent\",\"op\":\"lt\",\"data\":100}]}"};
     
     [[RHNetworkService instance] POST:@"common/main/shangListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"%@",responseObject);
@@ -85,7 +124,7 @@
 {
 
     
-    NSDictionary* parameters=@{@"search":@"true",@"rows":@"1000",@"page":@"1",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"percent\",\"op\":\"lt\",\"data\":100}]}"};
+    NSDictionary* parameters=@{@"_search":@"true",@"rows":@"1000",@"page":@"1",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"percent\",\"op\":\"lt\",\"data\":100}]}"};
     [[RHNetworkService instance] POST:@"common/main/xueListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
@@ -111,7 +150,7 @@
     
     NSString* page=[[NSNumber numberWithInt:(arrayCount/10+1)] stringValue];
     
-    NSDictionary* parameters=@{@"search":@"true",@"rows":@"10",@"page":page,@"sidx":@"",@"sord":@"",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};
+    NSDictionary* parameters=@{@"_search":@"true",@"rows":@"10",@"page":page,@"sidx":@"",@"sord":@"",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};
     
     [[RHNetworkService instance] POST:@"common/main/shangListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"%@",responseObject);
@@ -148,7 +187,7 @@
     
     NSString* page=[[NSNumber numberWithInt:(arrayCount/10+1)] stringValue];
     
-    NSDictionary* parameters=@{@"search":@"true",@"rows":@"10",@"page":page,@"sidx":@"",@"sord":@"",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};
+    NSDictionary* parameters=@{@"_search":@"true",@"rows":@"10",@"page":page,@"sidx":@"",@"sord":@"",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};
     
     [[RHNetworkService instance] POST:@"common/main/xueListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"%@",responseObject);
@@ -184,9 +223,10 @@
 -(void)didSelectSegmentAtIndex:(int)index
 {
     self.type=[NSString stringWithFormat:@"%d",index];
-    
+
     switch (index) {
         case 0:
+            self.contentLabel.text=@"借款方为经营良好的中小微企业及个体工商户。为保障投资人权益，融益汇通过评级严格筛选合作机构。所有借款项目均由合作机构评审后推荐，并经融益汇多轮在评审后发布。所有项目均由合作机构提供全额本息担保。";
             if ([self.segment1Array count]<=0) {
                 [self segment1Post];
             }else{
@@ -196,6 +236,8 @@
             }
             break;
         case 1:
+            self.contentLabel.text=@"借款方为接受就业培训的在读学生，贷款用于支付就业培训费用。培训机构承诺为学生就业提供保障，并承担未就业学生的全部还款本息；同时融益汇从每笔助学贷款的服务费中提取一定比例的资金作为助学贷专项风险保障金以备代偿。通过就业担保和风险保障金双重本息保障机制为您的投资保驾护航。";
+
             if ([self.segment2Array count]<=0) {
                 [self segment2Post];
             }else{
@@ -207,12 +249,16 @@
         default:
             break;
     }
+    [self.tableView setContentOffset:CGPointMake(0,0) animated:YES];
 }
 
 -(void)didSelectInvestment
 {
     RHProjectListViewController* controller=[[RHProjectListViewController alloc]initWithNibName:@"RHProjectListViewController" bundle:nil];
+    controller.type=self.type;
     [self.navigationController pushViewController:controller animated:YES];
+    
+
 }
 
 #pragma mark-TableViewDelegate

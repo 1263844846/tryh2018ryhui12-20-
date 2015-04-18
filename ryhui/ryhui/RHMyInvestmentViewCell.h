@@ -20,4 +20,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *backMoneyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *profitMoneyLabel;
 - (IBAction)contractAction:(id)sender;
+- (IBAction)pushInvestDetail:(id)sender;
 @end

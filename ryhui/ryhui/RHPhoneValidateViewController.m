@@ -47,15 +47,18 @@
         DLog(@"result==%@ <<<",[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         if ([responseObject isKindOfClass:[NSData class]]) {
             NSString* restult=[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            if ([restult isEqualToString:@"success"]) {
+            if ([restult isEqualToString:@"{\"msg\":\"手机验证码发送成功\"}"]||[restult isEqualToString:@"{\"msg\":\"success\"}"]) {
                 //短信发送成功
-                [RHUtility showTextWithText:@"短信发送成功"];
+                [RHUtility showTextWithText:@"验证码已发送至您的手机"];
                 [self reSendMessage];
             }
+        }else{
+            [RHUtility showTextWithText:@"发送失败"];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DLog(@"%@",error);
+        [RHUtility showTextWithText:@"发送失败"];
     }];
 }
 
@@ -68,7 +71,7 @@
 -(void)timeFireMethod
 {
     secondsCountDown--;
-    [self.captchaButton setTitle:[NSString stringWithFormat:@"%d后重新发送",secondsCountDown] forState:UIControlStateNormal];
+    [self.captchaButton setTitle:[NSString stringWithFormat:@"重新发送(%d)",secondsCountDown] forState:UIControlStateNormal];
     if (secondsCountDown==0) {
         self.captchaButton.enabled=YES;
         [self.captchaButton setTitle:@"获取验证码" forState:UIControlStateNormal];
@@ -116,5 +119,10 @@
 {
     RHPasswordConfirmViewController* controller=[[RHPasswordConfirmViewController alloc] initWithNibName:@"RHPasswordConfirmViewController" bundle:nil];
     [self.navigationController pushViewController:controller animated:YES];
+}
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 @end

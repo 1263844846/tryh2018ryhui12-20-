@@ -14,4 +14,5 @@
 @property(nonatomic,strong)NSString* projectId;
 @property(nonatomic,strong)NSString* userId;
 
+@property(nonatomic,assign)BOOL isAgreen;
 @end

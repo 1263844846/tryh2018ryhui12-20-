@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "RHMoreViewController.h"
 #import "RHLoginViewController.h"
+#import "RHALoginViewController.h"
 #import "RHGuidanceViewController.h"
 
 static RHTabbarManager* _instance =nil;
@@ -55,24 +56,26 @@ static RHTabbarManager* _instance =nil;
     self.tabbarMore.navigationBar.hidden=YES;
 }
 
--(void)selectTabbarMain
+-(UINavigationController*)selectTabbarMain
 {
     AppDelegate* delegate=[UIApplication sharedApplication].delegate;
     delegate.window.rootViewController=self.tabbarMain;
+    return self.tabbarMain;
 }
 
--(void)selectTabbarUser
+-(UINavigationController*)selectTabbarUser
 {
     AppDelegate* delegate=[UIApplication sharedApplication].delegate;
     delegate.window.rootViewController=self.tabbarUser;
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"RHSELECTUSER" object:nil];
+    return self.tabbarUser;
 }
 
--(void)selectTabbarMore
+-(UINavigationController*)selectTabbarMore
 {
     AppDelegate* delegate=[UIApplication sharedApplication].delegate;
     delegate.window.rootViewController=self.tabbarMore;
+    return self.tabbarMore;
 }
 
 -(void)cleanTabbar
@@ -80,6 +83,19 @@ static RHTabbarManager* _instance =nil;
     self.tabbarMain=nil;
     self.tabbarMore=nil;
     self.tabbarUser=nil;
+}
+
+-(void)selectALogin
+{
+    RHLoginViewController* controller=[[RHLoginViewController alloc]initWithNibName:@"RHLoginViewController" bundle:nil];
+    UINavigationController* nav=[[UINavigationController alloc]initWithRootViewController:controller];
+    
+    AppDelegate* delegate=[UIApplication sharedApplication].delegate;
+    delegate.window.rootViewController=nav;
+    
+    RHALoginViewController* controller1=[[RHALoginViewController alloc]initWithNibName:@"RHALoginViewController" bundle:nil];
+    [nav pushViewController:controller1 animated:NO];
+    
 }
 
 -(void)selectLogin

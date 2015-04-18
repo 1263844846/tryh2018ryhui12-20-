@@ -8,11 +8,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RHSegmentView"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="RHSegmentView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="189"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="rPy-xd-37d">
-                    <rect key="frame" x="5" y="0.0" width="310" height="169"/>
+                    <rect key="frame" x="5" y="0.0" width="310" height="40"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="segmentBg2.png" id="A0D-dR-tRg">
@@ -83,34 +83,11 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="segmentBgV.png" id="CVL-qw-Ujt">
-                            <rect key="frame" x="0.0" y="35" width="310" height="134"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="K2G-zE-UNx">
-                            <rect key="frame" x="15" y="50" width="278" height="65"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wfs-Kn-yRf">
-                            <rect key="frame" x="107" y="127" width="95" height="25"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                            <state key="normal" title="投资" backgroundImage="registerButtonUp.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="pushInvestment:" destination="iN0-l3-epB" eventType="touchUpInside" id="Brq-B3-OTL"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="1eF-Tg-0sI">
-                    <rect key="frame" x="5" y="0.0" width="310" height="169"/>
+                    <rect key="frame" x="5" y="0.0" width="310" height="40"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="segmentBg1.png" id="NDP-jK-c2h">
@@ -181,42 +158,14 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="segmentBgV.png" id="sBi-Wo-nBX">
-                            <rect key="frame" x="0.0" y="35" width="310" height="134"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                        </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fyQ-2o-dAw">
-                            <rect key="frame" x="107" y="127" width="95" height="25"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                            <state key="normal" title="投资" backgroundImage="registerButtonUp.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="pushInvestment:" destination="iN0-l3-epB" eventType="touchUpInside" id="5zb-69-RLR"/>
-                            </connections>
-                        </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kwg-hA-lx9">
-                            <rect key="frame" x="15" y="50" width="278" height="51"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newProjectBg.png" id="DQi-lw-uv6">
-                    <rect key="frame" x="8" y="174" width="36" height="10"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="contentLabel" destination="Kwg-hA-lx9" id="GzL-3z-9HI"/>
-                <outlet property="contentLabel1" destination="K2G-zE-UNx" id="SWo-yh-9Go"/>
                 <outlet property="segmentLabel" destination="mVA-87-pwm" id="7OB-xR-NEQ"/>
                 <outlet property="segmentLabel1" destination="bvG-Fn-dHj" id="gze-Eg-tpW"/>
                 <outlet property="segmentLabel3" destination="UFt-XC-mLw" id="3b2-t1-70a"/>
@@ -224,15 +173,12 @@
                 <outlet property="segmentView1" destination="1eF-Tg-0sI" id="alJ-Qa-QZW"/>
                 <outlet property="segmentView2" destination="rPy-xd-37d" id="hRc-8a-P38"/>
             </connections>
-            <point key="canvasLocation" x="166" y="147.5"/>
+            <point key="canvasLocation" x="166" y="71"/>
         </view>
     </objects>
     <resources>
-        <image name="newProjectBg.png" width="72" height="19"/>
-        <image name="registerButtonUp.png" width="530" height="88"/>
         <image name="segmentBg1.png" width="617" height="52"/>
         <image name="segmentBg2.png" width="617" height="52"/>
-        <image name="segmentBgV.png" width="617" height="253"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

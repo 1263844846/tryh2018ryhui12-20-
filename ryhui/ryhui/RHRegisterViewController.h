@@ -9,7 +9,8 @@
 #import "RHBaseViewController.h"
 
 @interface RHRegisterViewController : RHBaseViewController<UITextFieldDelegate>
-@property (weak, nonatomic) IBOutlet UIView *createAccountView;
+@property (weak, nonatomic) IBOutlet UIScrollView *createAccountView;
+@property (weak, nonatomic) IBOutlet UIButton *registerButton;
 
 @property (weak, nonatomic) IBOutlet UIView *webRegisterView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;

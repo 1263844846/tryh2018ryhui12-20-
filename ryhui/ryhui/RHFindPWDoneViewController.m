@@ -16,11 +16,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [self configBackButton];
+    [self configTitleWithString:@"完成"];
 }
 
 - (IBAction)loginAciton:(id)sender {
     
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:NO];
+    [[RHTabbarManager sharedInterface] selectALogin];
 }
 @end

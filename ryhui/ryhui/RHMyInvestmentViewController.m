@@ -34,7 +34,7 @@
     
     NSString* one=@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"projectStatus\",\"op\":\"in\",\"data\":[\"full\",\"loans\",\"repayment_normal\",\"repayment_abnormal\"]}]}";
     
-    NSString* two=@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"projectStatus\",\"op\":\"in\",\"data\":[\"published\"]}]}";
+    NSString* two=@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"projectStatus\",\"op\":\"in\",\"data\":[\"full\",\"published\"]}]}";
     
     NSString* three=@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"projectStatus\",\"op\":\"in\",\"data\":[\"finished\"]}]}";
     

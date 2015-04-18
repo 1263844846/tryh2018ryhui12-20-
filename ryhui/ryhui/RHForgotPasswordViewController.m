@@ -9,7 +9,10 @@
 #import "RHForgotPasswordViewController.h"
 
 @interface RHForgotPasswordViewController ()
-
+{
+    float changeY;
+    float keyboardHeight;
+}
 @end
 
 @implementation RHForgotPasswordViewController
@@ -19,9 +22,49 @@
     
     [self configBackButton];
     
-    [self configTitleWithString:@"修改密码"];
+    [self configTitleWithString:@"修改登录密码"];
     
     [self changeCaptcha];
+    
+    self.oldPasswordTF.secureTextEntry=YES;
+    self.nnewPasswordTF.secureTextEntry=YES;
+    self.rnewPasswordTF.secureTextEntry=YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textBegin:) name:UITextFieldTextDidBeginEditingNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
+}
+
+-(void)textBegin:(NSNotification*)not
+{
+    DLog(@"%@",not.object);
+    UITextField* textField=not.object;
+    changeY=textField.frame.origin.y+textField.frame.size.height+10;
+    if (changeY>(self.view.frame.size.height-keyboardHeight)) {
+        CGRect viewRect=self.view.frame;
+        viewRect.origin.y=(self.view.frame.size.height-keyboardHeight)-changeY;
+        self.view.frame=viewRect;
+    }
+
+}
+
+-(void)keyboardShow:(NSNotification*)not
+{
+    DLog(@"%@",not.userInfo);
+    NSValue* value=[not.userInfo objectForKey:@"UIKeyboardBoundsUserInfoKey"];
+    
+    CGRect rect=[value CGRectValue];
+    keyboardHeight=rect.size.height;
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    CGRect rect=self.view.frame;
+    rect.origin.y=64;
+    self.view.frame=rect;
+    
+    [textField resignFirstResponder];
+
+    return YES;
 }
 
 -(void)changeCaptcha
@@ -55,6 +98,14 @@
     }
     if ([self.captchaTF.text length]<=0) {
         [RHUtility showTextWithText:@"请输入验证码"];
+        return;
+    }
+    if ([self.nnewPasswordTF.text length]<6||[self.nnewPasswordTF.text length]>16) {
+        [RHUtility showTextWithText:@"新密码长度必须为6-16位字符之间"];
+        return;
+    }
+    if ([self.rnewPasswordTF.text length]<6||[self.rnewPasswordTF.text length]>16) {
+        [RHUtility showTextWithText:@"确认密码长度必须为6-16位字符之间"];
         return;
     }
     NSDictionary *parameters = @{@"oldPassword":self.oldPasswordTF.text,@"newPassword":self.nnewPasswordTF.text,@"repeatPassword":self.rnewPasswordTF.text,@"captcha":self.captchaTF.text};

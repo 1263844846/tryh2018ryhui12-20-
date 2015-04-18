@@ -10,7 +10,10 @@
 
 @interface RHBaseViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *messageNumLabel;
+
 - (void)configBackButton;
 - (void)configTitleWithString:(NSString*)title;
 - (void)configRightButtonWithTitle:(NSString*)title action:(SEL)action;
+-(void)setMessageNum:(NSNotification*)notss;
 @end

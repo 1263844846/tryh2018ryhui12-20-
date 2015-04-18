@@ -10,6 +10,13 @@
 #import "RHLoginViewController.h"
 #import "RHGesturePasswordViewController.h"
 #import "RHMainViewController.h"
+#import <ShareSDK/ShareSDK.h>
+#import <TencentOpenAPI/QQApiInterface.h>
+#import <TencentOpenAPI/TencentOAuth.h>
+#import "WXApi.h"
+#import "WeiboApi.h"
+#import "WeiboSDK.h"
+//#import <RennSDK/RennSDK.h>
 @interface AppDelegate ()
 
 @end
@@ -42,9 +49,11 @@
                 self.window.rootViewController=nav;
                 
             }else{
-                [[RHTabbarManager sharedInterface] initTabbar];
+                RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
+                controller.isReset=YES;
+                UINavigationController* nav=[[UINavigationController alloc]initWithRootViewController:controller];
                 
-                [[RHTabbarManager sharedInterface] selectTabbarMain];
+                self.window.rootViewController=nav;
             }
         }else{
             [[RHTabbarManager sharedInterface] selectLogin];
@@ -52,12 +61,38 @@
         
     }
     
+    
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionFail:) name:@"RHSESSIONFAIL" object:nil];
+    
+    [self initShareSDK];
 
     return YES;
 }
 
--(void)sessionFail:(NSNotification*)not
+
+-(void)initShareSDK
+{
+    [ShareSDK registerApp:@"6c23db79a7e8"];//字符串api20为您的ShareSDK的AppKey
+
+    //添加新浪微博应用 注册网址 http://open.weibo.com
+    [ShareSDK connectSinaWeiboWithAppKey:@"1083852544"
+                               appSecret:@"1d0c857bd233092ee0b2d69a494864b9"
+                             redirectUri:@"http://www.ryhui.com"];
+
+//    //当使用新浪微博客户端分享的时候需要按照下面的方法来初始化新浪的平台
+//    [ShareSDK  connectSinaWeiboWithAppKey:@"568898243"
+//                                appSecret:@"38a4f8204cc784f81f9f0daaf31e02e3"
+//                              redirectUri:@"http://www.sharesdk.cn"
+//                              weiboSDKCls:[WeiboSDK class]];
+    
+    //添加微信应用 注册网址 http://open.weixin.qq.com
+    [ShareSDK connectWeChatWithAppId:@"wx2010bdd8c8c72a3f"
+                           wechatCls:[WXApi class]];
+
+}
+
+-(void)sessionFail:(NSNotification*)nots
 {
     NSDictionary* parameters=@{@"account":[RHUserManager sharedInterface].username,@"password":[RHUserManager sharedInterface].md5};
     
@@ -95,6 +130,24 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
+}
+
+- (BOOL)application:(UIApplication *)application
+      handleOpenURL:(NSURL *)url
+{
+    return [ShareSDK handleOpenURL:url
+                        wxDelegate:self];
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    return [ShareSDK handleOpenURL:url
+                 sourceApplication:sourceApplication
+                        annotation:annotation
+                        wxDelegate:self];
 }
 
 #pragma mark - Core Data stack

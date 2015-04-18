@@ -26,7 +26,7 @@
     [self configTitleWithString:@"提现"];
     [self getWithdrawData];
     self.overView.hidden=YES;
-    self.scrollView.contentSize=CGSizeMake(self.scrollView.frame.size.width, 530);
+    self.scrollView.contentSize=CGSizeMake(self.scrollView.frame.size.width, 630);
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
 }
@@ -128,7 +128,7 @@
 }
 
 
--(void)textFieldTextDidChange:(NSNotification*)not
+-(void)textFieldTextDidChange:(NSNotification*)nots
 {
     double price=[self.withdrawTF.text doubleValue];
     if (price>[self.balanceLabel.text doubleValue]) {
@@ -141,13 +141,13 @@
         self.getAmountLabel.text=[NSString stringWithFormat:@"%0.2f",[self.withdrawTF.text doubleValue]];
     }else{
         tempPrice=price-free;
-        double getAmount=tempPrice*0.005;
-        if (getAmount>1) {
-            self.freeLabel.text=[NSString stringWithFormat:@"%0.2f",getAmount];
-            self.getAmountLabel.text=[NSString stringWithFormat:@"%0.2f",price-getAmount];
+        double getAmount=tempPrice*0.005>1.00?tempPrice*0.005:1.00;
+        self.freeLabel.text=[NSString stringWithFormat:@"%0.2f",getAmount];
+        if (price+getAmount<=[self.balanceLabel.text doubleValue]) {
+            self.getAmountLabel.text=[NSString stringWithFormat:@"%.2f",price];
         }else{
-            self.freeLabel.text=@"1.00";
-            self.getAmountLabel.text=[NSString stringWithFormat:@"%0.2f",price-1.00];
+            self.getAmountLabel.text=[NSString stringWithFormat:@"%0.2f",[self.balanceLabel.text doubleValue]-getAmount];
+  
         }
     }
     
@@ -162,9 +162,9 @@
         DLog(@"result==%@ <<<",[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         if ([responseObject isKindOfClass:[NSData class]]) {
             NSString* restult=[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            if ([restult isEqualToString:@"success"]) {
+            if ([restult isEqualToString:@"{\"msg\":\"手机验证码发送成功\"}"]||[restult isEqualToString:@"success"]) {
                 //短信发送成功
-                [RHUtility showTextWithText:@"短信发送成功"];
+                [RHUtility showTextWithText:@"验证码已发送至您的手机"];
                 [self reSendMessage];
             }
         }
@@ -183,7 +183,7 @@
 -(void)timeFireMethod
 {
     secondsCountDown--;
-    [self.captchaButton setTitle:[NSString stringWithFormat:@"%d后重新发送",secondsCountDown] forState:UIControlStateNormal];
+    [self.captchaButton setTitle:[NSString stringWithFormat:@"重新发送(%d)",secondsCountDown] forState:UIControlStateNormal];
     if (secondsCountDown==0) {
         self.captchaButton.enabled=YES;
         [self.captchaButton setTitle:@"获取验证码" forState:UIControlStateNormal];
@@ -211,6 +211,32 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
+    return YES;
+}
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSCharacterSet *cs;
+    NSString* str=@"0123456789.";
+    cs = [[NSCharacterSet characterSetWithCharactersInString:str] invertedSet];
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    BOOL basicTest = [string isEqualToString:filtered];
+    if(!basicTest)
+    {
+        return NO;
+    }
+    
+    NSString* result=[NSString stringWithFormat:@"%@%@",textField.text,string];
+    NSArray* array=[result componentsSeparatedByString:@"."];
+    if (array&&[array count]>2) {
+        return NO;
+    }
+    NSRange ranges=[result rangeOfString:@"."];
+    if (ranges.location!=NSNotFound) {
+        NSString* temp=[result substringFromIndex:ranges.location+1];
+        DLog(@"%@",temp);
+        if ([temp length]>2) {
+            return NO;
+        }
+    }
     return YES;
 }
 @end

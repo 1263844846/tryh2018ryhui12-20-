@@ -84,4 +84,10 @@
     RHFindPWDoneViewController* controller=[[RHFindPWDoneViewController alloc]initWithNibName:@"RHFindPWDoneViewController" bundle:nil];
     [self.navigationController pushViewController:controller animated:YES];
 }
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
 @end

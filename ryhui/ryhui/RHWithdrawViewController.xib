@@ -14,6 +14,7 @@
                 <outlet property="freeLabel" destination="Q3E-1y-C3b" id="edU-Ez-Msu"/>
                 <outlet property="getAmountLabel" destination="F9e-L4-Lh6" id="auy-kI-VDk"/>
                 <outlet property="iconImageView" destination="T8z-CP-4Up" id="uBf-7E-zC8"/>
+                <outlet property="messageNumLabel" destination="QGE-2F-qkY" id="B1O-EB-rXX"/>
                 <outlet property="overView" destination="mEh-7X-XWG" id="Al0-Rl-3sb"/>
                 <outlet property="scrollView" destination="Bws-hy-oiR" id="0xD-0P-d4C"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -37,7 +38,7 @@
                                     <rect key="frame" x="19" y="10" width="75" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kLf-jS-mlR">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kLf-jS-mlR">
                                     <rect key="frame" x="100" y="14" width="212" height="21"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -128,7 +129,7 @@
                                     <rect key="frame" x="92" y="45" width="195" height="30"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="7wP-7L-rEI"/>
                                     </connections>
@@ -201,7 +202,7 @@
                                     <rect key="frame" x="214" y="166" width="98" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.19215686269999999" green="0.56078431370000004" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <state key="normal" title="获取验证码">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -213,7 +214,7 @@
                                     <rect key="frame" x="97" y="166" width="109" height="30"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="v51-dj-iJn"/>
                                     </connections>
@@ -232,20 +233,47 @@
                                 <action selector="withdrawAction:" destination="-1" eventType="touchUpInside" id="Crv-H3-oK8"/>
                             </connections>
                         </button>
-                        <view contentMode="scaleToFill" id="35A-R4-thu">
-                            <rect key="frame" x="0.0" y="410" width="320" height="120"/>
+                        <view contentMode="scaleToFill" id="meU-gV-iaH">
+                            <rect key="frame" x="0.0" y="410" width="320" height="211"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="温馨提示：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZKD-q8-IVE">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="温馨提示：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dAf-mb-ckb">
                                     <rect key="frame" x="23" y="0.0" width="55" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LCn-BC-1C0">
-                                    <rect key="frame" x="23" y="23" width="277" height="89"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.用户完成身份认证、开通托管账户、绑定提现银行卡后，才能进行提现操作；" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="E6c-Z3-pe2">
+                                    <rect key="frame" x="23" y="23" width="277" height="29"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <string key="text">1.融益汇和汇付天下合作，对用户的投资资金进行托管，切实保障用户利益。汇付天下作为首批获得中国人民银行支付许可证的第三方支付公司，在金融支付领域处于领先地位。\n2.开通资金托管账户时，需要验证您的身份信息。该信息一经设置，无法修改，请慎重填写。\n3.请准备一张您名下的储蓄卡，以便顺利提现。</string>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
+                                    <color key="textColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2.若您充值的资金用于投资、融益汇将替您支付到期本息的第三方支付手续费，您可免费提现；若您充值的资金 未经投资就提现，将收取当次提现金额的0.5%（最低1元）用于支付第三方支付的资金交易手续费；" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6Sb-GL-bo8">
+                                    <rect key="frame" x="23" y="49" width="277" height="52"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
+                                    <color key="textColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3.每个融益汇账户每日仅可提现1次；" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MOD-LA-Bg5">
+                                    <rect key="frame" x="23" y="99" width="277" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
+                                    <color key="textColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.资金到达用户融益汇账户的当日（包括双休日/法定节假日）即可发起提现申请；" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hQX-dh-qhJ">
+                                    <rect key="frame" x="23" y="113" width="277" height="27"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
+                                    <color key="textColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5.工作日18:00前的提现申请，当日审核完毕并于T+1个工作日到账；工作日18:00之后或双休日/法定节假日的 提现申请，将于下一个工作日审核并预计于审核后T+1个工作日到账；实际到账时间依据资金托管方（第三方 支付平台）及提现银行而有所差异。" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RRG-Lh-oYN">
+                                    <rect key="frame" x="23" y="138" width="277" height="63"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
                                     <color key="textColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
@@ -263,17 +291,6 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="528"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="withdraw1.png" id="DGp-pT-aai">
-                                    <rect key="frame" x="59" y="207" width="203" height="112"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您尚未开通资金托管账户" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="acr-it-tfV">
-                                    <rect key="frame" x="35" y="334" width="250" height="21"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="11Z-2D-4ma">
                                     <rect key="frame" x="0.0" y="493" width="320" height="35"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -286,6 +303,24 @@
                                         <action selector="bindCardAction:" destination="-1" eventType="touchUpInside" id="c8J-lC-29q"/>
                                     </connections>
                                 </button>
+                                <view contentMode="scaleToFill" id="eZO-rE-cTW">
+                                    <rect key="frame" x="35" y="186" width="250" height="181"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="withdraw1.png" id="DGp-pT-aai">
+                                            <rect key="frame" x="24" y="11" width="203" height="112"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您尚未绑定提现银行卡" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="acr-it-tfV">
+                                            <rect key="frame" x="0.0" y="147" width="250" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.83999999999999997" colorSpace="calibratedWhite"/>
                         </view>
@@ -363,6 +398,14 @@
                                 <action selector="pushMore:" destination="-1" eventType="touchUpInside" id="ZKa-lH-xnt"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QGE-2F-qkY">
+                            <rect key="frame" x="102" y="2" width="22" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>

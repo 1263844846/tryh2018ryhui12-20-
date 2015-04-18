@@ -41,11 +41,13 @@
 @property (weak, nonatomic) IBOutlet UIView *segment2ContentView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *footView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView1;
 
 - (IBAction)pushMain:(id)sender;
 - (IBAction)pushUserCenter:(id)sender;
 - (IBAction)pushMore:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UILabel *projectDetail;
 -(void)setupWithDic:(NSDictionary*)dic;
 
 @property (weak, nonatomic) IBOutlet UIView *segmentView1;
@@ -57,8 +59,9 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *projectScrollView;
 @property (weak, nonatomic) IBOutlet UIScrollView *insuranceScrollView;
 
-@property (weak, nonatomic) IBOutlet UILabel *projectDetail;
+@property (weak, nonatomic) IBOutlet UILabel *projectImageLabel1;
 
+@property (weak, nonatomic) IBOutlet UILabel *projectImageLabel;
 - (IBAction)Investment:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UILabel *studentNameLabel;

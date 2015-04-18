@@ -11,6 +11,7 @@
 
 @interface RHGuidanceViewController : UIViewController<RHSegmentContentViewDelegate,UIScrollViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIPageControl *pageController;
 @property(nonatomic,strong)RHSegmentContentView* segmentContentView;
 @property(nonatomic,strong)NSMutableArray* views;
 @property (weak, nonatomic) IBOutlet UIScrollView *scollView;

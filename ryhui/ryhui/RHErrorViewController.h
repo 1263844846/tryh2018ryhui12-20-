@@ -17,7 +17,9 @@ enum{
 };
 
 @interface RHErrorViewController : RHBaseViewController
+@property (weak, nonatomic) IBOutlet UIButton *secButton;
 
+@property (weak, nonatomic) IBOutlet UIView *errorView;
 @property (weak, nonatomic) IBOutlet UIImageView *errorImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tipsLabel;

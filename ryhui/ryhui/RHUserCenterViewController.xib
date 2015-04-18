@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RHUserCenterViewController">
             <connections>
                 <outlet property="emailLabel" destination="4F4-mZ-cRy" id="yY7-An-HAU"/>
+                <outlet property="messageNumLabel" destination="QwS-g0-GIR" id="mzy-MJ-Wjt"/>
                 <outlet property="mobileLabel" destination="dTK-tk-2QU" id="5oj-0J-nQo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -198,6 +199,14 @@
                                         <action selector="pushMore:" destination="-1" eventType="touchUpInside" id="6ko-ib-YKD"/>
                                     </connections>
                                 </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QwS-g0-GIR">
+                                    <rect key="frame" x="102" y="2" width="22" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>

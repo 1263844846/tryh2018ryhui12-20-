@@ -8,6 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		961AD2F930E8CEFA8FA5D28D /* libPods-ryhui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB95D30F1AE0DCFA27AE1DD7 /* libPods-ryhui.a */; };
+		D537C36D1ADD3E1F009D3433 /* RHMyGiftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D537C36B1ADD3E1F009D3433 /* RHMyGiftViewController.m */; };
+		D537C36E1ADD3E1F009D3433 /* RHMyGiftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D537C36C1ADD3E1F009D3433 /* RHMyGiftViewController.xib */; };
+		D537C3711ADD4079009D3433 /* RHMyGiftContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D537C3701ADD4079009D3433 /* RHMyGiftContentViewController.m */; };
+		D537C3751ADD4100009D3433 /* RHMyGiftViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D537C3731ADD4100009D3433 /* RHMyGiftViewCell.m */; };
+		D537C3761ADD4100009D3433 /* RHMyGiftViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D537C3741ADD4100009D3433 /* RHMyGiftViewCell.xib */; };
+		D537C3791ADD41E2009D3433 /* giftcellBg.png in Resources */ = {isa = PBXBuildFile; fileRef = D537C3781ADD41E2009D3433 /* giftcellBg.png */; };
+		D537C37B1ADD4512009D3433 /* giftPass.png in Resources */ = {isa = PBXBuildFile; fileRef = D537C37A1ADD4512009D3433 /* giftPass.png */; };
+		D537C37D1ADD4518009D3433 /* giftbg2.png in Resources */ = {isa = PBXBuildFile; fileRef = D537C37C1ADD4518009D3433 /* giftbg2.png */; };
+		D537C37F1ADD452E009D3433 /* giftPass1.png in Resources */ = {isa = PBXBuildFile; fileRef = D537C37E1ADD452E009D3433 /* giftPass1.png */; };
+		D537C3841ADD4FF0009D3433 /* RHChooseGiftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D537C3821ADD4FF0009D3433 /* RHChooseGiftViewController.m */; };
+		D537C3851ADD4FF0009D3433 /* RHChooseGiftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D537C3831ADD4FF0009D3433 /* RHChooseGiftViewController.xib */; };
+		D537C3891ADD528D009D3433 /* RHChooseGiftViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D537C3871ADD528D009D3433 /* RHChooseGiftViewCell.m */; };
+		D537C38A1ADD528D009D3433 /* RHChooseGiftViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D537C3881ADD528D009D3433 /* RHChooseGiftViewCell.xib */; };
+		D537C38D1ADD63C2009D3433 /* gift.png in Resources */ = {isa = PBXBuildFile; fileRef = D537C38B1ADD63C2009D3433 /* gift.png */; };
+		D537C38E1ADD63C2009D3433 /* gift1.png in Resources */ = {isa = PBXBuildFile; fileRef = D537C38C1ADD63C2009D3433 /* gift1.png */; };
+		D54A074E1ADA39760031A5A1 /* RHBindCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D54A074C1ADA39760031A5A1 /* RHBindCardViewController.m */; };
+		D54A074F1ADA39760031A5A1 /* RHBindCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D54A074D1ADA39760031A5A1 /* RHBindCardViewController.xib */; };
+		D54A07531ADA99730031A5A1 /* RHMyMessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D54A07511ADA99730031A5A1 /* RHMyMessageDetailViewController.m */; };
+		D54A07541ADA99730031A5A1 /* RHMyMessageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D54A07521ADA99730031A5A1 /* RHMyMessageDetailViewController.xib */; };
+		D556C7CD1ADFB7690069E68E /* RHGetGiftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D556C7CB1ADFB7690069E68E /* RHGetGiftViewController.m */; };
+		D556C7CE1ADFB7690069E68E /* RHGetGiftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D556C7CC1ADFB7690069E68E /* RHGetGiftViewController.xib */; };
+		D556C7D21ADFB7FA0069E68E /* getGift1.png in Resources */ = {isa = PBXBuildFile; fileRef = D556C7CF1ADFB7FA0069E68E /* getGift1.png */; };
+		D556C7D31ADFB7FA0069E68E /* getGift3.png in Resources */ = {isa = PBXBuildFile; fileRef = D556C7D01ADFB7FA0069E68E /* getGift3.png */; };
+		D556C7D41ADFB7FA0069E68E /* getGiftBG.png in Resources */ = {isa = PBXBuildFile; fileRef = D556C7D11ADFB7FA0069E68E /* getGiftBG.png */; };
 		D562367C1AC79FC300FEAB7C /* guidan1.png in Resources */ = {isa = PBXBuildFile; fileRef = D56236791AC79FC300FEAB7C /* guidan1.png */; };
 		D562367D1AC79FC300FEAB7C /* guidan2.png in Resources */ = {isa = PBXBuildFile; fileRef = D562367A1AC79FC300FEAB7C /* guidan2.png */; };
 		D562367E1AC79FC300FEAB7C /* guidan3.png in Resources */ = {isa = PBXBuildFile; fileRef = D562367B1AC79FC300FEAB7C /* guidan3.png */; };
@@ -15,6 +39,45 @@
 		D56236841AC7A4C900FEAB7C /* RHForgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D56236821AC7A4C900FEAB7C /* RHForgotPasswordViewController.xib */; };
 		D562368E1AC7E6AB00FEAB7C /* RHAccountValidateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D562368C1AC7E6AB00FEAB7C /* RHAccountValidateViewController.m */; };
 		D562368F1AC7E6AB00FEAB7C /* RHAccountValidateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D562368D1AC7E6AB00FEAB7C /* RHAccountValidateViewController.xib */; };
+		D57006FA1ADF803500CEF60A /* defaultRH.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D57006F91ADF803500CEF60A /* defaultRH.jpg */; };
+		D57A0DDE1AE0DCCC00CE2293 /* RHBankListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D57A0DDC1AE0DCCC00CE2293 /* RHBankListViewController.m */; };
+		D57A0DDF1AE0DCCC00CE2293 /* RHBankListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D57A0DDD1AE0DCCC00CE2293 /* RHBankListViewController.xib */; };
+		D58A74091AD6AD0C0076D3FB /* RHRegisterAgreenWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D58A74071AD6AD0C0076D3FB /* RHRegisterAgreenWebViewController.m */; };
+		D58A740A1AD6AD0C0076D3FB /* RHRegisterAgreenWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D58A74081AD6AD0C0076D3FB /* RHRegisterAgreenWebViewController.xib */; };
+		D58A740E1AD6BA870076D3FB /* RHInvestDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D58A740C1AD6BA870076D3FB /* RHInvestDetailViewController.m */; };
+		D58A740F1AD6BA870076D3FB /* RHInvestDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D58A740D1AD6BA870076D3FB /* RHInvestDetailViewController.xib */; };
+		D58A74131AD6BBCC0076D3FB /* RHInvestDetaiTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D58A74111AD6BBCC0076D3FB /* RHInvestDetaiTableViewCell.m */; };
+		D58A74141AD6BBCC0076D3FB /* RHInvestDetaiTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D58A74121AD6BBCC0076D3FB /* RHInvestDetaiTableViewCell.xib */; };
+		D5C233B81ADCE677006DD91E /* qcode.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D5C233B71ADCE677006DD91E /* qcode.jpg */; };
+		D5C233BC1ADCE6F0006DD91E /* RHIntroductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C233BA1ADCE6F0006DD91E /* RHIntroductionViewController.m */; };
+		D5C233BD1ADCE6F0006DD91E /* RHIntroductionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5C233BB1ADCE6F0006DD91E /* RHIntroductionViewController.xib */; };
+		D5C233EB1ADCE99C006DD91E /* SinaWeiboConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C233C51ADCE99C006DD91E /* SinaWeiboConnection.framework */; };
+		D5C233EF1ADCE99C006DD91E /* WeChatConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C233C91ADCE99C006DD91E /* WeChatConnection.framework */; };
+		D5C233F01ADCE99C006DD91E /* AGCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C233CB1ADCE99C006DD91E /* AGCommon.framework */; };
+		D5C233F11ADCE99C006DD91E /* ShareSDKLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5C233CC1ADCE99C006DD91E /* ShareSDKLocalizable.strings */; };
+		D5C233F21ADCE99C006DD91E /* Resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D5C233CE1ADCE99C006DD91E /* Resource.bundle */; };
+		D5C233F31ADCE99C006DD91E /* ShareSDKCoreService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C233CF1ADCE99C006DD91E /* ShareSDKCoreService.framework */; };
+		D5C233F41ADCE99C006DD91E /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C233D31ADCE99C006DD91E /* TencentOpenAPI.framework */; };
+		D5C233F51ADCE99C006DD91E /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D5C233D41ADCE99C006DD91E /* TencentOpenApi_IOS_Bundle.bundle */; };
+		D5C233F61ADCE99C006DD91E /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C233D61ADCE99C006DD91E /* libWeiboSDK.a */; };
+		D5C233F71ADCE99C006DD91E /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D5C233D71ADCE99C006DD91E /* WeiboSDK.bundle */; };
+		D5C233F81ADCE99C006DD91E /* libTCWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C233DA1ADCE99C006DD91E /* libTCWeiboSDK.a */; };
+		D5C233F91ADCE99C006DD91E /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C233DE1ADCE99C006DD91E /* libWeChatSDK.a */; };
+		D5C233FA1ADCE99C006DD91E /* ShareSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C233E11ADCE99C006DD91E /* ShareSDK.framework */; };
+		D5C233FB1ADCE99C006DD91E /* ShareSDKFlatShareViewUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D5C233E31ADCE99C006DD91E /* ShareSDKFlatShareViewUI.bundle */; };
+		D5C233FC1ADCE99C006DD91E /* ShareSDKFlatShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C233E41ADCE99C006DD91E /* ShareSDKFlatShareViewUI.framework */; };
+		D5C233FD1ADCE99C006DD91E /* ShareSDKShareActionSheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C233E51ADCE99C006DD91E /* ShareSDKShareActionSheet.framework */; };
+		D5C234011ADCEA18006DD91E /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C234001ADCEA18006DD91E /* libicucore.dylib */; };
+		D5C234031ADCEA22006DD91E /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C234021ADCEA22006DD91E /* libz.1.2.5.dylib */; };
+		D5C234051ADCEA29006DD91E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C234041ADCEA29006DD91E /* Security.framework */; };
+		D5C234071ADCEA31006DD91E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C234061ADCEA31006DD91E /* CoreTelephony.framework */; };
+		D5C234091ADCEA3A006DD91E /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C234081ADCEA3A006DD91E /* ImageIO.framework */; };
+		D5C2340B1ADCF385006DD91E /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C2340A1ADCF385006DD91E /* Social.framework */; };
+		D5C2340D1ADCF38A006DD91E /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C2340C1ADCF38A006DD91E /* Accounts.framework */; };
+		D5C2340F1ADCF3B5006DD91E /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C2340E1ADCF3B5006DD91E /* libstdc++.dylib */; };
+		D5CC95CA1AD8E252006C2F80 /* NSString+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CC95C91AD8E252006C2F80 /* NSString+URL.m */; };
+		D5D7926F1ADC2ABD00017DD2 /* RepaymentSchedule1.png in Resources */ = {isa = PBXBuildFile; fileRef = D5D7926D1ADC2ABD00017DD2 /* RepaymentSchedule1.png */; };
+		D5D792701ADC2ABD00017DD2 /* RepaymentSchedule2.png in Resources */ = {isa = PBXBuildFile; fileRef = D5D7926E1ADC2ABD00017DD2 /* RepaymentSchedule2.png */; };
 		F80E49441A8E24C000028CD1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F80E49431A8E24C000028CD1 /* main.m */; };
 		F80E49471A8E24C000028CD1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F80E49461A8E24C000028CD1 /* AppDelegate.m */; };
 		F80E494A1A8E24C000028CD1 /* ryhui.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F80E49481A8E24C000028CD1 /* ryhui.xcdatamodeld */; };
@@ -192,8 +255,6 @@
 		F8C38D8C1AC9800F005C3B1F /* RHRepaymentScheduleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8C38D8A1AC9800F005C3B1F /* RHRepaymentScheduleViewController.xib */; };
 		F8C38D901AC98112005C3B1F /* RHRepaymentScheduleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C38D8E1AC98112005C3B1F /* RHRepaymentScheduleCell.m */; };
 		F8C38D911AC98112005C3B1F /* RHRepaymentScheduleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8C38D8F1AC98112005C3B1F /* RHRepaymentScheduleCell.xib */; };
-		F8C38D961AC982E2005C3B1F /* RepaymentSchedule1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C38D931AC982E2005C3B1F /* RepaymentSchedule1.png */; };
-		F8C38D971AC982E2005C3B1F /* RepaymentSchedule2.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C38D941AC982E2005C3B1F /* RepaymentSchedule2.png */; };
 		F8C38D981AC982E2005C3B1F /* RepaymentSchedule3.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C38D951AC982E2005C3B1F /* RepaymentSchedule3.png */; };
 		F8C38D9A1AC98432005C3B1F /* user1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C38D991AC98432005C3B1F /* user1.png */; };
 		F8C38D9C1AC986F2005C3B1F /* withdraw1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C38D9B1AC986F2005C3B1F /* withdraw1.png */; };
@@ -226,6 +287,38 @@
 /* Begin PBXFileReference section */
 		64D0F7EFA66E690954907170 /* Pods-ryhui.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ryhui.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ryhui/Pods-ryhui.debug.xcconfig"; sourceTree = "<group>"; };
 		BB95D30F1AE0DCFA27AE1DD7 /* libPods-ryhui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ryhui.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D537C36A1ADD3E1F009D3433 /* RHMyGiftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHMyGiftViewController.h; sourceTree = "<group>"; };
+		D537C36B1ADD3E1F009D3433 /* RHMyGiftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHMyGiftViewController.m; sourceTree = "<group>"; };
+		D537C36C1ADD3E1F009D3433 /* RHMyGiftViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHMyGiftViewController.xib; sourceTree = "<group>"; };
+		D537C36F1ADD4079009D3433 /* RHMyGiftContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHMyGiftContentViewController.h; sourceTree = "<group>"; };
+		D537C3701ADD4079009D3433 /* RHMyGiftContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHMyGiftContentViewController.m; sourceTree = "<group>"; };
+		D537C3721ADD4100009D3433 /* RHMyGiftViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHMyGiftViewCell.h; sourceTree = "<group>"; };
+		D537C3731ADD4100009D3433 /* RHMyGiftViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHMyGiftViewCell.m; sourceTree = "<group>"; };
+		D537C3741ADD4100009D3433 /* RHMyGiftViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHMyGiftViewCell.xib; sourceTree = "<group>"; };
+		D537C3781ADD41E2009D3433 /* giftcellBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = giftcellBg.png; sourceTree = "<group>"; };
+		D537C37A1ADD4512009D3433 /* giftPass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = giftPass.png; sourceTree = "<group>"; };
+		D537C37C1ADD4518009D3433 /* giftbg2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = giftbg2.png; sourceTree = "<group>"; };
+		D537C37E1ADD452E009D3433 /* giftPass1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = giftPass1.png; sourceTree = "<group>"; };
+		D537C3811ADD4FF0009D3433 /* RHChooseGiftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHChooseGiftViewController.h; sourceTree = "<group>"; };
+		D537C3821ADD4FF0009D3433 /* RHChooseGiftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHChooseGiftViewController.m; sourceTree = "<group>"; };
+		D537C3831ADD4FF0009D3433 /* RHChooseGiftViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHChooseGiftViewController.xib; sourceTree = "<group>"; };
+		D537C3861ADD528D009D3433 /* RHChooseGiftViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHChooseGiftViewCell.h; sourceTree = "<group>"; };
+		D537C3871ADD528D009D3433 /* RHChooseGiftViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHChooseGiftViewCell.m; sourceTree = "<group>"; };
+		D537C3881ADD528D009D3433 /* RHChooseGiftViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHChooseGiftViewCell.xib; sourceTree = "<group>"; };
+		D537C38B1ADD63C2009D3433 /* gift.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gift.png; sourceTree = "<group>"; };
+		D537C38C1ADD63C2009D3433 /* gift1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gift1.png; sourceTree = "<group>"; };
+		D54A074B1ADA39760031A5A1 /* RHBindCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHBindCardViewController.h; sourceTree = "<group>"; };
+		D54A074C1ADA39760031A5A1 /* RHBindCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHBindCardViewController.m; sourceTree = "<group>"; };
+		D54A074D1ADA39760031A5A1 /* RHBindCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHBindCardViewController.xib; sourceTree = "<group>"; };
+		D54A07501ADA99730031A5A1 /* RHMyMessageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHMyMessageDetailViewController.h; sourceTree = "<group>"; };
+		D54A07511ADA99730031A5A1 /* RHMyMessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHMyMessageDetailViewController.m; sourceTree = "<group>"; };
+		D54A07521ADA99730031A5A1 /* RHMyMessageDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHMyMessageDetailViewController.xib; sourceTree = "<group>"; };
+		D556C7CA1ADFB7690069E68E /* RHGetGiftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHGetGiftViewController.h; sourceTree = "<group>"; };
+		D556C7CB1ADFB7690069E68E /* RHGetGiftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHGetGiftViewController.m; sourceTree = "<group>"; };
+		D556C7CC1ADFB7690069E68E /* RHGetGiftViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHGetGiftViewController.xib; sourceTree = "<group>"; };
+		D556C7CF1ADFB7FA0069E68E /* getGift1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = getGift1.png; sourceTree = "<group>"; };
+		D556C7D01ADFB7FA0069E68E /* getGift3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = getGift3.png; sourceTree = "<group>"; };
+		D556C7D11ADFB7FA0069E68E /* getGiftBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = getGiftBG.png; sourceTree = "<group>"; };
 		D56236791AC79FC300FEAB7C /* guidan1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guidan1.png; sourceTree = "<group>"; };
 		D562367A1AC79FC300FEAB7C /* guidan2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guidan2.png; sourceTree = "<group>"; };
 		D562367B1AC79FC300FEAB7C /* guidan3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guidan3.png; sourceTree = "<group>"; };
@@ -235,6 +328,59 @@
 		D562368B1AC7E6AB00FEAB7C /* RHAccountValidateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHAccountValidateViewController.h; sourceTree = "<group>"; };
 		D562368C1AC7E6AB00FEAB7C /* RHAccountValidateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHAccountValidateViewController.m; sourceTree = "<group>"; };
 		D562368D1AC7E6AB00FEAB7C /* RHAccountValidateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHAccountValidateViewController.xib; sourceTree = "<group>"; };
+		D57006F91ADF803500CEF60A /* defaultRH.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = defaultRH.jpg; sourceTree = "<group>"; };
+		D57A0DDB1AE0DCCC00CE2293 /* RHBankListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHBankListViewController.h; sourceTree = "<group>"; };
+		D57A0DDC1AE0DCCC00CE2293 /* RHBankListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHBankListViewController.m; sourceTree = "<group>"; };
+		D57A0DDD1AE0DCCC00CE2293 /* RHBankListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHBankListViewController.xib; sourceTree = "<group>"; };
+		D58A74061AD6AD0C0076D3FB /* RHRegisterAgreenWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHRegisterAgreenWebViewController.h; sourceTree = "<group>"; };
+		D58A74071AD6AD0C0076D3FB /* RHRegisterAgreenWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHRegisterAgreenWebViewController.m; sourceTree = "<group>"; };
+		D58A74081AD6AD0C0076D3FB /* RHRegisterAgreenWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHRegisterAgreenWebViewController.xib; sourceTree = "<group>"; };
+		D58A740B1AD6BA870076D3FB /* RHInvestDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHInvestDetailViewController.h; sourceTree = "<group>"; };
+		D58A740C1AD6BA870076D3FB /* RHInvestDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHInvestDetailViewController.m; sourceTree = "<group>"; };
+		D58A740D1AD6BA870076D3FB /* RHInvestDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHInvestDetailViewController.xib; sourceTree = "<group>"; };
+		D58A74101AD6BBCC0076D3FB /* RHInvestDetaiTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHInvestDetaiTableViewCell.h; sourceTree = "<group>"; };
+		D58A74111AD6BBCC0076D3FB /* RHInvestDetaiTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHInvestDetaiTableViewCell.m; sourceTree = "<group>"; };
+		D58A74121AD6BBCC0076D3FB /* RHInvestDetaiTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHInvestDetaiTableViewCell.xib; sourceTree = "<group>"; };
+		D5C233B71ADCE677006DD91E /* qcode.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = qcode.jpg; sourceTree = "<group>"; };
+		D5C233B91ADCE6F0006DD91E /* RHIntroductionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHIntroductionViewController.h; sourceTree = "<group>"; };
+		D5C233BA1ADCE6F0006DD91E /* RHIntroductionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHIntroductionViewController.m; sourceTree = "<group>"; };
+		D5C233BB1ADCE6F0006DD91E /* RHIntroductionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHIntroductionViewController.xib; sourceTree = "<group>"; };
+		D5C233C51ADCE99C006DD91E /* SinaWeiboConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SinaWeiboConnection.framework; sourceTree = "<group>"; };
+		D5C233C91ADCE99C006DD91E /* WeChatConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WeChatConnection.framework; sourceTree = "<group>"; };
+		D5C233CB1ADCE99C006DD91E /* AGCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AGCommon.framework; sourceTree = "<group>"; };
+		D5C233CD1ADCE99C006DD91E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ShareSDKLocalizable.strings; sourceTree = "<group>"; };
+		D5C233CE1ADCE99C006DD91E /* Resource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resource.bundle; sourceTree = "<group>"; };
+		D5C233CF1ADCE99C006DD91E /* ShareSDKCoreService.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKCoreService.framework; sourceTree = "<group>"; };
+		D5C233D01ADCE99C006DD91E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ShareSDKLocalizable.strings"; sourceTree = "<group>"; };
+		D5C233D31ADCE99C006DD91E /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
+		D5C233D41ADCE99C006DD91E /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
+		D5C233D61ADCE99C006DD91E /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
+		D5C233D71ADCE99C006DD91E /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
+		D5C233D81ADCE99C006DD91E /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
+		D5C233DA1ADCE99C006DD91E /* libTCWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTCWeiboSDK.a; sourceTree = "<group>"; };
+		D5C233DB1ADCE99C006DD91E /* WeiboApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboApi.h; sourceTree = "<group>"; };
+		D5C233DC1ADCE99C006DD91E /* WeiboApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboApiObject.h; sourceTree = "<group>"; };
+		D5C233DE1ADCE99C006DD91E /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		D5C233DF1ADCE99C006DD91E /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		D5C233E01ADCE99C006DD91E /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		D5C233E11ADCE99C006DD91E /* ShareSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDK.framework; sourceTree = "<group>"; };
+		D5C233E31ADCE99C006DD91E /* ShareSDKFlatShareViewUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKFlatShareViewUI.bundle; sourceTree = "<group>"; };
+		D5C233E41ADCE99C006DD91E /* ShareSDKFlatShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKFlatShareViewUI.framework; sourceTree = "<group>"; };
+		D5C233E51ADCE99C006DD91E /* ShareSDKShareActionSheet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKShareActionSheet.framework; sourceTree = "<group>"; };
+		D5C233FE1ADCE9DB006DD91E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D5C234001ADCEA18006DD91E /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		D5C234021ADCEA22006DD91E /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		D5C234041ADCEA29006DD91E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		D5C234061ADCEA31006DD91E /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		D5C234081ADCEA3A006DD91E /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		D5C2340A1ADCF385006DD91E /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		D5C2340C1ADCF38A006DD91E /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		D5C2340E1ADCF3B5006DD91E /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		D5CC95C81AD8E252006C2F80 /* NSString+URL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URL.h"; sourceTree = "<group>"; };
+		D5CC95C91AD8E252006C2F80 /* NSString+URL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URL.m"; sourceTree = "<group>"; };
+		D5D7926C1ADBF8E400017DD2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		D5D7926D1ADC2ABD00017DD2 /* RepaymentSchedule1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RepaymentSchedule1.png; sourceTree = "<group>"; };
+		D5D7926E1ADC2ABD00017DD2 /* RepaymentSchedule2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RepaymentSchedule2.png; sourceTree = "<group>"; };
 		DE5A032DE22EAAF12589E45A /* Pods-ryhui.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ryhui.release.xcconfig"; path = "Pods/Target Support Files/Pods-ryhui/Pods-ryhui.release.xcconfig"; sourceTree = "<group>"; };
 		F80E493E1A8E24C000028CD1 /* ryhui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ryhui.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F80E49421A8E24C000028CD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -306,7 +452,7 @@
 		F83865AF1AA0569C00001D1A /* registerEnSelect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = registerEnSelect.png; sourceTree = "<group>"; };
 		F83865B01AA0569C00001D1A /* registerSelect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = registerSelect.png; sourceTree = "<group>"; };
 		F86B8AED1AA16ED3000D2B8C /* RHGesturePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHGesturePasswordViewController.h; sourceTree = "<group>"; };
-		F86B8AEE1AA16ED3000D2B8C /* RHGesturePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHGesturePasswordViewController.m; sourceTree = "<group>"; };
+		F86B8AEE1AA16ED3000D2B8C /* RHGesturePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHGesturePasswordViewController.m; sourceTree = "<group>"; wrapsLines = 0; };
 		F86B8AF01AA16F53000D2B8C /* RHGestureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHGestureView.h; sourceTree = "<group>"; };
 		F86B8AF11AA16F53000D2B8C /* RHGestureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHGestureView.m; sourceTree = "<group>"; };
 		F86B8AF31AA16F75000D2B8C /* RHGesturePasswordButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHGesturePasswordButton.h; sourceTree = "<group>"; };
@@ -468,8 +614,6 @@
 		F8C38D8D1AC98112005C3B1F /* RHRepaymentScheduleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHRepaymentScheduleCell.h; sourceTree = "<group>"; };
 		F8C38D8E1AC98112005C3B1F /* RHRepaymentScheduleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHRepaymentScheduleCell.m; sourceTree = "<group>"; };
 		F8C38D8F1AC98112005C3B1F /* RHRepaymentScheduleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHRepaymentScheduleCell.xib; sourceTree = "<group>"; };
-		F8C38D931AC982E2005C3B1F /* RepaymentSchedule1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RepaymentSchedule1.png; sourceTree = "<group>"; };
-		F8C38D941AC982E2005C3B1F /* RepaymentSchedule2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RepaymentSchedule2.png; sourceTree = "<group>"; };
 		F8C38D951AC982E2005C3B1F /* RepaymentSchedule3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RepaymentSchedule3.png; sourceTree = "<group>"; };
 		F8C38D991AC98432005C3B1F /* user1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user1.png; sourceTree = "<group>"; };
 		F8C38D9B1AC986F2005C3B1F /* withdraw1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = withdraw1.png; sourceTree = "<group>"; };
@@ -497,7 +641,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5C2340F1ADCF3B5006DD91E /* libstdc++.dylib in Frameworks */,
+				D5C2340D1ADCF38A006DD91E /* Accounts.framework in Frameworks */,
+				D5C2340B1ADCF385006DD91E /* Social.framework in Frameworks */,
+				D5C234091ADCEA3A006DD91E /* ImageIO.framework in Frameworks */,
+				D5C234071ADCEA31006DD91E /* CoreTelephony.framework in Frameworks */,
+				D5C234051ADCEA29006DD91E /* Security.framework in Frameworks */,
+				D5C234031ADCEA22006DD91E /* libz.1.2.5.dylib in Frameworks */,
+				D5C234011ADCEA18006DD91E /* libicucore.dylib in Frameworks */,
+				D5C233EF1ADCE99C006DD91E /* WeChatConnection.framework in Frameworks */,
+				D5C233FD1ADCE99C006DD91E /* ShareSDKShareActionSheet.framework in Frameworks */,
+				D5C233F91ADCE99C006DD91E /* libWeChatSDK.a in Frameworks */,
+				D5C233F31ADCE99C006DD91E /* ShareSDKCoreService.framework in Frameworks */,
 				961AD2F930E8CEFA8FA5D28D /* libPods-ryhui.a in Frameworks */,
+				D5C233F81ADCE99C006DD91E /* libTCWeiboSDK.a in Frameworks */,
+				D5C233F01ADCE99C006DD91E /* AGCommon.framework in Frameworks */,
+				D5C233F41ADCE99C006DD91E /* TencentOpenAPI.framework in Frameworks */,
+				D5C233F61ADCE99C006DD91E /* libWeiboSDK.a in Frameworks */,
+				D5C233FC1ADCE99C006DD91E /* ShareSDKFlatShareViewUI.framework in Frameworks */,
+				D5C233EB1ADCE99C006DD91E /* SinaWeiboConnection.framework in Frameworks */,
+				D5C233FA1ADCE99C006DD91E /* ShareSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,9 +686,72 @@
 		4B7547823688CBC5ACDA42D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D5C2340E1ADCF3B5006DD91E /* libstdc++.dylib */,
+				D5C2340C1ADCF38A006DD91E /* Accounts.framework */,
+				D5C2340A1ADCF385006DD91E /* Social.framework */,
+				D5C234081ADCEA3A006DD91E /* ImageIO.framework */,
+				D5C234061ADCEA31006DD91E /* CoreTelephony.framework */,
+				D5C234041ADCEA29006DD91E /* Security.framework */,
+				D5C234021ADCEA22006DD91E /* libz.1.2.5.dylib */,
+				D5C234001ADCEA18006DD91E /* libicucore.dylib */,
+				D5C233FE1ADCE9DB006DD91E /* SystemConfiguration.framework */,
 				BB95D30F1AE0DCFA27AE1DD7 /* libPods-ryhui.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D537C3691ADD3DF5009D3433 /* myGiftViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D537C36A1ADD3E1F009D3433 /* RHMyGiftViewController.h */,
+				D537C36B1ADD3E1F009D3433 /* RHMyGiftViewController.m */,
+				D537C36C1ADD3E1F009D3433 /* RHMyGiftViewController.xib */,
+				D537C36F1ADD4079009D3433 /* RHMyGiftContentViewController.h */,
+				D537C3701ADD4079009D3433 /* RHMyGiftContentViewController.m */,
+				D537C3721ADD4100009D3433 /* RHMyGiftViewCell.h */,
+				D537C3731ADD4100009D3433 /* RHMyGiftViewCell.m */,
+				D537C3741ADD4100009D3433 /* RHMyGiftViewCell.xib */,
+			);
+			name = myGiftViewController;
+			sourceTree = "<group>";
+		};
+		D537C3771ADD41C4009D3433 /* gitf */ = {
+			isa = PBXGroup;
+			children = (
+				D556C7CF1ADFB7FA0069E68E /* getGift1.png */,
+				D556C7D01ADFB7FA0069E68E /* getGift3.png */,
+				D556C7D11ADFB7FA0069E68E /* getGiftBG.png */,
+				D537C38B1ADD63C2009D3433 /* gift.png */,
+				D537C38C1ADD63C2009D3433 /* gift1.png */,
+				D537C37E1ADD452E009D3433 /* giftPass1.png */,
+				D537C37C1ADD4518009D3433 /* giftbg2.png */,
+				D537C37A1ADD4512009D3433 /* giftPass.png */,
+				D537C3781ADD41E2009D3433 /* giftcellBg.png */,
+			);
+			name = gitf;
+			sourceTree = "<group>";
+		};
+		D537C3801ADD4FC4009D3433 /* chooseGiftViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D537C3811ADD4FF0009D3433 /* RHChooseGiftViewController.h */,
+				D537C3821ADD4FF0009D3433 /* RHChooseGiftViewController.m */,
+				D537C3831ADD4FF0009D3433 /* RHChooseGiftViewController.xib */,
+				D537C3861ADD528D009D3433 /* RHChooseGiftViewCell.h */,
+				D537C3871ADD528D009D3433 /* RHChooseGiftViewCell.m */,
+				D537C3881ADD528D009D3433 /* RHChooseGiftViewCell.xib */,
+			);
+			name = chooseGiftViewController;
+			sourceTree = "<group>";
+		};
+		D556C7C91ADFB7430069E68E /* RHGetGiftViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D556C7CA1ADFB7690069E68E /* RHGetGiftViewController.h */,
+				D556C7CB1ADFB7690069E68E /* RHGetGiftViewController.m */,
+				D556C7CC1ADFB7690069E68E /* RHGetGiftViewController.xib */,
+			);
+			name = RHGetGiftViewController;
 			sourceTree = "<group>";
 		};
 		D562367F1AC7A32100FEAB7C /* RHForgotPasswordViewController */ = {
@@ -555,6 +781,98 @@
 				F87B83241AC82E3A00EB73A6 /* RHFindPWDoneViewController.xib */,
 			);
 			name = RHFindPasswordViewController;
+			sourceTree = "<group>";
+		};
+		D5C233BE1ADCE99C006DD91E /* ShareSDK */ = {
+			isa = PBXGroup;
+			children = (
+				D5C233BF1ADCE99C006DD91E /* Connection */,
+				D5C233CA1ADCE99C006DD91E /* Core */,
+				D5C233D11ADCE99C006DD91E /* Extend */,
+				D5C233E11ADCE99C006DD91E /* ShareSDK.framework */,
+				D5C233E21ADCE99C006DD91E /* UI */,
+			);
+			path = ShareSDK;
+			sourceTree = "<group>";
+		};
+		D5C233BF1ADCE99C006DD91E /* Connection */ = {
+			isa = PBXGroup;
+			children = (
+				D5C233C51ADCE99C006DD91E /* SinaWeiboConnection.framework */,
+				D5C233C91ADCE99C006DD91E /* WeChatConnection.framework */,
+			);
+			path = Connection;
+			sourceTree = "<group>";
+		};
+		D5C233CA1ADCE99C006DD91E /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				D5C233CB1ADCE99C006DD91E /* AGCommon.framework */,
+				D5C233CC1ADCE99C006DD91E /* ShareSDKLocalizable.strings */,
+				D5C233CE1ADCE99C006DD91E /* Resource.bundle */,
+				D5C233CF1ADCE99C006DD91E /* ShareSDKCoreService.framework */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		D5C233D11ADCE99C006DD91E /* Extend */ = {
+			isa = PBXGroup;
+			children = (
+				D5C233D21ADCE99C006DD91E /* QQConnectSDK */,
+				D5C233D51ADCE99C006DD91E /* SinaWeiboSDK */,
+				D5C233D91ADCE99C006DD91E /* TencentWeiboSDK */,
+				D5C233DD1ADCE99C006DD91E /* WeChatSDK */,
+			);
+			path = Extend;
+			sourceTree = "<group>";
+		};
+		D5C233D21ADCE99C006DD91E /* QQConnectSDK */ = {
+			isa = PBXGroup;
+			children = (
+				D5C233D31ADCE99C006DD91E /* TencentOpenAPI.framework */,
+				D5C233D41ADCE99C006DD91E /* TencentOpenApi_IOS_Bundle.bundle */,
+			);
+			path = QQConnectSDK;
+			sourceTree = "<group>";
+		};
+		D5C233D51ADCE99C006DD91E /* SinaWeiboSDK */ = {
+			isa = PBXGroup;
+			children = (
+				D5C233D61ADCE99C006DD91E /* libWeiboSDK.a */,
+				D5C233D71ADCE99C006DD91E /* WeiboSDK.bundle */,
+				D5C233D81ADCE99C006DD91E /* WeiboSDK.h */,
+			);
+			path = SinaWeiboSDK;
+			sourceTree = "<group>";
+		};
+		D5C233D91ADCE99C006DD91E /* TencentWeiboSDK */ = {
+			isa = PBXGroup;
+			children = (
+				D5C233DA1ADCE99C006DD91E /* libTCWeiboSDK.a */,
+				D5C233DB1ADCE99C006DD91E /* WeiboApi.h */,
+				D5C233DC1ADCE99C006DD91E /* WeiboApiObject.h */,
+			);
+			path = TencentWeiboSDK;
+			sourceTree = "<group>";
+		};
+		D5C233DD1ADCE99C006DD91E /* WeChatSDK */ = {
+			isa = PBXGroup;
+			children = (
+				D5C233DE1ADCE99C006DD91E /* libWeChatSDK.a */,
+				D5C233DF1ADCE99C006DD91E /* WXApi.h */,
+				D5C233E01ADCE99C006DD91E /* WXApiObject.h */,
+			);
+			path = WeChatSDK;
+			sourceTree = "<group>";
+		};
+		D5C233E21ADCE99C006DD91E /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				D5C233E31ADCE99C006DD91E /* ShareSDKFlatShareViewUI.bundle */,
+				D5C233E41ADCE99C006DD91E /* ShareSDKFlatShareViewUI.framework */,
+				D5C233E51ADCE99C006DD91E /* ShareSDKShareActionSheet.framework */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		F80E49351A8E24C000028CD1 = {
@@ -637,6 +955,7 @@
 		F80E496F1A8E38DF00028CD1 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				D556C7C91ADFB7430069E68E /* RHGetGiftViewController */,
 				F8C38DA31AC98D90005C3B1F /* RHErrorViewController */,
 				F8C38D9D1AC98A58005C3B1F /* RHContractViewContoller */,
 				F8C38D871AC97FF2005C3B1F /* RHRepaymentScheduleViewController */,
@@ -652,6 +971,8 @@
 				F8B6DAB11AB573C500CCB13D /* rechargeViewController */,
 				F8B6DA641AB5435A00CCB13D /* RHTabbarManager.h */,
 				F8B6DA651AB5435A00CCB13D /* RHTabbarManager.m */,
+				D537C3801ADD4FC4009D3433 /* chooseGiftViewController */,
+				D537C3691ADD3DF5009D3433 /* myGiftViewController */,
 				F8B6DA951AB565C400CCB13D /* myInvestmentViewController */,
 				F8B6DA8A1AB562C800CCB13D /* mytradViewController */,
 				F8B6DA791AB55B8B00CCB13D /* myAccountViewController */,
@@ -693,6 +1014,9 @@
 		F80E497B1A8E3D0400028CD1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D57006F91ADF803500CEF60A /* defaultRH.jpg */,
+				D537C3771ADD41C4009D3433 /* gitf */,
+				D5C233B71ADCE677006DD91E /* qcode.jpg */,
 				F8C38DBD1AC9A321005C3B1F /* projecticon.png */,
 				F8C38DA91AC98FAC005C3B1F /* errorView */,
 				F8C38D9B1AC986F2005C3B1F /* withdraw1.png */,
@@ -782,6 +1106,9 @@
 				F89A3D881AB5D6E200B92DF3 /* RHRegisterWebViewController.h */,
 				F89A3D891AB5D6E200B92DF3 /* RHRegisterWebViewController.m */,
 				F89A3D8A1AB5D6E200B92DF3 /* RHRegisterWebViewController.xib */,
+				D58A74061AD6AD0C0076D3FB /* RHRegisterAgreenWebViewController.h */,
+				D58A74071AD6AD0C0076D3FB /* RHRegisterAgreenWebViewController.m */,
+				D58A74081AD6AD0C0076D3FB /* RHRegisterAgreenWebViewController.xib */,
 			);
 			name = RegisterViewController;
 			sourceTree = "<group>";
@@ -821,6 +1148,7 @@
 		F86B8AF61AA17641000D2B8C /* third */ = {
 			isa = PBXGroup;
 			children = (
+				D5C233BE1ADCE99C006DD91E /* ShareSDK */,
 			);
 			name = third;
 			sourceTree = "<group>";
@@ -858,6 +1186,9 @@
 				F87B832F1AC8365500EB73A6 /* RHMyMessageCell.h */,
 				F87B83301AC8365500EB73A6 /* RHMyMessageCell.m */,
 				F87B83311AC8365500EB73A6 /* RHMyMessageCell.xib */,
+				D54A07501ADA99730031A5A1 /* RHMyMessageDetailViewController.h */,
+				D54A07511ADA99730031A5A1 /* RHMyMessageDetailViewController.m */,
+				D54A07521ADA99730031A5A1 /* RHMyMessageDetailViewController.xib */,
 			);
 			name = RHMyMessageViewController;
 			sourceTree = "<group>";
@@ -874,6 +1205,12 @@
 				F8C38DB81AC9991E005C3B1F /* RHBindCardWebViewController.h */,
 				F8C38DB91AC9991E005C3B1F /* RHBindCardWebViewController.m */,
 				F8C38DBA1AC9991E005C3B1F /* RHBindCardWebViewController.xib */,
+				D54A074B1ADA39760031A5A1 /* RHBindCardViewController.h */,
+				D54A074C1ADA39760031A5A1 /* RHBindCardViewController.m */,
+				D54A074D1ADA39760031A5A1 /* RHBindCardViewController.xib */,
+				D57A0DDB1AE0DCCC00CE2293 /* RHBankListViewController.h */,
+				D57A0DDC1AE0DCCC00CE2293 /* RHBankListViewController.m */,
+				D57A0DDD1AE0DCCC00CE2293 /* RHBankListViewController.xib */,
 			);
 			name = RHWithdrawViewController;
 			sourceTree = "<group>";
@@ -982,6 +1319,8 @@
 			children = (
 				F89A3D7D1AB5B54F00B92DF3 /* RHUserManager.h */,
 				F89A3D7E1AB5B54F00B92DF3 /* RHUserManager.m */,
+				D5CC95C81AD8E252006C2F80 /* NSString+URL.h */,
+				D5CC95C91AD8E252006C2F80 /* NSString+URL.m */,
 			);
 			name = Manager;
 			sourceTree = "<group>";
@@ -1026,6 +1365,9 @@
 				F8B6DA6D1AB54D7100CCB13D /* RHMoreViewController.h */,
 				F8B6DA6E1AB54D7100CCB13D /* RHMoreViewController.m */,
 				F8B6DA6F1AB54D7100CCB13D /* RHMoreViewController.xib */,
+				D5C233B91ADCE6F0006DD91E /* RHIntroductionViewController.h */,
+				D5C233BA1ADCE6F0006DD91E /* RHIntroductionViewController.m */,
+				D5C233BB1ADCE6F0006DD91E /* RHIntroductionViewController.xib */,
 			);
 			name = MoreViewController;
 			sourceTree = "<group>";
@@ -1093,6 +1435,12 @@
 				F8B6DAAE1AB56F7C00CCB13D /* RHMyInvestmentViewCell.xib */,
 				F815ED401AB726AA004B2053 /* RHInvestmentContentViewController.h */,
 				F815ED411AB726AA004B2053 /* RHInvestmentContentViewController.m */,
+				D58A740B1AD6BA870076D3FB /* RHInvestDetailViewController.h */,
+				D58A740C1AD6BA870076D3FB /* RHInvestDetailViewController.m */,
+				D58A740D1AD6BA870076D3FB /* RHInvestDetailViewController.xib */,
+				D58A74101AD6BBCC0076D3FB /* RHInvestDetaiTableViewCell.h */,
+				D58A74111AD6BBCC0076D3FB /* RHInvestDetaiTableViewCell.m */,
+				D58A74121AD6BBCC0076D3FB /* RHInvestDetaiTableViewCell.xib */,
 			);
 			name = myInvestmentViewController;
 			sourceTree = "<group>";
@@ -1150,8 +1498,8 @@
 		F8C38D921AC982BA005C3B1F /* RepaymentSchedule */ = {
 			isa = PBXGroup;
 			children = (
-				F8C38D931AC982E2005C3B1F /* RepaymentSchedule1.png */,
-				F8C38D941AC982E2005C3B1F /* RepaymentSchedule2.png */,
+				D5D7926D1ADC2ABD00017DD2 /* RepaymentSchedule1.png */,
+				D5D7926E1ADC2ABD00017DD2 /* RepaymentSchedule2.png */,
 				F8C38D951AC982E2005C3B1F /* RepaymentSchedule3.png */,
 			);
 			name = RepaymentSchedule;
@@ -1258,6 +1606,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = F80E49351A8E24C000028CD1;
 			productRefGroup = F80E493F1A8E24C000028CD1 /* Products */;
@@ -1278,6 +1627,7 @@
 				F8C38D9A1AC98432005C3B1F /* user1.png in Resources */,
 				F87B83401AC841D500EB73A6 /* withdrawButton.png in Resources */,
 				F815ED5C1AB7557E004B2053 /* 8-1.png in Resources */,
+				D5D792701ADC2ABD00017DD2 /* RepaymentSchedule2.png in Resources */,
 				F8B6DAAB1AB567BE00CCB13D /* 18-4.png in Resources */,
 				F815ED531AB752D2004B2053 /* bg.jpg in Resources */,
 				F88831171AB48069001E4AD1 /* mainNS.png in Resources */,
@@ -1285,6 +1635,8 @@
 				F8B6DAA81AB567BE00CCB13D /* 18-1.png in Resources */,
 				F87B83591AC84AD700EB73A6 /* PSBC.jpg in Resources */,
 				F87B83511AC84AD700EB73A6 /* BOCOM.jpg in Resources */,
+				D556C7D41ADFB7FA0069E68E /* getGiftBG.png in Resources */,
+				D58A740A1AD6AD0C0076D3FB /* RHRegisterAgreenWebViewController.xib in Resources */,
 				F87B83521AC84AD700EB73A6 /* BOS.jpg in Resources */,
 				F87B83411AC841D500EB73A6 /* withdrawButtonDown.png in Resources */,
 				F815ED591AB7557E004B2053 /* 6.png in Resources */,
@@ -1292,59 +1644,80 @@
 				F815ED5B1AB7557E004B2053 /* 7.png in Resources */,
 				F80E49801A8E407900028CD1 /* loginButtonDefault.png in Resources */,
 				F88831181AB48069001E4AD1 /* mainS.png in Resources */,
+				D537C37B1ADD4512009D3433 /* giftPass.png in Resources */,
 				F888310C1AB435C7001E4AD1 /* mainLogo.png in Resources */,
 				F87B83501AC84AD700EB73A6 /* BOC.jpg in Resources */,
-				F8C38D961AC982E2005C3B1F /* RepaymentSchedule1.png in Resources */,
 				F89A3D851AB5D16800B92DF3 /* register2.png in Resources */,
 				F8C38DB51AC98FE1005C3B1F /* error4.png in Resources */,
 				F87B83531AC84AD700EB73A6 /* CCB.jpg in Resources */,
+				D5C233BD1ADCE6F0006DD91E /* RHIntroductionViewController.xib in Resources */,
 				F80E49841A8E41A300028CD1 /* qrButtonDefault.png in Resources */,
 				F888311C1AB48069001E4AD1 /* userS.png in Resources */,
+				D556C7D21ADFB7FA0069E68E /* getGift1.png in Resources */,
 				D562368F1AC7E6AB00FEAB7C /* RHAccountValidateViewController.xib in Resources */,
+				D537C38E1ADD63C2009D3433 /* gift1.png in Resources */,
+				D5C233F51ADCE99C006DD91E /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				F88830FD1AB42268001E4AD1 /* segmentBgV.png in Resources */,
 				F87B83571AC84AD700EB73A6 /* CMBC.jpg in Resources */,
 				F8B6DA601AB51BE600CCB13D /* RHUserCenterViewController.xib in Resources */,
 				F87B83541AC84AD700EB73A6 /* CEB.jpg in Resources */,
 				F8B6DAB01AB56F7C00CCB13D /* RHMyInvestmentViewCell.xib in Resources */,
 				F8B6DAA31AB5679000CCB13D /* in3.png in Resources */,
+				D5C233FB1ADCE99C006DD91E /* ShareSDKFlatShareViewUI.bundle in Resources */,
+				D5C233F71ADCE99C006DD91E /* WeiboSDK.bundle in Resources */,
+				D537C3761ADD4100009D3433 /* RHMyGiftViewCell.xib in Resources */,
 				F83865B41AA0569C00001D1A /* registerButtonUp.png in Resources */,
 				F89A3D911AB5DA0300B92DF3 /* RHRechargeWebViewController.xib in Resources */,
 				F8B6DA621AB540AD00CCB13D /* userArrow.png in Resources */,
+				D556C7D31ADFB7FA0069E68E /* getGift3.png in Resources */,
+				D537C36E1ADD3E1F009D3433 /* RHMyGiftViewController.xib in Resources */,
 				F8B6DA861AB55C1500CCB13D /* myAccount2.png in Resources */,
 				F8C38DB21AC98FE1005C3B1F /* error2.png in Resources */,
+				D57A0DDF1AE0DCCC00CE2293 /* RHBankListViewController.xib in Resources */,
 				F88830F81AB41E6E001E4AD1 /* segmentBg1.png in Resources */,
 				F88831021AB42DBA001E4AD1 /* mainBanner.png in Resources */,
+				D58A740F1AD6BA870076D3FB /* RHInvestDetailViewController.xib in Resources */,
 				F89A3D841AB5D16800B92DF3 /* register1.png in Resources */,
 				F8B6DA851AB55C1500CCB13D /* myAccount1.png in Resources */,
 				F8A0EBF81AB8719000F65A7F /* 4-1.png in Resources */,
 				F815ED5D1AB7557E004B2053 /* 8.png in Resources */,
+				D5D7926F1ADC2ABD00017DD2 /* RepaymentSchedule1.png in Resources */,
+				D537C3791ADD41E2009D3433 /* giftcellBg.png in Resources */,
 				F80E49851A8E41A300028CD1 /* qrButtonHightLight.png in Resources */,
 				F86B8AFF1AA17DB2000D2B8C /* GestureIcon.png in Resources */,
 				F87B83581AC84AD700EB73A6 /* ICBC.jpg in Resources */,
 				F83865B11AA0569C00001D1A /* captchaButtonDown.png in Resources */,
+				D5C233F11ADCE99C006DD91E /* ShareSDKLocalizable.strings in Resources */,
 				D562367D1AC79FC300FEAB7C /* guidan2.png in Resources */,
 				F8B6DAB61AB5740600CCB13D /* RHRechargeViewController.xib in Resources */,
 				F88831261AB4885F001E4AD1 /* pd_segment1.png in Resources */,
 				F815ED5F1AB756BA004B2053 /* 9.png in Resources */,
+				D537C3851ADD4FF0009D3433 /* RHChooseGiftViewController.xib in Resources */,
 				F80E49951A8E502E00028CD1 /* ALoginButtonDefault.png in Resources */,
 				F80E49791A8E3C5400028CD1 /* RHLoginViewController.xib in Resources */,
 				F8B6DAA11AB5679000CCB13D /* in1.png in Resources */,
 				F8C38DA21AC98A71005C3B1F /* RHContractViewContoller.xib in Resources */,
 				F87B83261AC82E3A00EB73A6 /* RHFindPWDoneViewController.xib in Resources */,
-				F8C38D971AC982E2005C3B1F /* RepaymentSchedule2.png in Resources */,
 				F888311B1AB48069001E4AD1 /* userNS.png in Resources */,
 				F83865B31AA0569C00001D1A /* registerButtonDown.png in Resources */,
 				F8B6DA771AB5517600CCB13D /* phoneIcon.png in Resources */,
+				D54A074F1ADA39760031A5A1 /* RHBindCardViewController.xib in Resources */,
 				F8A0EBF01AB8704900F65A7F /* 3-1.png in Resources */,
 				F87B834F1AC84AD700EB73A6 /* ABC.jpg in Resources */,
+				D58A74141AD6BBCC0076D3FB /* RHInvestDetaiTableViewCell.xib in Resources */,
 				F88830F91AB41E6E001E4AD1 /* segmentBg2.png in Resources */,
 				F8C38DB31AC98FE1005C3B1F /* error3.png in Resources */,
 				F8C38DA81AC98DA8005C3B1F /* RHErrorViewController.xib in Resources */,
+				D54A07541ADA99730031A5A1 /* RHMyMessageDetailViewController.xib in Resources */,
 				F8A0EBF51AB8718900F65A7F /* project1@2x.png in Resources */,
+				D537C38D1ADD63C2009D3433 /* gift.png in Resources */,
+				D57006FA1ADF803500CEF60A /* defaultRH.jpg in Resources */,
 				F88831191AB48069001E4AD1 /* moreNS.png in Resources */,
+				D537C37D1ADD4518009D3433 /* giftbg2.png in Resources */,
 				F83375E11AB9BEBC00944CB1 /* RHInvestmentViewController.xib in Resources */,
 				F815ED5A1AB7557E004B2053 /* 7-1.png in Resources */,
 				F87B832D1AC8346700EB73A6 /* RHMyMessageViewController.xib in Resources */,
+				D537C38A1ADD528D009D3433 /* RHChooseGiftViewCell.xib in Resources */,
 				F88830FF1AB42329001E4AD1 /* newProjectBg.png in Resources */,
 				F87B83561AC84AD700EB73A6 /* CMB.jpg in Resources */,
 				F8C38DB71AC98FE1005C3B1F /* error5.png in Resources */,
@@ -1357,6 +1730,7 @@
 				F8B6DA9A1AB565DF00CCB13D /* RHMyInvestmentViewController.xib in Resources */,
 				F88831221AB4846B001E4AD1 /* RHProjectDetailViewController.xib in Resources */,
 				F89A3D861AB5D16800B92DF3 /* register3.png in Resources */,
+				D5C233F21ADCE99C006DD91E /* Resource.bundle in Resources */,
 				F8C38D911AC98112005C3B1F /* RHRepaymentScheduleCell.xib in Resources */,
 				F83865B51AA0569C00001D1A /* registerEnSelect.png in Resources */,
 				F80E498A1A8E444B00028CD1 /* RHALoginViewController.xib in Resources */,
@@ -1397,7 +1771,9 @@
 				F8B6DA9C1AB5664D00CCB13D /* myAccountButton.png in Resources */,
 				F80E49961A8E502E00028CD1 /* ALoginButtonHightLight.png in Resources */,
 				F87B83281AC82EA000EB73A6 /* pwDone.png in Resources */,
+				D537C37F1ADD452E009D3433 /* giftPass1.png in Resources */,
 				F83375EA1AB9C56700944CB1 /* 8-button-2.png in Resources */,
+				D5C233B81ADCE677006DD91E /* qcode.jpg in Resources */,
 				F8B6DA741AB5513100CCB13D /* moreHeader.png in Resources */,
 				F888311A1AB48069001E4AD1 /* moreS.png in Resources */,
 				F8B6DA881AB55C1500CCB13D /* myAccount4.png in Resources */,
@@ -1406,6 +1782,7 @@
 				F83375F01AB9C86B00944CB1 /* RHInvestmentWebViewController.xib in Resources */,
 				F87B835F1AC8552800EB73A6 /* RHWithdrawWebViewController.xib in Resources */,
 				F8B6DA871AB55C1500CCB13D /* myAccount3.png in Resources */,
+				D556C7CE1ADFB7690069E68E /* RHGetGiftViewController.xib in Resources */,
 				F87B831C1AC8255700EB73A6 /* RHPhoneValidateViewController.xib in Resources */,
 				F8B6DA781AB5517600CCB13D /* shareIcon.png in Resources */,
 				F86B8B051AA18406000D2B8C /* RHMainViewController.xib in Resources */,
@@ -1470,14 +1847,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D537C3891ADD528D009D3433 /* RHChooseGiftViewCell.m in Sources */,
 				F83865A81AA0525100001D1A /* RHRegisterViewController.m in Sources */,
 				F815ED421AB726AA004B2053 /* RHInvestmentContentViewController.m in Sources */,
 				F888312B1AB49988001E4AD1 /* RHProjectDetailViewCell.m in Sources */,
+				D54A074E1ADA39760031A5A1 /* RHBindCardViewController.m in Sources */,
+				D58A740E1AD6BA870076D3FB /* RHInvestDetailViewController.m in Sources */,
 				F87B833C1AC83C6300EB73A6 /* RHWithdrawViewController.m in Sources */,
+				D537C3711ADD4079009D3433 /* RHMyGiftContentViewController.m in Sources */,
+				D537C3841ADD4FF0009D3433 /* RHChooseGiftViewController.m in Sources */,
 				F8B6DA8E1AB562EF00CCB13D /* RHTradingViewController.m in Sources */,
 				F8B6DA661AB5435A00CCB13D /* RHTabbarManager.m in Sources */,
 				F80E49781A8E3C5400028CD1 /* RHLoginViewController.m in Sources */,
 				F815ED451AB72898004B2053 /* AITableFooterVew.m in Sources */,
+				D556C7CD1ADFB7690069E68E /* RHGetGiftViewController.m in Sources */,
 				F80E49471A8E24C000028CD1 /* AppDelegate.m in Sources */,
 				F87B835E1AC8552800EB73A6 /* RHWithdrawWebViewController.m in Sources */,
 				F8B6DABB1AB5773500CCB13D /* RHAboutViewController.m in Sources */,
@@ -1488,12 +1871,15 @@
 				D56236831AC7A4C900FEAB7C /* RHForgotPasswordViewController.m in Sources */,
 				F86B8AF21AA16F53000D2B8C /* RHGestureView.m in Sources */,
 				F8B6DAAF1AB56F7C00CCB13D /* RHMyInvestmentViewCell.m in Sources */,
+				D537C36D1ADD3E1F009D3433 /* RHMyGiftViewController.m in Sources */,
+				D5C233BC1ADCE6F0006DD91E /* RHIntroductionViewController.m in Sources */,
 				F80E49441A8E24C000028CD1 /* main.m in Sources */,
 				F8A0EBFC1AB8778D00F65A7F /* RHProjectListContentViewController.m in Sources */,
 				F88830F31AB41C02001E4AD1 /* RHSegmentView.m in Sources */,
 				F83375E01AB9BEBC00944CB1 /* RHInvestmentViewController.m in Sources */,
 				F8B6DA6A1AB5459500CCB13D /* RHUserCenterMainViewController.m in Sources */,
 				F87B832C1AC8346700EB73A6 /* RHMyMessageViewController.m in Sources */,
+				D537C3751ADD4100009D3433 /* RHMyGiftViewCell.m in Sources */,
 				F86B8AEF1AA16ED3000D2B8C /* RHGesturePasswordViewController.m in Sources */,
 				D562368E1AC7E6AB00FEAB7C /* RHAccountValidateViewController.m in Sources */,
 				F87B83201AC827BA00EB73A6 /* RHPasswordConfirmViewController.m in Sources */,
@@ -1504,9 +1890,13 @@
 				F815ED4A1AB749FF004B2053 /* RHGuidanceViewController.m in Sources */,
 				F88831071AB43369001E4AD1 /* RHMainViewCell.m in Sources */,
 				F87B831B1AC8255700EB73A6 /* RHPhoneValidateViewController.m in Sources */,
+				D54A07531ADA99730031A5A1 /* RHMyMessageDetailViewController.m in Sources */,
 				F8B6DA701AB54D7100CCB13D /* RHMoreViewController.m in Sources */,
+				D58A74131AD6BBCC0076D3FB /* RHInvestDetaiTableViewCell.m in Sources */,
 				F87B83251AC82E3A00EB73A6 /* RHFindPWDoneViewController.m in Sources */,
+				D57A0DDE1AE0DCCC00CE2293 /* RHBankListViewController.m in Sources */,
 				F86B8AF51AA16F75000D2B8C /* RHGesturePasswordButton.m in Sources */,
+				D5CC95CA1AD8E252006C2F80 /* NSString+URL.m in Sources */,
 				F8B6DA7D1AB55BA300CCB13D /* RHMyAccountViewController.m in Sources */,
 				F86B8B041AA18406000D2B8C /* RHMainViewController.m in Sources */,
 				F8C38D901AC98112005C3B1F /* RHRepaymentScheduleCell.m in Sources */,
@@ -1524,6 +1914,7 @@
 				F8B6DA991AB565DF00CCB13D /* RHMyInvestmentViewController.m in Sources */,
 				F83375EF1AB9C86B00944CB1 /* RHInvestmentWebViewController.m in Sources */,
 				F8A0EBEC1AB86F1A00F65A7F /* RHProjectListViewController.m in Sources */,
+				D58A74091AD6AD0C0076D3FB /* RHRegisterAgreenWebViewController.m in Sources */,
 				F80E494A1A8E24C000028CD1 /* ryhui.xcdatamodeld in Sources */,
 				F879E7551AA355B100339647 /* RHAgreement1ViewController.m in Sources */,
 				F86B8AFD1AA17680000D2B8C /* RHGesturePasswordView.m in Sources */,
@@ -1549,10 +1940,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		D5C233CC1ADCE99C006DD91E /* ShareSDKLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D5C233CD1ADCE99C006DD91E /* en */,
+				D5C233D01ADCE99C006DD91E /* zh-Hans */,
+			);
+			name = ShareSDKLocalizable.strings;
+			sourceTree = "<group>";
+		};
 		F80E49531A8E24C000028CD1 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				F80E49541A8E24C000028CD1 /* Base */,
+				D5D7926C1ADBF8E400017DD2 /* zh-Hans */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
@@ -1644,10 +2045,24 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ming Lu (C3TV6E2EC2)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ryhui/ShareSDK/Connection",
+					"$(PROJECT_DIR)/ryhui/ShareSDK/Core",
+					"$(PROJECT_DIR)/ryhui/ShareSDK/Extend/QQConnectSDK",
+					"$(PROJECT_DIR)/ryhui/ShareSDK",
+					"$(PROJECT_DIR)/ryhui/ShareSDK/UI",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ryhui/ryhuiPrefixHeader.pch;
 				INFOPLIST_FILE = ryhui/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ryhui/ShareSDK/Extend/SinaWeiboSDK",
+					"$(PROJECT_DIR)/ryhui/ShareSDK/Extend/TencentWeiboSDK",
+					"$(PROJECT_DIR)/ryhui/ShareSDK/Extend/WeChatSDK",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cdc5fc6b-77b3-4df5-a98e-5dee4d9ecda1";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1662,10 +2077,24 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ming Lu (C3TV6E2EC2)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ryhui/ShareSDK/Connection",
+					"$(PROJECT_DIR)/ryhui/ShareSDK/Core",
+					"$(PROJECT_DIR)/ryhui/ShareSDK/Extend/QQConnectSDK",
+					"$(PROJECT_DIR)/ryhui/ShareSDK",
+					"$(PROJECT_DIR)/ryhui/ShareSDK/UI",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ryhui/ryhuiPrefixHeader.pch;
 				INFOPLIST_FILE = ryhui/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ryhui/ShareSDK/Extend/SinaWeiboSDK",
+					"$(PROJECT_DIR)/ryhui/ShareSDK/Extend/TencentWeiboSDK",
+					"$(PROJECT_DIR)/ryhui/ShareSDK/Extend/WeChatSDK",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cdc5fc6b-77b3-4df5-a98e-5dee4d9ecda1";
 				TARGETED_DEVICE_FAMILY = 1;

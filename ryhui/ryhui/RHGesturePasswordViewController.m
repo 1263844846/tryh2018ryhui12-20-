@@ -11,7 +11,9 @@
 #import "RHALoginViewController.h"
 
 @interface RHGesturePasswordViewController ()
-
+{
+    BOOL isDrawPan;
+}
 @property (nonatomic,strong) RHGesturePasswordView * gesturePasswordView;
 
 @end
@@ -24,6 +26,7 @@
 @synthesize gesturePasswordView;
 @synthesize isForgotV;
 @synthesize isReset;
+@synthesize isRegister;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,13 +49,18 @@
         [self reset];
     }
     else {
-        [self verify];
         if (isReset) {
-            [gesturePasswordView.forgetButton setHidden:YES];
-            [gesturePasswordView.changeButton setHidden:YES];
-            [gesturePasswordView.state setTextColor:[UIColor colorWithRed:2/255.f green:174/255.f blue:240/255.f alpha:1]];
-            [gesturePasswordView.state setText:@"请输入密码"];
+            [self reset];
+        }else{
+            [self verify];
         }
+//        [self verify];
+//        if (isReset) {
+//            [gesturePasswordView.forgetButton setHidden:YES];
+//            [gesturePasswordView.changeButton setHidden:YES];
+//            [gesturePasswordView.state setTextColor:[UIColor colorWithRed:2/255.f green:174/255.f blue:240/255.f alpha:1]];
+//            [gesturePasswordView.state setText:@"请输入密码"];
+//        }
 
     }
 }
@@ -89,13 +97,18 @@
 #pragma mark - 重置手势密码
 - (void)reset{
     gesturePasswordView = [[RHGesturePasswordView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    [gesturePasswordView setGesturePasswordDelegate:self];
     [gesturePasswordView.tentacleView setResetDelegate:self];
     [gesturePasswordView.tentacleView setStyle:2];
     //    [gesturePasswordView.imgView setHidden:YES];
     [gesturePasswordView.forgetButton setHidden:YES];
     [gesturePasswordView.changeButton setHidden:YES];
+    [gesturePasswordView.clearButton setHidden:NO];
+    [gesturePasswordView.enterButton setHidden:NO];
+
     [gesturePasswordView.state setTextColor:[UIColor colorWithRed:2/255.f green:174/255.f blue:240/255.f alpha:1]];
-    [gesturePasswordView.state setText:@"请输入新密码"];
+    [gesturePasswordView.state setText:@"请设置手势密码"];
+    isDrawPan=YES;
     [self.view addSubview:gesturePasswordView];
 }
 
@@ -128,6 +141,23 @@
     [self clear];
 }
 
+-(void)cleanPan{
+    [gesturePasswordView.tentacleView enterArgin];
+
+}
+
+
+-(void)enterPan{
+    [gesturePasswordView.tentacleView enterArgin];
+    [gesturePasswordView.state setTextColor:[UIColor colorWithRed:2/255.f green:174/255.f blue:240/255.f alpha:1]];
+    [gesturePasswordView.state setText:@"请确认手势密码"];
+
+    [gesturePasswordView.clearButton setHidden:NO];
+    [gesturePasswordView.enterButton setHidden:NO];
+    isDrawPan=NO;
+}
+
+
 - (BOOL)verification:(NSString *)result{
     if ([result isEqualToString:password]) {
         [gesturePasswordView.state setTextColor:[UIColor colorWithRed:2/255.f green:174/255.f blue:240/255.f alpha:1]];
@@ -140,6 +170,7 @@
         }else{
             [[RHTabbarManager sharedInterface] initTabbar];
             [[RHTabbarManager sharedInterface] selectTabbarMain];
+            
         }
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"RHGestureSuccessed" object:nil];
@@ -151,12 +182,9 @@
 }
 
 - (BOOL)resetPassword:(NSString *)result{
-    if ([previousString isEqualToString:@""]) {
+    if ([previousString isEqualToString:@""]||isDrawPan) {
         DLog(@"%@",result);
         previousString=result;
-        [gesturePasswordView.tentacleView enterArgin];
-        [gesturePasswordView.state setTextColor:[UIColor colorWithRed:2/255.f green:174/255.f blue:240/255.f alpha:1]];
-        [gesturePasswordView.state setText:@"请验证输入密码"];
         return YES;
     }
     else {
@@ -172,7 +200,12 @@
                 [RHUtility showTextWithText:@"手势密码修改成功"];
                 [self.navigationController popViewControllerAnimated:YES];
             }else{
-               [self verify];
+                if (isRegister) {
+                    [self.navigationController popViewControllerAnimated:NO];
+                }else{
+                    [[RHTabbarManager sharedInterface] initTabbar];
+                    [[RHTabbarManager sharedInterface] selectTabbarMain];
+                }
             }
             
             return YES;
