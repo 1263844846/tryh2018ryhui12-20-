@@ -99,6 +99,20 @@
     self.myMessageNumLabel.layer.masksToBounds=YES;
     self.myMessageNumLabel.hidden=YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkout) name:@"RHSELECTUSER" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refesh) name:UIApplicationWillEnterForegroundNotification object:nil];
+
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self checkout];
+}
+
+-(void)refesh
+{
+    [self checkout];
 }
 -(void)dealloc
 {

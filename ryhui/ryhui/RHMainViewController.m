@@ -53,8 +53,6 @@
     self.segmentView.segmentLabel1.hidden=YES;
     self.segmentView.segmentLabel3.hidden=YES;
     self.segmentView.segmentLabel4.hidden=YES;
-    [self getSegmentnum1];
-    [self getSegmentnum2];
     
     self.tableView.tableFooterView=self.footView;
     
@@ -79,6 +77,8 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
     }];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refesh) name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -89,13 +89,11 @@
 
 -(void)refesh
 {
+    [self segment1Post];
+    [self segment2Post];
     [self getSegmentnum1];
     [self getSegmentnum2];
-    if (self.type&&[type isEqualToString:@"1"]) {
-        [self segment2Post];
-    }else{
-        [self segment1Post];  
-    }
+  
 }
 #pragma mark-network
 -(void)getSegmentnum1
@@ -104,7 +102,6 @@
     NSDictionary* parameters=@{@"_search":@"true",@"rows":@"1000",@"page":@"1",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"percent\",\"op\":\"lt\",\"data\":100}]}"};
     
     [[RHNetworkService instance] POST:@"common/main/shangListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             int num=[[responseObject objectForKey:@"records"] intValue];
             if (num>0) {
@@ -126,7 +123,6 @@
     
     NSDictionary* parameters=@{@"_search":@"true",@"rows":@"1000",@"page":@"1",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"percent\",\"op\":\"lt\",\"data\":100}]}"};
     [[RHNetworkService instance] POST:@"common/main/xueListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             int num=[[responseObject objectForKey:@"records"] intValue];
             if (num>0) {
@@ -158,6 +154,7 @@
 
             NSArray* array=[responseObject objectForKey:@"rows"];
             if ([array isKindOfClass:[NSArray class]]) {
+//                [self.segment1Array removeAllObjects];
                 for (NSDictionary* dic in array) {
                     if ([dic objectForKey:@"cell"]&&!([[dic objectForKey:@"cell"] isKindOfClass:[NSNull class]])) {
                         [self.segment1Array addObject:[dic objectForKey:@"cell"]];
@@ -169,9 +166,11 @@
             if (records&&[records intValue]<10) {
                 //已经到底了
             }
-            [self.dataArray removeAllObjects];
-            [self.dataArray addObjectsFromArray:self.segment1Array];
-            [self.tableView reloadData];
+            if ([type isEqualToString:@"0"]) {
+                [self.dataArray removeAllObjects];
+                [self.dataArray addObjectsFromArray:self.segment1Array];
+                [self.tableView reloadData];
+            }
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -196,6 +195,7 @@
 
             NSArray* array=[responseObject objectForKey:@"rows"];
             if ([array isKindOfClass:[NSArray class]]) {
+//                [self.segment2Array removeAllObjects];
                 for (NSDictionary* dic in array) {
                     if ([dic objectForKey:@"cell"]&&!([[dic objectForKey:@"cell"] isKindOfClass:[NSNull class]])) {
                         [self.segment2Array addObject:[dic objectForKey:@"cell"]];
@@ -207,10 +207,12 @@
             if (records&&[records intValue]<10) {
                 //已经到底了
             }
-            [self.dataArray removeAllObjects];
-            [self.dataArray addObjectsFromArray:self.segment2Array];
-            [self.tableView reloadData];
-        }
+            if ([type isEqualToString:@"1"]) {
+                [self.dataArray removeAllObjects];
+                [self.dataArray addObjectsFromArray:self.segment2Array];
+                [self.tableView reloadData];
+            }
+         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DLog(@"%@",error);

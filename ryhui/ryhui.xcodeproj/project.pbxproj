@@ -171,6 +171,8 @@
 		F87B835A1AC84AD700EB73A6 /* SPDB.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F87B834E1AC84AD700EB73A6 /* SPDB.jpg */; };
 		F87B835E1AC8552800EB73A6 /* RHWithdrawWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F87B835C1AC8552800EB73A6 /* RHWithdrawWebViewController.m */; };
 		F87B835F1AC8552800EB73A6 /* RHWithdrawWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F87B835D1AC8552800EB73A6 /* RHWithdrawWebViewController.xib */; };
+		F8838A9F1AE27528005A554E /* noData.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F8838A9E1AE27528005A554E /* noData.jpg */; };
+		F8838AA21AE27562005A554E /* UIViewController+NoData.m in Sources */ = {isa = PBXBuildFile; fileRef = F8838AA11AE27562005A554E /* UIViewController+NoData.m */; };
 		F88830F31AB41C02001E4AD1 /* RHSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = F88830F21AB41C02001E4AD1 /* RHSegmentView.m */; };
 		F88830F81AB41E6E001E4AD1 /* segmentBg1.png in Resources */ = {isa = PBXBuildFile; fileRef = F88830F61AB41E6E001E4AD1 /* segmentBg1.png */; };
 		F88830F91AB41E6E001E4AD1 /* segmentBg2.png in Resources */ = {isa = PBXBuildFile; fileRef = F88830F71AB41E6E001E4AD1 /* segmentBg2.png */; };
@@ -507,6 +509,9 @@
 		F87B835B1AC8552800EB73A6 /* RHWithdrawWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHWithdrawWebViewController.h; sourceTree = "<group>"; };
 		F87B835C1AC8552800EB73A6 /* RHWithdrawWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHWithdrawWebViewController.m; sourceTree = "<group>"; };
 		F87B835D1AC8552800EB73A6 /* RHWithdrawWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHWithdrawWebViewController.xib; sourceTree = "<group>"; };
+		F8838A9E1AE27528005A554E /* noData.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = noData.jpg; sourceTree = "<group>"; };
+		F8838AA01AE27562005A554E /* UIViewController+NoData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NoData.h"; sourceTree = "<group>"; };
+		F8838AA11AE27562005A554E /* UIViewController+NoData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NoData.m"; sourceTree = "<group>"; };
 		F88830F11AB41C02001E4AD1 /* RHSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHSegmentView.h; sourceTree = "<group>"; };
 		F88830F21AB41C02001E4AD1 /* RHSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHSegmentView.m; sourceTree = "<group>"; };
 		F88830F61AB41E6E001E4AD1 /* segmentBg1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = segmentBg1.png; sourceTree = "<group>"; };
@@ -1014,6 +1019,7 @@
 		F80E497B1A8E3D0400028CD1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F8838A9E1AE27528005A554E /* noData.jpg */,
 				D57006F91ADF803500CEF60A /* defaultRH.jpg */,
 				D537C3771ADD41C4009D3433 /* gitf */,
 				D5C233B71ADCE677006DD91E /* qcode.jpg */,
@@ -1149,6 +1155,8 @@
 			isa = PBXGroup;
 			children = (
 				D5C233BE1ADCE99C006DD91E /* ShareSDK */,
+				F8838AA01AE27562005A554E /* UIViewController+NoData.h */,
+				F8838AA11AE27562005A554E /* UIViewController+NoData.m */,
 			);
 			name = third;
 			sourceTree = "<group>";
@@ -1716,6 +1724,7 @@
 				D537C37D1ADD4518009D3433 /* giftbg2.png in Resources */,
 				F83375E11AB9BEBC00944CB1 /* RHInvestmentViewController.xib in Resources */,
 				F815ED5A1AB7557E004B2053 /* 7-1.png in Resources */,
+				F8838A9F1AE27528005A554E /* noData.jpg in Resources */,
 				F87B832D1AC8346700EB73A6 /* RHMyMessageViewController.xib in Resources */,
 				D537C38A1ADD528D009D3433 /* RHChooseGiftViewCell.xib in Resources */,
 				F88830FF1AB42329001E4AD1 /* newProjectBg.png in Resources */,
@@ -1858,6 +1867,7 @@
 				D537C3841ADD4FF0009D3433 /* RHChooseGiftViewController.m in Sources */,
 				F8B6DA8E1AB562EF00CCB13D /* RHTradingViewController.m in Sources */,
 				F8B6DA661AB5435A00CCB13D /* RHTabbarManager.m in Sources */,
+				F8838AA21AE27562005A554E /* UIViewController+NoData.m in Sources */,
 				F80E49781A8E3C5400028CD1 /* RHLoginViewController.m in Sources */,
 				F815ED451AB72898004B2053 /* AITableFooterVew.m in Sources */,
 				D556C7CD1ADFB7690069E68E /* RHGetGiftViewController.m in Sources */,
@@ -2064,7 +2074,7 @@
 					"$(PROJECT_DIR)/ryhui/ShareSDK/Extend/WeChatSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cdc5fc6b-77b3-4df5-a98e-5dee4d9ecda1";
+				PROVISIONING_PROFILE = "5159e2bb-dc2d-4b52-93ab-a81d2b90dc2a";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2096,7 +2106,7 @@
 					"$(PROJECT_DIR)/ryhui/ShareSDK/Extend/WeChatSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cdc5fc6b-77b3-4df5-a98e-5dee4d9ecda1";
+				PROVISIONING_PROFILE = "5159e2bb-dc2d-4b52-93ab-a81d2b90dc2a";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

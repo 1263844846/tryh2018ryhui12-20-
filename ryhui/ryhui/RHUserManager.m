@@ -103,13 +103,6 @@ static RHUserManager* _instance =nil;
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHSESSION"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    self.custId=nil;
-    self.email=nil;
-    self.infoType=nil;
-    self.md5=nil;
-    self.telephone=nil;
-    self.userId=nil;
-    self.username=nil;
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHMessageNumSave"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -118,9 +111,19 @@ static RHUserManager* _instance =nil;
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    self.custId=nil;
+    self.email=nil;
+    self.infoType=nil;
+    self.md5=nil;
+    self.telephone=nil;
+    self.userId=nil;
+    self.username=nil;
+
 
     [[RHTabbarManager sharedInterface] cleanTabbar];
     [[RHTabbarManager  sharedInterface] selectALogin];
+    
     
 
 

@@ -30,9 +30,9 @@
         self.emailLabel.text=@"请登录网站绑定";
     }
         
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refesh) name:UIApplicationWillEnterForegroundNotification object:nil];
 
 }
-
 
 
 

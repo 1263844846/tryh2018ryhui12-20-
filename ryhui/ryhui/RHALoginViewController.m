@@ -129,13 +129,18 @@
                 }
                 
                 if (!isPan) {
-                    RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
-                    controller.isForgotV=self.isForgotV;
-                    [self.navigationController pushViewController:controller animated:NO];
+                    if (self.isForgotV) {
+                        RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
+                        controller.isForgotV=self.isForgotV;
+                        [self.navigationController pushViewController:controller animated:NO];
+                    }else{
+                        RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
+                        [self.navigationController pushViewController:controller animated:NO];
+                    }
+           
                 }else{
-                    RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
-                    controller.isReset=YES;
-                    [self.navigationController pushViewController:controller animated:NO];
+                    [[RHTabbarManager sharedInterface] initTabbar];
+                    [[RHTabbarManager sharedInterface] selectTabbarMain];
                 }
 
             }

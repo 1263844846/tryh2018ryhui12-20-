@@ -12,6 +12,8 @@
 
 @interface RHProjectListContentViewController ()
 
+@property (nonatomic,strong)NSString* currentSort;
+@property (nonatomic,strong)NSString* currentSixd;
 @end
 
 @implementation RHProjectListContentViewController
@@ -19,6 +21,8 @@
 @synthesize type;
 @synthesize currentPageIndex = _currentPageIndex;
 @synthesize prarentNav;
+@synthesize currentSixd;
+@synthesize currentSort;
 
 
 -(instancetype)init
@@ -38,6 +42,8 @@
     self.tableView.dataSource=self;
     self.tableView.backgroundColor=[UIColor clearColor];
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor=[UIColor clearColor];
+
     [self.view addSubview:self.tableView];
     
     // Do any additional setup after loading the view.
@@ -78,6 +84,9 @@
 -(void)sordListWithSidx:(NSString*)sidx sord:(NSString*)sord
 {
     _reloading=YES;
+    self.currentSort=sord;
+    self.currentSixd=sidx;
+
     [self getListDataWithFilters:sidx sord:sord];
 }
 
@@ -102,6 +111,10 @@
                     //已经到底了
                     if ([array count]==0) {
                         [_footerView.footerButton setTitle:@"亲暂时没有数据" forState:UIControlStateNormal];
+                        
+                        [self showNoDataWithFrame:self.tableView.frame insertView:self.tableView];
+                    }else{
+                        [self hiddenNoData];
                     }
                     [_footerView.footerButton setEnabled:NO];
                     showLoadMoreButton=NO;
@@ -138,7 +151,15 @@
 
 -(void)getinvestListData
 {
-    [self getListDataWithFilters:@"" sord:@"desc"];
+    NSString* sixd=@"";
+    if (self.currentSixd&&[self.currentSixd length]>0) {
+        sixd=self.currentSixd;
+    }
+    NSString* sort=@"desc";
+    if (self.currentSort&&[self.currentSort length]>0) {
+        sort=self.currentSort;
+    }
+    [self getListDataWithFilters:sixd sord:sort];
 }
 
 - (void)reloadTableView{

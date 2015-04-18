@@ -48,6 +48,7 @@
     self.contentView.frame=rect;
     
     currentThreshold=0.0;
+    currentMoney=0;
     self.giftView.hidden=YES;
     self.gifticon.image=[UIImage imageNamed:@"gift.png"];
     self.giftId=@"";
@@ -110,6 +111,10 @@
     }
     if ([self.textFiled.text floatValue]>projectFund) {
         [RHUtility showTextWithText:@"请输入可投范围内的金额"];
+        return;
+    }
+    if ([self.textFiled.text intValue]-currentMoney>[self.balanceLabel.text intValue]) {
+        [RHUtility showTextWithText:@"您账户余额不足"];
         return;
     }
     [self.textFiled resignFirstResponder];

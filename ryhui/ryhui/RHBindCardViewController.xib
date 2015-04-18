@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14C2055" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RHBindCardViewController">
@@ -40,7 +40,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="L5h-9Q-SJg">
-                            <rect key="frame" x="170.99999966264335" y="61" width="141" height="30"/>
+                            <rect key="frame" x="170.99999957282941" y="61" width="141" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <state key="normal" title="查看支持银行及限额&gt;">
@@ -70,7 +70,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2Ap-Da-que">
-                                    <rect key="frame" x="119.00000009859764" y="15" width="162" height="21"/>
+                                    <rect key="frame" x="119.00000014098055" y="15" width="162" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -87,7 +87,7 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" id="ebQ-kg-Bsn">
-                            <rect key="frame" x="0.0" y="220" width="320" height="132"/>
+                            <rect key="frame" x="0.0" y="220" width="320" height="115"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="温馨提示：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Riu-GL-e7W">
@@ -96,26 +96,23 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OL0-j4-dhH">
-                                    <rect key="frame" x="23" y="53" width="277" height="26"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3、为了您的资金安全，如需解绑、换绑快捷卡/提现卡，需要审核您的资料。请联系融益汇在线客服或拨打400-010-4001" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VIq-8w-ab0">
+                                    <rect key="frame" x="23" y="69" width="277" height="26"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <string key="text">1.融益汇和汇付天下合作，对用户的投资资金进行托管，切实保障用户利益。汇付天下作为首批获得中国人民银行支付许可证的第三方支付公司，在金融支付领域处于领先地位。\n2.开通资金托管账户时，需要验证您的身份信息。该信息一经设置，无法修改，请慎重填写。\n3.请准备一张您名下的储蓄卡，以便顺利提现。</string>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
                                     <color key="textColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VIq-8w-ab0">
-                                    <rect key="frame" x="23" y="82" width="277" height="26"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1、每个用户只能绑定一张银行卡（仅支持借记卡）作为快捷卡，请选择常用的银行卡进行绑定。" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="taY-hR-b1f">
+                                    <rect key="frame" x="23" y="21" width="277" height="24"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <string key="text">1.融益汇和汇付天下合作，对用户的投资资金进行托管，切实保障用户利益。汇付天下作为首批获得中国人民银行支付许可证的第三方支付公司，在金融支付领域处于领先地位。\n2.开通资金托管账户时，需要验证您的身份信息。该信息一经设置，无法修改，请慎重填写。\n3.请准备一张您名下的储蓄卡，以便顺利提现。</string>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
                                     <color key="textColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="taY-hR-b1f">
-                                    <rect key="frame" x="23" y="21" width="277" height="26"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2、您成功绑定快捷卡后，该卡将自动被绑定为提现卡，以后只可提现至此卡，若您之前已绑定过其他提现卡，也将自动被更改为此快捷卡。" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OL0-j4-dhH">
+                                    <rect key="frame" x="23" y="44" width="277" height="26"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <string key="text">1.融益汇和汇付天下合作，对用户的投资资金进行托管，切实保障用户利益。汇付天下作为首批获得中国人民银行支付许可证的第三方支付公司，在金融支付领域处于领先地位。\n2.开通资金托管账户时，需要验证您的身份信息。该信息一经设置，无法修改，请慎重填写。\n3.请准备一张您名下的储蓄卡，以便顺利提现。</string>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
                                     <color key="textColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>

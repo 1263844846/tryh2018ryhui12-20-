@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configBackButton];
-    [self configTitleWithString:@"绑卡"];
+    [self configTitleWithString:@"支持银行限额"];
     
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@bindKJCard",[RHNetworkService instance].doMain]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];

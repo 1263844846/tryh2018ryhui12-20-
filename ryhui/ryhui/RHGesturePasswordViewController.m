@@ -44,6 +44,8 @@
     previousString = [NSString string];
     
     password = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]];
+   
+    DLog(@"%@",password);
     if (!password) {
         
         [self reset];

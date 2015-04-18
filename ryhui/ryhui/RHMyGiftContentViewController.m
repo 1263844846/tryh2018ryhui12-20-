@@ -35,6 +35,7 @@
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor=[UIColor clearColor];
     [self.view addSubview:self.tableView];
     
     // Do any additional setup after loading the view.
@@ -85,6 +86,10 @@
                     //已经到底了
                     if ([array count]==0) {
                         [_footerView.footerButton setTitle:@"亲暂时没有数据" forState:UIControlStateDisabled];
+                        [self showNoDataWithFrame:self.tableView.frame insertView:self.tableView];
+
+                    }else{
+                        [self hiddenNoData];
                     }
                     [_footerView.footerButton setEnabled:NO];
                     showLoadMoreButton=NO;

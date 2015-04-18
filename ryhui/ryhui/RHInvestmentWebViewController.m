@@ -55,6 +55,8 @@
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSString* url=[request.URL absoluteString];
+    DLog(@"%@",url);
+
     if ([url rangeOfString:@"common/paymentResponse/initiativeTenderSuccess"].location!=NSNotFound) {
         RHErrorViewController* controller=[[RHErrorViewController alloc]initWithNibName:@"RHErrorViewController" bundle:nil];
         controller.titleStr=[NSString stringWithFormat:@"投资金额%@元",price];
