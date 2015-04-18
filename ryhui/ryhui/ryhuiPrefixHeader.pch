@@ -18,6 +18,7 @@
 #import "RHTabbarManager.h"
 #import "RHUserManager.h"
 #import "UIViewController+NoData.h"
+#import "NSURLRequest+RHHttps.h"
 
 #ifdef DEBUG
 #define DLog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])

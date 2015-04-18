@@ -29,10 +29,13 @@
     NSString *body = [NSString stringWithFormat: @"money=%@&projectId=%@&giftId=%@",price,projectId,giftId?giftId:@""];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
     [request setHTTPMethod: @"POST"];
+    
     NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
+    
     if (session&&[session length]>0) {
         [request setValue:session forHTTPHeaderField:@"cookie"];
     }
+    
     [request setHTTPBody: [body dataUsingEncoding: NSUTF8StringEncoding]];
     [self.webView loadRequest: request];
 }

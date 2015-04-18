@@ -113,7 +113,14 @@
         [RHUtility showTextWithText:@"请输入可投范围内的金额"];
         return;
     }
-    if ([self.textFiled.text intValue]-currentMoney>[self.balanceLabel.text intValue]) {
+    
+    NSMutableString* balance=[[NSMutableString alloc]initWithCapacity:0];
+    ;
+    for (NSString* subStr in [self.balanceLabel.text componentsSeparatedByString:@","]) {
+        [balance appendString:subStr];
+    }
+    
+    if ([self.textFiled.text intValue]-currentMoney>[balance intValue]) {
         [RHUtility showTextWithText:@"您账户余额不足"];
         return;
     }

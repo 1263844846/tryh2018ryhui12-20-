@@ -170,6 +170,10 @@
         [RHUtility showTextWithText:@"请输入手机号"];
         return;
     }
+    if ([self.captchaImageTF.text length]<=0) {
+        [RHUtility showTextWithText:@"请输入图片验证码"];
+        return;
+    }
     
     NSDictionary* parameters=@{@"telephone":self.phoneNumTF.text};
 
@@ -182,7 +186,7 @@
             NSString* restult=[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
             if ([restult isEqualToString:@"true"]) {
                 //手机号没有绑定
-                NSDictionary *parameters = @{@"telephone":self.phoneNumTF.text,@"type":@"SMS_CAPTCHA_REGISTER"};
+                NSDictionary *parameters = @{@"telephone":self.phoneNumTF.text,@"type":@"SMS_CAPTCHA_REGISTER",@"captcha":self.captchaImageTF.text};
                 AFHTTPRequestOperationManager* manager=[AFHTTPRequestOperationManager manager];
                 manager.responseSerializer=[[AFCompoundResponseSerializer alloc]init];
                 [manager POST:[NSString stringWithFormat:@"%@common/user/general/registerTel",[RHNetworkService instance].doMain] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
