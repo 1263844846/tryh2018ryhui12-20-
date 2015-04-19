@@ -21,7 +21,7 @@
     NSURL *url = nil;
     if (isAgreen) {
         [self configTitleWithString:@"借款协议"];
-        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/agreement/ agreementInvestorApp?projectId=256&userId=89",[RHNetworkService instance].doMain]];
+        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/agreement/agreementInvestorApp?projectId=256&userId=89",[RHNetworkService instance].doMain]];
     }else{
         [self configTitleWithString:@"合同"];
         url=[NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/agreement/agreementInvestor?projectId=%@&userId=%@",[RHNetworkService instance].doMain,self.projectId,[RHUserManager sharedInterface].userId]];

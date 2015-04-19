@@ -198,13 +198,28 @@
                             [RHUtility showTextWithText:@"验证码已发送至您的手机"];
                             [self reSendMessage];
                         }else{
-                            [RHUtility showTextWithText:@"发送失败"];
+                            
+                            NSDictionary* errorDic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+                            if ([errorDic objectForKey:@"msg"]) {
+                                DLog(@"%@",[errorDic objectForKey:@"msg"]);
+                                if ([[errorDic objectForKey:@"msg"] isEqualToString:@"图片验证码错误"]) {
+                                }
+                                [RHUtility showTextWithText:[errorDic objectForKey:@"msg"]];
+                            }
                         }
                     }
 
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                    DLog(@"%@",error);
-                    [RHUtility showTextWithText:@"发送失败"];
+                    if ([error.userInfo.allKeys containsObject:@"com.alamofire.serialization.response.error.data"]) {
+                        NSDictionary* errorDic=[NSJSONSerialization JSONObjectWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] options:NSJSONReadingMutableContainers error:nil];
+                        if ([errorDic objectForKey:@"msg"]) {
+                            DLog(@"%@",[errorDic objectForKey:@"msg"]);
+                            if ([[errorDic objectForKey:@"msg"] isEqualToString:@"图片验证码错误"]) {
+                                [self changeCaptcha];
+                            }
+                            [RHUtility showTextWithText:[errorDic objectForKey:@"msg"]];
+                        }
+                    }
                 }];
             }else{
                 
@@ -361,6 +376,9 @@
         DLog(@"%@",operation.responseObject);
         if ([operation.responseObject isKindOfClass:[NSDictionary class]]) {
             NSString* msg=[operation.responseObject objectForKey:@"msg"];
+            if ([msg isEqualToString:@"验证码错误"]||[msg isEqualToString:@"手机验证码错误"]) {
+                [self changeCaptcha];
+            }
             [RHUtility showTextWithText:msg];
         }
     }];

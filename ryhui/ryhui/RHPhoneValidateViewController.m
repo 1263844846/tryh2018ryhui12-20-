@@ -34,6 +34,7 @@
 }
 
 - (IBAction)getCaptchaAction:(id)sender {
+    [self.phoneTF resignFirstResponder];
     
     if ([self.phoneTF.text length]<=0) {
         [RHUtility showTextWithText:@"请输入手机号"];
@@ -53,12 +54,20 @@
                 [self reSendMessage];
             }
         }else{
-            [RHUtility showTextWithText:@"发送失败"];
+            NSDictionary* errorDic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            if ([errorDic objectForKey:@"msg"]) {
+                [RHUtility showTextWithText:[errorDic objectForKey:@"msg"]];
+            }
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DLog(@"%@",error);
-        [RHUtility showTextWithText:@"发送失败"];
+        if ([error.userInfo.allKeys containsObject:@"com.alamofire.serialization.response.error.data"]) {
+            NSDictionary* errorDic=[NSJSONSerialization JSONObjectWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] options:NSJSONReadingMutableContainers error:nil];
+            if ([errorDic objectForKey:@"msg"]) {
+                [RHUtility showTextWithText:[errorDic objectForKey:@"msg"]];
+            }
+        }
     }];
 }
 

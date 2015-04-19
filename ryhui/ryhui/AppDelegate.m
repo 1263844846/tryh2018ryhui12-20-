@@ -102,6 +102,55 @@
         [[NSUserDefaults standardUserDefaults] setObject:[array objectAtIndex:0] forKey:@"RHSESSION"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         DLog(@"%@",operation.response.allHeaderFields);
+        
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSString* result=[responseObject objectForKey:@"md5"];
+            if (result&&[result length]>0) {
+                NSString* md5=[responseObject objectForKey:@"md5"];
+                [RHNetworkService instance].niubiMd5=md5;
+                
+                NSString* _custId=[responseObject objectForKey:@"custId"];
+                if (![_custId isKindOfClass:[NSNull class]]&&_custId&&[_custId length]>0) {
+                    [RHUserManager sharedInterface].custId=_custId;
+                    [[NSUserDefaults standardUserDefaults] setObject:[RHUserManager sharedInterface].custId forKey:@"RHcustId"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+                
+                NSString* _email=[responseObject objectForKey:@"email"];
+                if (![_email isKindOfClass:[NSNull class]]&&_email&&[_email length]>0) {
+                    [RHUserManager sharedInterface].email=_email;
+                    [[NSUserDefaults standardUserDefaults] setObject:[RHUserManager sharedInterface].email forKey:@"RHemail"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+                
+                NSString* _infoType=[responseObject objectForKey:@"infoType"];
+                if (_infoType&&[_infoType length]>0) {
+                    [RHUserManager sharedInterface].infoType=_infoType;
+                    [[NSUserDefaults standardUserDefaults] setObject:[RHUserManager sharedInterface].infoType forKey:@"RHinfoType"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+                
+                NSString* _md5=[responseObject objectForKey:@"md5"];
+                if (_md5&&[_md5 length]>0) {
+                    [RHUserManager sharedInterface].md5=_md5;
+                    [[NSUserDefaults standardUserDefaults] setObject:[RHUserManager sharedInterface].md5 forKey:@"RHmd5"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+                
+                NSString* _telephone=[responseObject objectForKey:@"telephone"];
+                if (_telephone&&[_telephone length]>0) {
+                    [RHUserManager sharedInterface].telephone=_telephone;
+                    [[NSUserDefaults standardUserDefaults] setObject:[RHUserManager sharedInterface].telephone forKey:@"RHtelephone"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+                NSString* _userid=[[responseObject objectForKey:@"userId"] stringValue];
+                if (_userid&&[_userid length]>0) {
+                    [RHUserManager sharedInterface].userId=_userid;
+                    [[NSUserDefaults standardUserDefaults] setObject:[RHUserManager sharedInterface].userId forKey:@"RHUSERID"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+            }
+        }
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DLog(@"%@",error);

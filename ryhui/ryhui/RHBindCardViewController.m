@@ -21,6 +21,9 @@
     [super viewDidLoad];
     [self configBackButton];
     [self configTitleWithString:@"绑定快捷卡"];
+    
+    NSString* tempStr=[amountStr substringToIndex:[amountStr rangeOfString:@"."].location];
+    
     self.amountLabel.text=amountStr;
 }
 

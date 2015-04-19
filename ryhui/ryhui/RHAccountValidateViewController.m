@@ -40,6 +40,8 @@
 }
 
 - (IBAction)nextAction:(id)sender {
+    [self.accountTF resignFirstResponder];
+    [self.captchaTF resignFirstResponder];
     
     if ([self.accountTF.text length]<=0) {
         [RHUtility showTextWithText:@"请输入用户名"];

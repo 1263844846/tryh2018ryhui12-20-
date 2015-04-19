@@ -34,9 +34,9 @@
     
     [self configTitleWithString:@"登录"];
     
-    self.accountTextField.text=@"asdf5678";
-    
-    self.passwordTextField.text=@"asdf5678";
+//    self.accountTextField.text=@"asdf5678";
+//    
+//    self.passwordTextField.text=@"asdf5678";
     
     self.passwordTextField.secureTextEntry=YES;
     
@@ -151,6 +151,9 @@
         if ([error.userInfo.allKeys containsObject:@"com.alamofire.serialization.response.error.data"]) {
             NSDictionary* errorDic=[NSJSONSerialization JSONObjectWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] options:NSJSONReadingMutableContainers error:nil];
             if ([errorDic objectForKey:@"msg"]) {
+                if ([[errorDic objectForKey:@"msg"] isEqualToString:@"验证码错误"]) {
+                    [self changeCaptcha];
+                }
                 [RHUtility showTextWithText:[errorDic objectForKey:@"msg"]];
             }
         }

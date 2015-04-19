@@ -32,7 +32,8 @@
 
 - (IBAction)nextAction:(id)sender {
     
-    
+    [self.nnewPasswordTF resignFirstResponder];
+    [self.cPasswordTF resignFirstResponder];
     if ([self.nnewPasswordTF.text length]<=0) {
         [RHUtility showTextWithText:@"请输入新密码"];
         return;

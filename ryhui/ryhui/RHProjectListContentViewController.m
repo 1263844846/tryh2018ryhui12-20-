@@ -84,6 +84,7 @@
 -(void)sordListWithSidx:(NSString*)sidx sord:(NSString*)sord
 {
     _reloading=YES;
+    self.currentPageIndex = 1;
     self.currentSort=sord;
     self.currentSixd=sidx;
 
@@ -93,12 +94,15 @@
 -(void)getListDataWithFilters:(NSString*)filters sord:(NSString*)sord
 {
     NSDictionary* parameters=@{@"_search":@"true",@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",_currentPageIndex],@"sidx":filters,@"sord":sord,@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};
+    
     NSString* url=nil;
     if ([type isEqualToString:@"0"]) {
         url=@"common/main/shangListData";
     }else{
         url=@"common/main/xueListData";
     }
+    DLog(@"%@--url==%@",parameters,url);
+
     [[RHNetworkService instance] POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"%@",responseObject);
         NSMutableArray* tempArray=[[NSMutableArray alloc]initWithCapacity:0];

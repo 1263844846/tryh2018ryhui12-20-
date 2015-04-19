@@ -61,8 +61,11 @@
 }
 
 - (IBAction)changePanPasswordAction:(id)sender {
-    RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
-    controller.isReset=YES;
-    [self.navigationController pushViewController:controller animated:YES];
+    
+    [[RHUserManager sharedInterface] logout];
+    [[RHTabbarManager sharedInterface] selectALogin];
+//    RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
+//    controller.isReset=YES;
+//    [self.navigationController pushViewController:controller animated:YES];
 }
 @end
