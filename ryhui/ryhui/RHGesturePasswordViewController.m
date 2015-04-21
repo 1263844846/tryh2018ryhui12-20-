@@ -154,8 +154,8 @@
     [gesturePasswordView.state setTextColor:[UIColor colorWithRed:2/255.f green:174/255.f blue:240/255.f alpha:1]];
     [gesturePasswordView.state setText:@"请确认手势密码"];
 
-    [gesturePasswordView.clearButton setHidden:NO];
-    [gesturePasswordView.enterButton setHidden:NO];
+    [gesturePasswordView.clearButton setHidden:YES];
+    [gesturePasswordView.enterButton setHidden:YES];
     isDrawPan=NO;
 }
 

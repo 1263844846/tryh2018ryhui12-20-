@@ -7,16 +7,20 @@
 //
 
 #import "RHGetGiftViewController.h"
+#import "RHRechargeViewController.h"
+#import "RHMyGiftViewController.h"
 
 @interface RHGetGiftViewController ()
 
 @end
 
 @implementation RHGetGiftViewController
+@synthesize amount;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.amountLabel.text=[NSString stringWithFormat:@"￥%@元",amount];
 }
 
 
@@ -39,7 +43,17 @@
 }
 
 - (IBAction)pushRecharge:(id)sender {
+    [self.navigationController popViewControllerAnimated:NO];
+
+    RHRechargeViewController* controller=[[RHRechargeViewController alloc]initWithNibName:@"RHRechargeViewController" bundle:nil];
+    [[[RHTabbarManager sharedInterface] selectTabbarUser] pushViewController:controller animated:YES];
     
+}
+
+- (IBAction)pushMyGift:(id)sender {
     
+    [self.navigationController popViewControllerAnimated:NO];
+    RHMyGiftViewController* controller=[[RHMyGiftViewController alloc]initWithNibName:@"RHMyGiftViewController" bundle:nil];
+    [[[RHTabbarManager sharedInterface] selectTabbarUser] pushViewController:controller animated:YES];
 }
 @end

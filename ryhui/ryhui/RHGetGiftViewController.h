@@ -9,7 +9,11 @@
 #import "RHBaseViewController.h"
 
 @interface RHGetGiftViewController : RHBaseViewController
+
+@property(nonatomic,strong)NSString* amount;
+
 @property (weak, nonatomic) IBOutlet UILabel *amountLabel;
 
 - (IBAction)pushRecharge:(id)sender;
+- (IBAction)pushMyGift:(id)sender;
 @end

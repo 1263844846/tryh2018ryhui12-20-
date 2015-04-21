@@ -15,6 +15,8 @@
 - (IBAction)hiddenKeyBorad:(id)sender;
 @property (weak, nonatomic) IBOutlet UIView *overView;
 
+@property (weak, nonatomic) IBOutlet UIView *qbCardTipsView;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIButton *captchaButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;

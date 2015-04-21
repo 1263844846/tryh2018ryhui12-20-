@@ -17,6 +17,7 @@
 #import "RHALoginViewController.h"
 #import "RHRegisterWebViewController.h"
 #import "RHMyGiftViewController.h"
+#import "RHGetGiftViewController.h"
 
 @interface RHUserCenterMainViewController ()
 
@@ -79,13 +80,14 @@
     [manager POST:[NSString stringWithFormat:@"%@front/payment/account/queryAccountFinishedBonuses",[RHNetworkService instance].doMain] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"result==%@ <<<",[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         if ([responseObject isKindOfClass:[NSData class]]) {
-            NSString* restult=[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            if ([restult isEqualToString:@"true"]) {
-                //手机号没有绑定
-        
-      
-            }else{
-                
+            
+            NSDictionary* dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSString* amount=[dic objectForKey:@"msg"];
+            if (amount&&[amount length]>0) {
+                RHGetGiftViewController* controller=[[RHGetGiftViewController alloc]initWithNibName:@"RHGetGiftViewController" bundle:nil];
+                controller.amount=amount;
+                [self.navigationController pushViewController:controller animated:NO];
+
             }
         }
         
@@ -101,7 +103,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkout) name:@"RHSELECTUSER" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refesh) name:UIApplicationWillEnterForegroundNotification object:nil];
-
 }
 
 -(void)viewWillAppear:(BOOL)animated

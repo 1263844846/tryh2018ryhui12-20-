@@ -60,6 +60,11 @@
         
 }
 
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 -(void)pushLogin
 {
     RHALoginViewController* controller=[[RHALoginViewController alloc] initWithNibName:@"RHALoginViewController" bundle:nil];
@@ -85,6 +90,8 @@
     self.captchaImageView.frame=CGRectMake([UIScreen mainScreen].bounds.size.width-8-80, self.captchaImageView.frame.origin.y, 80, 40);
     
     self.captchaImageButton.frame=self.captchaImageView.frame;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(characterDidChanged:) name:UITextFieldTextDidChangeNotification object:nil];
 }
 
 -(void)changeCaptcha
@@ -222,8 +229,7 @@
                     }
                 }];
             }else{
-                
-                [BDKNotifyHUD notifyHUDWithView:self.view text:@"该手机号已经绑定"];
+                [RHUtility showTextWithText:@"该手机号已经绑定"];
             }
         }
         
@@ -421,6 +427,11 @@
     [textField resignFirstResponder];
     
     return YES;
+}
+
+-(void)characterDidChanged:(NSNotification *)notif
+{
+    _accountTF.text = [_accountTF.text stringByReplacingOccurrencesOfString:@" " withString:@""];
 }
 
 @end

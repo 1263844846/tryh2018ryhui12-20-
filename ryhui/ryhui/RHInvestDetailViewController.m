@@ -59,8 +59,8 @@
 //{"class":"view.JqRow","id":1935,"version":null,"cell":{"id":1935,"fee":null,"custId":"6000060000735977","relatedId":null,"description":"期数:3","userId":"29","money":2293.05,"dateCreated":"2015-09-12 00:02:27","projectId":248,"type":"PenaltyInterest","orderId":"00000000000000014557"}
 -(void)getInvestDetail
 {
-    
-    NSDictionary* parameters=@{@"projectId":projectId,@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",_currentPageIndex],@"_search":@"false",@"sidx":@"payDate",@"sord":@"desc"};
+    //,@"sidx":@"payDate",@"sord":@"desc"
+    NSDictionary* parameters=@{@"projectId":projectId,@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",_currentPageIndex],@"_search":@"false"};
     
     [[RHNetworkService instance] POST:@"front/payment/account/myInvestDetailList" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"%@",responseObject);
@@ -74,7 +74,7 @@
                     //已经到底了
                     [_footerView.footerButton setEnabled:NO];
                     if ([array count]==0) {
-                        [_footerView.footerButton setTitle:@"亲暂时没有数据" forState:UIControlStateDisabled];
+//                        [_footerView.footerButton setTitle:@"亲暂时没有数据" forState:UIControlStateDisabled];
                         [self showNoDataWithFrame:self.tableView.frame insertView:self.tableView];
                     }else{
                         [self hiddenNoData];

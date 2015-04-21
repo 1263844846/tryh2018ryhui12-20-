@@ -21,10 +21,43 @@
     [super viewDidLoad];
     [self configBackButton];
     [self configTitleWithString:@"绑定快捷卡"];
+    NSString* tempStr=nil;
+    NSString* endStr=nil;
+    if ([amountStr rangeOfString:@"."].location!=NSNotFound) {
+        tempStr=[amountStr substringToIndex:[amountStr rangeOfString:@"."].location];
+        endStr=[amountStr substringFromIndex:[amountStr rangeOfString:@"."].location];
+    }else{
+        tempStr=amountStr;
+    }
     
-    NSString* tempStr=[amountStr substringToIndex:[amountStr rangeOfString:@"."].location];
     
-    self.amountLabel.text=amountStr;
+    int index=0;
+    NSMutableString* resultStr=[[NSMutableString alloc]initWithCapacity:0];
+    for (int i=0; i<[tempStr length]; i++) {
+        DLog(@"%@",tempStr);
+        if (index==2&&i!=[tempStr length]-1) {
+            index=0;
+            [resultStr insertString:[NSString stringWithFormat:@",%@",[tempStr substringWithRange:NSRangeFromString([NSString stringWithFormat:@"{%d;1}",[[NSNumber numberWithInteger:[tempStr length]] intValue]-i-1])]] atIndex:0];
+        }else{
+            [resultStr insertString:[tempStr substringWithRange:NSRangeFromString([NSString stringWithFormat:@"{%d;1}",[[NSNumber numberWithInteger:[tempStr length]] intValue]-i-1])] atIndex:0];
+            index++;
+        }
+        
+        DLog(@"%@",resultStr);
+    }
+    if (endStr&&[endStr length]>0) {
+        [resultStr appendString:endStr];
+    }
+    
+    NSArray* array=[resultStr componentsSeparatedByString:@","];
+    NSMutableString* amountTempStr=[[NSMutableString alloc]initWithCapacity:0];
+    for (NSString* str in array) {
+        [amountTempStr appendString:str];
+    }
+    amountStr=amountTempStr;
+    self.amountLabel.text=resultStr;
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -103,10 +103,10 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" id="KFw-co-j8s">
-                                    <rect key="frame" x="81.999998618597431" y="6" width="221" height="30"/>
+                                    <rect key="frame" x="81.999998105520547" y="6" width="221" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="emg-Nz-8w7"/>
                                     </connections>
@@ -139,7 +139,7 @@
                                     <rect key="frame" x="81" y="99" width="221" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="HsL-bB-mpI"/>
                                     </connections>
@@ -157,10 +157,10 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" id="5fO-s0-B6u">
-                                    <rect key="frame" x="81.000000475758327" y="146" width="221" height="30"/>
+                                    <rect key="frame" x="81" y="146" width="221.00000047575833" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="PTo-vw-FZu"/>
                                     </connections>
@@ -181,7 +181,7 @@
                                     <rect key="frame" x="103" y="193" width="117" height="30"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="VtQ-H9-diQ"/>
                                     </connections>
@@ -229,7 +229,7 @@
                                     <rect key="frame" x="81" y="52" width="221" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="M6S-O3-5A0"/>
                                     </connections>
@@ -238,7 +238,7 @@
                                     <rect key="frame" x="103" y="240" width="117" height="30"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="vWb-gp-cxJ"/>
                                     </connections>

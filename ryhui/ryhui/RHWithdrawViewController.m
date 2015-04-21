@@ -55,7 +55,7 @@
         NSArray* qpCard=[responseObject objectForKey:@"qpCard"];
         NSArray* cards=[responseObject objectForKey:@"cards"];
         
-        if (cards&&[cards count]>0) {
+        if ((cards&&[cards count]>0)||(qpCard&&[qpCard count]>0)) {
             self.overView.hidden=YES;
         }else{
             self.overView.hidden=NO;
@@ -78,6 +78,7 @@
                     cardType=idStr;
                 }
             }
+            self.qbCardTipsView.hidden=NO;
         }else{
             if (![cards isKindOfClass:[NSNull class]]&&cards&&[cards count]>0) {
                 DLog(@"%@",cards);
@@ -95,6 +96,10 @@
                         cardType=idStr;
                     }
                 }
+                self.qbCardTipsView.hidden=YES;
+                CGRect rect=self.contentView.frame;
+                rect.origin.y=80;
+                self.contentView.frame=rect;
             }
 
         }

@@ -114,7 +114,7 @@
                 if ([array count]<10) {
                     //已经到底了
                     if ([array count]==0) {
-                        [_footerView.footerButton setTitle:@"亲暂时没有数据" forState:UIControlStateNormal];
+//                        [_footerView.footerButton setTitle:@"亲暂时没有数据" forState:UIControlStateNormal];
                         
                         [self showNoDataWithFrame:self.tableView.frame insertView:self.tableView];
                     }else{
