@@ -40,7 +40,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="L5h-9Q-SJg">
-                            <rect key="frame" x="170.99999938623375" y="61" width="141" height="30"/>
+                            <rect key="frame" x="170.99999928933238" y="61" width="141" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <state key="normal" title="查看支持银行及限额&gt;">
@@ -70,7 +70,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2Ap-Da-que">
-                                    <rect key="frame" x="119.00000024420973" y="15" width="162" height="21"/>
+                                    <rect key="frame" x="119.00000030680215" y="15" width="162" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>

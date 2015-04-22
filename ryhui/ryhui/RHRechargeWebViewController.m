@@ -67,7 +67,7 @@
 
         RHErrorViewController* controller=[[RHErrorViewController alloc]initWithNibName:@"RHErrorViewController" bundle:nil];
         controller.titleStr=@"银行卡余额不足";
-        controller.tipsStr=@"快去抢银行吧~";
+        controller.tipsStr=@"先往卡里塞点钱吧~";
         controller.type=RHPayFail;
         [self.navigationController pushViewController:controller animated:YES];
         return NO;

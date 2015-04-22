@@ -107,7 +107,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
+                    <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="done"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="dcH-3j-WKu"/>
                     </connections>

@@ -32,6 +32,11 @@
     self.captchaButton.layer.cornerRadius=9;
     
 }
+-(void)back
+{
+    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+}
+
 
 - (IBAction)getCaptchaAction:(id)sender {
     [self.phoneTF resignFirstResponder];

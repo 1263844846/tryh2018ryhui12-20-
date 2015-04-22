@@ -12,7 +12,13 @@
 #import "RHRegisterViewController.h"
 
 @interface RHALoginViewController ()
+{
+    float changeY;
+    float keyboardHeight;
+    
+    UITextField* currentSelectTF;
 
+}
 @end
 
 @implementation RHALoginViewController
@@ -41,7 +47,17 @@
     self.passwordTextField.secureTextEntry=YES;
     
     [self configRightButtonWithTitle:@"注册" action:@selector(pushRigster)];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textBegin:) name:UITextFieldTextDidBeginEditingNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
 }
+
+-(void)back
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 
 -(void)changeCaptcha
 {
@@ -160,26 +176,64 @@
     }];
 }
 
+-(void)textBegin:(NSNotification*)not
+{
+    DLog(@"%@",not.object);
+    
+    currentSelectTF=not.object;
+    CGRect tfRect=[currentSelectTF convertRect:currentSelectTF.bounds toView:self.view];
+    changeY=tfRect.origin.y+tfRect.size.height+5;
+    if (changeY>(self.view.frame.size.height-keyboardHeight)) {
+        CGRect viewRect=self.view.frame;
+        viewRect.origin.y=(self.view.frame.size.height-keyboardHeight)-changeY;
+        self.view.frame=viewRect;
+    }
+    
+}
+
+-(void)keyboardShow:(NSNotification*)not
+{
+    DLog(@"%@",not.userInfo);
+    NSValue* value=[not.userInfo objectForKey:@"UIKeyboardBoundsUserInfoKey"];
+    
+    CGRect rect=[value CGRectValue];
+    keyboardHeight=rect.size.height;
+}
+
+-(void)keyboardFrameChange:(NSNotification*)not
+{
+    DLog(@"%@",not.userInfo);
+    NSValue* value=[not.userInfo objectForKey:@"UIKeyboardBoundsUserInfoKey"];
+    
+    NSValue* endValue=[not.userInfo objectForKey:@"UIKeyboardFrameEndUserInfoKey"];
+    CGRect endRect=[endValue CGRectValue];
+    if (endRect.origin.y>=[UIScreen mainScreen].bounds.size.height) {
+        return;
+    }
+    CGRect rect=[value CGRectValue];
+    keyboardHeight=rect.size.height;
+    
+    CGRect tfRect=[currentSelectTF convertRect:currentSelectTF.bounds toView:self.view];
+    changeY=tfRect.origin.y+tfRect.size.height+5;
+    if (changeY>(self.view.frame.size.height-keyboardHeight)) {
+        CGRect viewRect=self.view.frame;
+        viewRect.origin.y=(self.view.frame.size.height-keyboardHeight)-changeY;
+        self.view.frame=viewRect;
+    }
+    
+}
+
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    CGRect rect=self.view.frame;
+    rect.origin.y=64;
+    self.view.frame=rect;
+    
     [textField resignFirstResponder];
-//    if ([textField isEqual:self.accountTextField]) {
-//        [self.passwordTextField becomeFirstResponder];
-//        return YES;
-//    }
-//    
-//    if ([textField isEqual:self.passwordTextField]) {
-//        [self.captchaTextField becomeFirstResponder];
-//        return YES;
-//    }
-//    
-//    if ([textField isEqual:self.captchaTextField]) {
-//        [self loginAction:nil];
-//        return NO;
-//    }
     
     return YES;
 }
+
 
 -(void)findPassword
 {

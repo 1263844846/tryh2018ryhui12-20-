@@ -10,7 +10,7 @@
 #import "RHGestureView.h"
 #import "RHGesturePasswordView.h"
 
-@interface RHGesturePasswordViewController : RHBaseViewController<VerificationDelegate,ResetDelegate,GesturePasswordDelegate>
+@interface RHGesturePasswordViewController : RHBaseViewController<VerificationDelegate,ResetDelegate,GesturePasswordDelegate,UIAlertViewDelegate>
 
 @property(nonatomic,assign)BOOL isForgotV;
 

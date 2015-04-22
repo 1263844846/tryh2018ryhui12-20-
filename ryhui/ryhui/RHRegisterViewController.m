@@ -20,6 +20,7 @@
     float changeY;
     float keyboardHeight;
 
+    UITextField* currentSelectTF;
 }
 @end
 
@@ -51,12 +52,20 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textBegin:) name:UITextFieldTextDidBeginEditingNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(characterDidChanged:) name:UITextFieldTextDidChangeNotification object:nil];
+
+    
     CGRect rect=self.agreementView.frame;
     rect.origin.x=([UIScreen mainScreen].bounds.size.width-320)/2.0;
     self.agreementView.frame=rect;
     
     self.captchaPhoneButton.layer.cornerRadius=9;
     self.captchaPhoneButton.layer.masksToBounds=YES;
+    
+    
         
 }
 
@@ -64,6 +73,12 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+-(void)back
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 
 -(void)pushLogin
 {
@@ -91,7 +106,6 @@
     
     self.captchaImageButton.frame=self.captchaImageView.frame;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(characterDidChanged:) name:UITextFieldTextDidChangeNotification object:nil];
 }
 
 -(void)changeCaptcha
@@ -229,7 +243,7 @@
                     }
                 }];
             }else{
-                [RHUtility showTextWithText:@"该手机号已经绑定"];
+                [RHUtility showTextWithText:@"该手机号已被注册"];
             }
         }
         
@@ -366,9 +380,7 @@
                 [self selectOtherAciton:nil];
 //                
 //                if (!isPan) {
-                RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
-                controller.isRegister=YES;
-                [self.navigationController pushViewController:controller animated:NO];
+ 
 //                }else{
 //                    [[RHTabbarManager sharedInterface] initTabbar];
 //                    [[RHTabbarManager sharedInterface] selectTabbarMain];
@@ -399,8 +411,10 @@
 -(void)textBegin:(NSNotification*)not
 {
     DLog(@"%@",not.object);
-    UITextField* textField=not.object;
-    changeY=textField.frame.origin.y+textField.frame.size.height+10;
+    
+    currentSelectTF=not.object;
+    CGRect tfRect=[currentSelectTF convertRect:currentSelectTF.bounds toView:self.view];
+    changeY=tfRect.origin.y+tfRect.size.height+5;
     if (changeY>(self.view.frame.size.height-keyboardHeight)) {
         CGRect viewRect=self.view.frame;
         viewRect.origin.y=(self.view.frame.size.height-keyboardHeight)-changeY;
@@ -416,6 +430,29 @@
     
     CGRect rect=[value CGRectValue];
     keyboardHeight=rect.size.height;
+}
+
+-(void)keyboardFrameChange:(NSNotification*)not
+{
+    DLog(@"%@",not.userInfo);
+    NSValue* value=[not.userInfo objectForKey:@"UIKeyboardBoundsUserInfoKey"];
+    
+    NSValue* endValue=[not.userInfo objectForKey:@"UIKeyboardFrameEndUserInfoKey"];
+    CGRect endRect=[endValue CGRectValue];
+    if (endRect.origin.y>=[UIScreen mainScreen].bounds.size.height) {
+        return;
+    }
+    CGRect rect=[value CGRectValue];
+    keyboardHeight=rect.size.height;
+
+    CGRect tfRect=[currentSelectTF convertRect:currentSelectTF.bounds toView:self.view];
+    changeY=tfRect.origin.y+tfRect.size.height+5;
+    if (changeY>(self.view.frame.size.height-keyboardHeight)) {
+        CGRect viewRect=self.view.frame;
+        viewRect.origin.y=(self.view.frame.size.height-keyboardHeight)-changeY;
+        self.view.frame=viewRect;
+    }
+
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField

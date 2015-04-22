@@ -13,6 +13,7 @@
 @interface RHGesturePasswordViewController ()
 {
     BOOL isDrawPan;
+    int checkNum;
 }
 @property (nonatomic,strong) RHGesturePasswordView * gesturePasswordView;
 
@@ -65,6 +66,8 @@
 //        }
 
     }
+    
+    checkNum=0;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -180,9 +183,23 @@
     }
     [gesturePasswordView.state setTextColor:[UIColor redColor]];
     [gesturePasswordView.state setText:@"手势密码错误"];
+    checkNum++;
+    if (checkNum>5) {
+        checkNum=0;
+        UIAlertView* alertView=[[UIAlertView alloc]initWithTitle:@"手势密码错误超过5次"
+                                                         message:@"手势密码错误超过5次，您将退出登录，请重新登录设置新的手势密码"
+                                                        delegate:self
+                                               cancelButtonTitle:@"我知道了"
+                                               otherButtonTitles:nil, nil];
+        [alertView show];
+    }
     return NO;
 }
-
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [[RHUserManager sharedInterface] logout];
+    [[RHTabbarManager sharedInterface] selectALogin];
+}
 - (BOOL)resetPassword:(NSString *)result{
     if ([previousString isEqualToString:@""]||isDrawPan) {
         DLog(@"%@",result);

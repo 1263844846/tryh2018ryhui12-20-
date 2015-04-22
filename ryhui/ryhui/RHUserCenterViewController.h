@@ -8,7 +8,7 @@
 
 #import "RHBaseViewController.h"
 
-@interface RHUserCenterViewController : RHBaseViewController
+@interface RHUserCenterViewController : RHBaseViewController<UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *mobileLabel;
 @property (weak, nonatomic) IBOutlet UILabel *emailLabel;
 

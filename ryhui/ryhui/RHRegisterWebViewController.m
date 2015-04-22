@@ -8,6 +8,7 @@
 
 #import "RHRegisterWebViewController.h"
 #import "MBProgressHUD.h"
+#import "RHGesturePasswordViewController.h"
 
 @interface RHRegisterWebViewController ()
 
@@ -45,8 +46,12 @@
     
     if ([url rangeOfString:@"front/payment/account/myAccount"].location!=NSNotFound) {
         [RHUserManager sharedInterface].custId=@"first";
-        [[RHTabbarManager sharedInterface] initTabbar];
-        [[RHTabbarManager sharedInterface] selectTabbarUser];
+//        [[RHTabbarManager sharedInterface] initTabbar];
+//        [[RHTabbarManager sharedInterface] selectTabbarUser];
+        
+        RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
+        [self.navigationController pushViewController:controller animated:NO];
+        
         return NO;
     }
     return YES;

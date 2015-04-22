@@ -14,10 +14,15 @@
 
 @implementation RHFindPWDoneViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configBackButton];
     [self configTitleWithString:@"完成"];
+}
+-(void)back
+{
+    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
 }
 
 - (IBAction)loginAciton:(id)sender {

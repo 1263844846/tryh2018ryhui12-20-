@@ -37,7 +37,20 @@
 
 
 - (IBAction)logoutAction:(id)sender {
-    [[RHUserManager sharedInterface] logout];
+    
+    UIAlertView* alertView=[[UIAlertView alloc]initWithTitle:@"退出确认"
+                                                     message:@"您确定要退出当前账号？"
+                                                    delegate:self
+                                           cancelButtonTitle:@"确定"
+                                           otherButtonTitles:@"取消", nil];
+    [alertView show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex==0) {
+        [[RHUserManager sharedInterface] logout];
+    }
 }
 
 - (IBAction)pushMain:(id)sender {
