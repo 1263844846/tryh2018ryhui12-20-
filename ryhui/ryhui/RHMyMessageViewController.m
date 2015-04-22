@@ -134,9 +134,7 @@
         if (_reloading) {
             [self.dataArray removeAllObjects];
         }
-        else {
-            self.currentPageIndex++;
-        }
+        self.currentPageIndex++;
         [dataArray addObjectsFromArray:tempArray];
         if ([dataArray count]<10) {
             if ([dataArray count]==0) {

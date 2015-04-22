@@ -135,12 +135,12 @@
                 _footerView.hidden=YES;
             }
         }
+        
         if (_reloading) {
             [self.dataArray removeAllObjects];
         }
-        else {
-            self.currentPageIndex++;
-        }
+        self.currentPageIndex++;
+
         [dataArray addObjectsFromArray:tempArray];
         [self reloadTableView];
         [_footerView.activityIndicatorView stopAnimating];
