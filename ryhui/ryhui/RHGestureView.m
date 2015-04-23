@@ -127,8 +127,8 @@
     // Drawing code
     //    if (touchesArray.count<2)return;
     for (int i=0; i<touchesArray.count; i++) {
-        DLog(@"xPoint=%f",[[[touchesArray objectAtIndex:i] objectForKey:@"x"] floatValue]);
-        DLog(@"yPoint=%f",[[[touchesArray objectAtIndex:i] objectForKey:@"y"] floatValue]);
+//        DLog(@"xPoint=%f",[[[touchesArray objectAtIndex:i] objectForKey:@"x"] floatValue]);
+//        DLog(@"yPoint=%f",[[[touchesArray objectAtIndex:i] objectForKey:@"y"] floatValue]);
         CGContextRef context = UIGraphicsGetCurrentContext();
         if (![[touchesArray objectAtIndex:i] objectForKey:@"num"]) { //防止过快滑动产生垃圾数据
             [touchesArray removeObjectAtIndex:i];
