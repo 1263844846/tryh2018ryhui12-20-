@@ -165,7 +165,6 @@
         [gesturePasswordView.tentacleView enterArgin];
         [gesturePasswordView.state setTextColor:[UIColor colorWithRed:2/255.f green:174/255.f blue:240/255.f alpha:1]];
         [gesturePasswordView.state setText:@"请确认手势密码"];
-        
         [gesturePasswordView.clearButton setHidden:YES];
         [gesturePasswordView.enterButton setHidden:YES];
         isDrawPan=NO;
@@ -240,6 +239,7 @@
         }
         else{
             [gesturePasswordView.clearButton setHidden:NO];
+            [gesturePasswordView.tentacleView enterArgin];
             [gesturePasswordView.state setTextColor:[UIColor redColor]];
             [gesturePasswordView.state setText:@"两次密码不一致，请重新输入"];
             return NO;
