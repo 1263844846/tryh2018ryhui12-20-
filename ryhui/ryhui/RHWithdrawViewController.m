@@ -254,4 +254,10 @@
     }
     return YES;
 }
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.withdrawTF resignFirstResponder];
+    [self.captchaTF resignFirstResponder];
+}
 @end
