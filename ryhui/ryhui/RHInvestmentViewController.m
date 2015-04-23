@@ -37,7 +37,7 @@
     [self setupWithDic:self.dataDic];
 
     [self checkout];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textBegin:) name:UITextFieldTextDidBeginEditingNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textchange:) name:UITextFieldTextDidChangeNotification object:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -133,6 +133,7 @@
 }
 
 - (IBAction)allIn:(id)sender {
+    [self.textFiled resignFirstResponder];
     NSArray* stringArray=[[RHUserManager sharedInterface].balance componentsSeparatedByString:@","];
     NSMutableString* resultString=[NSMutableString string];
     for (NSString* subStr in stringArray) {
@@ -193,10 +194,9 @@
 
 }
 
--(void)textBegin:(NSNotification*)not
+-(void)keyboardHide:(NSNotification*)not
 {
-    DLog(@"%@",not.object);
-    
+    self.view.frame = CGRectMake(0, 64, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
 }
 
 -(void)keyboardShow:(NSNotification*)not
@@ -207,13 +207,15 @@
     CGRect rect=[value CGRectValue];
     keyboardHeight=rect.size.height;
     
-    changeY=self.textFiled.frame.origin.y+self.textFiled.frame.size.height+10;
-    if (changeY>(self.view.frame.size.height-keyboardHeight)) {
+    changeY = self.textFiled.frame.origin.y + self.textFiled.frame.size.height ;
+    
+    if (changeY + self.contentView.frame.origin.y  >= (CGRectGetHeight([UIScreen mainScreen].bounds) - keyboardHeight - 64)) {
         CGRect viewRect=self.view.frame;
-        viewRect.origin.y=(self.view.frame.size.height-keyboardHeight)-changeY;
+        viewRect.origin.y = - ((self.view.frame.size.height - keyboardHeight) - self.textFiled.frame.origin.y - 74 - self.textFiled.frame.size.height );
         self.view.frame=viewRect;
     }
 }
+
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -228,6 +230,11 @@
 
 -(void)textchange:(NSNotification*)not
 {
+    if (self.textFiled.text.length > 0) {
+        self.textFiled.font = [UIFont systemFontOfSize:18.0];
+    }else{
+        self.textFiled.font = [UIFont systemFontOfSize:12.0];
+    }
     if ([self.textFiled.text floatValue]<currentThreshold) {
         self.chooseButton.hidden=NO;
         self.giftView.hidden=YES;
@@ -254,6 +261,11 @@
     }
     
     return YES;
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.textFiled resignFirstResponder];
 }
 
 @end
