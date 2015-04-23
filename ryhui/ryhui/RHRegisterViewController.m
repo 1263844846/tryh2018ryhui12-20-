@@ -267,7 +267,7 @@
         [self.captchaPhoneButton setTitle:@"获取验证码" forState:UIControlStateNormal];
         [countDownTimer invalidate];
     }
-    [self.captchaPhoneButton setTitle:[NSString stringWithFormat:@"重新发送(%d)",secondsCountDown] forState:UIControlStateNormal];
+    [self.captchaPhoneButton setTitle:[NSString stringWithFormat:@"重新发送(%d)",secondsCountDown] forState:UIControlStateDisabled];
     if (secondsCountDown==0) {
         self.captchaPhoneButton.enabled=YES;
         [self.captchaPhoneButton setTitle:@"获取验证码" forState:UIControlStateNormal];
