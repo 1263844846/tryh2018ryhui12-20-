@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00CCC6EF1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CCC6ED1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.m */; };
+		00CCC6F01AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00CCC6EE1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.xib */; };
 		961AD2F930E8CEFA8FA5D28D /* libPods-ryhui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB95D30F1AE0DCFA27AE1DD7 /* libPods-ryhui.a */; };
 		D537C36D1ADD3E1F009D3433 /* RHMyGiftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D537C36B1ADD3E1F009D3433 /* RHMyGiftViewController.m */; };
 		D537C36E1ADD3E1F009D3433 /* RHMyGiftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D537C36C1ADD3E1F009D3433 /* RHMyGiftViewController.xib */; };
@@ -288,6 +290,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00CCC6EC1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHOfficeNetAndWeiBoViewController.h; sourceTree = "<group>"; };
+		00CCC6ED1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHOfficeNetAndWeiBoViewController.m; sourceTree = "<group>"; };
+		00CCC6EE1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHOfficeNetAndWeiBoViewController.xib; sourceTree = "<group>"; };
 		64D0F7EFA66E690954907170 /* Pods-ryhui.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ryhui.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ryhui/Pods-ryhui.debug.xcconfig"; sourceTree = "<group>"; };
 		BB95D30F1AE0DCFA27AE1DD7 /* libPods-ryhui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ryhui.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D537C36A1ADD3E1F009D3433 /* RHMyGiftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHMyGiftViewController.h; sourceTree = "<group>"; };
@@ -1489,6 +1494,9 @@
 				F8B6DAB81AB5773500CCB13D /* RHAboutViewController.h */,
 				F8B6DAB91AB5773500CCB13D /* RHAboutViewController.m */,
 				F8B6DABA1AB5773500CCB13D /* RHAboutViewController.xib */,
+				00CCC6EC1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.h */,
+				00CCC6ED1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.m */,
+				00CCC6EE1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.xib */,
 			);
 			name = aboutViewController;
 			sourceTree = "<group>";
@@ -1774,6 +1782,7 @@
 				F8B6DAA21AB5679000CCB13D /* in2.png in Resources */,
 				F8A0EBF11AB8704900F65A7F /* 3.png in Resources */,
 				F8B6DAA91AB567BE00CCB13D /* 18-2.png in Resources */,
+				00CCC6F01AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.xib in Resources */,
 				F87B83551AC84AD700EB73A6 /* CIB.jpg in Resources */,
 				F87B83211AC827BA00EB73A6 /* RHPasswordConfirmViewController.xib in Resources */,
 				F83865B61AA0569C00001D1A /* registerSelect.png in Resources */,
@@ -1899,6 +1908,7 @@
 				F87B83201AC827BA00EB73A6 /* RHPasswordConfirmViewController.m in Sources */,
 				F815ED3E1AB72545004B2053 /* RHSegmentContentView.m in Sources */,
 				F8B6DAB51AB5740600CCB13D /* RHRechargeViewController.m in Sources */,
+				00CCC6EF1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.m in Sources */,
 				F8C38DBB1AC9991E005C3B1F /* RHBindCardWebViewController.m in Sources */,
 				F80E49731A8E3A0300028CD1 /* RHBaseViewController.m in Sources */,
 				F815ED4A1AB749FF004B2053 /* RHGuidanceViewController.m in Sources */,

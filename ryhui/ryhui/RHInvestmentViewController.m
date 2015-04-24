@@ -196,7 +196,9 @@
 
 -(void)keyboardHide:(NSNotification*)not
 {
-    self.view.frame = CGRectMake(0, 64, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+    [UIView animateWithDuration:.2 animations:^{
+        self.view.frame = CGRectMake(0, 64, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+    }];
 }
 
 -(void)keyboardShow:(NSNotification*)not
@@ -212,7 +214,9 @@
     if (changeY + self.contentView.frame.origin.y  >= (CGRectGetHeight([UIScreen mainScreen].bounds) - keyboardHeight - 64)) {
         CGRect viewRect=self.view.frame;
         viewRect.origin.y = - ((self.view.frame.size.height - keyboardHeight) - self.textFiled.frame.origin.y - 74 - self.textFiled.frame.size.height );
-        self.view.frame=viewRect;
+        [UIView animateWithDuration:.4 animations:^{
+            self.view.frame=viewRect;
+        }];
     }
 }
 
