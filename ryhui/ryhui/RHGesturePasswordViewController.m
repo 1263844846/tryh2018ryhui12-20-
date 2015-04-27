@@ -140,6 +140,7 @@
 
 #pragma mark - 忘记手势密码
 - (void)forget{
+    [[RHUserManager sharedInterface] logout];
     RHALoginViewController* controller=[[RHALoginViewController alloc]initWithNibName:@"RHALoginViewController" bundle:nil];
     controller.isForgotV=YES;
     [self.navigationController pushViewController:controller animated:YES];
@@ -147,20 +148,27 @@
 }
 
 -(void)cleanPan{
+    previousString = @"";
+    [gesturePasswordView.state setText:@"请设置手势密码"];
+    [gesturePasswordView.state setTextColor:[UIColor colorWithRed:2/255.f green:174/255.f blue:240/255.f alpha:1]];
     [gesturePasswordView.tentacleView enterArgin];
-
+    [gesturePasswordView.clearButton setHidden:NO];
+    [gesturePasswordView.enterButton setHidden:NO];
 }
 
 
 -(void)enterPan{
-    [gesturePasswordView.tentacleView enterArgin];
-    [gesturePasswordView.state setTextColor:[UIColor colorWithRed:2/255.f green:174/255.f blue:240/255.f alpha:1]];
-    [gesturePasswordView.state setText:@"请确认手势密码"];
-
-    [gesturePasswordView.clearButton setHidden:YES];
-    [gesturePasswordView.enterButton setHidden:YES];
-    isDrawPan=NO;
-}
+    
+    if ([previousString isEqualToString:@""]) {
+        [RHUtility showTextWithText:@"请先设置正确的手势密码"];
+    }else{
+        [gesturePasswordView.tentacleView enterArgin];
+        [gesturePasswordView.state setTextColor:[UIColor colorWithRed:2/255.f green:174/255.f blue:240/255.f alpha:1]];
+        [gesturePasswordView.state setText:@"请确认手势密码"];
+        [gesturePasswordView.clearButton setHidden:YES];
+        [gesturePasswordView.enterButton setHidden:YES];
+        isDrawPan=NO;
+    }}
 
 
 - (BOOL)verification:(NSString *)result{
@@ -182,9 +190,9 @@
         return YES;
     }
     [gesturePasswordView.state setTextColor:[UIColor redColor]];
-    [gesturePasswordView.state setText:@"手势密码错误"];
+    [gesturePasswordView.state setText:[NSString stringWithFormat:@"手势密码错误,您还可输入%d次",4 - checkNum]];
     checkNum++;
-    if (checkNum>5) {
+    if (checkNum >= 5) {
         checkNum=0;
         UIAlertView* alertView=[[UIAlertView alloc]initWithTitle:@"手势密码错误超过5次"
                                                          message:@"手势密码错误超过5次，您将退出登录，请重新登录设置新的手势密码"
@@ -230,7 +238,8 @@
             return YES;
         }
         else{
-            previousString =@"";
+            [gesturePasswordView.clearButton setHidden:NO];
+            [gesturePasswordView.tentacleView enterArgin];
             [gesturePasswordView.state setTextColor:[UIColor redColor]];
             [gesturePasswordView.state setText:@"两次密码不一致，请重新输入"];
             return NO;
