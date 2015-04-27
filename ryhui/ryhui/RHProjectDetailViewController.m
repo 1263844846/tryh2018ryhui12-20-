@@ -51,7 +51,7 @@
     
     self.scrollView.contentSize=CGSizeMake(self.segmentView1.frame.size.width,267);
     
-    self.scrollView1.frame=CGRectMake(0, 35, self.segmentView1.frame.size.width, [UIScreen mainScreen].applicationFrame.size.height-self.navigationController.navigationBar.frame.size.height-280);
+    self.scrollView1.frame=CGRectMake(0, 35,self.segmentView1.frame.size.width, [UIScreen mainScreen].applicationFrame.size.height-self.navigationController.navigationBar.frame.size.height-280);
     
     self.scrollView1.contentSize=CGSizeMake(self.segmentView1.frame.size.width,267);
     
@@ -64,8 +64,11 @@
 {
     self.segmentView1.frame=CGRectMake(8, 170, [UIScreen mainScreen].bounds.size.width-16, [UIScreen mainScreen].applicationFrame.size.height-self.navigationController.navigationBar.frame.size.height-75);
     self.scrollView.frame=CGRectMake(0, 35, self.segmentView1.frame.size.width, self.segmentView1.frame.size.height-35);
-    
+    self.scrollView1.frame=CGRectMake(0, 35, self.segmentView1.frame.size.width, self.segmentView1.frame.size.height-35);
+
     self.segmentView2.frame=CGRectMake(8, 170, [UIScreen mainScreen].bounds.size.width-16, [UIScreen mainScreen].applicationFrame.size.height-self.navigationController.navigationBar.frame.size.height-75-170);
+    self.segmentView3.frame=CGRectMake(8, 170, [UIScreen mainScreen].bounds.size.width-16, [UIScreen mainScreen].applicationFrame.size.height-self.navigationController.navigationBar.frame.size.height-75-170);
+
     
     self.segment2ContentView.frame=CGRectMake(0, 35, self.segmentView2.frame.size.width, self.segmentView2.frame.size.height-35);
     
