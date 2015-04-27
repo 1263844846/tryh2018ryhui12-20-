@@ -122,11 +122,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="L5h-9Q-SJg">
-<<<<<<< HEAD
-                            <rect key="frame" x="170.99999918994638" y="61" width="141" height="30"/>
-=======
                             <rect key="frame" x="170.999999088012" y="61" width="141" height="30"/>
->>>>>>> 04d1a966f66595c526c8d66f124373535b0dadbd
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <state key="normal" title="查看支持银行及限额&gt;">
@@ -156,11 +152,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2Ap-Da-que">
-<<<<<<< HEAD
-                                    <rect key="frame" x="119.00000037808172" y="15" width="162" height="21"/>
-=======
                                     <rect key="frame" x="119.00000045925424" y="15" width="162" height="21"/>
->>>>>>> 04d1a966f66595c526c8d66f124373535b0dadbd
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
