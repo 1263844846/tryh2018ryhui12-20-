@@ -29,14 +29,20 @@
     }else{
         status=[dic objectForKey:@"status"];
     }
-    
-    if ([status isEqualToString:@"1"]) {
+    NSString*type =[dic objectForKey:@"type"];
+    if ([type isEqualToString:@"capital"]) {
         [self.iconImageView setImage:[UIImage imageNamed:@"RepaymentSchedule2"]];
         self.typeLabel.textColor=[RHUtility colorForHex:@"318fc5"];
-        self.typeImagView.hidden=YES;
     }else{
         self.typeLabel.textColor=[RHUtility colorForHex:@"ff5d25"];
         [self.iconImageView setImage:[UIImage imageNamed:@"RepaymentSchedule1"]];
+    }
+    
+    if ([status isEqualToString:@"0"]) {
+   
+        self.typeImagView.hidden=YES;
+    }else{
+
         self.typeImagView.hidden=NO;
     }
     NSString* money=nil;
@@ -46,7 +52,7 @@
         money=[dic objectForKey:@"money"];
     }
     
-    self.typeLabel.text=money;
+    self.typeLabel.text=[NSString stringWithFormat:@"%.2f",[money floatValue]];
     self.timeLabel.text=[dic objectForKey:@"payDate"];
 }
 

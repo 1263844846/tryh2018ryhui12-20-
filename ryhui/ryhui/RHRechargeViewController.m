@@ -24,6 +24,9 @@
     // Do any additional setup after loading the view from its nib.
     [self configBackButton];
     
+    self.rechargeButton.layer.masksToBounds=YES;
+    self.rechargeButton.layer.cornerRadius=9;
+    
     [self configTitleWithString:@"充值"];
     [self.textField becomeFirstResponder];
     

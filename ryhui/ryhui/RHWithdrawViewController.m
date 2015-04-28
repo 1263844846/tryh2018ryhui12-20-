@@ -29,8 +29,9 @@
     self.scrollView.contentSize=CGSizeMake(self.scrollView.frame.size.width, 630);
     self.changeCardsButton.layer.cornerRadius=9;
     self.changeCardsButton.layer.masksToBounds=YES;
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
+    self.withdrawTF.enabled=YES;
+    self.cardsView.hidden=YES;
 }
 //balance = "80.29000000000001";
 //cards =     (
@@ -59,6 +60,7 @@
         
         if ((cards&&[cards count]>0)||(qpCard&&[qpCard count]>0)) {
             self.overView.hidden=YES;
+            self.withdrawTF.enabled=NO;
         }else{
             self.overView.hidden=NO;
         }
@@ -137,6 +139,10 @@
         [RHUtility showTextWithText:@"请填写提验证码"];
         return;
     }
+    if ([self.withdrawTF.text floatValue]<=0) {
+        [RHUtility showTextWithText:@"提现最小金额为0.01元"];
+        return;
+    }
     RHWithdrawWebViewController* controller=[[RHWithdrawWebViewController alloc]initWithNibName:@"RHWithdrawWebViewController" bundle:nil];
     controller.amount=self.withdrawTF.text;
     controller.captcha=self.captchaTF.text;
@@ -173,7 +179,11 @@
         if (price+getAmount<=[self.balanceLabel.text doubleValue]) {
             self.getAmountLabel.text=[NSString stringWithFormat:@"%.2f",price];
         }else{
-            self.getAmountLabel.text=[NSString stringWithFormat:@"%0.2f",[self.balanceLabel.text doubleValue]-getAmount];
+            if ([self.balanceLabel.text doubleValue]-getAmount>0) {
+                self.getAmountLabel.text=[NSString stringWithFormat:@"%0.2f",[self.balanceLabel.text doubleValue]-getAmount];
+            }else{
+                self.getAmountLabel.text=@"0.00";
+            }
   
         }
     }

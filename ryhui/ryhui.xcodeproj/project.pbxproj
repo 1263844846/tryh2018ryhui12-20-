@@ -2092,12 +2092,8 @@
 					"$(PROJECT_DIR)/ryhui/ShareSDK/Extend/WeChatSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-<<<<<<< HEAD
-				PROVISIONING_PROFILE = "cdc5fc6b-77b3-4df5-a98e-5dee4d9ecda1";
+				PROVISIONING_PROFILE = "cfff088f-f974-4c6e-970e-5f8614f75e2c";
 				TARGETED_DEVICE_FAMILY = 1;
-=======
-				PROVISIONING_PROFILE = "5dd2358d-ef1c-4e5b-98d8-852b923acc97";
->>>>>>> 033cc4c3e1d6d7f9bbc116552fe2e04b4b5ef93c
 			};
 			name = Debug;
 		};
@@ -2128,7 +2124,7 @@
 					"$(PROJECT_DIR)/ryhui/ShareSDK/Extend/WeChatSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cdc5fc6b-77b3-4df5-a98e-5dee4d9ecda1";
+				PROVISIONING_PROFILE = "cfff088f-f974-4c6e-970e-5f8614f75e2c";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

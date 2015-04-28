@@ -43,13 +43,19 @@
                                                     delegate:self
                                            cancelButtonTitle:@"确定"
                                            otherButtonTitles:@"取消", nil];
+    alertView.tag=999;
     [alertView show];
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex==0) {
-        [[RHUserManager sharedInterface] logout];
+        if (alertView.tag==999) {
+            [[RHUserManager sharedInterface] logout];
+        }else{
+            [[RHUserManager sharedInterface] logout];
+            [[RHTabbarManager sharedInterface] selectALogin];
+        }
     }
 }
 
@@ -68,6 +74,7 @@
 }
 
 - (IBAction)changePasswordAction:(id)sender {
+
     RHForgotPasswordViewController* controller=[[RHForgotPasswordViewController alloc]initWithNibName:@"RHForgotPasswordViewController" bundle:nil];
     
     [self.navigationController pushViewController:controller animated:YES];
@@ -75,8 +82,14 @@
 
 - (IBAction)changePanPasswordAction:(id)sender {
     
-    [[RHUserManager sharedInterface] logout];
-    [[RHTabbarManager sharedInterface] selectALogin];
+    UIAlertView* alertView=[[UIAlertView alloc]initWithTitle:nil
+                                                     message:@"修改手势密码需要退出登录验证账号密码"
+                                                    delegate:self
+                                           cancelButtonTitle:@"确定"
+                                           otherButtonTitles:@"取消", nil];
+    alertView.tag=998;
+    [alertView show];
+
 //    RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
 //    controller.isReset=YES;
 //    [self.navigationController pushViewController:controller animated:YES];
