@@ -116,8 +116,12 @@
 
 
 - (IBAction)pushProjectList:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:NO];
+    UINavigationController* nav=[[RHTabbarManager sharedInterface] selectTabbarMain];
+
     RHProjectListViewController* controller=[[RHProjectListViewController alloc]initWithNibName:@"RHProjectListViewController" bundle:nil];
-    [self.navigationController pushViewController:controller animated:YES];
+    controller.type=@"0";
+    [nav pushViewController:controller animated:YES];
 }
 
 - (IBAction)pushMyAccount:(id)sender {

@@ -110,8 +110,14 @@
 
         }
         DLog(@"%@",[NSString stringWithFormat:@"%@.jgp",bankType]);
+        
+        DLog(@"%@",cardId);
+        
+        if(cardId != nil)
+        {
+            self.cardLabel.text=[NSString stringWithFormat:@"%@ **** **** %@",[cardId substringToIndex:4],[cardId substringFromIndex:[cardId length]-4]];
+        }
         self.iconImageView.image=[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",bankType]];
-        self.cardLabel.text=[NSString stringWithFormat:@"%@ **** **** %@",[cardId substringToIndex:4],[cardId substringFromIndex:[cardId length]-4]];
         free=[[responseObject objectForKey:@"free"] doubleValue];
         
         
@@ -260,4 +266,10 @@
     }
     return YES;
 }
+
+- (IBAction)gestureTape:(UITapGestureRecognizer *)sender {
+    [self.withdrawTF resignFirstResponder];
+    [self.captchaTF resignFirstResponder];
+}
+
 @end

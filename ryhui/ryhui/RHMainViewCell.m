@@ -78,7 +78,7 @@
     
     if ([[dic objectForKey:@"insuranceLogo"] isKindOfClass:[NSNull class]]) {
         CGRect rect=self.insuranceMethodLabel.frame;
-        rect.origin.x=60;
+        rect.origin.x=63;
         self.insuranceMethodLabel.frame=rect;
         self.logoImageView.hidden=YES;
     }else{
