@@ -36,6 +36,7 @@
         [request setValue:session forHTTPHeaderField:@"cookie"];
     }
     [self.webView loadRequest: request];
+    [self.webView setScalesPageToFit:YES];
 }
 
 - (void)didReceiveMemoryWarning {
