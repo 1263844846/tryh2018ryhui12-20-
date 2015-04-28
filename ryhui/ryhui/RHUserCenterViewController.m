@@ -55,7 +55,7 @@
 
 - (IBAction)pushMain:(id)sender {
     
-    [[RHTabbarManager sharedInterface] selectTabbarMain];
+    [[[RHTabbarManager sharedInterface] selectTabbarMain] popToRootViewControllerAnimated:NO];
     
 }
 
@@ -64,7 +64,7 @@
 }
 
 - (IBAction)pushMore:(id)sender {
-    [[RHTabbarManager sharedInterface] selectTabbarMore];
+    [[[RHTabbarManager sharedInterface] selectTabbarMore] popToRootViewControllerAnimated:NO];
 }
 
 - (IBAction)changePasswordAction:(id)sender {

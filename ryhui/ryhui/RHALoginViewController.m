@@ -153,7 +153,7 @@
            
                 }else{
                     [[RHTabbarManager sharedInterface] initTabbar];
-                    [[RHTabbarManager sharedInterface] selectTabbarMain];
+                    [[[RHTabbarManager sharedInterface] selectTabbarMain] popToRootViewControllerAnimated:NO];
                 }
 
             }

@@ -50,11 +50,11 @@
 
 - (IBAction)pushUser:(id)sender {
     
-    [[RHTabbarManager sharedInterface] selectTabbarUser];
+    [[[RHTabbarManager sharedInterface] selectTabbarUser] popToRootViewControllerAnimated:NO];
 }
 
 - (IBAction)pushMore:(id)sender {
-    [[RHTabbarManager sharedInterface] selectTabbarMore];
+    [[[RHTabbarManager sharedInterface] selectTabbarMore] popToRootViewControllerAnimated:NO];
 }
 
 - (void)dealloc

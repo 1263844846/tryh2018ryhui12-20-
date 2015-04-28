@@ -182,7 +182,7 @@
             
         }else{
             [[RHTabbarManager sharedInterface] initTabbar];
-            [[RHTabbarManager sharedInterface] selectTabbarMain];
+            [[[RHTabbarManager sharedInterface] selectTabbarMain] popToRootViewControllerAnimated:NO];
             
         }
         
@@ -231,7 +231,7 @@
                     [self.navigationController popViewControllerAnimated:NO];
                 }else{
                     [[RHTabbarManager sharedInterface] initTabbar];
-                    [[RHTabbarManager sharedInterface] selectTabbarMain];
+                    [[[RHTabbarManager sharedInterface] selectTabbarMain] popToRootViewControllerAnimated:NO];
                 }
             }
             

@@ -204,7 +204,7 @@
 }
 
 - (IBAction)pushMain:(id)sender {
-    [[RHTabbarManager sharedInterface] selectTabbarMain];
+    [[[RHTabbarManager sharedInterface] selectTabbarMain] popToRootViewControllerAnimated:NO];
 }
 
 - (IBAction)pushUser:(id)sender {
@@ -212,7 +212,7 @@
 }
 
 - (IBAction)pushMore:(id)sender {
-    [[RHTabbarManager sharedInterface] selectTabbarMore];
+    [[[RHTabbarManager sharedInterface] selectTabbarMore] popToRootViewControllerAnimated:NO];
 }
 
 @end
