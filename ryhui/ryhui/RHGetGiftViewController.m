@@ -46,7 +46,7 @@
     [self.navigationController popViewControllerAnimated:NO];
 
     RHRechargeViewController* controller=[[RHRechargeViewController alloc]initWithNibName:@"RHRechargeViewController" bundle:nil];
-    [[[RHTabbarManager sharedInterface] selectTabbarUser] pushViewController:controller animated:YES];
+    [[[RHTabbarManager sharedInterface] selectTabbarUser] pushViewController:controller animated:NO];
     
 }
 
@@ -54,6 +54,6 @@
     
     [self.navigationController popViewControllerAnimated:NO];
     RHMyGiftViewController* controller=[[RHMyGiftViewController alloc]initWithNibName:@"RHMyGiftViewController" bundle:nil];
-    [[[RHTabbarManager sharedInterface] selectTabbarUser] pushViewController:controller animated:YES];
+    [[[RHTabbarManager sharedInterface] selectTabbarUser] pushViewController:controller animated:NO];
 }
 @end

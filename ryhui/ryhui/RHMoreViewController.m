@@ -24,11 +24,11 @@
 }
 
 - (IBAction)pushMain:(id)sender {
-    [[RHTabbarManager sharedInterface] selectTabbarMain];
+    [[[RHTabbarManager sharedInterface] selectTabbarMain] popToRootViewControllerAnimated:NO];
 }
 
 - (IBAction)pushUser:(id)sender {
-    [[RHTabbarManager sharedInterface] selectTabbarUser];
+    [[[RHTabbarManager sharedInterface] selectTabbarUser] popToRootViewControllerAnimated:NO];
 }
 
 - (IBAction)pushAbout:(id)sender {
