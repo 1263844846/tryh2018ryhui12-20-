@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		003E60C51AEF653000F79832 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 003E60C41AEF653000F79832 /* bg.png */; };
+		004B90751AEF5F010011F0F6 /* defaultRH.png in Resources */ = {isa = PBXBuildFile; fileRef = 004B90741AEF5F010011F0F6 /* defaultRH.png */; };
 		00CCC6EF1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CCC6ED1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.m */; };
 		00CCC6F01AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00CCC6EE1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.xib */; };
 		961AD2F930E8CEFA8FA5D28D /* libPods-ryhui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB95D30F1AE0DCFA27AE1DD7 /* libPods-ryhui.a */; };
@@ -41,7 +43,6 @@
 		D56236841AC7A4C900FEAB7C /* RHForgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D56236821AC7A4C900FEAB7C /* RHForgotPasswordViewController.xib */; };
 		D562368E1AC7E6AB00FEAB7C /* RHAccountValidateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D562368C1AC7E6AB00FEAB7C /* RHAccountValidateViewController.m */; };
 		D562368F1AC7E6AB00FEAB7C /* RHAccountValidateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D562368D1AC7E6AB00FEAB7C /* RHAccountValidateViewController.xib */; };
-		D57006FA1ADF803500CEF60A /* defaultRH.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D57006F91ADF803500CEF60A /* defaultRH.jpg */; };
 		D57A0DDE1AE0DCCC00CE2293 /* RHBankListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D57A0DDC1AE0DCCC00CE2293 /* RHBankListViewController.m */; };
 		D57A0DDF1AE0DCCC00CE2293 /* RHBankListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D57A0DDD1AE0DCCC00CE2293 /* RHBankListViewController.xib */; };
 		D58A74091AD6AD0C0076D3FB /* RHRegisterAgreenWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D58A74071AD6AD0C0076D3FB /* RHRegisterAgreenWebViewController.m */; };
@@ -107,7 +108,6 @@
 		F815ED451AB72898004B2053 /* AITableFooterVew.m in Sources */ = {isa = PBXBuildFile; fileRef = F815ED441AB72898004B2053 /* AITableFooterVew.m */; };
 		F815ED4A1AB749FF004B2053 /* RHGuidanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F815ED481AB749FF004B2053 /* RHGuidanceViewController.m */; };
 		F815ED4B1AB749FF004B2053 /* RHGuidanceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F815ED491AB749FF004B2053 /* RHGuidanceViewController.xib */; };
-		F815ED531AB752D2004B2053 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F815ED521AB752D2004B2053 /* bg.jpg */; };
 		F815ED591AB7557E004B2053 /* 6.png in Resources */ = {isa = PBXBuildFile; fileRef = F815ED541AB7557E004B2053 /* 6.png */; };
 		F815ED5A1AB7557E004B2053 /* 7-1.png in Resources */ = {isa = PBXBuildFile; fileRef = F815ED551AB7557E004B2053 /* 7-1.png */; };
 		F815ED5B1AB7557E004B2053 /* 7.png in Resources */ = {isa = PBXBuildFile; fileRef = F815ED561AB7557E004B2053 /* 7.png */; };
@@ -290,6 +290,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		003E60C41AEF653000F79832 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		004B90741AEF5F010011F0F6 /* defaultRH.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultRH.png; sourceTree = "<group>"; };
 		00CCC6EC1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHOfficeNetAndWeiBoViewController.h; sourceTree = "<group>"; };
 		00CCC6ED1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHOfficeNetAndWeiBoViewController.m; sourceTree = "<group>"; };
 		00CCC6EE1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHOfficeNetAndWeiBoViewController.xib; sourceTree = "<group>"; };
@@ -336,7 +338,6 @@
 		D562368B1AC7E6AB00FEAB7C /* RHAccountValidateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHAccountValidateViewController.h; sourceTree = "<group>"; };
 		D562368C1AC7E6AB00FEAB7C /* RHAccountValidateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHAccountValidateViewController.m; sourceTree = "<group>"; };
 		D562368D1AC7E6AB00FEAB7C /* RHAccountValidateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHAccountValidateViewController.xib; sourceTree = "<group>"; };
-		D57006F91ADF803500CEF60A /* defaultRH.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = defaultRH.jpg; sourceTree = "<group>"; };
 		D57A0DDB1AE0DCCC00CE2293 /* RHBankListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHBankListViewController.h; sourceTree = "<group>"; };
 		D57A0DDC1AE0DCCC00CE2293 /* RHBankListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHBankListViewController.m; sourceTree = "<group>"; };
 		D57A0DDD1AE0DCCC00CE2293 /* RHBankListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHBankListViewController.xib; sourceTree = "<group>"; };
@@ -432,7 +433,6 @@
 		F815ED471AB749FF004B2053 /* RHGuidanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHGuidanceViewController.h; sourceTree = "<group>"; };
 		F815ED481AB749FF004B2053 /* RHGuidanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHGuidanceViewController.m; sourceTree = "<group>"; };
 		F815ED491AB749FF004B2053 /* RHGuidanceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHGuidanceViewController.xib; sourceTree = "<group>"; };
-		F815ED521AB752D2004B2053 /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
 		F815ED541AB7557E004B2053 /* 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 6.png; sourceTree = "<group>"; };
 		F815ED551AB7557E004B2053 /* 7-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "7-1.png"; sourceTree = "<group>"; };
 		F815ED561AB7557E004B2053 /* 7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7.png; sourceTree = "<group>"; };
@@ -1026,8 +1026,8 @@
 		F80E497B1A8E3D0400028CD1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				004B90741AEF5F010011F0F6 /* defaultRH.png */,
 				F8838A9E1AE27528005A554E /* noData.jpg */,
-				D57006F91ADF803500CEF60A /* defaultRH.jpg */,
 				D537C3771ADD41C4009D3433 /* gitf */,
 				D5C233B71ADCE677006DD91E /* qcode.jpg */,
 				F8838AA61AE2B298005A554E /* downCode.jpg */,
@@ -1051,7 +1051,7 @@
 				F8A0EBF71AB8719000F65A7F /* 4.png */,
 				F8A0EBEE1AB8704900F65A7F /* 3-1.png */,
 				F8A0EBEF1AB8704900F65A7F /* 3.png */,
-				F815ED521AB752D2004B2053 /* bg.jpg */,
+				003E60C41AEF653000F79832 /* bg.png */,
 				F815ED3A1AB717E7004B2053 /* 1.png */,
 				F87B83341AC837BB00EB73A6 /* message1.png */,
 				F87B83351AC837BB00EB73A6 /* message2.png */,
@@ -1645,10 +1645,10 @@
 			files = (
 				F8C38D9A1AC98432005C3B1F /* user1.png in Resources */,
 				F87B83401AC841D500EB73A6 /* withdrawButton.png in Resources */,
+				003E60C51AEF653000F79832 /* bg.png in Resources */,
 				F815ED5C1AB7557E004B2053 /* 8-1.png in Resources */,
 				D5D792701ADC2ABD00017DD2 /* RepaymentSchedule2.png in Resources */,
 				F8B6DAAB1AB567BE00CCB13D /* 18-4.png in Resources */,
-				F815ED531AB752D2004B2053 /* bg.jpg in Resources */,
 				F88831171AB48069001E4AD1 /* mainNS.png in Resources */,
 				F8A0EBED1AB86F1A00F65A7F /* RHProjectListViewController.xib in Resources */,
 				F8B6DAA81AB567BE00CCB13D /* 18-1.png in Resources */,
@@ -1730,7 +1730,6 @@
 				D54A07541ADA99730031A5A1 /* RHMyMessageDetailViewController.xib in Resources */,
 				F8A0EBF51AB8718900F65A7F /* project1@2x.png in Resources */,
 				D537C38D1ADD63C2009D3433 /* gift.png in Resources */,
-				D57006FA1ADF803500CEF60A /* defaultRH.jpg in Resources */,
 				F88831191AB48069001E4AD1 /* moreNS.png in Resources */,
 				D537C37D1ADD4518009D3433 /* giftbg2.png in Resources */,
 				F83375E11AB9BEBC00944CB1 /* RHInvestmentViewController.xib in Resources */,
@@ -1747,6 +1746,7 @@
 				F8B6DA7E1AB55BA300CCB13D /* RHMyAccountViewController.xib in Resources */,
 				F83375E31AB9C3CD00944CB1 /* 8-4.png in Resources */,
 				F888310A1AB433B9001E4AD1 /* mainCellBg.png in Resources */,
+				004B90751AEF5F010011F0F6 /* defaultRH.png in Resources */,
 				F879E75B1AA355C100339647 /* RHAgreement2ViewController.xib in Resources */,
 				F8B6DA9A1AB565DF00CCB13D /* RHMyInvestmentViewController.xib in Resources */,
 				F88831221AB4846B001E4AD1 /* RHProjectDetailViewController.xib in Resources */,
@@ -2002,7 +2002,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ming Lu (C3TV6E2EC2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ming Lu (C3TV6E2EC2)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2022,6 +2023,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "5dd2358d-ef1c-4e5b-98d8-852b923acc97";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2043,7 +2045,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ming Lu (C3TV6E2EC2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ming Lu (C3TV6E2EC2)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2056,6 +2059,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "5dd2358d-ef1c-4e5b-98d8-852b923acc97";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2088,12 +2092,7 @@
 					"$(PROJECT_DIR)/ryhui/ShareSDK/Extend/WeChatSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-<<<<<<< HEAD
-				PROVISIONING_PROFILE = "fdff66ad-4882-45d4-b81b-704a0a26dda1";
-=======
 				PROVISIONING_PROFILE = "5dd2358d-ef1c-4e5b-98d8-852b923acc97";
->>>>>>> ab4fa5845d1eb80f7bad23c632b2f578a8618dc4
-				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -2124,11 +2123,7 @@
 					"$(PROJECT_DIR)/ryhui/ShareSDK/Extend/WeChatSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-<<<<<<< HEAD
-				PROVISIONING_PROFILE = "fdff66ad-4882-45d4-b81b-704a0a26dda1";
-=======
 				PROVISIONING_PROFILE = "5dd2358d-ef1c-4e5b-98d8-852b923acc97";
->>>>>>> ab4fa5845d1eb80f7bad23c632b2f578a8618dc4
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
