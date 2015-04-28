@@ -40,13 +40,10 @@
     
     [self configTitleWithString:@"登录"];
     
-//    self.accountTextField.text=@"asdf5678";
-//    
-//    self.passwordTextField.text=@"asdf5678";
-    
     self.passwordTextField.secureTextEntry=YES;
     
     [self configRightButtonWithTitle:@"注册" action:@selector(pushRigster)];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textBegin:) name:UITextFieldTextDidBeginEditingNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
     

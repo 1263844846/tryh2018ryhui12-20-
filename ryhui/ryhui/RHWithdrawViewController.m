@@ -27,6 +27,8 @@
     [self getWithdrawData];
     self.overView.hidden=YES;
     self.scrollView.contentSize=CGSizeMake(self.scrollView.frame.size.width, 630);
+    self.changeCardsButton.layer.cornerRadius=9;
+    self.changeCardsButton.layer.masksToBounds=YES;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
 }
@@ -66,7 +68,9 @@
         NSString* cardType=nil;
         
         if (![qpCard isKindOfClass:[NSNull class]]&&qpCard&&[qpCard count]>0) {
+            
             for (NSString* idStr in qpCard) {
+                
                 int index=[[NSNumber numberWithUnsignedInteger:[qpCard indexOfObject:idStr]] intValue];
                 if (index==0) {
                     bankType=idStr;
@@ -79,6 +83,7 @@
                 }
             }
             self.qbCardTipsView.hidden=NO;
+            self.cardsView.hidden=YES;
         }else{
             if (![cards isKindOfClass:[NSNull class]]&&cards&&[cards count]>0) {
                 DLog(@"%@",cards);
@@ -97,9 +102,10 @@
                     }
                 }
                 self.qbCardTipsView.hidden=YES;
-                CGRect rect=self.contentView.frame;
-                rect.origin.y=80;
-                self.contentView.frame=rect;
+                self.cardsView.hidden=NO;
+//                CGRect rect=self.contentView.frame;
+//                rect.origin.y=80;
+//                self.contentView.frame=rect;
             }
 
         }
@@ -133,7 +139,13 @@
 
 - (IBAction)bindCardAction:(id)sender {
     RHBindCardWebViewController* controller=[[RHBindCardWebViewController alloc]initWithNibName:@"RHBindCardWebViewController" bundle:nil];
+    controller.delegate=self;
     [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (IBAction)changeCards:(id)sender {
+    
+    [self bindCardAction:nil];
 }
 
 

@@ -14,6 +14,7 @@
 @end
 
 @implementation RHBindCardWebViewController
+@synthesize delegate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,6 +29,12 @@
         [request setValue:session forHTTPHeaderField:@"cookie"];
     }
     [self.webView loadRequest: request];
+}
+
+-(void)back
+{
+    [delegate getWithdrawData];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)webViewDidStartLoad:(UIWebView *)webView

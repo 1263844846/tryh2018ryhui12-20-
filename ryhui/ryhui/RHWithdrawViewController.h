@@ -14,6 +14,8 @@
 }
 - (IBAction)hiddenKeyBorad:(id)sender;
 @property (weak, nonatomic) IBOutlet UIView *overView;
+@property (weak, nonatomic) IBOutlet UIView *cardsView;
+@property (weak, nonatomic) IBOutlet UIButton *changeCardsButton;
 
 @property (weak, nonatomic) IBOutlet UIView *qbCardTipsView;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
@@ -28,8 +30,11 @@
 @property (weak, nonatomic) IBOutlet UITextField *captchaTF;
 - (IBAction)withdrawAction:(id)sender;
 - (IBAction)bindCardAction:(id)sender;
+- (IBAction)changeCards:(id)sender;
 
 - (IBAction)pushMain:(id)sender;
 - (IBAction)pushUser:(id)sender;
 - (IBAction)pushMore:(id)sender;
+
+-(void)getWithdrawData;
 @end

@@ -7,8 +7,10 @@
 //
 
 #import "RHBaseViewController.h"
+#import "RHWithdrawViewController.h"
 
 @interface RHBindCardWebViewController : RHBaseViewController<UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (nonatomic,assign)RHWithdrawViewController* delegate;
 @end
