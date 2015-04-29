@@ -30,7 +30,7 @@
     self.changeCardsButton.layer.cornerRadius=9;
     self.changeCardsButton.layer.masksToBounds=YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
-    self.withdrawTF.enabled=YES;
+    self.withdrawTF.enabled=NO;
     self.cardsView.hidden=YES;
 }
 //balance = "80.29000000000001";
