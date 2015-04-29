@@ -30,7 +30,7 @@
     _headerView.delegate = self;
     [self.tableView addSubview:_headerView];
     
-    _footerView = [[AITableFooterVew alloc] initWithFrame:CGRectMake(0.0, 0.0, self.tableView.frame.size.width,50.0)];
+    _footerView = [[AITableFooterVew alloc] initWithFrame:CGRectMake(0.0, 0.0,[UIScreen mainScreen].bounds.size.width,50.0)];
     [_footerView.footerButton addTarget:self action:@selector(showMoreApp:) forControlEvents:UIControlEventTouchUpInside];
     self.tableView.tableFooterView = _footerView;
     _footerView.hidden=YES;
