@@ -283,4 +283,12 @@
     [self.captchaTF resignFirstResponder];
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+    for (UIView *subView in [UIApplication sharedApplication].keyWindow.subviews) {
+        if (subView.tag == 1000) {
+            [subView removeFromSuperview];
+        }
+    }
+}
 @end
