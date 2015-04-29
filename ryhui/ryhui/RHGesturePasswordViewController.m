@@ -233,7 +233,8 @@
                 [self.navigationController popViewControllerAnimated:YES];
             }else{
                 if (isRegister) {
-                    [self.navigationController popViewControllerAnimated:NO];
+                    [[RHTabbarManager sharedInterface] initTabbar];
+                    [[[RHTabbarManager sharedInterface] selectTabbarUser] popToRootViewControllerAnimated:NO];
                 }else{
                     [[RHTabbarManager sharedInterface] initTabbar];
                     [[[RHTabbarManager sharedInterface] selectTabbarMain] popToRootViewControllerAnimated:NO];

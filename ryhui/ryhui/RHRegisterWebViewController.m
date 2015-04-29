@@ -50,6 +50,7 @@
 //        [[RHTabbarManager sharedInterface] selectTabbarUser];
         
         RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
+        controller.isRegister=YES;
         [self.navigationController pushViewController:controller animated:NO];
         
         return NO;

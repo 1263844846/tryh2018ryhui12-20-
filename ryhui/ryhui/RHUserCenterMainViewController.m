@@ -60,7 +60,7 @@
         if ([responseObject isKindOfClass:[NSData class]]) {
             
             NSDictionary* dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            NSString* amount=[dic objectForKey:@"msg"];
+            NSString* amount=[dic objectForKey:@"money"];
             if (amount&&[amount length]>0) {
                 RHGetGiftViewController* controller=[[RHGetGiftViewController alloc]initWithNibName:@"RHGetGiftViewController" bundle:nil];
                 controller.amount=amount;

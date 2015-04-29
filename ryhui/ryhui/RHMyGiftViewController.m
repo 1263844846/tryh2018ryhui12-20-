@@ -52,6 +52,11 @@
     [self segmentContentView:_segmentContentView selectPage:0];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden=NO;
+}
 
 -(void)initData
 {
