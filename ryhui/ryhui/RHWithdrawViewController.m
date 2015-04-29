@@ -60,9 +60,10 @@
         
         if ((cards&&[cards count]>0)||(qpCard&&[qpCard count]>0)) {
             self.overView.hidden=YES;
-            self.withdrawTF.enabled=NO;
+            self.withdrawTF.enabled=YES;
         }else{
             self.overView.hidden=NO;
+            self.withdrawTF.enabled=NO;
         }
 
         NSString* bankType=nil;

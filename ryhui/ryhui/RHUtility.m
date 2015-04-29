@@ -57,6 +57,7 @@
     UIView* customView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 100, [text sizeWithFont:[UIFont boldSystemFontOfSize:18] forWidth:100 lineBreakMode:NSLineBreakByCharWrapping].height)];
     BDKNotifyHUD* hud=[BDKNotifyHUD notifyHUDWithView:customView text:text];
     hud.center = CGPointMake([UIApplication sharedApplication].keyWindow.center.x, [UIApplication sharedApplication].keyWindow.center.y - 20);
+    hud.tag = 1000;
     [[UIApplication sharedApplication].keyWindow addSubview:hud];
     [hud presentWithDuration:2.0f speed:0.5f inView:[UIApplication sharedApplication].keyWindow completion:^{
         [hud removeFromSuperview];
