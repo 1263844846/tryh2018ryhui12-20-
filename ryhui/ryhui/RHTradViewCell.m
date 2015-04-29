@@ -66,7 +66,7 @@
     if ([type isEqualToString:@"Cash"]) {
         return @"提现";
     }
-    if ([type isEqualToString:@"Cash_Fee"]) {
+    if ([type isEqualToString:@"Cash_Fee"]||[type isEqualToString:@"CashFee"]) {
         return @"提现手续费";
     }
     if ([type isEqualToString:@"PrepaymentPenalty"]) {
@@ -80,7 +80,7 @@
     if ([type isEqualToString:@"Recharge"]||[type isEqualToString:@"Interest"]||[type isEqualToString:@"Capital"]||[type isEqualToString:@"PenaltyInterest"]||[type isEqualToString:@"PrepaymentPenalty"]) {
         return 0;
     }
-    if ([type isEqualToString:@"Cash"]||[type isEqualToString:@"Cash_Fee"]||[type isEqualToString:@"Loans"]) {
+    if ([type isEqualToString:@"Cash"]||[type isEqualToString:@"Cash_Fee"]||[type isEqualToString:@"Loans"]||[type isEqualToString:@"CashFee"]) {
         return 1;
     }
     return 2;
