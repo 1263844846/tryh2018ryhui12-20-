@@ -65,8 +65,11 @@
         [RHUtility showTextWithText:@"请输入充值金额"];
         return;
     }else{
-        if ([self.textField.text floatValue]<=0) {
+        if ([self.textField.text floatValue] <= 0) {
             [RHUtility showTextWithText:@"请输入正确金额"];
+            return;
+        }else if ([_textField.text floatValue] < 1.0 ){
+            [RHUtility showTextWithText:@"充值金额应大于等于 1 元"];
             return;
         }
     }
@@ -119,5 +122,14 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.textField resignFirstResponder];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    for (UIView *subView in [UIApplication sharedApplication].keyWindow.subviews) {
+        if (subView.tag == 1000) {
+            [subView removeFromSuperview];
+        }
+    }
 }
 @end

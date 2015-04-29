@@ -81,6 +81,11 @@
 {
     [super viewWillDisappear:animated];
     self.navigationController.navigationBar.hidden=NO;
+    for (UIView *subView in [UIApplication sharedApplication].keyWindow.subviews) {
+        if (subView.tag == 1000) {
+            [subView removeFromSuperview];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning
