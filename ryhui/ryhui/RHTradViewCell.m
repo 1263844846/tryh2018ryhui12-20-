@@ -37,7 +37,7 @@
         default:
             break;
     }
-    self.priceLabel.text=[NSString stringWithFormat:@"%@%@",price,[[dic objectForKey:@"money"] stringValue]];
+    self.priceLabel.text=[NSString stringWithFormat:@"%@%.2f",price,[[dic objectForKey:@"money"] floatValue]];
 }
 
 -(NSString*)typeWithKey:(NSString*)type

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		003E60C51AEF653000F79832 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 003E60C41AEF653000F79832 /* bg.png */; };
 		004B90751AEF5F010011F0F6 /* defaultRH.png in Resources */ = {isa = PBXBuildFile; fileRef = 004B90741AEF5F010011F0F6 /* defaultRH.png */; };
+		0064C5E31AF0A6AC0096E1D8 /* Banner.png in Resources */ = {isa = PBXBuildFile; fileRef = 0064C5E21AF0A6AC0096E1D8 /* Banner.png */; };
 		00CCC6EF1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CCC6ED1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.m */; };
 		00CCC6F01AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00CCC6EE1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.xib */; };
 		961AD2F930E8CEFA8FA5D28D /* libPods-ryhui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB95D30F1AE0DCFA27AE1DD7 /* libPods-ryhui.a */; };
@@ -182,7 +183,6 @@
 		F88830FB1AB41F76001E4AD1 /* RHSegmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F88830FA1AB41F76001E4AD1 /* RHSegmentView.xib */; };
 		F88830FD1AB42268001E4AD1 /* segmentBgV.png in Resources */ = {isa = PBXBuildFile; fileRef = F88830FC1AB42268001E4AD1 /* segmentBgV.png */; };
 		F88830FF1AB42329001E4AD1 /* newProjectBg.png in Resources */ = {isa = PBXBuildFile; fileRef = F88830FE1AB42329001E4AD1 /* newProjectBg.png */; };
-		F88831021AB42DBA001E4AD1 /* mainBanner.png in Resources */ = {isa = PBXBuildFile; fileRef = F88831011AB42DBA001E4AD1 /* mainBanner.png */; };
 		F88831071AB43369001E4AD1 /* RHMainViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F88831051AB43369001E4AD1 /* RHMainViewCell.m */; };
 		F88831081AB43369001E4AD1 /* RHMainViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F88831061AB43369001E4AD1 /* RHMainViewCell.xib */; };
 		F888310A1AB433B9001E4AD1 /* mainCellBg.png in Resources */ = {isa = PBXBuildFile; fileRef = F88831091AB433B9001E4AD1 /* mainCellBg.png */; };
@@ -292,6 +292,7 @@
 /* Begin PBXFileReference section */
 		003E60C41AEF653000F79832 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		004B90741AEF5F010011F0F6 /* defaultRH.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultRH.png; sourceTree = "<group>"; };
+		0064C5E21AF0A6AC0096E1D8 /* Banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Banner.png; sourceTree = "<group>"; };
 		00CCC6EC1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHOfficeNetAndWeiBoViewController.h; sourceTree = "<group>"; };
 		00CCC6ED1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHOfficeNetAndWeiBoViewController.m; sourceTree = "<group>"; };
 		00CCC6EE1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHOfficeNetAndWeiBoViewController.xib; sourceTree = "<group>"; };
@@ -526,7 +527,6 @@
 		F88830FA1AB41F76001E4AD1 /* RHSegmentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHSegmentView.xib; sourceTree = "<group>"; };
 		F88830FC1AB42268001E4AD1 /* segmentBgV.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = segmentBgV.png; sourceTree = "<group>"; };
 		F88830FE1AB42329001E4AD1 /* newProjectBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newProjectBg.png; sourceTree = "<group>"; };
-		F88831011AB42DBA001E4AD1 /* mainBanner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainBanner.png; sourceTree = "<group>"; };
 		F88831041AB43369001E4AD1 /* RHMainViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHMainViewCell.h; sourceTree = "<group>"; };
 		F88831051AB43369001E4AD1 /* RHMainViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHMainViewCell.m; sourceTree = "<group>"; };
 		F88831061AB43369001E4AD1 /* RHMainViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHMainViewCell.xib; sourceTree = "<group>"; };
@@ -1278,9 +1278,9 @@
 		F88831001AB42DA2001E4AD1 /* mainViewController */ = {
 			isa = PBXGroup;
 			children = (
+				0064C5E21AF0A6AC0096E1D8 /* Banner.png */,
 				F888310B1AB435C7001E4AD1 /* mainLogo.png */,
 				F88831091AB433B9001E4AD1 /* mainCellBg.png */,
-				F88831011AB42DBA001E4AD1 /* mainBanner.png */,
 			);
 			name = mainViewController;
 			sourceTree = "<group>";
@@ -1662,6 +1662,7 @@
 				F89A3D8C1AB5D6E200B92DF3 /* RHRegisterWebViewController.xib in Resources */,
 				F815ED5B1AB7557E004B2053 /* 7.png in Resources */,
 				F80E49801A8E407900028CD1 /* loginButtonDefault.png in Resources */,
+				0064C5E31AF0A6AC0096E1D8 /* Banner.png in Resources */,
 				F88831181AB48069001E4AD1 /* mainS.png in Resources */,
 				D537C37B1ADD4512009D3433 /* giftPass.png in Resources */,
 				F888310C1AB435C7001E4AD1 /* mainLogo.png in Resources */,
@@ -1694,7 +1695,6 @@
 				F8C38DB21AC98FE1005C3B1F /* error2.png in Resources */,
 				D57A0DDF1AE0DCCC00CE2293 /* RHBankListViewController.xib in Resources */,
 				F88830F81AB41E6E001E4AD1 /* segmentBg1.png in Resources */,
-				F88831021AB42DBA001E4AD1 /* mainBanner.png in Resources */,
 				D58A740F1AD6BA870076D3FB /* RHInvestDetailViewController.xib in Resources */,
 				F89A3D841AB5D16800B92DF3 /* register1.png in Resources */,
 				F8B6DA851AB55C1500CCB13D /* myAccount1.png in Resources */,
