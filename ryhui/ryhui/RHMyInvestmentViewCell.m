@@ -36,16 +36,7 @@
     }
     self.backMoneyLabel.text=backMoney;
     
-    float profitMoney=0.00;
-    if (![[dic objectForKey:@"profitMoney"] isKindOfClass:[NSNull class]]) {
-        profitMoney=[[dic objectForKey:@"profitMoney"] floatValue];
-    }
-    float penaltyMoney=0.00;
-    if (![[dic objectForKey:@"penaltyMoney"] isKindOfClass:[NSNull class]]) {
-        penaltyMoney=[[dic objectForKey:@"penaltyMoney"] floatValue];
-    }
-    
-    self.profitMoneyLabel.text=[NSString stringWithFormat:@"%.2f",profitMoney+penaltyMoney];
+    self.profitMoneyLabel.text=[NSString stringWithFormat:@"%.2f",[[dic objectForKey:@"waitMoney"] floatValue]];
 }
 
 - (IBAction)contractAction:(id)sender {
