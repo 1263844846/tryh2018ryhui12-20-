@@ -2071,8 +2071,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Hong Du Yi Rong Financial Information Service Co., Ltd. (T8WLWPVY5C)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Hong Du Yi Rong Financial Information Service Co., Ltd. (T8WLWPVY5C)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ryhui/ShareSDK/Connection",
@@ -2092,7 +2092,7 @@
 					"$(PROJECT_DIR)/ryhui/ShareSDK/Extend/WeChatSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cdc5fc6b-77b3-4df5-a98e-5dee4d9ecda1";
+				PROVISIONING_PROFILE = "d4768157-768f-439b-b5d9-606a3624eacb";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2103,8 +2103,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Hong Du Yi Rong Financial Information Service Co., Ltd. (T8WLWPVY5C)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Hong Du Yi Rong Financial Information Service Co., Ltd. (T8WLWPVY5C)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ryhui/ShareSDK/Connection",
@@ -2124,7 +2124,7 @@
 					"$(PROJECT_DIR)/ryhui/ShareSDK/Extend/WeChatSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cdc5fc6b-77b3-4df5-a98e-5dee4d9ecda1";
+				PROVISIONING_PROFILE = "d4768157-768f-439b-b5d9-606a3624eacb";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -2146,7 +2146,7 @@
 				INFOPLIST_FILE = ryhuiTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5dd2358d-ef1c-4e5b-98d8-852b923acc97";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ryhui.app/ryhui";
 			};
 			name = Debug;
@@ -2155,8 +2155,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Hong Du Yi Rong Financial Information Service Co., Ltd. (T8WLWPVY5C)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Hong Du Yi Rong Financial Information Service Co., Ltd. (T8WLWPVY5C)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -2164,7 +2164,7 @@
 				INFOPLIST_FILE = ryhuiTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5dd2358d-ef1c-4e5b-98d8-852b923acc97";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ryhui.app/ryhui";
 			};
 			name = Release;
