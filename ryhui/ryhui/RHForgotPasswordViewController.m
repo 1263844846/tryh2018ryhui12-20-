@@ -138,5 +138,6 @@
             [subView removeFromSuperview];
         }
     }
+    [super viewWillDisappear:animated];
 }
 @end

@@ -64,6 +64,7 @@
             [subView removeFromSuperview];
         }
     }
+    [super viewWillDisappear:animated];
 }
 - (void)dealloc
 {
