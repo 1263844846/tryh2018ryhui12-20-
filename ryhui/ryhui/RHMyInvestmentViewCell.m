@@ -36,7 +36,7 @@
     }
     self.backMoneyLabel.text=backMoney;
     
-    self.profitMoneyLabel.text=[NSString stringWithFormat:@"%.2f",[[dic objectForKey:@"waitMoney"] floatValue]];
+    self.profitMoneyLabel.text=[NSString stringWithFormat:@"%@",[dic objectForKey:@"waitMoney"]];
 }
 
 - (IBAction)contractAction:(id)sender {
