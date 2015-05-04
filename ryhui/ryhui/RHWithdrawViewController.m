@@ -221,7 +221,7 @@
 -(void)timeFireMethod
 {
     secondsCountDown--;
-    [self.captchaButton setTitle:[NSString stringWithFormat:@"重新发送(%d)",secondsCountDown] forState:UIControlStateNormal];
+    [self.captchaButton setTitle:[NSString stringWithFormat:@"重新发送(%d)",secondsCountDown] forState:UIControlStateDisabled];
     if (secondsCountDown==0) {
         self.captchaButton.enabled=YES;
         [self.captchaButton setTitle:@"获取验证码" forState:UIControlStateNormal];
