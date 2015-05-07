@@ -95,7 +95,7 @@
                 NSString* md5=[responseObject objectForKey:@"md5"];
                 [RHNetworkService instance].niubiMd5=md5;
                 
-                [RHUserManager sharedInterface].username=self.accountTextField.text;
+                [RHUserManager sharedInterface].username=[responseObject objectForKey:@"username"];
                 
                 [[NSUserDefaults standardUserDefaults] setObject:[RHUserManager sharedInterface].username forKey:@"RHUSERNAME"];
                 [[NSUserDefaults standardUserDefaults] synchronize];

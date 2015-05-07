@@ -67,9 +67,69 @@
     
     [self initShareSDK];
 
+    [self registerJPushNotifyWithLauchOptions:launchOptions];
+    
     return YES;
 }
 
+-(void)registerJPushNotifyWithLauchOptions:(NSDictionary *)launchOptions
+{
+#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        //可以添加自定义categories
+        [APService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+                                                       UIUserNotificationTypeSound |
+                                                       UIUserNotificationTypeAlert)
+                                           categories:nil];
+    } else {
+        //categories 必须为nil
+        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                       UIRemoteNotificationTypeSound |
+                                                       UIRemoteNotificationTypeAlert)
+                                           categories:nil];
+    }
+#else
+    //categories 必须为nil
+    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                   UIRemoteNotificationTypeSound |
+                                                   UIRemoteNotificationTypeAlert)
+                                       categories:nil];
+#endif
+    // Required
+    [APService setupWithOption:launchOptions];
+    
+    [APService setBadge:0];
+    
+    [APService setTags:[NSSet setWithObject:@"1"] alias:@"mayun" callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lianjiechenggong) name:kJPFNetworkDidSetupNotification object:nil];
+    
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zhucechenggong) name:kJPFNetworkDidRegisterNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(denglichenggong) name:kJPFNetworkDidLoginNotification object:nil];
+    
+}
+
+-(void)lianjiechenggong
+{
+    NSLog(@"============%@",@"lianjiechenggong");
+}
+-(void)zhucechenggong
+{
+    NSLog(@"============%@",@"zhucechenggong");
+    
+}
+
+-(void)denglichenggong
+{
+    NSLog(@"============%@",@"denglichenggong");
+}
+-(void)tagsAliasCallback:(int)iResCode
+                    tags:(NSSet*)tags
+                   alias:(NSString*)alias
+{
+    NSLog(@"rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
+}
 
 -(void)initShareSDK
 {
@@ -160,6 +220,7 @@
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -197,6 +258,24 @@
                  sourceApplication:sourceApplication
                         annotation:annotation
                         wxDelegate:self];
+}
+
+//jpush 相关设置
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    
+    [APService registerDeviceToken:deviceToken];
+}
+
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    [APService handleRemoteNotification:userInfo];
+}
+
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    [APService handleRemoteNotification:userInfo];
+    completionHandler(UIBackgroundFetchResultNewData);
 }
 
 #pragma mark - Core Data stack

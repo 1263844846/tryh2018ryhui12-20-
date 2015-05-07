@@ -10,6 +10,12 @@
 		003E60C51AEF653000F79832 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 003E60C41AEF653000F79832 /* bg.png */; };
 		004B90751AEF5F010011F0F6 /* defaultRH.png in Resources */ = {isa = PBXBuildFile; fileRef = 004B90741AEF5F010011F0F6 /* defaultRH.png */; };
 		0064C5E31AF0A6AC0096E1D8 /* Banner.png in Resources */ = {isa = PBXBuildFile; fileRef = 0064C5E21AF0A6AC0096E1D8 /* Banner.png */; };
+		007ADF761AFB15C500D3B126 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 007ADF751AFB15C500D3B126 /* libz.dylib */; };
+		007ADF7A1AFB174100D3B126 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 007ADF791AFB174100D3B126 /* PushConfig.plist */; };
+		007ADF891AFB2FFA00D3B126 /* libPushSDK-1.8.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 007ADF881AFB2FFA00D3B126 /* libPushSDK-1.8.3.a */; };
+		007ADF8B1AFB32C200D3B126 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 007ADF8A1AFB32C200D3B126 /* CFNetwork.framework */; };
+		007ADF8D1AFB32D900D3B126 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 007ADF8C1AFB32D900D3B126 /* CoreFoundation.framework */; };
+		007ADF8F1AFB330000D3B126 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 007ADF8E1AFB330000D3B126 /* UIKit.framework */; };
 		00CCC6EF1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CCC6ED1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.m */; };
 		00CCC6F01AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00CCC6EE1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.xib */; };
 		961AD2F930E8CEFA8FA5D28D /* libPods-ryhui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB95D30F1AE0DCFA27AE1DD7 /* libPods-ryhui.a */; };
@@ -293,6 +299,13 @@
 		003E60C41AEF653000F79832 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		004B90741AEF5F010011F0F6 /* defaultRH.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultRH.png; sourceTree = "<group>"; };
 		0064C5E21AF0A6AC0096E1D8 /* Banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Banner.png; sourceTree = "<group>"; };
+		007ADF751AFB15C500D3B126 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		007ADF791AFB174100D3B126 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
+		007ADF871AFB2FFA00D3B126 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
+		007ADF881AFB2FFA00D3B126 /* libPushSDK-1.8.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.3.a"; sourceTree = "<group>"; };
+		007ADF8A1AFB32C200D3B126 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		007ADF8C1AFB32D900D3B126 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		007ADF8E1AFB330000D3B126 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		00CCC6EC1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHOfficeNetAndWeiBoViewController.h; sourceTree = "<group>"; };
 		00CCC6ED1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHOfficeNetAndWeiBoViewController.m; sourceTree = "<group>"; };
 		00CCC6EE1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHOfficeNetAndWeiBoViewController.xib; sourceTree = "<group>"; };
@@ -653,8 +666,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				007ADF8F1AFB330000D3B126 /* UIKit.framework in Frameworks */,
+				007ADF8D1AFB32D900D3B126 /* CoreFoundation.framework in Frameworks */,
+				007ADF8B1AFB32C200D3B126 /* CFNetwork.framework in Frameworks */,
+				007ADF761AFB15C500D3B126 /* libz.dylib in Frameworks */,
 				D5C2340F1ADCF3B5006DD91E /* libstdc++.dylib in Frameworks */,
 				D5C2340D1ADCF38A006DD91E /* Accounts.framework in Frameworks */,
+				007ADF891AFB2FFA00D3B126 /* libPushSDK-1.8.3.a in Frameworks */,
 				D5C2340B1ADCF385006DD91E /* Social.framework in Frameworks */,
 				D5C234091ADCEA3A006DD91E /* ImageIO.framework in Frameworks */,
 				D5C234071ADCEA31006DD91E /* CoreTelephony.framework in Frameworks */,
@@ -686,6 +704,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		007ADF851AFB2FAA00D3B126 /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				F86B8AF61AA17641000D2B8C /* third */,
+			);
+			name = ThirdParty;
+			sourceTree = "<group>";
+		};
+		007ADF861AFB2FEA00D3B126 /* Jpush */ = {
+			isa = PBXGroup;
+			children = (
+				007ADF871AFB2FFA00D3B126 /* APService.h */,
+				007ADF881AFB2FFA00D3B126 /* libPushSDK-1.8.3.a */,
+			);
+			name = Jpush;
+			sourceTree = "<group>";
+		};
 		0EF68FC40DCEEC7C77CF881D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -698,6 +733,10 @@
 		4B7547823688CBC5ACDA42D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				007ADF8E1AFB330000D3B126 /* UIKit.framework */,
+				007ADF8C1AFB32D900D3B126 /* CoreFoundation.framework */,
+				007ADF8A1AFB32C200D3B126 /* CFNetwork.framework */,
+				007ADF751AFB15C500D3B126 /* libz.dylib */,
 				D5C2340E1ADCF3B5006DD91E /* libstdc++.dylib */,
 				D5C2340C1ADCF38A006DD91E /* Accounts.framework */,
 				D5C2340A1ADCF385006DD91E /* Social.framework */,
@@ -912,7 +951,7 @@
 			children = (
 				F89A3D7C1AB5B53400B92DF3 /* Manager */,
 				F88830F01AB41BC3001E4AD1 /* CustomView */,
-				F86B8AF61AA17641000D2B8C /* third */,
+				007ADF851AFB2FAA00D3B126 /* ThirdParty */,
 				F80E497B1A8E3D0400028CD1 /* Resources */,
 				F80E496F1A8E38DF00028CD1 /* ViewController */,
 				F80E496B1A8E27CD00028CD1 /* Service */,
@@ -933,6 +972,7 @@
 			children = (
 				F80E49421A8E24C000028CD1 /* Info.plist */,
 				F80E49431A8E24C000028CD1 /* main.m */,
+				007ADF791AFB174100D3B126 /* PushConfig.plist */,
 				F80E496A1A8E26C000028CD1 /* ryhuiPrefixHeader.pch */,
 			);
 			name = "Supporting Files";
@@ -1162,6 +1202,7 @@
 		F86B8AF61AA17641000D2B8C /* third */ = {
 			isa = PBXGroup;
 			children = (
+				007ADF861AFB2FEA00D3B126 /* Jpush */,
 				D5C233BE1ADCE99C006DD91E /* ShareSDK */,
 				F8838AA01AE27562005A554E /* UIViewController+NoData.h */,
 				F8838AA11AE27562005A554E /* UIViewController+NoData.m */,
@@ -1613,7 +1654,7 @@
 					};
 					F80E49591A8E24C100028CD1 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = AN3PWSYEF8;
+						DevelopmentTeam = T8WLWPVY5C;
 						TestTargetID = F80E493D1A8E24C000028CD1;
 					};
 				};
@@ -1659,6 +1700,7 @@
 				F87B83521AC84AD700EB73A6 /* BOS.jpg in Resources */,
 				F87B83411AC841D500EB73A6 /* withdrawButtonDown.png in Resources */,
 				F815ED591AB7557E004B2053 /* 6.png in Resources */,
+				007ADF7A1AFB174100D3B126 /* PushConfig.plist in Resources */,
 				F89A3D8C1AB5D6E200B92DF3 /* RHRegisterWebViewController.xib in Resources */,
 				F815ED5B1AB7557E004B2053 /* 7.png in Resources */,
 				F80E49801A8E407900028CD1 /* loginButtonDefault.png in Resources */,
@@ -2083,6 +2125,16 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ryhui/ryhuiPrefixHeader.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/BDKNotifyHUD\"",
+					"\"${PODS_ROOT}/Headers/Public/EGOTableViewPullRefreshAndLoadMore\"",
+					"\"${PODS_ROOT}/Headers/Public/MBProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"$(SRCROOT)/ryhui",
+				);
 				INFOPLIST_FILE = ryhui/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -2090,9 +2142,12 @@
 					"$(PROJECT_DIR)/ryhui/ShareSDK/Extend/SinaWeiboSDK",
 					"$(PROJECT_DIR)/ryhui/ShareSDK/Extend/TencentWeiboSDK",
 					"$(PROJECT_DIR)/ryhui/ShareSDK/Extend/WeChatSDK",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(SRCROOT)/ryhui",
+					"$(PROJECT_DIR)/ryhui",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d4768157-768f-439b-b5d9-606a3624eacb";
+				PROVISIONING_PROFILE = "4e0bfa90-2aa3-46bd-a34c-d6d645e35efa";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2115,6 +2170,16 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ryhui/ryhuiPrefixHeader.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/BDKNotifyHUD\"",
+					"\"${PODS_ROOT}/Headers/Public/EGOTableViewPullRefreshAndLoadMore\"",
+					"\"${PODS_ROOT}/Headers/Public/MBProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"$(SRCROOT)/ryhui",
+				);
 				INFOPLIST_FILE = ryhui/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -2122,9 +2187,12 @@
 					"$(PROJECT_DIR)/ryhui/ShareSDK/Extend/SinaWeiboSDK",
 					"$(PROJECT_DIR)/ryhui/ShareSDK/Extend/TencentWeiboSDK",
 					"$(PROJECT_DIR)/ryhui/ShareSDK/Extend/WeChatSDK",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(SRCROOT)/ryhui",
+					"$(PROJECT_DIR)/ryhui",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d4768157-768f-439b-b5d9-606a3624eacb";
+				PROVISIONING_PROFILE = "4e0bfa90-2aa3-46bd-a34c-d6d645e35efa";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -2146,7 +2214,7 @@
 				INFOPLIST_FILE = ryhuiTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5dd2358d-ef1c-4e5b-98d8-852b923acc97";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ryhui.app/ryhui";
 			};
 			name = Debug;
@@ -2155,8 +2223,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Hong Du Yi Rong Financial Information Service Co., Ltd. (T8WLWPVY5C)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Hong Du Yi Rong Financial Information Service Co., Ltd. (T8WLWPVY5C)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -2164,7 +2232,7 @@
 				INFOPLIST_FILE = ryhuiTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5dd2358d-ef1c-4e5b-98d8-852b923acc97";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ryhui.app/ryhui";
 			};
 			name = Release;

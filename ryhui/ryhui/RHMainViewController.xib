@@ -120,7 +120,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Banner.png" id="6wr-m4-WNX">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NewBanner" id="6wr-m4-WNX">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </imageView>
@@ -191,7 +191,7 @@
         </view>
     </objects>
     <resources>
-        <image name="Banner.png" width="640" height="217"/>
+        <image name="NewBanner" width="640" height="217"/>
         <image name="mainS.png" width="37" height="37"/>
         <image name="moreNS.png" width="43" height="32"/>
         <image name="newProjectBg.png" width="72" height="19"/>

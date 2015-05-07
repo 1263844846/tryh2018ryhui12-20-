@@ -27,16 +27,16 @@
 
     NSString* investMoney=@"0.00";
     if (![[dic objectForKey:@"investMoney"] isKindOfClass:[NSNull class]]) {
-        investMoney=[NSString stringWithFormat:@"%.2f",[[dic objectForKey:@"investMoney"] floatValue]];
+        investMoney=[NSString stringWithFormat:@"%.2f",[[dic objectForKey:@"investMoney"] doubleValue]];
     }
     self.investMoneyLabel.text=investMoney;
     NSString* backMoney=@"0.00";
     if (![[dic objectForKey:@"backMoney"] isKindOfClass:[NSNull class]]) {
-        backMoney=[NSString stringWithFormat:@"%.2f",[[dic objectForKey:@"backMoney"] floatValue]];
+        backMoney=[NSString stringWithFormat:@"%.2f",[[dic objectForKey:@"backMoney"] doubleValue]];
     }
     self.backMoneyLabel.text=backMoney;
     
-    self.profitMoneyLabel.text=[NSString stringWithFormat:@"%@",[dic objectForKey:@"waitMoney"]];
+    self.profitMoneyLabel.text=[NSString stringWithFormat:@"%.2f",[[dic objectForKey:@"waitMoney"] doubleValue]];
 }
 
 - (IBAction)contractAction:(id)sender {
