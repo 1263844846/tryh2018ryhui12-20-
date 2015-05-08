@@ -62,7 +62,7 @@
     self.tableView.tableFooterView=self.footView;
     
     [[RHNetworkService instance] POST:@"front/payment/account/countUnReadMessage" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"%@",responseObject);
+//        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSString* numStr=nil;
             if (![[responseObject objectForKey:@"msgCount"] isKindOfClass:[NSNull class]]) {
@@ -130,7 +130,11 @@
         RHOfficeNetAndWeiBoViewController *office = [[RHOfficeNetAndWeiBoViewController alloc] initWithNibName:@"RHOfficeNetAndWeiBoViewController" bundle:nil];
         office.NavigationTitle = dic[@"title"];
         office.Type = 3;
-        office.urlString = [NSString stringWithFormat:@"http://%@",linkURl];
+        if (([linkURl rangeOfString:@"http://"].location == NSNotFound) || ([linkURl rangeOfString:@"https://"].location == NSNotFound)) {
+            office.urlString = [NSString stringWithFormat:@"http://%@",linkURl];
+        }else{
+            office.urlString = linkURl;
+        }
         
         [self.navigationController pushViewController:office animated:YES];
     }
@@ -171,7 +175,7 @@
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        DLog(@"%@",error);
+//        DLog(@"%@",error);
     }];
 }
 -(void)getSegmentnum2
@@ -192,7 +196,7 @@
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        DLog(@"%@",error);
+//        DLog(@"%@",error);
     }];
 }
 
@@ -206,7 +210,7 @@
     NSDictionary* parameters=@{@"_search":@"true",@"rows":@"10",@"page":page,@"sidx":@"",@"sord":@"",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};
     
     [[RHNetworkService instance] POST:@"common/main/shangListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"%@",responseObject);
+//        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
 
             NSArray* array=[responseObject objectForKey:@"rows"];
@@ -231,7 +235,7 @@
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        DLog(@"%@",error);
+//        DLog(@"%@",error);
         [RHUtility showTextWithText:@"请求失败"];
     }];
 }
@@ -246,7 +250,7 @@
     NSDictionary* parameters=@{@"_search":@"true",@"rows":@"10",@"page":page,@"sidx":@"",@"sord":@"",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};
     
     [[RHNetworkService instance] POST:@"common/main/xueListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"%@",responseObject);
+//        DLog(@"%@",responseObject);
         
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
 
@@ -272,7 +276,7 @@
          }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        DLog(@"%@",error);
+//        DLog(@"%@",error);
         [RHUtility showTextWithText:@"请求失败"];
     }];
 
