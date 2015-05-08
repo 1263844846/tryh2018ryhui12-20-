@@ -16,6 +16,7 @@
 		007ADF8B1AFB32C200D3B126 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 007ADF8A1AFB32C200D3B126 /* CFNetwork.framework */; };
 		007ADF8D1AFB32D900D3B126 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 007ADF8C1AFB32D900D3B126 /* CoreFoundation.framework */; };
 		007ADF8F1AFB330000D3B126 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 007ADF8E1AFB330000D3B126 /* UIKit.framework */; };
+		009DA35A1AFC529700973996 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 009DA3571AFC529700973996 /* libMobClickLibrary.a */; };
 		00CCC6EF1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CCC6ED1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.m */; };
 		00CCC6F01AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00CCC6EE1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.xib */; };
 		961AD2F930E8CEFA8FA5D28D /* libPods-ryhui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB95D30F1AE0DCFA27AE1DD7 /* libPods-ryhui.a */; };
@@ -306,6 +307,9 @@
 		007ADF8A1AFB32C200D3B126 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		007ADF8C1AFB32D900D3B126 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		007ADF8E1AFB330000D3B126 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		009DA3571AFC529700973996 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
+		009DA3581AFC529700973996 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
+		009DA3591AFC529700973996 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
 		00CCC6EC1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHOfficeNetAndWeiBoViewController.h; sourceTree = "<group>"; };
 		00CCC6ED1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHOfficeNetAndWeiBoViewController.m; sourceTree = "<group>"; };
 		00CCC6EE1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHOfficeNetAndWeiBoViewController.xib; sourceTree = "<group>"; };
@@ -681,6 +685,7 @@
 				D5C234011ADCEA18006DD91E /* libicucore.dylib in Frameworks */,
 				D5C233EF1ADCE99C006DD91E /* WeChatConnection.framework in Frameworks */,
 				D5C233FD1ADCE99C006DD91E /* ShareSDKShareActionSheet.framework in Frameworks */,
+				009DA35A1AFC529700973996 /* libMobClickLibrary.a in Frameworks */,
 				D5C233F91ADCE99C006DD91E /* libWeChatSDK.a in Frameworks */,
 				D5C233F31ADCE99C006DD91E /* ShareSDKCoreService.framework in Frameworks */,
 				961AD2F930E8CEFA8FA5D28D /* libPods-ryhui.a in Frameworks */,
@@ -719,6 +724,16 @@
 				007ADF881AFB2FFA00D3B126 /* libPushSDK-1.8.3.a */,
 			);
 			name = Jpush;
+			sourceTree = "<group>";
+		};
+		009DA3561AFC527200973996 /* UMAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				009DA3571AFC529700973996 /* libMobClickLibrary.a */,
+				009DA3581AFC529700973996 /* MobClick.h */,
+				009DA3591AFC529700973996 /* MobClickSocialAnalytics.h */,
+			);
+			name = UMAnalytics;
 			sourceTree = "<group>";
 		};
 		0EF68FC40DCEEC7C77CF881D /* Pods */ = {
@@ -1202,6 +1217,7 @@
 		F86B8AF61AA17641000D2B8C /* third */ = {
 			isa = PBXGroup;
 			children = (
+				009DA3561AFC527200973996 /* UMAnalytics */,
 				007ADF861AFB2FEA00D3B126 /* Jpush */,
 				D5C233BE1ADCE99C006DD91E /* ShareSDK */,
 				F8838AA01AE27562005A554E /* UIViewController+NoData.h */,
@@ -2065,7 +2081,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "5dd2358d-ef1c-4e5b-98d8-852b923acc97";
+				PROVISIONING_PROFILE = "4e0bfa90-2aa3-46bd-a34c-d6d645e35efa";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2101,7 +2117,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "5dd2358d-ef1c-4e5b-98d8-852b923acc97";
+				PROVISIONING_PROFILE = "4e0bfa90-2aa3-46bd-a34c-d6d645e35efa";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

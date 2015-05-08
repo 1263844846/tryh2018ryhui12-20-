@@ -22,8 +22,10 @@
     [self configBackButton];
     if (_Type == 0) {
         [self configTitleWithString:@"融益汇官网"];
-    }else{
+    }else if (_Type == 1){
         [self configTitleWithString:@"融益汇微博"];
+    }else{
+        [self configTitleWithString:_NavigationTitle];
     }
     
     NSURL *webUrl = [NSURL URLWithString:_urlString];

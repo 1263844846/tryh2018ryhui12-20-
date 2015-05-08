@@ -33,6 +33,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *captchaPhoneTF;
 @property (weak, nonatomic) IBOutlet UIButton *captchaPhoneButton;
 @property (weak, nonatomic) IBOutlet UIButton *captchaImageButton;
+@property (weak, nonatomic) IBOutlet UITextField *InvitationCodeTF;
 
 
 - (IBAction)selectOtherAciton:(id)sender;

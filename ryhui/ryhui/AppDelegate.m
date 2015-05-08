@@ -65,9 +65,17 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionFail:) name:@"RHSESSIONFAIL" object:nil];
     
+    //分享
     [self initShareSDK];
 
+    //推送
     [self registerJPushNotifyWithLauchOptions:launchOptions];
+    
+    //统计
+//    [MobClick startWithAppkey:@"554c126f67e58e7434007259" reportPolicy:BATCH   channelId:@""];
+//    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+//    [MobClick setAppVersion:version];
+//    [MobClick setCrashReportEnabled:YES];
     
     return YES;
 }
@@ -99,36 +107,6 @@
     [APService setupWithOption:launchOptions];
     
     [APService setBadge:0];
-    
-    [APService setTags:[NSSet setWithObject:@"1"] alias:@"mayun" callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lianjiechenggong) name:kJPFNetworkDidSetupNotification object:nil];
-    
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zhucechenggong) name:kJPFNetworkDidRegisterNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(denglichenggong) name:kJPFNetworkDidLoginNotification object:nil];
-    
-}
-
--(void)lianjiechenggong
-{
-    NSLog(@"============%@",@"lianjiechenggong");
-}
--(void)zhucechenggong
-{
-    NSLog(@"============%@",@"zhucechenggong");
-    
-}
-
--(void)denglichenggong
-{
-    NSLog(@"============%@",@"denglichenggong");
-}
--(void)tagsAliasCallback:(int)iResCode
-                    tags:(NSSet*)tags
-                   alias:(NSString*)alias
-{
-    NSLog(@"rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
 }
 
 -(void)initShareSDK
@@ -263,19 +241,35 @@
 //jpush 相关设置
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    
     [APService registerDeviceToken:deviceToken];
 }
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
+    NSLog(@"-------------%@",userInfo);
+    
     [APService handleRemoteNotification:userInfo];
 }
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
+    NSLog(@"-------------%@",userInfo);
     [APService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
+}
+
+-(void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void (^)())completionHandler
+{
+    NSLog(@"------------%@",identifier);
+    NSLog(@"------------%@",userInfo);
+//    NSLog(@"------------%@",);
+    
+}
+
+-(BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *))restorationHandler
+{
+    NSLog(@"-------------%@",userActivity);
+    return YES;
 }
 
 #pragma mark - Core Data stack

@@ -23,8 +23,8 @@ static RHNetworkService* _instance;
 }
 -(NSString*)doMain
 {
-//    return @"https://123.57.133.7/";
-    return @"https://app.ryhui.com/";
+    return @"https://123.57.133.7/";
+//    return @"https://app.ryhui.com/";
 
 #ifdef DEBUG
     return @"https://www.ryhui.com/";
@@ -34,9 +34,9 @@ static RHNetworkService* _instance;
 }
 -(NSString*)doMainhttp
 {
-//    return @"https://123.57.133.7/";
+    return @"https://123.57.133.7/";
     
-    return @"https://app.ryhui.com/";
+//    return @"https://app.ryhui.com/";
     
 #ifdef DEBUG
     return @"https://www.ryhui.com/";

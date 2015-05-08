@@ -10,9 +10,12 @@
 #import "RHMainViewCell.h"
 #import "RHProjectDetailViewController.h"
 #import "RHProjectListViewController.h"
-
+#import "RHOfficeNetAndWeiBoViewController.h"
 @interface RHMainViewController ()
 
+@property (weak, nonatomic) IBOutlet UIImageView *bannerImageView;
+
+@property (nonatomic, strong) NSArray *bannersArray;
 @end
 
 @implementation RHMainViewController
@@ -26,6 +29,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self configTitleWithString:@"融益汇"];
+    
+    _bannersArray = [[NSArray alloc] init];
     
     self.segmentView=[[[NSBundle mainBundle] loadNibNamed:@"RHSegmentView" owner:nil options:nil] objectAtIndex:0];
     segmentView.delegate=self;
@@ -79,6 +84,60 @@
     }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refesh) name:UIApplicationWillEnterForegroundNotification object:nil];
+    
+    [self getAppBanner];
+}
+
+-(void)getAppBanner
+{
+    [[RHNetworkService instance] POST:@"common/main/appBannerList" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"----------%@",responseObject);
+        _bannersArray = responseObject;
+        [self setBannersImageView];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+         NSLog(@"----------%@",error);
+    }];
+}
+
+-(void)setBannersImageView
+{
+        [_bannerImageView removeFromSuperview];
+    
+    if (_bannersArray.count > 0) {
+        for (int i = 0 ; i < _bannersArray.count; i ++) {
+            UIImageView *bannerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * CGRectGetWidth([UIScreen mainScreen].bounds), 0,  CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight(_headerScrollView.frame))];
+            bannerImageView.userInteractionEnabled = YES;
+            bannerImageView.tag = i + 100;
+            NSDictionary *dic = _bannersArray[i];
+            RHNetworkService *netService = [RHNetworkService instance];
+            NSString *urlString = [NSString stringWithFormat:@"%@%@%@",[netService doMain],@"common/main/attachment/",dic[@"bg"]];
+            NSLog(@"-----------%@",urlString);
+            [bannerImageView sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"NewBanner"]];
+            [_headerScrollView addSubview:bannerImageView];
+            
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goForBannerDetailViewController:)];
+            [bannerImageView addGestureRecognizer:tap];
+        }
+        
+        _headerScrollView.contentSize = CGSizeMake(_bannersArray.count * CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight(_headerScrollView.frame));
+    }
+}
+-(void)goForBannerDetailViewController:(UITapGestureRecognizer *)tap
+{
+    UIView *tapView = tap.view;
+    NSDictionary *dic = _bannersArray[tapView.tag - 100];
+    NSString *linkURl = dic[@"link"];
+    if (linkURl.length > 0) {
+        RHOfficeNetAndWeiBoViewController *office = [[RHOfficeNetAndWeiBoViewController alloc] initWithNibName:@"RHOfficeNetAndWeiBoViewController" bundle:nil];
+        office.NavigationTitle = dic[@"title"];
+        office.Type = 3;
+        office.urlString = [NSString stringWithFormat:@"http://%@",linkURl];
+        
+        [self.navigationController pushViewController:office animated:YES];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated

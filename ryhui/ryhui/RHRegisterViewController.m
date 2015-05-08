@@ -93,7 +93,7 @@
     
     self.agreementView.frame=CGRectMake(([UIScreen mainScreen].bounds.size.width-self.agreementView.frame.size.width)/2.0, self.agreementView.frame.origin.y, self.agreementView.frame.size.width, self.agreementView.frame.size.height);
     
-    self.scrollView.contentSize=CGSizeMake(self.scrollView.contentSize.width, 370);
+    self.scrollView.contentSize=CGSizeMake(self.scrollView.contentSize.width, 420);
     
     self.scrollView.frame=CGRectMake(0,44, self.scrollView.frame.size.width, [UIScreen mainScreen].bounds.size.height-44-44-20);
     
@@ -311,6 +311,7 @@
         return;
     }
     
+    
     NSMutableDictionary* parameters=[[NSMutableDictionary alloc]initWithCapacity:0];
     [parameters setObject:self.accountTF.text forKey:@"username"];
     [parameters setObject:self.passwordTF1.text forKey:@"password"];
@@ -318,6 +319,11 @@
     [parameters setObject:self.phoneNumTF.text forKey:@"telephone"];
     [parameters setObject:self.captchaImageTF.text forKey:@"captcha"];
     [parameters setObject:self.captchaPhoneTF.text forKey:@"telCaptcha"];
+    if (self.InvitationCodeTF.text.length > 0) {
+        [parameters setObject:self.InvitationCodeTF.text forKey:@"invitationCode"];
+    }else{
+        [parameters setObject:@"" forKey:@"invitationCode"];
+    }
     
     DLog(@"%@",parameters);
     
@@ -417,7 +423,11 @@
     changeY=tfRect.origin.y+tfRect.size.height+5;
     if (changeY>(self.view.frame.size.height-keyboardHeight)) {
         CGRect viewRect=self.view.frame;
-        viewRect.origin.y=(self.view.frame.size.height-keyboardHeight)-changeY;
+        if (currentSelectTF == _InvitationCodeTF) {
+            viewRect.origin.y=(self.view.frame.size.height-keyboardHeight)-changeY + 46;
+        }else{
+            viewRect.origin.y=(self.view.frame.size.height-keyboardHeight)-changeY;
+        }
         self.view.frame=viewRect;
     }
     
@@ -449,7 +459,11 @@
     changeY=tfRect.origin.y+tfRect.size.height+5;
     if (changeY>(self.view.frame.size.height-keyboardHeight)) {
         CGRect viewRect=self.view.frame;
-        viewRect.origin.y=(self.view.frame.size.height-keyboardHeight)-changeY;
+        if (currentSelectTF == _InvitationCodeTF) {
+            viewRect.origin.y=(self.view.frame.size.height-keyboardHeight)-changeY + 46;
+        }else{
+            viewRect.origin.y=(self.view.frame.size.height-keyboardHeight)-changeY;
+        }
         self.view.frame=viewRect;
     }
 
