@@ -91,14 +91,11 @@
 -(void)getAppBanner
 {
     [[RHNetworkService instance] POST:@"common/main/appBannerList" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSLog(@"----------%@",responseObject);
         _bannersArray = responseObject;
         [self setBannersImageView];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-         NSLog(@"----------%@",error);
+        [_bannerImageView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"NewBanner"]];
     }];
 }
 
@@ -114,7 +111,6 @@
             NSDictionary *dic = _bannersArray[i];
             RHNetworkService *netService = [RHNetworkService instance];
             NSString *urlString = [NSString stringWithFormat:@"%@%@%@",[netService doMain],@"common/main/attachment/",dic[@"bg"]];
-            NSLog(@"-----------%@",urlString);
             [bannerImageView sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"NewBanner"]];
             [_headerScrollView addSubview:bannerImageView];
             

@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "手机Banner.png"
+      "filename" : "手机默认banner.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "手机Banner-1.png"
+      "filename" : "手机默认banner-1.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "手机Banner-2.png"
+      "filename" : "手机默认banner-2.png"
     }
   ],
   "info" : {
