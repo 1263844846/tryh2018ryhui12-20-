@@ -21,7 +21,7 @@
 
 -(void)updateCell:(NSDictionary*)dic
 {
-    DLog(@"%@",dic);
+//    DLog(@"%@",dic);
     self.nameLabel.text=[dic objectForKey:@"name"];
     self.projectId=[dic objectForKey:@"id"];
 

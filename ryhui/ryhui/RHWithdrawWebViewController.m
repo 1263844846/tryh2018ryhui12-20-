@@ -48,7 +48,7 @@
 {
     NSString* url=[request.URL absoluteString];
 
-    DLog(@"%@",url);
+//    DLog(@"%@",url);
     if ([url rangeOfString:@"common/paymentResponse/cashClientBackSuccess"].location!=NSNotFound) {
         RHErrorViewController* controller=[[RHErrorViewController alloc]initWithNibName:@"RHErrorViewController" bundle:nil];
         controller.titleStr=[NSString stringWithFormat:@"申请提现金额%@元",amount];

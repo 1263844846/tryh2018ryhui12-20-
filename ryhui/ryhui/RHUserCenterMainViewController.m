@@ -56,7 +56,7 @@
         [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
     }
     [manager POST:[NSString stringWithFormat:@"%@front/payment/account/queryAccountFinishedBonuses",[RHNetworkService instance].doMain] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"result==%@ <<<",[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+//        DLog(@"result==%@ <<<",[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         if ([responseObject isKindOfClass:[NSData class]]) {
             
             NSDictionary* dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -70,7 +70,7 @@
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        DLog(@"%@",[[NSString alloc] initWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] encoding:NSUTF8StringEncoding]);
+//        DLog(@"%@",[[NSString alloc] initWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] encoding:NSUTF8StringEncoding]);
     }];
 
     
@@ -89,7 +89,7 @@
     [self checkout];
     
     [[RHNetworkService instance] POST:@"front/payment/account/countUnReadMessage" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"%@",responseObject);
+//        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSString* numStr=nil;
             if (![[responseObject objectForKey:@"msgCount"] isKindOfClass:[NSNull class]]) {
@@ -133,7 +133,7 @@
 - (void)checkout
 {
     [[RHNetworkService instance] POST:@"front/payment/account/queryBalance" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"%@",responseObject);
+//        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSString* AvlBal=[responseObject objectForKey:@"AvlBal"];
             if (AvlBal&&[AvlBal length]>0) {
@@ -143,7 +143,7 @@
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        DLog(@"%@",error);
+//        DLog(@"%@",error);
     }];
 }
 
@@ -204,6 +204,7 @@
     UIButton * button=sender;
     if ([button.titleLabel.text isEqualToString:@"立即开户"]) {
         RHRegisterWebViewController* controller=[[RHRegisterWebViewController alloc] initWithNibName:@"RHRegisterWebViewController" bundle:nil];
+        controller.isUserCenterTurn = YES;
         [self.navigationController pushViewController:controller animated:YES];
     }else{
         RHALoginViewController* controller=[[RHALoginViewController alloc] initWithNibName:@"RHALoginViewController" bundle:nil];

@@ -202,7 +202,7 @@
     manager.responseSerializer=[[AFCompoundResponseSerializer alloc]init];
     
     [manager POST:[NSString stringWithFormat:@"%@common/user/register/checkTelephoneExists",[RHNetworkService instance].doMain] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"result==%@ <<<",[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+//        DLog(@"result==%@ <<<",[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         if ([responseObject isKindOfClass:[NSData class]]) {
             NSString* restult=[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
             if ([restult isEqualToString:@"true"]) {
@@ -211,7 +211,7 @@
                 AFHTTPRequestOperationManager* manager=[AFHTTPRequestOperationManager manager];
                 manager.responseSerializer=[[AFCompoundResponseSerializer alloc]init];
                 [manager POST:[NSString stringWithFormat:@"%@common/user/general/registerTel",[RHNetworkService instance].doMain] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                    DLog(@"result==%@ <<<",[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+//                    DLog(@"result==%@ <<<",[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
                     if ([responseObject isKindOfClass:[NSData class]]) {
                         NSString* restult=[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
                         if ([restult isEqualToString:@"{\"msg\":\"手机验证码发送成功\"}"]||[restult isEqualToString:@"{\"msg\":\"success\"}"]) {
@@ -222,7 +222,7 @@
                             
                             NSDictionary* errorDic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
                             if ([errorDic objectForKey:@"msg"]) {
-                                DLog(@"%@",[errorDic objectForKey:@"msg"]);
+//                                DLog(@"%@",[errorDic objectForKey:@"msg"]);
                                 if ([[errorDic objectForKey:@"msg"] isEqualToString:@"图片验证码错误"]) {
                                 }
                                 [RHUtility showTextWithText:[errorDic objectForKey:@"msg"]];
@@ -234,7 +234,7 @@
                     if ([error.userInfo.allKeys containsObject:@"com.alamofire.serialization.response.error.data"]) {
                         NSDictionary* errorDic=[NSJSONSerialization JSONObjectWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] options:NSJSONReadingMutableContainers error:nil];
                         if ([errorDic objectForKey:@"msg"]) {
-                            DLog(@"%@",[errorDic objectForKey:@"msg"]);
+//                            DLog(@"%@",[errorDic objectForKey:@"msg"]);
                             if ([[errorDic objectForKey:@"msg"] isEqualToString:@"图片验证码错误"]) {
                                 [self changeCaptcha];
                             }
@@ -248,7 +248,7 @@
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        DLog(@"%@",error);
+//        DLog(@"%@",error);
     }];
 }
 
@@ -325,10 +325,10 @@
         [parameters setObject:@"" forKey:@"invitationCode"];
     }
     
-    DLog(@"%@",parameters);
+//    DLog(@"%@",parameters);
     
     [[RHNetworkService instance] POST:@"common/user/register/nextStep" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"%@",responseObject);
+//        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSString* result=[responseObject objectForKey:@"md5"];
             if (result&&[result length]>0) {
@@ -397,7 +397,7 @@
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        DLog(@"%@",operation.responseObject);
+//        DLog(@"%@",operation.responseObject);
         if ([operation.responseObject isKindOfClass:[NSDictionary class]]) {
             NSString* msg=[operation.responseObject objectForKey:@"msg"];
             if ([msg isEqualToString:@"验证码错误"]||[msg isEqualToString:@"手机验证码错误"]) {
@@ -411,12 +411,13 @@
 
 - (IBAction)CreateAccount:(id)sender {
     RHRegisterWebViewController* controller=[[RHRegisterWebViewController alloc]initWithNibName:@"RHRegisterWebViewController" bundle:nil];
+    controller.isUserCenterTurn = NO;
     [self.navigationController pushViewController:controller animated:YES];
 }
 
 -(void)textBegin:(NSNotification*)not
 {
-    DLog(@"%@",not.object);
+//    DLog(@"%@",not.object);
     
     currentSelectTF=not.object;
     CGRect tfRect=[currentSelectTF convertRect:currentSelectTF.bounds toView:self.view];
@@ -435,7 +436,7 @@
 
 -(void)keyboardShow:(NSNotification*)not
 {
-    DLog(@"%@",not.userInfo);
+//    DLog(@"%@",not.userInfo);
     NSValue* value=[not.userInfo objectForKey:@"UIKeyboardBoundsUserInfoKey"];
     
     CGRect rect=[value CGRectValue];
@@ -444,7 +445,7 @@
 
 -(void)keyboardFrameChange:(NSNotification*)not
 {
-    DLog(@"%@",not.userInfo);
+//    DLog(@"%@",not.userInfo);
     NSValue* value=[not.userInfo objectForKey:@"UIKeyboardBoundsUserInfoKey"];
     
     NSValue* endValue=[not.userInfo objectForKey:@"UIKeyboardFrameEndUserInfoKey"];

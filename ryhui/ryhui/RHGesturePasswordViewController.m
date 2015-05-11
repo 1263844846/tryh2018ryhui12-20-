@@ -46,7 +46,7 @@
     
     password = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]];
    
-    DLog(@"%@",password);
+//    DLog(@"%@",password);
     if (!password) {
         
         [self reset];
@@ -173,8 +173,8 @@
         [gesturePasswordView.clearButton setHidden:YES];
         [gesturePasswordView.enterButton setHidden:YES];
         isDrawPan=NO;
-    }}
-
+    }
+}
 
 - (BOOL)verification:(NSString *)result{
     if ([result isEqualToString:password]) {
@@ -215,12 +215,12 @@
 }
 - (BOOL)resetPassword:(NSString *)result{
     if ([previousString isEqualToString:@""]||isDrawPan) {
-        DLog(@"%@",result);
+//        DLog(@"%@",result);
         previousString=result;
         return YES;
     }
     else {
-        DLog(@"%@",result);
+//        DLog(@"%@",result);
         if ([result isEqualToString:previousString]) {
             password=result;
             
@@ -230,15 +230,13 @@
             [gesturePasswordView.state setText:@"已保存手势密码"];
             if (isReset) {
                 [RHUtility showTextWithText:@"手势密码修改成功"];
-                [self.navigationController popViewControllerAnimated:YES];
-            }else{
-                if (isRegister) {
-                    [[RHTabbarManager sharedInterface] initTabbar];
-                    [[[RHTabbarManager sharedInterface] selectTabbarUser] popToRootViewControllerAnimated:NO];
+                if (self.navigationController.childViewControllers.count > 1) {
+                    [self.navigationController popViewControllerAnimated:YES];
                 }else{
-                    [[RHTabbarManager sharedInterface] initTabbar];
-                    [[[RHTabbarManager sharedInterface] selectTabbarMain] popToRootViewControllerAnimated:NO];
+                    [self turnToUserCenterOrMainViewcontroller];
                 }
+            }else{
+                [self turnToUserCenterOrMainViewcontroller];
             }
             
             return YES;
@@ -253,6 +251,14 @@
     }
 }
 
-
+- (void)turnToUserCenterOrMainViewcontroller {
+    if (isRegister) {
+        [[RHTabbarManager sharedInterface] initTabbar];
+        [[[RHTabbarManager sharedInterface] selectTabbarUser] popToRootViewControllerAnimated:NO];
+    }else{
+        [[RHTabbarManager sharedInterface] initTabbar];
+        [[[RHTabbarManager sharedInterface] selectTabbarMain] popToRootViewControllerAnimated:NO];
+    }
+}
 
 @end

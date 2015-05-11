@@ -19,7 +19,7 @@
 
 -(void)updateCell:(NSDictionary*)dic
 {
-    DLog(@"%@",dic);
+//    DLog(@"%@",dic);
     
     NSString* threshold=@"";
     if (![[dic objectForKey:@"threshold"] isKindOfClass:[NSNull class]]) {

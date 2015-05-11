@@ -53,7 +53,7 @@
 {
     NSString* url=[request.URL absoluteString];
     if ([url rangeOfString:@"common/paymentResponse/netSaveClientSuccess"].location!=NSNotFound) {
-        DLog(@"%@",url);
+//        DLog(@"%@",url);
         RHErrorViewController* controller=[[RHErrorViewController alloc]initWithNibName:@"RHErrorViewController" bundle:nil];
         controller.titleStr=[NSString stringWithFormat:@"充值金额%@元",price];
         controller.tipsStr=@"好项目不等人，快去抢吧~";
@@ -63,7 +63,7 @@
         return NO;
     }
     if ([url rangeOfString:@"common/paymentResponse/netSaveClientFailed"].location!=NSNotFound) {
-        DLog(@"%@",url);
+//        DLog(@"%@",url);
 
         RHErrorViewController* controller=[[RHErrorViewController alloc]initWithNibName:@"RHErrorViewController" bundle:nil];
         controller.titleStr=@"银行卡余额不足";

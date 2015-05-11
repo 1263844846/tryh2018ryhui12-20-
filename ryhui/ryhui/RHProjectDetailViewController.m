@@ -154,7 +154,7 @@
     
     NSDictionary* parameters=@{@"projectId":self.projectId,@"_search":@"true",@"rows":@"10",@"page":page,@"sidx":@"investTime",@"sord":@"desc",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};    [[RHNetworkService instance] POST:@"common/main/projectInvestmentList" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        DLog(@"%@",responseObject);
+//        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSArray* array=[responseObject objectForKey:@"rows"];
             if ([array isKindOfClass:[NSArray class]]) {
@@ -174,7 +174,7 @@
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        DLog(@"%@",error);
+//        DLog(@"%@",error);
         [RHUtility showTextWithText:@"请求失败"];
     }];
 }
@@ -208,10 +208,10 @@
     NSDictionary* parameters=@{@"id":projectId};
     
     [[RHNetworkService instance] POST:@"common/main/appXueDetailData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"%@",responseObject);
+//        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSDictionary* project=[responseObject objectForKey:@"project"];
-            DLog(@"%@",project);
+//            DLog(@"%@",project);
             self.studentNameLabel.text=[project objectForKey:@"studentName"];
             self.studentCityLabel.text=[project objectForKey:@"studentCity"];
             self.studentSchoolLabel.text=[project objectForKey:@"studentSchool"];
@@ -248,7 +248,7 @@
     NSDictionary* parameters=@{@"id":projectId};
     
     [[RHNetworkService instance] POST:@"common/main/appShangDetailData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"%@",responseObject);
+//        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSArray* insuranceImages=[responseObject objectForKey:@"insuranceImages"];
             for (NSDictionary* insuranceDic in insuranceImages) {
@@ -262,7 +262,7 @@
                 [button addTarget:self action:@selector(touch1:) forControlEvents:UIControlEventTouchUpInside];
                 [imageView addSubview:button];
                 [self.array1 addObject:imageView];
-                DLog(@"%@",[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].doMain,[insuranceDic objectForKey:@"filepath"]]);
+//                DLog(@"%@",[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].doMain,[insuranceDic objectForKey:@"filepath"]]);
                 
                 [self.insuranceScrollView addSubview:imageView];
             }
@@ -288,7 +288,7 @@
                 UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(index*(45+10),4, 45, 45)];
                 imageView.userInteractionEnabled=YES;
                 [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].doMain,[projectImagesDic objectForKey:@"filepath"]]]];
-                DLog(@"%@",[NSString stringWithFormat:@"%@%@",[RHNetworkService instance].doMain,[projectImagesDic objectForKey:@"filepath"]]);
+//                DLog(@"%@",[NSString stringWithFormat:@"%@%@",[RHNetworkService instance].doMain,[projectImagesDic objectForKey:@"filepath"]]);
                 UIButton* button=[UIButton buttonWithType:UIButtonTypeCustom];
                 button.frame=imageView.bounds;
                 [button addTarget:self action:@selector(touch2:) forControlEvents:UIControlEventTouchUpInside];

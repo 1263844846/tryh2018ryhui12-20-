@@ -49,7 +49,7 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     [[RHNetworkService instance] POST:@"front/payment/account/myCashDataForApp" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"%@",responseObject);
+//        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSArray* array=nil;
             if ([responseObject objectForKey:@"qpCard"]) {
@@ -116,7 +116,7 @@
     NSRange ranges=[result rangeOfString:@"."];
     if (ranges.location!=NSNotFound) {
         NSString* temp=[result substringFromIndex:ranges.location+1];
-        DLog(@"%@",temp);
+//        DLog(@"%@",temp);
         if ([temp length]>2) {
             return NO;
         }

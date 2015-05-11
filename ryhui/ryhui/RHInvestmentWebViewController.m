@@ -58,7 +58,7 @@
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSString* url=[request.URL absoluteString];
-    DLog(@"%@",url);
+//    DLog(@"%@",url);
 
     if ([url rangeOfString:@"common/paymentResponse/initiativeTenderSuccess"].location!=NSNotFound) {
         RHErrorViewController* controller=[[RHErrorViewController alloc]initWithNibName:@"RHErrorViewController" bundle:nil];
@@ -70,7 +70,7 @@
         return NO;
     }
     if ([url rangeOfString:@"common/paymentResponse/initiativeTenderFailed"].location!=NSNotFound) {
-        DLog(@"%@",url);
+//        DLog(@"%@",url);
         RHErrorViewController* controller=[[RHErrorViewController alloc]initWithNibName:@"RHErrorViewController" bundle:nil];
         controller.titleStr=@"投资失败";
         NSArray* array=[url componentsSeparatedByString:@"&result="];

@@ -31,7 +31,7 @@
     AFHTTPRequestOperationManager* manager=[AFHTTPRequestOperationManager manager];
     manager.responseSerializer=[[AFCompoundResponseSerializer alloc]init];
     [manager POST:[NSString stringWithFormat:@"%@front/payment/account/markMessageReaded",[RHNetworkService instance].doMain] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"result==%@ <<<",[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+//        DLog(@"result==%@ <<<",[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         NSString* result=[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSRange range=[result rangeOfString:@"success"];
         if (range.location!=NSNotFound) {
@@ -40,7 +40,7 @@
         }
     
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        DLog(@"%@",error);
+//        DLog(@"%@",error);
     }];
 }
 

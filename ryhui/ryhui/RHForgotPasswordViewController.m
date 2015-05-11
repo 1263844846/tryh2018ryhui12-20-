@@ -36,7 +36,7 @@
 
 -(void)textBegin:(NSNotification*)not
 {
-    DLog(@"%@",not.object);
+//    DLog(@"%@",not.object);
     UITextField* textField=not.object;
     changeY=textField.frame.origin.y+textField.frame.size.height+10;
     if (changeY>(self.view.frame.size.height-keyboardHeight)) {
@@ -49,7 +49,7 @@
 
 -(void)keyboardShow:(NSNotification*)not
 {
-    DLog(@"%@",not.userInfo);
+//    DLog(@"%@",not.userInfo);
     NSValue* value=[not.userInfo objectForKey:@"UIKeyboardBoundsUserInfoKey"];
     
     CGRect rect=[value CGRectValue];
@@ -111,7 +111,7 @@
     NSDictionary *parameters = @{@"oldPassword":self.oldPasswordTF.text,@"newPassword":self.nnewPasswordTF.text,@"repeatPassword":self.rnewPasswordTF.text,@"captcha":self.captchaTF.text};
     
     [[RHNetworkService instance] POST:@"front/payment/account/editPassword" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"%@",responseObject);
+//        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSString* result=[responseObject objectForKey:@"msg"];
             if (result&&[result length]>0) {

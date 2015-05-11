@@ -51,7 +51,7 @@
 -(void)getWithdrawData
 {
     [[RHNetworkService instance] POST:@"front/payment/account/myCashDataForApp" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"%@",responseObject);
+//        DLog(@"%@",responseObject);
         NSString* balance=[NSString stringWithFormat:@"%0.2f",[[responseObject objectForKey:@"balance"] doubleValue]];
         self.balanceLabel.text=balance;
         
@@ -89,11 +89,11 @@
             self.cardsView.hidden=YES;
         }else{
             if (![cards isKindOfClass:[NSNull class]]&&cards&&[cards count]>0) {
-                DLog(@"%@",cards);
+//                DLog(@"%@",cards);
                 for (NSString* idStr in [cards objectAtIndex:0]) {
-                    DLog(@"%@",idStr);
+//                    DLog(@"%@",idStr);
                     int index=[[NSNumber numberWithUnsignedInteger:[[cards objectAtIndex:0] indexOfObject:idStr]] intValue];
-                    DLog(@"%d",index);
+//                    DLog(@"%d",index);
                     if (index==0) {
                         bankType=idStr;
                     }
@@ -112,9 +112,9 @@
             }
 
         }
-        DLog(@"%@",[NSString stringWithFormat:@"%@.jgp",bankType]);
-        
-        DLog(@"%@",cardId);
+//        DLog(@"%@",[NSString stringWithFormat:@"%@.jgp",bankType]);
+//        
+//        DLog(@"%@",cardId);
         
         if(cardId != nil)
         {
@@ -127,7 +127,7 @@
 
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        DLog(@"%@",error);
+//        DLog(@"%@",error);
     }];
 }
 
@@ -197,7 +197,7 @@
     AFHTTPRequestOperationManager* manager=[AFHTTPRequestOperationManager manager];
     manager.responseSerializer=[[AFCompoundResponseSerializer alloc]init];
     [manager POST:[NSString stringWithFormat:@"%@common/user/general/sendTelCaptcha",[RHNetworkService instance].doMain] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"result==%@ <<<",[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+//        DLog(@"result==%@ <<<",[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         if ([responseObject isKindOfClass:[NSData class]]) {
             NSString* restult=[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
             if ([restult isEqualToString:@"{\"msg\":\"手机验证码发送成功\"}"]||[restult isEqualToString:@"success"]) {
@@ -208,7 +208,7 @@
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        DLog(@"%@",error);
+//        DLog(@"%@",error);
     }];
 }
 
@@ -270,7 +270,7 @@
     NSRange ranges=[result rangeOfString:@"."];
     if (ranges.location!=NSNotFound) {
         NSString* temp=[result substringFromIndex:ranges.location+1];
-        DLog(@"%@",temp);
+//        DLog(@"%@",temp);
         if ([temp length]>2) {
             return NO;
         }

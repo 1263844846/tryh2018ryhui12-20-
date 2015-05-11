@@ -54,7 +54,7 @@
     NSDictionary *parameters = @{@"username":self.accountTF.text,@"captcha":self.captchaTF.text};
     
     [[RHNetworkService instance] POST:@"common/user/pwdBack/findPwdBack1" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"%@",responseObject);
+//        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSString* result=[responseObject objectForKey:@"msg"];
             if (result&&[result length]>0) {

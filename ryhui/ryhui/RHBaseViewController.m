@@ -28,7 +28,7 @@
     self.messageNumLabel.layer.cornerRadius=8;
     self.messageNumLabel.layer.masksToBounds=YES;
     NSString* num=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHMessageNumSave"];
-    DLog(@"%@",num);
+//    DLog(@"%@",num);
     if (num&&[num length]>0) {
         if ([RHUserManager sharedInterface].custId) {
             if ([num intValue]>99) {

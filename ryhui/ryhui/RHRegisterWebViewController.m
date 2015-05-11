@@ -42,17 +42,18 @@
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSString* url=[request.URL absoluteString];
-    DLog(@"%@",url);
+//    DLog(@"%@",url);
     
     if ([url rangeOfString:@"front/payment/account/myAccount"].location!=NSNotFound) {
         [RHUserManager sharedInterface].custId=@"first";
-//        [[RHTabbarManager sharedInterface] initTabbar];
-//        [[RHTabbarManager sharedInterface] selectTabbarUser];
-        
-        RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
-        controller.isRegister=YES;
-        [self.navigationController pushViewController:controller animated:NO];
-        
+        if (_isUserCenterTurn) {
+            [[RHTabbarManager sharedInterface] initTabbar];
+            [[RHTabbarManager sharedInterface] selectTabbarUser];
+        }else{
+            RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
+            controller.isRegister=YES;
+            [self.navigationController pushViewController:controller animated:NO];
+        }
         return NO;
     }
     return YES;

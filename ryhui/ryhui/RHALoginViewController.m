@@ -88,7 +88,7 @@
     NSDictionary *parameters = @{@"account":self.accountTextField.text,@"password":self.passwordTextField.text,@"captcha":self.captchaTextField.text};
 
     [[RHNetworkService instance] POST:@"common/user/login/login" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"%@",responseObject);
+//        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSString* result=[responseObject objectForKey:@"md5"];
             if (result&&[result length]>0) {
@@ -160,7 +160,7 @@
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        DLog(@"%@",error);
+//        DLog(@"%@",error);
         if ([error.userInfo.allKeys containsObject:@"com.alamofire.serialization.response.error.data"]) {
             NSDictionary* errorDic=[NSJSONSerialization JSONObjectWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] options:NSJSONReadingMutableContainers error:nil];
             if ([errorDic objectForKey:@"msg"]) {
@@ -175,7 +175,7 @@
 
 -(void)textBegin:(NSNotification*)not
 {
-    DLog(@"%@",not.object);
+//    DLog(@"%@",not.object);
     
     currentSelectTF=not.object;
     CGRect tfRect=[currentSelectTF convertRect:currentSelectTF.bounds toView:self.view];
@@ -190,7 +190,7 @@
 
 -(void)keyboardShow:(NSNotification*)not
 {
-    DLog(@"%@",not.userInfo);
+//    DLog(@"%@",not.userInfo);
     NSValue* value=[not.userInfo objectForKey:@"UIKeyboardBoundsUserInfoKey"];
     
     CGRect rect=[value CGRectValue];
@@ -199,7 +199,7 @@
 
 -(void)keyboardFrameChange:(NSNotification*)not
 {
-    DLog(@"%@",not.userInfo);
+//    DLog(@"%@",not.userInfo);
     NSValue* value=[not.userInfo objectForKey:@"UIKeyboardBoundsUserInfoKey"];
     
     NSValue* endValue=[not.userInfo objectForKey:@"UIKeyboardFrameEndUserInfoKey"];

@@ -63,7 +63,7 @@
     NSDictionary* parameters=@{@"projectId":projectId,@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",_currentPageIndex],@"_search":@"false"};
     
     [[RHNetworkService instance] POST:@"front/payment/account/myInvestDetailList" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"%@",responseObject);
+//        DLog(@"%@",responseObject);
         NSMutableArray* tempArray=[[NSMutableArray alloc]initWithCapacity:0];
         
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
@@ -106,7 +106,7 @@
         [_footerView.activityIndicatorView stopAnimating];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        DLog(@"%@",error);
+//        DLog(@"%@",error);
         
     }];
 }
@@ -120,7 +120,7 @@
 {
     
     if (![_footerView.activityIndicatorView isAnimating]) {
-        DLog(@"加载更多");
+//        DLog(@"加载更多");
         [_footerView.activityIndicatorView startAnimating];
         _reloading=NO;
         [self getInvestDetail];

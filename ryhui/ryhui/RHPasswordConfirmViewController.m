@@ -50,7 +50,7 @@
     NSDictionary *parameters = @{@"password":self.nnewPasswordTF.text,@"passwordRepeat":self.cPasswordTF.text};
     
     [[RHNetworkService instance] POST:@"common/user/pwdBack/findPwdBack3" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"%@",responseObject);
+//        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSString* result=[responseObject objectForKey:@"msg"];
             if (result&&[result length]>0) {

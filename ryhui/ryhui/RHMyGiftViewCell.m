@@ -31,7 +31,7 @@
 //usingTime = "<n
 -(void)updateCell:(NSDictionary*)dic with:(NSString*)type
 {
-    DLog(@"%@",dic);
+//    DLog(@"%@",dic);
     
     if ([type isEqualToString:@"front/payment/account/myInitGiftListData"]) {
         self.bgImageView.image=[UIImage imageNamed:@"giftcellBg.png"];

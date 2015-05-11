@@ -34,7 +34,7 @@
     int index=0;
     NSMutableString* resultStr=[[NSMutableString alloc]initWithCapacity:0];
     for (int i=0; i<[tempStr length]; i++) {
-        DLog(@"%@",tempStr);
+//        DLog(@"%@",tempStr);
         if (index==2&&i!=[tempStr length]-1) {
             index=0;
             [resultStr insertString:[NSString stringWithFormat:@",%@",[tempStr substringWithRange:NSRangeFromString([NSString stringWithFormat:@"{%d;1}",[[NSNumber numberWithInteger:[tempStr length]] intValue]-i-1])]] atIndex:0];
@@ -43,7 +43,7 @@
             index++;
         }
         
-        DLog(@"%@",resultStr);
+//        DLog(@"%@",resultStr);
     }
     if (endStr&&[endStr length]>0) {
         [resultStr appendString:endStr];

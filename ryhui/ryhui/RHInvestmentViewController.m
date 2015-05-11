@@ -66,7 +66,7 @@
 - (void)checkout
 {
     [[RHNetworkService instance] POST:@"front/payment/account/queryBalance" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"%@",responseObject);
+//        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSString* AvlBal=[responseObject objectForKey:@"AvlBal"];
             if (AvlBal&&[AvlBal length]>0) {
@@ -75,7 +75,7 @@
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        DLog(@"%@",error);
+//        DLog(@"%@",error);
     }];
 }
 
@@ -146,8 +146,8 @@
     int balance=[resultString intValue];
     int allinAmount=(balance/100)*100;
     int project=(projectFund/100)*100;
-    DLog(@"project=%d",project);
-    DLog(@"allinAmount=%d  balance=%d",allinAmount,balance);
+//    DLog(@"project=%d",project);
+//    DLog(@"allinAmount=%d  balance=%d",allinAmount,balance);
     if (allinAmount>project) {
         self.textFiled.text=[NSString stringWithFormat:@"%d",project];
     }else{
@@ -203,7 +203,7 @@
 
 -(void)keyboardShow:(NSNotification*)not
 {
-    DLog(@"%@",not.userInfo);
+//    DLog(@"%@",not.userInfo);
     NSValue* value=[not.userInfo objectForKey:@"UIKeyboardBoundsUserInfoKey"];
     
     CGRect rect=[value CGRectValue];

@@ -85,7 +85,7 @@
 //    NSDictionary* parameters=@{@"_search":@"true",@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",_currentPageIndex],@"forApp":@"true",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"state\",\"op\":\"in\",\"data\":[1,2]}]}"};
     
     [[RHNetworkService instance] POST:@"front/payment/account/loadAvailGifts" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"%@",responseObject);
+//        DLog(@"%@",responseObject);
         NSMutableArray* tempArray=[[NSMutableArray alloc]initWithCapacity:0];
         
         if ([responseObject isKindOfClass:[NSArray class]]) {
@@ -127,7 +127,7 @@
         [_footerView.activityIndicatorView stopAnimating];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        DLog(@"%@",error);
+//        DLog(@"%@",error);
         
     }];
 }
@@ -141,7 +141,7 @@
 {
     return;
     if (![_footerView.activityIndicatorView isAnimating]) {
-        DLog(@"加载更多");
+//        DLog(@"加载更多");
         [_footerView.activityIndicatorView startAnimating];
         _reloading=NO;
         [self getMyMessage];
@@ -239,7 +239,7 @@
             threshold=[dataDic objectForKey:@"threshold"];
         }
     }
-    DLog(@"%@--%d",threshold,investNum);
+//    DLog(@"%@--%d",threshold,investNum);
     if (investNum<[threshold intValue]&&investNum>0) {
         [RHUtility showTextWithText:@"投资金额不符合该红包的使用条件"];
         return;

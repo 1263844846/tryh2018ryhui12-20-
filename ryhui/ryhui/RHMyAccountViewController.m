@@ -35,7 +35,7 @@
 -(void)getMyAccountData
 {
     [[RHNetworkService instance] POST:@"front/payment/account/myAccountData" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"%@",responseObject);
+//        DLog(@"%@",responseObject);
         
         NSString* average=@"0.00";
         if (![[responseObject objectForKey:@"average"] isKindOfClass:[NSNull class]]) {
@@ -85,14 +85,14 @@
         self.earnInterestLabel.text=earnInterest;
                 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        DLog(@"%@",error);
+//        DLog(@"%@",error);
     }];
 }
 
 - (void)checkout
 {
     [[RHNetworkService instance] POST:@"front/payment/account/queryBalance" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"%@",responseObject);
+//        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSString* AvlBal=[responseObject objectForKey:@"AvlBal"];
             if (AvlBal&&[AvlBal length]>0) {
@@ -104,7 +104,7 @@
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        DLog(@"%@",error);
+//        DLog(@"%@",error);
     }];
 }
 

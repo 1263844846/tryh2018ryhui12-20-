@@ -66,7 +66,7 @@
     self.limitTimeLabel.text=limitTime;
     NSString* projectFund=@"0";
     if (![[dic objectForKey:@"projectFund"] isKindOfClass:[NSNull class]]) {
-        DLog(@"%@",[NSString stringWithFormat:@"%.2f",([[dic objectForKey:@"projectFund"] floatValue]/10000.0)]);
+//        DLog(@"%@",[NSString stringWithFormat:@"%.2f",([[dic objectForKey:@"projectFund"] floatValue]/10000.0)]);
         projectFund=[NSString stringWithFormat:@"%.2f",([[dic objectForKey:@"projectFund"] floatValue]/10000.0)];
     }
     self.projectFundLabel.text=projectFund;

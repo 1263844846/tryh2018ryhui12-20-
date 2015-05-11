@@ -101,10 +101,10 @@
     }else{
         url=@"common/main/xueListData";
     }
-    DLog(@"%@--url==%@",parameters,url);
+//    DLog(@"%@--url==%@",parameters,url);
 
     [[RHNetworkService instance] POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"%@",responseObject);
+//        DLog(@"%@",responseObject);
         NSMutableArray* tempArray=[[NSMutableArray alloc]initWithCapacity:0];
         
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
@@ -146,7 +146,7 @@
         [_footerView.activityIndicatorView stopAnimating];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        DLog(@"%@",error);
+//        DLog(@"%@",error);
         [_footerView.activityIndicatorView stopAnimating];
         _reloading = NO;
         [_headerView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
@@ -175,7 +175,7 @@
 {
     
     if (![_footerView.activityIndicatorView isAnimating]) {
-        DLog(@"加载更多");
+//        DLog(@"加载更多");
         [_footerView.activityIndicatorView startAnimating];
         _reloading=NO;
         [self getinvestListData];
