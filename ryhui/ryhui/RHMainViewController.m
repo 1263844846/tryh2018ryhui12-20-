@@ -13,9 +13,9 @@
 #import "RHOfficeNetAndWeiBoViewController.h"
 @interface RHMainViewController ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *bannerImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *bannerImageView; //banner图片
+@property (nonatomic, strong) NSArray *bannersArray;//banner集合
 
-@property (nonatomic, strong) NSArray *bannersArray;
 @end
 
 @implementation RHMainViewController
@@ -27,7 +27,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     [self configTitleWithString:@"融益汇"];
     
     _bannersArray = [[NSArray alloc] init];
@@ -80,7 +79,6 @@
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
     }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refesh) name:UIApplicationWillEnterForegroundNotification object:nil];
@@ -88,29 +86,25 @@
     [self getAppBanner];
 }
 
--(void)getAppBanner
-{
+- (void)getAppBanner {
     [[RHNetworkService instance] POST:@"common/main/appBannerList" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         _bannersArray = responseObject;
         [self setBannersImageView];
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [_bannerImageView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"NewBanner"]];
     }];
 }
 
--(void)setBannersImageView
-{
-        [_bannerImageView removeFromSuperview];
-    
+- (void)setBannersImageView {
     if (_bannersArray.count > 0) {
+         [_bannerImageView removeFromSuperview];
         for (int i = 0 ; i < _bannersArray.count; i ++) {
             UIImageView *bannerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * CGRectGetWidth([UIScreen mainScreen].bounds), 0,  CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight(_headerScrollView.frame))];
             bannerImageView.userInteractionEnabled = YES;
             bannerImageView.tag = i + 100;
             NSDictionary *dic = _bannersArray[i];
             RHNetworkService *netService = [RHNetworkService instance];
-            NSString *urlString = [NSString stringWithFormat:@"%@%@%@",[netService doMain],@"common/main/attachment/",dic[@"bg"]];
+            NSString *urlString = [NSString stringWithFormat:@"%@%@",[netService doMain],dic[@"bg"]];
             [bannerImageView sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"NewBanner"]];
             [_headerScrollView addSubview:bannerImageView];
             
@@ -119,10 +113,11 @@
         }
         
         _headerScrollView.contentSize = CGSizeMake(_bannersArray.count * CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight(_headerScrollView.frame));
+    }else{
+        [_bannerImageView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"NewBanner"]];
     }
 }
--(void)goForBannerDetailViewController:(UITapGestureRecognizer *)tap
-{
+- (void)goForBannerDetailViewController:(UITapGestureRecognizer *)tap {
     UIView *tapView = tap.view;
     NSDictionary *dic = _bannersArray[tapView.tag - 100];
     NSString *linkURl = dic[@"link"];
@@ -135,19 +130,16 @@
         }else{
             office.urlString = linkURl;
         }
-        
         [self.navigationController pushViewController:office animated:YES];
     }
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self refesh];
 }
 
--(void)refesh
-{
+- (void)refesh {
     [self.segment1Array removeAllObjects];
     [self.segment2Array removeAllObjects];
     [self segment1Post];
@@ -157,11 +149,8 @@
   
 }
 #pragma mark-network
--(void)getSegmentnum1
-{
-
+- (void)getSegmentnum1 {
     NSDictionary* parameters=@{@"_search":@"true",@"rows":@"1000",@"page":@"1",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"percent\",\"op\":\"lt\",\"data\":100}]}"};
-    
     [[RHNetworkService instance] POST:@"common/main/shangListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             int num=[[responseObject objectForKey:@"records"] intValue];
@@ -171,17 +160,11 @@
                 self.segmentView.segmentLabel3.text=[NSString stringWithFormat:@"可投%d",num];
                 self.segmentView.segmentLabel3.hidden=NO;
             }
-  
         }
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        DLog(@"%@",error);
     }];
 }
--(void)getSegmentnum2
-{
-
-    
+- (void)getSegmentnum2 {
     NSDictionary* parameters=@{@"_search":@"true",@"rows":@"1000",@"page":@"1",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"percent\",\"op\":\"lt\",\"data\":100}]}"};
     [[RHNetworkService instance] POST:@"common/main/xueListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
@@ -192,27 +175,19 @@
                 self.segmentView.segmentLabel4.text=[NSString stringWithFormat:@"可投%d",num];
                 self.segmentView.segmentLabel4.hidden=NO;
             }
-
         }
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 //        DLog(@"%@",error);
     }];
 }
 
--(void)segment1Post
-{
+- (void)segment1Post {
     int arrayCount=[[NSNumber numberWithInteger:[segment1Array count]] intValue];
-    
-    
     NSString* page=[[NSNumber numberWithInt:(arrayCount/10+1)] stringValue];
-    
     NSDictionary* parameters=@{@"_search":@"true",@"rows":@"10",@"page":page,@"sidx":@"",@"sord":@"",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};
-    
     [[RHNetworkService instance] POST:@"common/main/shangListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
-
             NSArray* array=[responseObject objectForKey:@"rows"];
             if ([array isKindOfClass:[NSArray class]]) {
 //                [self.segment1Array removeAllObjects];
@@ -220,7 +195,6 @@
                     if ([dic objectForKey:@"cell"]&&!([[dic objectForKey:@"cell"] isKindOfClass:[NSNull class]])) {
                         [self.segment1Array addObject:[dic objectForKey:@"cell"]];
                     }
-    
                 }
             }
             NSString* records=[responseObject objectForKey:@"records"];
@@ -233,27 +207,19 @@
                 [self.tableView reloadData];
             }
         }
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 //        DLog(@"%@",error);
         [RHUtility showTextWithText:@"请求失败"];
     }];
 }
 
--(void)segment2Post
-{
+- (void)segment2Post {
     int arrayCount=[[NSNumber numberWithInteger:[segment2Array count]] intValue];
-    
-    
     NSString* page=[[NSNumber numberWithInt:(arrayCount/10+1)] stringValue];
-    
     NSDictionary* parameters=@{@"_search":@"true",@"rows":@"10",@"page":page,@"sidx":@"",@"sord":@"",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};
-    
     [[RHNetworkService instance] POST:@"common/main/xueListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        DLog(@"%@",responseObject);
-        
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
-
             NSArray* array=[responseObject objectForKey:@"rows"];
             if ([array isKindOfClass:[NSArray class]]) {
 //                [self.segment2Array removeAllObjects];
@@ -261,7 +227,6 @@
                     if ([dic objectForKey:@"cell"]&&!([[dic objectForKey:@"cell"] isKindOfClass:[NSNull class]])) {
                         [self.segment2Array addObject:[dic objectForKey:@"cell"]];
                     }
-                    
                 }
             }
             NSString* records=[responseObject objectForKey:@"records"];
@@ -274,19 +239,15 @@
                 [self.tableView reloadData];
             }
          }
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 //        DLog(@"%@",error);
         [RHUtility showTextWithText:@"请求失败"];
     }];
-
 }
 
 #pragma mark-RHSegmentDelegate
--(void)didSelectSegmentAtIndex:(int)index
-{
+- (void)didSelectSegmentAtIndex:(int)index {
     self.type=[NSString stringWithFormat:@"%d",index];
-
     switch (index) {
         case 0:
             self.contentLabel.text=@"       借款方为经营良好的中小微企业及个体工商户。为保障投资人权益，融益汇通过评级严格筛选合作机构。所有借款项目均由合作机构评审后推荐，并经融益汇多轮再评审后发布。所有项目均由合作机构提供全额本息担保。";
@@ -297,7 +258,6 @@
 //                [self.dataArray addObjectsFromArray:self.segment1Array];
 //                [self.tableView reloadData];
 //            }
-            
             [self.segment1Array removeAllObjects];
             [self segment1Post];
             break;
@@ -320,75 +280,57 @@
     [self.tableView setContentOffset:CGPointMake(0,0) animated:YES];
 }
 
--(void)didSelectInvestment
-{
+- (void)didSelectInvestment {
     RHProjectListViewController* controller=[[RHProjectListViewController alloc]initWithNibName:@"RHProjectListViewController" bundle:nil];
     controller.type=self.type;
     [self.navigationController pushViewController:controller animated:YES];
-    
-
 }
 
 #pragma mark-TableViewDelegate
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 108;
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (dataArray.count>4) {
         return 4;
     }
     return dataArray.count;
 }
 
--(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"CellIdentifier";
-
     RHMainViewCell *cell = (RHMainViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"RHMainViewCell" owner:nil options:nil] objectAtIndex:0];
     }
-    
     NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];
-    
     [cell updateCell:dataDic];
-    
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     RHProjectDetailViewController* controller=[[RHProjectDetailViewController alloc]initWithNibName:@"RHProjectDetailViewController" bundle:nil];
     NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];
     controller.dataDic=dataDic;
     controller.type=type;
     [self.navigationController pushViewController:controller animated:YES];
-
 }
 
 #pragma mark-Push
-
 - (IBAction)pushUserCenter:(id)sender {
-    
     [[[RHTabbarManager sharedInterface] selectTabbarUser] popToRootViewControllerAnimated:NO];
 }
 
 - (IBAction)pushMore:(id)sender {
-    
     [[[RHTabbarManager sharedInterface] selectTabbarMore] popToRootViewControllerAnimated:NO];
 }
 
 - (IBAction)pushProjectList:(id)sender {
-    
     [self didSelectInvestment];
 }
 
--(void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     for (UIView *subView in [UIApplication sharedApplication].keyWindow.subviews) {
         if (subView.tag == 1000) {
             [subView removeFromSuperview];
@@ -396,4 +338,5 @@
     }
     [super viewWillDisappear:animated];
 }
+
 @end
