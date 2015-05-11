@@ -104,7 +104,7 @@
             bannerImageView.tag = i + 100;
             NSDictionary *dic = _bannersArray[i];
             RHNetworkService *netService = [RHNetworkService instance];
-            NSString *urlString = [NSString stringWithFormat:@"%@%@",[netService doMain],dic[@"bg"]];
+            NSString *urlString = [NSString stringWithFormat:@"%@%@%@",[netService doMain],@"common/main/attachment/",dic[@"bg"]];
             [bannerImageView sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"NewBanner"]];
             [_headerScrollView addSubview:bannerImageView];
             
