@@ -72,10 +72,10 @@
     [self registerJPushNotifyWithLauchOptions:launchOptions];
     
     //统计
-//    [MobClick startWithAppkey:@"554c126f67e58e7434007259" reportPolicy:BATCH   channelId:@""];
-//    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-//    [MobClick setAppVersion:version];
-//    [MobClick setCrashReportEnabled:YES];
+    [MobClick startWithAppkey:@"554c126f67e58e7434007259" reportPolicy:BATCH   channelId:@""];
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    [MobClick setAppVersion:version];
+    [MobClick setCrashReportEnabled:YES];
     
     return YES;
 }

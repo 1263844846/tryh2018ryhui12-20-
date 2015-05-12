@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		003E60C51AEF653000F79832 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 003E60C41AEF653000F79832 /* bg.png */; };
+		0046D1CA1B00C16B002AD791 /* RHLogoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0046D1C81B00C16B002AD791 /* RHLogoViewController.m */; };
+		0046D1CB1B00C16B002AD791 /* RHLogoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0046D1C91B00C16B002AD791 /* RHLogoViewController.xib */; };
 		004B90751AEF5F010011F0F6 /* defaultRH.png in Resources */ = {isa = PBXBuildFile; fileRef = 004B90741AEF5F010011F0F6 /* defaultRH.png */; };
 		0064C5E31AF0A6AC0096E1D8 /* Banner.png in Resources */ = {isa = PBXBuildFile; fileRef = 0064C5E21AF0A6AC0096E1D8 /* Banner.png */; };
 		007ADF761AFB15C500D3B126 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 007ADF751AFB15C500D3B126 /* libz.dylib */; };
@@ -298,6 +300,9 @@
 
 /* Begin PBXFileReference section */
 		003E60C41AEF653000F79832 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		0046D1C71B00C16B002AD791 /* RHLogoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHLogoViewController.h; sourceTree = "<group>"; };
+		0046D1C81B00C16B002AD791 /* RHLogoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHLogoViewController.m; sourceTree = "<group>"; };
+		0046D1C91B00C16B002AD791 /* RHLogoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHLogoViewController.xib; sourceTree = "<group>"; };
 		004B90741AEF5F010011F0F6 /* defaultRH.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultRH.png; sourceTree = "<group>"; };
 		0064C5E21AF0A6AC0096E1D8 /* Banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Banner.png; sourceTree = "<group>"; };
 		007ADF751AFB15C500D3B126 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -1233,6 +1238,9 @@
 				F86B8B011AA18406000D2B8C /* RHMainViewController.h */,
 				F86B8B021AA18406000D2B8C /* RHMainViewController.m */,
 				F86B8B031AA18406000D2B8C /* RHMainViewController.xib */,
+				0046D1C71B00C16B002AD791 /* RHLogoViewController.h */,
+				0046D1C81B00C16B002AD791 /* RHLogoViewController.m */,
+				0046D1C91B00C16B002AD791 /* RHLogoViewController.xib */,
 			);
 			name = MainViewController;
 			sourceTree = "<group>";
@@ -1813,6 +1821,7 @@
 				F8C38D911AC98112005C3B1F /* RHRepaymentScheduleCell.xib in Resources */,
 				F83865B51AA0569C00001D1A /* registerEnSelect.png in Resources */,
 				F80E498A1A8E444B00028CD1 /* RHALoginViewController.xib in Resources */,
+				0046D1CB1B00C16B002AD791 /* RHLogoViewController.xib in Resources */,
 				F87B835A1AC84AD700EB73A6 /* SPDB.jpg in Resources */,
 				F88830FB1AB41F76001E4AD1 /* RHSegmentView.xib in Resources */,
 				F8C38DBE1AC9A321005C3B1F /* projecticon.png in Resources */,
@@ -1960,6 +1969,7 @@
 				F83375E01AB9BEBC00944CB1 /* RHInvestmentViewController.m in Sources */,
 				F8B6DA6A1AB5459500CCB13D /* RHUserCenterMainViewController.m in Sources */,
 				F87B832C1AC8346700EB73A6 /* RHMyMessageViewController.m in Sources */,
+				0046D1CA1B00C16B002AD791 /* RHLogoViewController.m in Sources */,
 				D537C3751ADD4100009D3433 /* RHMyGiftViewCell.m in Sources */,
 				F86B8AEF1AA16ED3000D2B8C /* RHGesturePasswordViewController.m in Sources */,
 				D562368E1AC7E6AB00FEAB7C /* RHAccountValidateViewController.m in Sources */,
@@ -2129,8 +2139,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Hong Du Yi Rong Financial Information Service Co., Ltd. (T8WLWPVY5C)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Hong Du Yi Rong Financial Information Service Co., Ltd. (T8WLWPVY5C)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ryhui/ShareSDK/Connection",
@@ -2163,7 +2173,7 @@
 					"$(PROJECT_DIR)/ryhui",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4e0bfa90-2aa3-46bd-a34c-d6d645e35efa";
+				PROVISIONING_PROFILE = "96c752a4-cb1c-46a8-8d05-b661b079b4e6";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2174,8 +2184,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Hong Du Yi Rong Financial Information Service Co., Ltd. (T8WLWPVY5C)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Hong Du Yi Rong Financial Information Service Co., Ltd. (T8WLWPVY5C)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ryhui/ShareSDK/Connection",
@@ -2208,7 +2218,7 @@
 					"$(PROJECT_DIR)/ryhui",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4e0bfa90-2aa3-46bd-a34c-d6d645e35efa";
+				PROVISIONING_PROFILE = "96c752a4-cb1c-46a8-8d05-b661b079b4e6";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

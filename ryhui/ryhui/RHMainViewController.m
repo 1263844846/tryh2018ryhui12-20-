@@ -11,6 +11,7 @@
 #import "RHProjectDetailViewController.h"
 #import "RHProjectListViewController.h"
 #import "RHOfficeNetAndWeiBoViewController.h"
+#import "RHLogoViewController.h"
 @interface RHMainViewController ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *bannerImageView; //banner图片
@@ -88,6 +89,9 @@
 
 - (void)getAppBanner {
     [[RHNetworkService instance] POST:@"common/main/appBannerList" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"-------------%@",responseObject);
+        
         _bannersArray = responseObject;
         [self setBannersImageView];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -121,9 +125,11 @@
     UIView *tapView = tap.view;
     NSDictionary *dic = _bannersArray[tapView.tag - 100];
     NSString *linkURl = dic[@"link"];
+    NSString *logoUrl = dic[@"logo"];
+    NSString *naviTitle = dic[@"title"];
     if (linkURl.length > 0) {
         RHOfficeNetAndWeiBoViewController *office = [[RHOfficeNetAndWeiBoViewController alloc] initWithNibName:@"RHOfficeNetAndWeiBoViewController" bundle:nil];
-        office.NavigationTitle = dic[@"title"];
+        office.NavigationTitle = naviTitle;
         office.Type = 3;
         if (([linkURl rangeOfString:@"http://"].location == NSNotFound) || ([linkURl rangeOfString:@"https://"].location == NSNotFound)) {
             office.urlString = [NSString stringWithFormat:@"http://%@",linkURl];
@@ -131,6 +137,11 @@
             office.urlString = linkURl;
         }
         [self.navigationController pushViewController:office animated:YES];
+    }else if (logoUrl.length > 0 ) {
+        RHLogoViewController *logo = [[RHLogoViewController alloc] initWithNibName:@"RHLogoViewController" bundle:nil];
+        logo.logoRrl = [NSString stringWithFormat:@"%@%@%@",[[RHNetworkService instance] doMain],@"common/main/attachment/",logoUrl];
+        logo.navigationTitle = naviTitle;
+        [self.navigationController pushViewController:logo animated:YES];
     }
 }
 
