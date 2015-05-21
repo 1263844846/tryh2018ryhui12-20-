@@ -25,12 +25,29 @@
     [self configBackButton];
     
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:_logoRrl]]];
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), image.size.height/2)];
-    imageView.image = image;
+    
+    int h = image.size.height;
+    
+    int w = image.size.width;
+    
+    float b = CGRectGetWidth([UIScreen mainScreen].bounds)/w < CGRectGetHeight([UIScreen mainScreen].bounds) / h ? CGRectGetWidth([UIScreen mainScreen].bounds)/w : CGRectGetHeight([UIScreen mainScreen].bounds) /h;
+    CGSize itemSize = CGSizeMake(b*w, b*h);
+    
+    UIGraphicsBeginImageContext(itemSize);
+    
+    CGRect imageRect = CGRectMake(0, 0, b*w, b*h);
+    
+    [image drawInRect:imageRect];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight(imageRect) + 44)];
+
+    imageView.image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
     
     [_mainScrollView addSubview:imageView];
     
-    _mainScrollView.contentSize = CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), image.size.height/2 );
+    _mainScrollView.contentSize = CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), imageView.frame.size.height );
     
 }
 

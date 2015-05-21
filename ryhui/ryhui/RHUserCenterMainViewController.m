@@ -215,4 +215,9 @@
     RHMyGiftViewController* controller=[[RHMyGiftViewController alloc] initWithNibName:@"RHMyGiftViewController" bundle:nil];
     [self.navigationController pushViewController:controller animated:YES];
 }
+
+- (IBAction)pushMyInvestMentCode:(id)sender {
+//    我的邀请码
+}
+
 @end

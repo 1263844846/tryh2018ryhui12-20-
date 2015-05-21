@@ -44,7 +44,7 @@
     NSString* url=[request.URL absoluteString];
 //    DLog(@"%@",url);
     
-    if ([url rangeOfString:@"front/payment/account/myAccount"].location!=NSNotFound) {
+    if ([url rangeOfString:@"front/payment/account/myAccount"].location !=NSNotFound) {
         [RHUserManager sharedInterface].custId=@"first";
         if (_isUserCenterTurn) {
             [[RHTabbarManager sharedInterface] initTabbar];
