@@ -10,6 +10,8 @@
 #import "RHAboutViewController.h"
 #import "RHIntroductionViewController.h"
 #import <ShareSDK/ShareSDK.h>
+#import "WXApi.h"
+#import "WeiboSDK.h"
 
 @interface RHMoreViewController ()
 
@@ -54,6 +56,8 @@
 }
 
 - (IBAction)shareAction:(id)sender {
+    
+    self.navigationController.navigationBarHidden = YES;
     NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"GestureIcon" ofType:@"png"];
     
     //构造分享内容
@@ -63,14 +67,14 @@
                                                 title:@"权威专业的投资理财平台“融益汇”，快来下载客户端吧～"
                                                   url:@"http://www.ryhui.com/appDownload"
                                           description:nil
-                                            mediaType:SSPublishContentMediaTypeNews];
+                                            mediaType:SSPublishContentMediaTypeNews | SSPublishContentMediaTypeImage];
     //创建弹出菜单容器
     id<ISSContainer> container = [ShareSDK container];
-    [container setIPadContainerWithView:sender arrowDirect:UIPopoverArrowDirectionUp];
+//    [container setIPadContainerWithView:sender arrowDirect:UIPopoverArrowDirectionUp];
     
-    //弹出分享菜单
-
-    [ShareSDK showShareActionSheet:container
+    [container setIPhoneContainerWithViewController:self];
+     //弹出分享菜单
+    [ShareSDK showShareActionSheet:container    
                          shareList:nil
                            content:publishContent
                      statusBarTips:YES

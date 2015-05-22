@@ -11,12 +11,8 @@
 #import "RHGesturePasswordViewController.h"
 #import "RHMainViewController.h"
 #import <ShareSDK/ShareSDK.h>
-#import <TencentOpenAPI/QQApiInterface.h>
-#import <TencentOpenAPI/TencentOAuth.h>
 #import "WXApi.h"
-#import "WeiboApi.h"
 #import "WeiboSDK.h"
-//#import <RennSDK/RennSDK.h>
 @interface AppDelegate ()
 
 @end

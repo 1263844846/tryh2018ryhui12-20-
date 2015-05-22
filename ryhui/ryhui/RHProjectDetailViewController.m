@@ -14,6 +14,7 @@
 {
     int available;
     CGRect tempRect;
+    int page;
 }
 @property(nonatomic,strong)NSMutableArray* array1;
 @property(nonatomic,strong)NSMutableArray* array2;
@@ -31,6 +32,7 @@
     // Do any additional setup after loading the view from its nib.
     self.dataArray=[[NSMutableArray alloc] initWithCapacity:0];
 
+    page = 1 ;
     [self configBackButton];
     
     [self configTitleWithString:@"项目详情"];
@@ -54,8 +56,6 @@
     self.scrollView1.frame=CGRectMake(0, 35,self.segmentView1.frame.size.width, [UIScreen mainScreen].applicationFrame.size.height-self.navigationController.navigationBar.frame.size.height-280);
     
     self.scrollView1.contentSize=CGSizeMake(self.segmentView1.frame.size.width,267);
-    
-    
     
 }
 
@@ -147,12 +147,10 @@
 
 -(void)projectInvestmentList
 {
-    int arrayCount=[[NSNumber numberWithInteger:[dataArray count]] intValue];
-    
-    
-    NSString* page=[[NSNumber numberWithInt:(arrayCount/10+1)] stringValue];
-    
-    NSDictionary* parameters=@{@"projectId":self.projectId,@"_search":@"true",@"rows":@"10",@"page":page,@"sidx":@"investTime",@"sord":@"desc",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};    [[RHNetworkService instance] POST:@"common/main/projectInvestmentList" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSDictionary* parameters=@{@"projectId":self.projectId,@"_search":@"true",@"rows":@"50",@"page":[NSString stringWithFormat:@"%d",page],@"sidx":@"investTime",@"sord":@"desc",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};
+    [[RHNetworkService instance] POST:@"common/main/projectInvestmentList" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"-------------%@",[responseObject objectForKey:@"rows"]);
         
 //        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {

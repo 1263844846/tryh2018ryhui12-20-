@@ -28,11 +28,21 @@
 				<string>wx2010bdd8c8c72a3f</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wb1083852544</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1.6</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>Product Name</key>
+	<string>融益汇</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
