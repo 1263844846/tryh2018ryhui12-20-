@@ -11,7 +11,6 @@
 @interface RHLogoViewController ()
 
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
-@property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
 
 @end
 

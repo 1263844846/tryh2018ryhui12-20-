@@ -11,9 +11,16 @@
 #import "RHProjectDetailViewController.h"
 
 @interface RHProjectListContentViewController ()
-
+{
+    EGORefreshTableHeaderView *_headerView;
+    AITableFooterVew *_footerView;
+    BOOL _reloading;
+    BOOL showLoadMoreButton;
+}
 @property (nonatomic,strong)NSString* currentSort;
 @property (nonatomic,strong)NSString* currentSixd;
+@property (nonatomic, assign) int currentPageIndex;
+
 @end
 
 @implementation RHProjectListContentViewController
@@ -173,7 +180,6 @@
 }
 - (void)showMoreApp:(id)sender
 {
-    
     if (![_footerView.activityIndicatorView isAnimating]) {
 //        DLog(@"加载更多");
         [_footerView.activityIndicatorView startAnimating];

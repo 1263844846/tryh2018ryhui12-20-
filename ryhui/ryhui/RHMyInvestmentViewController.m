@@ -11,6 +11,12 @@
 
 @interface RHMyInvestmentViewController ()
 
+@property(nonatomic,strong)RHSegmentContentView* segmentContentView;
+@property(nonatomic,strong)NSMutableArray* viewControllers;
+@property (weak, nonatomic) IBOutlet UIView *segmentView1;
+@property (weak, nonatomic) IBOutlet UIView *segmentView2;
+@property (weak, nonatomic) IBOutlet UIView *segmentView3;
+
 @end
 
 @implementation RHMyInvestmentViewController
@@ -21,7 +27,6 @@
     [super viewDidLoad];
     self.viewControllers=[[NSMutableArray alloc]initWithCapacity:0];
     
-    // Do any additional setup after loading the view from its nib.
     [self configBackButton];
     [self configTitleWithString:@"我的投资"];
     

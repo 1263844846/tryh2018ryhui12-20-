@@ -112,7 +112,7 @@
     //添加新浪微博应用 注册网址 http://open.weibo.com
     [ShareSDK connectSinaWeiboWithAppKey:@"1083852544"
                                appSecret:@"1d0c857bd233092ee0b2d69a494864b9"
-                             redirectUri:@"http://www.ryhui.com"];
+                             redirectUri:@"https://www.ryhui.com"];
 
 //    //当使用新浪微博客户端分享的时候需要按照下面的方法来初始化新浪的平台
 //    [ShareSDK  connectSinaWeiboWithAppKey:@"568898243"
@@ -123,7 +123,6 @@
     //添加微信应用 注册网址 http://open.weixin.qq.com
     [ShareSDK connectWeChatWithAppId:@"wx2010bdd8c8c72a3f"
                            wechatCls:[WXApi class]];
-
 }
 
 -(void)sessionFail:(NSNotification*)nots

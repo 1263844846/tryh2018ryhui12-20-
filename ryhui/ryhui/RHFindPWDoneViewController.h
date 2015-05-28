@@ -10,5 +10,4 @@
 
 @interface RHFindPWDoneViewController : RHBaseViewController
 
-- (IBAction)loginAciton:(id)sender;
 @end

@@ -13,6 +13,12 @@
     float changeY;
     float keyboardHeight;
 }
+@property (weak, nonatomic) IBOutlet UITextField *oldPasswordTF;
+@property (weak, nonatomic) IBOutlet UITextField *rnewPasswordTF;
+@property (weak, nonatomic) IBOutlet UITextField *captchaTF;
+@property (weak, nonatomic) IBOutlet UITextField *nnewPasswordTF;
+@property (weak, nonatomic) IBOutlet UIImageView *captchaImageView;
+
 @end
 
 @implementation RHForgotPasswordViewController
@@ -121,7 +127,6 @@
                 }
             }
         }
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if ([error.userInfo.allKeys containsObject:@"com.alamofire.serialization.response.error.data"]) {
             NSDictionary* errorDic=[NSJSONSerialization JSONObjectWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] options:NSJSONReadingMutableContainers error:nil];
@@ -140,4 +145,5 @@
     }
     [super viewWillDisappear:animated];
 }
+
 @end

@@ -11,22 +11,6 @@
 #import "AITableFooterVew.h"
 #import "RHMyMessageDetailViewController.h"
 
-@interface RHMyMessageViewController : RHBaseViewController<EGORefreshTableHeaderDelegate,UITableViewDataSource,UITableViewDelegate,RHMessageDetailDelegate>
-{
-    EGORefreshTableHeaderView *_headerView;
-    AITableFooterVew *_footerView;
-    BOOL _reloading;
-    BOOL showLoadMoreButton;
-}
-
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, assign) int currentPageIndex;
-@property(nonatomic,strong)NSMutableArray* dataArray;
-
-- (IBAction)pushMain:(id)sender;
-- (IBAction)pushUser:(id)sender;
-- (IBAction)pushMore:(id)sender;
-
--(void)updateCell:(NSDictionary*)dic;
+@interface RHMyMessageViewController : RHBaseViewController
 
 @end

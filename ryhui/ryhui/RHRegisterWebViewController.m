@@ -12,6 +12,8 @@
 
 @interface RHRegisterWebViewController ()
 
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+
 @end
 
 @implementation RHRegisterWebViewController

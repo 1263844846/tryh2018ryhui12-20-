@@ -13,29 +13,27 @@
 @synthesize delegate;
 @synthesize selectedIndex;
 
--(void)initData
-{
+-(void)initData {
     self.segmentView1.hidden=NO;
     self.segmentView2.hidden=YES;
     [delegate didSelectSegmentAtIndex:0];
-    
-
 }
 
 - (IBAction)segment1Action:(id)sender {
-    if (self.segmentView1.hidden) {
-        self.segmentView1.hidden=NO;
-        self.segmentView2.hidden=YES;
-        [delegate didSelectSegmentAtIndex:0];
+    UIButton *btn = (UIButton *)sender;
+    if (btn.tag == 0){
+        if (self.segmentView1.hidden) {
+            self.segmentView1.hidden=NO;
+            self.segmentView2.hidden=YES;
+            [delegate didSelectSegmentAtIndex:0];
+        }
+    } else {
+        if (self.segmentView2.hidden) {
+            self.segmentView2.hidden=NO;
+            self.segmentView1.hidden=YES;
+            [delegate didSelectSegmentAtIndex:1];
+        }
     }
-
 }
 
-- (IBAction)segment2Action:(id)sender {
-    if (self.segmentView2.hidden) {
-        self.segmentView2.hidden=NO;
-        self.segmentView1.hidden=YES;
-        [delegate didSelectSegmentAtIndex:1];
-    }
-}
 @end

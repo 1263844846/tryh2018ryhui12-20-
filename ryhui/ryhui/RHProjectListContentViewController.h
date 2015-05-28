@@ -11,19 +11,15 @@
 #import "AITableFooterVew.h"
 
 @interface RHProjectListContentViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,EGORefreshTableHeaderDelegate>
-{
-    EGORefreshTableHeaderView *_headerView;
-    AITableFooterVew *_footerView;
-    BOOL _reloading;
-    BOOL showLoadMoreButton;
-}
+
 @property(nonatomic,assign)UINavigationController* prarentNav;
+@property (nonatomic,strong)NSString* type;
 @property(nonatomic,strong)UITableView* tableView;
 @property (nonatomic,strong)NSMutableArray* dataArray;
-@property (nonatomic,strong)NSString* type;
-@property (nonatomic, assign) int currentPageIndex;
--(void)getinvestListData;
--(void)startPost;
--(void)refreshWithData:(NSString*)data;
+
 -(void)sordListWithSidx:(NSString*)sidx sord:(NSString*)sord;
+-(void)startPost;
+-(void)getinvestListData;
+-(void)refreshWithData:(NSString*)data;
+
 @end

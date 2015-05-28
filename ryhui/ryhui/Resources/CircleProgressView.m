@@ -9,7 +9,17 @@
 #import "CircleProgressView.h"
 
 @interface CircleProgressView ()
-
+{
+    CGPoint center;
+    CGFloat radius;
+    double progress;
+    CGFloat linewidth;
+    double lastdegree;
+    TOUCHSTATUS status;
+    BOOL seekable;
+    id <CircleProgressViewDelegate> delegate;
+    BOOL lock;
+}
 @property (nonatomic, strong) UILabel *text;
 
 @end
@@ -18,14 +28,13 @@
 
 @synthesize center, radius, linewidth, delegate = _delegate, status, seekable, lock;
 
-- (id)initWithFrame:(CGRect)frame withCenter:(CGPoint)acenter Radius:(CGFloat)aradius lineWidth:(CGFloat)width
-{
+- (id)initWithFrame:(CGRect)frame withCenter:(CGPoint)acenter Radius:(CGFloat)aradius lineWidth:(CGFloat)width {
     self = [super initWithFrame:frame];
     if (self) {
         self.center = acenter;
         self.radius = aradius;
         self.linewidth = width;
-        lastdegree= 0;
+        lastdegree = 0;
         progress = 0;
         // Initialization code
         self.backgroundColor = [UIColor clearColor];
@@ -39,7 +48,7 @@
     }
     return self;
 }
-- (void)drawRect:(CGRect)rect{
+- (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     //background
@@ -58,7 +67,7 @@
     CGContextDrawPath (context, kCGPathStroke);
 }
 
-- (BOOL)isInCircle:(CGPoint)touchpoint{
+- (BOOL)isInCircle:(CGPoint)touchpoint {
     float r = sqrtf(((touchpoint.x - center.x) * (touchpoint.x - center.x) +
                       (touchpoint.y - center.y) * (touchpoint.y - center.y)));
     if (r > self.radius - dev && r < self.radius + self.linewidth + dev){
@@ -67,7 +76,7 @@
     return NO;
 }
 
-- (BOOL)isInPlayArea:(CGPoint)touchpoint{
+- (BOOL)isInPlayArea:(CGPoint)touchpoint {
     float r = sqrtf(((touchpoint.x - center.x) * (touchpoint.x - center.x) +
                      (touchpoint.y - center.y) * (touchpoint.y - center.y)));
     if (r < self.radius - 2 * dev){
@@ -76,7 +85,7 @@
     return NO;
 }
 
-- (double)CaculateO:(CGPoint)touchpoint{
+- (double)CaculateO:(CGPoint)touchpoint {
     double Degree = atan((touchpoint.y - center.y) / (touchpoint.x - center.x));
     if (touchpoint.y > center.y && touchpoint.x >= center.x){
         Degree += M_PI_2;
@@ -92,7 +101,7 @@
 }
 
 
-- (void)setProgress:(double)newProgress{
+- (void)setProgress:(double)newProgress {
     if (lock){
         return;
     }
@@ -102,7 +111,7 @@
     [_text setText:[NSString stringWithFormat:@"%d%%", (int)(newProgress * 100)]];
 }
 
-- (void)setSeekable:(BOOL)_seekable{
+- (void)setSeekable:(BOOL)_seekable {
     self.userInteractionEnabled = seekable = _seekable;
 }
 

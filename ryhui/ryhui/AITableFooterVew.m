@@ -14,8 +14,7 @@
 @synthesize footerButton = _footerButton;
 @synthesize activityIndicatorView = _activityIndicatorView;
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -29,7 +28,7 @@
 
 		self.footerButton.titleLabel.font = [UIFont systemFontOfSize:13.0f];
 		self.footerButton.titleLabel.backgroundColor = [UIColor clearColor];
-		self.footerButton.titleLabel.textAlignment = UITextAlignmentCenter;
+		self.footerButton.titleLabel.textAlignment = NSTextAlignmentCenter;
         [self.footerButton setTitleColor:AI_STORE_TEXT_DETAILCOLOR forState:UIControlStateNormal];
         [self.footerButton setTitle:@"显示更多..." forState:UIControlStateNormal];
         [self.footerButton setTitle:@"亲,已经到底部了" forState:UIControlStateDisabled];
@@ -40,6 +39,7 @@
         CGRect footFrame = self.footerButton.frame;
         footFrame.origin.x = (self.frame.size.width - footFrame.size.width) / 2;
         footFrame.origin.y = (self.frame.size.height - footFrame.size.height) / 2;
+        footFrame.size.width = CGRectGetWidth([UIScreen mainScreen].bounds) - 2 * footFrame.origin.x;
         self.footerButton.frame = footFrame;
         [self.footerButton setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin];
         
@@ -50,11 +50,10 @@
         self.activityIndicatorView.frame = activityFrame;
         [self.activityIndicatorView setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin];
     }
-    
     return self;
 }
 
--(void)dealloc {
+- (void)dealloc {
     self.activityIndicatorView = nil;
     self.footerButton = nil;
 }

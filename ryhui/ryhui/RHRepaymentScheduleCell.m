@@ -14,8 +14,7 @@
     // Initialization code
 }
 
--(void)updateCell:(NSDictionary*)dic
-{
+-(void)updateCell:(NSDictionary *)dic {
     
 }
 @end

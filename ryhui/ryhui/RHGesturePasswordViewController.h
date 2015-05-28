@@ -12,15 +12,9 @@
 
 @interface RHGesturePasswordViewController : RHBaseViewController<VerificationDelegate,ResetDelegate,GesturePasswordDelegate,UIAlertViewDelegate>
 
-@property(nonatomic,assign)BOOL isForgotV;
-
 @property(nonatomic,assign)BOOL isReset;
-
 @property(nonatomic,assign)BOOL isRegister;
-
-- (void)clear;
-
-- (BOOL)exist;
+@property(nonatomic,assign)BOOL isForgotV;
 
 
 @end

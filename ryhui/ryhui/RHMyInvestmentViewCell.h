@@ -12,13 +12,11 @@
 
 @property(nonatomic,strong)NSString* projectId;
 @property(nonatomic,assign)UINavigationController* nav;
-
--(void)updateCell:(NSDictionary*)dic;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-
 @property (weak, nonatomic) IBOutlet UILabel *investMoneyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *backMoneyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *profitMoneyLabel;
-- (IBAction)contractAction:(id)sender;
-- (IBAction)pushInvestDetail:(id)sender;
+
+-(void)updateCell:(NSDictionary*)dic;
+
 @end

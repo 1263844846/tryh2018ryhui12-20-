@@ -13,6 +13,8 @@
 
 @interface RHInvestmentWebViewController ()
 
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+
 @end
 
 @implementation RHInvestmentWebViewController

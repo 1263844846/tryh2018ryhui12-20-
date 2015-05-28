@@ -10,13 +10,6 @@
 
 @interface RHLoginViewController : RHBaseViewController
 
-@property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
-
-@property (weak, nonatomic) IBOutlet UIView *buttonView;
-
 @property (nonatomic,strong)UINavigationController* nav;
 
-- (IBAction)loginAction:(id)sender;
-- (IBAction)registerAction:(id)sender;
-- (IBAction)qRegisterAction:(id)sender;
 @end

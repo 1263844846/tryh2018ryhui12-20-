@@ -12,4 +12,5 @@
 
 @property (nonatomic, strong) NSString *logoRrl;
 @property (nonatomic, strong) NSString *navigationTitle;
+
 @end

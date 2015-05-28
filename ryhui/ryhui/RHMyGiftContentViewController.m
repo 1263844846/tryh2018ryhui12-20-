@@ -11,6 +11,15 @@
 //#import "RHContractViewContoller.h"
 @interface RHMyGiftContentViewController ()
 
+{
+    EGORefreshTableHeaderView *_headerView;
+    AITableFooterVew *_footerView;
+    BOOL _reloading;
+    BOOL showLoadMoreButton;
+}
+@property(nonatomic,strong)UITableView* tableView;
+@property (nonatomic, assign) int currentPageIndex;
+
 @end
 
 @implementation RHMyGiftContentViewController

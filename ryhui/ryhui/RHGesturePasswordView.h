@@ -21,14 +21,12 @@
 @interface RHGesturePasswordView : UIView
 
 @property (nonatomic,strong) RHGestureView * tentacleView;
-
 @property (nonatomic,strong) UILabel * state;
-
 @property (nonatomic,assign) id<GesturePasswordDelegate> gesturePasswordDelegate;
-
 @property (nonatomic,strong) UIImageView * imgView;
 @property (nonatomic,strong) UIButton * forgetButton;
 @property (nonatomic,strong) UIButton * changeButton;
 @property (nonatomic,strong) UIButton * clearButton;
 @property (nonatomic,strong) UIButton * enterButton;
+
 @end

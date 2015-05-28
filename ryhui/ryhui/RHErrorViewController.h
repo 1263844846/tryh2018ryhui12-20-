@@ -17,16 +17,9 @@ enum{
 };
 
 @interface RHErrorViewController : RHBaseViewController
-@property (weak, nonatomic) IBOutlet UIButton *secButton;
 
-@property (weak, nonatomic) IBOutlet UIView *errorView;
-@property (weak, nonatomic) IBOutlet UIImageView *errorImageView;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *tipsLabel;
 @property (nonatomic,assign) int type;
-@property (nonatomic,strong) NSString* titleStr;
-@property (nonatomic,strong) NSString* tipsStr;
+@property (nonatomic,strong) NSString *titleStr;
+@property (nonatomic,strong) NSString *tipsStr;
 
-- (IBAction)pushProjectList:(id)sender;
-- (IBAction)pushMyAccount:(id)sender;
 @end

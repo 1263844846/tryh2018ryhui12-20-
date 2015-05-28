@@ -9,10 +9,7 @@
 #import "RHBaseViewController.h"
 
 @interface RHBindCardViewController : RHBaseViewController
-- (IBAction)bindAction:(id)sender;
-- (IBAction)pushBankList:(id)sender;
-@property (weak, nonatomic) IBOutlet UILabel *amountLabel;
 
-@property(nonatomic,strong)NSString* amountStr;
+@property(nonatomic,strong)NSString *amountStr;
 
 @end

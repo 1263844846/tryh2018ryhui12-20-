@@ -10,6 +10,16 @@
 #import "RHTradViewCell.h"
 @interface RHTradingViewController ()
 
+{
+    EGORefreshTableHeaderView *_headerView;
+    AITableFooterVew *_footerView;
+    BOOL _reloading;
+    BOOL showLoadMoreButton;
+}
+@property (nonatomic, assign) int currentPageIndex;
+@property(nonatomic,strong)NSMutableArray* dataArray;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @end
 
 @implementation RHTradingViewController

@@ -9,8 +9,13 @@
 #import "RHGuidanceViewController.h"
 #import "RHLoginViewController.h"
 
-@interface RHGuidanceViewController ()
+@interface RHGuidanceViewController () <RHSegmentContentViewDelegate,UIScrollViewDelegate>
 @property(nonatomic,strong)RHLoginViewController* loginVC;
+@property (weak, nonatomic) IBOutlet UIPageControl *pageController;
+@property(nonatomic,strong)RHSegmentContentView* segmentContentView;
+@property(nonatomic,strong)NSMutableArray* views;
+@property (weak, nonatomic) IBOutlet UIScrollView *scollView;
+
 @end
 
 @implementation RHGuidanceViewController
@@ -37,38 +42,20 @@
     imageView3.image=[UIImage imageNamed:@"guidan3"];
     [_views addObject:imageView3];
     
-//    UIView* view=[[UIView alloc]initWithFrame:[UIScreen mainScreen].bounds];
-//    UIImageView* imageView4=[[UIImageView alloc]initWithFrame:[UIScreen mainScreen].bounds];
-//    imageView4.image=[UIImage imageNamed:@"bg.jpg"];
-//    [view addSubview:imageView4];
-//    UIButton * button=[UIButton buttonWithType:UIButtonTypeCustom];
-//    button.frame=[UIScreen mainScreen].bounds;
-//    [button addTarget:self action:@selector(pushLogin) forControlEvents:UIControlEventTouchUpInside];
-//    [view addSubview:button];
-//    [_views addObject:view]
-    
     self.loginVC=[[RHLoginViewController alloc]initWithNibName:@"RHLoginViewController" bundle:nil];
     self.loginVC.nav=self.navigationController;
     [_views addObject:self.loginVC.view];
 
-    
     [_segmentContentView setViews:_views];
     
     [self.view addSubview:self.pageController];
-        
 }
-
-//-(void)pushLogin
-//{
-//    [[RHTabbarManager sharedInterface] selectLogin];
-//}
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden=YES;
 }
-
 
 -(void)viewWillDisappear:(BOOL)animated
 {

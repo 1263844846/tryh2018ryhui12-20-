@@ -24,4 +24,5 @@
 @property(nonatomic,strong)UINavigationController* tabbarMain;
 @property(nonatomic,strong)UINavigationController* tabbarUser;
 @property(nonatomic,strong)UINavigationController* tabbarMore;
+
 @end

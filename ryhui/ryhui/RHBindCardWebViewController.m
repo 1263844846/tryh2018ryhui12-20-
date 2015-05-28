@@ -11,6 +11,8 @@
 
 @interface RHBindCardWebViewController ()
 
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+
 @end
 
 @implementation RHBindCardWebViewController
@@ -24,26 +26,23 @@
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/account/bindCard",[RHNetworkService instance].doMain]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
     [request setHTTPMethod: @"POST"];
-    NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
-    if (session&&[session length]>0) {
+    NSString *session = [[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
+    if (session&&[session length] > 0) {
         [request setValue:session forHTTPHeaderField:@"cookie"];
     }
     [self.webView loadRequest: request];
 }
 
--(void)back
-{
+- (void)back {
     [delegate getWithdrawData];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)webViewDidStartLoad:(UIWebView *)webView
-{
+- (void)webViewDidStartLoad:(UIWebView *)webView {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
--(void)webViewDidFinishLoad:(UIWebView *)webView
-{
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 

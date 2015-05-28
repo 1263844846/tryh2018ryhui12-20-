@@ -9,6 +9,7 @@
 #import "RHBaseViewController.h"
 
 @interface RHRegisterWebViewController : RHBaseViewController<UIWebViewDelegate>
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
+
 @property (nonatomic, assign) BOOL isUserCenterTurn;
+
 @end

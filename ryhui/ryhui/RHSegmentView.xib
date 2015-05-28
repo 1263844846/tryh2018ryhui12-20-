@@ -70,14 +70,14 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="HbQ-y5-NGu">
+                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="HbQ-y5-NGu">
                                     <rect key="frame" x="0.0" y="0.0" width="155" height="35"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <state key="normal">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="segment2Action:" destination="iN0-l3-epB" eventType="touchUpInside" id="dek-7u-f6n"/>
+                                        <action selector="segment1Action:" destination="iN0-l3-epB" eventType="touchUpInside" id="Jj7-sT-HC5"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -145,14 +145,14 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PNK-va-51d">
+                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PNK-va-51d">
                                     <rect key="frame" x="0.0" y="0.0" width="155" height="35"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="segment2Action:" destination="iN0-l3-epB" eventType="touchUpInside" id="MIR-5P-ehQ"/>
+                                        <action selector="segment1Action:" destination="iN0-l3-epB" eventType="touchUpInside" id="NMg-Cr-Xhe"/>
                                     </connections>
                                 </button>
                             </subviews>

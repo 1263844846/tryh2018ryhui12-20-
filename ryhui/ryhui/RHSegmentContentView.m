@@ -9,10 +9,11 @@
 #import "RHSegmentContentView.h"
 
 
-@interface RHSegmentContentView () <UIScrollViewDelegate>{
+@interface RHSegmentContentView () <UIScrollViewDelegate>
+{
     NSUInteger _currentPage;
 }
-
+@property (nonatomic, assign) NSUInteger pageCount;
 @property (nonatomic, strong) UIScrollView *scrollView;
 
 @end
@@ -35,11 +36,9 @@
         [_scrollView setBounces:NO];
         [_scrollView setShowsHorizontalScrollIndicator:NO];
         [_scrollView setShowsVerticalScrollIndicator:NO];
-//        self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         _currentPage = 0;
         
         [_scrollView addObserver:self forKeyPath:@"frame" options:0 context:NULL];
-
     }
     return self;
 }
@@ -48,7 +47,6 @@
     [self.scrollView setContentSize:(CGSize){count * self.frame.size.width, self.frame.size.height}];
     _pageCount = count;
 }
-
 
 - (NSUInteger)selectPage{
     return _currentPage;
@@ -70,8 +68,9 @@
     [view setFrame:frame];
     [_scrollView addSubview:view];
 }
+
 - (void)addView:(UIViewController *)views
-         atPage:(NSUInteger)page{
+         atPage:(NSUInteger)page {
     CGRect frame = views.view.frame;
     frame.origin.x = page * _scrollView.frame.size.width;
     frame.origin.y = 0;
@@ -101,7 +100,6 @@
 }
 
 #pragma mark - UIScrollViewDelegate
-
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
     NSUInteger page = scrollView.contentOffset.x / scrollView.frame.size.width;
     if (page != _currentPage){
@@ -111,7 +109,6 @@
         _currentPage = page;
     }
 }
-
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     NSUInteger page = scrollView.contentOffset.x / scrollView.frame.size.width;
@@ -129,9 +126,5 @@
         return;
     [self setPageCount:_pageCount];
 }
-
-
-
-
 
 @end

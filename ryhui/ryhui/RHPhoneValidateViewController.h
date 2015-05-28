@@ -10,9 +10,4 @@
 
 @interface RHPhoneValidateViewController : RHBaseViewController
 
-@property (weak, nonatomic) IBOutlet UIButton *captchaButton;
-@property (weak, nonatomic) IBOutlet UITextField *phoneTF;
-@property (weak, nonatomic) IBOutlet UITextField *captchaTF;
-- (IBAction)nextAction:(id)sender;
-- (IBAction)getCaptchaAction:(id)sender;
 @end

@@ -15,6 +15,10 @@
     NSTimer* countDownTimer;
 }
 
+@property (weak, nonatomic) IBOutlet UIButton *captchaButton;
+@property (weak, nonatomic) IBOutlet UITextField *phoneTF;
+@property (weak, nonatomic) IBOutlet UITextField *captchaTF;
+
 @end
 
 @implementation RHPhoneValidateViewController

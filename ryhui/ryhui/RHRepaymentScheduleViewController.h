@@ -10,19 +10,6 @@
 #import "EGORefreshTableHeaderView.h"
 #import "AITableFooterVew.h"
 
-@interface RHRepaymentScheduleViewController : RHBaseViewController<EGORefreshTableHeaderDelegate>
-{
-    EGORefreshTableHeaderView *_headerView;
-    AITableFooterVew *_footerView;
-    BOOL _reloading;
-    BOOL showLoadMoreButton;
-}
+@interface RHRepaymentScheduleViewController : RHBaseViewController
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, assign) int currentPageIndex;
-@property(nonatomic,strong)NSMutableArray* dataArray;
-
-- (IBAction)pushMain:(id)sender;
-- (IBAction)pushUser:(id)sender;
-- (IBAction)pushMore:(id)sender;
 @end

@@ -11,15 +11,7 @@
 #import "AITableFooterVew.h"
 
 @interface RHInvestDetailViewController : RHBaseViewController<EGORefreshTableHeaderDelegate>
-{
-    EGORefreshTableHeaderView *_headerView;
-    AITableFooterVew *_footerView;
-    BOOL _reloading;
-    BOOL showLoadMoreButton;
-}
-@property (nonatomic, assign) int currentPageIndex;
-@property(nonatomic,strong)NSMutableArray* dataArray;
+
 @property  (nonatomic,strong)NSString* projectId;
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end

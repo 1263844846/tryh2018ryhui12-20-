@@ -12,6 +12,9 @@
 
 @interface RHLoginViewController ()
 
+@property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
+@property (weak, nonatomic) IBOutlet UIView *buttonView;
+
 @end
 
 @implementation RHLoginViewController

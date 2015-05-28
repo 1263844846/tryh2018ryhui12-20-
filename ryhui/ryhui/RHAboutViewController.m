@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *officalNetLabel;
 @property (weak, nonatomic) IBOutlet UILabel *officalWeiBoLabel;
+
 @end
 
 @implementation RHAboutViewController

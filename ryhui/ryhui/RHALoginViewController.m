@@ -15,10 +15,13 @@
 {
     float changeY;
     float keyboardHeight;
-    
     UITextField* currentSelectTF;
-
 }
+@property (weak, nonatomic) IBOutlet UITextField *accountTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet UITextField *captchaTextField;
+@property (weak, nonatomic) IBOutlet UIImageView *captchaImageView;
+
 @end
 
 @implementation RHALoginViewController
@@ -54,7 +57,6 @@
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
-
 
 -(void)changeCaptcha
 {
@@ -176,7 +178,6 @@
 -(void)textBegin:(NSNotification*)not
 {
 //    DLog(@"%@",not.object);
-    
     currentSelectTF=not.object;
     CGRect tfRect=[currentSelectTF convertRect:currentSelectTF.bounds toView:self.view];
     changeY=tfRect.origin.y+tfRect.size.height+5;
@@ -217,7 +218,6 @@
         viewRect.origin.y=(self.view.frame.size.height-keyboardHeight)-changeY;
         self.view.frame=viewRect;
     }
-    
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -230,7 +230,6 @@
     
     return YES;
 }
-
 
 -(void)findPassword
 {

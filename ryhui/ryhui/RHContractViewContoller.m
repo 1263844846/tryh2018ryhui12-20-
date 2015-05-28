@@ -21,18 +21,18 @@
     NSURL *url = nil;
     if (isAgreen) {
         [self configTitleWithString:@"借款协议"];
-        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/agreement/agreementInvestorApp?projectId=256&userId=89",[RHNetworkService instance].doMain]];
-    }else{
+        url = [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/agreement/agreementInvestorApp?projectId=%@&userId=%@",[RHNetworkService instance].doMain,self.projectId,self.userId]];
+    } else {
         [self configTitleWithString:@"合同"];
-        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/agreement/agreementInvestor?projectId=%@&userId=%@",[RHNetworkService instance].doMain,self.projectId,[RHUserManager sharedInterface].userId]];
+        url = [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/agreement/agreementInvestor?projectId=%@&userId=%@",[RHNetworkService instance].doMain,self.projectId,[RHUserManager sharedInterface].userId]];
     }
     
-    [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/agreement/agreementInvestor?projectId=%@&userId=%@",[RHNetworkService instance].doMain,self.projectId,[RHUserManager sharedInterface].userId]];
+//    [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/agreement/agreementInvestor?projectId=%@&userId=%@",[RHNetworkService instance].doMain,self.projectId,[RHUserManager sharedInterface].userId]];
 
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
     [request setHTTPMethod: @"POST"];
-    NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
-    if (session&&[session length]>0) {
+    NSString* session = [[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
+    if (session&&[session length] > 0) {
         [request setValue:session forHTTPHeaderField:@"cookie"];
     }
     [self.webView loadRequest: request];

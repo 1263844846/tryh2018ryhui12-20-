@@ -21,6 +21,17 @@
 
 @interface RHUserCenterMainViewController ()
 
+@property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
+@property (weak, nonatomic) IBOutlet UILabel *myMessageNumLabel;
+@property(nonatomic,strong)NSString* balance;
+@property (weak, nonatomic) IBOutlet UIButton *topButton;
+@property (weak, nonatomic) IBOutlet UILabel *username;
+@property (weak, nonatomic) IBOutlet UILabel *ryUsername;
+@property (weak, nonatomic) IBOutlet UIView *overView;
+@property (weak, nonatomic) IBOutlet UILabel *errorLabel;
+@property (weak, nonatomic) IBOutlet UIButton *errorButton;
+@property (weak, nonatomic) IBOutlet UILabel *balanceLabel;
+
 @end
 
 @implementation RHUserCenterMainViewController
@@ -28,6 +39,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _mainScrollView.contentSize = CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 460);
+    
     [self configTitleWithString:@"个人中心"];
     self.username.text=[RHUserManager sharedInterface].username;
     if ([RHUserManager sharedInterface].custId) {

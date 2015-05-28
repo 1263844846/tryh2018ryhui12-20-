@@ -194,6 +194,9 @@
     [label sizeToFit];
     frame = _textLabel.frame;
     frame.origin.x = floorf((self.backgroundView.frame.size.width - _textLabel.frame.size.width) / 2);
+    if (!self.iconView) {
+       frame.origin.y = 10.0;
+    }
     _textLabel.frame = frame;
 }
 

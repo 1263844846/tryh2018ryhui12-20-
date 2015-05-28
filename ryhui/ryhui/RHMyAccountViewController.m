@@ -10,6 +10,17 @@
 
 @interface RHMyAccountViewController ()
 
+@property(nonatomic,strong)NSString* balance;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UILabel *collectCapitalLabel;
+@property (weak, nonatomic) IBOutlet UILabel *averageLabel;
+@property (weak, nonatomic) IBOutlet UILabel *earnInterestLabel;
+@property (weak, nonatomic) IBOutlet UILabel *collectInterestLabel;
+@property (weak, nonatomic) IBOutlet UILabel *collectPrepaymentPenaltyLabel;
+@property (weak, nonatomic) IBOutlet UILabel *balanceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *totalLabel;
+@property (weak, nonatomic) IBOutlet UILabel *FrzBalLabel;
+
 @end
 
 @implementation RHMyAccountViewController

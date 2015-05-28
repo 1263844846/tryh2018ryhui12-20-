@@ -11,6 +11,15 @@
 #import "RHChooseGiftViewCell.h"
 
 @interface RHChooseGiftViewController ()
+{
+    EGORefreshTableHeaderView *_headerView;
+    AITableFooterVew *_footerView;
+    BOOL _reloading;
+    BOOL showLoadMoreButton;
+}
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, assign) int currentPageIndex;
+@property(nonatomic,strong)NSMutableArray* dataArray;
 
 @end
 
@@ -140,12 +149,12 @@
 - (void)showMoreApp:(id)sender
 {
     return;
-    if (![_footerView.activityIndicatorView isAnimating]) {
-//        DLog(@"加载更多");
-        [_footerView.activityIndicatorView startAnimating];
-        _reloading=NO;
-        [self getMyMessage];
-    }
+//    if (![_footerView.activityIndicatorView isAnimating]) {
+////        DLog(@"加载更多");
+//        [_footerView.activityIndicatorView startAnimating];
+//        _reloading=NO;
+//        [self getMyMessage];
+//    }
 }
 
 - (void)refreshApp:(BOOL)showloading{
@@ -175,7 +184,7 @@
         if (currentOffset >= maximumOffset && ![_footerView.activityIndicatorView isAnimating]) {
             // Load the next 20 records.
             return;
-            [self showMoreApp:self];
+//            [self showMoreApp:self];
         }
     }
 }

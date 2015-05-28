@@ -9,6 +9,5 @@
 #import "RHBaseViewController.h"
 
 @interface RHBankListViewController : RHBaseViewController
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end

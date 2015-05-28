@@ -11,6 +11,9 @@
 
 @interface RHPasswordConfirmViewController ()
 
+@property (weak, nonatomic) IBOutlet UITextField *nnewPasswordTF;
+@property (weak, nonatomic) IBOutlet UITextField *cPasswordTF;
+
 @end
 
 @implementation RHPasswordConfirmViewController

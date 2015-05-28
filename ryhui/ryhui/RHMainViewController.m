@@ -16,6 +16,17 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *bannerImageView; //banner图片
 @property (nonatomic, strong) NSArray *bannersArray;//banner集合
+@property (strong, nonatomic) IBOutlet UIView *footView;
+@property (strong, nonatomic) IBOutlet UIView *tbHeaderView;
+@property (weak, nonatomic) IBOutlet UIScrollView *headerScrollView;
+@property (strong, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic,strong)NSMutableArray* segment1Array;
+@property (nonatomic,strong)NSMutableArray* segment2Array;
+@property (nonatomic,strong)NSMutableArray* dataArray;
+@property (nonatomic,strong)RHSegmentView* segmentView;
+@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+@property (nonatomic,strong)NSString* type;
 
 @end
 

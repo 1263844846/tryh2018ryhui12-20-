@@ -21,20 +21,20 @@
 //state = 1;
 //title = "\U5145\U503c\U6210\U529f";
 //type = 2;
--(void)updateCell:(NSDictionary*)dic{
-    self.titleLabel.text=[dic objectForKey:@"content"];
-    self.timeLabel.text=[dic objectForKey:@"postDate"];
-    NSString* type=nil;
+-(void)updateCell:(NSDictionary *)dic{
+    self.titleLabel.text = [dic objectForKey:@"content"];
+    self.timeLabel.text = [dic objectForKey:@"postDate"];
+    NSString *type = nil;
     if ([[dic objectForKey:@"state"] isKindOfClass:[NSNumber class]]) {
-        type=[[dic objectForKey:@"state"] stringValue];
+        type = [[dic objectForKey:@"state"] stringValue];
     }else{
-        type=[dic objectForKey:@"state"];
+        type = [dic objectForKey:@"state"];
     }
     
     if ([type isEqualToString:@"2"]) {
-        self.typeImageView.image=[UIImage imageNamed:@"message1"];
+        self.typeImageView.image = [UIImage imageNamed:@"message1"];
     }else{
-        self.typeImageView.image=[UIImage imageNamed:@"message2"];
+        self.typeImageView.image = [UIImage imageNamed:@"message2"];
     }
 }
 

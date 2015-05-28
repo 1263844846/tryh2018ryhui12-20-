@@ -11,6 +11,10 @@
 
 @interface RHAccountValidateViewController ()
 
+@property (weak, nonatomic) IBOutlet UITextField *accountTF;
+@property (weak, nonatomic) IBOutlet UITextField *captchaTF;
+@property (weak, nonatomic) IBOutlet UIImageView *captchaImageView;
+
 @end
 
 @implementation RHAccountValidateViewController

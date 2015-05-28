@@ -10,6 +10,8 @@
 
 @interface RHRegisterAgreenWebViewController ()
 
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+
 @end
 
 @implementation RHRegisterAgreenWebViewController
@@ -20,13 +22,9 @@
     [self configTitleWithString:@"《融益汇用户协议》"];
     
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@regProtocol",[RHNetworkService instance].doMain]];
-    
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
     [request setHTTPMethod:@"GET"];
     [self.webView loadRequest: request];
-
 }
-
-
 
 @end

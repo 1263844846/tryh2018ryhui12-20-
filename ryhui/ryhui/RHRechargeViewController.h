@@ -9,11 +9,7 @@
 #import "RHBaseViewController.h"
 
 @interface RHRechargeViewController : RHBaseViewController<UITextFieldDelegate>
+
 @property(nonatomic,strong)NSString* balance;
 
-@property (weak, nonatomic) IBOutlet UITextField *textField;
-- (IBAction)recharge:(id)sender;
-
-@property (weak, nonatomic) IBOutlet UIButton *rechargeButton;
-@property (weak, nonatomic) IBOutlet UILabel *balanceLabel;
 @end

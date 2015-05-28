@@ -9,13 +9,5 @@
 #import "RHBaseViewController.h"
 
 @interface RHUserCenterViewController : RHBaseViewController<UIAlertViewDelegate>
-@property (weak, nonatomic) IBOutlet UILabel *mobileLabel;
-@property (weak, nonatomic) IBOutlet UILabel *emailLabel;
 
-- (IBAction)logoutAction:(id)sender;
-- (IBAction)pushMain:(id)sender;
-- (IBAction)pushUserCenter:(id)sender;
-- (IBAction)pushMore:(id)sender;
-- (IBAction)changePasswordAction:(id)sender;
-- (IBAction)changePanPasswordAction:(id)sender;
 @end

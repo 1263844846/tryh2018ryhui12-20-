@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface RHInvestDetaiTableViewCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *typeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *typeImagView;
+
 -(void)updateCell:(NSDictionary*)dic;
 
 @end

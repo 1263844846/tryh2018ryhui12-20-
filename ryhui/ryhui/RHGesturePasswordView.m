@@ -60,7 +60,7 @@
         [self addSubview:view];
         tentacleView = [[RHGestureView alloc]initWithFrame:view.frame];
         [tentacleView setButtonArray:buttonArray];
-        [tentacleView setTouchBeginDelegate:self];
+        [tentacleView setTouchBeginDelegate: self];
         [self addSubview:tentacleView];
         
         state = [[UILabel alloc]initWithFrame:CGRectMake(frame.size.width/2-140, frame.size.height/2-120, 280, 30)];

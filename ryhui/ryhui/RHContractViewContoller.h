@@ -11,8 +11,8 @@
 @interface RHContractViewContoller : RHBaseViewController
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
-@property(nonatomic,strong)NSString* projectId;
-@property(nonatomic,strong)NSString* userId;
-
+@property(nonatomic,strong)NSString *projectId;
+@property(nonatomic,strong)NSString *userId;
 @property(nonatomic,assign)BOOL isAgreen;
+
 @end

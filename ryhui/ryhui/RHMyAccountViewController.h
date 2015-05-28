@@ -10,19 +10,5 @@
 #import "RHRechargeViewController.h"
 
 @interface RHMyAccountViewController : RHBaseViewController
-@property(nonatomic,strong)NSString* balance;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
-- (IBAction)pushMain:(id)sender;
-- (IBAction)pushUser:(id)sender;
-- (IBAction)pushMore:(id)sender;
-@property (weak, nonatomic) IBOutlet UILabel *collectCapitalLabel;
-@property (weak, nonatomic) IBOutlet UILabel *averageLabel;
-@property (weak, nonatomic) IBOutlet UILabel *earnInterestLabel;
-@property (weak, nonatomic) IBOutlet UILabel *collectInterestLabel;
-@property (weak, nonatomic) IBOutlet UILabel *collectPrepaymentPenaltyLabel;
-@property (weak, nonatomic) IBOutlet UILabel *balanceLabel;
-@property (weak, nonatomic) IBOutlet UILabel *totalLabel;
-@property (weak, nonatomic) IBOutlet UILabel *FrzBalLabel;
-- (IBAction)pushPay:(id)sender;
 @end

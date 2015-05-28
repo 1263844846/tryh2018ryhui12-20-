@@ -11,6 +11,12 @@
 
 @interface RHMyGiftViewController ()
 
+@property(nonatomic,strong)RHSegmentContentView* segmentContentView;
+@property(nonatomic,strong)NSMutableArray* viewControllers;
+@property (weak, nonatomic) IBOutlet UIView *segmentView1;
+@property (weak, nonatomic) IBOutlet UIView *segmentView2;
+@property (weak, nonatomic) IBOutlet UIView *segmentView3;
+
 @end
 
 @implementation RHMyGiftViewController

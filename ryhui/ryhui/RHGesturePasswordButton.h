@@ -11,7 +11,6 @@
 @interface RHGesturePasswordButton : UIView
 
 @property (nonatomic,assign) BOOL selected;
-
 @property (nonatomic,assign) BOOL success;
 
 @end

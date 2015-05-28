@@ -10,7 +10,4 @@
 
 @interface RHAboutViewController : RHBaseViewController
 
-- (IBAction)pushMain:(id)sender;
-- (IBAction)pushUser:(id)sender;
-- (IBAction)pushMore:(id)sender;
 @end

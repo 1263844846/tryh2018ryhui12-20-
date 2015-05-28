@@ -7,7 +7,7 @@
 //
 
 #import "RHUserManager.h"
-static RHUserManager* _instance =nil;
+static RHUserManager *_instance = nil;
 
 @implementation RHUserManager
 @synthesize username;
@@ -18,7 +18,7 @@ static RHUserManager* _instance =nil;
 @synthesize email;
 @synthesize userId;
 
-+(id)allocWithZone:(struct _NSZone *)zone{
++ (id)allocWithZone:(struct _NSZone *)zone {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _instance = [super allocWithZone:zone];
@@ -26,7 +26,7 @@ static RHUserManager* _instance =nil;
     return _instance;
 }
 
-+(instancetype)sharedInterface{
++ (instancetype)sharedInterface {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _instance = [[RHUserManager alloc] init];
@@ -35,50 +35,48 @@ static RHUserManager* _instance =nil;
     return _instance;
 }
 
--(id)copyWithZone:(NSZone *)zone{
+- (id)copyWithZone:(NSZone *)zone {
     return _instance;
 }
 
--(void)initData
-{
-    NSString* _custId=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHcustId"];
-    if (_custId&&[_custId length]>0) {
-        self.custId=_custId;
+- (void)initData {
+    NSString *_custId = [[NSUserDefaults standardUserDefaults] objectForKey:@"RHcustId"];
+    if (_custId && [_custId length] > 0) {
+        self.custId = _custId;
     }
     
-    NSString* _email=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHemail"];
-    if (_email&&[_email length]>0) {
-        self.email=_email;
+    NSString *_email = [[NSUserDefaults standardUserDefaults] objectForKey:@"RHemail"];
+    if (_email && [_email length] > 0) {
+        self.email = _email;
     }
 
-    NSString* _infoType=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHinfoType"];
-    if (_infoType&&[_infoType length]>0) {
-        self.infoType=_infoType;
+    NSString *_infoType = [[NSUserDefaults standardUserDefaults] objectForKey:@"RHinfoType"];
+    if (_infoType && [_infoType length] > 0) {
+        self.infoType = _infoType;
     }
 
-    NSString* _md5=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHmd5"];
-    if (_md5&&[_md5 length]>0) {
-        self.md5=_md5;
+    NSString *_md5=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHmd5"];
+    if (_md5 && [_md5 length] > 0) {
+        self.md5 = _md5;
     }
 
-    NSString* _telephone=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHtelephone"];
-    if (_telephone&&[_telephone length]>0) {
-        self.telephone=_telephone;
+    NSString *_telephone=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHtelephone"];
+    if (_telephone && [_telephone length] > 0) {
+        self.telephone = _telephone;
     }
 
-    NSString* _username=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHUSERNAME"];
-    if (_username&&[_username length]>0) {
-        self.username=_username;
+    NSString *_username = [[NSUserDefaults standardUserDefaults] objectForKey:@"RHUSERNAME"];
+    if (_username && [_username length] > 0) {
+        self.username = _username;
     }
     
-    NSString* _userid=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHUSERID"];
-    if (_userid&&[_userid length]>0) {
-        self.userId=_userid;
+    NSString *_userid = [[NSUserDefaults standardUserDefaults] objectForKey:@"RHUSERID"];
+    if (_userid && [_userid length] > 0) {
+        self.userId = _userid;
     }
 }
 
--(void)logout
-{
+- (void)logout {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHcustId"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
@@ -103,7 +101,6 @@ static RHUserManager* _instance =nil;
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHSESSION"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHMessageNumSave"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
@@ -112,21 +109,16 @@ static RHUserManager* _instance =nil;
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    self.custId=nil;
-    self.email=nil;
-    self.infoType=nil;
-    self.md5=nil;
-    self.telephone=nil;
-    self.userId=nil;
-    self.username=nil;
-
+    self.custId = nil;
+    self.email = nil;
+    self.infoType = nil;
+    self.md5 = nil;
+    self.telephone = nil;
+    self.userId = nil;
+    self.username = nil;
 
     [[RHTabbarManager sharedInterface] cleanTabbar];
     [[RHTabbarManager  sharedInterface] selectALogin];
-    
-    
-
-
 }
 
 @end

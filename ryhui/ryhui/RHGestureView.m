@@ -9,10 +9,10 @@
 #import "RHGestureView.h"
 #import "RHGesturePasswordButton.h"
 
-@implementation RHGestureView{
+@implementation RHGestureView
+{
     CGPoint lineStartPoint;
     CGPoint lineEndPoint;
-    
     NSMutableArray * touchesArray;
     NSMutableArray * touchedArray;
     BOOL success;

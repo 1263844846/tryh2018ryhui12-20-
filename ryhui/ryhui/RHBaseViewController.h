@@ -16,4 +16,5 @@
 - (void)configTitleWithString:(NSString*)title;
 - (void)configRightButtonWithTitle:(NSString*)title action:(SEL)action;
 -(void)setMessageNum:(NSNotification*)notss;
+
 @end

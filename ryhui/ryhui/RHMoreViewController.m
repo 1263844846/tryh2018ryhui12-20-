@@ -15,6 +15,9 @@
 
 @interface RHMoreViewController ()
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UIView *alertView;
+
 @end
 
 @implementation RHMoreViewController
@@ -61,8 +64,7 @@
     NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"GestureIcon" ofType:@"png"];
     
     //构造分享内容
-    id<ISSContent> publishContent = [ShareSDK content:@"全国唯一由国家级金融组织和国家级信息科技组织共同打造的互联网金融平台，投资理财“容易会”！http://www.ryhui.com"
-                                       defaultContent:nil
+    id<ISSContent> publishContent = [ShareSDK content:@"全国唯一由国家级金融组织和国家级信息科技组织共同打造的互联网金融平台，投资理财“容易会”！http://www.ryhui.com" defaultContent:nil
                                                 image:[ShareSDK imageWithPath:imagePath]
                                                 title:@"权威专业的投资理财平台“融益汇”，快来下载客户端吧～"
                                                   url:@"http://www.ryhui.com/appDownload"
@@ -70,8 +72,6 @@
                                             mediaType:SSPublishContentMediaTypeNews | SSPublishContentMediaTypeImage];
     //创建弹出菜单容器
     id<ISSContainer> container = [ShareSDK container];
-//    [container setIPadContainerWithView:sender arrowDirect:UIPopoverArrowDirectionUp];
-    
     [container setIPhoneContainerWithViewController:self];
      //弹出分享菜单
     [ShareSDK showShareActionSheet:container    
@@ -81,14 +81,10 @@
                        authOptions:nil
                       shareOptions:nil
                             result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-                                
-                                if (state == SSResponseStateSuccess)
-                                {
-                                    NSLog(NSLocalizedString(@"TEXT_ShARE_SUC", @"分享成功"));
-                                }
-                                else if (state == SSResponseStateFail)
-                                {
-                                    NSLog(NSLocalizedString(@"TEXT_ShARE_FAI", @"分享失败,错误码:%d,错误描述:%@"), [error errorCode], [error errorDescription]);
+                                if (state == SSResponseStateSuccess) {
+                                    [RHUtility showTextWithText:@"分享成功!"];
+                                } else if (state == SSResponseStateFail) {
+                                    [RHUtility showTextWithText:[NSString stringWithFormat:@"%@",[error errorDescription]]];
                                 }
                             }];
 }

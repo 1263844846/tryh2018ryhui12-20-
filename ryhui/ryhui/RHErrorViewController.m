@@ -13,6 +13,12 @@
 
 @interface RHErrorViewController ()
 
+@property (weak, nonatomic) IBOutlet UIButton *secButton;
+@property (weak, nonatomic) IBOutlet UIView *errorView;
+@property (weak, nonatomic) IBOutlet UIImageView *errorImageView;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tipsLabel;
+
 @end
 
 @implementation RHErrorViewController
@@ -57,55 +63,45 @@
         default:
             break;
     }
-    
 
+    CGRect tipsRect = self.tipsLabel.frame;
+    tipsRect.size.height = [tipsStr sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(204, MAXFLOAT) lineBreakMode:NSLineBreakByCharWrapping].height;
+    self.tipsLabel.frame = tipsRect;
     
-    CGRect tipsRect=self.tipsLabel.frame;
-    tipsRect.size.height=[tipsStr sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(204, MAXFLOAT) lineBreakMode:NSLineBreakByCharWrapping].height;
-    self.tipsLabel.frame=tipsRect;
+    CGRect errorRect = self.errorImageView.frame;
+    errorRect.origin.x = (239 - (50 + 7 + [titleStr sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(MAXFLOAT, 21) lineBreakMode:NSLineBreakByCharWrapping].width))/2.0;
+    self.errorImageView.frame = errorRect;
     
-    CGRect errorRect=self.errorImageView.frame;
-    errorRect.origin.x=(239-(50+7+[titleStr sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(MAXFLOAT, 21) lineBreakMode:NSLineBreakByCharWrapping].width))/2.0;
-    self.errorImageView.frame=errorRect;
+    CGRect titleRect = self.titleLabel.frame;
+    titleRect.origin.x = self.errorImageView.frame.origin.x+50+7;
+    self.titleLabel.frame = titleRect;
     
-    CGRect titleRect=self.titleLabel.frame;
-    titleRect.origin.x=self.errorImageView.frame.origin.x+50+7;
-    self.titleLabel.frame=titleRect;
-    
-    
-    self.titleLabel.text=titleStr;
-    self.tipsLabel.text=tipsStr;
-}
--(void)succeed
-{
-    self.errorImageView.image=[UIImage imageNamed:@"error1.png"];
-    self.titleLabel.textColor=[RHUtility colorForHex:@"#ff5d25"];
-    self.tipsLabel.textColor=[RHUtility colorForHex:@"#989898"];
+    self.titleLabel.text = titleStr;
+    self.tipsLabel.text = tipsStr;
 }
 
--(void)fail
-{
-    self.errorImageView.image=[UIImage imageNamed:@"error2.png"];
-    self.titleLabel.textColor=[RHUtility colorForHex:@"#40b5b8"];
-    self.tipsLabel.textColor=[RHUtility colorForHex:@"#989898"];
+- (void)succeed {
+    self.errorImageView.image = [UIImage imageNamed:@"error1.png"];
+    self.titleLabel.textColor = [RHUtility colorForHex:@"#ff5d25"];
+    self.tipsLabel.textColor = [RHUtility colorForHex:@"#989898"];
 }
 
--(void)myInvestMent
-{
+- (void)fail {
+    self.errorImageView.image = [UIImage imageNamed:@"error2.png"];
+    self.titleLabel.textColor = [RHUtility colorForHex:@"#40b5b8"];
+    self.tipsLabel.textColor = [RHUtility colorForHex:@"#989898"];
+}
+
+-(void)myInvestMent {
     [self.secButton setTitle:@"我的投资" forState:UIControlStateNormal];
-    [self.secButton addTarget:self action:@selector(pushInvestMent) forControlEvents:UIControlEventTouchUpInside];
-}
-
--(void)myAccount
-{
-    [self.secButton setTitle:@"我的账户" forState:UIControlStateNormal];
+    _secButton.tag = 10;
     [self.secButton addTarget:self action:@selector(pushMyAccount:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-
--(void)back
-{
-    [self.navigationController popToRootViewControllerAnimated:YES];
+- (void)myAccount {
+    [self.secButton setTitle:@"我的账户" forState:UIControlStateNormal];
+    _secButton.tag = 20;
+    [self.secButton addTarget:self action:@selector(pushMyAccount:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -113,34 +109,24 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-
 - (IBAction)pushProjectList:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:NO];
-    UINavigationController* nav=[[RHTabbarManager sharedInterface] selectTabbarMain];
-
-    RHProjectListViewController* controller=[[RHProjectListViewController alloc]initWithNibName:@"RHProjectListViewController" bundle:nil];
-    controller.type=@"0";
+    UINavigationController* nav = [[RHTabbarManager sharedInterface] selectTabbarMain];
+    RHProjectListViewController *controller = [[RHProjectListViewController alloc]initWithNibName:@"RHProjectListViewController" bundle:nil];
+    controller.type = @"0";
     [nav pushViewController:controller animated:YES];
 }
 
-- (IBAction)pushMyAccount:(id)sender {
+- (void)pushMyAccount:(UIButton *)sender {
     [self.navigationController popToRootViewControllerAnimated:NO];
-    UINavigationController* nav=[[RHTabbarManager sharedInterface] selectTabbarUser];
-    
-    RHMyAccountViewController* controller=[[RHMyAccountViewController alloc]initWithNibName:@"RHMyAccountViewController" bundle:nil];
+    UINavigationController* nav = [[RHTabbarManager sharedInterface] selectTabbarUser];
+    UIViewController *controller;
+    if (sender.tag == 10) {
+        controller = [[RHMyInvestmentViewController alloc] initWithNibName:@"RHMyInvestmentViewController" bundle:nil];
+    } else {
+        controller = [[RHMyAccountViewController alloc]initWithNibName:@"RHMyAccountViewController" bundle:nil];
+    }
     [nav pushViewController:controller animated:YES];
 }
-
--(void)pushInvestMent
-{
-    [self.navigationController popToRootViewControllerAnimated:NO];
-    UINavigationController* nav=[[RHTabbarManager sharedInterface] selectTabbarUser];
-    
-    RHMyInvestmentViewController* controller=[[RHMyInvestmentViewController alloc] initWithNibName:@"RHMyInvestmentViewController" bundle:nil];
-    [nav pushViewController:controller animated:YES];
-    
-}
-
 
 @end

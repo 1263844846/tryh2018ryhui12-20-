@@ -10,8 +10,7 @@
 
 @interface RHWithdrawWebViewController : RHBaseViewController<UIWebViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property(nonatomic,strong)NSString *captcha;
+@property(nonatomic,strong)NSString *amount;
 
-@property(nonatomic,strong)NSString* amount;
-@property(nonatomic,strong)NSString* captcha;
 @end

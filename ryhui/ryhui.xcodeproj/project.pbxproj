@@ -34,6 +34,13 @@
 		00AAAFB61B0F0D4400BE5D1F /* ShareSDKFlatShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00AAAFA91B0F0D4400BE5D1F /* ShareSDKFlatShareViewUI.framework */; };
 		00AAAFB71B0F0D4400BE5D1F /* ShareSDKShareActionSheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00AAAFAA1B0F0D4400BE5D1F /* ShareSDKShareActionSheet.framework */; };
 		00AAB0461B0F193300BE5D1F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00AAB0451B0F193300BE5D1F /* QuartzCore.framework */; };
+		00B3D5BC1B171DE700BEF703 /* MJPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B3D5B01B171DE700BEF703 /* MJPhoto.m */; };
+		00B3D5BD1B171DE700BEF703 /* MJPhotoBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 00B3D5B11B171DE700BEF703 /* MJPhotoBrowser.bundle */; };
+		00B3D5BE1B171DE700BEF703 /* MJPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B3D5B31B171DE700BEF703 /* MJPhotoBrowser.m */; };
+		00B3D5BF1B171DE700BEF703 /* MJPhotoLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B3D5B51B171DE700BEF703 /* MJPhotoLoadingView.m */; };
+		00B3D5C01B171DE700BEF703 /* MJPhotoProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B3D5B71B171DE700BEF703 /* MJPhotoProgressView.m */; };
+		00B3D5C11B171DE700BEF703 /* MJPhotoToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B3D5B91B171DE700BEF703 /* MJPhotoToolbar.m */; };
+		00B3D5C21B171DE700BEF703 /* MJPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B3D5BB1B171DE700BEF703 /* MJPhotoView.m */; };
 		00CCC6EF1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CCC6ED1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.m */; };
 		00CCC6F01AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00CCC6EE1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.xib */; };
 		961AD2F930E8CEFA8FA5D28D /* libPods-ryhui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB95D30F1AE0DCFA27AE1DD7 /* libPods-ryhui.a */; };
@@ -333,6 +340,19 @@
 		00AAAFA91B0F0D4400BE5D1F /* ShareSDKFlatShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKFlatShareViewUI.framework; sourceTree = "<group>"; };
 		00AAAFAA1B0F0D4400BE5D1F /* ShareSDKShareActionSheet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKShareActionSheet.framework; sourceTree = "<group>"; };
 		00AAB0451B0F193300BE5D1F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		00B3D5AF1B171DE700BEF703 /* MJPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPhoto.h; sourceTree = "<group>"; };
+		00B3D5B01B171DE700BEF703 /* MJPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPhoto.m; sourceTree = "<group>"; };
+		00B3D5B11B171DE700BEF703 /* MJPhotoBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJPhotoBrowser.bundle; sourceTree = "<group>"; };
+		00B3D5B21B171DE700BEF703 /* MJPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPhotoBrowser.h; sourceTree = "<group>"; };
+		00B3D5B31B171DE700BEF703 /* MJPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPhotoBrowser.m; sourceTree = "<group>"; };
+		00B3D5B41B171DE700BEF703 /* MJPhotoLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPhotoLoadingView.h; sourceTree = "<group>"; };
+		00B3D5B51B171DE700BEF703 /* MJPhotoLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPhotoLoadingView.m; sourceTree = "<group>"; };
+		00B3D5B61B171DE700BEF703 /* MJPhotoProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPhotoProgressView.h; sourceTree = "<group>"; };
+		00B3D5B71B171DE700BEF703 /* MJPhotoProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPhotoProgressView.m; sourceTree = "<group>"; };
+		00B3D5B81B171DE700BEF703 /* MJPhotoToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPhotoToolbar.h; sourceTree = "<group>"; };
+		00B3D5B91B171DE700BEF703 /* MJPhotoToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPhotoToolbar.m; sourceTree = "<group>"; };
+		00B3D5BA1B171DE700BEF703 /* MJPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPhotoView.h; sourceTree = "<group>"; };
+		00B3D5BB1B171DE700BEF703 /* MJPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPhotoView.m; sourceTree = "<group>"; };
 		00CCC6EC1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHOfficeNetAndWeiBoViewController.h; sourceTree = "<group>"; };
 		00CCC6ED1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHOfficeNetAndWeiBoViewController.m; sourceTree = "<group>"; };
 		00CCC6EE1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHOfficeNetAndWeiBoViewController.xib; sourceTree = "<group>"; };
@@ -806,6 +826,26 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		00B3D5AE1B171DE700BEF703 /* MJPhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				00B3D5AF1B171DE700BEF703 /* MJPhoto.h */,
+				00B3D5B01B171DE700BEF703 /* MJPhoto.m */,
+				00B3D5B11B171DE700BEF703 /* MJPhotoBrowser.bundle */,
+				00B3D5B21B171DE700BEF703 /* MJPhotoBrowser.h */,
+				00B3D5B31B171DE700BEF703 /* MJPhotoBrowser.m */,
+				00B3D5B41B171DE700BEF703 /* MJPhotoLoadingView.h */,
+				00B3D5B51B171DE700BEF703 /* MJPhotoLoadingView.m */,
+				00B3D5B61B171DE700BEF703 /* MJPhotoProgressView.h */,
+				00B3D5B71B171DE700BEF703 /* MJPhotoProgressView.m */,
+				00B3D5B81B171DE700BEF703 /* MJPhotoToolbar.h */,
+				00B3D5B91B171DE700BEF703 /* MJPhotoToolbar.m */,
+				00B3D5BA1B171DE700BEF703 /* MJPhotoView.h */,
+				00B3D5BB1B171DE700BEF703 /* MJPhotoView.m */,
+			);
+			path = MJPhotoBrowser;
+			sourceTree = "<group>";
+		};
 		0EF68FC40DCEEC7C77CF881D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1196,6 +1236,7 @@
 		F86B8AF61AA17641000D2B8C /* third */ = {
 			isa = PBXGroup;
 			children = (
+				00B3D5AE1B171DE700BEF703 /* MJPhotoBrowser */,
 				00AAAF921B0F0D4400BE5D1F /* ShareSDK */,
 				009DA3561AFC527200973996 /* UMAnalytics */,
 				007ADF861AFB2FEA00D3B126 /* Jpush */,
@@ -1750,6 +1791,7 @@
 				F88831261AB4885F001E4AD1 /* pd_segment1.png in Resources */,
 				F815ED5F1AB756BA004B2053 /* 9.png in Resources */,
 				D537C3851ADD4FF0009D3433 /* RHChooseGiftViewController.xib in Resources */,
+				00B3D5BD1B171DE700BEF703 /* MJPhotoBrowser.bundle in Resources */,
 				F80E49951A8E502E00028CD1 /* ALoginButtonDefault.png in Resources */,
 				F80E49791A8E3C5400028CD1 /* RHLoginViewController.xib in Resources */,
 				F8B6DAA11AB5679000CCB13D /* in1.png in Resources */,
@@ -1925,10 +1967,12 @@
 				F80E49781A8E3C5400028CD1 /* RHLoginViewController.m in Sources */,
 				F815ED451AB72898004B2053 /* AITableFooterVew.m in Sources */,
 				D556C7CD1ADFB7690069E68E /* RHGetGiftViewController.m in Sources */,
+				00B3D5C01B171DE700BEF703 /* MJPhotoProgressView.m in Sources */,
 				F80E49471A8E24C000028CD1 /* AppDelegate.m in Sources */,
 				F87B835E1AC8552800EB73A6 /* RHWithdrawWebViewController.m in Sources */,
 				F8B6DABB1AB5773500CCB13D /* RHAboutViewController.m in Sources */,
 				F8C38D8B1AC9800F005C3B1F /* RHRepaymentScheduleViewController.m in Sources */,
+				00B3D5C21B171DE700BEF703 /* MJPhotoView.m in Sources */,
 				F80E496E1A8E27F600028CD1 /* RHNetworkService.m in Sources */,
 				F888310F1AB4385D001E4AD1 /* CircleProgressView.m in Sources */,
 				F89A3D7F1AB5B54F00B92DF3 /* RHUserManager.m in Sources */,
@@ -1956,6 +2000,7 @@
 				F815ED4A1AB749FF004B2053 /* RHGuidanceViewController.m in Sources */,
 				F88831071AB43369001E4AD1 /* RHMainViewCell.m in Sources */,
 				F87B831B1AC8255700EB73A6 /* RHPhoneValidateViewController.m in Sources */,
+				00B3D5BF1B171DE700BEF703 /* MJPhotoLoadingView.m in Sources */,
 				D54A07531ADA99730031A5A1 /* RHMyMessageDetailViewController.m in Sources */,
 				F8B6DA701AB54D7100CCB13D /* RHMoreViewController.m in Sources */,
 				D58A74131AD6BBCC0076D3FB /* RHInvestDetaiTableViewCell.m in Sources */,
@@ -1971,6 +2016,7 @@
 				F879E75A1AA355C100339647 /* RHAgreement2ViewController.m in Sources */,
 				F80E49891A8E444B00028CD1 /* RHALoginViewController.m in Sources */,
 				F89A3D901AB5DA0300B92DF3 /* RHRechargeWebViewController.m in Sources */,
+				00B3D5BC1B171DE700BEF703 /* MJPhoto.m in Sources */,
 				F80E498E1A8E46CA00028CD1 /* RHUtility.m in Sources */,
 				F8C38DA71AC98DA8005C3B1F /* RHErrorViewController.m in Sources */,
 				F87B83321AC8365500EB73A6 /* RHMyMessageCell.m in Sources */,
@@ -1979,8 +2025,10 @@
 				F8B6DA5F1AB51BE600CCB13D /* RHUserCenterViewController.m in Sources */,
 				F8B6DA991AB565DF00CCB13D /* RHMyInvestmentViewController.m in Sources */,
 				F83375EF1AB9C86B00944CB1 /* RHInvestmentWebViewController.m in Sources */,
+				00B3D5C11B171DE700BEF703 /* MJPhotoToolbar.m in Sources */,
 				F8A0EBEC1AB86F1A00F65A7F /* RHProjectListViewController.m in Sources */,
 				D58A74091AD6AD0C0076D3FB /* RHRegisterAgreenWebViewController.m in Sources */,
+				00B3D5BE1B171DE700BEF703 /* MJPhotoBrowser.m in Sources */,
 				F80E494A1A8E24C000028CD1 /* ryhui.xcdatamodeld in Sources */,
 				F879E7551AA355B100339647 /* RHAgreement1ViewController.m in Sources */,
 				F86B8AFD1AA17680000D2B8C /* RHGesturePasswordView.m in Sources */,

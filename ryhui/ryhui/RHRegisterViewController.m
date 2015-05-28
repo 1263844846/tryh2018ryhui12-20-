@@ -19,9 +19,31 @@
     NSTimer* countDownTimer;
     float changeY;
     float keyboardHeight;
-
     UITextField* currentSelectTF;
 }
+
+@property (weak, nonatomic) IBOutlet UIScrollView *createAccountView;
+@property (weak, nonatomic) IBOutlet UIButton *registerButton;
+@property (weak, nonatomic) IBOutlet UIView *webRegisterView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet UIView *otherRegisterView;
+@property (weak, nonatomic) IBOutlet UIImageView *webRegisterSbg;
+@property (weak, nonatomic) IBOutlet UILabel *webRegisterLab;
+@property (weak, nonatomic) IBOutlet UIImageView *ohterRegisterSbg;
+@property (weak, nonatomic) IBOutlet UILabel *otherRegisterLab;
+@property (weak, nonatomic) IBOutlet UIImageView *captchaImageView;
+@property (weak, nonatomic) IBOutlet UITextField *accountTF;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTF1;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTF2;
+@property (weak, nonatomic) IBOutlet UITextField *phoneNumTF;
+@property (weak, nonatomic) IBOutlet UITextField *captchaImageTF;
+@property (weak, nonatomic) IBOutlet UITextField *captchaPhoneTF;
+@property (weak, nonatomic) IBOutlet UIButton *captchaPhoneButton;
+@property (weak, nonatomic) IBOutlet UIButton *captchaImageButton;
+@property (weak, nonatomic) IBOutlet UITextField *InvitationCodeTF;
+@property (weak, nonatomic) IBOutlet UIView *agreementView;
+
 @end
 
 @implementation RHRegisterViewController

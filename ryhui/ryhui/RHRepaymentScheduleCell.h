@@ -10,10 +10,11 @@
 
 @interface RHRepaymentScheduleCell : UITableViewCell
 
--(void)updateCell:(NSDictionary*)dic;
+-(void)updateCell:(NSDictionary *)dic;
 
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *selectImageView;
 @property (weak, nonatomic) IBOutlet UILabel *timelabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
+
 @end

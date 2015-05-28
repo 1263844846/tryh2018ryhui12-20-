@@ -12,6 +12,8 @@
 
 @interface RHGetGiftViewController ()
 
+@property (weak, nonatomic) IBOutlet UILabel *amountLabel;
+
 @end
 
 @implementation RHGetGiftViewController
@@ -23,37 +25,29 @@
     self.amountLabel.text=[NSString stringWithFormat:@"￥%@元",amount];
 }
 
-
--(void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden=YES;
 }
 
-
--(void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     self.navigationController.navigationBar.hidden=NO;
 }
 
--(BOOL)prefersStatusBarHidden
-{
+- (BOOL)prefersStatusBarHidden {
     return YES;
 }
 
-- (IBAction)pushRecharge:(id)sender {
+- (IBAction)pushRecharge:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:NO];
-
-    RHRechargeViewController* controller=[[RHRechargeViewController alloc]initWithNibName:@"RHRechargeViewController" bundle:nil];
-    [[[RHTabbarManager sharedInterface] selectTabbarUser] pushViewController:controller animated:NO];
-    
-}
-
-- (IBAction)pushMyGift:(id)sender {
-    
-    [self.navigationController popViewControllerAnimated:NO];
-    RHMyGiftViewController* controller=[[RHMyGiftViewController alloc]initWithNibName:@"RHMyGiftViewController" bundle:nil];
+    UIViewController *controller;
+    if (sender.tag == 0) {
+        controller=[[RHRechargeViewController alloc]initWithNibName:@"RHRechargeViewController" bundle:nil];
+    } else {
+        controller=[[RHMyGiftViewController alloc]initWithNibName:@"RHMyGiftViewController" bundle:nil];
+    }
     [[[RHTabbarManager sharedInterface] selectTabbarUser] pushViewController:controller animated:NO];
 }
+
 @end

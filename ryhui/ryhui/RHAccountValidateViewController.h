@@ -10,9 +10,4 @@
 
 @interface RHAccountValidateViewController : RHBaseViewController<UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *accountTF;
-@property (weak, nonatomic) IBOutlet UITextField *captchaTF;
-@property (weak, nonatomic) IBOutlet UIImageView *captchaImageView;
-- (IBAction)nextAction:(id)sender;
-- (IBAction)changeCaptcha:(id)sender;
 @end

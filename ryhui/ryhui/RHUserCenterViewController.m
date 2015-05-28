@@ -13,6 +13,9 @@
 
 @interface RHUserCenterViewController ()
 
+@property (weak, nonatomic) IBOutlet UILabel *mobileLabel;
+@property (weak, nonatomic) IBOutlet UILabel *emailLabel;
+
 @end
 
 @implementation RHUserCenterViewController

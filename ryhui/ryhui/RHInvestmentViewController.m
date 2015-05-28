@@ -11,15 +11,32 @@
 #import "RHRechargeViewController.h"
 #import "RHContractViewContoller.h"
 
-@interface RHInvestmentViewController ()
+@interface RHInvestmentViewController ()<UITextFieldDelegate,chooseGiftDelegate>
 {
     float changeY;
     float keyboardHeight;
-    
     float currentThreshold;
-    
     int currentMoney;
 }
+
+@property (weak, nonatomic) IBOutlet UIImageView *textBG;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
+@property (weak, nonatomic) IBOutlet UIImageView *gifticon;
+@property (weak, nonatomic) IBOutlet UIView *giftSupperView;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *investorRateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *limitTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *projectFundLabel;
+@property (weak, nonatomic) IBOutlet UILabel *balanceLabel;
+@property (weak, nonatomic) IBOutlet UITextField *textFiled;
+@property (weak, nonatomic) IBOutlet UIView *giftView;
+@property (weak, nonatomic) IBOutlet UILabel *label1;
+@property (weak, nonatomic) IBOutlet UILabel *label0;
+@property (weak, nonatomic) IBOutlet UIButton *chooseButton;
+
+@property(nonatomic,strong)NSString* projectId;
+@property(nonatomic,strong)NSString* giftId;
+
 @end
 
 @implementation RHInvestmentViewController

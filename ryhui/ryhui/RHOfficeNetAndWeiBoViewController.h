@@ -12,9 +12,7 @@
 @interface RHOfficeNetAndWeiBoViewController : RHBaseViewController
 
 @property (nonatomic, assign) int Type;
-
 @property (nonatomic, strong) NSString *urlString;
-
 @property (nonatomic, strong) NSString *NavigationTitle;
 
 @end

@@ -10,5 +10,4 @@
 
 @interface RHRegisterAgreenWebViewController : RHBaseViewController
 
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
 @end

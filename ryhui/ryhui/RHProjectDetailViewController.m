@@ -9,15 +9,55 @@
 #import "RHProjectDetailViewController.h"
 #import "RHALoginViewController.h"
 #import "RHRegisterWebViewController.h"
-
-@interface RHProjectDetailViewController ()
+#import <ShareSDK/ShareSDK.h>
+#import "WXApi.h"
+#import "WeiboSDK.h"
+#import "AITableFooterVew.h"
+#import "MJPhotoBrowser.h"
+#import "MJPhoto.h"
+@interface RHProjectDetailViewController ()<UIScrollViewDelegate>
 {
     int available;
     CGRect tempRect;
     int page;
+    AITableFooterVew *footerView;
 }
 @property(nonatomic,strong)NSMutableArray* array1;
 @property(nonatomic,strong)NSMutableArray* array2;
+@property(nonatomic,strong)NSString* projectId;
+@property (nonatomic,strong)NSMutableArray* dataArray;
+@property (weak, nonatomic) IBOutlet UIButton *investmentButton;
+@property (weak, nonatomic) IBOutlet UILabel *limitTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *investorRateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *insuranceMethodLabel;
+@property (weak, nonatomic) IBOutlet UILabel *projectFundLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *paymentNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *availableLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *progressImageView;
+@property (weak, nonatomic) IBOutlet UILabel *progressLabel;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *segment2ContentView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIView *footView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView1;
+@property (weak, nonatomic) IBOutlet UILabel *projectDetail;
+@property (weak, nonatomic) IBOutlet UIView *segmentView1;
+@property (weak, nonatomic) IBOutlet UIView *segmentView2;
+@property (strong, nonatomic) IBOutlet UIView *segmentView3;
+@property (weak, nonatomic) IBOutlet UIScrollView *projectScrollView;
+@property (weak, nonatomic) IBOutlet UIScrollView *insuranceScrollView;
+@property (weak, nonatomic) IBOutlet UILabel *projectImageLabel1;
+@property (weak, nonatomic) IBOutlet UILabel *projectImageLabel;
+@property (weak, nonatomic) IBOutlet UILabel *studentNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *studentCityLabel;
+@property (weak, nonatomic) IBOutlet UILabel *studentSchoolLabel;
+@property (weak, nonatomic) IBOutlet UILabel *studentGenderLabel;
+@property (weak, nonatomic) IBOutlet UILabel *studentNationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *studentProfessionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *studentAgeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *studentEducationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *partnerInfoLabel;
 
 @end
 
@@ -31,10 +71,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.dataArray=[[NSMutableArray alloc] initWithCapacity:0];
-
+    
     page = 1 ;
     [self configBackButton];
-    
+    [self setRightItemButton];
     [self configTitleWithString:@"项目详情"];
     
     [self setupWithDic:self.dataDic];
@@ -57,8 +97,58 @@
     
     self.scrollView1.contentSize=CGSizeMake(self.segmentView1.frame.size.width,267);
     
+    footerView = [[AITableFooterVew alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width,50.0)];
+    [footerView.footerButton addTarget:self action:@selector(showMoreInfomationForApp:) forControlEvents:UIControlEventTouchUpInside];
+    [footerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    self.tableView.tableFooterView = footerView;
+    footerView.hidden = YES;
 }
 
+- (void)showMoreInfomationForApp:(UIButton *)btn {
+    page ++;
+    [self projectInvestmentList];
+    footerView.hidden = NO;
+    [footerView.activityIndicatorView startAnimating];
+}
+
+- (void)setRightItemButton {
+    UIButton* button=[UIButton buttonWithType:UIButtonTypeCustom];
+    [button addTarget:self action:@selector(shareTheAppInfomation:) forControlEvents:UIControlEventTouchUpInside];
+    [button setBackgroundImage:[UIImage imageNamed:@"shareIcon.png"] forState:UIControlStateNormal];
+    [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+    button.frame=CGRectMake(0, 0, 21, 16);
+    self.navigationItem.rightBarButtonItem= [[UIBarButtonItem alloc] initWithCustomView:button];
+}
+
+- (void)shareTheAppInfomation:(UIButton *)btn {
+    NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"GestureIcon" ofType:@"png"];
+    
+    //构造分享内容
+    id<ISSContent> publishContent = [ShareSDK content:@"全国唯一由国家级金融组织和国家级信息科技组织共同打造的互联网金融平台，投资理财“容易会”！http://www.ryhui.com" defaultContent:nil
+                                                image:[ShareSDK imageWithPath:imagePath]
+                                                title:@"权威专业的投资理财平台“融益汇”，快来下载客户端吧～"
+                                                  url:@"http://www.ryhui.com/appDownload"
+                                          description:nil
+                                            mediaType:SSPublishContentMediaTypeNews | SSPublishContentMediaTypeImage];
+    //创建弹出菜单容器
+    id<ISSContainer> container = [ShareSDK container];
+    [container setIPhoneContainerWithViewController:self];
+    //弹出分享菜单
+    [ShareSDK showShareActionSheet:container
+                         shareList:nil
+                           content:publishContent
+                     statusBarTips:YES
+                       authOptions:nil
+                      shareOptions:nil
+                            result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+                                if (state == SSResponseStateSuccess) {
+                                    [RHUtility showTextWithText:@"分享成功!"];
+                                } else if (state == SSResponseStateFail) {
+                                    [RHUtility showTextWithText:[NSString stringWithFormat:@"%@",[error errorDescription]]];
+                                }
+                            }];
+
+}
 
 -(void)setupWithDic:(NSDictionary*)dic
 {
@@ -145,9 +235,16 @@
     
 }
 
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    page ++;
+    [self projectInvestmentList];
+    footerView.hidden = NO;
+    [footerView.activityIndicatorView startAnimating];
+}
+
 -(void)projectInvestmentList
 {
-    NSDictionary* parameters=@{@"projectId":self.projectId,@"_search":@"true",@"rows":@"50",@"page":[NSString stringWithFormat:@"%d",page],@"sidx":@"investTime",@"sord":@"desc",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};
+    NSDictionary* parameters=@{@"projectId":self.projectId,@"_search":@"true",@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",page],@"sidx":@"investTime",@"sord":@"desc",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};
     [[RHNetworkService instance] POST:@"common/main/projectInvestmentList" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"-------------%@",[responseObject objectForKey:@"rows"]);
@@ -155,19 +252,34 @@
 //        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSArray* array=[responseObject objectForKey:@"rows"];
+            
             if ([array isKindOfClass:[NSArray class]]) {
-                for (NSDictionary* dic in array) {
-                    if ([dic objectForKey:@"cell"]&&!([[dic objectForKey:@"cell"] isKindOfClass:[NSNull class]])) {
-                        [self.dataArray addObject:[dic objectForKey:@"cell"]];
+                
+                if (array.count == 0) {
+                    [footerView.activityIndicatorView stopAnimating];
+                    [footerView.activityIndicatorView removeFromSuperview];
+                    footerView.hidden = NO;
+                     footerView.footerButton.enabled = NO;
+                } else {
+                    for (NSDictionary* dic in array) {
+                        if ([dic objectForKey:@"cell"]&&!([[dic objectForKey:@"cell"] isKindOfClass:[NSNull class]])) {
+                            [self.dataArray addObject:[dic objectForKey:@"cell"]];
+                        }
                     }
-                    
                 }
             }
             NSString* records=[responseObject objectForKey:@"records"];
             if (records&&[records intValue]<10) {
                 //已经到底了
+                [footerView.activityIndicatorView stopAnimating];
+                [footerView.activityIndicatorView removeFromSuperview];
+                footerView.hidden = NO;
+                footerView.footerButton.enabled = NO;
             }
 
+            if (self.dataArray.count < 10) {
+                [footerView removeFromSuperview];
+            }
             [self.tableView reloadData];
         }
         
@@ -249,28 +361,39 @@
 //        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSArray* insuranceImages=[responseObject objectForKey:@"insuranceImages"];
-            for (NSDictionary* insuranceDic in insuranceImages) {
-                int index=[[NSNumber numberWithInteger:[insuranceImages indexOfObject:insuranceDic]] intValue];
             
-                UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(index*(45+10),4, 45, 45)];
-                imageView.userInteractionEnabled=YES;
-                [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].doMain,[insuranceDic objectForKey:@"filepath"]]]];
-                UIButton* button=[UIButton buttonWithType:UIButtonTypeCustom];
-                button.frame=imageView.bounds;
-                [button addTarget:self action:@selector(touch1:) forControlEvents:UIControlEventTouchUpInside];
-                [imageView addSubview:button];
-                [self.array1 addObject:imageView];
-//                DLog(@"%@",[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].doMain,[insuranceDic objectForKey:@"filepath"]]);
-                
-                [self.insuranceScrollView addSubview:imageView];
+            if (insuranceImages.count > 0) {
+                for (NSDictionary* insuranceDic in insuranceImages) {
+                    int index=[[NSNumber numberWithInteger:[insuranceImages indexOfObject:insuranceDic]] intValue];
+                    
+                    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(index*(45+10),4, 45, 45)];
+                    imageView.userInteractionEnabled=YES;
+                    [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].doMain,[insuranceDic objectForKey:@"filepath"]]]];
+                    UIButton* button=[UIButton buttonWithType:UIButtonTypeCustom];
+                    button.frame=imageView.bounds;
+                    button.tag = index;
+                    [button addTarget:self action:@selector(touch1:) forControlEvents:UIControlEventTouchUpInside];
+                    [imageView addSubview:button];
+                    [self.array1 addObject:[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].doMain,[insuranceDic objectForKey:@"filepath"]]];
+                    //                DLog(@"%@",[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].doMain,[insuranceDic objectForKey:@"filepath"]]);
+                    
+                    [self.insuranceScrollView addSubview:imageView];
+                }
+
             }
             self.insuranceScrollView.contentSize=CGSizeMake([insuranceImages count]*55,53);
             
             NSDictionary* projectDic=[responseObject objectForKey:@"project"];
-            self.projectDetail.text=[projectDic objectForKey:@"projectInfo"];
+            NSString *detailString = [NSString stringWithFormat:@"%@",[projectDic objectForKey:@"projectInfo"]];
             
             CGRect rect1=self.projectDetail.frame;
-            rect1.size.height=[[projectDic objectForKey:@"projectInfo"] sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(self.projectDetail.frame.size.width, MAXFLOAT) lineBreakMode:NSLineBreakByCharWrapping].height+5;
+            
+            NSLog(@"---------------%@",detailString);
+            
+            if (detailString && detailString.length > 0 && ![detailString isKindOfClass:[NSNull class]] && detailString != nil && ![detailString isEqualToString:@"<null>"]) {
+                self.projectDetail.text = detailString;
+                rect1.size.height=[detailString sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(self.projectDetail.frame.size.width, MAXFLOAT) lineBreakMode:NSLineBreakByCharWrapping].height+5;
+            }
             self.projectDetail.frame=rect1;
             
             self.projectImageLabel.frame=CGRectMake(self.projectImageLabel.frame.origin.x, self.projectDetail.frame.origin.y+self.projectDetail.frame.size.height+5, self.projectImageLabel.frame.size.width, self.projectImageLabel.frame.size.height);
@@ -281,20 +404,25 @@
             self.scrollView.contentSize=CGSizeMake(self.scrollView.frame.size.width, self.insuranceScrollView.frame.origin.y+self.insuranceScrollView.frame.size.height+10);
             
             NSArray* projectImages=[responseObject objectForKey:@"projectImages"];
-            for (NSDictionary* projectImagesDic in projectImages) {
-                int index=[[NSNumber numberWithInteger:[projectImages indexOfObject:projectImagesDic]] intValue];
-                UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(index*(45+10),4, 45, 45)];
-                imageView.userInteractionEnabled=YES;
-                [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].doMain,[projectImagesDic objectForKey:@"filepath"]]]];
-//                DLog(@"%@",[NSString stringWithFormat:@"%@%@",[RHNetworkService instance].doMain,[projectImagesDic objectForKey:@"filepath"]]);
-                UIButton* button=[UIButton buttonWithType:UIButtonTypeCustom];
-                button.frame=imageView.bounds;
-                [button addTarget:self action:@selector(touch2:) forControlEvents:UIControlEventTouchUpInside];
-                [imageView addSubview:button];
-                [self.array2 addObject:imageView];
-                [self.projectScrollView addSubview:imageView];
+            
+            if (projectImages.count > 0) {
+                for (NSDictionary* projectImagesDic in projectImages) {
+                    int index=[[NSNumber numberWithInteger:[projectImages indexOfObject:projectImagesDic]] intValue];
+                    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(index*(45+10),4, 45, 45)];
+                    imageView.userInteractionEnabled=YES;
+                    [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].doMain,[projectImagesDic objectForKey:@"filepath"]]]];
+                    //                DLog(@"%@",[NSString stringWithFormat:@"%@%@",[RHNetworkService instance].doMain,[projectImagesDic objectForKey:@"filepath"]]);
+                    UIButton* button=[UIButton buttonWithType:UIButtonTypeCustom];
+                    button.frame=imageView.bounds;
+                    button.tag = index;
+                    [button addTarget:self action:@selector(touch2:) forControlEvents:UIControlEventTouchUpInside];
+                    [imageView addSubview:button];
+                    [self.array2 addObject:[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].doMain,[projectImagesDic objectForKey:@"filepath"]]];
+                    [self.projectScrollView addSubview:imageView];
+                }
+
             }
-//            if ([[projectDic objectForKey:@"available2"] isKindOfClass:[NSNull class]]) {
+           //            if ([[projectDic objectForKey:@"available2"] isKindOfClass:[NSNull class]]) {
 //                self.availableLabel.text=@"";
 //            }else{
 //                self.availableLabel.text=[projectDic objectForKey:@"available2"];
@@ -312,54 +440,47 @@
 -(void)touch1:(id)sender
 {
     UIButton* button=sender;
-    if (button.frame.size.width<100) {
-        for (UIImageView* imageview in self.array1) {
-            for (UIButton* temp in imageview.subviews) {
-                if ([temp isEqual:button]) {
-                    tempRect=imageview.frame;
-                    UIWindow* window=[UIApplication sharedApplication].keyWindow;
-                    [UIView animateWithDuration:0.25 animations:^{
-                        imageview.frame=[UIScreen mainScreen].bounds;
-                        temp.frame=imageview.bounds;
-                        [window addSubview:imageview];
-                    }];
-                }
-            }
-        }
-    }else{
-        [button.superview removeFromSuperview];
-        
-        button.superview.frame=tempRect;
-        
-        button.frame=button.superview.bounds;
-        
-        [self.insuranceScrollView addSubview:button.superview];
+    
+    int count = self.array1.count;
+    // 1.封装图片数据
+    NSMutableArray *photos = [NSMutableArray arrayWithCapacity:count];
+    for (int i = 0; i<count; i++) {
+        // 替换为中等尺寸图片
+        NSString *url = self.array1[i];
+        MJPhoto *photo = [[MJPhoto alloc] init];
+        photo.url = [NSURL URLWithString:url]; // 图片路径
+//        photo.srcImageView = self.view.subviews[i]; // 来源于哪个UIImageView
+        [photos addObject:photo];
     }
+    
+    // 2.显示相册
+    MJPhotoBrowser *browser = [[MJPhotoBrowser alloc] init];
+    browser.currentPhotoIndex = button.tag; // 弹出相册时显示的第一张图片是？
+    browser.photos = photos; // 设置所有的图片
+    [browser show];
+    
+    
 }
 -(void)touch2:(id)sender
 {
     UIButton* button=sender;
-    if (button.frame.size.width<100) {
-        for (UIImageView* imageview in self.array2) {
-            for (UIButton* temp in imageview.subviews) {
-                if ([temp isEqual:button]) {
-                    tempRect=imageview.frame;
-                    UIWindow* window=[UIApplication sharedApplication].keyWindow;
-                    [UIView animateWithDuration:0.25 animations:^{
-                        imageview.frame=[UIScreen mainScreen].bounds;
-                        temp.frame=imageview.bounds;
-                        [window addSubview:imageview];
-                    }];
-                }
-            }
-        }
-    }else{
-        [button.superview removeFromSuperview];
-        button.superview.frame=tempRect;
-        button.frame=button.superview.bounds;
-        [self.projectScrollView addSubview:button.superview];
+    int count = self.array2.count;
+    // 1.封装图片数据
+    NSMutableArray *photos = [NSMutableArray arrayWithCapacity:count];
+    for (int i = 0; i<count; i++) {
+        // 替换为中等尺寸图片
+        NSString *url = self.array2[i];
+        MJPhoto *photo = [[MJPhoto alloc] init];
+        photo.url = [NSURL URLWithString:url]; // 图片路径
+        //        photo.srcImageView = self.view.subviews[i]; // 来源于哪个UIImageView
+        [photos addObject:photo];
     }
-}
+    
+    // 2.显示相册
+    MJPhotoBrowser *browser = [[MJPhotoBrowser alloc] init];
+    browser.currentPhotoIndex = button.tag; // 弹出相册时显示的第一张图片是？
+    browser.photos = photos; // 设置所有的图片
+    [browser show];}
 
 - (IBAction)pushMain:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
@@ -436,9 +557,9 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:@"RHProjectDetailViewCell" owner:nil options:nil] objectAtIndex:0];
     }
     
-    NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];
+    NSDictionary* getDataDic=[self.dataArray objectAtIndex:indexPath.row];
     
-    [cell updateCell:dataDic];
+    [cell updateCell:getDataDic];
     
     return cell;
 }

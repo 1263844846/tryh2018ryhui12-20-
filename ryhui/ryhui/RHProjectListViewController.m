@@ -13,6 +13,18 @@
 {
     int currentPage;
 }
+@property(nonatomic,strong)RHSegmentContentView* segmentContentView;
+
+@property(nonatomic,strong)NSMutableArray* viewControllers;
+@property (weak, nonatomic) IBOutlet UILabel *segmentLabel;
+@property (weak, nonatomic) IBOutlet UILabel *segmentLabel1;
+@property (weak, nonatomic) IBOutlet UILabel *segmentLabel3;
+@property (weak, nonatomic) IBOutlet UILabel *segmentLabel4;
+@property (weak, nonatomic) IBOutlet UIView *segmentView1;
+@property (weak, nonatomic) IBOutlet UIView *segmentView2;
+
+- (void)didSelectSegmentAtIndex:(int)index;
+
 @end
 
 @implementation RHProjectListViewController

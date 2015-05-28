@@ -19,24 +19,12 @@ typedef enum {
 }TOUCHSTATUS;
 
 
-@interface CircleProgressView : UIView{
-    CGPoint center;
-    CGFloat radius;
-    double progress;
-    CGFloat linewidth;
-    double lastdegree;
-    TOUCHSTATUS status;
-    BOOL seekable;
-    id <CircleProgressViewDelegate> delegate;
-    BOOL lock;
-    
-}
+@interface CircleProgressView : UIView
 
 - (id)initWithFrame:(CGRect)frame withCenter:(CGPoint)acenter Radius:(CGFloat)aradius lineWidth:(CGFloat)width;
 
 @property (nonatomic) CGPoint center;
 @property (nonatomic) BOOL lock;
-
 @property (nonatomic) TOUCHSTATUS status;
 @property (nonatomic) CGFloat radius;
 @property (nonatomic) CGFloat linewidth;
@@ -48,8 +36,8 @@ typedef enum {
 @end
 
 @protocol CircleProgressViewDelegate <NSObject>
-@optional
 
+@optional
 - (void)hasSeekToEnd:(CircleProgressView *)circle;
 - (void)hasSeekToBegin:(CircleProgressView *)circle;
 - (void)seekToProgress:(double)newProgress;
