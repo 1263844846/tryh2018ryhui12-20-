@@ -59,8 +59,6 @@
 }
 
 - (IBAction)shareAction:(id)sender {
-    
-    self.navigationController.navigationBarHidden = YES;
     NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"GestureIcon" ofType:@"png"];
     
     //构造分享内容
@@ -69,7 +67,7 @@
                                                 title:@"权威专业的投资理财平台“融益汇”，快来下载客户端吧～"
                                                   url:@"http://www.ryhui.com/appDownload"
                                           description:nil
-                                            mediaType:SSPublishContentMediaTypeNews | SSPublishContentMediaTypeImage];
+                                            mediaType:SSPublishContentMediaTypeNews | SSPublishContentMediaTypeText];
     //创建弹出菜单容器
     id<ISSContainer> container = [ShareSDK container];
     [container setIPhoneContainerWithViewController:self];
@@ -82,7 +80,11 @@
                       shareOptions:nil
                             result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
                                 if (state == SSResponseStateSuccess) {
-                                    [RHUtility showTextWithText:@"分享成功!"];
+                                    if (type == ShareTypeWeixiFav) {
+                                        [RHUtility showTextWithText:@"收藏成功!"];
+                                    } else {
+                                        [RHUtility showTextWithText:@"分享成功!"];
+                                    }
                                 } else if (state == SSResponseStateFail) {
                                     [RHUtility showTextWithText:[NSString stringWithFormat:@"%@",[error errorDescription]]];
                                 }

@@ -137,12 +137,8 @@
         }
         self.currentPageIndex ++;
         [dataArray addObjectsFromArray:tempArray];
-        if ([dataArray count] < 10) {
-            if ([dataArray count] == 0) {
-                _footerView.hidden = NO;
-            } else {
-                _footerView.hidden = YES;
-            }
+        if ([dataArray count] <= 10) {
+            _footerView.hidden = YES;
         }
         [self reloadTableView];
         [_footerView.activityIndicatorView stopAnimating];

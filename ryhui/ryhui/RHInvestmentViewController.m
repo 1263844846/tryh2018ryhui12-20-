@@ -114,6 +114,7 @@
 - (IBAction)pushAreegment:(id)sender {
     RHContractViewContoller* controller=[[RHContractViewContoller alloc]initWithNibName:@"RHContractViewContoller" bundle:nil];
     controller.isAgreen=YES;
+    controller.projectId = self.projectId;
     [self.navigationController pushViewController:controller animated:YES];
 }
 - (IBAction)Investment:(id)sender {

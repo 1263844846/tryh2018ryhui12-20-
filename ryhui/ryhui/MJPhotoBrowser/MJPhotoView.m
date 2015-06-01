@@ -215,11 +215,12 @@
     
     CGFloat duration = 0.15;
     if (_photo.srcImageView.clipsToBounds) {
-        [self performSelector:@selector(reset) withObject:nil afterDelay:duration];
+        [self performSelector:@selector(reset) withObject:nil afterDelay:0.0];
     }
     
-    [UIView animateWithDuration:duration + 0.1 animations:^{
-        _imageView.frame = [_photo.srcImageView convertRect:_photo.srcImageView.bounds toView:nil];
+    _imageView.frame = [_photo.srcImageView convertRect:_photo.srcImageView.bounds toView:nil];
+
+    [UIView animateWithDuration: 0.1 animations:^{
         
         // gif图片仅显示第0张
         if (_imageView.image.images) {
@@ -231,14 +232,16 @@
             [self.photoViewDelegate photoViewSingleTap:self];
         }
     } completion:^(BOOL finished) {
-        // 设置底部的小图片
-        _photo.srcImageView.image = _photo.placeholder;
-        
-        // 通知代理
-        if ([self.photoViewDelegate respondsToSelector:@selector(photoViewDidEndZoom:)]) {
-            [self.photoViewDelegate photoViewDidEndZoom:self];
-        }
+      
     }];
+    
+    // 设置底部的小图片
+    _photo.srcImageView.image = _photo.placeholder;
+    
+    // 通知代理
+    if ([self.photoViewDelegate respondsToSelector:@selector(photoViewDidEndZoom:)]) {
+        [self.photoViewDelegate photoViewDidEndZoom:self];
+    }
 }
 
 - (void)reset

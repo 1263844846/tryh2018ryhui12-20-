@@ -111,6 +111,9 @@
         }
         self.currentPageIndex ++;
         [dataArray addObjectsFromArray:tempArray];
+        if ([dataArray count] <= 10) {
+            _footerView.hidden = YES;
+        }
         [self reloadTableView];
         [_footerView.activityIndicatorView stopAnimating];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

@@ -13,15 +13,19 @@
 #import <ShareSDK/ShareSDK.h>
 #import "WXApi.h"
 #import "WeiboSDK.h"
+#import "RHMyMessageViewController.h"
+
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
 @synthesize window=_window;
-
+@synthesize isNotificationCenter = _isNotificationCenter;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    _isNotificationCenter = NO;
     
     [UIApplication sharedApplication].statusBarStyle=UIStatusBarStyleLightContent;
     
@@ -101,7 +105,6 @@
 #endif
     // Required
     [APService setupWithOption:launchOptions];
-    
     [APService setBadge:0];
 }
 
@@ -207,11 +210,25 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    if ([RHUserManager sharedInterface].username&&[[RHUserManager sharedInterface].username length]>0) {
+        BOOL isGesture = [[NSUserDefaults standardUserDefaults] boolForKey:@"GestureSave"];
+        if (isGesture) {
+            if (_isNotificationCenter) {
+                _isNotificationCenter = NO;
+                RHMyMessageViewController *myMessage = [[RHMyMessageViewController alloc] initWithNibName:@"RHMyMessageViewController" bundle:nil];
+                [[RHTabbarManager sharedInterface] initTabbar];
+                [[[RHTabbarManager  sharedInterface] selectTabbarUser] pushViewController:myMessage animated:NO];
+            }
+ 
+        }
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"GestureSave"];
     [self saveContext];
 }
 
@@ -241,29 +258,24 @@
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    NSLog(@"-------------%@",userInfo);
-    
     [APService handleRemoteNotification:userInfo];
 }
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
-    NSLog(@"-------------%@",userInfo);
     [APService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
+ 
+    _isNotificationCenter = YES;
 }
 
 -(void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void (^)())completionHandler
 {
-    NSLog(@"------------%@",identifier);
-    NSLog(@"------------%@",userInfo);
-//    NSLog(@"------------%@",);
-    
+
 }
 
 -(BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *))restorationHandler
 {
-    NSLog(@"-------------%@",userActivity);
     return YES;
 }
 

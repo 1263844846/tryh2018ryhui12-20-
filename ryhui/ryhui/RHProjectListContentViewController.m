@@ -149,6 +149,9 @@
         self.currentPageIndex++;
 
         [dataArray addObjectsFromArray:tempArray];
+        if ([dataArray count] <= 6) {
+            _footerView.hidden = YES;
+        }
         [self reloadTableView];
         [_footerView.activityIndicatorView stopAnimating];
         
@@ -270,7 +273,7 @@
     RHProjectDetailViewController* controller=[[RHProjectDetailViewController alloc]initWithNibName:@"RHProjectDetailViewController" bundle:nil];
     NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];
     controller.dataDic=dataDic;
-    controller.type=type;
+    controller.getType=type;
     [self.prarentNav pushViewController:controller animated:YES];
     
 }

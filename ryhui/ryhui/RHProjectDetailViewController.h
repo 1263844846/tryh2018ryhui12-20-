@@ -12,7 +12,7 @@
 
 @interface RHProjectDetailViewController : RHBaseViewController
 
-@property(nonatomic,strong)NSString* type;
+@property(nonatomic,strong)NSString* getType;
 @property(nonatomic,strong)NSDictionary* dataDic;
 
 @end

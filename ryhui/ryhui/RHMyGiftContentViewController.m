@@ -120,6 +120,9 @@
         }
         self.currentPageIndex++;
         [dataArray addObjectsFromArray:tempArray];
+        if (dataArray.count <= 8) {
+            _footerView.hidden=YES;
+        }
         [self reloadTableView];
         [_footerView.activityIndicatorView stopAnimating];
         

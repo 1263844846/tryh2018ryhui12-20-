@@ -65,7 +65,7 @@
 @synthesize projectId;
 @synthesize dataDic;
 @synthesize dataArray;
-@synthesize type;
+@synthesize getType;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -80,7 +80,7 @@
     [self setupWithDic:self.dataDic];
     
     [self projectInvestmentList];
-    if ([type isEqualToString:@"0"]) {
+    if ([getType isEqualToString:@"0"]) {
         [self appShangDetailData];
     }else{
         [self appXueDetailData];
@@ -129,7 +129,7 @@
                                                 title:@"权威专业的投资理财平台“融益汇”，快来下载客户端吧～"
                                                   url:@"http://www.ryhui.com/appDownload"
                                           description:nil
-                                            mediaType:SSPublishContentMediaTypeNews | SSPublishContentMediaTypeImage];
+                                            mediaType:SSPublishContentMediaTypeNews | SSPublishContentMediaTypeText];
     //创建弹出菜单容器
     id<ISSContainer> container = [ShareSDK container];
     [container setIPhoneContainerWithViewController:self];
@@ -142,7 +142,11 @@
                       shareOptions:nil
                             result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
                                 if (state == SSResponseStateSuccess) {
-                                    [RHUtility showTextWithText:@"分享成功!"];
+                                    if (type == ShareTypeWeixiFav) {
+                                        [RHUtility showTextWithText:@"收藏成功!"];
+                                    } else {
+                                        [RHUtility showTextWithText:@"分享成功!"];
+                                    }
                                 } else if (state == SSResponseStateFail) {
                                     [RHUtility showTextWithText:[NSString stringWithFormat:@"%@",[error errorDescription]]];
                                 }
@@ -164,7 +168,7 @@
     
     self.tableView.frame=CGRectMake(0, 40, self.segmentView2.frame.size.width, self.segment2ContentView.frame.size.height-40);
     
-    if ([type isEqualToString:@"0"]) {
+    if ([getType isEqualToString:@"0"]) {
         self.segmentView1.hidden=NO;
         self.segmentView3.hidden=YES;
     }else{
@@ -361,7 +365,6 @@
 //        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSArray* insuranceImages=[responseObject objectForKey:@"insuranceImages"];
-            
             if (insuranceImages.count > 0) {
                 for (NSDictionary* insuranceDic in insuranceImages) {
                     int index=[[NSNumber numberWithInteger:[insuranceImages indexOfObject:insuranceDic]] intValue];
@@ -375,8 +378,6 @@
                     [button addTarget:self action:@selector(touch1:) forControlEvents:UIControlEventTouchUpInside];
                     [imageView addSubview:button];
                     [self.array1 addObject:[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].doMain,[insuranceDic objectForKey:@"filepath"]]];
-                    //                DLog(@"%@",[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].doMain,[insuranceDic objectForKey:@"filepath"]]);
-                    
                     [self.insuranceScrollView addSubview:imageView];
                 }
 
@@ -411,7 +412,6 @@
                     UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(index*(45+10),4, 45, 45)];
                     imageView.userInteractionEnabled=YES;
                     [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].doMain,[projectImagesDic objectForKey:@"filepath"]]]];
-                    //                DLog(@"%@",[NSString stringWithFormat:@"%@%@",[RHNetworkService instance].doMain,[projectImagesDic objectForKey:@"filepath"]]);
                     UIButton* button=[UIButton buttonWithType:UIButtonTypeCustom];
                     button.frame=imageView.bounds;
                     button.tag = index;
@@ -499,7 +499,7 @@
 
 - (IBAction)segment1Action:(id)sender {
     if (self.segmentView1.hidden) {
-        if ([type isEqualToString:@"0"]) {
+        if ([getType isEqualToString:@"0"]) {
             self.segmentView1.hidden=NO;
             self.segmentView3.hidden=YES;
         }else{

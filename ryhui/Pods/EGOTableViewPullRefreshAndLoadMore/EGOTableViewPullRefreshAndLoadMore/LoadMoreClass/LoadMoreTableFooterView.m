@@ -69,7 +69,7 @@
 	switch (aState) {
 		case PullLoadMorePulling:
 			
-			_statusLabel.text = NSLocalizedString(@"Release to load more...", @"Release to load more status");
+			_statusLabel.text = NSLocalizedString(@"松手即可加载更多...", @"Release to load more status");
 			[CATransaction begin];
 			[CATransaction setAnimationDuration:FLIP_ANIMATION_DURATION];
 			_arrowImage.transform = CATransform3DMakeRotation((M_PI / 180.0) * 180.0f, 0.0f, 0.0f, 1.0f);
@@ -85,7 +85,7 @@
 				[CATransaction commit];
 			}
 			
-			_statusLabel.text = NSLocalizedString(@"Pull up to load more...", @"Pull up to load more status");
+			_statusLabel.text = NSLocalizedString(@"上拉加载更多...", @"Pull up to load more status");
 			[_activityView stopAnimating];
 			[CATransaction begin];
 			[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions]; 
@@ -99,7 +99,7 @@
             
 		case PullLoadMoreLoading:
 			
-			_statusLabel.text = NSLocalizedString(@"Loading more...", @"Loading Status");
+			_statusLabel.text = NSLocalizedString(@"加载中...", @"Loading Status");
 			[_activityView startAnimating];
 			[CATransaction begin];
 			[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions]; 

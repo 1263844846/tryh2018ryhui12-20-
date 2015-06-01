@@ -9,7 +9,7 @@
 #import "RHGesturePasswordViewController.h"
 #import <CoreFoundation/CoreFoundation.h>
 #import "RHALoginViewController.h"
-
+#import "RHMyMessageViewController.h"
 @interface RHGesturePasswordViewController ()
 {
     BOOL isDrawPan;
@@ -181,16 +181,26 @@
         [gesturePasswordView.state setTextColor:[UIColor colorWithRed:2/255.f green:174/255.f blue:240/255.f alpha:1]];
         [gesturePasswordView.state setText:@"输入正确"];
         
-        if (isReset) {
-            [self reset];
-            [self clear];
-            
-        }else{
-            [[RHTabbarManager sharedInterface] initTabbar];
-            [[[RHTabbarManager sharedInterface] selectTabbarMain] popToRootViewControllerAnimated:NO];
-            
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"GestureSave"];
+
+        AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+        [[RHTabbarManager sharedInterface] initTabbar];
+
+        if (delegate.isNotificationCenter) {
+            delegate.isNotificationCenter = NO;
+            RHMyMessageViewController *myMessage = [[RHMyMessageViewController alloc] initWithNibName:@"RHMyMessageViewController" bundle:nil];
+           
+            [[[RHTabbarManager  sharedInterface] selectTabbarUser] pushViewController:myMessage animated:NO];
+        } else {
+            if (isReset) {
+                [self reset];
+                [self clear];
+                
+            }else{
+                [[[RHTabbarManager sharedInterface] selectTabbarMain] popToRootViewControllerAnimated:NO];
+            }
         }
-        
+
         [[NSNotificationCenter defaultCenter] postNotificationName:@"RHGestureSuccessed" object:nil];
         return YES;
     }

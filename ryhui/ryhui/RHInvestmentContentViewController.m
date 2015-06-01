@@ -59,7 +59,6 @@
     self.tableView.tableFooterView = _footerView;
     _footerView.hidden=YES;
     showLoadMoreButton=YES;
-
 }
 
 - (void)dealloc
@@ -120,7 +119,7 @@
         }
         self.currentPageIndex++;
         [dataArray addObjectsFromArray:tempArray];
-        if ([dataArray count]<10) {
+        if ([dataArray count]<=7) {
             _footerView.hidden=YES;
         }
         [self reloadTableView];

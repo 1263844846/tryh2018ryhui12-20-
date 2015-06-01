@@ -33,7 +33,7 @@
 {
     _photos = photos;
     
-    if (_photos.count > 1) {
+    if (_photos.count >= 1) {
         _indexLabel = [[UILabel alloc] init];
         _indexLabel.font = [UIFont boldSystemFontOfSize:20];
         _indexLabel.frame = self.bounds;
@@ -52,7 +52,7 @@
     [_saveImageBtn setImage:[UIImage imageNamed:@"MJPhotoBrowser.bundle/save_icon.png"] forState:UIControlStateNormal];
     [_saveImageBtn setImage:[UIImage imageNamed:@"MJPhotoBrowser.bundle/save_icon_highlighted.png"] forState:UIControlStateHighlighted];
     [_saveImageBtn addTarget:self action:@selector(saveImage) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:_saveImageBtn];
+//    [self addSubview:_saveImageBtn];
 }
 
 - (void)saveImage

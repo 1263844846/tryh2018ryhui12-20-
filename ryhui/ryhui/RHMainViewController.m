@@ -106,7 +106,7 @@
         _bannersArray = responseObject;
         [self setBannersImageView];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [_bannerImageView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"NewBanner"]];
+        [_bannerImageView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"NewBanner.png"]];
     }];
 }
 
@@ -120,7 +120,7 @@
             NSDictionary *dic = _bannersArray[i];
             RHNetworkService *netService = [RHNetworkService instance];
             NSString *urlString = [NSString stringWithFormat:@"%@%@%@",[netService doMain],@"common/main/attachment/",dic[@"bg"]];
-            [bannerImageView sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"NewBanner"]];
+            [bannerImageView sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"NewBanner.png"]];
             [_headerScrollView addSubview:bannerImageView];
             
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goForBannerDetailViewController:)];
@@ -129,7 +129,7 @@
         
         _headerScrollView.contentSize = CGSizeMake(_bannersArray.count * CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight(_headerScrollView.frame));
     }else{
-        [_bannerImageView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"NewBanner"]];
+        [_bannerImageView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"NewBanner.png"]];
     }
 }
 - (void)goForBannerDetailViewController:(UITapGestureRecognizer *)tap {
@@ -335,7 +335,7 @@
     RHProjectDetailViewController* controller=[[RHProjectDetailViewController alloc]initWithNibName:@"RHProjectDetailViewController" bundle:nil];
     NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];
     controller.dataDic=dataDic;
-    controller.type=type;
+    controller.getType=type;
     [self.navigationController pushViewController:controller animated:YES];
 }
 

@@ -8,7 +8,7 @@
 
 #import "RHContractViewContoller.h"
 
-@interface RHContractViewContoller ()
+@interface RHContractViewContoller ()<UIWebViewDelegate>
 
 @end
 
@@ -21,13 +21,11 @@
     NSURL *url = nil;
     if (isAgreen) {
         [self configTitleWithString:@"借款协议"];
-        url = [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/agreement/agreementInvestorApp?projectId=%@&userId=%@",[RHNetworkService instance].doMain,self.projectId,self.userId]];
+        url = [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/agreement/agreementInvestorApp?projectId=%@&userId=%@",[RHNetworkService instance].doMain,self.projectId,[RHUserManager sharedInterface].userId]];
     } else {
         [self configTitleWithString:@"合同"];
         url = [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/agreement/agreementInvestor?projectId=%@&userId=%@",[RHNetworkService instance].doMain,self.projectId,[RHUserManager sharedInterface].userId]];
     }
-    
-//    [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/agreement/agreementInvestor?projectId=%@&userId=%@",[RHNetworkService instance].doMain,self.projectId,[RHUserManager sharedInterface].userId]];
 
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
     [request setHTTPMethod: @"POST"];

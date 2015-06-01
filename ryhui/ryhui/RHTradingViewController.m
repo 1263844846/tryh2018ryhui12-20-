@@ -65,7 +65,6 @@
 //{"class":"view.JqRow","id":1935,"version":null,"cell":{"id":1935,"fee":null,"custId":"6000060000735977","relatedId":null,"description":"期数:3","userId":"29","money":2293.05,"dateCreated":"2015-09-12 00:02:27","projectId":248,"type":"PenaltyInterest","orderId":"00000000000000014557"}
 -(void)getTrading
 {
-  
     NSDictionary* parameters=@{@"_search":@"true",@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",_currentPageIndex],@"sidx":@"dateCreated",@"sord":@"desc",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};
     
     [[RHNetworkService instance] POST:@"front/payment/account/tradeInvestListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -105,6 +104,11 @@
         }
         self.currentPageIndex++;
         [dataArray addObjectsFromArray:tempArray];
+        
+        if ([dataArray count] <= 12) {
+            _footerView.hidden = YES;
+        }
+        
         [self reloadTableView];
         [_footerView.activityIndicatorView stopAnimating];
         
@@ -150,9 +154,9 @@
     
     [_headerView egoRefreshScrollViewDidScroll:scrollView];
     
-    if (!_footerView.hidden&&showLoadMoreButton)  {
+    if (showLoadMoreButton)  {
         CGFloat currentOffset = scrollView.contentOffset.y;
-        CGFloat maximumOffset = _footerView.frame.origin.y - (scrollView.frame.size.height - _footerView.frame.size.height);
+        CGFloat maximumOffset = _footerView.frame.origin.y - (scrollView.frame.size.height - 2*_footerView.frame.size.height);
         
         if (currentOffset >= maximumOffset && ![_footerView.activityIndicatorView isAnimating]) {
             // Load the next 20 records.

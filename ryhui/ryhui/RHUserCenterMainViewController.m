@@ -39,8 +39,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _mainScrollView.contentSize = CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 460);
-    
+    _mainScrollView.contentSize = CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 420);
+    _mainScrollView.scrollEnabled = NO;
     [self configTitleWithString:@"个人中心"];
     self.username.text=[RHUserManager sharedInterface].username;
     if ([RHUserManager sharedInterface].custId) {
@@ -215,7 +215,7 @@
 - (IBAction)openAccount:(id)sender {
     
     UIButton * button=sender;
-    if ([button.titleLabel.text isEqualToString:@"立即开户"]) {
+    if ([button.titleLabel.text isEqualToString:@"开户领红包"]) {
         RHRegisterWebViewController* controller=[[RHRegisterWebViewController alloc] initWithNibName:@"RHRegisterWebViewController" bundle:nil];
         controller.isUserCenterTurn = YES;
         [self.navigationController pushViewController:controller animated:YES];
