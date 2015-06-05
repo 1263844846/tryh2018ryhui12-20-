@@ -31,6 +31,9 @@
     self.titleLabel.text = titleStr;
     self.contentLabel.text = contentStr;
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"[%@]",ids],@"ids", nil];
+    
+    NSLog(@"------------%@",parameters);
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [[AFCompoundResponseSerializer alloc]init];
     [manager POST:[NSString stringWithFormat:@"%@front/payment/account/markMessageReaded",[RHNetworkService instance].doMain] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {

@@ -15,9 +15,16 @@
     AITableFooterVew *_footerView;
     BOOL _reloading;
     BOOL showLoadMoreButton;
+    UIButton *rightButton;
+    NSMutableArray *readMessages;
+    UIButton *leftButton;
+    BOOL isAllSelected;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *tabBarView;
+@property (weak, nonatomic) IBOutlet UIView *selecteBar;
+
 @property (nonatomic, assign) int currentPageIndex;
 @property(nonatomic, strong)NSMutableArray *dataArray;
 
@@ -32,6 +39,8 @@
     [self configBackButton];
     [self configTitleWithString:@"我的消息"];
     
+    isAllSelected = NO;
+    readMessages = [[NSMutableArray alloc] init];
     self.dataArray = [[NSMutableArray alloc]initWithCapacity:0];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -48,12 +57,109 @@
     
     showLoadMoreButton = YES;
     [_headerView egoRefreshScrollViewDataSourceStartManualLoading:self.tableView];
+    
+    [self setRightButtonItem];
+    self.selecteBar.hidden = YES;
+}
+
+- (void)setRightButtonItem {
+    rightButton =[UIButton buttonWithType:UIButtonTypeCustom];
+    [rightButton setTitle:@"编辑" forState:UIControlStateNormal];
+    rightButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    rightButton.font = [UIFont systemFontOfSize:17.0];
+    [rightButton addTarget:self action:@selector(chooiceMoreMessages:) forControlEvents:UIControlEventTouchUpInside];
+    rightButton.frame=CGRectMake(0, 0, 70, 30);
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+}
+
+- (void)chooiceMoreMessages:(UIButton *)btn {
+    self.selecteBar.hidden = NO;
+    [self.tableView setEditing:(!self.tableView.editing) animated:YES];
+    [readMessages removeAllObjects];
+    if (self.tableView.isEditing) {
+       leftButton =[UIButton buttonWithType:UIButtonTypeCustom];
+        [leftButton setTitle:@"全选" forState:UIControlStateNormal];
+        leftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        leftButton.font = [UIFont systemFontOfSize:17.0];
+        [leftButton addTarget:self action:@selector(cancelChooseMoreMessage:) forControlEvents:UIControlEventTouchUpInside];
+        leftButton.frame=CGRectMake(0, 0, 70, 30);
+        self.navigationItem.leftBarButtonItem= [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+        
+        [btn setTitle:@"取消编辑" forState:UIControlStateNormal];
+    } else {
+        self.selecteBar.hidden = YES;
+        [btn setTitle:@"编辑" forState:UIControlStateNormal];
+        [self configBackButton];
+         [self chooseCompeleted];
+    }
+}
+
+- (void)cancelChooseMoreMessage:(UIButton *)btn {
+    btn.selected = !btn.selected;
+    if (btn.selected) {
+        isAllSelected = YES;
+        [leftButton setTitle:@"取消全选" forState:UIControlStateNormal];
+        for (int i = 0; i < self.dataArray.count; i ++) {
+            NSDictionary *addObject = [self.dataArray objectAtIndex:i];
+            NSString *messageID = [addObject objectForKey:@"id"];
+            [readMessages addObject:messageID];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+            [self.tableView selectRowAtIndexPath:indexPath
+                                          animated:NO
+                                    scrollPosition:UITableViewScrollPositionNone];
+        }
+    } else {
+        isAllSelected = NO;
+        [readMessages removeAllObjects];
+        [leftButton setTitle:@"全选" forState:UIControlStateNormal];
+        [self.tableView selectRowAtIndexPath:nil
+                                    animated:NO
+                              scrollPosition:UITableViewScrollPositionNone];
+    }
+}
+
+- (void)chooseCompeleted {
+    if (readMessages.count > 0) {
+        NSString *ids = @"";
+        
+        for (int i = 0 ; i < readMessages.count ; i ++) {
+            NSString *messageID = readMessages[i];
+            NSString *temp = @"";
+            if (i < readMessages.count - 1) {
+                temp = [NSString stringWithFormat:@"%@,",messageID];
+                ids = [ids stringByAppendingString:temp];
+            } else {
+                temp = [NSString stringWithFormat:@"%@",messageID];
+                ids = [ids stringByAppendingString:temp];
+            }
+        }
+        ids = [NSString stringWithFormat:@"[%@]",ids];
+        
+        NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithObjectsAndKeys:ids,@"ids", nil];
+        NSLog(@"=======%@",parameters);
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.responseSerializer = [[AFCompoundResponseSerializer alloc]init];
+        [manager POST:[NSString stringWithFormat:@"%@front/payment/account/markMessageReaded",[RHNetworkService instance].doMain] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //        DLog(@"result==%@ <<<",[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+            NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            NSRange range = [result rangeOfString:@"success"];
+            if (range.location != NSNotFound) {
+                [self refresh];
+                if (isAllSelected) {
+                    [self cancelChooseMoreMessage:leftButton];
+                }
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            DLog(@"%@",error);
+        }];
+    }
 }
 
 - (void)refresh {
     [self refreshApp:YES];
     [[RHNetworkService instance] POST:@"front/payment/account/countUnReadMessage" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        DLog(@"%@",responseObject);
+        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSString *numStr = nil;
             if (![[responseObject objectForKey:@"msgCount"] isKindOfClass:[NSNull class]]) {
@@ -83,6 +189,49 @@
 
 - (IBAction)pushMore:(id)sender {
     [[[RHTabbarManager sharedInterface] selectTabbarMore] popToRootViewControllerAnimated:NO];
+}
+
+- (IBAction)deleteButton:(UIButton *)sender {
+    if (readMessages.count > 0) {
+        NSString *ids = @"";
+        
+        for (int i = 0 ; i < readMessages.count ; i ++) {
+            NSString *messageID = readMessages[i];
+            NSString *temp = @"";
+            if (i < readMessages.count - 1) {
+                temp = [NSString stringWithFormat:@"%@,",messageID];
+                ids = [ids stringByAppendingString:temp];
+            } else {
+                temp = [NSString stringWithFormat:@"%@",messageID];
+                ids = [ids stringByAppendingString:temp];
+            }
+        }
+        ids = [NSString stringWithFormat:@"[%@]",ids];
+        
+        NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithObjectsAndKeys:ids,@"ids", nil];
+        NSLog(@"=======%@",parameters);
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.responseSerializer = [[AFCompoundResponseSerializer alloc]init];
+        [manager POST:[NSString stringWithFormat:@"%@front/payment/account/markMessageDelete",[RHNetworkService instance].doMain] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //        DLog(@"result==%@ <<<",[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+            NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            NSRange range = [result rangeOfString:@"success"];
+            if (range.location != NSNotFound) {
+                [self refresh];
+                if (isAllSelected) {
+                    [self cancelChooseMoreMessage:leftButton];
+                }
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            DLog(@"%@",error);
+        }];
+    }
+
+}
+
+- (IBAction)readedMessageButton:(UIButton *)sender {
+    [self chooseCompeleted];
 }
 
 - (void)dealloc {
@@ -140,6 +289,11 @@
         if ([dataArray count] <= 10) {
             _footerView.hidden = YES;
         }
+        if (dataArray.count == 0) {
+            self.selecteBar.hidden = YES;
+            [self configBackButton];
+            [rightButton setTitle:@"编辑" forState:UIControlStateNormal];
+        }
         [self reloadTableView];
         [_footerView.activityIndicatorView stopAnimating];
         
@@ -179,7 +333,7 @@
     
     [_headerView egoRefreshScrollViewDidScroll:scrollView];
     
-    if (!_footerView.hidden&&showLoadMoreButton)  {
+    if (showLoadMoreButton)  {
         CGFloat currentOffset = scrollView.contentOffset.y;
         CGFloat maximumOffset = _footerView.frame.origin.y - (scrollView.frame.size.height - _footerView.frame.size.height);
         
@@ -225,14 +379,24 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSDictionary *dataDic=[self.dataArray objectAtIndex:indexPath.row];
-    RHMyMessageDetailViewController *controller = [[RHMyMessageDetailViewController alloc]initWithNibName:@"RHMyMessageDetailViewController" bundle:nil];
-    controller.delegate = self;
-    controller.ids = [dataDic objectForKey:@"id"];
-    controller.titleStr = [dataDic objectForKey:@"title"];
-    controller.contentStr = [dataDic objectForKey:@"content"];
-    [self.navigationController pushViewController:controller animated:YES];
+    if (!tableView.isEditing) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        NSDictionary *dataDic=[self.dataArray objectAtIndex:indexPath.row];
+        RHMyMessageDetailViewController *controller = [[RHMyMessageDetailViewController alloc]initWithNibName:@"RHMyMessageDetailViewController" bundle:nil];
+        controller.delegate = self;
+        controller.ids = [dataDic objectForKey:@"id"];
+        controller.titleStr = [dataDic objectForKey:@"title"];
+        controller.contentStr = [dataDic objectForKey:@"content"];
+        [self.navigationController pushViewController:controller animated:YES];
+    } else {
+        NSDictionary *addObject = [self.dataArray objectAtIndex:indexPath.row];
+        NSString *messageID = [addObject objectForKey:@"id"];
+        [readMessages addObject:messageID];
+    }
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleDelete|UITableViewCellEditingStyleInsert;
 }
 
 @end

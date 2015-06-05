@@ -16,5 +16,4 @@
 @property(nonatomic,assign)BOOL isRegister;
 @property(nonatomic,assign)BOOL isForgotV;
 
-
 @end

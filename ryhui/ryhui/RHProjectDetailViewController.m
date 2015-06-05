@@ -15,7 +15,7 @@
 #import "AITableFooterVew.h"
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
-@interface RHProjectDetailViewController ()<UIScrollViewDelegate>
+@interface RHProjectDetailViewController ()<UIScrollViewDelegate,UIAlertViewDelegate>
 {
     int available;
     CGRect tempRect;
@@ -441,7 +441,7 @@
 {
     UIButton* button=sender;
     
-    int count = self.array1.count;
+    int count = (int)self.array1.count;
     // 1.封装图片数据
     NSMutableArray *photos = [NSMutableArray arrayWithCapacity:count];
     for (int i = 0; i<count; i++) {
@@ -464,7 +464,7 @@
 -(void)touch2:(id)sender
 {
     UIButton* button=sender;
-    int count = self.array2.count;
+    int count = (int)self.array2.count;
     // 1.封装图片数据
     NSMutableArray *photos = [NSMutableArray arrayWithCapacity:count];
     for (int i = 0; i<count; i++) {
@@ -513,12 +513,28 @@
 }
 
 - (IBAction)segment2Action:(id)sender {
-    if (self.segmentView2.hidden) {
-        self.segmentView2.hidden=NO;
-        self.segmentView1.hidden=YES;
-        self.segmentView3.hidden=YES;
+    
+    if ([RHUserManager sharedInterface].username&&[[RHUserManager sharedInterface].username length]>0) {
+        if (self.segmentView2.hidden) {
+            self.segmentView2.hidden=NO;
+            self.segmentView1.hidden=YES;
+            self.segmentView3.hidden=YES;
+            
+            [self didSelectSegmentAtIndex:1];
+        }
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"登录后才可查看投标记录,请先登录" delegate:self cancelButtonTitle:@"登录" otherButtonTitles:@"取消", nil];
+        [alert show];
+    }
 
-        [self didSelectSegmentAtIndex:1];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [alertView removeFromSuperview];
+    if (buttonIndex == 0) {
+        RHALoginViewController* controller=[[RHALoginViewController alloc] initWithNibName:@"RHALoginViewController" bundle:nil];
+        [self.navigationController pushViewController:controller animated:YES];
     }
 }
 

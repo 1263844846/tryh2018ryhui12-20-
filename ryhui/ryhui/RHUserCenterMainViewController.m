@@ -65,6 +65,8 @@
     AFHTTPRequestOperationManager* manager=[AFHTTPRequestOperationManager manager];
     manager.responseSerializer=[[AFCompoundResponseSerializer alloc]init];
     NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
+    NSLog(@"------------------%@",session);
+    
     if (session&&[session length]>0) {
         [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
     }
@@ -73,6 +75,9 @@
         if ([responseObject isKindOfClass:[NSData class]]) {
             
             NSDictionary* dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            
+            NSLog(@"------------------%@",dic);
+            
             NSString* amount=[dic objectForKey:@"money"];
             if (amount&&[amount length]>0) {
                 RHGetGiftViewController* controller=[[RHGetGiftViewController alloc]initWithNibName:@"RHGetGiftViewController" bundle:nil];

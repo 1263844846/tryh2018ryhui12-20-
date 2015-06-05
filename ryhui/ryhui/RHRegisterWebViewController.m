@@ -47,13 +47,20 @@
 //    DLog(@"%@",url);
     
     if ([url rangeOfString:@"front/payment/account/myAccount"].location !=NSNotFound) {
-        [RHUserManager sharedInterface].custId=@"first";
-        if (_isUserCenterTurn) {
-            [[RHTabbarManager sharedInterface] initTabbar];
-            [[RHTabbarManager sharedInterface] selectTabbarUser];
+        [RHUserManager sharedInterface].custId = @"first";
+        
+        if ([RHUserManager sharedInterface].username&&[[RHUserManager sharedInterface].username length]>0) {
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]]&&[[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]] length]>0) {
+                [[RHTabbarManager sharedInterface] initTabbar];
+                [[RHTabbarManager sharedInterface] selectTabbarUser];
+            } else {
+                RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
+                controller.isRegister = YES;
+                [self.navigationController pushViewController:controller animated:NO];
+            }
         }else{
             RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
-            controller.isRegister=YES;
+            controller.isRegister = YES;
             [self.navigationController pushViewController:controller animated:NO];
         }
         return NO;

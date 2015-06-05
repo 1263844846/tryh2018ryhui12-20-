@@ -406,7 +406,8 @@
                 [RHUtility showTextWithText:@"注册成功"];
                 
                 [self selectOtherAciton:nil];
-//                
+//
+                [self setNavigationBackButton];
 //                if (!isPan) {
  
 //                }else{
@@ -429,6 +430,19 @@
         }
     }];
 
+}
+
+- (void)setNavigationBackButton {
+    UIButton* button=[UIButton buttonWithType:UIButtonTypeCustom];
+    [button addTarget:self action:@selector(backToGusture:) forControlEvents:UIControlEventTouchUpInside];
+    [button setImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
+    button.frame=CGRectMake(0, 0, 11, 17);
+    self.navigationItem.leftBarButtonItem= [[UIBarButtonItem alloc] initWithCustomView:button];
+}
+
+- (void)backToGusture:(UIButton *)btn {
+    RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
+    [self.navigationController pushViewController:controller animated:NO];
 }
 
 - (IBAction)CreateAccount:(id)sender {
