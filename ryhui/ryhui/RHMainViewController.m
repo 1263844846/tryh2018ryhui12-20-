@@ -96,6 +96,62 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refesh) name:UIApplicationWillEnterForegroundNotification object:nil];
     
     [self getAppBanner];
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"AppUpdate"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AppUpdate"];
+        //获取本地软件的版本号
+        NSString *localVersion = [[[NSBundle mainBundle]infoDictionary] objectForKey:@"CFBundleVersion"];
+        [self onCheckVersion:localVersion];
+    }
+}
+
+
+-(void)onCheckVersion:(NSString *)currentVersion
+{
+    NSURL *url = [NSURL URLWithString:@"http://itunes.apple.com/lookup?id=977505438"];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"GET"];
+    [request setTimeoutInterval:10.0];
+    NSOperationQueue *queue = [[NSOperationQueue alloc]init];
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        if (connectionError) {
+        } else {
+            NSError* jasonErr = nil;
+            // jason 解析
+            NSDictionary* responseDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jasonErr];
+            if (responseDict && [responseDict objectForKey:@"results"]) {
+                    NSDictionary* results = [[responseDict objectForKey:@"results"] objectAtIndex:0];;
+                    if (results) {
+                        CGFloat  fVeFromNet = [[results objectForKey:@"version"] floatValue];
+                       NSString *strVerUrl = [results objectForKey:@"trackViewUrl"];
+                        if (0 < fVeFromNet && strVerUrl) {
+                            CGFloat fCurVer = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] floatValue];
+                            if (fCurVer < fVeFromNet) {
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""message:@"发现新版本，立即去更新吧！" delegate:self cancelButtonTitle:@"立即更新" otherButtonTitles:@"稍后提醒", nil];
+                                            [alert show];
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+        }];
+
+}
+
+//响应升级提示按钮
+- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    //如果选择“现在升级”
+    if (buttonIndex == 0){
+        //打开iTunes  方法一
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/rong-yi-hui/id977505438?mt=8"]];
+        
+//         // 打开iTunes 方法二:此方法总是提示“无法连接到itunes”，不推荐使用
+//         NSString *iTunesLink = @"itms-apps://phobos.apple.com/WebObjects/MZStore.woa/wa/viewSoftwareUpdate?id=977505438&mt=8";
+//         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
+        
+    }
 }
 
 - (void)getAppBanner {

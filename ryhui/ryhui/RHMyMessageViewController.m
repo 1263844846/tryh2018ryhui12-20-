@@ -153,6 +153,8 @@
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             DLog(@"%@",error);
         }];
+    } else {
+        [RHUtility showTextWithText:@"您未选择消息"];
     }
 }
 
@@ -226,6 +228,8 @@
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             DLog(@"%@",error);
         }];
+    } else {
+        [RHUtility showTextWithText:@"您未选择消息"];
     }
 
 }
