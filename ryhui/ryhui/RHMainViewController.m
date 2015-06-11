@@ -40,7 +40,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configTitleWithString:@"融益汇"];
-    
     _bannersArray = [[NSArray alloc] init];
     
     self.segmentView=[[[NSBundle mainBundle] loadNibNamed:@"RHSegmentView" owner:nil options:nil] objectAtIndex:0];
@@ -86,14 +85,13 @@
             if (numStr) {
                 [[NSUserDefaults standardUserDefaults] setObject:numStr forKey:@"RHMessageNumSave"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
-                
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"RHMessageNum" object:numStr];
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     }];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refesh) name:UIApplicationWillEnterForegroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refeshMainViewDataWithState:) name:UIApplicationWillEnterForegroundNotification object:nil];
     
     [self getAppBanner];
     
@@ -105,9 +103,7 @@
     }
 }
 
-
--(void)onCheckVersion:(NSString *)currentVersion
-{
+- (void)onCheckVersion:(NSString *)currentVersion {
     NSURL *url = [NSURL URLWithString:@"http://itunes.apple.com/lookup?id=977505438"];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"GET"];
@@ -120,24 +116,23 @@
             // jason 解析
             NSDictionary* responseDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jasonErr];
             if (responseDict && [responseDict objectForKey:@"results"]) {
-                    NSDictionary* results = [[responseDict objectForKey:@"results"] objectAtIndex:0];;
-                    if (results) {
-                        CGFloat  fVeFromNet = [[results objectForKey:@"version"] floatValue];
-                       NSString *strVerUrl = [results objectForKey:@"trackViewUrl"];
-                        if (0 < fVeFromNet && strVerUrl) {
-                            CGFloat fCurVer = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] floatValue];
-                            if (fCurVer < fVeFromNet) {
-                                dispatch_async(dispatch_get_main_queue(), ^{
-                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""message:@"发现新版本，立即去更新吧！" delegate:self cancelButtonTitle:@"立即更新" otherButtonTitles:@"稍后提醒", nil];
-                                            [alert show];
-                                });
-                            }
+                NSDictionary* results = [[responseDict objectForKey:@"results"] objectAtIndex:0];;
+                if (results) {
+                    CGFloat  fVeFromNet = [[results objectForKey:@"version"] floatValue];
+                    NSString *strVerUrl = [results objectForKey:@"trackViewUrl"];
+                    if (0 < fVeFromNet && strVerUrl) {
+                        CGFloat fCurVer = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] floatValue];
+                        if (fCurVer < fVeFromNet) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""message:@"发现新版本，立即去更新吧！" delegate:self cancelButtonTitle:@"立即更新" otherButtonTitles:@"稍后提醒", nil];
+                                [alert show];
+                            });
                         }
                     }
                 }
             }
-        }];
-
+        }
+    }];
 }
 
 //响应升级提示按钮
@@ -146,19 +141,11 @@
     if (buttonIndex == 0){
         //打开iTunes  方法一
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/rong-yi-hui/id977505438?mt=8"]];
-        
-//         // 打开iTunes 方法二:此方法总是提示“无法连接到itunes”，不推荐使用
-//         NSString *iTunesLink = @"itms-apps://phobos.apple.com/WebObjects/MZStore.woa/wa/viewSoftwareUpdate?id=977505438&mt=8";
-//         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
-        
     }
 }
 
 - (void)getAppBanner {
     [[RHNetworkService instance] POST:@"common/main/appBannerList" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSLog(@"-------------%@",responseObject);
-        
         _bannersArray = responseObject;
         [self setBannersImageView];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -182,12 +169,12 @@
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goForBannerDetailViewController:)];
             [bannerImageView addGestureRecognizer:tap];
         }
-        
         _headerScrollView.contentSize = CGSizeMake(_bannersArray.count * CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight(_headerScrollView.frame));
     }else{
         [_bannerImageView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"NewBanner.png"]];
     }
 }
+
 - (void)goForBannerDetailViewController:(UITapGestureRecognizer *)tap {
     UIView *tapView = tap.view;
     NSDictionary *dic = _bannersArray[tapView.tag - 100];
@@ -214,18 +201,27 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self refesh];
+    [self refeshMainViewDataWithState:0];
 }
 
-- (void)refesh {
-    [self.segment1Array removeAllObjects];
-    [self.segment2Array removeAllObjects];
+- (void)refeshMainViewDataWithState:(int) state {
+    if (state == 0) {
+        //刷新全部数据
+        [self.segment1Array removeAllObjects];
+        [self.segment2Array removeAllObjects];
+    } else if (state == 1){
+        //刷新商业贷数据
+        [self.segment1Array removeAllObjects];
+    } else {
+        //刷新就业贷数据
+        [self.segment2Array removeAllObjects];
+    }
     [self segment1Post];
     [self segment2Post];
     [self getSegmentnum1];
     [self getSegmentnum2];
-  
 }
+
 #pragma mark-network
 - (void)getSegmentnum1 {
     NSDictionary* parameters=@{@"_search":@"true",@"rows":@"1000",@"page":@"1",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"percent\",\"op\":\"lt\",\"data\":100}]}"};
@@ -237,11 +233,15 @@
                 self.segmentView.segmentLabel.hidden=NO;
                 self.segmentView.segmentLabel3.text=[NSString stringWithFormat:@"可投%d",num];
                 self.segmentView.segmentLabel3.hidden=NO;
+            } else {
+                self.segmentView.segmentLabel.hidden = YES;
+                self.segmentView.segmentLabel3.hidden = YES;
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     }];
 }
+
 - (void)getSegmentnum2 {
     NSDictionary* parameters=@{@"_search":@"true",@"rows":@"1000",@"page":@"1",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"percent\",\"op\":\"lt\",\"data\":100}]}"};
     [[RHNetworkService instance] POST:@"common/main/xueListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -252,10 +252,12 @@
                 self.segmentView.segmentLabel1.hidden=NO;
                 self.segmentView.segmentLabel4.text=[NSString stringWithFormat:@"可投%d",num];
                 self.segmentView.segmentLabel4.hidden=NO;
+            } else {
+                self.segmentView.segmentLabel1.hidden = YES;
+                self.segmentView.segmentLabel4.hidden = YES;
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        DLog(@"%@",error);
     }];
 }
 
@@ -268,7 +270,6 @@
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSArray* array=[responseObject objectForKey:@"rows"];
             if ([array isKindOfClass:[NSArray class]]) {
-//                [self.segment1Array removeAllObjects];
                 for (NSDictionary* dic in array) {
                     if ([dic objectForKey:@"cell"]&&!([[dic objectForKey:@"cell"] isKindOfClass:[NSNull class]])) {
                         [self.segment1Array addObject:[dic objectForKey:@"cell"]];
@@ -286,7 +287,6 @@
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        DLog(@"%@",error);
         [RHUtility showTextWithText:@"请求失败"];
     }];
 }
@@ -300,7 +300,6 @@
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSArray* array=[responseObject objectForKey:@"rows"];
             if ([array isKindOfClass:[NSArray class]]) {
-//                [self.segment2Array removeAllObjects];
                 for (NSDictionary* dic in array) {
                     if ([dic objectForKey:@"cell"]&&!([[dic objectForKey:@"cell"] isKindOfClass:[NSNull class]])) {
                         [self.segment2Array addObject:[dic objectForKey:@"cell"]];
@@ -318,7 +317,6 @@
             }
          }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        DLog(@"%@",error);
         [RHUtility showTextWithText:@"请求失败"];
     }];
 }
@@ -329,28 +327,11 @@
     switch (index) {
         case 0:
             self.contentLabel.text=@"       借款方为经营良好的中小微企业及个体工商户。为保障投资人权益，融益汇通过评级严格筛选合作机构。所有借款项目均由合作机构评审后推荐，并经融益汇多轮再评审后发布。所有项目均由合作机构提供全额本息担保。";
-//            if ([self.segment1Array count]<=0) {
-//                [self segment1Post];
-//            }else{
-//                [self.dataArray removeAllObjects];
-//                [self.dataArray addObjectsFromArray:self.segment1Array];
-//                [self.tableView reloadData];
-//            }
-            [self.segment1Array removeAllObjects];
-            [self segment1Post];
+            [self refeshMainViewDataWithState:1];
             break;
         case 1:
             self.contentLabel.text=@"       借款方为接受就业培训的在读学生，贷款用于支付就业培训费用。培训机构承诺为学生就业提供保障，并承担未就业学生的全部还款本息；同时融益汇从每笔就业贷款的服务费中提取一定比例的资金作为就业贷专项风险保障金以备代偿。通过就业担保和风险保障金双重本息保障机制为您的投资保驾护航。";
-
-//            if ([self.segment2Array count]<=0) {
-//                [self segment2Post];
-//            }else{
-//                [self.dataArray removeAllObjects];
-//                [self.dataArray addObjectsFromArray:self.segment2Array];
-//                [self.tableView reloadData];
-//            }
-            [self.segment2Array removeAllObjects];
-            [self segment2Post];
+            [self refeshMainViewDataWithState:2];
             break;
         default:
             break;
