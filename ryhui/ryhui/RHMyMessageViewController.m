@@ -61,6 +61,13 @@
     self.selecteBar.hidden = YES;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    if (self.dataArray.count > 0) {
+        NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:0];
+        [self.tableView scrollToRowAtIndexPath:path atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    }
+}
+
 - (void)setRightButtonItem {
     rightButton =[UIButton buttonWithType:UIButtonTypeCustom];
     [rightButton setTitle:@"编辑" forState:UIControlStateNormal];
@@ -97,10 +104,13 @@
         isAllSelected = YES;
         [leftButton setTitle:@"取消全选" forState:UIControlStateNormal];
         for (int i = 0; i < self.dataArray.count; i ++) {
-                NSDictionary *addObject = [self.dataArray objectAtIndex:i];
-                NSString *messageID = [addObject objectForKey:@"id"];
-                [readMessages addObject:messageID];
-                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+            NSDictionary *addObject = [self.dataArray objectAtIndex:i];
+            NSString *messageID = [addObject objectForKey:@"id"];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+            [dic setObject:messageID forKey:@"messageID"];
+            [dic setObject:[NSString stringWithFormat:@"%d",indexPath.row] forKey:@"rowID"];
+            [readMessages addObject:dic];
                 [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
         }
     } else {
@@ -123,7 +133,8 @@
     if (readMessages.count > 0) {
         NSString *ids = @"";
         for (int i = 0 ; i < readMessages.count ; i ++) {
-            NSString *messageID = readMessages[i];
+           NSMutableDictionary *dic = readMessages[i];
+            NSString *messageID = dic[@"messageID"];
             NSString *temp = @"";
             if (i < readMessages.count - 1) {
                 temp = [NSString stringWithFormat:@"%@,",messageID];
@@ -135,13 +146,15 @@
         }
         ids = [NSString stringWithFormat:@"[%@]",ids];
         NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithObjectsAndKeys:ids,@"ids", nil];
-//        NSLog(@"=======%@",parameters);
+        NSLog(@"=======%@",parameters);
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.responseSerializer = [[AFCompoundResponseSerializer alloc]init];
         [manager POST:[NSString stringWithFormat:@"%@front/payment/account/%@",[RHNetworkService instance].doMain,appendString] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
             NSRange range = [result rangeOfString:@"success"];
             if (range.location != NSNotFound) {
+                NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:0];
+                [self.tableView scrollToRowAtIndexPath:path atScrollPosition:UITableViewScrollPositionTop animated:NO];
                 if (state == 1) {
                     [RHUtility showTextWithText:@"标记已读成功!"];
                 } else {
@@ -369,7 +382,21 @@
     } else {
         NSDictionary *addObject = [self.dataArray objectAtIndex:indexPath.row];
         NSString *messageID = [addObject objectForKey:@"id"];
-        [readMessages addObject:messageID];
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        [dic setObject:messageID forKey:@"messageID"];
+        [dic setObject:[NSString stringWithFormat:@"%ld",indexPath.row] forKey:@"rowID"];
+        [readMessages addObject:dic];
+    }
+}
+
+-(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView.isEditing) {
+        for (NSDictionary *dic in readMessages) {
+            NSInteger deSelect = [dic[@"rowID"] integerValue];
+            if (deSelect == indexPath.row) {
+                [readMessages removeObject:dic];
+            }
+        }
     }
 }
 

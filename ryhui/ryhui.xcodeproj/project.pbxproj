@@ -18,6 +18,7 @@
 		007ADF8B1AFB32C200D3B126 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 007ADF8A1AFB32C200D3B126 /* CFNetwork.framework */; };
 		007ADF8D1AFB32D900D3B126 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 007ADF8C1AFB32D900D3B126 /* CoreFoundation.framework */; };
 		007ADF8F1AFB330000D3B126 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 007ADF8E1AFB330000D3B126 /* UIKit.framework */; };
+		008C94AD1B2982380046FB83 /* smallPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 008C94AC1B2982380046FB83 /* smallPhone.png */; };
 		009DA35A1AFC529700973996 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 009DA3571AFC529700973996 /* libMobClickLibrary.a */; };
 		00AAAF911B0F06D500BE5D1F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00AAAF901B0F06D500BE5D1F /* Info.plist */; };
 		00AAAFAB1B0F0D4400BE5D1F /* SinaWeiboConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00AAAF941B0F0D4400BE5D1F /* SinaWeiboConnection.framework */; };
@@ -318,6 +319,7 @@
 		007ADF8A1AFB32C200D3B126 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		007ADF8C1AFB32D900D3B126 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		007ADF8E1AFB330000D3B126 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		008C94AC1B2982380046FB83 /* smallPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smallPhone.png; sourceTree = "<group>"; };
 		009DA3571AFC529700973996 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		009DA3581AFC529700973996 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		009DA3591AFC529700973996 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
@@ -991,6 +993,7 @@
 				F80E496B1A8E27CD00028CD1 /* Service */,
 				F80E49451A8E24C000028CD1 /* AppDelegate.h */,
 				F80E49461A8E24C000028CD1 /* AppDelegate.m */,
+				008C94AC1B2982380046FB83 /* smallPhone.png */,
 				F80E49511A8E24C000028CD1 /* Images.xcassets */,
 				F80E49531A8E24C000028CD1 /* LaunchScreen.xib */,
 				F80E49481A8E24C000028CD1 /* ryhui.xcdatamodeld */,
@@ -1891,6 +1894,7 @@
 				F8B6DA781AB5517600CCB13D /* shareIcon.png in Resources */,
 				F86B8B051AA18406000D2B8C /* RHMainViewController.xib in Resources */,
 				F83375EB1AB9C56700944CB1 /* 8-button1.png in Resources */,
+				008C94AD1B2982380046FB83 /* smallPhone.png in Resources */,
 				F83375E51AB9C49100944CB1 /* 82-2.png in Resources */,
 				F8B6DA941AB563BA00CCB13D /* RHTradViewCell.xib in Resources */,
 				F8B6DA891AB55C1500CCB13D /* myAccountLine.png in Resources */,

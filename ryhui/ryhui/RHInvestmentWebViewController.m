@@ -28,7 +28,7 @@
     [self configTitleWithString:@"投资"];
     
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@common/main/invest",[RHNetworkService instance].doMain]];
-    NSString *body = [NSString stringWithFormat: @"money=%@&projectId=%@&giftId=%@",price,projectId,giftId?giftId:@""];
+    NSString *body = [NSString stringWithFormat: @"money=%@&projectId=%@&giftId=%@&investType=App",price,projectId,giftId?giftId:@""];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
     [request setHTTPMethod: @"POST"];
     

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14C2055" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,38 +13,66 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="39"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="投资人" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="de0-Rd-TEt">
-                        <rect key="frame" x="8" y="9" width="81" height="21"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="投资人" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="de0-Rd-TEt">
+                        <rect key="frame" x="8" y="9" width="50" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="de0-Rd-TEt" secondAttribute="height" multiplier="50:21" id="XeK-Is-z7S"/>
+                            <constraint firstAttribute="width" constant="50" id="oQg-l0-8MN"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="YUJ-It-HXo">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YUJ-It-HXo">
                         <rect key="frame" x="0.0" y="39" width="320" height="1"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.77647058823529413" green="0.77647058823529413" blue="0.77647058823529413" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="时间" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="n1t-dG-41z">
-                        <rect key="frame" x="191" y="2" width="121" height="37.5"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="时间" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n1t-dG-41z">
+                        <rect key="frame" x="191" y="2" width="121" height="38"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="121" id="1D9-0d-kon"/>
+                            <constraint firstAttribute="height" constant="38" id="kOG-0Z-nq0"/>
+                            <constraint firstAttribute="width" secondItem="n1t-dG-41z" secondAttribute="height" multiplier="121:38" id="qIb-DB-acg"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="投资金额（元）" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7fX-Nl-a19">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="投资金额（元）" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fX-Nl-a19">
                         <rect key="frame" x="100" y="9" width="95" height="21"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="95" id="5eZ-f7-MIe"/>
+                            <constraint firstAttribute="width" secondItem="7fX-Nl-a19" secondAttribute="height" multiplier="95:21" id="SiG-3A-pd2"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smallPhone.png" translatesAutoresizingMaskIntoConstraints="NO" id="Gqi-km-2n8">
+                        <rect key="frame" x="60" y="12" width="12" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="12" id="8tP-4O-Ypx"/>
+                            <constraint firstAttribute="height" constant="16" id="HC9-QA-QuY"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="7fX-Nl-a19" firstAttribute="leading" secondItem="Gqi-km-2n8" secondAttribute="trailing" constant="28" id="4r1-aW-GwK"/>
+                    <constraint firstItem="n1t-dG-41z" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="82k-gR-aXQ"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="7fX-Nl-a19" secondAttribute="bottom" constant="1" id="LPc-ZL-dnX"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="de0-Rd-TEt" secondAttribute="bottom" constant="1" id="WVj-PS-1Fo"/>
+                    <constraint firstItem="Gqi-km-2n8" firstAttribute="leading" secondItem="de0-Rd-TEt" secondAttribute="trailing" constant="2" id="cvx-uS-nue"/>
+                    <constraint firstItem="de0-Rd-TEt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="efF-eE-J7x"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Gqi-km-2n8" secondAttribute="bottom" constant="3" id="o2z-nf-pdP"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="n1t-dG-41z" secondAttribute="bottom" constant="-9" id="rkw-Mk-yGT"/>
+                    <constraint firstItem="n1t-dG-41z" firstAttribute="leading" secondItem="7fX-Nl-a19" secondAttribute="trailing" constant="-4" id="s7k-S5-XMq"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="isPhoneInvest" destination="Gqi-km-2n8" id="GaH-Vb-WLV"/>
                 <outlet property="nameLabel" destination="de0-Rd-TEt" id="gah-He-7Af"/>
                 <outlet property="priceLabel" destination="7fX-Nl-a19" id="MB6-Wo-5gA"/>
                 <outlet property="timeLabel" destination="n1t-dG-41z" id="PtK-Z4-yVq"/>
@@ -50,9 +80,7 @@
             <point key="canvasLocation" x="181" y="315"/>
         </tableViewCell>
     </objects>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
+    <resources>
+        <image name="smallPhone.png" width="17" height="23"/>
+    </resources>
 </document>

@@ -98,7 +98,7 @@
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"AppUpdate"]) {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AppUpdate"];
         //获取本地软件的版本号
-        NSString *localVersion = [[[NSBundle mainBundle]infoDictionary] objectForKey:@"CFBundleVersion"];
+        NSString *localVersion = [[[NSBundle mainBundle]infoDictionary] objectForKey:@"CFBundleShortVersionString"];
         [self onCheckVersion:localVersion];
     }
 }
@@ -119,9 +119,11 @@
                 NSDictionary* results = [[responseDict objectForKey:@"results"] objectAtIndex:0];;
                 if (results) {
                     CGFloat  fVeFromNet = [[results objectForKey:@"version"] floatValue];
+                    NSLog(@"========%f",fVeFromNet);
                     NSString *strVerUrl = [results objectForKey:@"trackViewUrl"];
                     if (0 < fVeFromNet && strVerUrl) {
-                        CGFloat fCurVer = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] floatValue];
+                        CGFloat fCurVer = [currentVersion floatValue];
+                         NSLog(@"========%f",fCurVer);
                         if (fCurVer < fVeFromNet) {
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""message:@"发现新版本，立即去更新吧！" delegate:self cancelButtonTitle:@"立即更新" otherButtonTitles:@"稍后提醒", nil];

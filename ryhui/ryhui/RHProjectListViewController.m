@@ -92,8 +92,6 @@
 #pragma mark-network
 -(void)getSegmentnum1
 {
-    
-    
     NSDictionary* parameters=@{@"_search":@"true",@"rows":@"1000",@"page":@"1",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"percent\",\"op\":\"lt\",\"data\":100}]}"};
     
     [[RHNetworkService instance] POST:@"common/main/shangListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -105,6 +103,9 @@
                 self.segmentLabel.hidden=NO;
                 self.segmentLabel3.text=[NSString stringWithFormat:@"可投%d",num];
                 self.segmentLabel3.hidden=NO;
+            } else {
+                self.segmentLabel.hidden=YES;
+                self.segmentLabel3.hidden=YES;
             }
             
         }
@@ -115,8 +116,6 @@
 }
 -(void)getSegmentnum2
 {
-    
-    
     NSDictionary* parameters=@{@"_search":@"true",@"rows":@"1000",@"page":@"1",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"percent\",\"op\":\"lt\",\"data\":100}]}"};
     [[RHNetworkService instance] POST:@"common/main/xueListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        DLog(@"%@",responseObject);
@@ -127,8 +126,10 @@
                 self.segmentLabel1.hidden=NO;
                 self.segmentLabel4.text=[NSString stringWithFormat:@"可投%d",num];
                 self.segmentLabel4.hidden=NO;
+            } else {
+                self.segmentLabel1.hidden=YES;
+                self.segmentLabel4.hidden=YES;
             }
-            
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -138,6 +139,8 @@
 
 - (void)didSelectSegmentAtIndex:(int)index
 {
+    [self getSegmentnum1];
+    [self getSegmentnum2];
     RHProjectListContentViewController* controller=[_viewControllers objectAtIndex:index];
     [controller.tableView setContentOffset:CGPointMake(0,0) animated:YES];
     [_segmentContentView setSelectPage:index];
@@ -157,7 +160,8 @@
         default:
             break;
     }
-    
+    [self getSegmentnum1];
+    [self getSegmentnum2];
     RHProjectListContentViewController* controller=[_viewControllers objectAtIndex:page];
     if ([[NSNumber numberWithInteger:[controller.dataArray count]] intValue]<=0) {
         [controller startPost];
@@ -166,6 +170,8 @@
 
 
 - (IBAction)yearEarnAction:(id)sender {
+    [self getSegmentnum1];
+    [self getSegmentnum2];
     UIButton* button=sender;
     RHProjectListContentViewController* controller=[_viewControllers objectAtIndex:currentPage];
     if (!button.selected) {
@@ -178,6 +184,8 @@
 }
 
 - (IBAction)deadlineAction:(id)sender {
+    [self getSegmentnum1];
+    [self getSegmentnum2];
     RHProjectListContentViewController* controller=[_viewControllers objectAtIndex:currentPage];
     UIButton* button=sender;
     if (!button.selected) {
@@ -190,6 +198,8 @@
 }
 
 - (IBAction)totalMoneyAction:(id)sender {
+    [self getSegmentnum1];
+    [self getSegmentnum2];
     RHProjectListContentViewController* controller=[_viewControllers objectAtIndex:currentPage];
     UIButton* button=sender;
     if (!button.selected) {
@@ -202,6 +212,8 @@
 }
 
 - (IBAction)investmentProgressAction:(id)sender {
+    [self getSegmentnum1];
+    [self getSegmentnum2];
     RHProjectListContentViewController* controller=[_viewControllers objectAtIndex:currentPage];
     UIButton* button=sender;
     if (!button.selected) {

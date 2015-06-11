@@ -19,5 +19,12 @@
     self.nameLabel.text=[dic objectForKey:@"username"];
     self.timeLabel.text=[dic objectForKey:@"investTime"];
     self.priceLabel.text=[[dic objectForKey:@"investMoney"] stringValue];
+    self.isPhoneInvest.hidden = YES;
+    NSString *platform = [dic objectForKey:@"investType"];
+    if (platform && platform != nil && ![platform isKindOfClass:[NSNull class]] && ![platform isEqualToString:@"<null>"]) {
+        if ([platform isEqualToString:@"App"]) {
+            self.isPhoneInvest.hidden = NO;
+        }
+    }
 }
 @end
