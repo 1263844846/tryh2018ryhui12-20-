@@ -109,7 +109,7 @@
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
             NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
             [dic setObject:messageID forKey:@"messageID"];
-            [dic setObject:[NSString stringWithFormat:@"%d",indexPath.row] forKey:@"rowID"];
+            [dic setObject:[NSString stringWithFormat:@"%ld",(long)indexPath.row] forKey:@"rowID"];
             [readMessages addObject:dic];
                 [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
         }
@@ -384,17 +384,18 @@
         NSString *messageID = [addObject objectForKey:@"id"];
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         [dic setObject:messageID forKey:@"messageID"];
-        [dic setObject:[NSString stringWithFormat:@"%ld",indexPath.row] forKey:@"rowID"];
+        [dic setObject:[NSString stringWithFormat:@"%ld",(long)indexPath.row] forKey:@"rowID"];
         [readMessages addObject:dic];
     }
 }
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView.isEditing) {
-        for (NSDictionary *dic in readMessages) {
+        for (NSMutableDictionary *dic in readMessages) {
             NSInteger deSelect = [dic[@"rowID"] integerValue];
             if (deSelect == indexPath.row) {
                 [readMessages removeObject:dic];
+                return;
             }
         }
     }

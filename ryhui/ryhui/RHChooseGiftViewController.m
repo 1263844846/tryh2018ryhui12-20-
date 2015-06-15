@@ -126,10 +126,12 @@
         self.currentPageIndex++;
 
         [dataArray addObjectsFromArray:tempArray];
-        if ([dataArray count]>0) {
-            _footerView.hidden=YES;
+        if ([dataArray count]>=8) {
+            _footerView.hidden=NO;
             self.tableView.tableFooterView=nil;
             [self hiddenNoData];
+        } else {
+            _footerView.hidden=YES;
         }
     
         [self reloadTableView];
