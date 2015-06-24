@@ -56,7 +56,7 @@
 		D537C37F1ADD452E009D3433 /* giftPass1.png in Resources */ = {isa = PBXBuildFile; fileRef = D537C37E1ADD452E009D3433 /* giftPass1.png */; };
 		D537C3841ADD4FF0009D3433 /* RHChooseGiftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D537C3821ADD4FF0009D3433 /* RHChooseGiftViewController.m */; };
 		D537C3851ADD4FF0009D3433 /* RHChooseGiftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D537C3831ADD4FF0009D3433 /* RHChooseGiftViewController.xib */; };
-		D537C3891ADD528D009D3433 /* RHChooseGiftViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D537C3871ADD528D009D3433 /* RHChooseGiftViewCell.m */; };
+		D537C3891ADD528D009D3433 /* RHChooseGiftViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D537C3871ADD528D009D3433 /* RHChooseGiftViewCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D537C38A1ADD528D009D3433 /* RHChooseGiftViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D537C3881ADD528D009D3433 /* RHChooseGiftViewCell.xib */; };
 		D537C38D1ADD63C2009D3433 /* gift.png in Resources */ = {isa = PBXBuildFile; fileRef = D537C38B1ADD63C2009D3433 /* gift.png */; };
 		D537C38E1ADD63C2009D3433 /* gift1.png in Resources */ = {isa = PBXBuildFile; fileRef = D537C38C1ADD63C2009D3433 /* gift1.png */; };

@@ -21,6 +21,7 @@
     CGRect tempRect;
     int page;
     AITableFooterVew *footerView;
+    BOOL isSegment2Click;
 }
 @property(nonatomic,strong)NSMutableArray* array1;
 @property(nonatomic,strong)NSMutableArray* array2;
@@ -73,6 +74,7 @@
     self.dataArray=[[NSMutableArray alloc] initWithCapacity:0];
     
     page = 1 ;
+    isSegment2Click = NO;
     [self configBackButton];
     [self setRightItemButton];
     [self configTitleWithString:@"项目详情"];
@@ -251,7 +253,7 @@
     NSDictionary* parameters=@{@"projectId":self.projectId,@"_search":@"true",@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",page],@"sidx":@"investTime",@"sord":@"desc",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};
     [[RHNetworkService instance] POST:@"common/main/projectInvestmentList" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSLog(@"-------------%@",[responseObject objectForKey:@"rows"]);
+        NSLog(@"---responseObjectresponseObject----------%@",[responseObject objectForKey:@"rows"]);
         
 //        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
@@ -284,7 +286,15 @@
             if (self.dataArray.count < 10) {
                 [footerView removeFromSuperview];
             }
+            if (isSegment2Click) {
+                isSegment2Click = NO;
+                if (self.dataArray.count > 0) {
+                    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+                }
+            }
             [self.tableView reloadData];
+         
+
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -521,6 +531,11 @@
             self.segmentView3.hidden=YES;
             
             [self didSelectSegmentAtIndex:1];
+            [self.dataArray removeAllObjects];
+            isSegment2Click = YES;
+             page = 1;
+            [self projectInvestmentList];
+            
         }
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"登录后才可查看投标记录,请先登录" delegate:self cancelButtonTitle:@"登录" otherButtonTitles:@"取消", nil];
