@@ -31,8 +31,6 @@
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@common/main/invest",[RHNetworkService instance].doMain]];
 //    NSString *body = [NSString stringWithFormat: @"money=%@&projectId=%@&giftId=%@",price,projectId,giftId?giftId:@""];
     
-    NSLog(@"------------%@",price);
-    
     NSString *body = [NSString stringWithFormat: @"money=%@&projectId=%@&giftId=%@&investType=App",price,projectId,giftId?giftId:@""];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
     [request setHTTPMethod: @"POST"];
@@ -67,10 +65,8 @@
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    NSLog(@"============%@", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
-   
     NSString* url=[request.URL absoluteString];
-    DLog(@"%@",url);
+//    DLog(@"%@",url);
 
     if ([url rangeOfString:@"common/paymentResponse/initiativeTenderSuccess"].location!=NSNotFound) {
         RHErrorViewController* controller=[[RHErrorViewController alloc]initWithNibName:@"RHErrorViewController" bundle:nil];
