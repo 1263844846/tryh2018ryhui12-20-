@@ -10,6 +10,7 @@
                 <outlet property="balanceLabel" destination="0xQ-e9-GOx" id="kBR-zR-dCK"/>
                 <outlet property="errorButton" destination="cxB-co-Ge8" id="abG-Np-51O"/>
                 <outlet property="errorLabel" destination="yGT-30-Ktf" id="UUQ-rv-bxW"/>
+                <outlet property="lastNoticeView" destination="fXT-UF-JjH" id="HH7-3j-T2G"/>
                 <outlet property="mainScrollView" destination="rrY-Qh-kXM" id="YYN-Lk-Xr6"/>
                 <outlet property="messageNumLabel" destination="yeW-mi-Gda" id="hD6-5a-qHj"/>
                 <outlet property="myMessageNumLabel" destination="6Ig-hv-LNw" id="Rz9-bk-qpE"/>
@@ -418,7 +419,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="400-010-4001" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cqX-FB-47Z">
-                                            <rect key="frame" x="125" y="172" width="86" height="21"/>
+                                            <rect key="frame" x="125" y="165" width="86" height="36"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                             <color key="textColor" red="0.14117647059999999" green="0.42352941179999998" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
