@@ -23,6 +23,12 @@ static RHNetworkService* _instance;
 }
 -(NSString*)doMain
 {
+    
+    
+    
+    //localTest
+//    return @"http://192.168.1.112:8080/TinyFinance/";
+    
     return @"https://123.57.133.7/";
 //    return @"https://app.ryhui.com/";
 
@@ -34,6 +40,10 @@ static RHNetworkService* _instance;
 }
 -(NSString*)doMainhttp
 {
+    
+    //localTest
+//    return @"http://192.168.1.112:8080/TinyFinance/";
+    
     return @"https://123.57.133.7/";
     
 //    return @"https://app.ryhui.com/";

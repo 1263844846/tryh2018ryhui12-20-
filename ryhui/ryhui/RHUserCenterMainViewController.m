@@ -31,6 +31,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *errorLabel;
 @property (weak, nonatomic) IBOutlet UIButton *errorButton;
 @property (weak, nonatomic) IBOutlet UILabel *balanceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *questionLabel;
+@property (weak, nonatomic) IBOutlet UIView *noticeView;
 
 @end
 
@@ -99,6 +101,54 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkout) name:@"RHSELECTUSER" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refesh) name:UIApplicationWillEnterForegroundNotification object:nil];
+    
+    NSDictionary *attributes = @{NSUnderlineStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+    NSMutableAttributedString *netString = [[NSMutableAttributedString alloc] initWithString:_questionLabel.text];
+    [netString addAttributes:attributes range:NSMakeRange(8, netString.length - 8)];
+    _questionLabel.attributedText = netString;
+    
+    self.noticeView.hidden = YES;
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    CGPoint touchPoint = [touch locationInView:self.view];
+    
+    if (CGRectContainsPoint(_questionLabel.frame, touchPoint)) {
+        _questionLabel.textColor = [UIColor blueColor];
+    }
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    CGPoint touchPoint = [touch locationInView:self.view];
+    
+    self.noticeView.hidden = NO;
+    if (CGRectContainsPoint(_questionLabel.frame, touchPoint)) {
+        _questionLabel.textColor = [UIColor colorWithRed:36.0/255 green:108.0/255 blue:161.0/255 alpha:1.0];
+    }
+}
+
+-(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    _questionLabel.textColor = [UIColor colorWithRed:36.0/255 green:108.0/255 blue:161.0/255 alpha:1.0];
+}
+
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    CGPoint touchPoint = [touch locationInView:self.view];
+    if (!CGRectContainsPoint(_questionLabel.frame, touchPoint)) {
+        _questionLabel.textColor = [UIColor colorWithRed:36.0/255 green:108.0/255 blue:161.0/255 alpha:1.0];
+    }
+}
+- (IBAction)callService:(UIButton *)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:4000104001"]];
+}
+- (IBAction)cancleCall:(UIButton *)sender {
+    self.noticeView.hidden = YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated

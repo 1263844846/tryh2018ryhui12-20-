@@ -414,10 +414,10 @@
 		48554529BD46CEF07F9973F5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				C75640772072D33426245525 /* MBProgressHUD */,
 				C0D0B6D4F774BE7F0C36787B /* AFNetworking */,
 				B5FED3CDE66D6758143B0A85 /* BDKNotifyHUD */,
 				4D179D211BE3520FF72E06AE /* EGOTableViewPullRefreshAndLoadMore */,
-				C75640772072D33426245525 /* MBProgressHUD */,
 				49C624CF7C1C155D85D20178 /* SDWebImage */,
 			);
 			name = Pods;

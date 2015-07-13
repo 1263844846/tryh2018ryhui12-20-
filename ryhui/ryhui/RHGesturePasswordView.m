@@ -43,15 +43,15 @@
             
             NSInteger distance = 320/3;
             NSInteger size = distance/1.7;
-            NSInteger yPoint = size+20;
-            NSInteger margin = size/2+18;
+            NSInteger yPoint = size+30;
+            NSInteger margin = size/2+5;
             if ([UIScreen mainScreen].bounds.size.height>480) {
-                size=distance/1.5;
+                size=distance/1.7;
+                margin =size/4 + 8;
                 yPoint=distance;
-                margin =size/4;
             }
             
-            RHGesturePasswordButton * gesturePasswordButton = [[RHGesturePasswordButton alloc]initWithFrame:CGRectMake(col*yPoint+margin, row*yPoint, size, size)];
+            RHGesturePasswordButton * gesturePasswordButton = [[RHGesturePasswordButton alloc]initWithFrame:CGRectMake(col*yPoint+margin, row*yPoint - 10, size, size)];
             [gesturePasswordButton setTag:i];
             [view addSubview:gesturePasswordButton];
             [buttonArray addObject:gesturePasswordButton];
@@ -68,9 +68,9 @@
         [state setFont:[UIFont systemFontOfSize:14.f]];
         [self addSubview:state];
         
-        CGRect imageRect=CGRectMake(frame.size.width/2-40,40, 80, 80);
+        CGRect imageRect=CGRectMake(frame.size.width/2-39,40, 80, 80);
         if ([UIScreen mainScreen].bounds.size.height>480) {
-            imageRect=CGRectMake(frame.size.width/2-50, frame.size.width/2-100, 100, 100);
+            imageRect=CGRectMake(frame.size.width/2-49, frame.size.width/2-100, 100, 100);
         }
         imgView = [[UIImageView alloc]initWithFrame:imageRect];
         [imgView setBackgroundColor:[UIColor clearColor]];
