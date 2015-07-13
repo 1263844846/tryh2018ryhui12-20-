@@ -121,12 +121,9 @@
     }
 }
 
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint touchPoint = [touch locationInView:self.lastNoticeView];
-    
-    
     if (CGRectContainsPoint(_questionLabel.frame, touchPoint)) {
         self.noticeView.hidden = NO;
         _questionLabel.textColor = [UIColor colorWithRed:36.0/255 green:108.0/255 blue:161.0/255 alpha:1.0];

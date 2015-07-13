@@ -157,7 +157,6 @@
                     [[RHTabbarManager sharedInterface] initTabbar];
                     [[[RHTabbarManager sharedInterface] selectTabbarMain] popToRootViewControllerAnimated:NO];
                 }
-
             }
         }
         

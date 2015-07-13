@@ -197,7 +197,11 @@
                 [self clear];
                 
             }else{
-                [[[RHTabbarManager sharedInterface] selectTabbarMain] popToRootViewControllerAnimated:NO];
+                if (self.isEnter) {
+                    [self.navigationController popViewControllerAnimated:NO];
+                } else {
+                    [[[RHTabbarManager sharedInterface] selectTabbarMain] popToRootViewControllerAnimated:NO];
+                }
             }
         }
 
@@ -223,6 +227,8 @@
     [[RHUserManager sharedInterface] logout];
     [[RHTabbarManager sharedInterface] selectALogin];
 }
+
+//修改手势密码
 - (BOOL)resetPassword:(NSString *)result{
     if ([previousString isEqualToString:@""]||isDrawPan) {
 //        DLog(@"%@",result);
@@ -262,13 +268,14 @@
 }
 
 - (void)turnToUserCenterOrMainViewcontroller {
-    if (isRegister) {
-        [[RHTabbarManager sharedInterface] initTabbar];
-        [[[RHTabbarManager sharedInterface] selectTabbarUser] popToRootViewControllerAnimated:NO];
-    }else{
-        [[RHTabbarManager sharedInterface] initTabbar];
-        [[[RHTabbarManager sharedInterface] selectTabbarMain] popToRootViewControllerAnimated:NO];
-    }
+   
+        if (isRegister) {
+            [[RHTabbarManager sharedInterface] initTabbar];
+            [[[RHTabbarManager sharedInterface] selectTabbarUser] popToRootViewControllerAnimated:NO];
+        }else{
+            [[RHTabbarManager sharedInterface] initTabbar];
+            [[[RHTabbarManager sharedInterface] selectTabbarMain] popToRootViewControllerAnimated:NO];
+        }
 }
 
 @end

@@ -82,7 +82,6 @@
         }else{
             [[RHTabbarManager sharedInterface] selectLogin];
         }
-        
     }
 }
 
@@ -210,6 +209,18 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionFail:) name:@"RHSESSIONFAIL" object:nil];
+    
+    if ([RHUserManager sharedInterface].username&&[[RHUserManager sharedInterface].username length]>0) {
+        [self sessionFail:nil];
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]]&&[[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]] length]>0) {
+            RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
+            controller.isEnter = YES;
+            UINavigationController *navi = (UINavigationController *)self.window.rootViewController;
+            UIViewController *vc = navi.viewControllers[navi.viewControllers.count - 1];
+            [vc.navigationController pushViewController:controller animated:YES];
+        }
+    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
