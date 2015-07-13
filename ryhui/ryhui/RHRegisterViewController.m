@@ -43,6 +43,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *captchaImageButton;
 @property (weak, nonatomic) IBOutlet UITextField *InvitationCodeTF;
 @property (weak, nonatomic) IBOutlet UIView *agreementView;
+@property (weak, nonatomic) IBOutlet UILabel *moneyLale;
+@property (weak, nonatomic) IBOutlet UILabel *giftNoticeLabel;
+
+//红包设置
+
+@property (strong, nonatomic) IBOutlet UIView *giftView;
 
 @end
 
@@ -87,8 +93,21 @@
     self.captchaPhoneButton.layer.cornerRadius=9;
     self.captchaPhoneButton.layer.masksToBounds=YES;
     
-    
+    [self setTheAttributeString:self.moneyLale.text];
         
+}
+
+-(void)setTheAttributeString:(NSString *)string {
+    NSDictionary *attribute = @{NSForegroundColorAttributeName : [UIColor colorWithRed:249.0/255 green:212.0/255 blue:37.0/255 alpha:1.0], NSFontAttributeName: [UIFont systemFontOfSize:22.0]};
+    NSDictionary *attribute1 = @{NSForegroundColorAttributeName : [UIColor colorWithRed:249.0/255 green:212.0/255 blue:37.0/255 alpha:1.0]};
+    
+    NSString *subString = [string componentsSeparatedByString:@"元"][0];
+    
+    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:string];
+    
+    [attributeString setAttributes:attribute range:NSMakeRange(0, subString.length)];
+    [attributeString setAttributes:attribute1 range:NSMakeRange(subString.length, 1)];
+    self.moneyLale.attributedText = attributeString;
 }
 
 -(void)dealloc
@@ -406,15 +425,10 @@
                 [RHUtility showTextWithText:@"注册成功"];
                 
                 [self selectOtherAciton:nil];
-//
                 [self setNavigationBackButton];
-//                if (!isPan) {
- 
-//                }else{
-//                    [[RHTabbarManager sharedInterface] initTabbar];
-//                    [[RHTabbarManager sharedInterface] selectTabbarMain];
-//                }
-                
+
+                self.giftView.frame = CGRectMake(0, -20, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) + 64);
+                [self.navigationController.navigationBar addSubview:self.giftView];
             }
         }
 
@@ -531,4 +545,16 @@
     }
     [super viewWillDisappear:animated];
 }
+
+
+//gift 操作
+- (IBAction)fiftCloseButtonClicked:(UIButton *)sender {
+    [self.giftView removeFromSuperview];
+}
+
+- (IBAction)doButtonClicked:(UIButton *)sender {
+    
+    
+}
+
 @end

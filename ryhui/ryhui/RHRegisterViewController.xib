@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -16,7 +16,10 @@
                 <outlet property="captchaPhoneButton" destination="UDg-IX-dlp" id="pIz-fv-q3i"/>
                 <outlet property="captchaPhoneTF" destination="A9a-MD-xJH" id="WE2-Jb-jAO"/>
                 <outlet property="createAccountView" destination="QVA-yT-W9z" id="viX-Mu-3TV"/>
+                <outlet property="giftNoticeLabel" destination="Up3-zc-tqc" id="B1T-v3-ffW"/>
+                <outlet property="giftView" destination="3qL-vr-7du" id="SBf-pc-awa"/>
                 <outlet property="headerView" destination="aWa-Zv-lyE" id="h0T-G0-Mim"/>
+                <outlet property="moneyLale" destination="ACQ-ey-KDM" id="47K-ZW-TD5"/>
                 <outlet property="ohterRegisterSbg" destination="kwI-dn-5Zd" id="tbW-Sm-IYR"/>
                 <outlet property="otherRegisterLab" destination="6mu-BP-qMl" id="JO2-H6-Sfz"/>
                 <outlet property="otherRegisterView" destination="0ED-Ku-bcJ" id="h0r-tn-MrS"/>
@@ -104,7 +107,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" id="KFw-co-j8s">
-                                    <rect key="frame" x="82" y="6" width="221" height="30"/>
+                                    <rect key="frame" x="81.999999564427583" y="6" width="221" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL"/>
@@ -421,9 +424,75 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="165" y="359"/>
         </view>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="3qL-vr-7du">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" alpha="0.85000002384185791" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="pAY-Nb-gHJ">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" red="0.078431372550000003" green="0.078431372550000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="giftsubBack" id="Sie-hT-oyx">
+                    <rect key="frame" x="25" y="150" width="270" height="350"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="giftOpenSuccess" id="9ME-9O-sWA">
+                    <rect key="frame" x="68" y="136" width="170" height="62"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="giftClose" id="Gd5-ok-YKd">
+                    <rect key="frame" x="275" y="48" width="22" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Q6l-Jp-RFx">
+                    <rect key="frame" x="256" y="38" width="60" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="fiftCloseButtonClicked:" destination="-1" eventType="touchUpInside" id="Zzi-pd-rQE"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000元投资现金已放入账户" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ACQ-ey-KDM">
+                    <rect key="frame" x="41" y="359" width="242" height="21"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="首次投资10000元以上立得返利现金哦！快去充值投资吧" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Up3-zc-tqc">
+                    <rect key="frame" x="41" y="387" width="233" height="41"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ae7-zy-JP6">
+                    <rect key="frame" x="111" y="439" width="97" height="30"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <state key="normal" title="立即充值" backgroundImage="giftBlickButton">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="doButtonClicked:" destination="-1" eventType="touchUpInside" id="mVi-vR-AoK"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <point key="canvasLocation" x="568" y="367"/>
+        </view>
     </objects>
     <resources>
         <image name="captchaButtonDown.png" width="142" height="64"/>
+        <image name="giftBlickButton" width="226" height="61"/>
+        <image name="giftClose" width="44" height="43"/>
+        <image name="giftOpenSuccess" width="340" height="124"/>
+        <image name="giftsubBack" width="540" height="700"/>
         <image name="register1.png" width="61" height="60"/>
         <image name="register2.png" width="65" height="34"/>
         <image name="registerButtonUp.png" width="530" height="88"/>

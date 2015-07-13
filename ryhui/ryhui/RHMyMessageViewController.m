@@ -289,6 +289,10 @@
         [_footerView.activityIndicatorView stopAnimating];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 //        DLog(@"%@",error);
+        
+        NSLog(@"-------------%@",operation);
+        
+         NSLog(@"-------------%@",error);
     }];
 }
 

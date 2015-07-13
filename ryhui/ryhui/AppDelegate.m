@@ -199,32 +199,97 @@
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    NSDate *date = [NSDate date];
+    [[NSUserDefaults standardUserDefaults] setObject:date forKey:@"backTime"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    NSDate *date = [NSDate date];
+    [[NSUserDefaults standardUserDefaults] setObject:date forKey:@"backTime"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
+}
+
+
+-(BOOL)getminutesTimeFromTime:(NSDate *)date compareTime:(NSDate *)date2{
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy"];
+    
+    NSString *yearString=[dateFormatter stringFromDate:date];
+    NSLog(@"------------%@",yearString);
+    
+    NSString *yearString1=[dateFormatter stringFromDate:date2];
+    NSLog(@"------------%@",yearString1);
+    
+    if ([yearString integerValue] > [yearString1 integerValue]) {
+        return YES;
+    }
+    
+    [dateFormatter setDateFormat:@"MM"];
+    
+    NSString *monthString =[dateFormatter stringFromDate:date];
+    NSString *monthString1 =[dateFormatter stringFromDate:date2];
+    if ([monthString integerValue] > [monthString1 integerValue]) {
+        return YES;
+    }
+    
+    [dateFormatter setDateFormat:@"dd"];
+    NSString *dayString = [dateFormatter stringFromDate:date];
+    
+    NSString *dayString1 = [dateFormatter stringFromDate:date2];
+    
+    [dateFormatter setDateFormat:@"HH"];
+    NSString *hourString = [dateFormatter stringFromDate:date];
+    NSString *hourString1 = [dateFormatter stringFromDate:date2];
+    
+    [dateFormatter setDateFormat:@"mm"];
+    NSString *minuteString = [dateFormatter stringFromDate:date];
+    NSString *minuteString1 = [dateFormatter stringFromDate:date2];
+    
+   long int time = ([dayString integerValue] - [dayString1 integerValue]) * 24 + ([hourString integerValue] - [hourString1 integerValue]) * 60 + ([minuteString integerValue] - [minuteString1 integerValue]);
+    
+    if (time > 3) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionFail:) name:@"RHSESSIONFAIL" object:nil];
+    [self openTheGesture];
+}
+
+-(void)openTheGesture {
+    NSDate *date = [NSDate date];
+    NSDate *back = [[NSUserDefaults standardUserDefaults] objectForKey:@"backTime"];
+    BOOL isOut = [self getminutesTimeFromTime:date compareTime:back];
     
-    if ([RHUserManager sharedInterface].username&&[[RHUserManager sharedInterface].username length]>0) {
-        [self sessionFail:nil];
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]]&&[[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]] length]>0) {
-            RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
-            controller.isEnter = YES;
-            UINavigationController *navi = (UINavigationController *)self.window.rootViewController;
-            UIViewController *vc = navi.viewControllers[navi.viewControllers.count - 1];
-            [vc.navigationController pushViewController:controller animated:YES];
+    if (isOut) {
+        if ([RHUserManager sharedInterface].username&&[[RHUserManager sharedInterface].username length]>0) {
+            [self sessionFail:nil];
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]]&&[[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]] length]>0) {
+                RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
+                controller.isEnter = YES;
+                UINavigationController *navi = (UINavigationController *)self.window.rootViewController;
+                UIViewController *vc = navi.viewControllers[navi.viewControllers.count - 1];
+                [vc.navigationController pushViewController:controller animated:YES];
+            }
         }
     }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    [self openTheGesture];
     
     if ([RHUserManager sharedInterface].username&&[[RHUserManager sharedInterface].username length]>0) {
         BOOL isGesture = [[NSUserDefaults standardUserDefaults] boolForKey:@"GestureSave"];
