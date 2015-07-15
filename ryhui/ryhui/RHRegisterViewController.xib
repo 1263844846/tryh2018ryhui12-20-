@@ -16,10 +16,10 @@
                 <outlet property="captchaPhoneButton" destination="UDg-IX-dlp" id="pIz-fv-q3i"/>
                 <outlet property="captchaPhoneTF" destination="A9a-MD-xJH" id="WE2-Jb-jAO"/>
                 <outlet property="createAccountView" destination="QVA-yT-W9z" id="viX-Mu-3TV"/>
-                <outlet property="giftNoticeLabel" destination="Up3-zc-tqc" id="B1T-v3-ffW"/>
+                <outlet property="giftMoneyLabel" destination="ACQ-ey-KDM" id="ZFy-hK-uek"/>
+                <outlet property="giftNoticeLabel" destination="Up3-zc-tqc" id="5q9-h9-z8W"/>
                 <outlet property="giftView" destination="3qL-vr-7du" id="SBf-pc-awa"/>
                 <outlet property="headerView" destination="aWa-Zv-lyE" id="h0T-G0-Mim"/>
-                <outlet property="moneyLale" destination="ACQ-ey-KDM" id="47K-ZW-TD5"/>
                 <outlet property="ohterRegisterSbg" destination="kwI-dn-5Zd" id="tbW-Sm-IYR"/>
                 <outlet property="otherRegisterLab" destination="6mu-BP-qMl" id="JO2-H6-Sfz"/>
                 <outlet property="otherRegisterView" destination="0ED-Ku-bcJ" id="h0r-tn-MrS"/>
@@ -28,6 +28,7 @@
                 <outlet property="phoneNumTF" destination="5fO-s0-B6u" id="l02-Kx-Wxg"/>
                 <outlet property="registerButton" destination="PWc-mT-pFF" id="8zH-Aj-x1Z"/>
                 <outlet property="scrollView" destination="Qy7-Jr-2SZ" id="ahd-2A-2Db"/>
+                <outlet property="typeImageView" destination="9ME-9O-sWA" id="2dS-UD-UfL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="webRegisterLab" destination="2Cp-pM-UGc" id="PmG-PU-uFp"/>
                 <outlet property="webRegisterSbg" destination="0fD-5l-316" id="NWS-Um-KVt"/>
@@ -107,7 +108,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" id="KFw-co-j8s">
-                                    <rect key="frame" x="82" y="6" width="220.9999991044171" height="30"/>
+                                    <rect key="frame" x="81.999998687488414" y="6" width="221" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL"/>
@@ -161,7 +162,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" id="5fO-s0-B6u">
-                                    <rect key="frame" x="81.000000475758341" y="146" width="221" height="30"/>
+                                    <rect key="frame" x="81.000000475758327" y="146" width="221" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL"/>
@@ -470,17 +471,6 @@
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ae7-zy-JP6">
-                    <rect key="frame" x="111" y="439" width="97" height="30"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <state key="normal" title="立即充值" backgroundImage="giftBlickButton">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="doButtonClicked:" destination="-1" eventType="touchUpInside" id="mVi-vR-AoK"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -489,7 +479,6 @@
     </objects>
     <resources>
         <image name="captchaButtonDown.png" width="142" height="64"/>
-        <image name="giftBlickButton" width="226" height="61"/>
         <image name="giftClose" width="44" height="43"/>
         <image name="giftOpenSuccess" width="340" height="124"/>
         <image name="giftsubBack" width="540" height="700"/>

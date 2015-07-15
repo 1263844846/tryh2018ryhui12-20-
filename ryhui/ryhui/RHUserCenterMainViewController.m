@@ -35,6 +35,13 @@
 @property (weak, nonatomic) IBOutlet UIView *noticeView;
 @property (weak, nonatomic) IBOutlet UIView *lastNoticeView;
 
+//红包
+@property (strong, nonatomic) IBOutlet UIView *giftView;
+@property (weak, nonatomic) IBOutlet UIImageView *giftTypeImageView;
+@property (weak, nonatomic) IBOutlet UILabel *giftMoneyLabel;
+@property (weak, nonatomic) IBOutlet UILabel *giftNoticeLabel;
+@property (weak, nonatomic) IBOutlet UIButton *doButton;
+
 @end
 
 @implementation RHUserCenterMainViewController
@@ -86,7 +93,8 @@
                 RHGetGiftViewController* controller=[[RHGetGiftViewController alloc]initWithNibName:@"RHGetGiftViewController" bundle:nil];
                 controller.amount=amount;
                 [self.navigationController pushViewController:controller animated:NO];
-
+//                self.giftView.frame = CGRectMake(0, -20, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) + 64);
+//                [self.navigationController.navigationBar addSubview:self.giftView];
             }
         }
         
@@ -286,6 +294,14 @@
 
 - (IBAction)pushMyInvestMentCode:(id)sender {
 //    我的邀请码
+}
+
+
+//红包
+- (IBAction)closeButtonClicked:(UIButton *)sender {
+}
+
+- (IBAction)doButtonClicked:(UIButton *)sender {
 }
 
 @end

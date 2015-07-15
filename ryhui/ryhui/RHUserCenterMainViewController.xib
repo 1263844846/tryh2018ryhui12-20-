@@ -8,8 +8,13 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RHUserCenterMainViewController">
             <connections>
                 <outlet property="balanceLabel" destination="0xQ-e9-GOx" id="kBR-zR-dCK"/>
+                <outlet property="doButton" destination="HJn-2p-JfH" id="yDK-rd-VH7"/>
                 <outlet property="errorButton" destination="cxB-co-Ge8" id="abG-Np-51O"/>
                 <outlet property="errorLabel" destination="yGT-30-Ktf" id="UUQ-rv-bxW"/>
+                <outlet property="giftMoneyLabel" destination="8Au-0P-QDe" id="0WX-g4-aYb"/>
+                <outlet property="giftNoticeLabel" destination="ncP-wU-bhe" id="Gyd-k0-ujz"/>
+                <outlet property="giftTypeImageView" destination="uvH-7Q-big" id="gaZ-lX-BbX"/>
+                <outlet property="giftView" destination="qqW-2b-TPd" id="IhM-hL-0fS"/>
                 <outlet property="lastNoticeView" destination="fXT-UF-JjH" id="HH7-3j-T2G"/>
                 <outlet property="mainScrollView" destination="rrY-Qh-kXM" id="YYN-Lk-Xr6"/>
                 <outlet property="messageNumLabel" destination="yeW-mi-Gda" id="hD6-5a-qHj"/>
@@ -506,6 +511,68 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-18" y="320"/>
         </view>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="qqW-2b-TPd">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" alpha="0.85000002384185791" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="U0p-0a-gPY">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" red="0.078431372550000003" green="0.078431372550000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="giftsubBack" id="dbC-u4-9gd">
+                    <rect key="frame" x="25" y="150" width="270" height="350"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="giftOpenSuccess" id="uvH-7Q-big">
+                    <rect key="frame" x="68" y="136" width="170" height="62"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="giftClose" id="1BU-Zt-CqY">
+                    <rect key="frame" x="275" y="48" width="22" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Kib-ZX-BUr">
+                    <rect key="frame" x="256" y="38" width="60" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="closeButtonClicked:" destination="-1" eventType="touchUpInside" id="QLo-pn-iMT"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000元投资现金已放入账户" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8Au-0P-QDe">
+                    <rect key="frame" x="41" y="359" width="242" height="21"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="首次投资10000元以上立得返利现金哦！快去充值投资吧" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ncP-wU-bhe">
+                    <rect key="frame" x="41" y="387" width="233" height="41"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="HJn-2p-JfH">
+                    <rect key="frame" x="111" y="439" width="97" height="30"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <state key="normal" title="立即充值" backgroundImage="giftBlickButton">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="doButtonClicked:" destination="-1" eventType="touchUpInside" id="07j-j8-9uz"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <point key="canvasLocation" x="415" y="320"/>
+        </view>
     </objects>
     <resources>
         <image name="6.png" width="531" height="153"/>
@@ -514,6 +581,10 @@
         <image name="8-1.png" width="265" height="81"/>
         <image name="8.png" width="265" height="81"/>
         <image name="9.png" width="2" height="81"/>
+        <image name="giftBlickButton" width="226" height="61"/>
+        <image name="giftClose" width="44" height="43"/>
+        <image name="giftOpenSuccess" width="340" height="124"/>
+        <image name="giftsubBack" width="540" height="700"/>
         <image name="mainNS.png" width="37" height="37"/>
         <image name="moreNS.png" width="43" height="32"/>
         <image name="user1.png" width="173" height="169"/>

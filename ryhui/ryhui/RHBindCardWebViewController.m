@@ -8,9 +8,13 @@
 
 #import "RHBindCardWebViewController.h"
 #import "MBProgressHUD.h"
+#import "RHGesturePasswordViewController.h"
 
 @interface RHBindCardWebViewController ()
 
+{
+    AppDelegate *app;
+}
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end
@@ -23,6 +27,8 @@
     [self configBackButton];
     [self configTitleWithString:@"绑卡"];
     
+    app = [UIApplication sharedApplication].delegate;
+
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/account/bindCard",[RHNetworkService instance].doMain]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
     [request setHTTPMethod: @"POST"];
@@ -30,6 +36,7 @@
     if (session&&[session length] > 0) {
         [request setValue:session forHTTPHeaderField:@"cookie"];
     }
+    self.webView.delegate = self;
     [self.webView loadRequest: request];
 }
 
@@ -46,18 +53,28 @@
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 
-//-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-//{
-//    NSString* url=[request.URL absoluteString];
-//    if ([url isEqualToString:[NSString stringWithFormat:@"%@common/paymentResponse/cashClientBackSuccess",[RHNetworkService instance].doMain]]) {
-//        
-//        return NO;
-//    }
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSString* url=[request.URL absoluteString];
+    if ([url containsString:@"/common/user/login/index"]) {
+        if ([RHUserManager sharedInterface].username&&[[RHUserManager sharedInterface].username length]>0) {
+            [app sessionFail:nil];
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]]&&[[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]] length]>0) {
+                RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
+                controller.isEnter = YES;
+//                UINavigationController *navi = (UINavigationController *)app.window.rootViewController;
+//                UIViewController *vc = navi.viewControllers[navi.viewControllers.count - 1];
+                [self.navigationController pushViewController:controller animated:YES];
+            }
+        }
+        
+        return NO;
+    }
 //    if ([url isEqualToString:[NSString stringWithFormat:@"%@common/paymentResponse/cashClientBackFailed",[RHNetworkService instance].doMain]]) {
 //        
 //        return NO;
 //    }
-//    return YES;
-//}
+    return YES;
+}
 
 @end

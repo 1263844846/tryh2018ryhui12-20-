@@ -197,7 +197,11 @@
                 [self clear];
                 
             }else{
-                [[[RHTabbarManager sharedInterface] selectTabbarMain] popToRootViewControllerAnimated:NO];
+                if (self.isEnter) {
+                    [self.navigationController popViewControllerAnimated:NO];
+                } else {
+                    [[[RHTabbarManager sharedInterface] selectTabbarMain] popToRootViewControllerAnimated:NO];
+                }
             }
         }
 

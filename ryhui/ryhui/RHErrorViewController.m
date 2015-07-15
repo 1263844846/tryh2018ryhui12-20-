@@ -19,6 +19,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tipsLabel;
 
+//红包
+@property (strong, nonatomic) IBOutlet UIView *giftView;
+@property (weak, nonatomic) IBOutlet UILabel *moneyLabel;
+@property (weak, nonatomic) IBOutlet UILabel *giftNoticeLabel;
+@property (weak, nonatomic) IBOutlet UIButton *doButton;
+@property (weak, nonatomic) IBOutlet UIImageView *giftTypeImageView;
+
 @end
 
 @implementation RHErrorViewController
@@ -34,6 +41,11 @@
             [self configTitleWithString:@"投资成功"];
             [self succeed];
             [self myInvestMent];
+            
+            //首次投资成功显示
+//            self.giftView.frame = CGRectMake(0, -20, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) + 64);
+//            [self.navigationController.navigationBar addSubview:self.giftView];
+//            
             break;
         case RHPaySucceed:
             [self configTitleWithString:@"充值成功"];
@@ -129,4 +141,11 @@
     [nav pushViewController:controller animated:YES];
 }
 
+
+//红包
+- (IBAction)closeButtonClicked:(UIButton *)sender {
+}
+
+- (IBAction)doButtonClicked:(UIButton *)sender {
+}
 @end

@@ -9,8 +9,12 @@
 #import "RHWithdrawWebViewController.h"
 #import "MBProgressHUD.h"
 #import "RHErrorViewController.h"
-@interface RHWithdrawWebViewController ()
+#import "RHGesturePasswordViewController.h"
 
+@interface RHWithdrawWebViewController ()
+{
+    AppDelegate *app;
+}
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end
@@ -21,6 +25,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    app = [UIApplication sharedApplication].delegate;
+    
     [self configBackButton];
     [self configTitleWithString:@"提现"];
     
@@ -72,6 +79,21 @@
         }
         controller.type = RHWithdrawFail;
         [self.navigationController pushViewController:controller animated:YES];
+        return NO;
+    }
+    
+    if ([url containsString:@"/common/user/login/index"]) {
+        if ([RHUserManager sharedInterface].username&&[[RHUserManager sharedInterface].username length]>0) {
+            [app sessionFail:nil];
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]]&&[[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]] length]>0) {
+                RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
+                controller.isEnter = YES;
+                //                UINavigationController *navi = (UINavigationController *)app.window.rootViewController;
+                //                UIViewController *vc = navi.viewControllers[navi.viewControllers.count - 1];
+                [self.navigationController pushViewController:controller animated:YES];
+            }
+        }
+        
         return NO;
     }
     return YES;

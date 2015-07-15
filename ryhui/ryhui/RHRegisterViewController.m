@@ -43,12 +43,13 @@
 @property (weak, nonatomic) IBOutlet UIButton *captchaImageButton;
 @property (weak, nonatomic) IBOutlet UITextField *InvitationCodeTF;
 @property (weak, nonatomic) IBOutlet UIView *agreementView;
-@property (weak, nonatomic) IBOutlet UILabel *moneyLale;
-@property (weak, nonatomic) IBOutlet UILabel *giftNoticeLabel;
 
 //红包设置
 
 @property (strong, nonatomic) IBOutlet UIView *giftView;
+@property (weak, nonatomic) IBOutlet UIImageView *typeImageView;
+@property (weak, nonatomic) IBOutlet UILabel *giftMoneyLabel;
+@property (weak, nonatomic) IBOutlet UILabel *giftNoticeLabel;
 
 @end
 
@@ -93,7 +94,7 @@
     self.captchaPhoneButton.layer.cornerRadius=9;
     self.captchaPhoneButton.layer.masksToBounds=YES;
     
-    [self setTheAttributeString:self.moneyLale.text];
+    [self setTheAttributeString:self.giftMoneyLabel.text];
         
 }
 
@@ -107,7 +108,7 @@
     
     [attributeString setAttributes:attribute range:NSMakeRange(0, subString.length)];
     [attributeString setAttributes:attribute1 range:NSMakeRange(subString.length, 1)];
-    self.moneyLale.attributedText = attributeString;
+    self.giftMoneyLabel.attributedText = attributeString;
 }
 
 -(void)dealloc
@@ -427,8 +428,8 @@
                 [self selectOtherAciton:nil];
                 [self setNavigationBackButton];
 
-                self.giftView.frame = CGRectMake(0, -20, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) + 64);
-                [self.navigationController.navigationBar addSubview:self.giftView];
+//                self.giftView.frame = CGRectMake(0, -20, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) + 64);
+//                [self.navigationController.navigationBar addSubview:self.giftView];
             }
         }
 
@@ -550,11 +551,6 @@
 //gift 操作
 - (IBAction)fiftCloseButtonClicked:(UIButton *)sender {
     [self.giftView removeFromSuperview];
-}
-
-- (IBAction)doButtonClicked:(UIButton *)sender {
-    
-    
 }
 
 @end

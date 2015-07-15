@@ -16,9 +16,22 @@
 
 -(void)updateCell:(NSDictionary*)dic
 {
-    self.nameLabel.text=[dic objectForKey:@"username"];
-    self.timeLabel.text=[dic objectForKey:@"investTime"];
-    self.priceLabel.text=[[dic objectForKey:@"investMoney"] stringValue];
+   
+    NSString *username = [dic objectForKey:@"username"];
+    if (username && username != nil && ![username isKindOfClass:[NSNull class]] && ![username isEqualToString:@"<null>"]) {
+        self.nameLabel.text = username;
+    }
+    
+    NSString *investTime = [dic objectForKey:@"investTime"];
+    if (investTime && investTime != nil && ![investTime isKindOfClass:[NSNull class]] && ![investTime isEqualToString:@"<null>"]) {
+        self.timeLabel.text = investTime;
+    }
+    
+    NSString *investMoney = [[dic objectForKey:@"investMoney"] stringValue];
+    if (investMoney && investMoney != nil && ![investMoney isKindOfClass:[NSNull class]] && ![investMoney isEqualToString:@"<null>"]) {
+        self.priceLabel.text = investMoney;
+    }
+    
     self.isPhoneInvest.hidden = YES;
     NSString *platform = [dic objectForKey:@"investType"];
     if (platform && platform != nil && ![platform isKindOfClass:[NSNull class]] && ![platform isEqualToString:@"<null>"]) {

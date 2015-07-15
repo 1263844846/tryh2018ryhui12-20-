@@ -274,6 +274,8 @@
                     }
                 }
             }
+            [self.tableView reloadData];
+            
             NSString* records=[responseObject objectForKey:@"records"];
             if (records&&[records intValue]<10) {
                 //已经到底了
@@ -292,15 +294,12 @@
                     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
                 }
             }
-            [self.tableView reloadData];
-         
-
         }
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 //        DLog(@"%@",error);
         [RHUtility showTextWithText:@"请求失败"];
     }];
+    [self.tableView reloadData];
 }
 //project =     {
 //    available = 0;
@@ -524,25 +523,24 @@
 
 - (IBAction)segment2Action:(id)sender {
     
-    if ([RHUserManager sharedInterface].username&&[[RHUserManager sharedInterface].username length]>0) {
-        if (self.segmentView2.hidden) {
-            self.segmentView2.hidden=NO;
-            self.segmentView1.hidden=YES;
-            self.segmentView3.hidden=YES;
-            
-            [self didSelectSegmentAtIndex:1];
-            [self.dataArray removeAllObjects];
-            isSegment2Click = YES;
-             page = 1;
-            [self projectInvestmentList];
-            
+        if ([RHUserManager sharedInterface].username&&[[RHUserManager sharedInterface].username length]>0) {
+            if (self.segmentView2.hidden) {
+                self.segmentView2.hidden=NO;
+                self.segmentView1.hidden=YES;
+                self.segmentView3.hidden=YES;
+                
+                [self didSelectSegmentAtIndex:1];
+                [self.dataArray removeAllObjects];
+                isSegment2Click = YES;
+                page = 1;
+                [self projectInvestmentList];
+                
+            }
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"登录后才可查看投标记录,请先登录" delegate:self cancelButtonTitle:@"登录" otherButtonTitles:@"取消", nil];
+            [alert show];
         }
-    } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"登录后才可查看投标记录,请先登录" delegate:self cancelButtonTitle:@"登录" otherButtonTitles:@"取消", nil];
-        [alert show];
     }
-
-}
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -587,10 +585,13 @@
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"RHProjectDetailViewCell" owner:nil options:nil] objectAtIndex:0];
     }
+    if (self.dataArray.count > 0) {
+       NSDictionary* getDataDic =[self.dataArray objectAtIndex:indexPath.row];
+        [cell updateCell:getDataDic];
+    }
     
-    NSDictionary* getDataDic=[self.dataArray objectAtIndex:indexPath.row];
     
-    [cell updateCell:getDataDic];
+    
     
     return cell;
 }
