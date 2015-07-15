@@ -19,6 +19,7 @@
 
 @property (assign, nonatomic) BOOL isNotificationCenter;
 
+-(void)sessionFail:(NSNotification*)nots;
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 

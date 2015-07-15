@@ -11,6 +11,7 @@
 @interface RHNetworkService : NSObject
 
 @property(nonatomic,strong)NSString* niubiMd5;
+@property (nonatomic, strong) AppDelegate *delegate;
 
 +(RHNetworkService*)instance;
 

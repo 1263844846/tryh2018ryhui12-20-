@@ -126,6 +126,11 @@ static dispatch_group_t http_request_operation_completion_group() {
             } else {
                 id responseObject = self.responseObject;
                 if (self.error) {
+                    NSURL *dic = [self.error.userInfo objectForKey:@"NSErrorFailingURLKey"];
+                    
+                    if ([[dic absoluteString] containsString:@"/common/user/login/index"]) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"UserTimeOut" object:dic];
+                    }
                     if (failure) {
                         dispatch_group_async(self.completionGroup ?: http_request_operation_completion_group(), self.completionQueue ?: dispatch_get_main_queue(), ^{
                             failure(self, self.error);

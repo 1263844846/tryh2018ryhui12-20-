@@ -7,7 +7,7 @@
 //
 
 #import "RHNetworkService.h"
-
+#import "RHGesturePasswordViewController.h"
 static RHNetworkService* _instance;
 
 @implementation RHNetworkService
@@ -55,8 +55,11 @@ static RHNetworkService* _instance;
 #endif
 }
 
--(AFHTTPRequestOperation*)POST:(NSString *)URLString parameters:(id)parameters success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+-(AFHTTPRequestOperation*)POST:(NSString *)URLString parameters:(id)parameters success:(void (^)(AFHTTPRequestOperation *opp, id ress))success failure:(void (^)(AFHTTPRequestOperation *opp, NSError *rss))failure
 {
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userTimeOut:) name:@"UserTimeOut" object:nil];
+    
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
     NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
     if (session&&[session length]>0) {
@@ -72,5 +75,20 @@ static RHNetworkService* _instance;
 }
 
 
+-(void)userTimeOut:(NSNotification *)noty {
+    self.delegate = [UIApplication sharedApplication].delegate;
+    if ([RHUserManager sharedInterface].username&&[[RHUserManager sharedInterface].username length]>0) {
+        [self.delegate sessionFail:nil];
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]]&&[[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]] length]>0) {
+            RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
+            controller.isEnter = YES;
+            UINavigationController *navi = (UINavigationController *)self.delegate.window.rootViewController;
+            UIViewController *vc = navi.viewControllers[navi.viewControllers.count - 1];
+            [vc.navigationController pushViewController:controller animated:YES];
+        }
+    }
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 @end
