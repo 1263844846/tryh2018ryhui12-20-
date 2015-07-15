@@ -74,14 +74,14 @@
 //        DLog(@"%@",url);
 
         RHErrorViewController* controller=[[RHErrorViewController alloc]initWithNibName:@"RHErrorViewController" bundle:nil];
-        controller.titleStr=@"银行卡余额不足";
-        controller.tipsStr=@"先往卡里塞点钱吧~";
-        controller.type=RHPayFail;
+        controller.titleStr = @"银行卡余额不足";
+        controller.tipsStr = @"先往卡里塞点钱吧~";
+        controller.type = RHPayFail;
         [self.navigationController pushViewController:controller animated:YES];
         return NO;
     }
     
-    if ([url containsString:@"/common/user/login/index"]) {
+    if ([url rangeOfString:@"/common/user/login/index"].location != NSNotFound) {
         if ([RHUserManager sharedInterface].username&&[[RHUserManager sharedInterface].username length]>0) {
             [app sessionFail:nil];
             if ([[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]]&&[[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]] length]>0) {

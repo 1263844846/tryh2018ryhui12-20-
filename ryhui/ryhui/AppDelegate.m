@@ -213,7 +213,6 @@
     [[NSUserDefaults standardUserDefaults] setObject:date forKey:@"backTime"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    
 }
 
 
@@ -224,7 +223,6 @@
     
     NSString *yearString=[dateFormatter stringFromDate:date];
     NSLog(@"------------%@",yearString);
-    
     NSString *yearString1=[dateFormatter stringFromDate:date2];
     NSLog(@"------------%@",yearString1);
     

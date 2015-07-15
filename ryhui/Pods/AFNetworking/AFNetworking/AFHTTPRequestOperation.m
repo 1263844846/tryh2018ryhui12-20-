@@ -128,7 +128,9 @@ static dispatch_group_t http_request_operation_completion_group() {
                 if (self.error) {
                     NSURL *dic = [self.error.userInfo objectForKey:@"NSErrorFailingURLKey"];
                     
-                    if ([[dic absoluteString] containsString:@"/common/user/login/index"]) {
+                    NSString *str = [dic absoluteString];
+                    
+                    if ([str rangeOfString:@"/common/user/login/index"].location != NSNotFound) {
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"UserTimeOut" object:dic];
                     }
                     if (failure) {

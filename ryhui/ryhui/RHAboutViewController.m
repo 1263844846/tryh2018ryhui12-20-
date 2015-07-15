@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *officalNetLabel;
 @property (weak, nonatomic) IBOutlet UILabel *officalWeiBoLabel;
+@property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 
 @end
 
@@ -30,6 +31,8 @@
     NSMutableAttributedString *weiBoString = [[NSMutableAttributedString alloc] initWithString:_officalWeiBoLabel.text];
     [weiBoString addAttributes:attributes range:NSMakeRange(0, weiBoString.length)];
     _officalWeiBoLabel.attributedText = weiBoString;
+    
+    self.versionLabel.text = [NSString stringWithFormat:@"V%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
 }
 
 -(void)viewWillAppear:(BOOL)animated

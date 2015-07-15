@@ -43,6 +43,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *captchaImageButton;
 @property (weak, nonatomic) IBOutlet UITextField *InvitationCodeTF;
 @property (weak, nonatomic) IBOutlet UIView *agreementView;
+@property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
+@property (weak, nonatomic) IBOutlet UIView *telNoticeView;
+@property (strong, nonatomic) IBOutlet UIView *kaihuAndPhoneView;
 
 //红包设置
 
@@ -95,8 +98,36 @@
     self.captchaPhoneButton.layer.masksToBounds=YES;
     
     [self setTheAttributeString:self.giftMoneyLabel.text];
-        
+    self.telNoticeView.hidden = YES;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(phoneNumberTaped:)];
+    [self.phoneLabel addGestureRecognizer:tap];
+    
 }
+
+-(void)phoneNumberTaped:(UITapGestureRecognizer *)tap {
+    
+    if (tap.state == UIGestureRecognizerStateBegan) {
+        self.phoneLabel.textColor = [UIColor blueColor];
+    } else if (tap.state == UIGestureRecognizerStateEnded) {
+        [self.view bringSubviewToFront:self.telNoticeView];
+        self.telNoticeView.hidden = NO;
+        self.phoneLabel.textColor = [UIColor colorWithRed:36.0/255 green:108.0/255 blue:161.0/255 alpha:1.0];
+    } else if (tap.state == UIGestureRecognizerStateCancelled) {
+        self.phoneLabel.textColor = [UIColor colorWithRed:36.0/255 green:108.0/255 blue:161.0/255 alpha:1.0];
+    }
+}
+
+
+- (IBAction)cancleButtonClicked:(UIButton *)sender {
+    self.telNoticeView.hidden = YES;
+}
+
+- (IBAction)callNumberButtonClicked:(UIButton *)sender {
+     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:4000104001"]];
+}
+
+
 
 -(void)setTheAttributeString:(NSString *)string {
     NSDictionary *attribute = @{NSForegroundColorAttributeName : [UIColor colorWithRed:249.0/255 green:212.0/255 blue:37.0/255 alpha:1.0], NSFontAttributeName: [UIFont systemFontOfSize:22.0]};
@@ -139,8 +170,8 @@
     
     self.scrollView.frame=CGRectMake(0,44, self.scrollView.frame.size.width, [UIScreen mainScreen].bounds.size.height-44-44-20);
     
-    self.createAccountView.frame=CGRectMake(0,44, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height-44-44-20);
-    self.createAccountView.contentSize=CGSizeMake(self.createAccountView.contentSize.width, 433);
+    self.createAccountView.frame=CGRectMake(0,44, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height-44-44-20 - 71);
+    self.createAccountView.contentSize=CGSizeMake(self.createAccountView.contentSize.width, 370);
     
     self.captchaPhoneButton.frame=CGRectMake([UIScreen mainScreen].bounds.size.width-8-80, self.captchaPhoneButton.frame.origin.y, 80, 40);
     
@@ -428,6 +459,9 @@
                 [self selectOtherAciton:nil];
                 [self setNavigationBackButton];
 
+                self.kaihuAndPhoneView.frame = CGRectMake(0, CGRectGetHeight([UIScreen mainScreen].bounds) - CGRectGetHeight(self.kaihuAndPhoneView.frame) - 64, CGRectGetWidth(self.kaihuAndPhoneView.frame), CGRectGetHeight(self.kaihuAndPhoneView.frame));
+                [self.view addSubview:self.kaihuAndPhoneView];
+                [self.view bringSubviewToFront:self.kaihuAndPhoneView];
 //                self.giftView.frame = CGRectMake(0, -20, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) + 64);
 //                [self.navigationController.navigationBar addSubview:self.giftView];
             }

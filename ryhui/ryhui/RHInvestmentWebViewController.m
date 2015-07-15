@@ -94,7 +94,7 @@
         return NO;
     }
     
-    if ([url containsString:@"/common/user/login/index"]) {
+    if ([url rangeOfString:@"/common/user/login/index"].location != NSNotFound) {
         if ([RHUserManager sharedInterface].username&&[[RHUserManager sharedInterface].username length]>0) {
             [app sessionFail:nil];
             if ([[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]]&&[[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]] length]>0) {

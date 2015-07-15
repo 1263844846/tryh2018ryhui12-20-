@@ -111,10 +111,10 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refesh) name:UIApplicationWillEnterForegroundNotification object:nil];
     
-    NSDictionary *attributes = @{NSUnderlineStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]};
-    NSMutableAttributedString *netString = [[NSMutableAttributedString alloc] initWithString:_questionLabel.text];
-    [netString addAttributes:attributes range:NSMakeRange(8, netString.length - 8)];
-    _questionLabel.attributedText = netString;
+//    NSDictionary *attributes = @{NSUnderlineStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+//    NSMutableAttributedString *netString = [[NSMutableAttributedString alloc] initWithString:_questionLabel.text];
+//    [netString addAttributes:attributes range:NSMakeRange(8, netString.length - 8)];
+//    _questionLabel.attributedText = netString;
     
     self.noticeView.hidden = YES;
 }
