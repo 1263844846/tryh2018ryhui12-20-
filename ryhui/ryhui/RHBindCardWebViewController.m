@@ -22,13 +22,8 @@
 @implementation RHBindCardWebViewController
 @synthesize delegate;
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self configBackButton];
-    [self configTitleWithString:@"绑卡"];
-    
-    app = [UIApplication sharedApplication].delegate;
-
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/account/bindCard",[RHNetworkService instance].doMain]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
     [request setHTTPMethod: @"POST"];
@@ -38,6 +33,16 @@
     }
     self.webView.delegate = self;
     [self.webView loadRequest: request];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self configBackButton];
+    [self configTitleWithString:@"绑卡"];
+    
+    app = [UIApplication sharedApplication].delegate;
+
+   
 }
 
 - (void)back {

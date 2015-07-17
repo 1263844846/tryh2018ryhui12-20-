@@ -30,9 +30,14 @@
     [super viewDidLoad];
     [self configBackButton];
     [self configTitleWithString:@"我的账户"];
+   
+    self.scrollView.contentSize=CGSizeMake(self.scrollView.frame.size.width, 414);
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self getMyAccountData];
     [self checkout];
-    self.scrollView.contentSize=CGSizeMake(self.scrollView.frame.size.width, 414);
 }
 //average = "9.35";
 //collectCapital = 241400;

@@ -57,53 +57,6 @@
         self.ryUsername.text=[NSString stringWithFormat:@"ryh_%@",[RHUserManager sharedInterface].username];
     }
     
-    if (![RHUserManager sharedInterface].username) {
-        self.errorLabel.text=@"您尚未登录账号";
-        [self.errorButton setTitle:@"账号登录" forState:UIControlStateNormal];
-        self.overView.hidden=NO;
-        self.topButton.hidden=YES;
-    }else{
-        [self checkout];
-        
-        if ([RHUserManager sharedInterface].custId) {
-            self.overView.hidden=YES;
-        }else{
-            self.overView.hidden=NO;
-        }
-    }
-    
-    AFHTTPRequestOperationManager* manager=[AFHTTPRequestOperationManager manager];
-    manager.responseSerializer=[[AFCompoundResponseSerializer alloc]init];
-    NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
-    NSLog(@"------------------%@",session);
-    
-    if (session&&[session length]>0) {
-        [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
-    }
-    [manager POST:[NSString stringWithFormat:@"%@front/payment/account/queryAccountFinishedBonuses",[RHNetworkService instance].doMain] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        DLog(@"result==%@ <<<",[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
-        if ([responseObject isKindOfClass:[NSData class]]) {
-            
-            NSDictionary* dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            
-            NSLog(@"------------------%@",dic);
-            
-            NSString* amount=[dic objectForKey:@"money"];
-            if (amount&&[amount length]>0) {
-                RHGetGiftViewController* controller=[[RHGetGiftViewController alloc]initWithNibName:@"RHGetGiftViewController" bundle:nil];
-                controller.amount=amount;
-                [self.navigationController pushViewController:controller animated:NO];
-//                self.giftView.frame = CGRectMake(0, -20, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) + 64);
-//                [self.navigationController.navigationBar addSubview:self.giftView];
-            }
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        DLog(@"%@",[[NSString alloc] initWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] encoding:NSUTF8StringEncoding]);
-    }];
-
-    
-    
     self.myMessageNumLabel.layer.cornerRadius=8;
     self.myMessageNumLabel.layer.masksToBounds=YES;
     self.myMessageNumLabel.hidden=YES;
@@ -184,6 +137,51 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
+    }];
+    
+    if (![RHUserManager sharedInterface].username) {
+        self.errorLabel.text=@"您尚未登录账号";
+        [self.errorButton setTitle:@"账号登录" forState:UIControlStateNormal];
+        self.overView.hidden=NO;
+        self.topButton.hidden=YES;
+    }else{
+        [self checkout];
+        
+        if ([RHUserManager sharedInterface].custId) {
+            self.overView.hidden=YES;
+        }else{
+            self.overView.hidden=NO;
+        }
+    }
+    
+    AFHTTPRequestOperationManager* manager=[AFHTTPRequestOperationManager manager];
+    manager.responseSerializer=[[AFCompoundResponseSerializer alloc]init];
+    NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
+    NSLog(@"------------------%@",session);
+    
+    if (session&&[session length]>0) {
+        [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
+    }
+    [manager POST:[NSString stringWithFormat:@"%@front/payment/account/queryAccountFinishedBonuses",[RHNetworkService instance].doMain] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //        DLog(@"result==%@ <<<",[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        if ([responseObject isKindOfClass:[NSData class]]) {
+            
+            NSDictionary* dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            
+            NSLog(@"------------------%@",dic);
+            
+            NSString* amount=[dic objectForKey:@"money"];
+            if (amount&&[amount length]>0) {
+                RHGetGiftViewController* controller=[[RHGetGiftViewController alloc]initWithNibName:@"RHGetGiftViewController" bundle:nil];
+                controller.amount=amount;
+                [self.navigationController pushViewController:controller animated:NO];
+                //                self.giftView.frame = CGRectMake(0, -20, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) + 64);
+                //                [self.navigationController.navigationBar addSubview:self.giftView];
+            }
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //        DLog(@"%@",[[NSString alloc] initWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] encoding:NSUTF8StringEncoding]);
     }];
 
 }

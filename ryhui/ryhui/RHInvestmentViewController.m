@@ -45,6 +45,11 @@
 @synthesize projectFund;
 @synthesize giftId=_giftId;
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self checkout];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configBackButton];
@@ -52,8 +57,7 @@
     [self configTitleWithString:@"投资"];
     
     [self setupWithDic:self.dataDic];
-
-    [self checkout];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textchange:) name:UITextFieldTextDidChangeNotification object:nil];
 

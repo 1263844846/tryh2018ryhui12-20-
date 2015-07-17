@@ -31,10 +31,13 @@
     
     [self configBackButton];
     [self configTitleWithString:@"投资"];
-    
-    
+
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@common/main/invest",[RHNetworkService instance].doMain]];
-//    NSString *body = [NSString stringWithFormat: @"money=%@&projectId=%@&giftId=%@",price,projectId,giftId?giftId:@""];
+    //    NSString *body = [NSString stringWithFormat: @"money=%@&projectId=%@&giftId=%@",price,projectId,giftId?giftId:@""];
     
     NSString *body = [NSString stringWithFormat: @"money=%@&projectId=%@&giftId=%@&investType=App",price,projectId,giftId?giftId:@""];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
@@ -45,7 +48,6 @@
     if (session&&[session length]>0) {
         [request setValue:session forHTTPHeaderField:@"cookie"];
     }
-    
     [request setHTTPBody:[body dataUsingEncoding: NSUTF8StringEncoding]];
     
     [self.webView loadRequest: request];

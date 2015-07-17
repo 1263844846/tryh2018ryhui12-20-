@@ -34,7 +34,9 @@
 
 -(void)back
 {
-    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+    });
 }
 
 

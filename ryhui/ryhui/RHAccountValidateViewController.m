@@ -23,7 +23,10 @@
     [super viewDidLoad];
     [self configBackButton];
     [self configTitleWithString:@"用户名验证"];
-    
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self changeCaptcha];
 }
 

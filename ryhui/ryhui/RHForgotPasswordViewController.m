@@ -29,15 +29,18 @@
     [self configBackButton];
     
     [self configTitleWithString:@"修改登录密码"];
-    
-    [self changeCaptcha];
-    
+   
     self.oldPasswordTF.secureTextEntry=YES;
     self.nnewPasswordTF.secureTextEntry=YES;
     self.rnewPasswordTF.secureTextEntry=YES;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textBegin:) name:UITextFieldTextDidBeginEditingNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+     [self changeCaptcha];
 }
 
 -(void)textBegin:(NSNotification*)not

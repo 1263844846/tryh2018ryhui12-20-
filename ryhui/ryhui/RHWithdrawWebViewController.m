@@ -30,7 +30,10 @@
     
     [self configBackButton];
     [self configTitleWithString:@"提现"];
-    
+
+}
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/account/cash",[RHNetworkService instance].doMain]];
     NSString *body = [NSString stringWithFormat: @"money=%@&captcha=%@",amount,captcha];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];

@@ -32,7 +32,11 @@
     [super viewDidLoad];
     [self configBackButton];
     [self configTitleWithString:@"请选择红包"];
-    
+
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     self.dataArray=[[NSMutableArray alloc]initWithCapacity:0];
     
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;

@@ -30,12 +30,14 @@
     [self configBackButton];
     [self configTitleWithString:@"我的投资"];
     
-    [self initData];
+   
     
     self.segmentContentView = [[RHSegmentContentView alloc] initWithFrame:CGRectMake(0, 50, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].applicationFrame.size.height-50-40-self.navigationController.navigationBar.frame.size.height)];
 //    DLog(@"%f----%f",[UIScreen mainScreen].applicationFrame.size.height-50-40-self.navigationController.navigationBar.frame.size.height,self.navigationController.navigationBar.frame.size.height);
     [_segmentContentView setDelegate:self];
     [self.view addSubview:_segmentContentView];
+    
+     [self initData];
     
     NSString* one=@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"projectStatus\",\"op\":\"in\",\"data\":[\"loans\",\"repayment_normal\",\"repayment_abnormal\"]}]}";
     

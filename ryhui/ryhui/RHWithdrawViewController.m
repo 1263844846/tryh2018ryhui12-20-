@@ -36,11 +36,14 @@
 
 @implementation RHWithdrawViewController
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self getWithdrawData];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configBackButton];
     [self configTitleWithString:@"提现"];
-    [self getWithdrawData];
     self.overView.hidden = YES;
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, 630);
     self.changeCardsButton.layer.cornerRadius = 9;

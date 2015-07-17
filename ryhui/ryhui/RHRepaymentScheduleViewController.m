@@ -31,11 +31,15 @@
     [self configBackButton];
     [self configTitleWithString:@"我的消息"];
     
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     self.dataArray=[[NSMutableArray alloc]initWithCapacity:0];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor clearColor];
-
+    
     _headerView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
     _headerView.delegate = self;
     [self.tableView addSubview:_headerView];

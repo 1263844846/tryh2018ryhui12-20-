@@ -21,7 +21,7 @@
 // THE SOFTWARE.
 
 #import "AFHTTPRequestOperation.h"
-
+#import "MBProgressHUD.h"
 static dispatch_queue_t http_request_operation_processing_queue() {
     static dispatch_queue_t af_http_request_operation_processing_queue;
     static dispatch_once_t onceToken;
@@ -117,15 +117,18 @@ static dispatch_group_t http_request_operation_completion_group() {
         }
 
         dispatch_async(http_request_operation_processing_queue(), ^{
+            
             if (self.error) {
                 if (failure) {
                     dispatch_group_async(self.completionGroup ?: http_request_operation_completion_group(), self.completionQueue ?: dispatch_get_main_queue(), ^{
                         failure(self, self.error);
+                        [self hideMBP];
                     });
                 }
             } else {
                 id responseObject = self.responseObject;
                 if (self.error) {
+                    
                     NSURL *dic = [self.error.userInfo objectForKey:@"NSErrorFailingURLKey"];
                     
                     NSString *str = [dic absoluteString];
@@ -136,12 +139,14 @@ static dispatch_group_t http_request_operation_completion_group() {
                     if (failure) {
                         dispatch_group_async(self.completionGroup ?: http_request_operation_completion_group(), self.completionQueue ?: dispatch_get_main_queue(), ^{
                             failure(self, self.error);
+                            [self hideMBP];
                         });
                     }
                 } else {
                     if (success) {
                         dispatch_group_async(self.completionGroup ?: http_request_operation_completion_group(), self.completionQueue ?: dispatch_get_main_queue(), ^{
                             success(self, responseObject);
+                            [self hideMBP];
                         });
                     }
                 }
@@ -152,9 +157,22 @@ static dispatch_group_t http_request_operation_completion_group() {
             }
         });
     };
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 #pragma clang diagnostic pop
 }
 
+
+-(void)hideMBP {
+    UINavigationController *navi = (UINavigationController *)[UIApplication sharedApplication].delegate.window.rootViewController;
+    UIViewController *vc;
+    if (navi) {
+        vc = navi.viewControllers[navi.viewControllers.count - 1];
+        if (vc != nil) {
+            [MBProgressHUD hideAllHUDsForView:vc.view animated:YES];
+        }
+    }
+
+}
 #pragma mark - AFURLRequestOperation
 
 - (void)pause {

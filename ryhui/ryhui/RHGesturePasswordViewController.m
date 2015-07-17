@@ -22,6 +22,7 @@
 @implementation RHGesturePasswordViewController{
     NSString * previousString;
     NSString * password;
+    UIViewController *oringinVC;
 }
 
 @synthesize gesturePasswordView;
@@ -197,14 +198,23 @@
                 [self clear];
                 
             }else{
-                if (self.isEnter) {
-                    [self.navigationController popViewControllerAnimated:NO];
-                } else {
+//                if (self.isEnter) {
+////                    UINavigationController *navi = (UINavigationController *)delegate.window.rootViewController;
+////                    
+////                    NSLog(@"--------------%d",navi.viewControllers.count);
+////                    if (navi.viewControllers.count > 2) {
+////                        UIViewController *vc = navi.viewControllers[navi.viewControllers.count - 2];
+////                        [self.navigationController popToViewController:vc animated:NO];
+////                    } else {
+//////                        [self.navigationController popViewControllerAnimated:NO];
+////                        UIViewController *vc = navi.viewControllers[navi.viewControllers.count - 1];
+////                    }
+//                    [self.navigationController popViewControllerAnimated:NO];
+//                } else {
                     [[[RHTabbarManager sharedInterface] selectTabbarMain] popToRootViewControllerAnimated:NO];
-                }
+//                }
             }
         }
-
         [[NSNotificationCenter defaultCenter] postNotificationName:@"RHGestureSuccessed" object:nil];
         return YES;
     }

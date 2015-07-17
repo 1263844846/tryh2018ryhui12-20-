@@ -29,7 +29,10 @@
     
     [self configBackButton];
     [self configTitleWithString:@"充值"];
-    
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/account/recharge",[RHNetworkService instance].doMain]];
     NSString *body = [NSString stringWithFormat: @"money=%@&type=QP",price];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
@@ -40,7 +43,6 @@
     }
     [request setHTTPBody: [body dataUsingEncoding: NSUTF8StringEncoding]];
     [self.webView loadRequest: request];
-    
 }
 
 -(void)webViewDidStartLoad:(UIWebView *)webView

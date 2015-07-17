@@ -41,12 +41,18 @@
     
     isAllSelected = NO;
     showLoadMoreButton = YES;
-    readMessages = [[NSMutableArray alloc] init];
-    self.dataArray = [[NSMutableArray alloc]initWithCapacity:0];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor clearColor];
 
+    [self setRightButtonItem];
+    self.selecteBar.hidden = YES;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    readMessages = [[NSMutableArray alloc] init];
+    self.dataArray = [[NSMutableArray alloc]initWithCapacity:0];
     _headerView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
     _headerView.delegate = self;
     [self.tableView addSubview:_headerView];
@@ -56,12 +62,6 @@
     self.tableView.tableFooterView = _footerView;
     _footerView.hidden = YES;
     [_headerView egoRefreshScrollViewDataSourceStartManualLoading:self.tableView];
-    
-    [self setRightButtonItem];
-    self.selecteBar.hidden = YES;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
     if (self.dataArray.count > 0) {
         NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:0];
         [self.tableView scrollToRowAtIndexPath:path atScrollPosition:UITableViewScrollPositionTop animated:NO];

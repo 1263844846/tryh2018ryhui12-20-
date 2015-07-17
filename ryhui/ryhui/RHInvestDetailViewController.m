@@ -40,6 +40,11 @@
     self.tableView.backgroundColor=[UIColor clearColor];
 
     // Do any additional setup after loading the view.
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     _headerView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
     _headerView.delegate = self;
     [self.tableView addSubview:_headerView];
@@ -51,8 +56,6 @@
     
     showLoadMoreButton=YES;
     [_headerView egoRefreshScrollViewDataSourceStartManualLoading:self.tableView];
-    
-    
 }
 - (void)dealloc
 {

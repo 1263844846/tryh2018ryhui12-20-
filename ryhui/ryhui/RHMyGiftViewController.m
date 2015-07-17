@@ -30,8 +30,6 @@
     [self configBackButton];
     [self configTitleWithString:@"我的红包"];
     
-    [self initData];
-    
     self.segmentContentView = [[RHSegmentContentView alloc] initWithFrame:CGRectMake(0, 50, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].applicationFrame.size.height-50-40-self.navigationController.navigationBar.frame.size.height)];
 //    DLog(@"%f----%f",[UIScreen mainScreen].applicationFrame.size.height-50-40-self.navigationController.navigationBar.frame.size.height,self.navigationController.navigationBar.frame.size.height);
     [_segmentContentView setDelegate:self];
@@ -62,6 +60,7 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden=NO;
+     [self initData];
 }
 
 -(void)initData

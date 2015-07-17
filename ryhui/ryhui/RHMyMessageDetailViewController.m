@@ -23,7 +23,7 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+     [self refreshTheData];
 }
 
 -(void)refreshTheData {
@@ -50,9 +50,7 @@
     
     self.titleLabel.text = titleStr;
     self.contentLabel.text = contentStr;
-    
-    [self refreshTheData];
-  
+ 
 }
 
 - (IBAction)pushMain:(id)sender {

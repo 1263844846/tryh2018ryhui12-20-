@@ -11,9 +11,8 @@
 #import "RHMyGiftViewController.h"
 
 @interface RHGetGiftViewController ()
-@property (weak, nonatomic) IBOutlet UIImageView *typeImageView;
-@property (weak, nonatomic) IBOutlet UILabel *noticeLabel;    
-@property (weak, nonatomic) IBOutlet UILabel *giftMoneyLabel;  //红包现金
+
+@property (weak, nonatomic) IBOutlet UILabel *amountLabel;
 
 
 @end
@@ -24,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-//    self.amountLabel.text=[NSString stringWithFormat:@"￥%@元",amount];
+    self.amountLabel.text=[NSString stringWithFormat:@"￥%@ 元",amount];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -272,13 +272,25 @@
     
     if (isOut) {
         if ([RHUserManager sharedInterface].username&&[[RHUserManager sharedInterface].username length]>0) {
-            [self sessionFail:nil];
             if ([[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]]&&[[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]] length]>0) {
                 RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
                 controller.isEnter = YES;
+                UINavigationController *nc = [[RHTabbarManager sharedInterface] selectTabbarMain];
+                UINavigationController *nc1 = [[RHTabbarManager sharedInterface] selectTabbarMore];
+                UINavigationController *nc2 = [[RHTabbarManager sharedInterface] selectTabbarUser];
                 UINavigationController *navi = (UINavigationController *)self.window.rootViewController;
+                
                 UIViewController *vc = navi.viewControllers[navi.viewControllers.count - 1];
-                [vc.navigationController pushViewController:controller animated:YES];
+                
+                if ([vc.navigationController isEqual:nc]) {
+                    [vc.navigationController pushViewController:controller animated:NO];
+                } else if ([vc.navigationController isEqual:nc1]) {
+                    [vc.navigationController pushViewController:controller animated:NO];
+                } else if ([vc.navigationController isEqual:nc2]) {
+                    [vc.navigationController pushViewController:controller animated:NO];
+                } else {
+                    [self chooseWindowToIndicate];
+                }
             }
         }
     }

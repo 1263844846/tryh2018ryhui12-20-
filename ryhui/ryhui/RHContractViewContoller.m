@@ -24,6 +24,10 @@
     app = [UIApplication sharedApplication].delegate;
     
     [self configBackButton];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     NSURL *url = nil;
     if (isAgreen) {
         [self configTitleWithString:@"借款协议"];
@@ -32,7 +36,7 @@
         [self configTitleWithString:@"合同"];
         url = [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/agreement/agreementInvestor?projectId=%@&userId=%@",[RHNetworkService instance].doMain,self.projectId,[RHUserManager sharedInterface].userId]];
     }
-
+    
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
     [request setHTTPMethod: @"POST"];
     NSString* session = [[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
@@ -43,7 +47,6 @@
     [self.webView loadRequest: request];
     [self.webView setScalesPageToFit:YES];
 }
-
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {

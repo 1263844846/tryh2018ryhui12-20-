@@ -32,20 +32,48 @@
     self.rechargeButton.layer.cornerRadius=9;
     
     [self configTitleWithString:@"充值"];
-    [self.textField becomeFirstResponder];
-    
+//    [self.textField becomeFirstResponder];
     if (balance&&[balance length]>0) {
         self.balanceLabel.text=balance;
     }else{
         self.balanceLabel.text=@"0.00";
     }
     
-    [self getBindCard];
+     [self getBindCard];
+    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden=NO;
+    self.rechargeButton.userInteractionEnabled = YES;
+    [[RHNetworkService instance] POST:@"front/payment/account/countUnReadMessage" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //        DLog(@"%@",responseObject);
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSString* numStr=nil;
+            if (![[responseObject objectForKey:@"msgCount"] isKindOfClass:[NSNull class]]) {
+                if ([[responseObject objectForKey:@"msgCount"] isKindOfClass:[NSNumber class]]) {
+                    numStr=[[responseObject objectForKey:@"msgCount"] stringValue];
+                }else{
+                    numStr=[responseObject objectForKey:@"msgCount"];
+                }
+            }
+            if (numStr) {
+                [[NSUserDefaults standardUserDefaults] setObject:numStr forKey:@"RHMessageNumSave"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"RHMessageNum" object:numStr];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSURL *dic = [error.userInfo objectForKey:@"NSErrorFailingURLKey"];
+        
+        NSString *str = [dic absoluteString];
+        
+        if ([str rangeOfString:@"/common/user/login/index"].location != NSNotFound) {
+            self.rechargeButton.userInteractionEnabled = NO;
+        }
+    }];
+
 }
 
 -(void)getBindCard
@@ -60,16 +88,19 @@
                 array=[responseObject objectForKey:@"qpCard"];
                 if ([array isKindOfClass:[NSArray class]]&&[array count]>0) {
                     isQpCard=YES;
+                    self.rechargeButton.userInteractionEnabled = YES;
                 }
             }
         }
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        
     }];
 }
 
 - (IBAction)recharge:(id)sender {
+    [self.textField resignFirstResponder];
     if ([self.textField.text length]<=0) {
         [RHUtility showTextWithText:@"请输入充值金额"];
         return;
@@ -91,7 +122,7 @@
         controllers.price=self.textField.text;
         [self.navigationController pushViewController:controllers animated:YES];
     }
-
+    self.rechargeButton.userInteractionEnabled = NO;
     
 }
 -(BOOL)textFieldShouldReturn:(UITextField *)textField

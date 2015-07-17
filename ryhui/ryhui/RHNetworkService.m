@@ -8,6 +8,7 @@
 
 #import "RHNetworkService.h"
 #import "RHGesturePasswordViewController.h"
+#import "MBProgressHUD.h"
 static RHNetworkService* _instance;
 
 @implementation RHNetworkService
@@ -58,13 +59,29 @@ static RHNetworkService* _instance;
 -(AFHTTPRequestOperation*)POST:(NSString *)URLString parameters:(id)parameters success:(void (^)(AFHTTPRequestOperation *opp, id ress))success failure:(void (^)(AFHTTPRequestOperation *opp, NSError *rss))failure
 {
     
+    self.delegate = [UIApplication sharedApplication].delegate;
+    UINavigationController *navi = (UINavigationController *)self.delegate.window.rootViewController;
+    UIViewController *vc;
+    if (navi) {
+        vc = navi.viewControllers[navi.viewControllers.count - 1];
+        if (vc != nil) {
+            [MBProgressHUD showHUDAddedTo:vc.view animated:YES];
+        }
+    }
+    
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userTimeOut:) name:@"UserTimeOut" object:nil];
     
+
+    
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
+    [manager.operationQueue cancelAllOperations];
     NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
     if (session&&[session length]>0) {
         [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
     }
+    
+    
     return [manager POST:[NSString stringWithFormat:@"%@%@",[self doMain],URLString]
               parameters:parameters
     constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
@@ -78,13 +95,30 @@ static RHNetworkService* _instance;
 -(void)userTimeOut:(NSNotification *)noty {
     self.delegate = [UIApplication sharedApplication].delegate;
     if ([RHUserManager sharedInterface].username&&[[RHUserManager sharedInterface].username length]>0) {
-        [self.delegate sessionFail:nil];
         if ([[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]]&&[[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]] length]>0) {
             RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
             controller.isEnter = YES;
+
             UINavigationController *navi = (UINavigationController *)self.delegate.window.rootViewController;
+            
             UIViewController *vc = navi.viewControllers[navi.viewControllers.count - 1];
-            [vc.navigationController pushViewController:controller animated:YES];
+            if (vc != nil) {
+                [MBProgressHUD showHUDAddedTo:vc.view animated:YES];
+            }
+            
+            NSLog(@"--------------%d",navi.viewControllers.count);
+            
+            if ([vc.navigationController isEqual: [[RHTabbarManager sharedInterface] selectTabbarMain]]) {
+                [[[RHTabbarManager sharedInterface] selectTabbarMain] pushViewController:controller animated:NO];
+            }
+            
+            if ([vc.navigationController isEqual:[[RHTabbarManager sharedInterface] selectTabbarMore]]) {
+                [[[RHTabbarManager sharedInterface] selectTabbarMore] pushViewController:controller animated:NO];
+            }
+            if ([vc.navigationController isEqual:[[RHTabbarManager sharedInterface] selectTabbarUser]]) {
+                [[[RHTabbarManager sharedInterface] selectTabbarUser] pushViewController:controller animated:NO];
+            }
+            [self.delegate sessionFail:nil];
         }
     }
     

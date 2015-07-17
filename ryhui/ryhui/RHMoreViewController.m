@@ -21,6 +21,28 @@
 @end
 
 @implementation RHMoreViewController
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[RHNetworkService instance] POST:@"front/payment/account/countUnReadMessage" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //        DLog(@"%@",responseObject);
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSString* numStr=nil;
+            if (![[responseObject objectForKey:@"msgCount"] isKindOfClass:[NSNull class]]) {
+                if ([[responseObject objectForKey:@"msgCount"] isKindOfClass:[NSNumber class]]) {
+                    numStr=[[responseObject objectForKey:@"msgCount"] stringValue];
+                }else{
+                    numStr=[responseObject objectForKey:@"msgCount"];
+                }
+            }
+            if (numStr) {
+                [[NSUserDefaults standardUserDefaults] setObject:numStr forKey:@"RHMessageNumSave"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"RHMessageNum" object:numStr];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    }];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

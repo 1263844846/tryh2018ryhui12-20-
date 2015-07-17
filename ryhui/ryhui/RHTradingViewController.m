@@ -30,11 +30,16 @@
     // Do any additional setup after loading the view from its nib.
     [self configBackButton];
     [self configTitleWithString:@"交易记录"];
-    self.dataArray=[[NSMutableArray alloc]initWithCapacity:0];
-    
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor=[UIColor clearColor];
+}
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+  
+    
+    self.dataArray=[[NSMutableArray alloc]initWithCapacity:0];
+    
     // Do any additional setup after loading the view.
     _headerView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
     _headerView.delegate = self;
@@ -44,24 +49,39 @@
     [_footerView.footerButton addTarget:self action:@selector(showMoreApp:) forControlEvents:UIControlEventTouchUpInside];
     self.tableView.tableFooterView = _footerView;
     _footerView.hidden=YES;
-
-    showLoadMoreButton=YES;
-    [_headerView egoRefreshScrollViewDataSourceStartManualLoading:self.tableView];
-
     
+    showLoadMoreButton=YES;
+    _reloading = NO;
+    [_headerView egoRefreshScrollViewDataSourceStartManualLoading:self.tableView];
 }
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
     [_footerView.activityIndicatorView stopAnimating];
-    _footerView.activityIndicatorView = nil;
-    [_footerView.footerButton removeTarget:self action:@selector(showMoreApp:) forControlEvents:UIControlEventTouchUpInside];
-    _footerView.footerButton = nil;
-    _footerView = nil;
-    self.tableView = nil;
-    _headerView = nil;
+//    _footerView.activityIndicatorView = nil;
+//    [_footerView.footerButton removeTarget:self action:@selector(showMoreApp:) forControlEvents:UIControlEventTouchUpInside];
+//    _footerView.footerButton = nil;
+//    _footerView = nil;
+//    self.tableView = nil;
+//    _headerView = nil;
+//    _reloading = NO;
+
 }
+
+//- (void)dealloc
+//{
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//
+//    [_footerView.activityIndicatorView stopAnimating];
+//    _footerView.activityIndicatorView = nil;
+//    [_footerView.footerButton removeTarget:self action:@selector(showMoreApp:) forControlEvents:UIControlEventTouchUpInside];
+//    _footerView.footerButton = nil;
+//    _footerView = nil;
+//    self.tableView = nil;
+//    _headerView = nil;
+//}
 //{"class":"view.JqRow","id":1935,"version":null,"cell":{"id":1935,"fee":null,"custId":"6000060000735977","relatedId":null,"description":"期数:3","userId":"29","money":2293.05,"dateCreated":"2015-09-12 00:02:27","projectId":248,"type":"PenaltyInterest","orderId":"00000000000000014557"}
 -(void)getTrading
 {

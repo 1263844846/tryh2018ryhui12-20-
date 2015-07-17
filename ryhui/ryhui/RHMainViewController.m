@@ -71,26 +71,7 @@
     
     self.tableView.tableFooterView=self.footView;
     
-    [[RHNetworkService instance] POST:@"front/payment/account/countUnReadMessage" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        DLog(@"%@",responseObject);
-        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-            NSString* numStr=nil;
-            if (![[responseObject objectForKey:@"msgCount"] isKindOfClass:[NSNull class]]) {
-                if ([[responseObject objectForKey:@"msgCount"] isKindOfClass:[NSNumber class]]) {
-                    numStr=[[responseObject objectForKey:@"msgCount"] stringValue];
-                }else{
-                    numStr=[responseObject objectForKey:@"msgCount"];
-                }
-            }
-            if (numStr) {
-                [[NSUserDefaults standardUserDefaults] setObject:numStr forKey:@"RHMessageNumSave"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"RHMessageNum" object:numStr];
-            }
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    }];
-    
+  
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refeshMainViewDataWithState:) name:UIApplicationWillEnterForegroundNotification object:nil];
     
     [self getAppBanner];
@@ -204,6 +185,26 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self refeshMainViewDataWithState:0];
+    
+    [[RHNetworkService instance] POST:@"front/payment/account/countUnReadMessage" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //        DLog(@"%@",responseObject);
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSString* numStr=nil;
+            if (![[responseObject objectForKey:@"msgCount"] isKindOfClass:[NSNull class]]) {
+                if ([[responseObject objectForKey:@"msgCount"] isKindOfClass:[NSNumber class]]) {
+                    numStr=[[responseObject objectForKey:@"msgCount"] stringValue];
+                }else{
+                    numStr=[responseObject objectForKey:@"msgCount"];
+                }
+            }
+            if (numStr) {
+                [[NSUserDefaults standardUserDefaults] setObject:numStr forKey:@"RHMessageNumSave"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"RHMessageNum" object:numStr];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    }];
 }
 
 - (void)refeshMainViewDataWithState:(int) state {
