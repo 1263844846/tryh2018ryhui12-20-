@@ -253,7 +253,7 @@
     
    long int time = ([dayString integerValue] - [dayString1 integerValue]) * 24 + ([hourString integerValue] - [hourString1 integerValue]) * 60 + ([minuteString integerValue] - [minuteString1 integerValue]);
     
-    if (time > 3) {
+    if (time > 20) {
         return YES;
     }
     

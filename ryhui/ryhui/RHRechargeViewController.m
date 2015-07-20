@@ -40,7 +40,6 @@
     }
     
      [self getBindCard];
-    
 }
 -(void)viewWillAppear:(BOOL)animated
 {

@@ -12,6 +12,7 @@
 #import "RHMyMessageViewController.h"
 @interface RHGesturePasswordViewController ()
 {
+    AppDelegate *app;
     BOOL isDrawPan;
     int checkNum;
 }
@@ -44,7 +45,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     previousString = [NSString string];
-    
+    app = [UIApplication sharedApplication].delegate;
     password = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]];
    
 //    DLog(@"%@",password);
@@ -211,6 +212,7 @@
 ////                    }
 //                    [self.navigationController popViewControllerAnimated:NO];
 //                } else {
+                    [app sessionFail:nil];
                     [[[RHTabbarManager sharedInterface] selectTabbarMain] popToRootViewControllerAnimated:NO];
 //                }
             }

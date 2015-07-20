@@ -9,6 +9,7 @@
 #import "RHNetworkService.h"
 #import "RHGesturePasswordViewController.h"
 #import "MBProgressHUD.h"
+#import "RHMainViewController.h"
 static RHNetworkService* _instance;
 
 @implementation RHNetworkService
@@ -30,8 +31,8 @@ static RHNetworkService* _instance;
     //localTest
 //    return @"http://192.168.1.112:8080/TinyFinance/";
     
-    return @"https://123.57.133.7/";
-//    return @"https://app.ryhui.com/";
+//    return @"https://123.57.133.7/";
+    return @"https://app.ryhui.com/";
 
 #ifdef DEBUG
     return @"https://www.ryhui.com/";
@@ -45,9 +46,9 @@ static RHNetworkService* _instance;
     //localTest
 //    return @"http://192.168.1.112:8080/TinyFinance/";
     
-    return @"https://123.57.133.7/";
+//    return @"https://123.57.133.7/";
     
-//    return @"https://app.ryhui.com/";
+    return @"https://app.ryhui.com/";
     
 #ifdef DEBUG
     return @"https://www.ryhui.com/";
@@ -94,31 +95,35 @@ static RHNetworkService* _instance;
 
 -(void)userTimeOut:(NSNotification *)noty {
     self.delegate = [UIApplication sharedApplication].delegate;
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"RHSESSION"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     if ([RHUserManager sharedInterface].username&&[[RHUserManager sharedInterface].username length]>0) {
         if ([[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]]&&[[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]] length]>0) {
             RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
-            controller.isEnter = YES;
+//            controller.isEnter = YES;
 
+            UINavigationController *nv = [[RHTabbarManager sharedInterface] selectTabbarMain];
+            UINavigationController *nv1 = [[RHTabbarManager sharedInterface] selectTabbarMore];
+            UINavigationController *nv2 = [[RHTabbarManager sharedInterface] selectTabbarUser];
             UINavigationController *navi = (UINavigationController *)self.delegate.window.rootViewController;
-            
             UIViewController *vc = navi.viewControllers[navi.viewControllers.count - 1];
+            
             if (vc != nil) {
                 [MBProgressHUD showHUDAddedTo:vc.view animated:YES];
             }
             
-            NSLog(@"--------------%d",navi.viewControllers.count);
-            
-            if ([vc.navigationController isEqual: [[RHTabbarManager sharedInterface] selectTabbarMain]]) {
-                [[[RHTabbarManager sharedInterface] selectTabbarMain] pushViewController:controller animated:NO];
+            if ([vc.navigationController isEqual:nv ]) {
+                [vc.navigationController pushViewController:controller animated:NO];
             }
             
-            if ([vc.navigationController isEqual:[[RHTabbarManager sharedInterface] selectTabbarMore]]) {
-                [[[RHTabbarManager sharedInterface] selectTabbarMore] pushViewController:controller animated:NO];
+            if ([vc.navigationController isEqual:nv1]) {
+                [vc.navigationController pushViewController:controller animated:NO];
             }
-            if ([vc.navigationController isEqual:[[RHTabbarManager sharedInterface] selectTabbarUser]]) {
-                [[[RHTabbarManager sharedInterface] selectTabbarUser] pushViewController:controller animated:NO];
+            if ([vc.navigationController isEqual:nv2]) {
+                [vc.navigationController pushViewController:controller animated:NO];
             }
-            [self.delegate sessionFail:nil];
         }
     }
     
