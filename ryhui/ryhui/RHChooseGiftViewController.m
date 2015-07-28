@@ -9,7 +9,7 @@
 #import "RHChooseGiftViewController.h"
 
 #import "RHChooseGiftViewCell.h"
-
+#import "RHNewChooseGiftTableViewCell.h"
 @interface RHChooseGiftViewController ()
 {
     EGORefreshTableHeaderView *_headerView;
@@ -42,6 +42,7 @@
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     
     self.tableView.backgroundColor=[UIColor clearColor];
+    [self.tableView registerNib:[UINib nibWithNibName:@"RHNewChooseGiftTableViewCell" bundle:nil] forCellReuseIdentifier:@"CellIdentifier"];
     
     // Do any additional setup after loading the view.
     _headerView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
@@ -215,7 +216,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 80;
+    return 98;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -227,11 +228,12 @@
 {
     static NSString *CellIdentifier = @"CellIdentifier";
     
-    RHChooseGiftViewCell *cell = (RHChooseGiftViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    RHNewChooseGiftTableViewCell *cell = (RHNewChooseGiftTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"RHChooseGiftViewCell" owner:nil options:nil] objectAtIndex:0];
+//        cell = [[[NSBundle mainBundle] loadNibNamed:@"RHNewChooseGiftTableViewCell" owner:nil options:nil] objectAtIndex:0];
+        cell = [[NSBundle mainBundle] loadNibNamed:@"RHNewChooseGiftTableViewCell" owner:nil options:nil][0];
     }
-    cell.investNum=investNum;
+    cell.investNum = investNum;
 
     NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];
     

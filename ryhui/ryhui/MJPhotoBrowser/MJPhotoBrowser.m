@@ -145,7 +145,9 @@
 - (void)photoViewDidEndZoom:(MJPhotoView *)photoView
 {
     [self.view removeFromSuperview];
+    [self.navigationController popViewControllerAnimated:NO];
     [self removeFromParentViewController];
+
 }
 
 - (void)photoViewImageFinishLoad:(MJPhotoView *)photoView

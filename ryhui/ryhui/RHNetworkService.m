@@ -31,8 +31,8 @@ static RHNetworkService* _instance;
     //localTest
 //    return @"http://192.168.1.112:8080/TinyFinance/";
     
-//    return @"https://123.57.133.7/";
-    return @"https://app.ryhui.com/";
+    return @"https://123.57.133.7/";
+//    return @"https://app.ryhui.com/";
 
 #ifdef DEBUG
     return @"https://www.ryhui.com/";
@@ -46,9 +46,9 @@ static RHNetworkService* _instance;
     //localTest
 //    return @"http://192.168.1.112:8080/TinyFinance/";
     
-//    return @"https://123.57.133.7/";
+    return @"https://123.57.133.7/";
     
-    return @"https://app.ryhui.com/";
+//    return @"https://app.ryhui.com/";
     
 #ifdef DEBUG
     return @"https://www.ryhui.com/";

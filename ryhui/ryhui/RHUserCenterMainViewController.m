@@ -64,16 +64,10 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refesh) name:UIApplicationWillEnterForegroundNotification object:nil];
     
-//    NSDictionary *attributes = @{NSUnderlineStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]};
-//    NSMutableAttributedString *netString = [[NSMutableAttributedString alloc] initWithString:_questionLabel.text];
-//    [netString addAttributes:attributes range:NSMakeRange(8, netString.length - 8)];
-//    _questionLabel.attributedText = netString;
-    
     self.noticeView.hidden = YES;
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint touchPoint = [touch locationInView:self.lastNoticeView];
     
@@ -91,13 +85,11 @@
     }
 }
 
--(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
-{
+-(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     _questionLabel.textColor = [UIColor colorWithRed:36.0/255 green:108.0/255 blue:161.0/255 alpha:1.0];
 }
 
--(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint touchPoint = [touch locationInView:self.lastNoticeView];
     if (!CGRectContainsPoint(_questionLabel.frame, touchPoint)) {
@@ -172,18 +164,36 @@
             
             NSString* amount=[dic objectForKey:@"money"];
             if (amount&&[amount length]>0) {
-                RHGetGiftViewController* controller=[[RHGetGiftViewController alloc]initWithNibName:@"RHGetGiftViewController" bundle:nil];
-                controller.amount=amount;
-                [self.navigationController pushViewController:controller animated:NO];
-                //                self.giftView.frame = CGRectMake(0, -20, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) + 64);
-                //                [self.navigationController.navigationBar addSubview:self.giftView];
+//                RHGetGiftViewController* controller=[[RHGetGiftViewController alloc]initWithNibName:@"RHGetGiftViewController" bundle:nil];
+//                controller.amount=amount;
+//                [self.navigationController pushViewController:controller animated:NO];
+                self.giftView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) + 64);
+//                self.giftMoneyLabel.text = [NSString stringWithFormat:@"%d元投资现金已放入账户",[amount intValue]];
+                [self setTheAttributeString:self.giftMoneyLabel.text];
+                [[[UIApplication sharedApplication].delegate window] addSubview:self.giftView];
+                self.view.userInteractionEnabled = NO;
+    
+    
+                [self performSelector:@selector(closeButtonClicked:) withObject:nil afterDelay:15.0];
             }
         }
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //        DLog(@"%@",[[NSString alloc] initWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] encoding:NSUTF8StringEncoding]);
     }];
 
+}
+
+-(void)setTheAttributeString:(NSString *)string {
+    NSDictionary *attribute = @{NSForegroundColorAttributeName : [UIColor colorWithRed:249.0/255 green:212.0/255 blue:37.0/255 alpha:1.0], NSFontAttributeName: [UIFont systemFontOfSize:22.0]};
+    NSDictionary *attribute1 = @{NSForegroundColorAttributeName : [UIColor colorWithRed:249.0/255 green:212.0/255 blue:37.0/255 alpha:1.0]};
+    
+    NSString *subString = [string componentsSeparatedByString:@"元"][0];
+    
+    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:string];
+    
+    [attributeString setAttributes:attribute range:NSMakeRange(0, subString.length)];
+    [attributeString setAttributes:attribute1 range:NSMakeRange(subString.length, 1)];
+    self.giftMoneyLabel.attributedText = attributeString;
 }
 
 -(void)refesh
@@ -257,7 +267,7 @@
 }
 
 - (IBAction)pushPay:(id)sender {
-    
+    [self.giftView removeFromSuperview];
     RHRechargeViewController* controller=[[RHRechargeViewController alloc]initWithNibName:@"RHRechargeViewController" bundle:nil];
     controller.balance=self.balance;
     [self.navigationController pushViewController:controller animated:YES];
@@ -294,12 +304,10 @@
 //    我的邀请码
 }
 
-
-//红包
+//关闭红包页面
 - (IBAction)closeButtonClicked:(UIButton *)sender {
-}
-
-- (IBAction)doButtonClicked:(UIButton *)sender {
+    [self.giftView removeFromSuperview];
+    self.view.userInteractionEnabled = YES;
 }
 
 @end

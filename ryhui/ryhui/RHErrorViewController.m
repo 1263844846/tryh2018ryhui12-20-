@@ -10,6 +10,7 @@
 #import "RHProjectListViewController.h"
 #import "RHMyAccountViewController.h"
 #import "RHMyInvestmentViewController.h"
+#import "RHMyGiftViewController.h"
 
 @interface RHErrorViewController ()
 
@@ -43,9 +44,8 @@
             [self myInvestMent];
             
             //首次投资成功显示
-//            self.giftView.frame = CGRectMake(0, -20, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) + 64);
-//            [self.navigationController.navigationBar addSubview:self.giftView];
-//            
+            [self cheTheGift];
+//
             break;
         case RHPaySucceed:
             [self configTitleWithString:@"充值成功"];
@@ -90,6 +90,50 @@
     
     self.titleLabel.text = titleStr;
     self.tipsLabel.text = tipsStr;
+}
+
+//检查是否发红包
+-(void)cheTheGift {
+    AFHTTPRequestOperationManager* manager=[AFHTTPRequestOperationManager manager];
+    manager.responseSerializer=[[AFCompoundResponseSerializer alloc]init];
+    NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
+    NSLog(@"------------------%@",session);
+    if (session&&[session length]>0) {
+        [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
+    }
+    [manager POST:[NSString stringWithFormat:@"%@/front/payment/account/queryInvestmentBonuses",[RHNetworkService instance].doMain] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"------------------%@",responseObject);
+        
+        if ([responseObject isKindOfClass:[NSData class]]) {
+            NSDictionary* dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSLog(@"------------------%@",dic);
+            NSString* amount=[dic objectForKey:@"money"];
+            if (amount&&[amount length]>0) {
+                self.giftView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) + 64);
+                self.moneyLabel.text = [NSString stringWithFormat:@"%d元返利现金已放入账户",[amount intValue]];
+                [self setTheAttributeString:self.moneyLabel.text];
+                [[[UIApplication sharedApplication].delegate window] addSubview:self.giftView];
+                [self performSelector:@selector(closeButtonClicked:) withObject:nil afterDelay:15.0];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        DLog(@"%@",[[NSString alloc] initWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] encoding:NSUTF8StringEncoding]);
+    }];
+}
+
+
+-(void)setTheAttributeString:(NSString *)string {
+    NSDictionary *attribute = @{NSForegroundColorAttributeName : [UIColor colorWithRed:249.0/255 green:212.0/255 blue:37.0/255 alpha:1.0], NSFontAttributeName: [UIFont systemFontOfSize:22.0]};
+    NSDictionary *attribute1 = @{NSForegroundColorAttributeName : [UIColor colorWithRed:249.0/255 green:212.0/255 blue:37.0/255 alpha:1.0]};
+    
+    NSString *subString = [string componentsSeparatedByString:@"元"][0];
+    
+    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:string];
+    
+    [attributeString setAttributes:attribute range:NSMakeRange(0, subString.length)];
+    [attributeString setAttributes:attribute1 range:NSMakeRange(subString.length, 1)];
+    self.moneyLabel.attributedText = attributeString;
 }
 
 - (void)succeed {
@@ -144,8 +188,14 @@
 
 //红包
 - (IBAction)closeButtonClicked:(UIButton *)sender {
+    
+    [self.giftView removeFromSuperview];
 }
 
 - (IBAction)doButtonClicked:(UIButton *)sender {
+    [self.giftView removeFromSuperview];
+    UIViewController *controller = [[RHMyGiftViewController alloc]initWithNibName:@"RHMyGiftViewController" bundle:nil];
+    [[[RHTabbarManager sharedInterface] selectTabbarUser] pushViewController:controller animated:NO];
+    
 }
 @end

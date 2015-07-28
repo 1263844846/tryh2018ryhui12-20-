@@ -44,6 +44,10 @@
 		00B3D5C21B171DE700BEF703 /* MJPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B3D5BB1B171DE700BEF703 /* MJPhotoView.m */; };
 		00CCC6EF1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CCC6ED1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.m */; };
 		00CCC6F01AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00CCC6EE1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.xib */; };
+		00DE04641B5F9EEE00BF49BC /* RHNewChooseGiftTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DE04621B5F9EEE00BF49BC /* RHNewChooseGiftTableViewCell.m */; };
+		00DE04651B5F9EEE00BF49BC /* RHNewChooseGiftTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00DE04631B5F9EEE00BF49BC /* RHNewChooseGiftTableViewCell.xib */; };
+		00EB05AB1B5CE00D0036002C /* RHMyNewGiftTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EB05A91B5CE00D0036002C /* RHMyNewGiftTableViewCell.m */; };
+		00EB05AC1B5CE00D0036002C /* RHMyNewGiftTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00EB05AA1B5CE00D0036002C /* RHMyNewGiftTableViewCell.xib */; };
 		961AD2F930E8CEFA8FA5D28D /* libPods-ryhui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB95D30F1AE0DCFA27AE1DD7 /* libPods-ryhui.a */; };
 		D537C36D1ADD3E1F009D3433 /* RHMyGiftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D537C36B1ADD3E1F009D3433 /* RHMyGiftViewController.m */; };
 		D537C36E1ADD3E1F009D3433 /* RHMyGiftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D537C36C1ADD3E1F009D3433 /* RHMyGiftViewController.xib */; };
@@ -358,6 +362,12 @@
 		00CCC6EC1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHOfficeNetAndWeiBoViewController.h; sourceTree = "<group>"; };
 		00CCC6ED1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHOfficeNetAndWeiBoViewController.m; sourceTree = "<group>"; };
 		00CCC6EE1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHOfficeNetAndWeiBoViewController.xib; sourceTree = "<group>"; };
+		00DE04611B5F9EEE00BF49BC /* RHNewChooseGiftTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHNewChooseGiftTableViewCell.h; sourceTree = "<group>"; };
+		00DE04621B5F9EEE00BF49BC /* RHNewChooseGiftTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHNewChooseGiftTableViewCell.m; sourceTree = "<group>"; };
+		00DE04631B5F9EEE00BF49BC /* RHNewChooseGiftTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHNewChooseGiftTableViewCell.xib; sourceTree = "<group>"; };
+		00EB05A81B5CE00D0036002C /* RHMyNewGiftTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHMyNewGiftTableViewCell.h; sourceTree = "<group>"; };
+		00EB05A91B5CE00D0036002C /* RHMyNewGiftTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHMyNewGiftTableViewCell.m; sourceTree = "<group>"; };
+		00EB05AA1B5CE00D0036002C /* RHMyNewGiftTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHMyNewGiftTableViewCell.xib; sourceTree = "<group>"; };
 		64D0F7EFA66E690954907170 /* Pods-ryhui.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ryhui.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ryhui/Pods-ryhui.debug.xcconfig"; sourceTree = "<group>"; };
 		BB95D30F1AE0DCFA27AE1DD7 /* libPods-ryhui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ryhui.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D537C36A1ADD3E1F009D3433 /* RHMyGiftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHMyGiftViewController.h; sourceTree = "<group>"; };
@@ -887,6 +897,9 @@
 				D537C36C1ADD3E1F009D3433 /* RHMyGiftViewController.xib */,
 				D537C36F1ADD4079009D3433 /* RHMyGiftContentViewController.h */,
 				D537C3701ADD4079009D3433 /* RHMyGiftContentViewController.m */,
+				00EB05A81B5CE00D0036002C /* RHMyNewGiftTableViewCell.h */,
+				00EB05A91B5CE00D0036002C /* RHMyNewGiftTableViewCell.m */,
+				00EB05AA1B5CE00D0036002C /* RHMyNewGiftTableViewCell.xib */,
 				D537C3721ADD4100009D3433 /* RHMyGiftViewCell.h */,
 				D537C3731ADD4100009D3433 /* RHMyGiftViewCell.m */,
 				D537C3741ADD4100009D3433 /* RHMyGiftViewCell.xib */,
@@ -916,6 +929,9 @@
 				D537C3811ADD4FF0009D3433 /* RHChooseGiftViewController.h */,
 				D537C3821ADD4FF0009D3433 /* RHChooseGiftViewController.m */,
 				D537C3831ADD4FF0009D3433 /* RHChooseGiftViewController.xib */,
+				00DE04611B5F9EEE00BF49BC /* RHNewChooseGiftTableViewCell.h */,
+				00DE04621B5F9EEE00BF49BC /* RHNewChooseGiftTableViewCell.m */,
+				00DE04631B5F9EEE00BF49BC /* RHNewChooseGiftTableViewCell.xib */,
 				D537C3861ADD528D009D3433 /* RHChooseGiftViewCell.h */,
 				D537C3871ADD528D009D3433 /* RHChooseGiftViewCell.m */,
 				D537C3881ADD528D009D3433 /* RHChooseGiftViewCell.xib */,
@@ -1856,6 +1872,7 @@
 				F83865B21AA0569C00001D1A /* captchaButtonUp.png in Resources */,
 				F87B83371AC837BB00EB73A6 /* message2.png in Resources */,
 				F815ED3B1AB717E7004B2053 /* 1.png in Resources */,
+				00DE04651B5F9EEE00BF49BC /* RHNewChooseGiftTableViewCell.xib in Resources */,
 				F8C38DB11AC98FE1005C3B1F /* error1.png in Resources */,
 				F8B6DA6B1AB5459500CCB13D /* RHUserCenterMainViewController.xib in Resources */,
 				F80E49551A8E24C000028CD1 /* LaunchScreen.xib in Resources */,
@@ -1901,6 +1918,7 @@
 				D56236841AC7A4C900FEAB7C /* RHForgotPasswordViewController.xib in Resources */,
 				D562367C1AC79FC300FEAB7C /* guidan1.png in Resources */,
 				F8C38DB61AC98FE1005C3B1F /* error5-1.png in Resources */,
+				00EB05AC1B5CE00D0036002C /* RHMyNewGiftTableViewCell.xib in Resources */,
 				F8C38D9C1AC986F2005C3B1F /* withdraw1.png in Resources */,
 				00AAAFB51B0F0D4400BE5D1F /* ShareSDKFlatShareViewUI.bundle in Resources */,
 				F8B6DA8F1AB562EF00CCB13D /* RHTradingViewController.xib in Resources */,
@@ -1964,6 +1982,7 @@
 				D58A740E1AD6BA870076D3FB /* RHInvestDetailViewController.m in Sources */,
 				F87B833C1AC83C6300EB73A6 /* RHWithdrawViewController.m in Sources */,
 				D537C3711ADD4079009D3433 /* RHMyGiftContentViewController.m in Sources */,
+				00EB05AB1B5CE00D0036002C /* RHMyNewGiftTableViewCell.m in Sources */,
 				D537C3841ADD4FF0009D3433 /* RHChooseGiftViewController.m in Sources */,
 				F8B6DA8E1AB562EF00CCB13D /* RHTradingViewController.m in Sources */,
 				F8B6DA661AB5435A00CCB13D /* RHTabbarManager.m in Sources */,
@@ -2034,6 +2053,7 @@
 				D58A74091AD6AD0C0076D3FB /* RHRegisterAgreenWebViewController.m in Sources */,
 				00B3D5BE1B171DE700BEF703 /* MJPhotoBrowser.m in Sources */,
 				F80E494A1A8E24C000028CD1 /* ryhui.xcdatamodeld in Sources */,
+				00DE04641B5F9EEE00BF49BC /* RHNewChooseGiftTableViewCell.m in Sources */,
 				F879E7551AA355B100339647 /* RHAgreement1ViewController.m in Sources */,
 				F86B8AFD1AA17680000D2B8C /* RHGesturePasswordView.m in Sources */,
 			);
@@ -2096,8 +2116,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ming Lu (C3TV6E2EC2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ming Lu (C3TV6E2EC2)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2117,7 +2137,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "4e0bfa90-2aa3-46bd-a34c-d6d645e35efa";
+				PROVISIONING_PROFILE = "5dd2358d-ef1c-4e5b-98d8-852b923acc97";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2139,8 +2159,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ming Lu (C3TV6E2EC2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ming Lu (C3TV6E2EC2)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2153,7 +2173,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "4e0bfa90-2aa3-46bd-a34c-d6d645e35efa";
+				PROVISIONING_PROFILE = "5dd2358d-ef1c-4e5b-98d8-852b923acc97";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2200,7 +2220,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4e0bfa90-2aa3-46bd-a34c-d6d645e35efa";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2246,7 +2266,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4e0bfa90-2aa3-46bd-a34c-d6d645e35efa";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

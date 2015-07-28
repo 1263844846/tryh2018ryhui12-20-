@@ -8,6 +8,7 @@
 
 #import "RHMyGiftContentViewController.h"
 #import "RHMyGiftViewCell.h"
+#import "RHMyNewGiftTableViewCell.h"
 //#import "RHContractViewContoller.h"
 @interface RHMyGiftContentViewController ()
 
@@ -86,7 +87,7 @@
     NSDictionary* parameters=@{@"_search":@"true",@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",_currentPageIndex],@"sidx":@"usingTime",@"sord":@"desc",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};
 //    DLog(@"%@",type);
     [[RHNetworkService instance] POST:type parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        DLog(@"%@",responseObject);
+        NSLog(@"＝＝＝＝＝＝＝%@",responseObject);
         NSMutableArray* tempArray=[[NSMutableArray alloc]initWithCapacity:0];
         
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
@@ -205,7 +206,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 80;
+    return 98;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -217,9 +218,9 @@
 {
     static NSString *CellIdentifier = @"CellIdentifier";
     
-    RHMyGiftViewCell *cell = (RHMyGiftViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    RHMyNewGiftTableViewCell *cell = (RHMyNewGiftTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"RHMyGiftViewCell" owner:nil options:nil] objectAtIndex:0];
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"RHMyNewGiftTableViewCell" owner:nil options:nil] objectAtIndex:0];
     }
     
     NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];

@@ -454,16 +454,16 @@
                     [[NSUserDefaults standardUserDefaults] synchronize];
                 }
                 
-                [RHUtility showTextWithText:@"注册成功"];
+//                [RHUtility showTextWithText:@"注册成功"];
                 
                 [self selectOtherAciton:nil];
                 [self setNavigationBackButton];
 
-                self.kaihuAndPhoneView.frame = CGRectMake(0, CGRectGetHeight([UIScreen mainScreen].bounds) - CGRectGetHeight(self.kaihuAndPhoneView.frame) - 64, CGRectGetWidth(self.kaihuAndPhoneView.frame), CGRectGetHeight(self.kaihuAndPhoneView.frame));
+                self.kaihuAndPhoneView.frame = CGRectMake(0, CGRectGetHeight([UIScreen mainScreen].bounds) - CGRectGetHeight(self.kaihuAndPhoneView.frame) - 64, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight(self.kaihuAndPhoneView.frame));
                 [self.view addSubview:self.kaihuAndPhoneView];
                 [self.view bringSubviewToFront:self.kaihuAndPhoneView];
-//                self.giftView.frame = CGRectMake(0, -20, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) + 64);
-//                [self.navigationController.navigationBar addSubview:self.giftView];
+    
+                [self cheTheGift];
             }
         }
 
@@ -480,6 +480,37 @@
     }];
 
 }
+
+//检查是否发红包
+-(void)cheTheGift {
+    AFHTTPRequestOperationManager* manager=[AFHTTPRequestOperationManager manager];
+    manager.responseSerializer=[[AFCompoundResponseSerializer alloc]init];
+    NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
+    NSLog(@"------------------%@",session);
+    if (session&&[session length]>0) {
+        [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
+    }
+    [manager POST:[NSString stringWithFormat:@"%@front/payment/account/queryAccountFinishedBonuses",[RHNetworkService instance].doMain] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"------------------%@",responseObject);
+        
+        if ([responseObject isKindOfClass:[NSData class]]) {
+            NSDictionary* dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSLog(@"------------------%@",dic);
+            NSString* amount=[dic objectForKey:@"money"];
+            if (amount&&[amount length]>0) {
+                self.giftView.frame = CGRectMake(0, -20, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) + 64);
+               self.giftMoneyLabel.text = [NSString stringWithFormat:@"%d元投资现金已放入账户",[amount intValue]];
+                [self setTheAttributeString:self.giftMoneyLabel.text];
+                [self.navigationController.navigationBar addSubview:self.giftView];
+                [self performSelector:@selector(fiftCloseButtonClicked:) withObject:nil afterDelay:15.0];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                DLog(@"%@",[[NSString alloc] initWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] encoding:NSUTF8StringEncoding]);
+    }];
+}
+
 
 - (void)setNavigationBackButton {
     UIButton* button=[UIButton buttonWithType:UIButtonTypeCustom];
