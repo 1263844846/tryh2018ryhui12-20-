@@ -36,14 +36,14 @@
             self.backImage.image=[UIImage imageNamed:@"giftChooseInvalide"];
             self.moneyLabel.textColor=[RHUtility colorForHex:@"878787"];
             self.moneyNoticeLabel.textColor = [RHUtility colorForHex:@"878787"];
-            self.titleLabel.textColor = [RHUtility colorForHex:@"878787"];
-            self.subTitleLabel.textColor = [RHUtility colorForHex:@"878787"];
+            self.titleLabel.textColor = [RHUtility colorForHex:@"7a7a7a"];
+            self.subTitleLabel.textColor = [RHUtility colorForHex:@"7a7a7a"];
         }else{
             self.moneyLabel.textColor=[RHUtility colorForHex:@"df3121"];
             self.moneyNoticeLabel.textColor = [RHUtility colorForHex:@"df3121"];
             self.backImage.image=[UIImage imageNamed:@"giftChooseInvest"];
-            self.titleLabel.textColor = [RHUtility colorForHex:@"555555"];
-            self.subTitleLabel.textColor = [RHUtility colorForHex:@"555555"];
+            self.titleLabel.textColor = [RHUtility colorForHex:@"303030"];
+            self.subTitleLabel.textColor = [RHUtility colorForHex:@"303030"];
         }
         
         self.subTitleLabel.text = @" [投资时使用]";

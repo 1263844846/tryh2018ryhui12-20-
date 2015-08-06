@@ -128,7 +128,6 @@
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
     }];
     
     if (![RHUserManager sharedInterface].username) {
@@ -168,7 +167,7 @@
 //                controller.amount=amount;
 //                [self.navigationController pushViewController:controller animated:NO];
                 self.giftView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) + 64);
-//                self.giftMoneyLabel.text = [NSString stringWithFormat:@"%d元投资现金已放入账户",[amount intValue]];
+                self.giftMoneyLabel.text = [NSString stringWithFormat:@"%d元投资现金已放入账户",[amount intValue]];
                 [self setTheAttributeString:self.giftMoneyLabel.text];
                 [[[UIApplication sharedApplication].delegate window] addSubview:self.giftView];
                 self.view.userInteractionEnabled = NO;
@@ -216,19 +215,21 @@
 }
 - (void)checkout
 {
-    [[RHNetworkService instance] POST:@"front/payment/account/queryBalance" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        DLog(@"%@",responseObject);
-        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-            NSString* AvlBal=[responseObject objectForKey:@"AvlBal"];
-            if (AvlBal&&[AvlBal length]>0) {
-                self.balance=AvlBal;
-                [RHUserManager sharedInterface].balance=AvlBal;
-                self.balanceLabel.text=[NSString stringWithFormat:@"可用余额%@元",AvlBal];
+    if ([RHUserManager sharedInterface].custId) {
+        [[RHNetworkService instance] POST:@"front/payment/account/queryBalance" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //        DLog(@"%@",responseObject);
+            if ([responseObject isKindOfClass:[NSDictionary class]]) {
+                NSString* AvlBal=[responseObject objectForKey:@"AvlBal"];
+                if (AvlBal&&[AvlBal length]>0) {
+                    self.balance=AvlBal;
+                    [RHUserManager sharedInterface].balance=AvlBal;
+                    self.balanceLabel.text=[NSString stringWithFormat:@"可用余额%@元",AvlBal];
+                }
             }
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        DLog(@"%@",error);
-    }];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            DLog(@"%@",error);
+        }];
+    }
 }
 
 - (IBAction)pushAccountInfo:(id)sender {

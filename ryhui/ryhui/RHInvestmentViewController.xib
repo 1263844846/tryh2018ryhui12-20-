@@ -82,7 +82,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UdZ-E2-RZm">
-                            <rect key="frame" x="201.00000109424445" y="79" width="82" height="42"/>
+                            <rect key="frame" x="201.00000277031052" y="79" width="82" height="42"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="25"/>
                             <nil key="highlightedColor"/>

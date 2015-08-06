@@ -101,7 +101,7 @@
     if (session&&[session length]>0) {
         [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
     }
-    [manager POST:[NSString stringWithFormat:@"%@/front/payment/account/queryInvestmentBonuses",[RHNetworkService instance].doMain] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:[NSString stringWithFormat:@"%@front/payment/account/queryInvestmentBonuses",[RHNetworkService instance].doMain] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"------------------%@",responseObject);
         
@@ -111,7 +111,7 @@
             NSString* amount=[dic objectForKey:@"money"];
             if (amount&&[amount length]>0) {
                 self.giftView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) + 64);
-                self.moneyLabel.text = [NSString stringWithFormat:@"%d元返利现金已放入账户",[amount intValue]];
+                self.moneyLabel.text = [NSString stringWithFormat:@"%.2f元返利现金已放入账户",[amount floatValue]];
                 [self setTheAttributeString:self.moneyLabel.text];
                 [[[UIApplication sharedApplication].delegate window] addSubview:self.giftView];
                 [self performSelector:@selector(closeButtonClicked:) withObject:nil afterDelay:15.0];

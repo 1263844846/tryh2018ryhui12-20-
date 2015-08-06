@@ -77,6 +77,8 @@ static RHNetworkService* _instance;
     
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
     [manager.operationQueue cancelAllOperations];
+//    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
     if (session&&[session length]>0) {
         [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];

@@ -213,7 +213,14 @@
 //                    [self.navigationController popViewControllerAnimated:NO];
 //                } else {
                     [app sessionFail:nil];
+                
+                NSString *string = [[NSUserDefaults  standardUserDefaults] objectForKey:@"RHSESSION"];
+                if (string && string.length > 0) {
                     [[[RHTabbarManager sharedInterface] selectTabbarMain] popToRootViewControllerAnimated:NO];
+                } else {
+                    [RHUtility showTextWithText:@"登录失败，请重新尝试！"];
+                }
+                
 //                }
             }
         }

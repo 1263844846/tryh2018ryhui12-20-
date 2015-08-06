@@ -9,8 +9,11 @@
 #import "RHMyGiftContentViewController.h"
 #import "RHMyGiftViewCell.h"
 #import "RHMyNewGiftTableViewCell.h"
+#import "RHProjectListViewController.h"
+#import "MBProgressHUD.h"
+
 //#import "RHContractViewContoller.h"
-@interface RHMyGiftContentViewController ()
+@interface RHMyGiftContentViewController () <UIAlertViewDelegate>
 
 {
     EGORefreshTableHeaderView *_headerView;
@@ -222,10 +225,52 @@
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"RHMyNewGiftTableViewCell" owner:nil options:nil] objectAtIndex:0];
     }
-    
+    [cell.clickButton addTarget:self action:@selector(chooseCellButton:) forControlEvents:UIControlEventTouchUpInside];
     NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];
     [cell updateCell:dataDic with:type];
     return cell;
+}
+
+-(void)chooseCellButton:(UIButton *)btn {
+    if (btn.tag == 10) {
+        //投资
+        RHProjectListViewController* controller=[[RHProjectListViewController alloc]initWithNibName:@"RHProjectListViewController" bundle:nil];
+        controller.type= @"0";
+        [[[RHTabbarManager sharedInterface] selectTabbarMain] pushViewController:controller animated:YES];
+    } else {
+        //兑换
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        NSDictionary* parameters=@{@"giftId":[NSString stringWithFormat:@"%d",btn.tag]};
+        AFHTTPRequestOperationManager* manager=[AFHTTPRequestOperationManager manager];
+        manager.responseSerializer=[[AFCompoundResponseSerializer alloc]init];
+        NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
+        NSLog(@"------------------%@",session);
+        if (session&&[session length]>0) {
+            [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
+        }
+        [manager POST:[NSString stringWithFormat:@"%@front/payment/account/useRebateGift",[RHNetworkService instance].doMain] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"------------------%@",responseObject);
+            if ([responseObject isKindOfClass:[NSData class]]) {
+                NSDictionary* dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+                NSLog(@"------------------%@",dic);
+                if ([dic[@"msg"] isEqualToString:@"成功"]) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"兑换成功！现金已充入您的账户余额，可到【我的账户】查询." delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                    [alert show];
+                } else {
+                    [RHUtility showTextWithText:@"兑换现金失败"];
+                }
+                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //            DLog(@"%@",[[NSString alloc] initWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] encoding:NSUTF8StringEncoding]);
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [RHUtility showTextWithText:@"兑换现金失败"];
+        }];
+    }
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    [self startPost];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
