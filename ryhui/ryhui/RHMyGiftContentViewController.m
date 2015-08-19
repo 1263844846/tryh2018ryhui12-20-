@@ -41,6 +41,10 @@
     }
     return self;
 }
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -86,7 +90,6 @@
 
 -(void)getinvestListData
 {
-    
     NSDictionary* parameters=@{@"_search":@"true",@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",_currentPageIndex],@"sidx":@"usingTime",@"sord":@"desc",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};
 //    DLog(@"%@",type);
     [[RHNetworkService instance] POST:type parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -165,7 +168,6 @@
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    
     [_headerView egoRefreshScrollViewDidEndDragging:scrollView];
     
 }
@@ -226,8 +228,10 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:@"RHMyNewGiftTableViewCell" owner:nil options:nil] objectAtIndex:0];
     }
     [cell.clickButton addTarget:self action:@selector(chooseCellButton:) forControlEvents:UIControlEventTouchUpInside];
-    NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];
-    [cell updateCell:dataDic with:type];
+    if (self.dataArray.count > 0) {
+        NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];
+        [cell updateCell:dataDic with:type];
+    }
     return cell;
 }
 
@@ -270,7 +274,9 @@
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    [self.dataArray removeAllObjects];
     [self startPost];
+    _reloading = NO;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

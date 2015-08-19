@@ -20,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *balanceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalLabel;
 @property (weak, nonatomic) IBOutlet UILabel *FrzBalLabel;
+@property (weak, nonatomic) IBOutlet UILabel *investCashLabel;
+@property (weak, nonatomic) IBOutlet UILabel *profitCashLabel;
 
 @end
 
@@ -31,7 +33,7 @@
     [self configBackButton];
     [self configTitleWithString:@"我的账户"];
    
-    self.scrollView.contentSize=CGSizeMake(self.scrollView.frame.size.width, 414);
+    self.scrollView.contentSize=CGSizeMake(self.scrollView.frame.size.width, 503);
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -51,7 +53,7 @@
 -(void)getMyAccountData
 {
     [[RHNetworkService instance] POST:@"front/payment/account/myAccountData" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        DLog(@"%@",responseObject);
+        DLog(@"%@",responseObject);
         
         NSString* average=@"0.00";
         if (![[responseObject objectForKey:@"average"] isKindOfClass:[NSNull class]]) {
@@ -99,6 +101,24 @@
             earnInterest=[responseObject objectForKey:@"earnInterest"];
         }
         self.earnInterestLabel.text=earnInterest;
+        
+        NSString* investCash=@"0.00";
+        if (![[responseObject objectForKey:@"insteadCash"] isKindOfClass:[NSNull class]]) {
+            investCash=[responseObject objectForKey:@"insteadCash"];
+        }
+        if (investCash.length <= 0) {
+            investCash = @"0.00";
+        }
+        self.investCashLabel.text=investCash;
+        
+        NSString* ProfitCash=@"0.00";
+        if (![[responseObject objectForKey:@"rebateCash"] isKindOfClass:[NSNull class]]) {
+            ProfitCash=[responseObject objectForKey:@"rebateCash"];
+        }
+        if (ProfitCash.length <= 0) {
+            ProfitCash = @"0.00";
+        }
+        self.profitCashLabel.text=ProfitCash;
                 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 //        DLog(@"%@",error);

@@ -126,6 +126,7 @@
     }
     
     RHMyGiftContentViewController* controller=[_viewControllers objectAtIndex:page];
+    [controller.dataArray removeAllObjects];
     if ([[NSNumber numberWithInteger:[controller.dataArray count]] intValue]<=0) {
         [controller startPost];
     }

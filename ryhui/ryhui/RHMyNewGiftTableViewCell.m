@@ -103,8 +103,6 @@
         }
     }
     
-//     22.0
-    
    
     money = [NSString stringWithFormat:@"%.2f",[money floatValue]];
      NSLog(@"=========%lu",(unsigned long)money.length);

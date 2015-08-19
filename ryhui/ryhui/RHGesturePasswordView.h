@@ -29,4 +29,5 @@
 @property (nonatomic,strong) UIButton * clearButton;
 @property (nonatomic,strong) UIButton * enterButton;
 
+
 @end

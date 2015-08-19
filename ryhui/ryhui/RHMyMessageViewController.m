@@ -47,13 +47,14 @@
 
     [self setRightButtonItem];
     self.selecteBar.hidden = YES;
+    self.dataArray = [[NSMutableArray alloc]initWithCapacity:0];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.tableView reloadData];
     readMessages = [[NSMutableArray alloc] init];
-    self.dataArray = [[NSMutableArray alloc]initWithCapacity:0];
     _headerView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
     _headerView.delegate = self;
     [self.tableView addSubview:_headerView];

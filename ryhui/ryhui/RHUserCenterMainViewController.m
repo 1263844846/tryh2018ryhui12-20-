@@ -172,7 +172,17 @@
                 [[[UIApplication sharedApplication].delegate window] addSubview:self.giftView];
                 self.view.userInteractionEnabled = NO;
     
-    
+                
+                 NSNumber* lowest = [dic objectForKey:@"lowestMoney"];
+                if (lowest) {
+                    if ([lowest integerValue] == 0) {
+                        self.giftNoticeLabel.text = @"快去充值投资吧～";
+                    } else {
+                        self.giftNoticeLabel.text = [NSString stringWithFormat:@" 首次投资%@元以上立得返利现金哦！快去充值投资吧～",lowest];
+                    }
+                } else {
+                    self.giftNoticeLabel.text = @"快去充值投资吧～";
+                }
                 [self performSelector:@selector(closeButtonClicked:) withObject:nil afterDelay:15.0];
             }
         }

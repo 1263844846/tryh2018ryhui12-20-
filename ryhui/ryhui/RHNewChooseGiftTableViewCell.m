@@ -39,8 +39,8 @@
             self.titleLabel.textColor = [RHUtility colorForHex:@"7a7a7a"];
             self.subTitleLabel.textColor = [RHUtility colorForHex:@"7a7a7a"];
         }else{
-            self.moneyLabel.textColor=[RHUtility colorForHex:@"df3121"];
-            self.moneyNoticeLabel.textColor = [RHUtility colorForHex:@"df3121"];
+            self.moneyLabel.textColor=[RHUtility colorForHex:@"ff4a1f"];
+            self.moneyNoticeLabel.textColor = [RHUtility colorForHex:@"ff4a1f"];
             self.backImage.image=[UIImage imageNamed:@"giftChooseInvest"];
             self.titleLabel.textColor = [RHUtility colorForHex:@"303030"];
             self.subTitleLabel.textColor = [RHUtility colorForHex:@"303030"];
@@ -60,12 +60,22 @@
         NSString* money=@"";
         if (![[dic objectForKey:@"money"] isKindOfClass:[NSNull class]]) {
             if ([[dic objectForKey:@"money"] isKindOfClass:[NSNumber class]]) {
-                money=[NSString stringWithFormat:@"%@",[[dic objectForKey:@"money"] stringValue]];
+                money= [NSString stringWithFormat:@"%@",[[dic objectForKey:@"money"] stringValue]];
             }else{
-                money=[NSString stringWithFormat:@"%@",[dic objectForKey:@"money"]];
+                money= [NSString stringWithFormat:@"%@",[dic objectForKey:@"money"]];
             }
         }
-        self.moneyLabel.text=money;
+        money = [NSString stringWithFormat:@"%.2f",[money floatValue]];
+        if (money.length >= 7) {
+            self.moneyLabel.font = [UIFont fontWithName:@"Helvetica Neue Bold" size:14.0];
+        } else if (money.length >= 6) {
+            self.moneyLabel.font = [UIFont fontWithName:@"Helvetica Neue Bold" size:19.0];
+        } else if (money.length >= 5) {
+            self.moneyLabel.font = [UIFont fontWithName:@"Helvetica Neue Bold" size:22.0];
+        } else {
+            self.moneyLabel.font = [UIFont fontWithName:@"Helvetica Neue Bold" size:22.0];
+        }
+        self.moneyLabel.text = money;
     }
 }
 @end

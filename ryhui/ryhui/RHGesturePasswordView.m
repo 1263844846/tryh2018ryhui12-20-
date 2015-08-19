@@ -97,7 +97,7 @@
         [clearButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [clearButton setTitle:@"重绘" forState:UIControlStateNormal];
         [clearButton addTarget:self action:@selector(cleanPan) forControlEvents:UIControlEventTouchDown];
-        [self addSubview:clearButton];
+          [self addSubview:clearButton];
         
         enterButton = [[UIButton alloc]initWithFrame:CGRectMake(frame.size.width/2+30, frame.size.height-70, 120, 30)];
         [enterButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
@@ -105,6 +105,7 @@
         [enterButton setTitle:@"继续" forState:UIControlStateNormal];
         [enterButton addTarget:self action:@selector(enterPan) forControlEvents:UIControlEventTouchDown];
         [self addSubview:enterButton];
+        
         
         [self.clearButton setHidden:YES];
         [self.enterButton setHidden:YES];
