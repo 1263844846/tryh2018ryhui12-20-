@@ -7,8 +7,9 @@
 //
 
 #import "RHForgotPasswordViewController.h"
+#import "RHAccountValidateViewController.h"
 
-@interface RHForgotPasswordViewController ()
+@interface RHForgotPasswordViewController ()<UIAlertViewDelegate>
 {
     float changeY;
     float keyboardHeight;
@@ -18,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *captchaTF;
 @property (weak, nonatomic) IBOutlet UITextField *nnewPasswordTF;
 @property (weak, nonatomic) IBOutlet UIImageView *captchaImageView;
+@property (weak, nonatomic) IBOutlet UIButton *querenbtn;
 
 @end
 
@@ -29,7 +31,9 @@
     [self configBackButton];
     
     [self configTitleWithString:@"修改登录密码"];
-   
+    self.querenbtn.layer.masksToBounds=YES;
+    self.querenbtn.layer.cornerRadius=6;
+    
     self.oldPasswordTF.secureTextEntry=YES;
     self.nnewPasswordTF.secureTextEntry=YES;
     self.rnewPasswordTF.secureTextEntry=YES;
@@ -80,7 +84,8 @@
 {
     AFHTTPRequestOperationManager* manager=[AFHTTPRequestOperationManager manager];
     manager.responseSerializer=[[AFImageResponseSerializer alloc]init];
-    [manager POST:[NSString stringWithFormat:@"%@%@",[RHNetworkService instance].doMain,@"common/user/general/captcha?type=CAPTCHA_EDITPWD"] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    manager.securityPolicy = [[RHNetworkService instance] customSecurityPolicy];
+    [manager POST:[NSString stringWithFormat:@"%@%@",[RHNetworkService instance].newdoMain,@"app/common/user/appGeneral/captcha?type=CAPTCHA_EDITPWD"] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[UIImage class]]) {
             self.captchaImageView.image=responseObject;
         }
@@ -117,16 +122,20 @@
         [RHUtility showTextWithText:@"确认密码长度必须为6-16位字符之间"];
         return;
     }
+    
+    
+   
+    
     NSDictionary *parameters = @{@"oldPassword":self.oldPasswordTF.text,@"newPassword":self.nnewPasswordTF.text,@"repeatPassword":self.rnewPasswordTF.text,@"captcha":self.captchaTF.text};
     
-    [[RHNetworkService instance] POST:@"front/payment/account/editPassword" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        DLog(@"%@",responseObject);
+    [[RHNetworkService instance] POST:@"app/common/user/appUpdateUser/appEditPassword" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSString* result=[responseObject objectForKey:@"msg"];
             if (result&&[result length]>0) {
                 if ([result isEqualToString:@"success"]) {
-                    [RHUtility showTextWithText:@"修改成功"];
-                    [self.navigationController popViewControllerAnimated:YES];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"密码修改成功，请重新登录" delegate:self cancelButtonTitle:@"登录" otherButtonTitles: nil];
+                    [alert show];
                 }
             }
         }
@@ -139,6 +148,60 @@
         }
     }];
 }
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        [[RHUserManager sharedInterface] logout];
+    } else {
+//        [self changeCaptcha];
+       // [[RHUserManager sharedInterface] logout];
+    }
+}                        
+
+-(void)loginOut {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHcustId"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHemail"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHinfoType"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHmd5"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHtelephone"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHUSERNAME"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHUSERID"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHSESSION"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHMessageNumSave"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"RHMessageNum" object:@"0"];
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [RHUserManager sharedInterface].custId = nil;
+    [RHUserManager sharedInterface].email = nil;
+    [RHUserManager sharedInterface].infoType = nil;
+    [RHUserManager sharedInterface].md5 = nil;
+    [RHUserManager sharedInterface].telephone = nil;
+    [RHUserManager sharedInterface].userId = nil;
+    [RHUserManager sharedInterface].username = nil;
+
+}
+
+
 -(void)viewWillDisappear:(BOOL)animated
 {
     for (UIView *subView in [UIApplication sharedApplication].keyWindow.subviews) {
@@ -147,6 +210,15 @@
         }
     }
     [super viewWillDisappear:animated];
+}
+- (IBAction)forgetpassword:(id)sender {
+    
+    
+    RHAccountValidateViewController* controller=[[RHAccountValidateViewController alloc]initWithNibName:@"RHAccountValidateViewController" bundle:nil];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+- (IBAction)button:(id)sender {
+    [self changeCaptcha];
 }
 
 @end

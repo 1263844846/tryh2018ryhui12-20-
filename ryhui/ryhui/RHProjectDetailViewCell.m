@@ -20,6 +20,8 @@
     NSString *username = [dic objectForKey:@"username"];
     if (username && username != nil && ![username isKindOfClass:[NSNull class]] && ![username isEqualToString:@"<null>"]) {
         self.nameLabel.text = username;
+        CGSize size = [username drawInRect:CGRectMake(self.nameLabel.frame.origin.x, self.nameLabel.frame.origin.y, 200, 100) withFont:self.nameLabel.font lineBreakMode:NSLineBreakByCharWrapping];
+        self.noticeWidth.constant = size.width + 1;
     }
     
     NSString *investTime = [dic objectForKey:@"investTime"];

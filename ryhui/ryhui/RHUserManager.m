@@ -17,6 +17,7 @@ static RHUserManager *_instance = nil;
 @synthesize telephone;
 @synthesize email;
 @synthesize userId;
+@synthesize zhiwen;
 
 + (id)allocWithZone:(struct _NSZone *)zone {
     static dispatch_once_t onceToken;
@@ -74,9 +75,15 @@ static RHUserManager *_instance = nil;
     if (_userid && [_userid length] > 0) {
         self.userId = _userid;
     }
+    NSString *_zhiwen = [[NSUserDefaults standardUserDefaults] objectForKey:@"zhiwen"];
+    if (_zhiwen && [_zhiwen length] > 0) {
+        self.zhiwen = _zhiwen;
+    }
 }
 
 - (void)logout {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"headUrl"];
+     [[NSUserDefaults standardUserDefaults] synchronize];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHcustId"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
@@ -104,6 +111,9 @@ static RHUserManager *_instance = nil;
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHMessageNumSave"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"zhiwen"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"RHMessageNum" object:@"0"];
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]];
@@ -116,7 +126,7 @@ static RHUserManager *_instance = nil;
     self.telephone = nil;
     self.userId = nil;
     self.username = nil;
-
+    self.zhiwen = nil;
     [[RHTabbarManager sharedInterface] cleanTabbar];
     [[RHTabbarManager  sharedInterface] selectALogin];
 }

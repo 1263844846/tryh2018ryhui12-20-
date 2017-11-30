@@ -16,7 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *investMoneyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *backMoneyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *profitMoneyLabel;
-
+@property(nonatomic,strong)NSString * type;
 -(void)updateCell:(NSDictionary*)dic;
 
 @end

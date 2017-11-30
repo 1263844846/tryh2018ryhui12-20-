@@ -19,12 +19,12 @@
     imageView.image=[UIImage imageNamed:@"noData.jpg"];
     [view addSubview:imageView];
     
-    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(0, imageView.frame.origin.y+94+5, [UIScreen mainScreen].bounds.size.width, 20)];
+    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(0, imageView.frame.origin.y+94+5+15, [UIScreen mainScreen].bounds.size.width, 20)];
     label.backgroundColor=[UIColor clearColor];
     label.font=[UIFont systemFontOfSize:18];
     label.textColor=[RHUtility colorForHex:@"#c7c7c7"];
     label.textAlignment=NSTextAlignmentCenter;
-    label.text=@"暂时没有相应数据";
+    label.text=@"暂无数据";
     [view addSubview:label];
     
     [self.view insertSubview:view belowSubview:insetView];

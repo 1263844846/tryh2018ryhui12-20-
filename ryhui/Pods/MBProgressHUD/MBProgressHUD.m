@@ -6,8 +6,8 @@
 
 #import "MBProgressHUD.h"
 #import <tgmath.h>
-
-
+#import "UIImageView+WebCache.h"
+#import "UIImage+GIF.h"
 #if __has_feature(objc_arc)
 	#define MB_AUTORELEASE(exp) exp
 	#define MB_RELEASE(exp) exp
@@ -69,7 +69,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 @property (atomic, MB_STRONG) NSTimer *graceTimer;
 @property (atomic, MB_STRONG) NSTimer *minShowTimer;
 @property (atomic, MB_STRONG) NSDate *showStarted;
-
+@property (atomic, MB_STRONG) UIImageView *myimage;
 
 @end
 
@@ -113,10 +113,23 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 
 #pragma mark - Class methods
 
+
+
+
 + (MB_INSTANCETYPE)showHUDAddedTo:(UIView *)view animated:(BOOL)animated {
 	MBProgressHUD *hud = [[self alloc] initWithView:view];
+    hud.mode = MBProgressHUDModeCustomView;
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"loading-logo_180x180" ofType:@"gif"];
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    UIImage *image = [UIImage sd_animatedGIFWithData:data];
+//    hud.minSize  = CGSizeMake(50,50);
+    [hud setColor:[UIColor clearColor]];
+   // hud.customView = [[UIImageView alloc] initWithImage:image];
+    
+    [hud setCustomView:[[UIImageView alloc] initWithImage:image]];
 	[view addSubview:hud];
 	[hud show:animated];
+    
 	return MB_AUTORELEASE(hud);
 }
 

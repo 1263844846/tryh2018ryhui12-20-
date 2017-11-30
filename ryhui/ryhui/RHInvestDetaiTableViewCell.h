@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *typeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *typeImagView;
+@property (weak, nonatomic) IBOutlet UILabel *namelab;
 
 -(void)updateCell:(NSDictionary*)dic;
 

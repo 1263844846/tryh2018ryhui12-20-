@@ -113,6 +113,7 @@
 		_lastUpdatedLabel.text = [NSString stringWithFormat:@"%@: %@",NSLocalizedString(@"最后刷新时间", @"Last Updated"),  [dateFormatter stringFromDate:date]];
 		[[NSUserDefaults standardUserDefaults] setObject:_lastUpdatedLabel.text forKey:@"EGORefreshTableView_LastRefresh"];
 		[[NSUserDefaults standardUserDefaults] synchronize];
+        
 	} else {
 		_lastUpdatedLabel.text = nil;
 	}
@@ -155,6 +156,7 @@
 			_statusLabel.text = NSLocalizedString(@"加载中...", @"Loading Status");
 			[_activityView startAnimating];
 			[CATransaction begin];
+            NSLog(@"---=====---cbx--===---");
 			[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions]; 
 			_arrowImage.hidden = YES;
 			[CATransaction commit];

@@ -8,8 +8,8 @@
 
 #import "RHBaseViewController.h"
 
-@interface RHWithdrawViewController : RHBaseViewController<UITextFieldDelegate>
-
+@interface RHWithdrawViewController : RHBaseViewController<UITextFieldDelegate,RHSegmentControlDelegate>
+@property(nonatomic,strong)NSDictionary *bankdic;
 - (void)getWithdrawData;
 
 @end

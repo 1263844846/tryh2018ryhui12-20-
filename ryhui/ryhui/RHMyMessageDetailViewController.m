@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timelab;
 
 @end
 
@@ -30,7 +31,7 @@
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"[%@]",ids],@"ids", nil];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [[AFCompoundResponseSerializer alloc]init];
-    [manager POST:[NSString stringWithFormat:@"%@front/payment/account/markMessageReaded",[RHNetworkService instance].doMain] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:[NSString stringWithFormat:@"%@app/front/payment/appAccount/appMarkMessageReaded",[RHNetworkService instance].newdoMain] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //        DLog(@"result==%@ <<<",[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSRange range = [result rangeOfString:@"success"];
@@ -46,7 +47,7 @@
     
     [self configBackButton];
     
-    [self configTitleWithString:@"我的消息"];
+    [self configTitleWithString:@"消息详情"];
     
     self.titleLabel.text = titleStr;
     self.contentLabel.text = contentStr;

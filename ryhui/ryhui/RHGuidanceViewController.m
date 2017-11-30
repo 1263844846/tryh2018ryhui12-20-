@@ -33,13 +33,13 @@
     [self.view addSubview:_segmentContentView];
     
     UIImageView* imageView1=[[UIImageView alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    imageView1.image=[UIImage imageNamed:@"guidan1"];
+    imageView1.image=[UIImage imageNamed:@"ydyy1"];
     [_views addObject:imageView1];
     UIImageView* imageView2=[[UIImageView alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    imageView2.image=[UIImage imageNamed:@"guidan2"];
+    imageView2.image=[UIImage imageNamed:@"ydyy2"];
     [_views addObject:imageView2];
     UIImageView* imageView3=[[UIImageView alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    imageView3.image=[UIImage imageNamed:@"guidan3"];
+    imageView3.image=[UIImage imageNamed:@"ydyy3"];
     [_views addObject:imageView3];
     
     self.loginVC=[[RHLoginViewController alloc]initWithNibName:@"RHLoginViewController" bundle:nil];

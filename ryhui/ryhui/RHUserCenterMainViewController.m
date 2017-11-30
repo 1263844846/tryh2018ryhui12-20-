@@ -18,6 +18,8 @@
 #import "RHRegisterWebViewController.h"
 #import "RHMyGiftViewController.h"
 #import "RHGetGiftViewController.h"
+#import "RHMyMoneyViewController.h"
+
 
 @interface RHUserCenterMainViewController ()
 
@@ -51,12 +53,7 @@
     [super viewDidLoad];
     _mainScrollView.contentSize = CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 420);
     _mainScrollView.scrollEnabled = NO;
-    [self configTitleWithString:@"个人中心"];
-    self.username.text=[RHUserManager sharedInterface].username;
-    if ([RHUserManager sharedInterface].custId) {
-        self.ryUsername.text=[NSString stringWithFormat:@"ryh_%@",[RHUserManager sharedInterface].username];
-    }
-    
+
     self.myMessageNumLabel.layer.cornerRadius=8;
     self.myMessageNumLabel.layer.masksToBounds=YES;
     self.myMessageNumLabel.hidden=YES;
@@ -66,6 +63,7 @@
     
     self.noticeView.hidden = YES;
 }
+
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
@@ -107,9 +105,18 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [self configTitleWithString:@"个人中心"];
+    self.username.text=[RHUserManager sharedInterface].username;
+    if ([RHUserManager sharedInterface].custId) {
+        self.ryUsername.text=[NSString stringWithFormat:@"ryh_%@",[RHUserManager sharedInterface].username];
+    } else {
+        self.ryUsername.text = @"";
+    }
+    
     [self checkout];
     
-    [[RHNetworkService instance] POST:@"front/payment/account/countUnReadMessage" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[RHNetworkService instance] POST:@"app/front/payment/account/countUnReadMessage" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSString* numStr=nil;
@@ -147,13 +154,14 @@
     
     AFHTTPRequestOperationManager* manager=[AFHTTPRequestOperationManager manager];
     manager.responseSerializer=[[AFCompoundResponseSerializer alloc]init];
+    manager.securityPolicy = [[RHNetworkService instance] customSecurityPolicy];
     NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
     NSLog(@"------------------%@",session);
     
     if (session&&[session length]>0) {
         [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
     }
-    [manager POST:[NSString stringWithFormat:@"%@front/payment/account/queryAccountFinishedBonuses",[RHNetworkService instance].doMain] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:[NSString stringWithFormat:@"%@front/payment/account/queryAccountFinishedBonuses",[RHNetworkService instance].newdoMain] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //        DLog(@"result==%@ <<<",[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         if ([responseObject isKindOfClass:[NSData class]]) {
             
@@ -226,7 +234,7 @@
 - (void)checkout
 {
     if ([RHUserManager sharedInterface].custId) {
-        [[RHNetworkService instance] POST:@"front/payment/account/queryBalance" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[RHNetworkService instance] POST:@"app/front/payment/account/queryBalance" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             //        DLog(@"%@",responseObject);
             if ([responseObject isKindOfClass:[NSDictionary class]]) {
                 NSString* AvlBal=[responseObject objectForKey:@"AvlBal"];
@@ -249,6 +257,7 @@
 }
 
 - (IBAction)pushMyAccount:(id)sender {
+    //我的账户
     RHMyAccountViewController* controller=[[RHMyAccountViewController alloc]initWithNibName:@"RHMyAccountViewController" bundle:nil];
     [self.navigationController pushViewController:controller animated:YES];
 }
@@ -260,6 +269,8 @@
 }
 
 - (IBAction)pushMyInvestment:(id)sender {
+    
+    //我的投资
     RHMyInvestmentViewController* controller=[[RHMyInvestmentViewController alloc]initWithNibName:@"RHMyInvestmentViewController" bundle:nil];
     [self.navigationController pushViewController:controller animated:YES];
 }
@@ -278,6 +289,7 @@
 }
 
 - (IBAction)pushPay:(id)sender {
+    //充值
     [self.giftView removeFromSuperview];
     RHRechargeViewController* controller=[[RHRechargeViewController alloc]initWithNibName:@"RHRechargeViewController" bundle:nil];
     controller.balance=self.balance;
@@ -285,11 +297,13 @@
 }
 
 - (IBAction)extractPayment:(id)sender {
+    //提现
     RHWithdrawViewController* controller=[[RHWithdrawViewController alloc] initWithNibName:@"RHWithdrawViewController" bundle:nil];
     [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (IBAction)pushMyMessage:(id)sender {
+    //消息
     RHMyMessageViewController* controller=[[RHMyMessageViewController alloc] initWithNibName:@"RHMyMessageViewController" bundle:nil];
     [self.navigationController pushViewController:controller animated:YES];
 }
@@ -307,6 +321,8 @@
     }
 }
 - (IBAction)pushMyGift:(id)sender {
+    
+    //6666666
     RHMyGiftViewController* controller=[[RHMyGiftViewController alloc] initWithNibName:@"RHMyGiftViewController" bundle:nil];
     [self.navigationController pushViewController:controller animated:YES];
 }

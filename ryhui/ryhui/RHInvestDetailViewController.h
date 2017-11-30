@@ -13,5 +13,5 @@
 @interface RHInvestDetailViewController : RHBaseViewController<EGORefreshTableHeaderDelegate>
 
 @property  (nonatomic,strong)NSString* projectId;
-
+@property(nonatomic,assign)int res;
 @end

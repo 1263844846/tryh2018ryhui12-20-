@@ -10,7 +10,8 @@
 #import "MBProgressHUD.h"
 #import "RHErrorViewController.h"
 #import "RHGesturePasswordViewController.h"
-
+#import "RHHFLoginPasswordViewController.h"
+#import "RHhelper.h"
 @interface RHWithdrawWebViewController ()
 {
     AppDelegate *app;
@@ -22,7 +23,7 @@
 @implementation RHWithdrawWebViewController
 @synthesize amount;
 @synthesize captcha;
-
+@synthesize category;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -31,16 +32,18 @@
     [self configBackButton];
     [self configTitleWithString:@"提现"];
 
+    [RHhelper ShraeHelp].withdrawtest=101;
+    
 }
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/account/cash",[RHNetworkService instance].doMain]];
-    NSString *body = [NSString stringWithFormat: @"money=%@&captcha=%@",amount,captcha];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@app/front/payment/appJxAccount/withdrawJxData",[RHNetworkService instance].newdoMain]];
+    NSString *body = [NSString stringWithFormat: @"cardNumber=%@&money=%@&txFee=%@&category=%@&cardBankCnaps=%@",self.bankcard,amount,captcha,category,self.cardBankCnaps];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
     [request setHTTPMethod: @"POST"];
     NSString* session = [[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
     if (session && [session length] > 0) {
-        [request setValue:session forHTTPHeaderField:@"cookie"];
+        [request setValue:session forHTTPHeaderField:@"Set-Cookie"];
     }
     [request setHTTPBody: [body dataUsingEncoding: NSUTF8StringEncoding]];
     [self.webView loadRequest: request];
@@ -57,31 +60,38 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     NSString *url=[request.URL absoluteString];
 //    DLog(@"%@",url);
-    if ([url rangeOfString:@"common/paymentResponse/cashClientBackSuccess"].location != NSNotFound) {
+    if ([url rangeOfString:@"front/payment/account/myCash2"].location != NSNotFound) {
         RHErrorViewController *controller = [[RHErrorViewController alloc]initWithNibName:@"RHErrorViewController" bundle:nil];
         controller.titleStr = [NSString stringWithFormat:@"申请提现金额%@元",amount];
-        controller.tipsStr = @"资金预计于审核后T+1个工作日到账";
+        controller.tipsStr = @"";
         controller.type = RHWithdrawSucceed;
+        if ([RHhelper ShraeHelp].withdrawtest==10) {
+            return NO;
+        }
+        
         [self.navigationController pushViewController:controller animated:YES];
-
+        
         return NO;
     }
-    if ([url rangeOfString:@"common/paymentResponse/cashClientBackFailed"].location != NSNotFound) {
+    
+    if ([url rangeOfString:@"front/payment/account/myCash3"].location != NSNotFound) {
         
         RHErrorViewController *controller = [[RHErrorViewController alloc]initWithNibName:@"RHErrorViewController" bundle:nil];
         controller.titleStr = @"失败";
-        NSArray* array = nil;
-        if ([url rangeOfString:@"&RespDesc"].location != NSNotFound) {
-            array = [url componentsSeparatedByString:@"&RespDesc="];
-        }
-        if ([url rangeOfString:@"&result="].location != NSNotFound) {
-            array = [url componentsSeparatedByString:@"&result="];
-        }
-        if ([array count] > 1) {
-            controller.tipsStr = [[[array objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        }
+//        NSArray* array = nil;
+//        if ([url rangeOfString:@"&RespDesc"].location != NSNotFound) {
+//            array = [url componentsSeparatedByString:@"&RespDesc="];
+//        }
+//        if ([url rangeOfString:@"&result="].location != NSNotFound) {
+//            array = [url componentsSeparatedByString:@"&result="];
+//        }
+//        if ([array count] > 1) {
+//            controller.tipsStr = [[[array objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//        }
         controller.type = RHWithdrawFail;
-        [self.navigationController pushViewController:controller animated:YES];
+       // [self.navigationController pushViewController:controller animated:YES];
+        
+        [self.navigationController popViewControllerAnimated:YES];
         return NO;
     }
     
@@ -99,7 +109,20 @@
         
         return NO;
     }
+    if ([url rangeOfString:@"account/mySafe?id=4"].location!=NSNotFound) {
+        
+        RHHFLoginPasswordViewController* controller=[[RHHFLoginPasswordViewController alloc]initWithNibName:@"RHHFLoginPasswordViewController" bundle:nil];
+        //        controller.titleStr=[NSString stringWithFormat:@"投资金额%@元",price];
+        //        controller.tipsStr=@"赚钱别忘告诉其他小伙伴哦~";
+        //        controller.type=RHInvestmentSucceed;
+        
+        controller.backstring = @"backback";
+        [self.navigationController pushViewController:controller animated:YES];
+        //NSLog(@"666");
+        return NO;
+    }
     return YES;
 }
+
 
 @end

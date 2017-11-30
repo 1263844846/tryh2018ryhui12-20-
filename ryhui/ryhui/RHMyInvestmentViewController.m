@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UIView *segmentView1;
 @property (weak, nonatomic) IBOutlet UIView *segmentView2;
 @property (weak, nonatomic) IBOutlet UIView *segmentView3;
+@property (weak, nonatomic) IBOutlet UIView *myaview;
+
 
 @end
 
@@ -23,46 +25,140 @@
 @synthesize segmentContentView=_segmentContentView;
 @synthesize viewControllers=_viewControllers;
 
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+       if (self) {
+         // Custom initialization.
+       //  self.hidesBottomBarWhenPushed = YES;
+    }
+      return self;
+ }
+
+-(void)hindetabbar{
+    
+  ///  self.hidesBottomBarWhenPushed = NO;
+}
+-(void)hindetabbar1{
+    
+  ///  self.hidesBottomBarWhenPushed = YES;
+}
+-(void)viewWillAppear:(BOOL)animated{
+   self.navigationController.navigationBar.hidden=YES;
+    
+        [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+   
+    [super viewWillAppear:animated];
+ //   self.navigationController.navigationBar.backgroundColor = [UIColor redColor];
+//      [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
+    //self.hidesBottomBarWhenPushed=YES;
+    self.navigationController.navigationBar.subviews.firstObject.alpha = 1.00;
+    //[self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"PNG_首页_带阴影背景-48"]forBarMetrics:UIBarMetricsDefault];
+   NSLog(@"====-%@-=======",self.navigationController.navigationBar.backgroundColor);
+    
+    NSLog(@"====-%f-=======",self.navigationController.navigationBar.alpha);
+    
+}
+
+
+-(void)back{
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    //[self hindetabbar1];
+}
+- (void)configBackButton
+{
+    UIButton* button=[UIButton buttonWithType:UIButtonTypeCustom];
+    [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    //    UIImage * image = [UIImage imageNamed:@"back.png"];
+    
+    [button setImage:[UIImage imageNamed:@"icon_back.png"] forState:UIControlStateNormal];
+     button.frame=CGRectMake(0, 0, 25, 40);
+    
+    // button.backgroundColor = [UIColor colorWithHexString:@"44bbc1"];
+    self.navigationItem.leftBarButtonItem= [[UIBarButtonItem alloc] initWithCustomView:button];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+   
+//    self.hidesBottomBarWhenPushed=YES;
+   
+//    self.hidesBottomBarWhenPushed = NO;
+
+   // [self prefersStatusBarHidden];
+//     [self setNeedsStatusBarAppearanceUpdate];
     self.viewControllers=[[NSMutableArray alloc]initWithCapacity:0];
-    
+//    ／／self.navigationController.navigationBar.subviews.firstObject.alpha =1.00;
+//    self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
+//    [[UIApplication sharedApplication].keyWindow addSubview:self.view];
+//    [[UIApplication sharedApplication].keyWindow addSubview:self.segmentContentView];
+//    [[UIApplication sharedApplication].keyWindow addSubview:self.segmentView1];
+//    [[UIApplication sharedApplication].keyWindow addSubview:self.segmentView2];
+//    [[UIApplication sharedApplication].keyWindow addSubview:self.segmentView3];
     [self configBackButton];
     [self configTitleWithString:@"我的投资"];
-    
+//    self.tabBarController.tabBar.hidden = YES;
    
-    
-    self.segmentContentView = [[RHSegmentContentView alloc] initWithFrame:CGRectMake(0, 50, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].applicationFrame.size.height-50-40-self.navigationController.navigationBar.frame.size.height)];
+    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    self.segmentContentView = [[RHSegmentContentView alloc] initWithFrame:CGRectMake(0, 110, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].applicationFrame.size.height-50-40-self.navigationController.navigationBar.frame.size.height-10+40)];
 //    DLog(@"%f----%f",[UIScreen mainScreen].applicationFrame.size.height-50-40-self.navigationController.navigationBar.frame.size.height,self.navigationController.navigationBar.frame.size.height);
     [_segmentContentView setDelegate:self];
     [self.view addSubview:_segmentContentView];
-    
+  
+     [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
      [self initData];
     
-    NSString* one=@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"projectStatus\",\"op\":\"in\",\"data\":[\"loans\",\"repayment_normal\",\"repayment_abnormal\"]}]}";
+    NSString* one=@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"projectStatus\",\"op\":\"in\",\"data\":[\"repayment_normal\",\"repayment_abnormal\"]}]}";
     
-    NSString* two=@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"projectStatus\",\"op\":\"in\",\"data\":[\"full\",\"published\"]}]}";
+    
+    NSString* two=@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"projectStatus\",\"op\":\"in\",\"data\":[\"full\",\"loans\",\"published\",\"loans_audit\"]}]}";
     
     NSString* three=@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"projectStatus\",\"op\":\"in\",\"data\":[\"finished\"]}]}";
+    
     
     RHInvestmentContentViewController* controller1=[[RHInvestmentContentViewController alloc]init];
     controller1.nav=self.navigationController;
     controller1.type=one;
+//    controller1.ressss =  self.hidesBottomBarWhenPushed ;
+    controller1.myblock = ^{
+        [self hindetabbar];
+    };
+    controller1.myblock1 = ^{
+        [self hindetabbar1];
+    };
     [_viewControllers addObject:controller1];
     
     RHInvestmentContentViewController* controller2=[[RHInvestmentContentViewController alloc]init];
     controller2.nav=self.navigationController;
     controller2.type=two;
+    controller2.myblock = ^{
+        [self hindetabbar];
+    };
+    controller2.myblock1 = ^{
+        [self hindetabbar1];
+    };
+//    controller2.ressss =  self.hidesBottomBarWhenPushed ;
     [_viewControllers addObject:controller2];
     
     RHInvestmentContentViewController* controller3=[[RHInvestmentContentViewController alloc]init];
     controller3.nav=self.navigationController;
     controller3.type=three;
+    controller3.myblock = ^{
+        [self hindetabbar];
+    };
+    controller3.myblock1 = ^{
+        [self hindetabbar1];
+    };
+//    controller3.ressss =  self.hidesBottomBarWhenPushed ;
     [_viewControllers addObject:controller3];
     
     [_segmentContentView setViews:_viewControllers];
 
     [self segmentContentView:_segmentContentView selectPage:0];
+//     self.hidesBottomBarWhenPushed=YES;
+    
+    // [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.164 green:0.657 blue:0.915 alpha:1.000]];
 }
 
 -(void)initData
@@ -132,5 +228,14 @@
         [controller startPost];
     }
 }
+- (IBAction)popmycount:(id)sender {
+    self.navigationController.navigationBar.hidden=NO;
+     [self.navigationController popViewControllerAnimated:YES];
+}
 
+-(void)viewWillDisappear:(BOOL)animated{
+    self.navigationController.navigationBar.hidden=NO;
+    [super viewWillDisappear:animated];
+    
+}
 @end

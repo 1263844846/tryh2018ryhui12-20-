@@ -10,6 +10,9 @@
 #import "RHGesturePasswordViewController.h"
 #import "RHAccountValidateViewController.h"
 #import "RHRegisterViewController.h"
+#import "MBProgressHUD.h"
+#import "DQViewController.h"
+#import "RHMainViewController.h"
 
 @interface RHALoginViewController ()
 {
@@ -21,17 +24,43 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *captchaTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *captchaImageView;
+@property (weak, nonatomic) IBOutlet UIButton *button;
+@property(nonatomic,assign)CGFloat loginNum;
 
+@property (weak, nonatomic) IBOutlet UIImageView *hideimage;
+@property (weak, nonatomic) IBOutlet UIImageView *hidenimag;
 @end
 
 @implementation RHALoginViewController
 @synthesize isForgotV;
 @synthesize isPan;
-
+-(void)viewWillAppear:(BOOL)animated{
+    
+     [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [super viewWillAppear:animated];
+    self.loginNum = 0;
+    if (self.loginNum <2) {
+        self.hideimage.hidden = YES;
+        self.hidenimag.hidden = YES;
+        self.captchaImageView.hidden = YES;
+        self.captchaTextField.hidden = YES;
+    }
+    
+}
 - (void)viewDidLoad {
+    self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
+  // [ UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     [super viewDidLoad];
+//     [DQViewController Sharedbxtabar].tarbar.hidden = NO;
+    
+    NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
+    NSLog(@"------------------%@",session);
+    
     UIControl* control=[[UIControl alloc]initWithFrame:self.captchaImageView.bounds];
     [control addTarget:self action:@selector(changeCaptcha) forControlEvents:UIControlEventTouchUpInside];
+    self.accountTextField.text = nil;
+    self.captchaTextField.text = nil;
+    self.passwordTextField.text = nil;
     [self.captchaImageView addSubview:control];
     self.captchaImageView.userInteractionEnabled=YES;
     
@@ -39,7 +68,8 @@
     
     [self.accountTextField becomeFirstResponder];
     
-    [self configBackButton];
+    self.button.layer.masksToBounds=YES;
+    self.button.layer.cornerRadius=6;
     
     [self configTitleWithString:@"登录"];
     
@@ -51,18 +81,65 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    if ([self.str isEqualToString:@"cbx"]) {
+        
+        UIButton* button=[UIButton buttonWithType:UIButtonTypeCustom];
+        [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+        //    UIImage * image = [UIImage imageNamed:@"back.png"];
+        
+        [button setImage:[UIImage imageNamed:@"icon_back.png"] forState:UIControlStateNormal];
+        button.frame=CGRectMake(0, 0, 11, 17);
+        
+        button.hidden = YES;
+        // button.backgroundColor = [UIColor colorWithHexString:@"44bbc1"];
+        self.navigationItem.leftBarButtonItem= [[UIBarButtonItem alloc] initWithCustomView:button];
+    }else{
+        //[self configBackButton];
+    }
+    [self configBackButton];
+}
+- (void)configBackButton
+{
+    UIButton* button=[UIButton buttonWithType:UIButtonTypeCustom];
+    [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    //    UIImage * image = [UIImage imageNamed:@"back.png"];
+    
+    [button setImage:[UIImage imageNamed:@"icon_back.png"] forState:UIControlStateNormal];
+     button.frame=CGRectMake(0, 0, 25, 40);
+    
+    // button.backgroundColor = [UIColor colorWithHexString:@"44bbc1"];
+    self.navigationItem.leftBarButtonItem= [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 
 -(void)back
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+//    if ([self.str isEqualToString:@"cbx"]) {
+    [[RHTabbarManager sharedInterface] initTabbar];
+        RHMainViewController *controller = [[RHMainViewController alloc]initWithNibName:@"RHMainViewController" bundle:nil];
+//        controller.type = @"0";
+        //    [nav pushViewController:controller animated:YES];
+        [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:0];
+        UIButton *btn = [[UIButton alloc]init];
+        btn.tag = 0;
+        [[DQview Shareview] btnClick:btn];
+        
+//    }else{
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+//    }
 }
 
 -(void)changeCaptcha
 {
+    NSString * str = @"app/common/user/appGeneral/captcha?type=CAPTCHA_LOGIN";
+    NSString * str1 = @"common/user/general/captcha?type=CAPTCHA_LOGIN";
+
     AFHTTPRequestOperationManager* manager=[AFHTTPRequestOperationManager manager];
+    
+    [manager setSecurityPolicy:[[RHNetworkService instance] customSecurityPolicy]];
     manager.responseSerializer=[[AFImageResponseSerializer alloc]init];
-    [manager POST:[NSString stringWithFormat:@"%@%@",[RHNetworkService instance].doMain,@"common/user/general/captcha?type=CAPTCHA_LOGIN"] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:[NSString stringWithFormat:@"%@%@",[RHNetworkService instance].newdoMain,str] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:responseObject options:(NSJSONReadingMutableContainers)  error:nil];
+        
         if ([responseObject isKindOfClass:[UIImage class]]) {
             self.captchaImageView.image=responseObject;
         }
@@ -87,10 +164,49 @@
 }
 
 - (IBAction)loginAction:(id)sender {
+    //11
+    //NSString * tes = self.accountTextField.text;
+    
+    if (!self.accountTextField.text.length) {
+        [RHUtility showTextWithText:@"账号不能为空"];
+        return;
+    }
+    if (!self.passwordTextField.text.length) {
+        [RHUtility showTextWithText:@"密码不能为空"];
+        return;
+    }
+    
+    if (self.captchaTextField.hidden == YES) {
+        self.captchaTextField.text = @"";
+    }else{
+        
+        if (self.captchaTextField.text.length <1) {
+            [RHUtility showTextWithText:@"验证码不能为空"];
+            return;
+        }
+        
+    }
+//    if (!self.captchaTextField.text.length) {
+//        [RHUtility showTextWithText:@"验证码不能为空"];
+//        return;
+//    }
+    
+    self.loginNum++;
+    
+    NSString * str = @"app/common/user/appLogin/login";
+    NSString * str1 = @"common/user/login/login";
     NSDictionary *parameters = @{@"account":self.accountTextField.text,@"password":self.passwordTextField.text,@"captcha":self.captchaTextField.text};
 
-    [[RHNetworkService instance] POST:@"common/user/login/login" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[RHNetworkService instance] POST:str parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        DLog(@"%@",responseObject);
+        if (responseObject[@"isCompany"]) {
+            if ([responseObject[@"isCompany"] isEqualToString:@"true"]) {
+                [RHUtility showTextWithText:@"企业借款人暂不支持APP登录，请通过融益汇网站登录"];
+                return ;
+            }
+          
+            
+        }else{
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSString* result=[responseObject objectForKey:@"md5"];
             if (result&&[result length]>0) {
@@ -142,7 +258,12 @@
                     [[NSUserDefaults standardUserDefaults] setObject:[RHUserManager sharedInterface].userId forKey:@"RHUSERID"];
                     [[NSUserDefaults standardUserDefaults] synchronize];
                 }
+                NSString * _headUrl = [responseObject objectForKey:@"headUrl"];
                 
+                if (_headUrl&&_headUrl.length >0) {
+                    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].newdoMain,_headUrl] forKey:@"headUrl"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
                 if (!isPan) {
                     if (self.isForgotV) {
                         RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
@@ -159,9 +280,17 @@
                 }
             }
         }
+        }
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 //        DLog(@"%@",error);
+        if (self.loginNum >=2) {
+            self.hideimage.hidden = NO;
+            self.hidenimag.hidden = NO;
+            self.captchaImageView.hidden = NO;
+            self.captchaTextField.hidden = NO;
+        }
         if ([error.userInfo.allKeys containsObject:@"com.alamofire.serialization.response.error.data"]) {
             NSDictionary* errorDic=[NSJSONSerialization JSONObjectWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] options:NSJSONReadingMutableContainers error:nil];
             if ([errorDic objectForKey:@"msg"]) {
@@ -217,6 +346,15 @@
         viewRect.origin.y=(self.view.frame.size.height-keyboardHeight)-changeY;
         self.view.frame=viewRect;
     }
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.passwordTextField resignFirstResponder];
+    [self.captchaTextField resignFirstResponder];
+    [self.accountTextField resignFirstResponder];
+//   [self.InvitationCodeTF resignFirstResponder];
+    //    [self.textField resignFirstResponder];
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField

@@ -18,6 +18,8 @@
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @property (assign, nonatomic) BOOL isNotificationCenter;
+@property (assign, nonatomic) BOOL isAPPActive;
+@property (nonatomic, strong) UIAlertView *alert;
 
 -(void)sessionFail:(NSNotification*)nots;
 - (void)saveContext;

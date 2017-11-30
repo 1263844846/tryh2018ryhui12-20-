@@ -11,9 +11,11 @@
 #import "RHMyNewGiftTableViewCell.h"
 #import "RHProjectListViewController.h"
 #import "MBProgressHUD.h"
+#import "DQViewController.h"
+#import "DQview.h"
 
 //#import "RHContractViewContoller.h"
-@interface RHMyGiftContentViewController () <UIAlertViewDelegate>
+@interface RHMyGiftContentViewController () <UIAlertViewDelegate,DQviewDelegate>
 
 {
     EGORefreshTableHeaderView *_headerView;
@@ -44,11 +46,14 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    //[self reloadTableView];
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].applicationFrame.size.height-50-40-self.navigationController.navigationBar.frame.size.height) style:UITableViewStylePlain];
+    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0,20, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].applicationFrame.size.height-50-30-self.navigationController.navigationBar.frame.size.height - 75+30) style:UITableViewStylePlain];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
@@ -83,6 +88,8 @@
     _headerView = nil;
     _reloading = NO;
 }
+
+
 -(void)startPost
 {
     [_headerView egoRefreshScrollViewDataSourceStartManualLoading:self.tableView];
@@ -90,8 +97,19 @@
 
 -(void)getinvestListData
 {
-    NSDictionary* parameters=@{@"_search":@"true",@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",_currentPageIndex],@"sidx":@"usingTime",@"sord":@"desc",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};
+    NSDictionary* parameters;
 //    DLog(@"%@",type);
+    if ([type isEqualToString:@"app/front/payment/appGift/appMyInitGiftListData"]) {
+        parameters = @{@"_search":@"true",@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",_currentPageIndex],@"sidx":@"giftTypeOrigin",@"sord":@"desc",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};
+    }else if ([type isEqualToString:@"app/front/payment/appGift/appMyPastGiftListData"]) {
+        
+        parameters = @{@"_search":@"true",@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",_currentPageIndex],@"sidx":@"exp",@"sord":@"desc",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};
+        
+    }else{
+        
+        parameters =@{@"_search":@"true",@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",_currentPageIndex],@"sidx":@"usingTime",@"sord":@"desc",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};
+    }
+    
     [[RHNetworkService instance] POST:type parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"＝＝＝＝＝＝＝%@",responseObject);
         NSMutableArray* tempArray=[[NSMutableArray alloc]initWithCapacity:0];
@@ -159,6 +177,9 @@
     }
 }
 
+
+
+
 - (void)refreshApp:(BOOL)showloading{
     if (!_reloading){
         _reloading = YES;
@@ -211,7 +232,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 98;
+    return 140;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -227,7 +248,7 @@
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"RHMyNewGiftTableViewCell" owner:nil options:nil] objectAtIndex:0];
     }
-    [cell.clickButton addTarget:self action:@selector(chooseCellButton:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.coinView.button addTarget:self action:@selector(chooseCellButton:) forControlEvents:UIControlEventTouchUpInside];
     if (self.dataArray.count > 0) {
         NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];
         [cell updateCell:dataDic with:type];
@@ -236,23 +257,45 @@
 }
 
 -(void)chooseCellButton:(UIButton *)btn {
+    
     if (btn.tag == 10) {
         //投资
+      //  [DQViewController Sharedbxtabar].tarbar.hidden = NO;
         RHProjectListViewController* controller=[[RHProjectListViewController alloc]initWithNibName:@"RHProjectListViewController" bundle:nil];
-        controller.type= @"0";
-        [[[RHTabbarManager sharedInterface] selectTabbarMain] pushViewController:controller animated:YES];
+       // controller.type= @"4";
+        
+        DQview * aview = [DQview Shareview];
+        aview.str = @"cbx";
+        //aview.delegate = self;
+        [aview btnClick:[[UIButton alloc]init]];
+        [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:1];
+        [nav popViewControllerAnimated:NO];
+          [[DQViewController Sharedbxtabar].tabBar setHidden:YES];
+//        [nav pushViewController:controller animated:YES];
+        [DQViewController Sharedbxtabar].tabBar.hidden = NO;
+//        [self presentViewController:controller animated:YES completion:nil];
+//        [[[RHTabbarManager sharedInterface] selectTabbarMain] pushViewController:controller animated:YES];
+        
     } else {
         //兑换
+        if (![RHUserManager sharedInterface].custId) {
+            
+            self.myblock();
+            return;
+        }
+        
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        NSDictionary* parameters=@{@"giftId":[NSString stringWithFormat:@"%d",btn.tag]};
+        NSDictionary* parameters=@{@"giftId":[NSString stringWithFormat:@"%ld",(long)btn.tag]};
         AFHTTPRequestOperationManager* manager=[AFHTTPRequestOperationManager manager];
         manager.responseSerializer=[[AFCompoundResponseSerializer alloc]init];
+        manager.securityPolicy = [[RHNetworkService instance] customSecurityPolicy];
         NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
         NSLog(@"------------------%@",session);
         if (session&&[session length]>0) {
             [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
         }
-        [manager POST:[NSString stringWithFormat:@"%@front/payment/account/useRebateGift",[RHNetworkService instance].doMain] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //----------------没改
+        [manager POST:[NSString stringWithFormat:@"%@app/front/payment/appGift/appUseRebateGift",[RHNetworkService instance].newdoMain] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"------------------%@",responseObject);
             if ([responseObject isKindOfClass:[NSData class]]) {
                 NSDictionary* dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];

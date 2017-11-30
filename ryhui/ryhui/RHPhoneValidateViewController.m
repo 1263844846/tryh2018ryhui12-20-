@@ -53,7 +53,8 @@
     NSDictionary *parameters = @{@"telephone":self.phoneTF.text,@"type":@"SMS_CAPTCHA_GETPWDBACK"};
     AFHTTPRequestOperationManager* manager=[AFHTTPRequestOperationManager manager];
     manager.responseSerializer=[[AFCompoundResponseSerializer alloc]init];
-    [manager POST:[NSString stringWithFormat:@"%@common/user/general/sendPwdBackTelCaptchaNoLogin",[RHNetworkService instance].doMain] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    manager.securityPolicy = [[RHNetworkService instance] customSecurityPolicy];
+    [manager POST:[NSString stringWithFormat:@"%@common/user/general/sendPwdBackTelCaptchaNoLogin",[RHNetworkService instance].newdoMain] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        DLog(@"result==%@ <<<",[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         if ([responseObject isKindOfClass:[NSData class]]) {
             NSString* restult=[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];

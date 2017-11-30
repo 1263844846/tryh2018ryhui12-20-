@@ -9,6 +9,7 @@
 #import "RHBindCardViewController.h"
 #import "RHRechargeWebViewController.h"
 #import "RHBankListViewController.h"
+#import "MBProgressHUD.h"
 
 @interface RHBindCardViewController ()
 
@@ -77,6 +78,7 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"RHMessageNum" object:numStr];
             }
         }
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     }];
 }

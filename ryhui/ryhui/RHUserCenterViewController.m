@@ -10,6 +10,8 @@
 #import "RHMainViewController.h"
 #import "RHForgotPasswordViewController.h"
 #import "RHGesturePasswordViewController.h"
+#import "RHUserCountViewController.h"
+
 
 @interface RHUserCenterViewController ()
 
@@ -23,7 +25,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[RHNetworkService instance] POST:@"front/payment/account/countUnReadMessage" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[RHNetworkService instance] POST:@"app/front/payment/account/countUnReadMessage" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSString* numStr=nil;
@@ -42,6 +44,8 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     }];
+    
+    
 }
 
 - (void)viewDidLoad {
@@ -59,7 +63,7 @@
 }
 
 
-
+//退出登录
 - (IBAction)logoutAction:(id)sender {
     
     UIAlertView* alertView=[[UIAlertView alloc]initWithTitle:@"退出确认"
@@ -114,8 +118,13 @@
 //    alertView.tag=998;
 //    [alertView show];
 
-    RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
-    controller.isReset=YES;
-    [self.navigationController pushViewController:controller animated:YES];
+//    RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
+//    controller.isReset=YES;
+//    [self.navigationController pushViewController:controller animated:YES];
+    
+    RHUserCountViewController * vc = [[RHUserCountViewController alloc]initWithNibName:@"RHUserCountViewController" bundle:nil];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 @end

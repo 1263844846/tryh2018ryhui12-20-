@@ -12,5 +12,8 @@
 
 @property(nonatomic,strong)NSString *captcha;
 @property(nonatomic,strong)NSString *amount;
+@property(nonatomic,strong)NSString * category;
+@property(nonatomic,strong)NSString * bankcard;
+@property(nonatomic,strong)NSString * cardBankCnaps;
 
 @end

@@ -10,5 +10,6 @@
 #import "RHSegmentView.h"
 
 @interface RHMainViewController : RHBaseViewController<RHSegmentControlDelegate,UITableViewDataSource,UITableViewDelegate>
+@property(nonatomic,copy)NSString * maintest;
 
 @end

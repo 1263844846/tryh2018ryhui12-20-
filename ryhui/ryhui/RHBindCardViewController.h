@@ -11,5 +11,5 @@
 @interface RHBindCardViewController : RHBaseViewController
 
 @property(nonatomic,strong)NSString *amountStr;
-
+@property(nonatomic,strong)NSString * bankname;
 @end

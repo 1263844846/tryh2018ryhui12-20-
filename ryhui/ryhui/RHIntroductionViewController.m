@@ -11,6 +11,7 @@
 @interface RHIntroductionViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *officeNetLabel;
+@property (weak, nonatomic) IBOutlet UIScrollView *Scrolview;
 
 @end
 
@@ -18,19 +19,110 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self configBackButton];
-    [self configTitleWithString:@"平台介绍"];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+    //titleLabel.backgroundColor = [UIColor grayColor];
     
-    NSDictionary *attributes = @{NSUnderlineStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]};
-    NSMutableAttributedString *netString = [[NSMutableAttributedString alloc] initWithString:_officeNetLabel.text];
-    [netString addAttributes:attributes range:NSMakeRange(0, netString.length)];
-    _officeNetLabel.attributedText = netString;
+    titleLabel.font = [UIFont boldSystemFontOfSize:20];
+    
+    titleLabel.textColor = [UIColor whiteColor];
+    
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    
+    
+    
+    titleLabel.text = @"平台介绍";
+    self.navigationItem.titleView = titleLabel;
+    
+//    NSDictionary *attributes = @{NSUnderlineStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+//    NSMutableAttributedString *netString = [[NSMutableAttributedString alloc] initWithString:_officeNetLabel.text];
+//    [netString addAttributes:attributes range:NSMakeRange(0, netString.length)];
+//    _officeNetLabel.attributedText = netString;
+    self.Scrolview.bounces = NO;
+    if ([UIScreen mainScreen].bounds.size.width >375) {
+        self.Scrolview.contentSize=CGSizeMake(320,1400);
+        
+    }else if ([UIScreen mainScreen].bounds.size.width <321){
+        
+        self.Scrolview.contentSize=CGSizeMake(320,1250);
+        
+    }else{
+        self.Scrolview.contentSize=CGSizeMake(320,1350);
+        
+    }
+    
+    self.Scrolview.showsHorizontalScrollIndicator = NO;
+    self.Scrolview.showsVerticalScrollIndicator = NO;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden=NO;
+    [self.navigationController.navigationBar setBarTintColor:[RHUtility colorForHex:@"#44bbc1"]];
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    
+    //UIImageView * cbximage = [[UIImageView alloc]init];
+    //cbximage.backgroundColor = [RHUtility colorForHex:@"#44bbc1"];
+    self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
+    self.navigationController.navigationBar.translucent = NO;
+    [self toback];
+}
+
+- (void)toback
+{
+    UIButton* button=[UIButton buttonWithType:UIButtonTypeCustom];
+    [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    //    UIImage * image = [UIImage imageNamed:@"back.png"];
+    
+    NSString *version = [UIDevice currentDevice].systemVersion;
+    if ([version doubleValue]>=11) {
+        UIImage *theImage = [self imageWithImageSimple:[UIImage imageNamed:@"back1.png"] scaledToSize:CGSizeMake(11, 17)];
+        // [self imageWithImageSimple:imageview1.image scaledToSize:CGSizeMake(12, 12)];
+        
+        //NSData * imageData = UIImageJPEGRepresentation(imageview1.image, 0.1);
+        [button setImage:theImage forState:UIControlStateNormal];
+    }else{
+        [button setImage:[UIImage imageNamed:@"back1.png"] forState:UIControlStateNormal];
+    }
+    
+    
+    button.frame=CGRectMake(0, 0, 11, 17);
+    
+    // button.backgroundColor = [UIColor colorWithHexString:@"44bbc1"];
+    self.navigationItem.leftBarButtonItem= [[UIBarButtonItem alloc] initWithCustomView:button];
+}
+- (UIImage*)imageWithImageSimple:(UIImage*)image scaledToSize:(CGSize)newSize {
+    // Create a graphics image context
+    UIGraphicsBeginImageContext(newSize);
+    // Tell the old image to draw in this new context, with the desired
+    // new size
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    // Get the new image from the context
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    // End the context
+    UIGraphicsEndImageContext();
+    // Return the new image.
+    return newImage;
+}
+
+#pragma mark 保存图片到document
+- (void)saveImage:(UIImage *)tempImage WithName:(NSString *)imageName {
+    NSData* imageData = UIImagePNGRepresentation(tempImage);
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString* documentsDirectory = [paths objectAtIndex:0];
+    // Now we get the full path to the file
+    NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:imageName];
+    // and then we write it out
+    [imageData writeToFile:fullPathToFile atomically:NO];
+}
+
+#pragma mark 从文档目录下获取Documents路径
+- (NSString *)documentFolderPath {
+    return [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+}
+- (void)back{
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 

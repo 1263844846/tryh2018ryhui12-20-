@@ -32,18 +32,30 @@
     NSString*type =[dic objectForKey:@"type"];
     if ([type isEqualToString:@"capital"]) {
         [self.iconImageView setImage:[UIImage imageNamed:@"RepaymentSchedule2"]];
-        self.typeLabel.textColor=[RHUtility colorForHex:@"318fc5"];
+      //  self.typeLabel.textColor=[RHUtility colorForHex:@"318fc5"];
+        self.namelab.text = @"本金";
     }else{
-        self.typeLabel.textColor=[RHUtility colorForHex:@"ff5d25"];
+        //self.typeLabel.textColor=[RHUtility colorForHex:@"ff5d25"];
         [self.iconImageView setImage:[UIImage imageNamed:@"RepaymentSchedule1"]];
+        if ([type isEqualToString:@"subsidy_interest"]) {
+            self.namelab.text = dic[@"typeName"];
+        }else if ([type isEqualToString:@"Penalty_interest"]){
+            self.namelab.text = @"罚息";
+        }else if ([type isEqualToString:@"Prepayment_Penalty"]){
+            self.namelab.text = @"违约利息";
+            
+        }else{
+        self.namelab.text = dic[@"typeName"];
+        }
+        //lixi
     }
     
     if ([status isEqualToString:@"0"]) {
    
-        self.typeImagView.hidden=YES;
+        self.typeImagView.image= [UIImage imageNamed:@"融益汇app完整wh"];
     }else{
 
-        self.typeImagView.hidden=NO;
+        self.typeImagView.image= [UIImage imageNamed:@"融益汇app完整hk"];
     }
     NSString* money=nil;
     if ([[dic objectForKey:@"money"] isKindOfClass:[NSNumber class]]) {

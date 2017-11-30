@@ -7,7 +7,7 @@
 //
 
 #import "RHMyMessageCell.h"
-
+#import "UIColor+ZXLazy.h"
 @implementation RHMyMessageCell
 
 - (void)awakeFromNib {
@@ -22,8 +22,10 @@
 //title = "\U5145\U503c\U6210\U529f";
 //type = 2;
 -(void)updateCell:(NSDictionary *)dic{
-    self.titleLabel.text = [dic objectForKey:@"content"];
-    self.timeLabel.text = [dic objectForKey:@"postDate"];
+    self.titleLabel.text = [dic objectForKey:@"title"];
+    NSString * timestr = [[dic objectForKey:@"postDate"] substringToIndex:10];
+    self.timeLabel.text = timestr;
+    self.namelab.text = [dic objectForKey:@"content"];
     NSString *type = nil;
     if ([[dic objectForKey:@"state"] isKindOfClass:[NSNumber class]]) {
         type = [[dic objectForKey:@"state"] stringValue];
@@ -32,9 +34,13 @@
     }
     
     if ([type isEqualToString:@"2"]) {
-        self.typeImageView.image = [UIImage imageNamed:@"message1"];
+        //self.typeImageView.image = [UIImage imageNamed:@"message1"];
+        self.titleLabel.textColor = [UIColor colorWithHexString:@"c7c7c7"];
+        self.timeLabel.textColor = [UIColor colorWithHexString:@"c7c7c7"];
+        self.namelab.textColor = [UIColor colorWithHexString:@"c7c7c7"];
     }else{
         self.typeImageView.image = [UIImage imageNamed:@"message2"];
+//        self.namelab.textColor = [UIColor redColor];
     }
 }
 

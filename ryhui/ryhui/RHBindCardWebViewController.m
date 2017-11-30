@@ -24,7 +24,7 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/account/bindCard",[RHNetworkService instance].doMain]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/account/bindCard",[RHNetworkService instance].newdoMain]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
     [request setHTTPMethod: @"POST"];
     NSString *session = [[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];

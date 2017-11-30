@@ -97,8 +97,8 @@
 {
     
 //    NSDictionary* parameters=@{@"_search":@"true",@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",_currentPageIndex],@"forApp":@"true",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"state\",\"op\":\"in\",\"data\":[1,2]}]}"};
-    
-    [[RHNetworkService instance] POST:@"front/payment/account/loadAvailGifts" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSDictionary* parameters=@{@"limit":[NSString stringWithFormat:@"%f",self.mouthNum],@"quota":[NSString stringWithFormat:@"%d",self.investNum],@"monthOrDay":self.dayormonth};
+    [[RHNetworkService instance] POST:@"app/front/payment/appAccount/appLoadAvailGifts1" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        DLog(@"%@",responseObject);
         NSMutableArray* tempArray=[[NSMutableArray alloc]initWithCapacity:0];
         
@@ -216,7 +216,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 98;
+    return 140;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -226,7 +226,7 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"CellIdentifier";
+    static NSString *CellIdentifier = @"CellIdentifier1";
     
     RHNewChooseGiftTableViewCell *cell = (RHNewChooseGiftTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -234,7 +234,8 @@
         cell = [[NSBundle mainBundle] loadNibNamed:@"RHNewChooseGiftTableViewCell" owner:nil options:nil][0];
     }
     cell.investNum = investNum;
-
+    cell.mouthNum = self.mouthNum;
+    cell.monthorday = self.dayormonth;
     NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];
     
     [cell updateCell:dataDic];
@@ -256,15 +257,44 @@
             threshold=[dataDic objectForKey:@"threshold"];
         }
     }
-//    DLog(@"%@--%d",threshold,investNum);
-    if (investNum<[threshold intValue]&&investNum>0) {
-        [RHUtility showTextWithText:@"投资金额不符合该红包的使用条件"];
-        return;
+    NSString* TP=@"";
+    if (![[dataDic objectForKey:@"giftType"] isKindOfClass:[NSNull class]]) {
+        if ([[dataDic objectForKey:@"giftType"] isKindOfClass:[NSNumber class]]) {
+            TP=[[dataDic objectForKey:@"giftType"] stringValue];
+        }else{
+            TP=[dataDic objectForKey:@"giftType"];
+        }
     }
+    
+    double limitTime ;
+    if (!dataDic[@"limitTime"]||![dataDic[@"limitTime"] isKindOfClass:[NSNull class]]) {
+        
+        NSString * str = [NSString stringWithFormat:@"%.2f",[dataDic[@"limitTime"] floatValue]];
+        limitTime = [dataDic[@"limitTime"] doubleValue];
+    }else{
+        
+        
+        limitTime = 1;
+    }
+    //    DLog(@"%@--%d",threshold,investNum);
     if (investNum<1) {
         [RHUtility showTextWithText:@"请先输入投资金额"];
         return;
     }
+    if (investNum<[threshold intValue]&&investNum>0) {
+        [RHUtility showTextWithText:@"投资金额不符合该红包的使用条件"];
+        return;
+    }
+    if ([self.dayormonth isEqualToString:@"day"]) {
+        limitTime = limitTime*30;
+    }
+    if (self.mouthNum <limitTime) {
+        [RHUtility showTextWithText:@"投资期限不符合该红包的使用条件"];
+        return;
+    }
+    //d89aa29d64f004a2b982981efb83c34a4bb8fda6
+    
+    
     
     NSString* money=@"";
     if (![[dataDic objectForKey:@"money"] isKindOfClass:[NSNull class]]) {
@@ -272,6 +302,16 @@
             money=[NSString stringWithFormat:@"%@",[[dataDic objectForKey:@"money"] stringValue]];
         }else{
             money=[NSString stringWithFormat:@"%@",[dataDic objectForKey:@"money"]];
+        }
+    }
+    if (![[dataDic objectForKey:@"giftTypeId"] isKindOfClass:[NSNull class]]&&[[dataDic objectForKey:@"giftTypeId"]isEqualToString:@"add_interest_voucher"]) {
+        if ([[dataDic objectForKey:@"rate"] isKindOfClass:[NSNumber class]]) {
+            money=[NSString stringWithFormat:@"%@",[[dataDic objectForKey:@"rate"] stringValue]];
+            
+            self.myblock();
+        }else{
+            money=[NSString stringWithFormat:@"%@",[dataDic objectForKey:@"rate"]];
+            self.myblock();
         }
     }
     
@@ -285,7 +325,7 @@
     }
     
     
-    [delegate chooseGiftWithnNum:money threshold:threshold giftId:ids];
+    [delegate chooseGiftWithnNum:money threshold:threshold giftId:ids giftTP:TP];
     
     [self.navigationController popViewControllerAnimated:YES];
 

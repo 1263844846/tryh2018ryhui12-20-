@@ -7,6 +7,7 @@
 //
 
 #import "RHMyAccountViewController.h"
+#import "TestViewController.h"
 
 @interface RHMyAccountViewController ()
 
@@ -14,10 +15,15 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *collectCapitalLabel;
 @property (weak, nonatomic) IBOutlet UILabel *averageLabel;
+
+//shouyi
 @property (weak, nonatomic) IBOutlet UILabel *earnInterestLabel;
 @property (weak, nonatomic) IBOutlet UILabel *collectInterestLabel;
 @property (weak, nonatomic) IBOutlet UILabel *collectPrepaymentPenaltyLabel;
+
+//可用余额
 @property (weak, nonatomic) IBOutlet UILabel *balanceLabel;
+//总资产
 @property (weak, nonatomic) IBOutlet UILabel *totalLabel;
 @property (weak, nonatomic) IBOutlet UILabel *FrzBalLabel;
 @property (weak, nonatomic) IBOutlet UILabel *investCashLabel;
@@ -52,7 +58,7 @@
 
 -(void)getMyAccountData
 {
-    [[RHNetworkService instance] POST:@"front/payment/account/myAccountData" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[RHNetworkService instance] POST:@"app/front/payment/account/myAccountData" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"%@",responseObject);
         
         NSString* average=@"0.00";
@@ -73,11 +79,17 @@
         }
         self.balanceLabel.text=AvlBal;
         
-        NSString* total=@"0.00";
+        NSString* total=@"0.00元";
         if (![[responseObject objectForKey:@"total"] isKindOfClass:[NSNull class]]) {
             total=[responseObject objectForKey:@"total"] ;
         }
-        self.totalLabel.text=total;
+        total = [NSString stringWithFormat:@"%@元",total];
+        
+        NSMutableAttributedString *arrString = [[NSMutableAttributedString alloc] initWithString:total];
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor],NSForegroundColorAttributeName,[UIFont systemFontOfSize:15.0],NSFontAttributeName, nil];
+       [arrString addAttributes:dic range:NSMakeRange(total.length - 1, 1)];
+        self.totalLabel.attributedText = arrString;
+        
         
         NSString* collectCapital=@"0.00";
         if (![[responseObject objectForKey:@"collectCapital"] isKindOfClass:[NSNull class]]) {
@@ -127,7 +139,7 @@
 
 - (void)checkout
 {
-    [[RHNetworkService instance] POST:@"front/payment/account/queryBalance" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[RHNetworkService instance] POST:@"app/front/payment/account/queryBalance" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSString* AvlBal=[responseObject objectForKey:@"AvlBal"];
@@ -150,6 +162,17 @@
 
 - (IBAction)pushUser:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
+    
+}
+- (IBAction)addbutton:(id)sender {
+    
+//    UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"666" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
+//    [alertView show];
+//
+    TestViewController * test = [[TestViewController alloc]initWithNibName:@"TestViewController" bundle:nil];
+    [self.navigationController pushViewController:test animated:YES];
+   // [self presentViewController:test animated:YES completion:nil];
+    
 }
 
 - (IBAction)pushMore:(id)sender {

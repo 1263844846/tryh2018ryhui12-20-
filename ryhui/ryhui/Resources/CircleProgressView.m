@@ -42,9 +42,15 @@
         self.text = [[UILabel alloc] initWithFrame:(CGRect){CGPointZero, {aradius * 2, aradius * 2}}];
         self.text.center = acenter;
         [self.text setFont:[UIFont systemFontOfSize:12]];
-        [self.text setTextColor:[RHUtility colorForHex:@"#318FC5"]];
+        //字体颜色
+        if ([_text.text isEqualToString:@"满"]) {
+            [self.text setTextColor:[RHUtility colorForHex:@"#f89779"]];
+        }else{
+        [self.text setTextColor:[RHUtility colorForHex:@"#44bbc1"]];
+        }
         [self.text setTextAlignment:NSTextAlignmentCenter];
         [self.text setBackgroundColor:[UIColor clearColor]];
+        
     }
     return self;
 }
@@ -62,7 +68,11 @@
     ////3db9ec
 	CGContextSetLineWidth(context, self.linewidth);  
     CGContextBeginPath (context);
-    CGContextSetRGBStrokeColor(context, 0x3d / 255.0, 0xb9 / 255.0, 0xec / 255.0, 1.0);
+    if ([_text.text isEqualToString:@"满"]){
+        CGContextSetRGBStrokeColor(context, 248 / 255.0, 151 / 255.0, 121 / 255.0, 1.0);
+    }else{
+    CGContextSetRGBStrokeColor(context, 68 / 255.0, 187 / 255.0, 193 / 255.0, 1.0);
+    }
 	CGContextAddArc(context, self.center.x, self.center.y, radius, -M_PI_2, progress * 2 * M_PI - M_PI_2, false);
     CGContextDrawPath (context, kCGPathStroke);
 }
@@ -105,9 +115,20 @@
     if (lock){
         return;
     }
+//    if ([self.str isEqualToString:@"dbx"]) {
+//       
+//        [self.text setFont:[UIFont systemFontOfSize:25]];
+//    }else if ([self.str isEqualToString:@"cbx"]){
+//         [self.text setFont:[UIFont systemFontOfSize:17]];
+//    }
     progress = newProgress;
     [self setNeedsDisplay];
     [self addSubview:_text];
+    if (newProgress ==1) {
+        [_text setText:[NSString stringWithFormat:@"满"]];
+        [self.text setTextColor:[RHUtility colorForHex:@"#f89779"]];
+        return;
+    }
     [_text setText:[NSString stringWithFormat:@"%d%%", (int)(newProgress * 100)]];
 }
 

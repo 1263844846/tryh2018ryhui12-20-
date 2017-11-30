@@ -8,7 +8,8 @@
 
 #import "RHBaseViewController.h"
 #import "RHSegmentContentView.h"
-
+typedef void(^myblock)() ;
 @interface RHMyGiftViewController : RHBaseViewController<RHSegmentContentViewDelegate>
 
+@property(nonatomic,copy)myblock myblock;
 @end

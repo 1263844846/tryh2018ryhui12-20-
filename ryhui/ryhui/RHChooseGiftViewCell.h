@@ -15,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *usingTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *moneyLabel;
 @property (nonatomic,assign)int investNum;
-
+@property (nonatomic,copy)NSString * monthorday;
 -(void)updateCell:(NSDictionary*)dic;
 
 @end

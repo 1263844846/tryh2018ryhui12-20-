@@ -24,7 +24,7 @@
             [self.activityIndicatorView setFrame:CGRectMake(60.0, 10.0, 25.0, 25.0)];
         }
         
-        self.footerButton = [[UIButton alloc] initWithFrame:CGRectMake(_activityIndicatorView.frame.origin.x, 0.0, 110, self.frame.size.height)];
+        self.footerButton = [[UIButton alloc] initWithFrame:CGRectMake(_activityIndicatorView.frame.origin.x, 0.0, 149, self.frame.size.height)];
 
 		self.footerButton.titleLabel.font = [UIFont systemFontOfSize:13.0f];
 		self.footerButton.titleLabel.backgroundColor = [UIColor clearColor];

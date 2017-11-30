@@ -27,7 +27,7 @@
 
 @property (nonatomic, assign) int currentPageIndex;
 @property(nonatomic, strong)NSMutableArray *dataArray;
-
+@property(nonatomic, strong)NSMutableArray *messageidArray;
 @end
 
 @implementation RHMyMessageViewController
@@ -37,7 +37,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configBackButton];
-    [self configTitleWithString:@"我的消息"];
+    [self configTitleWithString:@"消息列表"];
     
     isAllSelected = NO;
     showLoadMoreButton = YES;
@@ -72,32 +72,68 @@
 
 - (void)setRightButtonItem {
     rightButton =[UIButton buttonWithType:UIButtonTypeCustom];
-    [rightButton setTitle:@"编辑" forState:UIControlStateNormal];
+   // rightButton.backgroundColor = [UIColor redColor];
+    [rightButton setTitle:@"全部已读" forState:UIControlStateNormal];
     rightButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    rightButton.font = [UIFont systemFontOfSize:17.0];
+    [rightButton setTitleColor:[RHUtility colorForHex:@"#4abac0"] forState:UIControlStateNormal];
+    rightButton.font = [UIFont systemFontOfSize:15.0];
     [rightButton addTarget:self action:@selector(enteringToEditingMessages:) forControlEvents:UIControlEventTouchUpInside];
     rightButton.frame=CGRectMake(0, 0, 70, 30);
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
 }
 
 - (void)enteringToEditingMessages:(UIButton *)btn {
-    self.selecteBar.hidden = NO;
-    [self.tableView setEditing:(!self.tableView.editing) animated:YES];
-    [readMessages removeAllObjects];
-    if (self.tableView.isEditing) {
-       leftButton =[UIButton buttonWithType:UIButtonTypeCustom];
-        [leftButton setTitle:@"全选" forState:UIControlStateNormal];
-        leftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        leftButton.font = [UIFont systemFontOfSize:17.0];
-        [leftButton addTarget:self action:@selector(chooseMoreMessage:) forControlEvents:UIControlEventTouchUpInside];
-        leftButton.frame=CGRectMake(0, 0, 70, 30);
-        self.navigationItem.leftBarButtonItem= [[UIBarButtonItem alloc] initWithCustomView:leftButton];
-        [btn setTitle:@"取消编辑" forState:UIControlStateNormal];
-    } else {
-        self.selecteBar.hidden = YES;
-        [btn setTitle:@"编辑" forState:UIControlStateNormal];
-        [self configBackButton];
+    
+    
+//    self.selecteBar.hidden = NO;
+//    [self.tableView setEditing:(!self.tableView.editing) animated:YES];
+//    [readMessages removeAllObjects];
+//    if (self.tableView.isEditing) {
+//       leftButton =[UIButton buttonWithType:UIButtonTypeCustom];
+//        [leftButton setTitle:@"全选" forState:UIControlStateNormal];
+//        leftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+//        leftButton.font = [UIFont systemFontOfSize:17.0];
+//        [leftButton addTarget:self action:@selector(chooseMoreMessage:) forControlEvents:UIControlEventTouchUpInside];
+//        leftButton.frame=CGRectMake(0, 0, 70, 30);
+//        self.navigationItem.leftBarButtonItem= [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+//        [btn setTitle:@"取消编辑" forState:UIControlStateNormal];
+//    } else {
+//        self.selecteBar.hidden = YES;
+//        [btn setTitle:@"编辑" forState:UIControlStateNormal];
+//        [self configBackButton];
+//    }
+    
+    NSString *ids = @"";
+    for (int i = 0 ; i < self.messageidArray.count ; i ++) {
+       // NSMutableDictionary *dic = readMessages[i];
+        NSString *messageID = self.messageidArray[i];
+        NSString *temp = @"";
+        if (i < self.messageidArray.count - 1) {
+            temp = [NSString stringWithFormat:@"%@,",messageID];
+            ids = [ids stringByAppendingString:temp];
+        } else {
+            temp = [NSString stringWithFormat:@"%@",messageID];
+            ids = [ids stringByAppendingString:temp];
+        }
     }
+    ids = [NSString stringWithFormat:@"[%@]",ids];
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithObjectsAndKeys:ids,@"ids", nil];
+    NSLog(@"=======%@",parameters);
+    
+//    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"[%@]",self.messageidArray],@"ids", nil];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [[AFCompoundResponseSerializer alloc]init];
+    manager.securityPolicy = [[RHNetworkService instance] customSecurityPolicy];
+    [manager POST:[NSString stringWithFormat:@"%@app/front/payment/appAccount/appMarkMessageReaded",[RHNetworkService instance].newdoMain] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //        DLog(@"result==%@ <<<",[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSRange range = [result rangeOfString:@"success"];
+        if (range.location != NSNotFound) {
+            [self refresh];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //        DLog(@"%@",error);
+    }];
 }
 
 - (void)chooseMoreMessage:(UIButton *)btn {
@@ -151,7 +187,8 @@
         NSLog(@"=======%@",parameters);
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.responseSerializer = [[AFCompoundResponseSerializer alloc]init];
-        [manager POST:[NSString stringWithFormat:@"%@front/payment/account/%@",[RHNetworkService instance].doMain,appendString] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        manager.securityPolicy = [[RHNetworkService instance] customSecurityPolicy];
+        [manager POST:[NSString stringWithFormat:@"%@front/payment/account/%@",[RHNetworkService instance].newdoMain,appendString] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
             NSRange range = [result rangeOfString:@"success"];
             if (range.location != NSNotFound) {
@@ -238,12 +275,13 @@
     _footerView = nil;
     self.tableView = nil;
     _headerView = nil;
+    [self.messageidArray removeAllObjects];
 }
 //{"class":"view.JqRow","id":1935,"version":null,"cell":{"id":1935,"fee":null,"custId":"6000060000735977","relatedId":null,"description":"期数:3","userId":"29","money":2293.05,"dateCreated":"2015-09-12 00:02:27","projectId":248,"type":"PenaltyInterest","orderId":"00000000000000014557"}
 - (void)getMyMessage {
-    NSDictionary *parameters = @{@"_search":@"true",@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",_currentPageIndex],@"forApp":@"true",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"state\",\"op\":\"in\",\"data\":[1,2]}]}"};
+    NSDictionary *parameters = @{@"_search":@"true",@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",_currentPageIndex],@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"state\",\"op\":\"in\",\"data\":[1,2]}]}"};
     
-    [[RHNetworkService instance] POST:@"front/payment/account/myMessageListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[RHNetworkService instance] POST:@"app/front/payment/appAccount/appMyMessageListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        DLog(@"%@",responseObject);
         NSMutableArray *tempArray = [[NSMutableArray alloc]initWithCapacity:0];
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
@@ -285,7 +323,7 @@
         if (dataArray.count == 0) {
             self.selecteBar.hidden = YES;
             [self configBackButton];
-            [rightButton setTitle:@"编辑" forState:UIControlStateNormal];
+            [rightButton setTitle:@"全部" forState:UIControlStateNormal];
         }
         [self reloadTableView];
         [_footerView.activityIndicatorView stopAnimating];
@@ -370,6 +408,7 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:@"RHMyMessageCell" owner:nil options:nil] objectAtIndex:0];
     }
     NSDictionary *dataDic=[self.dataArray objectAtIndex:indexPath.row];
+    [self.messageidArray addObject:dataDic[@"id"]];
     [cell updateCell:dataDic];
     
     return cell;
@@ -382,7 +421,7 @@
         RHMyMessageDetailViewController *controller = [[RHMyMessageDetailViewController alloc]initWithNibName:@"RHMyMessageDetailViewController" bundle:nil];
         controller.delegate = self;
         controller.ids = [dataDic objectForKey:@"id"];
-        controller.titleStr = [dataDic objectForKey:@"title"];
+        controller.titleStr = [dataDic objectForKey:@"postDate"];
         controller.contentStr = [dataDic objectForKey:@"content"];
         [self.navigationController pushViewController:controller animated:YES];
     } else {
@@ -409,6 +448,16 @@
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
     return UITableViewCellEditingStyleDelete|UITableViewCellEditingStyleInsert;
+}
+
+
+-(NSMutableArray *)messageidArray{
+    
+    if (!_messageidArray) {
+        _messageidArray = [NSMutableArray array];
+    }
+    return _messageidArray;
+    
 }
 
 @end

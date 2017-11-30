@@ -22,6 +22,7 @@
 
 #import "AFHTTPRequestOperation.h"
 #import "MBProgressHUD.h"
+
 static dispatch_queue_t http_request_operation_processing_queue() {
     static dispatch_queue_t af_http_request_operation_processing_queue;
     static dispatch_once_t onceToken;
@@ -123,6 +124,7 @@ static dispatch_group_t http_request_operation_completion_group() {
                     dispatch_group_async(self.completionGroup ?: http_request_operation_completion_group(), self.completionQueue ?: dispatch_get_main_queue(), ^{
                         failure(self, self.error);
                         [self hideMBP];
+                        
                     });
                 }
             } else {
@@ -146,7 +148,11 @@ static dispatch_group_t http_request_operation_completion_group() {
                     if (success) {
                         dispatch_group_async(self.completionGroup ?: http_request_operation_completion_group(), self.completionQueue ?: dispatch_get_main_queue(), ^{
                             success(self, responseObject);
-                            [self hideMBP];
+                            if (![self.afnstring isEqualToString:@"111"]) {
+                                [self hideMBP];
+                                
+                            }
+                            
                         });
                     }
                 }

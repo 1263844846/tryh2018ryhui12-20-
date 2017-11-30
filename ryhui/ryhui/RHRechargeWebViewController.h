@@ -11,5 +11,6 @@
 @interface RHRechargeWebViewController : RHBaseViewController<UIWebViewDelegate>
 
 @property(nonatomic,strong)NSString* price;
+@property(nonatomic,strong)NSString * bankname;
 
 @end

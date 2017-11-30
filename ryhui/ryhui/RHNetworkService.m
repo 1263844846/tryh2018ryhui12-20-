@@ -10,10 +10,80 @@
 #import "RHGesturePasswordViewController.h"
 #import "MBProgressHUD.h"
 #import "RHMainViewController.h"
+
 static RHNetworkService* _instance;
 
 @implementation RHNetworkService
 @synthesize niubiMd5;
+
+-(NSString *)newdoMain{
+    //zhouming
+//     return @"http://223.223.180.146:8096/TinyFinance/";
+    
+    //laoniu
+//    return @"http://223.223.180.146:8093/TinyFinance/";
+    //wuzhiqiang
+    
+//    return @"http://39.106.110.53/";
+//  return @"http://223.223.180.146:8097/TinyFinance/";
+//
+//    return @"https://123.57.133.7/";
+   return @"https://123.57.133.7/TinyFinance4/";
+    return @"https://www.ryhui.com/";
+//    return @"http://223.223.180.146:8093/TinyFinance/";
+}
+
++ (AFSecurityPolicy*)customSecurityPolicy
+{
+    // /先导入证书
+    NSString *cerPath = [[NSBundle mainBundle] pathForResource:@"server" ofType:@"cer"];//证书的路径
+    NSData *certData = [NSData dataWithContentsOfFile:cerPath];
+//    NSSet * certSet = [[NSSet alloc] initWithObjects:certData, nil];
+    // AFSSLPinningModeCertificate 使用证书验证模式
+    AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
+    
+    // allowInvalidCertificates 是否允许无效证书（也就是自建的证书），默认为NO
+    // 如果是需要验证自建证书，需要设置为YES
+    securityPolicy.allowInvalidCertificates = NO;
+    
+    //validatesDomainName 是否需要验证域名，默认为YES；
+    //假如证书的域名与你请求的域名不一致，需把该项设置为NO；如设成NO的话，即服务器使用其他可信任机构颁发的证书，也可以建立连接，这个非常危险，建议打开。
+    //置为NO，主要用于这种情况：客户端请求的是子域名，而证书上的是另外一个域名。因为SSL证书上的域名是独立的，假如证书上注册的域名是www.google.com，那么mail.google.com是无法验证通过的；当然，有钱可以注册通配符的域名*.google.com，但这个还是比较贵的。
+    //如置为NO，建议自己添加对应域名的校验逻辑。
+    securityPolicy.validatesDomainName = NO;
+    
+    securityPolicy.pinnedCertificates = @[certData];
+    
+    return securityPolicy;
+}
+- (AFSecurityPolicy*)customSecurityPolicy
+{
+  
+    // /先导入证书
+    NSString *cerPath = [[NSBundle mainBundle] pathForResource:@"server1" ofType:@"cer"];//证书的路径
+    NSData *certData = [NSData dataWithContentsOfFile:cerPath];
+    NSSet * certSet = [[NSSet alloc] initWithObjects:certData, nil];
+    // AFSSLPinningModeCertificate 使用证书验证模式
+    AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+    
+    // allowInvalidCertificates 是否允许无效证书（也就是自建的证书），默认为NO
+    // 如果是需要验证自建证书，需要设置为YES
+    securityPolicy.allowInvalidCertificates = YES;
+    [securityPolicy setValidatesDomainName:NO];
+    
+    //validatesDomainName 是否需要验证域名，默认为YES；
+    //假如证书的域名与你请求的域名不一致，需把该项设置为NO；如设成NO的话，即服务器使用其他可信任机构颁发的证书，也可以建立连接，这个非常危险，建议打开。
+    //置为NO，主要用于这种情况：客户端请求的是子域名，而证书上的是另外一个域名。因为SSL证书上的域名是独立的，假如证书上注册的域名是www.google.com，那么mail.google.com是无法验证通过的；当然，有钱可以注册通配符的域名*.google.com，但这个还是比较贵的。
+    //如置为NO，建议自己添加对应域名的校验逻辑。
+//    securityPolicy.validatesDomainName = NO;
+    
+//    securityPolicy.pinnedCertificates = @[certData];
+    [securityPolicy setPinnedCertificates:certSet];
+   
+    return securityPolicy;
+    
+    
+}
 
 +(RHNetworkService*)instance
 {
@@ -22,7 +92,9 @@ static RHNetworkService* _instance;
         _instance=[[RHNetworkService alloc]init];
     });
     return _instance;
+    
 }
+
 -(NSString*)doMain
 {
     
@@ -31,8 +103,8 @@ static RHNetworkService* _instance;
     //localTest
 //    return @"http://192.168.1.112:8080/TinyFinance/";
     
-    return @"https://123.57.133.7/";
-//    return @"https://app.ryhui.com/";
+//    return @"https://123.57.133.7/";
+    return @"https://app.ryhui.com/";
 
 #ifdef DEBUG
     return @"https://www.ryhui.com/";
@@ -46,9 +118,9 @@ static RHNetworkService* _instance;
     //localTest
 //    return @"http://192.168.1.112:8080/TinyFinance/";
     
-    return @"https://123.57.133.7/";
+//    return @"https://123.57.133.7/";
     
-//    return @"https://app.ryhui.com/";
+//   return @"https://app.ryhui.com/";
     
 #ifdef DEBUG
     return @"https://www.ryhui.com/";
@@ -63,10 +135,17 @@ static RHNetworkService* _instance;
     self.delegate = [UIApplication sharedApplication].delegate;
     UINavigationController *navi = (UINavigationController *)self.delegate.window.rootViewController;
     UIViewController *vc;
+   // UITableView * tableview =(UITableView *) [vc.view viewWithTag:717];
     if (navi) {
         vc = navi.viewControllers[navi.viewControllers.count - 1];
         if (vc != nil) {
-            [MBProgressHUD showHUDAddedTo:vc.view animated:YES];
+            
+//            if ([self.rhafn isEqualToString:@"yanan"]) {
+//                //manager.panduan = @"zhuanquan";
+//            }else{
+
+           // [MBProgressHUD showHUDAddedTo:vc.view animated:YES];
+//            }
         }
     }
     
@@ -76,16 +155,29 @@ static RHNetworkService* _instance;
 
     
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
+    if ([self.rhafn isEqualToString:@"yanan"]) {
+        manager.panduan = @"zhuanquan";
+    }
+
+    
+    [manager.securityPolicy setAllowInvalidCertificates:YES];
+      manager.securityPolicy = [self customSecurityPolicy];
+//    [manager setSecurityPolicy:[self customSecurityPolicy]];
+     [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
     [manager.operationQueue cancelAllOperations];
+    
+    
+     
 //    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
 //    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
     if (session&&[session length]>0) {
         [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
+        
     }
     
     
-    return [manager POST:[NSString stringWithFormat:@"%@%@",[self doMain],URLString]
+    return [manager POST:[NSString stringWithFormat:@"%@%@",[self newdoMain],URLString]
               parameters:parameters
     constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     }

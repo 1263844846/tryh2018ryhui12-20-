@@ -11,5 +11,6 @@
 @interface RHRechargeViewController : RHBaseViewController<UITextFieldDelegate>
 
 @property(nonatomic,strong)NSString* balance;
-
+@property(nonatomic,strong)NSDictionary *bankdic;
+@property(nonatomic,copy)NSString * bankress;
 @end

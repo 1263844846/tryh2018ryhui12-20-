@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CMSCoinView.h"
 
 @interface RHMyNewGiftTableViewCell : UITableViewCell
 
@@ -20,6 +21,14 @@
 @property (weak, nonatomic) IBOutlet UIImageView *backGroundImage;    // 背景图片
 @property (weak, nonatomic) IBOutlet UIButton *giftTypeButton;    //投资／兑换按钮
 @property (weak, nonatomic) IBOutlet UIButton *clickButton;
+
+@property (weak, nonatomic) IBOutlet CMSCoinView *coinView;
+
+@property(nonatomic,strong)NSString * imagestr;
+
+@property(nonatomic,strong)NSDictionary * dic;
+
+@property(nonatomic,strong)UIImageView * profileView;
 
 -(void)updateCell:(NSDictionary*)dic with:(NSString*)type;
 

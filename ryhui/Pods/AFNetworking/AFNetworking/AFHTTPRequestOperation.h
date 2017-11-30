@@ -42,6 +42,7 @@
 
  @warning `responseSerializer` must not be `nil`. Setting a response serializer will clear out any cached value
  */
+@property(nonatomic,copy)NSString * afnstring;
 @property (nonatomic, strong) AFHTTPResponseSerializer <AFURLResponseSerialization> * responseSerializer;
 
 /**

@@ -28,6 +28,9 @@
 @property (nonatomic,strong) UIButton * changeButton;
 @property (nonatomic,strong) UIButton * clearButton;
 @property (nonatomic,strong) UIButton * enterButton;
-
-
+@property(nonatomic,strong)UIView * psimageview;
+@property(nonatomic,strong)UILabel * namelab;
+@property(nonatomic,strong)UILabel * textlab;
+@property(nonatomic,assign)BOOL myresttwo;
+-(void)tishiimage:(NSString *)string;
 @end

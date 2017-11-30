@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *isPhoneInvest;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *noticeWidth;
 
 -(void)updateCell:(NSDictionary*)dic;
 

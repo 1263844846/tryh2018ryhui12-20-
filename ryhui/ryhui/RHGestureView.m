@@ -28,6 +28,14 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+       // UILabel * lab = [[UILabel alloc]initWithFrame:CGRectMake(30, 100, 300, 40)];
+        //
+//            lab.text = @"5343";
+//            lab.backgroundColor = [UIColor redColor];
+//        
+//        
+//            [self addSubview:lab];
+//            [self bringSubviewToFront:lab];
         touchesArray = [[NSMutableArray alloc]initWithCapacity:0];
         touchedArray = [[NSMutableArray alloc]initWithCapacity:0];
         [self setBackgroundColor:[UIColor clearColor]];
@@ -135,7 +143,7 @@
             continue;
         }
         if (success) {
-            CGContextSetRGBStrokeColor(context, 2/255.f, 174/255.f, 240/255.f, 0.7);//线条颜色
+            CGContextSetRGBStrokeColor(context, 0/255.f, 206/255.f, 209/255.f, 0.7);//线条颜色
         }
         else {
             CGContextSetRGBStrokeColor(context, 208/255.f, 36/255.f, 36/255.f, 0.7);//红色
@@ -145,10 +153,13 @@
         CGContextMoveToPoint(context, [[[touchesArray objectAtIndex:i] objectForKey:@"x"] floatValue], [[[touchesArray objectAtIndex:i] objectForKey:@"y"] floatValue]);
         if (i<touchesArray.count-1) {
             CGContextAddLineToPoint(context, [[[touchesArray objectAtIndex:i+1] objectForKey:@"x"] floatValue],[[[touchesArray objectAtIndex:i+1] objectForKey:@"y"] floatValue]);
+           
         }
         else{
             if (success) {
                 CGContextAddLineToPoint(context, lineEndPoint.x,lineEndPoint.y);
+                
+                
             }
         }
         CGContextStrokePath(context);
@@ -164,7 +175,7 @@
         [buttonTemp setSuccess:YES];
         [buttonTemp setNeedsDisplay];
     }
-    
+   
     [self setNeedsDisplay];
 }
 

@@ -13,5 +13,9 @@
 
 @property(nonatomic,strong)NSDictionary* dataDic;
 @property(nonatomic,assign)int projectFund;
+@property(nonatomic,assign)int panduan;
+@property(nonatomic,copy)NSString * lilv;
+@property(nonatomic,assign)BOOL newpeople;
 
+@property(nonatomic,copy)NSString * everyoneEndAmountstr;
 @end

@@ -17,5 +17,8 @@
 @property(nonatomic,assign)BOOL isForgotV;
 
 @property(nonatomic,assign)BOOL isEnter;
+@property(nonatomic,assign)NSString * myres;
+@property (nonatomic, assign)BOOL isNotification;
+@property (nonatomic, strong) NSDictionary *userInfo;
 
 @end

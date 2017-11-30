@@ -21,7 +21,7 @@
     [self configBackButton];
     [self configTitleWithString:@"支持银行限额"];
     
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@bindKJCard",[RHNetworkService instance].doMain]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@bindKJCard",[RHNetworkService instance].newdoMain]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
     
     [self.webView loadRequest: request];

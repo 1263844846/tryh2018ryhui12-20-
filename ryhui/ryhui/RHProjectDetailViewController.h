@@ -11,8 +11,11 @@
 #import "RHInvestmentViewController.h"
 
 @interface RHProjectDetailViewController : RHBaseViewController
-
+//@property(nonatomic,strong)NSString* projectId;
 @property(nonatomic,strong)NSString* getType;
 @property(nonatomic,strong)NSDictionary* dataDic;
 
+@property(nonatomic,assign)int panduan;
+
+@property(nonatomic,strong)NSString * lilv;
 @end

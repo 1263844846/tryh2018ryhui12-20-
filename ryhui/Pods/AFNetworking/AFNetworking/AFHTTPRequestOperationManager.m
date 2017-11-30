@@ -127,6 +127,10 @@
     operation.securityPolicy = self.securityPolicy;
 
     [operation setCompletionBlockWithSuccess:success failure:failure];
+    if ([self.panduan isEqualToString:@"zhuanquan"]) {
+         operation.afnstring =@"111";
+    }
+   
     operation.completionQueue = self.completionQueue;
     operation.completionGroup = self.completionGroup;
 
@@ -197,7 +201,7 @@
     }
 
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
-
+    
     [self.operationQueue addOperation:operation];
 
     return operation;

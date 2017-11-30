@@ -12,9 +12,16 @@
 
 @property(nonatomic,strong)NSString* niubiMd5;
 @property (nonatomic, strong) AppDelegate *delegate;
+@property (nonatomic,copy)NSString * rhafn;
+
+@property(nonatomic,assign)BOOL updateress;
 
 +(RHNetworkService*)instance;
 
+- (AFSecurityPolicy*)customSecurityPolicy;
+
+
+-(NSString*)newdoMain;
 -(NSString*)doMain;
 -(NSString*)doMainhttp;
 

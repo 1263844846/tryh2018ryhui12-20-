@@ -27,5 +27,6 @@
 @property (nonatomic, assign) id<RHSegmentControlDelegate> delegate;
 
 -(void)initData;
-
+- (void)hidd;
+- (void)hiddd;
 @end

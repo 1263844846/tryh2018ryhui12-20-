@@ -9,7 +9,7 @@
 #import "RHBaseViewController.h"
 
 @interface RHALoginViewController : RHBaseViewController<UITextFieldDelegate>
-
+@property(nonatomic,strong)NSString * str;
 @property(nonatomic,assign)BOOL isForgotV;
 @property(nonatomic,assign)BOOL isPan;
 

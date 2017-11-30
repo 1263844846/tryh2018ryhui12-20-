@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "EGORefreshTableHeaderView.h"
 #import "AITableFooterVew.h"
-
+typedef void(^QiangGegeBlock)(NSDictionary * dic);
 @interface RHProjectListContentViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,EGORefreshTableHeaderDelegate>
-
+@property(nonatomic,copy)QiangGegeBlock myblock;
 @property(nonatomic,assign)UINavigationController* prarentNav;
 @property (nonatomic,strong)NSString* type;
 @property(nonatomic,strong)UITableView* tableView;

@@ -26,6 +26,7 @@
 
 @property(nonatomic,strong)NSString *balance;
 
+@property(nonatomic,strong)NSString *zhiwen;
 +(instancetype)sharedInterface;
 
 -(void)logout;

@@ -8,8 +8,13 @@
 
 #import "RHProjectListContentViewController.h"
 #import "RHMainViewCell.h"
-#import "RHProjectDetailViewController.h"
-
+//#import "RHProjectDetailViewController.h"
+#import "RHMainTableViewCell.h"
+#import "RHZZListTableViewCell.h"
+#import "RHZZDetailViewController.h"
+#import "RHProjectdetailthreeViewController.h"
+#import "RHXFDViewController.h"
+#import "RHHFJXViewController.h"
 @interface RHProjectListContentViewController ()
 {
     EGORefreshTableHeaderView *_headerView;
@@ -44,7 +49,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].applicationFrame.size.height-75-40-self.navigationController.navigationBar.frame.size.height) style:UITableViewStylePlain];
+    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].applicationFrame.size.height-75-40-self.navigationController.navigationBar.frame.size.height+35) style:UITableViewStylePlain];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     self.tableView.backgroundColor=[UIColor clearColor];
@@ -66,6 +71,7 @@
     showLoadMoreButton=YES;
 
 }
+
 -(void)refreshWithData:(NSString *)data
 {
     
@@ -104,7 +110,7 @@
     
     NSString* url=nil;
     if ([type isEqualToString:@"0"]) {
-        url=@"common/main/shangListData";
+        url=@"app/common/appMain/projectListAllData";
     }else{
         url=@"common/main/xueListData";
     }
@@ -136,6 +142,10 @@
                 for (NSDictionary* dic in array) {
                     if ([dic objectForKey:@"cell"]&&!([[dic objectForKey:@"cell"] isKindOfClass:[NSNull class]])) {
                         [tempArray addObject:[dic objectForKey:@"cell"]];
+//                        NSLog(@"----234----%@",dic[@"id"]);
+//                        NSString * str = [NSString stringWithFormat:@"%@",dic[@"id"]];
+//                        
+                        
                     }
                 }
             }else{
@@ -151,6 +161,7 @@
         [dataArray addObjectsFromArray:tempArray];
         if ([dataArray count] <= 6) {
             _footerView.hidden = YES;
+        
         }
         [self reloadTableView];
         [_footerView.activityIndicatorView stopAnimating];
@@ -202,6 +213,7 @@
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     
     [_headerView egoRefreshScrollViewDidEndDragging:scrollView];
+     [[NSNotificationCenter defaultCenter]postNotificationName:@"666" object:nil];
     
 }
 
@@ -210,6 +222,8 @@
 {
     
     [_headerView egoRefreshScrollViewDidScroll:scrollView];
+  
+   
     
     if (!_footerView.hidden&&showLoadMoreButton)  {
         CGFloat currentOffset = scrollView.contentOffset.y;
@@ -244,7 +258,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 103;
+    return 150;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -254,30 +268,257 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+   // [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    if ([self.type isEqualToString:@"0"]) {
+     
+    if ([UIScreen mainScreen].bounds.size.width > 319) {
+        
+    
     static NSString *CellIdentifier = @"CellIdentifier";
     
     RHMainViewCell *cell = (RHMainViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"RHMainViewCell" owner:nil options:nil] objectAtIndex:0];
     }
+        if (self.dataArray.count >0) {
+     NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];
+    cell.myblock = ^{
+        self.myblock(dataDic);
+    };
+   
     
-    NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];
-    
+    NSString  * string = [NSString stringWithFormat:@"%@",dataDic[@"investorRate"]];
+    //dataDic[@"investorRate"] = (id)string
+    if (string.length > 5) {
+        NSArray *array = [string componentsSeparatedByString:@"."];
+        string = array.lastObject;
+        string =  [string substringToIndex:2];
+        
+        int a = [string intValue];
+        
+        int b  = a /10;
+        
+        int c = a - b * 10;
+        
+        if (c > 5) {
+            b= b+1;
+            
+            string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
+            // [dataDic setValue:string forKey:@"investorRate"];
+            // dataDic[@"investorRate"] = string;
+        }else{
+            
+            string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
+            //[dataDic setValue:string forKey:@"investorRate"];
+            
+        }
+    }
+    cell.lilv = string;
     [cell updateCell:dataDic];
-    
+        }
     return cell;
+    }else{
+        static NSString *CellIdentifier = @"CellIdentifier1";
+        
+        RHMainTableViewCell *cell = (RHMainTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RHMainTableViewCell" owner:nil options:nil] objectAtIndex:0];
+        }
+        NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row-2];
+//        cell.myblock = ^{
+//            self.myblock(dataDic);
+//        };
+        
+        
+        NSString  * string = [NSString stringWithFormat:@"%@",dataDic[@"investorRate"]];
+        //dataDic[@"investorRate"] = (id)string
+        if (string.length > 5) {
+            NSArray *array = [string componentsSeparatedByString:@"."];
+            string = array.lastObject;
+            string =  [string substringToIndex:2];
+            
+            int a = [string intValue];
+            
+            int b  = a /10;
+            
+            int c = a - b * 10;
+            
+            if (c > 5) {
+                b= b+1;
+                
+                string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
+                // [dataDic setValue:string forKey:@"investorRate"];
+                // dataDic[@"investorRate"] = string;
+            }else{
+                
+                string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
+                //[dataDic setValue:string forKey:@"investorRate"];
+                
+            }
+        }
+//        cell.lilv = string;
+        [cell updateCell:dataDic];
+        
+        return cell;
+
+
+        
+    }
+    }else{
+        
+       static NSString * CellIdentifier = @"rhzzlistcell";
+//        static NSString *CellIdentifier = @"CellIdentifier1";
+        
+        RHZZListTableViewCell *cell = (RHZZListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RHZZListTableViewCell" owner:nil options:nil] objectAtIndex:0];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (self.dataArray.count >0) {
+             NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];
+            cell.myblock = ^{
+                self.myblock(dataDic);
+            };
+            
+            
+            NSString  * string = [NSString stringWithFormat:@"%@",dataDic[@"investorRate"]];
+            //dataDic[@"investorRate"] = (id)string
+            if (string.length > 5) {
+                NSArray *array = [string componentsSeparatedByString:@"."];
+                string = array.lastObject;
+                string =  [string substringToIndex:2];
+                
+                int a = [string intValue];
+                
+                int b  = a /10;
+                
+                int c = a - b * 10;
+                
+                if (c > 5) {
+                    b= b+1;
+                    
+                    string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
+                    // [dataDic setValue:string forKey:@"investorRate"];
+                    // dataDic[@"investorRate"] = string;
+                }else{
+                    
+                    string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
+                    //[dataDic setValue:string forKey:@"investorRate"];
+                    
+                }
+                
+            }
+            cell.lilv = string;
+            [cell updateCell:dataDic];
+        }else{
+            
+        }
+        
+        
+        
+        return cell;
+    }
+    
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    RHProjectDetailViewController* controller=[[RHProjectDetailViewController alloc]initWithNibName:@"RHProjectDetailViewController" bundle:nil];
-    NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];
+    //if ([self.type isEqualToString:@"0"]) {
+    
+    
+    
+   
+   
+    
+    
+    
+   NSMutableDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];
+    
+   
+    
+    RHProjectdetailthreeViewController* controller=[[RHProjectdetailthreeViewController alloc]initWithNibName:@"RHProjectdetailthreeViewController" bundle:nil];
+        controller.zzimage.hidden = YES;
+        controller.zzlasttimelab.hidden = YES;
+        controller.zzlasttimeminlab.hidden = YES;
+        controller.zztimelogoiamge.hidden = YES;
+    
+    NSString  * string = [NSString stringWithFormat:@"%@",dataDic[@"investorRate"]];
+   //dataDic[@"investorRate"] = (id)string
+    if (string.length > 5) {
+        NSArray *array = [string componentsSeparatedByString:@"."];
+        string = array.lastObject;
+       string =  [string substringToIndex:2];
+        
+        int a = [string intValue];
+        
+        int b  = a /10;
+        
+        int c = a - b * 10;
+        
+        if (c > 5) {
+            b= b+1;
+            
+            string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
+           // [dataDic setValue:string forKey:@"investorRate"];
+           // dataDic[@"investorRate"] = string;
+        }else{
+            
+            string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
+            //[dataDic setValue:string forKey:@"investorRate"];
+            
+        }
+    }
+
+    controller.lilv = string;
     controller.dataDic=dataDic;
     controller.getType=type;
+    NSString * projectStatus;
+    if (![[dataDic objectForKey:@"percent"] isKindOfClass:[NSNull class]]) {
+        projectStatus=[dataDic objectForKey:@"projectStatus"] ;
+        
+    }
+    if ([projectStatus isEqualToString:@"finished"]) {
+        
+        controller.zhaungtaistr =  @"还款完毕";
+        
+    }else if ([projectStatus isEqualToString:@"repayment_normal"]||[projectStatus isEqualToString:@"repayment_abnormal"]){
+        
+        controller.zhaungtaistr =@"还款中";
+        
+    }else if ([projectStatus isEqualToString:@"loans"]||[projectStatus isEqualToString:@"loans_audit"]){
+        
+        controller.zhaungtaistr =@"项目审核";
+        
+    }else if ([projectStatus isEqualToString:@"full"]){
+        
+        controller.zhaungtaistr =@"已满标";
+        
+    }
+    
     [self.prarentNav pushViewController:controller animated:YES];
+
+    
+    
     
 }
 
+-(NSString *)roundUp:(float)number afterPoint:(int)position{
+    NSDecimalNumberHandler* roundingBehavior = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundUp scale:position raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:NO];
+    NSDecimalNumber *ouncesDecimal;
+    NSDecimalNumber *roundedOunces;
+    ouncesDecimal = [[NSDecimalNumber alloc] initWithFloat:number];
+    roundedOunces = [ouncesDecimal decimalNumberByRoundingAccordingToBehavior:roundingBehavior];
+    //[ouncesDecimal release];
+    return [NSString stringWithFormat:@"%@",roundedOunces];
+}
 
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    [dataArray removeAllObjects];
+   //  [self getListDataWithFilters:nil sord:nil];
+    [self startPost];
+    
+}
 
 @end

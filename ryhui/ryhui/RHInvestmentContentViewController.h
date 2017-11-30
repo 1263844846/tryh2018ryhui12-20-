@@ -9,12 +9,15 @@
 #import "RHBaseViewController.h"
 #import "EGORefreshTableHeaderView.h"
 #import "AITableFooterVew.h"
+typedef void(^myblock)() ;
 @interface RHInvestmentContentViewController : RHBaseViewController<UITableViewDataSource,UITableViewDelegate,EGORefreshTableHeaderDelegate>
 
 @property(nonatomic,assign)UINavigationController* nav;
 @property (nonatomic,strong)NSMutableArray* dataArray;
 @property (nonatomic,strong)NSString* type;
-
+@property(nonatomic,assign)BOOL ressss;
+@property(nonatomic,copy)myblock myblock;
+@property(nonatomic,copy)myblock myblock1;
 -(void)getinvestListData;
 -(void)startPost;
 

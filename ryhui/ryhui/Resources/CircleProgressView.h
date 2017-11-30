@@ -22,7 +22,7 @@ typedef enum {
 @interface CircleProgressView : UIView
 
 - (id)initWithFrame:(CGRect)frame withCenter:(CGPoint)acenter Radius:(CGFloat)aradius lineWidth:(CGFloat)width;
-
+@property(nonatomic,copy)NSString * str;
 @property (nonatomic) CGPoint center;
 @property (nonatomic) BOOL lock;
 @property (nonatomic) TOUCHSTATUS status;

@@ -17,6 +17,7 @@
     self.segmentView1.hidden=NO;
     self.segmentView2.hidden=YES;
     [delegate didSelectSegmentAtIndex:0];
+    //self.segmentLabel.text = @"可投0";
 }
 
 - (IBAction)segment1Action:(id)sender {
@@ -36,4 +37,18 @@
     }
 }
 
+-(void)hidd{
+    
+    self.segmentView2.hidden=NO;
+    self.segmentView1.hidden=YES;
+    [delegate didSelectSegmentAtIndex:1];
+    
+}
+- (void)hiddd{
+    
+    self.segmentView2.hidden=YES;
+    self.segmentView1.hidden=NO;
+    [delegate didSelectSegmentAtIndex:0];
+    
+}
 @end

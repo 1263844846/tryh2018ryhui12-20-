@@ -9,6 +9,7 @@
 #import "RHLoginViewController.h"
 #import "RHALoginViewController.h"
 #import "RHRegisterViewController.h"
+#import "RHMainViewController.h"
 
 @interface RHLoginViewController ()
 
@@ -22,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.bgImageView.frame=[UIScreen mainScreen].bounds;
+//    self.bgImageView.frame=[UIScreen mainScreen].bounds;
     
     [self.view addSubview:self.buttonView];
 }
@@ -50,6 +51,7 @@
 }
 
 - (IBAction)registerAction:(id)sender {
+    //11
     RHRegisterViewController* controller=[[RHRegisterViewController alloc]initWithNibName:@"RHRegisterViewController" bundle:nil];
     if (nav) {
         [self.nav pushViewController:controller animated:YES];
@@ -58,6 +60,15 @@
     }}
 
 - (IBAction)qRegisterAction:(id)sender {
+    
+  RHMainViewController  * controller=[[RHMainViewController alloc]initWithNibName:@"RHMainViewController" bundle:nil];
+    // controller.type= @"4";
+    
+    DQview * aview = [DQview Shareview];
+    //aview.str = @"cbx";
+    //aview.delegate = self;
+    [aview btnClick:[[UIButton alloc]init]];
+    [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:0];
     
     [[RHTabbarManager sharedInterface] initTabbar];
     
