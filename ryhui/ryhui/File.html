@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<header>
+    
+<title id = "title">Title of this page</title>
+
+<!--样式从File.css文件中获取-->
+<link rel="stylesheet" type="text/css" href="File.css">
+
+<!--响应的方法从File.js文件中获取-->
+<!--<script type="text/javascript" src="File.js"></script>-->
+
+
+
+</header>
+
+<body>
+    <!--    标签，css中设置样式时，会根据id来设置-->
+    <p id = "wql">This is my first try to write Html5 file.</p>
+    <br/>
+    <!--    加粗的文本，css中设置样式时，会根据id来设置-->
+    <b id = "myp">This text is bold</b>
+
+    <!--    换行符-->
+    <br/><br/><br/><br/>
+    
+    <!--    按钮，点击按钮触发helloWQL()方法，按钮上的文本是“点击出弹框”-->
+    <!--    该按钮的目的是：点击后触发OC的方法-->
+    <button type="button" onclick = "helloWQL()">点击出弹框</button>
+    <br/><br/>
+    
+    
+    <!--    按钮，点击该按钮会触发sendValueFromHtml()方法，按钮上的文本是“点击出弹框”-->
+    <!--    该按钮的目的是：将某个值传给OC，我们这里分别传了一个值、两个值-->
+    <button type="button" onclick = "sendValueFromHtml()">点击传值</button>
+    <br/><br/>
+    
+    
+    <!--    按钮，点击该按钮会触发getValueFromOC()方法，按钮上的文本是“从OC拿值”-->
+    <!--    该按钮的目的是：点击按钮后，从OC获取某个值-->
+    <button type="button" onclick = "getValueFromOC()">从OC拿值</button>
+    
+    <!--        定义各个方法-->
+   
+    
+
+
+
+</body>
+
+
+
+</html>
