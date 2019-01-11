@@ -27,27 +27,120 @@
     
     [self configBackButton];
 }
+-(void)getContract{
+    NSDictionary *parameters = @{@"projectId":self.projectId};
+    [[RHNetworkService instance] POST:@"front/payment/agreement/judgeContractType" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"----===============-1111---%@",responseObject);
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            
+            if ([responseObject[@"msg"]isEqualToString:@"old"]) {
+                NSURL *url = nil;
+                if (isAgreen) {
+                    [self configTitleWithString:@"借款协议"];
+                    url = [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/agreement/agreementInvestorApp?projectId=%@&userId=%@",[RHNetworkService instance].newdoMain,self.projectId,[RHUserManager sharedInterface].userId]];
+                } else {
+                    [self configTitleWithString:@"合同"];
+                    url = [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/agreement/agreementInvestor?projectId=%@&userId=%@",[RHNetworkService instance].newdoMain,self.projectId,[RHUserManager sharedInterface].userId]];
+                    
+                    //        url = [NSURL URLWithString:[NSString stringWithFormat:@"http://i.sandbox.junziqian.com/applaySign/toDetailAnony?timestamp=1515726753567&applyNo=APL951347153597501440&sign=39fa5fd546e0daeccd6ff804ee36aea26be7a719"]];
+                }
+                
+                _request = [[NSMutableURLRequest alloc]initWithURL: url];
+                [_request setHTTPMethod: @"POST"];
+                NSString* session = [[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
+                if (session&&[session length] > 0) {
+                    [_request setValue:session forHTTPHeaderField:@"Set-Cookie"];
+                }
+                self.webView.delegate = self;
+                [self.webView loadRequest: _request];
+                [self.webView setScalesPageToFit:YES];
+            }else{
+                NSDictionary* parameters=@{@"projectId":self.projectId};
+              
+                [[RHNetworkService instance] POST:@"front/payment/agreement/showBaoquanContractApp" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                     if ([responseObject isKindOfClass:[NSDictionary class]]) {
+                         NSString * urlstr = [NSString stringWithFormat:@"%@",responseObject[@"url"]];
+                         if (urlstr.length >8) {
+                             NSURL *url = nil;
+                             if (isAgreen) {
+                                 [self configTitleWithString:@"借款协议"];
+                                 url = [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/agreement/agreementInvestorApp?projectId=%@&userId=%@",[RHNetworkService instance].newdoMain,self.projectId,[RHUserManager sharedInterface].userId]];
+                                 
+                                 _request = [[NSMutableURLRequest alloc]initWithURL: url];
+                                 [_request setHTTPMethod: @"POST"];
+                                 NSString* session = [[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
+                                 if (session&&[session length] > 0) {
+                                     [_request setValue:session forHTTPHeaderField:@"Set-Cookie"];
+                                 }
+                                 self.webView.delegate = self;
+                                 [self.webView loadRequest: _request];
+                                 [self.webView setScalesPageToFit:YES];
+                             } else {
+                                 [self configTitleWithString:@"合同"];
+                                 url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",urlstr]];
+                                 
+                                 //        url = [NSURL URLWithString:[NSString stringWithFormat:@"http://i.sandbox.junziqian.com/applaySign/toDetailAnony?timestamp=1515726753567&applyNo=APL951347153597501440&sign=39fa5fd546e0daeccd6ff804ee36aea26be7a719"]];
+                                 
+                                 _request = [[NSMutableURLRequest alloc]initWithURL: url];
+                                 [_request setHTTPMethod: @"GET"];
+//                                 NSString* session = [[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
+//                                 if (session&&[session length] > 0) {
+//                                     [_request setValue:session forHTTPHeaderField:@"Set-Cookie"];
+//                                 }
+                                 self.webView.delegate = self;
+                                 [self.webView loadRequest: _request];
+                                 [self.webView setScalesPageToFit:YES];
+                             }
+                             
+                            
+                         }else{
+                             
+                             NSURL *url = nil;
+                             if (isAgreen) {
+                                 [self configTitleWithString:@"借款协议"];
+                                 url = [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/agreement/agreementInvestorApp?projectId=%@&userId=%@",[RHNetworkService instance].newdoMain,self.projectId,[RHUserManager sharedInterface].userId]];
+                             } else {
+                                 [self configTitleWithString:@"合同"];
+                                 url = [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/agreement/agreementInvestor?projectId=%@&userId=%@",[RHNetworkService instance].newdoMain,self.projectId,[RHUserManager sharedInterface].userId]];
+                                 
+                                 //        url = [NSURL URLWithString:[NSString stringWithFormat:@"http://i.sandbox.junziqian.com/applaySign/toDetailAnony?timestamp=1515726753567&applyNo=APL951347153597501440&sign=39fa5fd546e0daeccd6ff804ee36aea26be7a719"]];
+                             }
+                             
+                             _request = [[NSMutableURLRequest alloc]initWithURL: url];
+                             [_request setHTTPMethod: @"POST"];
+                             NSString* session = [[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
+                             if (session&&[session length] > 0) {
+                                 [_request setValue:session forHTTPHeaderField:@"Set-Cookie"];
+                             }
+                             self.webView.delegate = self;
+                             [self.webView loadRequest: _request];
+                             [self.webView setScalesPageToFit:YES];
+                         }
+                         
+                     }
+                    
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    ;
+                    DLog(@"%@",[[NSString alloc] initWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] encoding:NSUTF8StringEncoding]);
+                 
+                }];
+                
+            }
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        ;
+        DLog(@"%@",[[NSString alloc] initWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] encoding:NSUTF8StringEncoding]);
+       
+    }];
 
+    
+}
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    NSURL *url = nil;
-    if (isAgreen) {
-        [self configTitleWithString:@"借款协议"];
-        url = [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/agreement/agreementInvestorApp?projectId=%@&userId=%@",[RHNetworkService instance].newdoMain,self.projectId,[RHUserManager sharedInterface].userId]];
-    } else {
-        [self configTitleWithString:@"合同"];
-        url = [NSURL URLWithString:[NSString stringWithFormat:@"%@front/payment/agreement/agreementInvestor?projectId=%@&userId=%@",[RHNetworkService instance].newdoMain,self.projectId,[RHUserManager sharedInterface].userId]];
-    }
+   
+    [self getContract];
     
-    _request = [[NSMutableURLRequest alloc]initWithURL: url];
-    [_request setHTTPMethod: @"POST"];
-    NSString* session = [[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
-    if (session&&[session length] > 0) {
-        [_request setValue:session forHTTPHeaderField:@"Set-Cookie"];
-    }
-    self.webView.delegate = self;
-    [self.webView loadRequest: _request];
-    [self.webView setScalesPageToFit:YES];
 }
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
