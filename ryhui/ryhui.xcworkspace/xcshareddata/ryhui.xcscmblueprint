@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "D213F881BD7DDEEEEDF7788AB31B99050E70825A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "0D8C799293DC638F05F9E83307C88065A3DA9E35" : 9223372036854775807,
+    "D213F881BD7DDEEEEDF7788AB31B99050E70825A" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "AB25BE1F-3052-4857-BF62-D7C5A5FA5271",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "0D8C799293DC638F05F9E83307C88065A3DA9E35" : "..\/ryhui_ios",
+    "D213F881BD7DDEEEEDF7788AB31B99050E70825A" : "tryh2016ryhui12%E6%9C%8829%E6%97%A5\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "ryhui",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ryhui\/ryhui.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "192.168.1.200:ryhui_ios\/ryhui_ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0D8C799293DC638F05F9E83307C88065A3DA9E35"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "106.185.32.212:hugeliang\/ryhui.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D213F881BD7DDEEEEDF7788AB31B99050E70825A"
+    }
+  ]
+}
