@@ -54,6 +54,11 @@
 //    self.hidesBottomBarWhenPushed=YES;
   //  [[UIApplication sharedApplication].keyWindow addSubview:self.view];
     self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].applicationFrame.size.height-50-40-self.navigationController.navigationBar.frame.size.height+30) style:UITableViewStylePlain];
+    
+    if ([UIScreen mainScreen].bounds.size.height>740) {
+        self.tableView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].applicationFrame.size.height-50-40-self.navigationController.navigationBar.frame.size.height+10);
+    }
+    
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
@@ -95,9 +100,89 @@
 -(void)getinvestListData
 {
     
-    NSDictionary* parameters=@{@"_search":@"true",@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",_currentPageIndex],@"sidx":@"realGiveTime",@"sord":@"desc",@"filters":type};
+    NSDictionary* parameters=@{@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",_currentPageIndex],@"filters":type};
+    
+//
+    AFHTTPRequestOperationManager* manager=[AFHTTPRequestOperationManager manager];
+
+    manager.securityPolicy = [[RHNetworkService instance] customSecurityPolicy];
+    [manager.operationQueue cancelAllOperations];
+
+
+    [manager.securityPolicy setAllowInvalidCertificates:YES];
+
+    [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
+
+
+    NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
+    NSLog(@"------------------%@",session);
+    NSString* session1=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHNEWMYSESSION"];
+
+    if (session1.length>12) {
+        session = [NSString stringWithFormat:@"%@,%@",session,session1];
+    }
+    if (session&&[session length]>0) {
+        [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
+    }
+//    NSString * str = @"https://60.205.154.45/";
+    
+    NSString * str = [RHNetworkService instance].newdoMain;
+    [manager POST:[NSString stringWithFormat:@"%@ryhuiBoot/app/front/account/investApp",str]parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+
+        NSLog(@"------------------%@",responseObject);
+
+        NSMutableArray* tempArray=[[NSMutableArray alloc]initWithCapacity:0];
+
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSArray* array=[responseObject objectForKey:@"rows"];
+            if ([array isKindOfClass:[NSArray class]]) {
+                _footerView.hidden=NO;
+                if ([array count]<10) {
+                    //已经到底了
+                    if ([array count]==0) {
+                        //                        [_footerView.footerButton setTitle:@"亲暂时没有数据" forState:UIControlStateDisabled];
+                        [self showNoDataWithFrame:self.tableView.frame insertView:self.tableView];
+                    }else{
+                        [self hiddenNoData];
+                    }
+                    [_footerView.footerButton setEnabled:NO];
+                    showLoadMoreButton=NO;
+                }else{
+                    [_footerView.footerButton setEnabled:YES];
+                    showLoadMoreButton=YES;
+                }
+                for (NSDictionary* dic in array) {
+                    if ([dic objectForKey:@"cell"]&&!([[dic objectForKey:@"cell"] isKindOfClass:[NSNull class]])) {
+                        [tempArray addObject:[dic objectForKey:@"cell"]];
+                    }
+                }
+            }else{
+                _footerView.hidden=YES;
+            }
+        }
+        if (_reloading) {
+            [self.dataArray removeAllObjects];
+        }
+
+        self.currentPageIndex++;
+        [dataArray addObjectsFromArray:tempArray];
+        if ([dataArray count]<=7) {
+            _footerView.hidden=YES;
+        }
+        [self reloadTableView];
+        [_footerView.activityIndicatorView stopAnimating];
+        [_headerView setHidden:YES];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        DLog(@"%@",[[NSString alloc] initWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] encoding:NSUTF8StringEncoding]);
+    }];
+
+
+
+
+    return;
+    
 //    DLog(@"%@",type);
-    [[RHNetworkService instance] POST:@"app/front/payment/appAccount/appInvestListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[RHNetworkService instance] POST:@"ryhuiBoot/app/front/account/investApp" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        DLog(@"%@",responseObject);
         NSMutableArray* tempArray=[[NSMutableArray alloc]initWithCapacity:0];
         
@@ -242,6 +327,13 @@
     NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];
     _row = indexPath.row;
     cell.nav=nav;
+     cell.xmjbtn.hidden = YES;
+    if (dataDic[@"isProjectList"]&&![dataDic[@"isProjectList"] isKindOfClass:[NSNull class]]) {
+        if ([dataDic[@"isProjectList"] isEqualToString:@"yes"]) {
+            cell.xmjbtn.hidden = NO;
+        }
+    }
+    
     cell.type = self.type;
     [cell updateCell:dataDic];
    // [cell.nameLabel addGestureRecognizer:tap];
@@ -275,6 +367,9 @@
     
     [[RHNetworkService instance] POST:@"app/common/appDetails/appProjectDetailData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
     [RHhelper ShraeHelp].myinsert = 11;
+        if ([self.resstr isEqualToString:@"test"]) {
+            [RHhelper ShraeHelp].myinsert = 0;
+        }
         RHProjectdetailthreeViewController* controller=[[RHProjectdetailthreeViewController alloc]initWithNibName:@"RHProjectdetailthreeViewController" bundle:nil];
         
         
@@ -288,14 +383,10 @@
             //
             //
            
-                controller.judge = @"ketou";
-            
+            controller.judge = @"ketou";
             controller.dataDic=dataDic;
             controller.getType=type;
-            //            controller.newpeopletype =YES;
-            //            controller.postnewpeopletype = self.newpeoplebool;
-            //            //controller.view.frame = CGRectMake(0, 0, self.view.frame.size.width, 700);
-            //            //controller.view.backgroundColor = [UIColor orangeColor];
+           
             NSString * projectStatus;
             if (![[dataDic objectForKey:@"percent"] isKindOfClass:[NSNull class]]) {
                 projectStatus=[dataDic objectForKey:@"projectStatus"] ;
@@ -318,6 +409,7 @@
                 controller.zhaungtaistr =@"已满标";
                 
             }
+            
             //[RHhelper ShraeHelp].myinsert = 10;
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             [self.nav pushViewController:controller animated:YES];
@@ -386,13 +478,23 @@
             controller.zhaungtaistr =@"已满标";
             
         }
-            
+//            controller.insert = 10;
          [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         [self.nav pushViewController:controller animated:YES];
+            
+            
+//            [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:1];
+//            UIButton *btn = [[UIButton alloc]init];
+//            btn.tag = 1;
+//            [[DQview Shareview] btnClick:btn];
+//            nav.navigationController.navigationBar.alpha = 1.00;
+//            [self.navigationController pushViewController:controller animated:YES];
+            
+            //[nav popToRootViewControllerAnimated:NO];
         }
         NSLog(@"%@",responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        ;
+        DLog(@"%@",[[NSString alloc] initWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] encoding:NSUTF8StringEncoding]);
     }];
     
     

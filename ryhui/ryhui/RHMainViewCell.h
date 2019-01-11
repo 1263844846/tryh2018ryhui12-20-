@@ -37,6 +37,7 @@ typedef void(^QiangGeBlock)();
 @property (weak, nonatomic) IBOutlet UILabel *fuhaolab;
 
 -(void)updateCell:(NSDictionary*)dic;
+-(void)updatexmjCell:(NSDictionary*)dic;
 @property (weak, nonatomic) IBOutlet UILabel *firstlab;
 
 @property (weak, nonatomic) IBOutlet UILabel *secondlab;
@@ -50,7 +51,13 @@ typedef void(^QiangGeBlock)();
 @property (weak, nonatomic) IBOutlet UIView *moveview;
 @property (weak, nonatomic) IBOutlet UIImageView *newpeopleimage;
 @property (weak, nonatomic) IBOutlet UILabel *mouthordaylab;
+@property (weak, nonatomic) IBOutlet UILabel *newfirstlanhiden;
 
 @property (weak, nonatomic) IBOutlet UIImageView *projectjdimage;
 @property(nonatomic,assign)CGFloat test;
+@property (weak, nonatomic) IBOutlet UILabel *listlab;
+
+@property(nonatomic,copy)NSString * listres;
+@property (weak, nonatomic) IBOutlet UIImageView *btnimage;
+
 @end

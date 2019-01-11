@@ -44,11 +44,11 @@
 
     // Do any additional setup after loading the view.
     [self getInvestDetail];
-    self.myimage.hidden = YES;
-    self.mylab.hidden = YES;
+//    self.myimage.hidden = YES;
+//    self.mylab.hidden = YES;
     if (self.res==3) {
-        self.myimage.hidden = NO;
-        self.mylab.hidden = NO;
+//        self.myimage.hidden = NO;
+        self.mylab.text = @"将于满标后生成回款计划";
         
     }
 }
@@ -212,7 +212,16 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (self.dataArray.count>1) {
+        
+        self.myimage.hidden = YES;
+        self.mylab.hidden = YES;
+        self.tableView.hidden = NO;
+    }else{
+        self.tableView.hidden = YES;
+    }
     return self.dataArray.count;
+    
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

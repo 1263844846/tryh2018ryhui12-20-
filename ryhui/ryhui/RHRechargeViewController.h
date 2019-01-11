@@ -13,4 +13,6 @@
 @property(nonatomic,strong)NSString* balance;
 @property(nonatomic,strong)NSDictionary *bankdic;
 @property(nonatomic,copy)NSString * bankress;
+
+@property(nonatomic,copy)NSString * baofuress;
 @end

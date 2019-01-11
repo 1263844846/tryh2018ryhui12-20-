@@ -19,7 +19,7 @@
     // Do any additional setup after loading the view from its nib.
     [self configBackButton];
     
-    [self configTitleWithString:@"投资咨询与服务管理协议"];
+    [self configTitleWithString:@"出借咨询与服务管理协议"];
 }
 
 - (void)didReceiveMemoryWarning {

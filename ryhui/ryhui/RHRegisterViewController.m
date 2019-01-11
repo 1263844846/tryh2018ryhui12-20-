@@ -14,6 +14,7 @@
 #import "RHGesturePasswordViewController.h"
 #import "RHRegisterSecondViewController.h"
 #import "RHOpenCountViewController.h"
+#import "RHXYWebviewViewController.h"
 @interface RHRegisterViewController ()
 {
     int secondsCountDown;
@@ -60,7 +61,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView *typeImageView;
 @property (weak, nonatomic) IBOutlet UILabel *giftMoneyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *giftNoticeLabel;
+@property (weak, nonatomic) IBOutlet UIButton *userbtn;
 
+@property(nonatomic,copy)NSString * userstring;
 @end
 
 @implementation RHRegisterViewController
@@ -112,6 +115,7 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(phoneNumberTaped:)];
     [self.phoneLabel addGestureRecognizer:tap];
     
+    self.userstring = @"2";
 }
 
 -(void)phoneNumberTaped:(UITapGestureRecognizer *)tap {
@@ -220,8 +224,30 @@
             
         }
         NSArray* array=[[operation.response.allHeaderFields objectForKey:@"Set-Cookie"] componentsSeparatedByString:@";"];
-        [[NSUserDefaults standardUserDefaults] setObject:[array objectAtIndex:0] forKey:@"RHSESSION"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        //        array = @[];
+        for (NSString * str in array) {
+            if(str.length>12){
+                
+                
+                if ([str rangeOfString:@"JSESSIONID="].location != NSNotFound) {
+                    
+                    NSArray *array1 = [str componentsSeparatedByString:@"="];
+                    
+                    NSString * string = [NSString stringWithFormat:@"JSESSIONID=%@",array1[1]];
+                    [[NSUserDefaults standardUserDefaults] setObject:string forKey:@"RHSESSION"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+                if ([str rangeOfString:@"MYSESSIONID="].location != NSNotFound) {
+                    
+                    NSArray *array1 = [str componentsSeparatedByString:@"="];
+                    
+                    NSString * string = [NSString stringWithFormat:@"MYSESSIONID=%@",array1[1]];
+                    [[NSUserDefaults standardUserDefaults] setObject:string forKey:@"RHNEWMYSESSION"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+            }
+        }
+        
         NSLog(@"88989989889");
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -271,15 +297,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)selectOtherAciton:(id)sender {
     
@@ -401,44 +419,9 @@
             //        DLog(@"%@",error);
         }];
     }
-//    NSString * str = @"https://123.57.133.7/common/user/register/checkTelephoneExists";
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    manager.responseSerializer = [[AFCompoundResponseSerializer alloc]init];
-//    
-//    NSDictionary *parameters = @{@"telephone":self.phoneNumTF.text};
-//    
-//    [manager POST:str parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        
-//        if ([responseObject isKindOfClass:[NSData class]]) {
-//            NSString* restult=[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-//            if ([restult isEqualToString:@"true"]) {
-//                [self loadtel];
-//            }}
-//        
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"chongfu");
-//    }];
+
 }
-//- (void)loadtel{
-//    
-//    NSString * str = @"https://123.57.133.7/common/user/general/registerTel";
-//    AFHTTPRequestOperationManager* manager=[AFHTTPRequestOperationManager manager];
-//    manager.responseSerializer=[[AFCompoundResponseSerializer alloc]init];
-//    
-//    //manager.requestSerializer = [AFJSONRequestSerializer serializer];
-//    // manager.responseSerializer = [AFCompoundResponseSerializer serializer];
-//    
-//    //[manager.operationQueue cancelAllOperations];
-//    
-//    NSDictionary *parameters = @{@"telephone":self.phoneNumTF.text,@"type":@"SMS_CAPTCHA_REGISTER",@"captcha":self.captchaImageTF.text};
-//    
-//    [manager POST:str parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"duanxinok");
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"发送短信失败");
-//        NSLog(@"%@",error);
-//    }];
-//}
+
 
 -(void)reSendMessage
 {
@@ -498,22 +481,12 @@
         [RHUtility showTextWithText:@"请输入短信验证码"];
         return;
     }
-//    if ([self.accountTF.text length]<=0) {
-//        [RHUtility showTextWithText:@"请输入用户名"];
-//        return;
-//    }
-//    if ([self.passwordTF1.text length]<=0) {
-//        [RHUtility showTextWithText:@"请输入密码"];
-//        return;
-//    }
-//    if ([self.passwordTF2.text length]<=0) {
-//        [RHUtility showTextWithText:@"请输入确认密码"];
-//        return;
-//    }
-//    if ([self.captchaImageTF.text length]<=0) {
-//        [RHUtility showTextWithText:@"请输入图片验证码"];
-//        return;
-//    }
+    if (![self.userstring isEqualToString:@"1"]) {
+        [RHUtility showTextWithText:@"请先同意融益汇注册服务协议"];
+        return;
+    }
+    
+
     
     
     NSMutableDictionary* parameters=[[NSMutableDictionary alloc]initWithCapacity:0];
@@ -561,6 +534,11 @@
     manager.securityPolicy = [[RHNetworkService instance] customSecurityPolicy];
     NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
     NSLog(@"------------------%@",session);
+    NSString* session1=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHNEWMYSESSION"];
+    
+    if (session1.length>12) {
+        session = [NSString stringWithFormat:@"%@,%@",session,session1];
+    }
     if (session&&[session length]>0) {
         [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
     }
@@ -574,7 +552,7 @@
             NSString* amount=[dic objectForKey:@"money"];
             if (amount&&[amount length]>0) {
                 self.giftView.frame = CGRectMake(0, -20, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) + 64);
-               self.giftMoneyLabel.text = [NSString stringWithFormat:@"%d元投资现金已放入账户",[amount intValue]];
+               self.giftMoneyLabel.text = [NSString stringWithFormat:@"%d元红包券已放入账户",[amount intValue]];
                 [self setTheAttributeString:self.giftMoneyLabel.text];
                 [self.navigationController.navigationBar addSubview:self.giftView];
                 [self performSelector:@selector(fiftCloseButtonClicked:) withObject:nil afterDelay:15.0];
@@ -693,8 +671,37 @@
 
 //gift 操作
 - (IBAction)fiftCloseButtonClicked:(UIButton *)sender {
-    
+
     [self.giftView removeFromSuperview];
+}
+- (IBAction)readingbtn:(id)sender {
+    
+    if ([self.userstring isEqualToString:@"1"]) {
+        self.userstring = @"2";
+        
+        [self.userbtn setImage:[UIImage imageNamed:@"未选中状态icon"] forState:UIControlStateNormal];
+        
+    }else{
+        [self.userbtn setImage:[UIImage imageNamed:@"选中状态icon"] forState:UIControlStateNormal];
+        self.userstring = @"1";
+    }
+    
+}
+- (IBAction)yinsizhengce:(id)sender {
+    
+    UIButton * btn = sender;
+    RHXYWebviewViewController * controller = [[RHXYWebviewViewController alloc]initWithNibName:@"RHXYWebviewViewController" bundle:nil];
+    
+    NSString * str = btn.titleLabel.text;
+    
+    NSString *stringWithoutQuotation = [str
+                                        stringByReplacingOccurrencesOfString:@"《" withString:@""];
+    str =  [stringWithoutQuotation stringByReplacingOccurrencesOfString:@"》" withString:@""];
+    controller.namestr = str;
+//    controller.projectid = self.firstid;
+    
+    [self.navigationController pushViewController:controller animated:YES];
+    
 }
 
 @end

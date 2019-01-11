@@ -72,6 +72,11 @@
     self.tableView.tableFooterView = _footerView;
     _footerView.hidden=YES;
     showLoadMoreButton=YES;
+    
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    
+    [center addObserver:self selector:@selector(notice:) name:@"relodata" object:nil];
+    
 }
 
 
@@ -291,6 +296,11 @@
         manager.securityPolicy = [[RHNetworkService instance] customSecurityPolicy];
         NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
         NSLog(@"------------------%@",session);
+        NSString* session1=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHNEWMYSESSION"];
+        
+        if (session1.length>12) {
+            session = [NSString stringWithFormat:@"%@,%@",session,session1];
+        }
         if (session&&[session length]>0) {
             [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
         }
@@ -304,14 +314,14 @@
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"兑换成功！现金已充入您的账户余额，可到【我的账户】查询." delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
                     [alert show];
                 } else {
-                    [RHUtility showTextWithText:@"兑换现金失败"];
+                    [RHUtility showTextWithText:@"兑换失败,请重试"];
                 }
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //            DLog(@"%@",[[NSString alloc] initWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] encoding:NSUTF8StringEncoding]);
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            [RHUtility showTextWithText:@"兑换现金失败"];
+            [RHUtility showTextWithText:@"兑换失败,请重试"];
         }];
     }
 }
@@ -325,5 +335,18 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+}
+
+-(void)notice:(id)sender{
+    [self.dataArray removeAllObjects];
+    [self startPost];
+    _reloading = NO;
+    
+//    [self removeObserver:sender forKeyPath:@"relodata"];
+}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"relodata" object:nil];
 }
 @end

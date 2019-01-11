@@ -49,6 +49,11 @@
     [_segmentContentView setViews:_views];
     
     [self.view addSubview:self.pageController];
+    
+   // self.pageController.pageIndicatorTintColor = [UIColor redColor];
+    [self.pageController setValue:[UIImage imageNamed:@"实心.png"] forKeyPath:@"_currentPageImage"];
+    
+    [self.pageController setValue:[UIImage imageNamed:@"空心.png"] forKeyPath:@"_pageImage"];
 }
 
 -(void)viewWillAppear:(BOOL)animated

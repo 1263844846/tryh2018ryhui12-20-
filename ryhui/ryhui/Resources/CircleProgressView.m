@@ -115,12 +115,7 @@
     if (lock){
         return;
     }
-//    if ([self.str isEqualToString:@"dbx"]) {
-//       
-//        [self.text setFont:[UIFont systemFontOfSize:25]];
-//    }else if ([self.str isEqualToString:@"cbx"]){
-//         [self.text setFont:[UIFont systemFontOfSize:17]];
-//    }
+
     progress = newProgress;
     [self setNeedsDisplay];
     [self addSubview:_text];

@@ -23,9 +23,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.bgImageView.frame=[UIScreen mainScreen].bounds;
+    //self.bgImageView.frame=[UIScreen mainScreen].bounds;
     
     [self.view addSubview:self.buttonView];
+    
+  
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -57,7 +60,9 @@
         [self.nav pushViewController:controller animated:YES];
     }else{
         [self.navigationController pushViewController:controller animated:YES];
-    }}
+    }
+    
+}
 
 - (IBAction)qRegisterAction:(id)sender {
     

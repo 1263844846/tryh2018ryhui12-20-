@@ -55,9 +55,9 @@
     NSString* threshold=@"";
     if (![[dic objectForKey:@"threshold"] isKindOfClass:[NSNull class]]) {
         if ([[dic objectForKey:@"threshold"] isKindOfClass:[NSNumber class]]) {
-            threshold=[NSString stringWithFormat:@"单笔投资满%@元",[[dic objectForKey:@"threshold"] stringValue]];
+            threshold=[NSString stringWithFormat:@"单笔出借满%@元",[[dic objectForKey:@"threshold"] stringValue]];
         }else{
-            threshold=[NSString stringWithFormat:@"单笔投资满%@元",[dic objectForKey:@"threshold"]];
+            threshold=[NSString stringWithFormat:@"单笔出借满%@元",[dic objectForKey:@"threshold"]];
         }
     }
     self.threshodLabel.text=threshold;

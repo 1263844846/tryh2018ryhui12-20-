@@ -17,6 +17,8 @@
 #import "RHHelpCenterViewController.h"
 #import "RHFeedbackViewController.h"
 #import "hehehtestViewController.h"
+#import "RHhelper.h"
+
 @interface RHMoreViewController ()
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -26,8 +28,33 @@
 @end
 
 @implementation RHMoreViewController
+-(void)stzfpush{
+    
+    [[RHNetworkService instance] POST:@"front/payment/account/trusteePayAlter" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSString * str = [NSString stringWithFormat:@"%@",responseObject[@"flag"]];
+            
+//            self.dbsxstr = str;
+            [RHhelper ShraeHelp].dbsxstr = str;
+            
+        }
+        
+        NSLog(@"%@",responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        ;
+    }];
+    
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBar.hidden=NO;
+}
 -(void)viewWillAppear:(BOOL)animated {
 //    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
+    
+//    [self stzfpush];
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden=YES;
     [DQViewController Sharedbxtabar].tarbar.hidden = NO;
@@ -109,10 +136,10 @@
     if (imageArray) {
         
         NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
-        [shareParams SSDKSetupShareParamsByText:@"中国普惠金融联席会指导、国开行金融管理团队打造。100元起投，年化收益7-12%，注册开户再送258元红包"
+        [shareParams SSDKSetupShareParamsByText:@"银行资金存管，优质机构担保，100元起出借，目标年化利率7~12%，注册送豪华大礼包。"
                                          images:imageArray
                                             url:[NSURL URLWithString:@"http://www.ryhui.com"]
-                                          title:@"我在融益汇赚取好收益，邀您一起安全理财！"
+                                          title:@"我在融益汇赚取好收益，邀您一起来体验！ "
                                            type:SSDKContentTypeAuto];
         //2、分享（可以弹出我们的分享菜单和编辑界面）
         [ShareSDK showShareActionSheet:nil //要显示菜单的视图, iPad版中此参数作为弹出菜单的参照视图，只有传这个才可以弹出我们的分享菜单，可以传分享的按钮对象或者自己创建小的view 对象，iPhone可以传nil不会影响

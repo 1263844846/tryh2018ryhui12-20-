@@ -18,4 +18,11 @@
 @property(nonatomic,assign)BOOL newpeople;
 
 @property(nonatomic,copy)NSString * everyoneEndAmountstr;
+
+
+@property(nonatomic,copy)NSString *xmjres;
+
+@property(nonatomic,copy)NSString *xmjid;
+
+@property(nonatomic,copy)NSString * xmjfirst;
 @end

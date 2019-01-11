@@ -25,15 +25,15 @@
                     <rect key="frame" x="1" y="-1" width="374" height="668"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
-                <view contentMode="scaleToFill" id="ZYq-d5-uTU">
-                    <rect key="frame" x="-2" y="591" width="375" height="47"/>
+                <view contentMode="scaleToFill" misplaced="YES" id="ZYq-d5-uTU">
+                    <rect key="frame" x="-2" y="550" width="375" height="47"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4LK-8r-6Sl">
                             <rect key="frame" x="127" y="0.0" width="133" height="32"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                            <state key="normal" title="立即体验" backgroundImage="qrButtonDefault.png">
+                            <state key="normal" backgroundImage="lijitiyan">
                                 <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <state key="highlighted" backgroundImage="qrButtonHightLight.png"/>
@@ -51,7 +51,7 @@
         </view>
     </objects>
     <resources>
-        <image name="qrButtonDefault.png" width="189" height="52"/>
+        <image name="lijitiyan" width="357" height="91"/>
         <image name="qrButtonHightLight.png" width="189" height="52"/>
         <image name="ydyy4" width="750" height="1334"/>
     </resources>

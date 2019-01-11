@@ -99,8 +99,8 @@ static RHUserManager *_instance = nil;
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHtelephone"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHUSERNAME"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHUSERNAME"];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHUSERID"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -108,8 +108,12 @@ static RHUserManager *_instance = nil;
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHSESSION"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHNEWMYSESSION"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHMessageNumSave"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"zhiwen"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -118,7 +122,7 @@ static RHUserManager *_instance = nil;
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
+    [RHUserManager sharedInterface].username = @"";
     self.custId = nil;
     self.email = nil;
     self.infoType = nil;

@@ -11,5 +11,5 @@
 @interface RHWithdrawViewController : RHBaseViewController<UITextFieldDelegate,RHSegmentControlDelegate>
 @property(nonatomic,strong)NSDictionary *bankdic;
 - (void)getWithdrawData;
-
+@property(nonatomic,copy)NSString * myswitch;
 @end

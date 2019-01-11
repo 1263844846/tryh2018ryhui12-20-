@@ -25,10 +25,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configBackButton];
-    [self configTitleWithString:@"《融益汇用户协议》"];
+    [self configTitleWithString:@"《融益汇注册服务协议》"];
     
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@regProtocol",[RHNetworkService instance].newdoMain]];
-    NSURL * url1 = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.baidu.com"]];
+//    NSURL * url1 = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.baidu.com"]];
     
     _request = [[NSMutableURLRequest alloc]initWithURL: url];
    // [_request setHTTPMethod: @"POST"];

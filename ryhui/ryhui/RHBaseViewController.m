@@ -64,7 +64,20 @@
     self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
 //    self.navigationController.interactivePopGestureRecognizer.delegate =(id)self;
    */
+    
+//    self.view.userInteractionEnabled = YES;
+//    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(backHandle:)];
+//    [self.view addGestureRecognizer:panGesture];
+
 }
+//- (void)backHandle:(UIPanGestureRecognizer *)recognizer
+//{
+//    NSArray * array = self.navigationController.viewControllers;
+//
+//    if (array.count>1) {
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }
+//}
 
 -(void)setMessageNum:(NSNotification*)notss
 {
@@ -139,7 +152,7 @@
 //    UIImage * image = [UIImage imageNamed:@"back.png"];
    
     [button setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
-    button.frame=CGRectMake(0, 0, 25, 40);
+    button.frame=CGRectMake(0, 0, 30, 50);
 
    // button.backgroundColor = [UIColor colorWithHexString:@"44bbc1"];
     self.navigationItem.leftBarButtonItem= [[UIBarButtonItem alloc] initWithCustomView:button];

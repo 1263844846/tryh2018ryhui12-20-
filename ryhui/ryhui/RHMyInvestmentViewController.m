@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIView *segmentView2;
 @property (weak, nonatomic) IBOutlet UIView *segmentView3;
 @property (weak, nonatomic) IBOutlet UIView *myaview;
+@property (weak, nonatomic) IBOutlet UIView *titleview;
 
 
 @end
@@ -49,11 +50,7 @@
         [DQViewController Sharedbxtabar].tarbar.hidden = YES;
    
     [super viewWillAppear:animated];
- //   self.navigationController.navigationBar.backgroundColor = [UIColor redColor];
-//      [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
-    //self.hidesBottomBarWhenPushed=YES;
-    self.navigationController.navigationBar.subviews.firstObject.alpha = 1.00;
-    //[self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"PNG_首页_带阴影背景-48"]forBarMetrics:UIBarMetricsDefault];
+
    NSLog(@"====-%@-=======",self.navigationController.navigationBar.backgroundColor);
     
     NSLog(@"====-%f-=======",self.navigationController.navigationBar.alpha);
@@ -82,45 +79,45 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
-//    self.hidesBottomBarWhenPushed=YES;
-   
-//    self.hidesBottomBarWhenPushed = NO;
 
-   // [self prefersStatusBarHidden];
-//     [self setNeedsStatusBarAppearanceUpdate];
     self.viewControllers=[[NSMutableArray alloc]initWithCapacity:0];
-//    ／／self.navigationController.navigationBar.subviews.firstObject.alpha =1.00;
-//    self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
-//    [[UIApplication sharedApplication].keyWindow addSubview:self.view];
-//    [[UIApplication sharedApplication].keyWindow addSubview:self.segmentContentView];
-//    [[UIApplication sharedApplication].keyWindow addSubview:self.segmentView1];
-//    [[UIApplication sharedApplication].keyWindow addSubview:self.segmentView2];
-//    [[UIApplication sharedApplication].keyWindow addSubview:self.segmentView3];
+
     [self configBackButton];
-    [self configTitleWithString:@"我的投资"];
+    [self configTitleWithString:@"我的出借"];
 //    self.tabBarController.tabBar.hidden = YES;
    
     [DQViewController Sharedbxtabar].tarbar.hidden = YES;
     self.segmentContentView = [[RHSegmentContentView alloc] initWithFrame:CGRectMake(0, 110, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].applicationFrame.size.height-50-40-self.navigationController.navigationBar.frame.size.height-10+40)];
+    
+    if ([UIScreen mainScreen].bounds.size.height>740) {
+        self.titleview.frame = CGRectMake(0, 40, self.titleview.frame.size.width, 65);
+         self.segmentContentView = [[RHSegmentContentView alloc] initWithFrame:CGRectMake(0, 150, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].applicationFrame.size.height-50-40-self.navigationController.navigationBar.frame.size.height-10+40)];
+        self.segmentView1.frame = CGRectMake(0, 105, self.segmentView1.frame.size.width, 50);
+        self.segmentView2.frame = CGRectMake(0, 105, self.segmentView1.frame.size.width, 50);
+        self.segmentView3.frame = CGRectMake(0, 105, self.segmentView1.frame.size.width, 50);
+    }
+    
 //    DLog(@"%f----%f",[UIScreen mainScreen].applicationFrame.size.height-50-40-self.navigationController.navigationBar.frame.size.height,self.navigationController.navigationBar.frame.size.height);
     [_segmentContentView setDelegate:self];
     [self.view addSubview:_segmentContentView];
   
-     [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
+     //[self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
      [self initData];
     
-    NSString* one=@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"projectStatus\",\"op\":\"in\",\"data\":[\"repayment_normal\",\"repayment_abnormal\"]}]}";
+    NSString* one=@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"project.project_status\",\"op\":\"in\",\"data\":[\"repayment_normal\",\"repayment_abnormal\"]}]}";
     
     
-    NSString* two=@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"projectStatus\",\"op\":\"in\",\"data\":[\"full\",\"loans\",\"published\",\"loans_audit\"]}]}";
+    NSString* two=@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"project.project_status\",\"op\":\"in\",\"data\":[\"full\",\"loans\",\"published\",\"loans_audit\"]}]}";
     
-    NSString* three=@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"projectStatus\",\"op\":\"in\",\"data\":[\"finished\"]}]}";
+    NSString* three=@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"project.project_status\",\"op\":\"in\",\"data\":[\"finished\"]}]}";
     
     
     RHInvestmentContentViewController* controller1=[[RHInvestmentContentViewController alloc]init];
-    controller1.nav=self.navigationController;
+//    controller1.nav=self.navigationController;
+   controller1.nav = [[RHTabbarManager sharedInterface] selectTabbarUser];
     controller1.type=one;
 //    controller1.ressss =  self.hidesBottomBarWhenPushed ;
+    controller1.resstr = self.resstr;
     controller1.myblock = ^{
         [self hindetabbar];
     };
@@ -130,8 +127,10 @@
     [_viewControllers addObject:controller1];
     
     RHInvestmentContentViewController* controller2=[[RHInvestmentContentViewController alloc]init];
-    controller2.nav=self.navigationController;
+    //controller2.nav=self.navigationController;
+    controller2.nav = [[RHTabbarManager sharedInterface] selectTabbarUser];
     controller2.type=two;
+     controller2.resstr = self.resstr;
     controller2.myblock = ^{
         [self hindetabbar];
     };
@@ -142,7 +141,9 @@
     [_viewControllers addObject:controller2];
     
     RHInvestmentContentViewController* controller3=[[RHInvestmentContentViewController alloc]init];
-    controller3.nav=self.navigationController;
+//    controller3.nav=self.navigationController;
+    controller3.nav = [[RHTabbarManager sharedInterface] selectTabbarUser];
+     controller3.resstr = self.resstr;
     controller3.type=three;
     controller3.myblock = ^{
         [self hindetabbar];

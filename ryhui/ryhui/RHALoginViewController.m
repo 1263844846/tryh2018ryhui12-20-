@@ -97,6 +97,24 @@
         //[self configBackButton];
     }
     [self configBackButton];
+    
+    NSString * usernamestr = [[NSUserDefaults standardUserDefaults] objectForKey:@"RHUSERNAME"];
+    
+    if (usernamestr.length>3) {
+        self.accountTextField.text = usernamestr;
+    }
+    [self.passwordTextField addTarget:self action:@selector(searchTextFieldChange:) forControlEvents:UIControlEventEditingChanged];
+}
+
+
+
+
+- (void)searchTextFieldChange:(UITextField *)textField{
+    
+    textField.text =[textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    
+    
 }
 - (void)configBackButton
 {
@@ -167,6 +185,8 @@
     //11
     //NSString * tes = self.accountTextField.text;
     
+    
+   
     if (!self.accountTextField.text.length) {
         [RHUtility showTextWithText:@"账号不能为空"];
         return;
@@ -192,13 +212,42 @@
 //    }
     
     self.loginNum++;
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHSESSION"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"RHNEWMYSESSION"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     NSString * str = @"app/common/user/appLogin/login";
     NSString * str1 = @"common/user/login/login";
     NSDictionary *parameters = @{@"account":self.accountTextField.text,@"password":self.passwordTextField.text,@"captcha":self.captchaTextField.text};
 
     [[RHNetworkService instance] POST:str parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        DLog(@"%@",responseObject);
+        NSArray* array=[[operation.response.allHeaderFields objectForKey:@"Set-Cookie"] componentsSeparatedByString:@";"];
+        //        array = @[];
+        for (NSString * str in array) {
+            if(str.length>12){
+                
+                
+                if ([str rangeOfString:@"JSESSIONID="].location != NSNotFound) {
+                    
+                    NSArray *array1 = [str componentsSeparatedByString:@"="];
+                    
+                    NSString * string = [NSString stringWithFormat:@"JSESSIONID=%@",array1[1]];
+                    [[NSUserDefaults standardUserDefaults] setObject:string forKey:@"RHSESSION"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+                if ([str rangeOfString:@"MYSESSIONID="].location != NSNotFound) {
+                    
+                    NSArray *array1 = [str componentsSeparatedByString:@"="];
+                    
+                    NSString * string = [NSString stringWithFormat:@"MYSESSIONID=%@",array1[1]];
+                    [[NSUserDefaults standardUserDefaults] setObject:string forKey:@"RHNEWMYSESSION"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+            }
+        }
+        
         if (responseObject[@"isCompany"]) {
             if ([responseObject[@"isCompany"] isEqualToString:@"true"]) {
                 [RHUtility showTextWithText:@"企业借款人暂不支持APP登录，请通过融益汇网站登录"];
@@ -264,6 +313,9 @@
                     [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].newdoMain,_headUrl] forKey:@"headUrl"];
                     [[NSUserDefaults standardUserDefaults] synchronize];
                 }
+                
+//                [self getMyAccountData];
+//                return;
                 if (!isPan) {
                     if (self.isForgotV) {
                         RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
@@ -302,7 +354,59 @@
         }
     }];
 }
-
+-(void)getMyAccountData
+{
+    
+    NSString * str = @"app/front/payment/appJxAccount/myAccountData";
+    //    NSString * newstr = @"app/front/payment/appAccount/appMyAccountData";
+    NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
+    if (session&&[session length]>0) {
+        // [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
+        
+    }
+    
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    [[RHNetworkService instance] POST:str parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        DLog(@"%@",responseObject);
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //        DLog(@"%@",error);
+        
+        [[RHUserManager sharedInterface] logout];
+        [[RHTabbarManager sharedInterface] selectALogin];
+        DLog(@"2222%@",[[NSString alloc] initWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] encoding:NSUTF8StringEncoding]);
+    }];
+}
+-(void)getloginpassword{
+    
+    NSDictionary *parameters = @{@"password":self.passwordTextField.text};
+    [[RHNetworkService instance] POST:@"app/common/user/appRegister/checkPassword" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //        DLog(@"%@",responseObject);
+        
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            
+        }
+       
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //        DLog(@"%@",error);
+       
+        if ([error.userInfo.allKeys containsObject:@"com.alamofire.serialization.response.error.data"]) {
+            NSDictionary* errorDic=[NSJSONSerialization JSONObjectWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] options:NSJSONReadingMutableContainers error:nil];
+            if ([errorDic objectForKey:@"msg"]) {
+               
+                [RHUtility showTextWithText:[errorDic objectForKey:@"msg"]];
+            }
+        }
+    }];
+}
+-(void)getloignpasswordsuo{
+    
+    
+}
 -(void)textBegin:(NSNotification*)not
 {
 //    DLog(@"%@",not.object);

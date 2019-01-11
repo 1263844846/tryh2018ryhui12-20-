@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "PNG-本息保障.png",
+      "filename" : "2018-2.png",
       "scale" : "1x"
     },
     {
@@ -11,6 +11,7 @@
     },
     {
       "idiom" : "universal",
+      "filename" : "2018-2-2x.png",
       "scale" : "3x"
     }
   ],

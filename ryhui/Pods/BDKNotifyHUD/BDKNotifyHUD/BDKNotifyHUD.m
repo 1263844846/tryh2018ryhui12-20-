@@ -143,6 +143,9 @@
     if (_backgroundView != nil) return _backgroundView;
     
     _backgroundView = [[UIView alloc] initWithFrame:self.bounds];
+    NSLog(@"%f",self.bounds.size.width);
+    
+    
     _backgroundView.layer.cornerRadius = self.roundness;
     _backgroundView.layer.borderWidth = 1.0f;
     _backgroundView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.0f];
@@ -154,8 +157,8 @@
 - (UILabel *)textLabel {
     if (_textLabel != nil) return _textLabel;
     
-    CGRect frame = CGRectMake(0, floorf(CGRectGetMaxY(self.iconView.frame) + kBDKNotifyHUDDefaultInnerPadding),
-                              floorf(self.backgroundView.frame.size.width),
+    CGRect frame = CGRectMake(10, floorf(CGRectGetMaxY(self.iconView.frame) + kBDKNotifyHUDDefaultInnerPadding),
+                              floorf(self.backgroundView.frame.size.width)+20,
                               floorf(self.backgroundView.frame.size.height / 2.0f));
     _textLabel = [[UILabel alloc] initWithFrame:frame];
     _textLabel.font = [UIFont boldSystemFontOfSize:18];
@@ -189,13 +192,24 @@
 
 - (void)adjustTextLabel:(UILabel *)label {
     CGRect frame = _textLabel.frame;
-    frame.size.width = self.backgroundView.frame.size.width;
+    if (self.text.length>20) {
+        frame.size.width = self.backgroundView.frame.size.width+80;
+        _textLabel.frame = frame;
+        [label sizeToFit];
+        frame = _textLabel.frame;
+        frame.origin.x = floorf((self.backgroundView.frame.size.width - _textLabel.frame.size.width) / 2);
+        if (!self.iconView) {
+            frame.origin.y = 10.0;
+        }
+    }else{
+    frame.size.width = self.backgroundView.frame.size.width-5;
     _textLabel.frame = frame;
     [label sizeToFit];
     frame = _textLabel.frame;
-    frame.origin.x = floorf((self.backgroundView.frame.size.width - _textLabel.frame.size.width) / 2);
+    frame.origin.x = floorf((self.backgroundView.frame.size.width - _textLabel.frame.size.width) / 2)+2;
     if (!self.iconView) {
        frame.origin.y = 10.0;
+    }
     }
     _textLabel.frame = frame;
 }
@@ -203,6 +217,11 @@
 - (void)recalculateHeight {
     CGRect frame = self.backgroundView.frame;
     frame.size.height = CGRectGetMaxY(self.textLabel.frame) + kBDKNotifyHUDDefaultPadding;
+  //  frame.size.width = frame.size.width +200;
+    if (self.text.length>20) {
+        frame.size.width = frame.size.width +40;
+        frame.origin.x = frame.origin.x-20;
+    }
     self.backgroundView.frame = frame;
 }
 

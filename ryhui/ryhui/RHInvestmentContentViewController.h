@@ -18,6 +18,7 @@ typedef void(^myblock)() ;
 @property(nonatomic,assign)BOOL ressss;
 @property(nonatomic,copy)myblock myblock;
 @property(nonatomic,copy)myblock myblock1;
+@property(nonatomic,copy)NSString *resstr;
 -(void)getinvestListData;
 -(void)startPost;
 

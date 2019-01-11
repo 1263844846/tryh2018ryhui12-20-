@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface RHMyInvestmentViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIButton *xmjbtn;
 
 @property(nonatomic,strong)NSString* projectId;
 @property(nonatomic,assign)UINavigationController* nav;

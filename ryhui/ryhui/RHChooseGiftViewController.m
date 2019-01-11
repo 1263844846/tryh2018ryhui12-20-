@@ -278,18 +278,18 @@
     }
     //    DLog(@"%@--%d",threshold,investNum);
     if (investNum<1) {
-        [RHUtility showTextWithText:@"请先输入投资金额"];
+        [RHUtility showTextWithText:@"请先输入出借金额"];
         return;
     }
     if (investNum<[threshold intValue]&&investNum>0) {
-        [RHUtility showTextWithText:@"投资金额不符合该红包的使用条件"];
+        [RHUtility showTextWithText:@"出借金额不符合该红包的使用条件"];
         return;
     }
     if ([self.dayormonth isEqualToString:@"day"]) {
         limitTime = limitTime*30;
     }
     if (self.mouthNum <limitTime) {
-        [RHUtility showTextWithText:@"投资期限不符合该红包的使用条件"];
+        [RHUtility showTextWithText:@"出借期限不符合该红包的使用条件"];
         return;
     }
     //d89aa29d64f004a2b982981efb83c34a4bb8fda6

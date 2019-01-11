@@ -21,6 +21,9 @@
 #import "RHALpayViewController.h"
 #import "RHBngkCardDetailViewController.h"
 #import <SobotKit/SobotKit.h>
+#import "RHzhuanzhangViewController1.h"
+#import "RHzhuangzhangalpayViewController.h"
+
 @interface RHRechargeViewController ()<UIActionSheetDelegate,UITableViewDelegate,UITableViewDataSource,RHSegmentContentViewDelegate>
 {
     BOOL isQpCard;
@@ -63,8 +66,9 @@
 
 @property(nonatomic,strong)RHkuaijViewController* controller1;
 @property(nonatomic,strong)RHzhuanzhangViewController*controller2;
+@property(nonatomic,strong)RHzhuanzhangViewController1*controller8;
 @property(nonatomic,strong)RHALpayViewController*controller3;
-
+@property(nonatomic,strong)RHzhuangzhangalpayViewController*controller9;
 
 @property (weak, nonatomic) IBOutlet UILabel *hidenlab1;
 @property (weak, nonatomic) IBOutlet UILabel *hidenlab2;
@@ -85,6 +89,18 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *tishiscorlview;
 
 @property(nonatomic,copy)NSString * stri;
+
+
+@property (weak, nonatomic) IBOutlet UIButton *secondupbtn;
+@property (weak, nonatomic) IBOutlet UIButton *threeupbtn;
+@property (weak, nonatomic) IBOutlet UIImageView *secondimage;
+@property (weak, nonatomic) IBOutlet UIButton *secondupbtn1;
+@property (weak, nonatomic) IBOutlet UIButton *threeupbtn1;
+@property (weak, nonatomic) IBOutlet UIImageView *secondimage1;
+@property (weak, nonatomic) IBOutlet UIButton *secondupbtn2;
+@property (weak, nonatomic) IBOutlet UIButton *threeupbtn2;
+@property (weak, nonatomic) IBOutlet UIImageView *secondimage2;
+
 @end
 
 @implementation RHRechargeViewController
@@ -122,6 +138,16 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    if (![self.baofuress isEqualToString:@"1"]) {
+        [self.secondupbtn setTitle:@"转账充值" forState:UIControlStateNormal];
+        [self.secondupbtn1 setTitle:@"转账充值" forState:UIControlStateNormal];
+        [self.secondupbtn2 setTitle:@"转账充值" forState:UIControlStateNormal];
+        [self.threeupbtn setTitle:@"支付宝充值" forState:UIControlStateNormal];
+        [self.threeupbtn1 setTitle:@"支付宝充值" forState:UIControlStateNormal];
+        [self.threeupbtn2 setTitle:@"支付宝充值" forState:UIControlStateNormal];
+    }
+    
     // Do any additional setup after loading the view from its nib.
     [self configBackButton];
     self.textField.inputAccessoryView = [self addToolbar];
@@ -239,8 +265,8 @@
     [self getsegmentviewcontrol];
     
    // [self didSelectSegmentAtIndex:2];
-    self.controller3.alipaybtn.hidden = YES;
-    self.controller3.albtn2.hidden = YES;
+//    self.controller3.alipaybtn.hidden = YES;
+//    self.controller3.albtn2.hidden = YES;
     
 }
 -(void)getsegmentviewcontrol{
@@ -255,16 +281,40 @@
    // [self.controller1 setbankcarddata:self.bankdic];
     [_viewControllers addObject:_controller1];
     
-    self.controller2=[[RHzhuanzhangViewController alloc]initWithNibName:@"RHzhuanzhangViewController" bundle:nil];
-    self.controller2.bankdic = self.bankdic;
-    [_viewControllers addObject:_controller2];
+    if ([self.baofuress isEqualToString:@"1"]) {
+        self.controller2=[[RHzhuanzhangViewController alloc]initWithNibName:@"RHzhuanzhangViewController" bundle:nil];
+         self.controller2.nav = self.navigationController;
+        self.controller2.bankdic = self.bankdic;
+        self.controller2.bancle = self.balance;
+        [_viewControllers addObject:_controller2];
+        
+        self.controller9=[[RHzhuangzhangalpayViewController alloc]initWithNibName:@"RHzhuangzhangalpayViewController" bundle:nil];
+//        self.controller3.alipaybtn.hidden = YES;
+//        self.controller3.albtn2.hidden = YES;
+//        self.controller3.bankdic = self.bankdic;
+        [_viewControllers addObject:_controller9];
+    }else{
+        
+    self.controller8=[[RHzhuanzhangViewController1 alloc]initWithNibName:@"RHzhuanzhangViewController1" bundle:nil];
+    self.controller8.bankdic = self.bankdic;
+   // self.controller8.bancle = self.balance;
+        self.controller8.nav = self.navigationController;
+    [_viewControllers addObject:_controller8];
+        
+//        self.controller3=[[RHALpayViewController alloc]initWithNibName:@"RHALpayViewController" bundle:nil];
+//        self.controller3.alipaybtn.hidden = YES;
+//        self.controller3.albtn2.hidden = YES;
+//        self.controller3.bankdic = self.bankdic;
+//        [_viewControllers addObject:_controller3];
+    
+    }
    
     
-    self.controller3=[[RHALpayViewController alloc]initWithNibName:@"RHALpayViewController" bundle:nil];
-    self.controller3.alipaybtn.hidden = YES;
-    self.controller3.albtn2.hidden = YES;
-    self.controller3.bankdic = self.bankdic;
-    [_viewControllers addObject:_controller3];
+//    self.controller3=[[RHALpayViewController alloc]initWithNibName:@"RHALpayViewController" bundle:nil];
+//    self.controller3.alipaybtn.hidden = YES;
+//    self.controller3.albtn2.hidden = YES;
+//    self.controller3.bankdic = self.bankdic;
+//    [_viewControllers addObject:_controller3];
        [_segmentContentView setViews:_viewControllers];
     
     //[self segmentContentView:_segmentContentView selectPage:0];
@@ -287,6 +337,30 @@
 -(void)toubiao{
     
     NSLog(@"57575");
+}
+- (void)customUserInformationWith:(ZCLibInitInfo*)initInfo{
+    // 用户手机号码
+    //    initInfo.phone        = @"Your phone";
+    
+    // 用户昵称
+    initInfo.nickName     = [RHUserManager sharedInterface].username;
+}
+- (void)setZCLibInitInfoParam:(ZCLibInitInfo *)initInfo{
+    // 获取AppKey
+    initInfo.appKey = @"75bdfe3a9f9c4b8a846e9edc282c92b4";
+    //    initInfo.appKey = @"23a063ddadb1485a9a59f391b46bcb8b";
+    //    initInfo.skillSetId = _groupIdTF.text;
+    //    initInfo.skillSetName = _groupNameTF.text;
+    //    initInfo.receptionistId = _aidTF.text;
+    //    initInfo.robotId = _robotIdTF.text;
+    //    initInfo.tranReceptionistFlag = _aidTurn;
+    //    initInfo.scopeTime = [_historyScopeTF.text intValue];
+    //    initInfo.titleType = titleType;
+    //    initInfo.customTitle = _titleCustomTF.text;
+    UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.layer.cornerRadius = 5;
+    btn.layer.masksToBounds = YES;
+    
 }
 
 - (void)chongzhi{
@@ -338,6 +412,48 @@
     
         [self addActionTarget:alert title:@"客服" color: [RHUtility colorForHex:@"555555"] action:^(UIAlertAction *action) {
             //
+            
+            ZCLibInitInfo *initInfo = [ZCLibInitInfo new];
+            // Appkey    *必填*
+            //initInfo.appKey  = @"75bdfe3a9f9c4b8a846e9edc282c92b4";//appKey;
+            initInfo.nickName     = [RHUserManager sharedInterface].username;
+            //自定义用户参数
+            [self customUserInformationWith:initInfo];
+            [self setZCLibInitInfoParam:initInfo];
+            ZCKitInfo *uiInfo=[ZCKitInfo new];
+            // uiInfo.info=initInfo;
+            uiInfo.isOpenEvaluation = YES;
+            [[ZCLibClient getZCLibClient] setLibInitInfo:initInfo];
+            
+            
+            // 启动
+            [ZCSobot startZCChatView:uiInfo with:self target:nil pageBlock:^(ZCUIChatController *object, ZCPageBlockType type) {
+                // 点击返回
+                if(type==ZCPageBlockGoBack){
+                    NSLog(@"点击了关闭按钮");
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        //                [self.navigationController setNavigationBarHidden:NO];
+                        //                            [self.navigationController setNavigationBarHidden:NO];
+                        //                [DQViewController Sharedbxtabar].tarbar.hidden = NO;
+                        [[DQViewController Sharedbxtabar].tabBar setHidden:YES];
+                        [self.navigationController setNavigationBarHidden:NO];
+                    });
+                }
+                
+                // 页面UI初始化完成，可以获取UIView，自定义UI
+                if(type==ZCPageBlockLoadFinish){
+                    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+                    //            object.navigationController.interactivePopGestureRecognizer.delegate = object;
+                    // banner 返回按钮
+                    [object.backButton setTitle:@"关闭" forState:UIControlStateNormal];
+                    
+                    
+                }
+            } messageLinkClick:nil];
+            
+            
+            
+      /*
             ZCLibInitInfo *initInfo = [ZCLibInitInfo new];
             // Appkey    *必填*
             initInfo.appKey  = @"75bdfe3a9f9c4b8a846e9edc282c92b4";//appKey;
@@ -376,6 +492,8 @@
                     
                 }
             } messageLinkClick:nil];
+             
+             */
             NSLog(@"nicaicai");
         }];
         
@@ -384,13 +502,20 @@
     [self presentViewController:alert animated:YES completion:nil];
     }
 }
--(void)addCancelActionTarget:(UIAlertController*)alertController title:(NSString *)title
+-(void)addCancelActionTarget:                                                                                                                                                                                                                                                (UIAlertController*)alertController title:(NSString *)title
 {
     UIAlertAction *action = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
 //         self.controller3.alipaybtn.hidden = NO;
 //        self.controller3.albtn2.hidden = NO;
         if ([self.stri isEqualToString:@"qq"]) {
             self.controller3.albtn2.hidden = NO;
+            if ([UIScreen mainScreen].bounds.size.height>740) {
+                
+                if (self.hidenbtn1.hidden) {
+                    self.controller3.albtn2.hidden = YES;
+                }
+                
+            }
         }
     }];
     [action setValue:[RHUtility colorForHex:@"555555"] forKey:@"_titleTextColor"];
@@ -486,6 +611,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    [self getmybfbankcard];
 //    NSString * str = @"front/payment/account/myAccountData";
 //    NSString * newstr = @"front/payment/appAccount/appMyAccountData";
     
@@ -522,6 +648,13 @@
 
     if ([self.stri isEqualToString:@"qq"]) {
         self.controller3.albtn2.hidden = NO;
+        if ([UIScreen mainScreen].bounds.size.height>740) {
+            
+            if (self.hidenbtn1.hidden) {
+                self.controller3.albtn2.hidden = YES;
+            }
+            
+        }
     }
     if ([self.bankress isEqualToString:@"notBank"]) {
         [self didSelectSegmentAtIndex:1];
@@ -552,6 +685,31 @@
 //        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 //        
 //    }];
+}
+-(void)getmybfbankcard{
+    
+    if (![self.baofuress isEqualToString:@"1"]) {
+        return;
+    }
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    [[RHNetworkService instance] POST:@"front/payment/baofoo/getAllBankCards" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //        DLog(@"%@",responseObject);
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            
+            NSArray * array = responseObject[@"allCards"];
+            
+            
+            self.controller2.baofumykjblock(array);
+            
+        }
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        
+    }];
+    
 }
 
 - (IBAction)recharge:(id)sender {
@@ -960,7 +1118,14 @@
     [self didSelectSegmentAtIndex:2];
     self.controller3.alipaybtn.hidden = NO;
     self.controller3.albtn2.hidden = NO;
-    
+    if ([UIScreen mainScreen].bounds.size.height>740) {
+        //self.controller3.alipaybtn.hidden = YES;
+//        self.controller3.albtn2.hidden = YES;
+        if (self.hidenbtn1.hidden) {
+            self.controller3.albtn2.hidden = YES;
+        }
+        
+    }
     self.stri  =@"qq";
     [self.controller1 respfirsttf];
 }
@@ -980,7 +1145,12 @@
     self.hidenimage1.hidden = YES;
     self.hideniaamge2.hidden = YES;
     
-    self.controller3.myblock();
+//    self.controller3.myblock();
+    if ([UIScreen mainScreen].bounds.size.height>740) {
+        //self.controller3.alipaybtn.hidden = YES;
+        self.controller3.albtn2.hidden = YES;
+    }
+    
 //    self.controller3.alipaybtn.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height-40, [UIScreen mainScreen].bounds.size.width, 40);
 }
 
@@ -996,6 +1166,8 @@
             if (![responseObject[@"message"] isKindOfClass:[NSNull class]]&&responseObject) {
              
           
+                 [self.secondimage1 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].newdoMain,responseObject[@"message"][@"imgAddress"]]]];
+                [self.secondimage2 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].newdoMain,responseObject[@"message"][@"imgAddress"]]]];
             if (responseObject[@"message"][@"summary"]) {
                 NSLog(@"%@",responseObject[@"message"][@"summary"]);
                 
@@ -1089,6 +1261,7 @@
     
     self.hidenguize.hidden = YES;
     self.hidenmengban.hidden = YES;
+    
     
 }
 

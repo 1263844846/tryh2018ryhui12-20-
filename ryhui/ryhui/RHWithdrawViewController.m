@@ -19,6 +19,8 @@
 #import "RHShiShiTXViewController.h"
 #import <SobotKit/SobotKit.h>
 #import "RHhelper.h"
+#import "RHWSQViewController.h"
+#import "RHXYWebviewViewController.h"
 
 @interface RHWithdrawViewController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UITextFieldDelegate,UIScrollViewDelegate>
 {
@@ -116,6 +118,9 @@
 @property (weak, nonatomic) IBOutlet UIView *mengban1;
 
 @property(nonatomic,copy)NSString * wortimestr;
+
+@property(nonatomic,copy)NSString * sqstring;
+@property (weak, nonatomic) IBOutlet UIView *sqview;
 @end
 
 @implementation RHWithdrawViewController
@@ -196,7 +201,7 @@
             if (responseObject[@"limitMoney"]&& ![responseObject[@"limitMoney"] isKindOfClass:[NSNull class]]) {
                 self.moneystr = responseObject[@"limitMoney"];
                 [RHhelper ShraeHelp].withdrawsmall = responseObject[@"limitMoney"];
-                self.newtishilab.text = [NSString stringWithFormat:@"1、提现条件：用户完成身份认证、开通汇付天下托管账户、绑定银行卡后，才能申请提现；每用户每日可提现1次；根据资金托管方规定，个人网银/快捷充值的资金当日不能提现。\n2、预计到账时间:\n1)普通提现：单笔最低提现金额%@元，每日21:00前申请普通提现，将于T+1个工作日到账，每日21:00后申请普通提现，视同第二日申请。如遇周六日/法定节假日，到账时间将顺延至下一个工作日。除法定节假日外，周一至周四21:00提现到账时间为第二日，周四21:00至周日申请提现，将会在下周一到账。 实际到账时间依据资金托管方及提现银行而有所差异，请耐心等待。\n2)即时取现：单笔最低提现金额200元，工作日（除法定节假日外，为周一至周五)8:00-17:30可发起即时取现，提现资金将在当日到账。\n3、提现手续费\n1)普通提现：若您充入的资金用于投资、融益汇将替您支付到期本息的资金托管方交易手续费，您可免费提现；若您充入资金未经投资就提现，则每笔提现将收取资金托管方交易手续费：提现金额*0.5%%（最低1元）。\n 2)即时取现：即时取现手续费计算规则同普通提现，另需额外支付资金托管方手续费：提现金额*0.1%%，若你在节假日（包括周六日/法定节假日）前一个工作日即时取现，资金托管方手续费为：提现金额*0.1%%*(节假日天数+1)。\n4、普通提现、即时取现服务由资金托管方汇付天下提供。\n5、如有疑问请联系在线客服或拨打400-010-4001",self.moneystr];
+                self.newtishilab.text = [NSString stringWithFormat:@"1、提现条件：用户完成身份认证、开通汇付天下托管账户、绑定银行卡后，才能申请提现；每用户每日可提现1次；根据资金托管方规定，个人网银/快捷充值的资金当日不能提现。\n2、预计到账时间:\n1)普通提现：单笔最低提现金额%@元，每日21:00前申请普通提现，将于T+1个工作日到账，每日21:00后申请普通提现，视同第二日申请。如遇周六日/法定节假日，到账时间将顺延至下一个工作日。除法定节假日外，周一至周四21:00提现到账时间为第二日，周四21:00至周日申请提现，将会在下周一到账。 实际到账时间依据资金托管方及提现银行而有所差异，请耐心等待。\n2)即时取现：单笔最低提现金额200元，工作日（除法定节假日外，为周一至周五)8:00-17:30可发起即时取现，提现资金将在当日到账。\n3、提现手续费\n1)普通提现：若您充入的资金用于出借、融益汇将替您支付到期本息的资金托管方交易手续费，您可免费提现；若您充入资金未经出借就提现，则每笔提现将收取资金托管方交易手续费：提现金额*0.5%%（最低1元）。\n 2)即时取现：即时取现手续费计算规则同普通提现，另需额外支付资金托管方手续费：提现金额*0.1%%，若你在节假日（包括周六日/法定节假日）前一个工作日即时取现，资金托管方手续费为：提现金额*0.1%%*(节假日天数+1)。\n4、普通提现、即时取现服务由资金托管方汇付天下提供。\n5、如有疑问请联系在线客服或拨打400-010-4001",self.moneystr];
                 
             }
 //            if (free<0) {
@@ -376,10 +381,10 @@
     
     [[UIApplication sharedApplication].keyWindow addSubview:self.mengban1];
     [[UIApplication sharedApplication].keyWindow addSubview:self.daetishiview];
-    
+    [[UIApplication sharedApplication].keyWindow addSubview:self.sqview];
     self.mengban1.hidden = YES;
     self.daetishiview.hidden = YES;
-    
+    self.sqview.hidden = YES;
 }
 
 -(void)getsegmentviewcontrol{
@@ -391,6 +396,14 @@
         
         [self didSelectSegmentAtIndex:1];
     };
+    self.controller1.sqswitch = self.myswitch;
+    self.controller1.sqblock = ^(){
+        if ([self.myswitch isEqualToString:@"ON"]) {
+            [self jxsq];
+        }
+        
+        
+    };
     self.controller1.today = self.today;
     self.controller1.bankdic = self.bankdic;
     [_viewControllers addObject:_controller1];
@@ -399,6 +412,12 @@
     self.controller2.nav = self.navigationController;
      self.controller2.bankdic = self.bankdic;
      self.controller2.today = self.today;
+     self.controller2.sqswitch = self.myswitch;
+    self.controller2.sqblock = ^(){
+        if ([self.myswitch isEqualToString:@"ON"]) {
+            [self jxsq];
+        }
+    };
     [_viewControllers addObject:_controller2];
     
     
@@ -426,6 +445,32 @@
     //    NSLog(@" scrollViewDidScroll");
     NSLog(@"ContentOffset  x is  %f,yis %f",scrollView.contentOffset.x,scrollView.contentOffset.y);
 }
+
+- (void)customUserInformationWith:(ZCLibInitInfo*)initInfo{
+    // 用户手机号码
+    //    initInfo.phone        = @"Your phone";
+    
+    // 用户昵称
+    initInfo.nickName     = [RHUserManager sharedInterface].username;
+}
+- (void)setZCLibInitInfoParam:(ZCLibInitInfo *)initInfo{
+    // 获取AppKey
+    initInfo.appKey = @"75bdfe3a9f9c4b8a846e9edc282c92b4";
+    //    initInfo.appKey = @"23a063ddadb1485a9a59f391b46bcb8b";
+    //    initInfo.skillSetId = _groupIdTF.text;
+    //    initInfo.skillSetName = _groupNameTF.text;
+    //    initInfo.receptionistId = _aidTF.text;
+    //    initInfo.robotId = _robotIdTF.text;
+    //    initInfo.tranReceptionistFlag = _aidTurn;
+    //    initInfo.scopeTime = [_historyScopeTF.text intValue];
+    //    initInfo.titleType = titleType;
+    //    initInfo.customTitle = _titleCustomTF.text;
+    UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.layer.cornerRadius = 5;
+    btn.layer.masksToBounds = YES;
+    
+}
+
 - (void)chongzhi{
 //    [self.textField resignFirstResponder];
     
@@ -476,7 +521,47 @@
             NSLog(@"nicaicai");
         }];
         [self addActionTarget:alert title:@"客服" color: [RHUtility colorForHex:@"555555"] action:^(UIAlertAction *action) {
-//
+            
+            ZCLibInitInfo *initInfo = [ZCLibInitInfo new];
+            // Appkey    *必填*
+            //initInfo.appKey  = @"75bdfe3a9f9c4b8a846e9edc282c92b4";//appKey;
+            initInfo.nickName     = [RHUserManager sharedInterface].username;
+            //自定义用户参数
+            [self customUserInformationWith:initInfo];
+            [self setZCLibInitInfoParam:initInfo];
+            ZCKitInfo *uiInfo=[ZCKitInfo new];
+            // uiInfo.info=initInfo;
+            uiInfo.isOpenEvaluation = YES;
+            [[ZCLibClient getZCLibClient] setLibInitInfo:initInfo];
+            
+            
+            // 启动
+            [ZCSobot startZCChatView:uiInfo with:self target:nil pageBlock:^(ZCUIChatController *object, ZCPageBlockType type) {
+                // 点击返回
+                if(type==ZCPageBlockGoBack){
+                    NSLog(@"点击了关闭按钮");
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [self.navigationController setNavigationBarHidden:NO];
+                        //[DQViewController Sharedbxtabar].tarbar.hidden = NO;
+                        // [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+                        
+                     //   self.secondview.frame = CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height+50);
+                    });
+                }
+                
+                // 页面UI初始化完成，可以获取UIView，自定义UI
+                if(type==ZCPageBlockLoadFinish){
+                    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+                    //            object.navigationController.interactivePopGestureRecognizer.delegate = object;
+                    // banner 返回按钮
+                    [object.backButton setTitle:@"关闭" forState:UIControlStateNormal];
+                    
+                    
+                }
+            } messageLinkClick:nil];
+            
+            
+/*
             ZCLibInitInfo *initInfo = [ZCLibInitInfo new];
             // Appkey    *必填*
             initInfo.appKey  = @"75bdfe3a9f9c4b8a846e9edc282c92b4";//appKey;
@@ -514,10 +599,11 @@
                     
                 }
             } messageLinkClick:nil];
+ */
             NSLog(@"nicaicai");
         }];
         
-        
+ 
         [self addCancelActionTarget:alert title:@"取消"];
         
         [self presentViewController:alert animated:YES completion:nil];
@@ -1415,6 +1501,33 @@
     self.mengban1.hidden = YES;
     self.daetishiview.hidden = YES;
     
+}
+
+-(void)jxsq{
+    
+    self.mengban1.hidden = NO;
+    self.sqview.hidden = NO;
+    
+//    RHWSQViewController * vc = [[RHWSQViewController alloc]initWithNibName:@"RHWSQViewController" bundle:nil];
+//    [self.navigationController pushViewController:vc animated:YES];
+}
+- (IBAction)sqxieyi:(id)sender {
+    self.mengban1.hidden = YES;
+    self.sqview.hidden = YES;
+    RHXYWebviewViewController * vc= [[RHXYWebviewViewController alloc]initWithNibName:@"RHXYWebviewViewController" bundle:nil];
+    vc.namestr = @"缴费授权协议";
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (IBAction)hidennsqview:(id)sender {
+    self.mengban1.hidden = YES;
+    self.sqview.hidden = YES;
+}
+- (IBAction)gosq:(id)sender {
+    self.mengban1.hidden = YES;
+    self.sqview.hidden = YES;
+    RHWSQViewController * vc = [[RHWSQViewController alloc]initWithNibName:@"RHWSQViewController" bundle:nil];
+        [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

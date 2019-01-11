@@ -8,10 +8,11 @@
 
 #import "RHIntroductionViewController.h"
 #import "RHOfficeNetAndWeiBoViewController.h"
-@interface RHIntroductionViewController ()
+@interface RHIntroductionViewController ()<UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *officeNetLabel;
 @property (weak, nonatomic) IBOutlet UIScrollView *Scrolview;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end
 
@@ -19,6 +20,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    self.webView.hidden = YES;
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
     //titleLabel.backgroundColor = [UIColor grayColor];
     
@@ -32,26 +35,47 @@
     
     titleLabel.text = @"平台介绍";
     self.navigationItem.titleView = titleLabel;
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@ryhPlatform",[RHNetworkService instance].newdoMain]];
+    
+    self.webView.scalesPageToFit =YES;
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
+    
+    
+    NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
+    NSString* session1=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHNEWMYSESSION"];
+    
+    if (session1.length>12) {
+        session = [NSString stringWithFormat:@"%@,%@",session,session1];
+    }
+    if (session&&[session length]>0) {
+        [request setValue:session forHTTPHeaderField:@"cookie"];
+        
+        
+    }
+    
+    self.webView.scalesPageToFit = YES;
+    //  [request setHTTPMethod:@"GET"];
+    [self.webView loadRequest: request];
     
 //    NSDictionary *attributes = @{NSUnderlineStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]};
 //    NSMutableAttributedString *netString = [[NSMutableAttributedString alloc] initWithString:_officeNetLabel.text];
 //    [netString addAttributes:attributes range:NSMakeRange(0, netString.length)];
 //    _officeNetLabel.attributedText = netString;
-    self.Scrolview.bounces = NO;
-    if ([UIScreen mainScreen].bounds.size.width >375) {
-        self.Scrolview.contentSize=CGSizeMake(320,1400);
-        
-    }else if ([UIScreen mainScreen].bounds.size.width <321){
-        
-        self.Scrolview.contentSize=CGSizeMake(320,1250);
-        
-    }else{
-        self.Scrolview.contentSize=CGSizeMake(320,1350);
-        
-    }
-    
-    self.Scrolview.showsHorizontalScrollIndicator = NO;
-    self.Scrolview.showsVerticalScrollIndicator = NO;
+//    self.Scrolview.bounces = NO;
+//    if ([UIScreen mainScreen].bounds.size.width >375) {
+//        self.Scrolview.contentSize=CGSizeMake(320,1400);
+//
+//    }else if ([UIScreen mainScreen].bounds.size.width <321){
+//
+//        self.Scrolview.contentSize=CGSizeMake(320,1250);
+//
+//    }else{
+//        self.Scrolview.contentSize=CGSizeMake(320,1350);
+//
+//    }
+//
+//    self.Scrolview.showsHorizontalScrollIndicator = NO;
+//    self.Scrolview.showsVerticalScrollIndicator = NO;
 }
 
 -(void)viewWillAppear:(BOOL)animated

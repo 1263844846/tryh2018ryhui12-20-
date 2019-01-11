@@ -34,6 +34,7 @@
 #import "RHInvestmentViewController.h"
 #import "RHNEWpeopleViewController.h"
 #import <SobotKit/SobotKit.h>
+#import <SobotKit/ZCUIChatController.h>
 #import "AppDelegate.h"
 #import "RHRNewShareWebViewController.h"
 #import "RHMainTableViewCell.h"
@@ -42,7 +43,13 @@
 #import "RHhelper.h"
 #import "RHHFJXViewController.h"
 #import "RHHFjiaochengViewController.h"
-@interface RHMainViewController ()<XmyScrollViewDatasource,XmyScrollViewDelegate,PageViewDelegate,MBProgressHUDDelegate,PagedFlowViewDataSource,PagedFlowViewDelegate,UIScrollViewDelegate>
+#import "RHDBSJViewController.h"
+#import "RHXMJTableViewCell.h"
+#import "RHXMJWebViewController.h"
+#import "RHXMJProjectViewController.h"
+#import "RHProjectCollectionViewCell.h"
+
+@interface RHMainViewController ()<XmyScrollViewDatasource,XmyScrollViewDelegate,PageViewDelegate,MBProgressHUDDelegate,PagedFlowViewDataSource,PagedFlowViewDelegate,UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 {
     NSArray *imageArray;
     NSArray * titleArray;
@@ -149,6 +156,24 @@
 @property (weak, nonatomic) IBOutlet UIView *mengban2;
 
 @property(nonatomic,strong)UIView *mengbanview2;
+@property(nonatomic,copy)NSString *dbsxstr;
+
+
+@property (weak, nonatomic) IBOutlet UIView *ryhnewsview;
+
+@property (weak, nonatomic) IBOutlet UIImageView *ryhimage;
+
+
+@property(nonatomic,copy)NSString *  ryhnewslink;
+@property(nonatomic,copy)NSString *  ryhnewstitle;
+@property(nonatomic,strong)NSArray *xmjarray;
+@property (weak, nonatomic) IBOutlet UIView *newscollectionview;
+
+
+@property (weak, nonatomic) IBOutlet UICollectionView *mycollection;
+@property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *colleclayout;
+@property (weak, nonatomic) IBOutlet UIImageView *collectionimage;
+
 @end
 
 @implementation RHMainViewController
@@ -157,6 +182,157 @@
 @synthesize dataArray;
 @synthesize segmentView;
 @synthesize type;
+- (IBAction)ryhpushnewslink:(id)sender {
+    self.ryhnewsview.hidden = YES;
+    self.mengbanview.hidden = YES;
+    RHOfficeNetAndWeiBoViewController *office = [[RHOfficeNetAndWeiBoViewController alloc] initWithNibName:@"RHOfficeNetAndWeiBoViewController" bundle:nil];
+    
+    office.urlString = self.ryhnewslink;
+    office.NavigationTitle = self.ryhnewstitle;
+    [self doneryhnews:nil];
+    [self.navigationController pushViewController:office animated:NO];
+    
+}
+
+- (IBAction)doneryhnews:(id)sender {
+    
+    self.ryhnewsview.hidden = YES;
+    self.mengbanview.hidden = YES;
+    NSString *deviceUUID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+     NSDictionary* parameters=@{@"equipmentCode":deviceUUID};
+    [[RHNetworkService instance] POST:@"app/front/payment/appJxAccount/updateBannerRecord" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        NSLog(@"%@",responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        ;
+    }];
+}
+
+-(void)huoquryhnews{
+    
+    
+    NSString *deviceUUID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    NSDictionary* parameters=@{@"equipmentCode":deviceUUID};
+    [[RHNetworkService instance] POST:@"app/front/payment/appJxAccount/isPopUp" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if (responseObject && [responseObject isKindOfClass:[NSDictionary class]]) {
+            
+            if (responseObject[@"popUp"]&&![responseObject[@"popUp"] isKindOfClass:[NSNull class]]) {
+                if ([responseObject[@"popUp"] isEqualToString:@"yes"]) {
+                    self.ryhnewsview.hidden = NO;
+                    self.mengbanview.hidden = NO;
+                    if (responseObject[@"logo"]&&![responseObject[@"logo"] isKindOfClass:[NSNull class]]) {
+                       [self.ryhimage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].newdoMain,responseObject[@"logo"]]]];
+                    }
+                    if (responseObject[@"link"]&&![responseObject[@"link"] isKindOfClass:[NSNull class]]) {
+                        
+                        self.ryhnewslink = responseObject[@"link"];
+                    }
+                    if (responseObject[@"title"]&&![responseObject[@"title"] isKindOfClass:[NSNull class]]) {
+                        
+                        self.ryhnewstitle = responseObject[@"title"];
+                    }
+                    
+                }
+            }
+            
+        }
+        
+        NSLog(@"%@",responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        ;
+    }];
+}
+
+-(void)stzfpush{
+    
+    [[RHNetworkService instance] POST:@"front/payment/account/trusteePayAlter" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSString * str = [NSString stringWithFormat:@"%@",responseObject[@"flag"]];
+            
+            self.dbsxstr = str;
+            [RHhelper ShraeHelp].dbsxstr = str;
+            
+        }
+        
+        NSLog(@"%@",responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        ;
+    }];
+    
+}
+-(void)xmjswitch{
+    
+    [[RHNetworkService instance] POST:@"app/common/appMain/projectListSwitch" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSString * str = [NSString stringWithFormat:@"%@",responseObject[@"projectListSwitch"]];
+            
+            
+            [RHhelper ShraeHelp].xmjswitch = str;
+            [self.tableView reloadData];
+        }
+        
+        NSLog(@"%@",responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        ;
+    }];
+    
+}
+-(void)xmjdata{
+    
+    [[RHNetworkService instance] POST:@"app/common/appMain/getProjectListInfo" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+//            NSString * str = [NSString stringWithFormat:@"%@",responseObject[@"projectListSwitch"]];
+//
+//
+//            [RHhelper ShraeHelp].xmjswitch = str;
+//            [self.tableView reloadData];
+            
+            if (responseObject[@"timeLimit"]&&![responseObject[@"timeLimit"] isKindOfClass:[NSNull class]]) {
+                
+                
+                [RHhelper ShraeHelp].xmjmouth = responseObject[@"timeLimit"];
+                
+            }
+            if (responseObject[@"link"]&&![responseObject[@"link"] isKindOfClass:[NSNull class]]) {
+                
+                
+                [RHhelper ShraeHelp].xmjlink = responseObject[@"link"];
+                
+            }
+            if (responseObject[@"rate"]&&![responseObject[@"rate"] isKindOfClass:[NSNull class]]) {
+                
+                
+                [RHhelper ShraeHelp].xmjlilv = responseObject[@"rate"];
+                
+            }
+            [self.tableView reloadData];
+        }
+        
+        NSLog(@"%@",responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        ;
+    }];
+    
+}
+-(void)pushxmj{
+    if (![RHUserManager sharedInterface].username) {
+        //        [self.investmentButton setTitle:@"请先登录" forState:UIControlStateNormal];
+        [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+        NSLog(@"ddddddd");
+        RHALoginViewController* controller=[[RHALoginViewController alloc] initWithNibName:@"RHALoginViewController" bundle:nil];
+        [self.navigationController pushViewController:controller animated:NO];
+        return;
+    }
+    
+     [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    RHXMJWebViewController *office = [[RHXMJWebViewController alloc] initWithNibName:@"RHXMJWebViewController" bundle:nil];
+    office.nametitle = @"项目集";
+    office.xmjurl = [NSString stringWithFormat:@"%@%@",[RHNetworkService instance].newdoMain,[RHhelper ShraeHelp].xmjlink];
+    [self.navigationController pushViewController:office animated:NO];
+}
+
 - (IBAction)hidenmengban:(id)sender {
     self.mengbanview.hidden = YES;
     self.kaihuview.hidden = YES;
@@ -173,18 +349,57 @@
         RHJXPassWordViewController * controller =[[RHJXPassWordViewController alloc]initWithNibName:@"RHJXPassWordViewController" bundle:nil];
         
         controller.urlstr = @"app/front/payment/appJxAccount/passwordSetJxData";
-        [self.navigationController pushViewController:controller animated:YES];
+        [self.navigationController pushViewController:controller animated:NO];
         return;
     }
     RHOpenCountViewController* controller1=[[RHOpenCountViewController alloc]initWithNibName:@"RHOpenCountViewController" bundle:nil];
-    [self.navigationController pushViewController:controller1 animated:YES];
+    [self.navigationController pushViewController:controller1 animated:NO];
 }
 - (IBAction)guanbihftishi:(id)sender {
     
     [self seeetalterview];
     
 }
-
+-(void)gethuifuyuemoth{
+    if ([RHUserManager sharedInterface].username.length<2) {
+        return;
+    }
+    
+    NSDictionary* parameters=@{@"username":[RHUserManager sharedInterface].username};
+    
+  //  self.view.userInteractionEnabled = NO;
+    [[RHNetworkService instance] POST:@"app/front/payment/appAccount/instantHuifu" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+     //   self.view.userInteractionEnabled = YES;
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            
+            if (responseObject[@"msg"]&&![responseObject[@"msg"] isKindOfClass:[NSNull class]]) {
+                [RHhelper ShraeHelp].numstr = [NSString stringWithFormat:@"%@",responseObject[@"msg"]];
+                
+            }
+            if (responseObject[@"money"]&&![responseObject[@"money"] isKindOfClass:[NSNull class]]) {
+                [RHhelper ShraeHelp].moneystr = [NSString stringWithFormat:@"%@",responseObject[@"money"]];
+                
+            }else{
+                
+                [RHhelper ShraeHelp].moneystr = @"0";
+            }
+            if (responseObject[@"flag"]&&![responseObject[@"flag"] isKindOfClass:[NSNull class]]) {
+                [RHhelper ShraeHelp].flag = [NSString stringWithFormat:@"%@",responseObject[@"flag"]];
+                
+            }
+        }
+        //        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        NSLog(@"%@---",responseObject);
+        
+        [self huifumoth];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        ;
+       // self.view.userInteractionEnabled = YES;
+        
+        
+    }];
+}
 -(void)gonggao{
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
 //    [manager.operationQueue cancelAllOperations];
@@ -246,15 +461,13 @@
     if (alpha<0.17) {
         [self configTitleWithString:@""];
         [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"透明矩形.png"] forBarMetrics:UIBarMetricsDefault];
-//        [self rightbuttonwhithimagrstring:@"放标预告" action:@selector(gonggao)];
-        
-//        [self rightleftbuttonwhithimagrstring:@"放标预告" str:@"客服" action:@selector(gonggao) actions:@selector(getloadzcCustomerService)];
+
         [self.leftbutton setBackgroundImage:[UIImage imageNamed:@"公告"] forState:UIControlStateNormal];
-//        if ([rightstr isEqualToString:@"客服"]) {
-            self.rightbutton.frame=CGRectMake(0, 0, 30, 30);
-        self.leftbutton.frame=CGRectMake(0, 0, 30, 30);
-//        }
         [self.rightbutton setBackgroundImage:[UIImage imageNamed:@"客服1"] forState:UIControlStateNormal];
+        self.rightbutton.frame=CGRectMake(0, 0, 30, 30);//2
+        self.leftbutton.frame=CGRectMake(0, 0, 30, 30);
+
+        
         
     }else{
 //        [self rightleftbuttonwhithimagrstring:@"PNG_首页_公告-50" str:@"PNG_客服" action:@selector(gonggao) actions:@selector(getloadzcCustomerService)];
@@ -268,7 +481,7 @@
 }
 -(void)rightleftbuttonwhithimagrstring:(NSString *)leftimagestring str:(NSString *)rightstr action:(SEL)leftaction actions:(SEL)rightaction{
     
-    self.leftbutton=[UIButton buttonWithType:UIButtonTypeCustom];
+    self.leftbutton=[[UIButton alloc]init];
     [self.leftbutton addTarget:self action:leftaction forControlEvents:UIControlEventTouchUpInside];
     //    [button setTitle:title forState:UIControlStateNormal];
     [self.leftbutton setBackgroundImage:[UIImage imageNamed:leftimagestring] forState:UIControlStateNormal];
@@ -276,22 +489,17 @@
     self.leftbutton.frame=CGRectMake(0, 0, 30, 30);
     self.navigationItem.leftBarButtonItem= [[UIBarButtonItem alloc] initWithCustomView:self.leftbutton];
     
-    self.rightbutton=[UIButton buttonWithType:UIButtonTypeCustom];
+    
+    
+    self.rightbutton=[[UIButton alloc]init];
     [self.rightbutton addTarget:self action:rightaction forControlEvents:UIControlEventTouchUpInside];
     //    [button setTitle:title forState:UIControlStateNormal];
-    [self.rightbutton setBackgroundImage:[UIImage imageNamed:rightstr] forState:UIControlStateNormal];
-    [self.rightbutton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-    self.rightbutton.frame=CGRectMake(0, 0, 30, 30);
+//    [self.leftbutton setBackgroundImage:[UIImage imageNamed:rightstr] forState:UIControlStateNormal];
+    [self.rightbutton    setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+    self.rightbutton.frame=CGRectMake(0, 0, 30, 50);
     self.navigationItem.rightBarButtonItem= [[UIBarButtonItem alloc] initWithCustomView:self.rightbutton];
     
-    
-//    UIBarButtonItem * btn = [[UIBarButtonItem alloc]initWithTitle:@"登录" style:UIBarButtonItemStylePlain target:self action:@selector(loginryh)];
-//    
-//    [btn setTitle:@"登录"];
-//    [btn setTintColor:[RHUtility colorForHex:@"#44bbc1"]];
-//    
-//    
-//    self.navigationItem.rightBarButtonItem = btn;
+
     
     
 }
@@ -313,7 +521,7 @@
 - (IBAction)zhuanchuyue:(id)sender {
     
     
-    
+    return;
     //汇付天下官网转出余额教程
     if ([self.hfzybtn.titleLabel.text isEqualToString:@"汇付天下官网转出余额教程"]){
         self.mengbanview.tag = 10111;
@@ -342,12 +550,15 @@
     UIView *subView1 = [self.view viewWithTag:10112];
     [subView1 removeFromSuperview];
     [DQViewController Sharedbxtabar].tarbar.hidden = YES;
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:vc animated:NO];
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+
+    [self stzfpush];
     self.footbutton.layer.masksToBounds=YES;
     self.footbutton.layer.cornerRadius=5;
     self.navgationrightView.layer.masksToBounds=YES;
@@ -362,7 +573,9 @@
     
     self.zhuanyiview.hidden = YES;
      [[UIApplication sharedApplication].keyWindow addSubview:self.mengbanview];
-    
+    [[UIApplication sharedApplication].keyWindow addSubview:self.ryhnewsview];
+    self.ryhnewsview.frame =CGRectMake((RHScreeWidth-295)/2,150 , 295, 354);
+    self.ryhnewsview.hidden = YES;
     self.mengbanview.frame = CGRectMake(0, CGRectGetMinY(self.mengbanview.frame), [UIScreen mainScreen].bounds.size.width, self.mengbanview.frame.size.height);
     
 //    self.newsdatabtn.userInteractionEnabled = NO;
@@ -383,33 +596,17 @@
 //    self.navgationrightView.hidden = YES;
     [[DQViewController Sharedbxtabar] tabBar:(DQview *)self.view didSelectedIndex:0];
     self.tableView.scrollEnabled = NO;
-  //  CGFloat height  = [UIScreen mainScreen].bounds.size.height;
-    
-    
-    //self.navigationController.navigationBar.tintColor = [UIColor redColor];
-//    [self configTitleWithString:@"融益汇"];
-//    self.title = @"融益汇";
-//    [self rightbuttonwhithimagrstring:@"放标预告" action:@selector(gonggao)];
-     [self rightleftbuttonwhithimagrstring:@"放标预告1" str:@"客服" action:@selector(gonggao) actions:@selector(getloadzcCustomerService)];
+ 
+     [self rightleftbuttonwhithimagrstring:@"公告" str:@"客服1" action:@selector(gonggao) actions:@selector(getloadzcCustomerService)];
     _bannersArray = [[NSArray alloc] init];
     _bannerViewsArray = [[NSMutableArray alloc] init];
     
     self.scrview = [[UIScrollView alloc]init];
     self.scrview.frame = CGRectMake(0, -64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height-44-69-5+3+3+64);
-    
-//    if ([UIScreen mainScreen].bounds.size.height > 670) {
-//        self.scrview.contentSize =  CGSizeMake([UIScreen mainScreen].bounds.size.width,[UIScreen mainScreen].bounds.size.height*1.1+140-30+30+64);
-//    }else if ([UIScreen mainScreen].bounds.size.height > 570 && [UIScreen mainScreen].bounds.size.height< 670){
-//        self.scrview.contentSize =  CGSizeMake([UIScreen mainScreen].bounds.size.width,[UIScreen mainScreen].bounds.size.height*1.4+10-30+30);
-//        
-//    }else{
-//    self.scrview.contentSize =  CGSizeMake([UIScreen mainScreen].bounds.size.width,[UIScreen mainScreen].bounds.size.height*1.4+120+64);
-//    }
-//    if ([UIScreen mainScreen].bounds.size.height < 481){
-//        
-//        
-//        self.scrview.contentSize =  CGSizeMake([UIScreen mainScreen].bounds.size.width,1000);
-//    }
+    if ([UIScreen mainScreen].bounds.size.height >740) {
+        self.scrview.frame = CGRectMake(0,-90, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height-44-69-5+3+3+64);
+    }
+
     
     //是否显示滚动条
     NSLog(@"%f",[UIScreen mainScreen].bounds.size.height);
@@ -434,93 +631,16 @@
     self.scrview .scrollEnabled = YES;
     self.scrview.backgroundColor = [UIColor colorWithHexString:@"efefef"];
     self.scrview.delegate = self;
-//    self.navigationController
-    
-    
-//    self.segmentView=[[[NSBundle mainBundle] loadNibNamed:@"RHSegmentView" owner:nil options:nil] objectAtIndex:0];
-//    segmentView.delegate=self;
-//    segmentView.frame=CGRectMake(segmentView.frame.origin.x, 115, segmentView.frame.size.width, segmentView.frame.size.height);
-//    [segmentView initData];
-    //[self.headerView addSubview:segmentView];
-  
-    
-    //*----------------------------
-/*
-    UIView * RHcbxview = [UIView new];
-    RHcbxview.frame =CGRectMake(0, 108, [UIScreen mainScreen].applicationFrame.size.width, 10);
-    RHcbxview.backgroundColor = [UIColor whiteColor];
-    [self.scrview addSubview:RHcbxview];
-    
-    _rhcdbxlab = [[UILabel alloc]init];
-    
-    _rhcdbxlab.frame = CGRectMake(0, 0, [UIScreen mainScreen].applicationFrame.size.width*2, 10);
-    _rhcdbxlab.text = @"2016年1月19日（周二）上午10点百万商业贷项目上线还款方式：先息后本、等额本息期限2-6个月，年化收益8%~9%";
-   // _rhcdbxlab.backgroundColor = [UIColor orangeColor];
-    _rhcdbxlab.font = [UIFont fontWithName:@"Arial" size:10.0];
-    _rhcdbxlab.textAlignment = NSTextAlignmentCenter;
-    
-    [RHcbxview addSubview:_rhcdbxlab];
-    
-    
-    CGFloat with = [UIScreen mainScreen].bounds.size.width;
-    //CGFloat height = self.RHcbxview.frame.size.height;
-    CGFloat a = 0;
-    CGFloat b = 0;
-    if (with > 410) {
-        a = 200;
-        b = 40;
-    }else if (with > 360&&with < 410){
-        a = 200;
-        b = 40;
-        
-    }else if (with <330){
-        a = 160;
-        b = 0;
-    }
 
-    self.RHcbxview = [[PagedFlowView alloc]initWithFrame:CGRectMake(0, 118,  [UIScreen mainScreen].applicationFrame.size.width, a)];
-    [self.scrview addSubview:self.RHcbxview];
-    
-    imageArray = @[@"cbx1",@"cbx2",@"cbx0",@"cbx3",@"cbx4"];
-    
-    titleArray = @[@"益学贷",@"益商贷",@"益房贷",@"益车贷",@"债权转让"];
-    
-    baozhengArray = @[@"等额本息",@"等额本息",@"等额本息",@"等额本息",@"等额本息"];
-   
-    self.RHcbxview.delegate = self;
-    self.RHcbxview.dataSource = self;
-    
-    _RHcbxview.minimumPageAlpha = 0.4;
-    _RHcbxview.minimumPageScale = 0.8;
-    
-    //_RHcbxview.orientation = PagedFlowViewOrientationHorizontal;
-    
-   // _RHcbxview.backgroundColor = [UIColor redColor];
-    //self.tableView.backgroundColor = [UIColor redColor];
- 
- */
- 
-//    UILabel * headerlab = [[UILabel alloc]init];
-//    headerlab.frame = CGRectMake(10, 278, [UIScreen mainScreen].applicationFrame.size.width, 15);
-//    headerlab.text = @"最新标的";
-//    headerlab.backgroundColor = [UIColor colorWithHexString:@"44bbc1"];
-//    headerlab.font = [UIFont fontWithName:@"Arial" size:10.0];
-//    [self.scrview addSubview:headerlab];
     
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor=[UIColor clearColor];
-    if ([UIScreen mainScreen].bounds.size.width <321) {
-        self.newsView.frame=CGRectMake(0, CGRectGetMaxY(_headerScrollView.frame)+40, [UIScreen mainScreen].applicationFrame.size.width,30);
-    }else{
-       self.newsView.frame=CGRectMake(0, CGRectGetMaxY(_headerScrollView.frame)+90, [UIScreen mainScreen].applicationFrame.size.width,30);
-    }
-//    self.newsView.frame=CGRectMake(0, CGRectGetMaxY(_headerScrollView.frame)+90, [UIScreen mainScreen].applicationFrame.size.width,39);
-    [self.scrview addSubview:self.newsView];
+ 
 //    self.newsView.backgroundColor = [UIColor redColor];
 //    if ([UIScreen mainScreen].bounds.size.width >321) {
 //        self.tableView.frame=CGRectMake(0, CGRectGetMaxY(self.newsView.frame)+30, [UIScreen mainScreen].applicationFrame.size.width, 1000-44-69+10);
 //    }
-    self.tableView.frame=CGRectMake(0, CGRectGetMaxY(self.newsView.frame)+5, [UIScreen mainScreen].applicationFrame.size.width, 1000-44-69+10);
+   
 //    if ([UIScreen mainScreen].bounds.size.width >321) {
 //        self.tableView.frame=CGRectMake(0, CGRectGetMaxY(self.newsView.frame)+5, [UIScreen mainScreen].applicationFrame.size.width, 1000-44-69+10);
 //    }
@@ -534,18 +654,7 @@
     self.segment1Array=[[NSMutableArray alloc]initWithCapacity:0];
     self.segment2Array=[[NSMutableArray alloc]initWithCapacity:0];
     self.dataArray=[[NSMutableArray alloc]initWithCapacity:0];
-//    self.segmentView.segmentLabel.layer.cornerRadius=8;
-//    self.segmentView.segmentLabel.layer.masksToBounds=YES;
-//    self.segmentView.segmentLabel1.layer.cornerRadius=8;
-//    self.segmentView.segmentLabel1.layer.masksToBounds=YES;
-//    self.segmentView.segmentLabel3.layer.cornerRadius=8;
-//    self.segmentView.segmentLabel3.layer.masksToBounds=YES;
-//    self.segmentView.segmentLabel4.layer.cornerRadius=8;
-//    self.segmentView.segmentLabel4.layer.masksToBounds=YES;
-//    self.segmentView.segmentLabel.hidden=YES;
-//    self.segmentView.segmentLabel1.hidden=YES;
-//    self.segmentView.segmentLabel3.hidden=YES;
-//    self.segmentView.segmentLabel4.hidden=YES;
+
 //   
  
  
@@ -567,44 +676,21 @@
     self.mainScorllView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), 110) animationDuration:3.0];
     [self.view addSubview:self.mainScorllView];
     if ([UIScreen mainScreen].bounds.size.width <321) {
-        self.scrview .contentSize =  CGSizeMake([UIScreen mainScreen].bounds.size.width,675*1.4+10-30+30+25+64+20+6+10);
+        self.scrview .contentSize =  CGSizeMake([UIScreen mainScreen].bounds.size.width,675*1.4+10-30+30+25+64+20+6+10+80);
         self.newslab.font = [UIFont systemFontOfSize:11];
     }else{
-        self.scrview .contentSize =  CGSizeMake([UIScreen mainScreen].bounds.size.width,675*1.4+10-30+30+25+64+20+46+10);
+        self.scrview .contentSize =  CGSizeMake([UIScreen mainScreen].bounds.size.width,675*1.4+10-30+30+25+64+20+46+10+80);
         
+    }
+    if ([UIScreen mainScreen].bounds.size.height>740) {
+        self.scrview .contentSize =  CGSizeMake([UIScreen mainScreen].bounds.size.width,675*1.4+10-30+30+25+64+20+46+10+80+20);
     }
     _shangye = -1;
     [NSTimer scheduledTimerWithTimeInterval:0.0f target:self selector:@selector(delayMethod) userInfo:nil repeats:NO];
-    //[NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(RHwycbx) userInfo:nil repeats:YES];
-    
-//    [_rhcdbxlab sizeToFit];
-//    CGRect frame = _rhcdbxlab.frame;
-//    frame.origin.x = 320*2;
-//    _rhcdbxlab.frame = frame;
-//    
-//    [UIView beginAnimations:@"testAnimation" context:NULL];
-//    [UIView setAnimationDuration:10.0f];
-//    [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-//    [UIView setAnimationDelegate:self];
-//    [UIView setAnimationRepeatAutoreverses:NO];
-//    [UIView setAnimationRepeatCount:999999];
-//    
-//    frame = _rhcdbxlab.frame;
-//    frame.origin.x = -frame.size.width;
-//    _rhcdbxlab.frame = frame;
-//    [UIView commitAnimations];
+  
     [self.view addSubview:self.scrview];
     
-//    UILabel * newpersonlab = [[UILabel alloc]init];
-//    newpersonlab.frame = CGRectMake(20, CGRectGetMaxY(_headerScrollView.frame), 100, 30);
-////    newpersonlab.backgroundColor = [UIColor redColor];
-//    [self.scrview addSubview:newpersonlab];
-//    newpersonlab.font =[UIFont systemFontOfSize: 14.0];
-//    newpersonlab.text = @"新手专享";
-//    UILabel * newperson = [[UILabel alloc]init];
-//    newpersonlab.frame = CGRectMake(20, CGRectGetMaxY(newpersonlab.frame), [UIScreen mainScreen].bounds.size.width, 30);
-//    [self.scrview addSubview:self.navgationrightView];
-//    self.navgationrightView.hidden = YES;
+
     
     
     
@@ -723,7 +809,7 @@
         office.urlString = self.gonggaourlstr;
         
     }
-    [self.navigationController pushViewController:office animated:YES];
+    [self.navigationController pushViewController:office animated:NO];
     
     
     
@@ -731,7 +817,7 @@
 
 -(void)getnewsryhgw{
 //    self.newsdatabtn.userInteractionEnabled = NO;
-    [[RHNetworkService instance] POST:@"app/common/appMain/appActivityList" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[RHNetworkService instance] POST:@"app/common/appMain/appActivityListNew" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
@@ -764,6 +850,8 @@
 //            self.webtitle = self.newslab.text;
             [self.tableView reloadData];
             
+            [self.mycollection reloadData];
+            
             }
             
 //        NSLog(@"%@",self.keyarr);
@@ -777,6 +865,13 @@
         
         
     }];
+}
+-(NSArray *)xmjarray{
+    
+    if (!_xmjarray) {
+        _xmjarray = [NSArray array];
+    }
+    return _xmjarray;
 }
 -(NSMutableArray *)keyarr{
     
@@ -806,18 +901,36 @@
     // 用户昵称
     initInfo.nickName     = [RHUserManager sharedInterface].username;
 }
+- (void)setZCLibInitInfoParam:(ZCLibInitInfo *)initInfo{
+    // 获取AppKey
+    initInfo.appKey = @"75bdfe3a9f9c4b8a846e9edc282c92b4";
+    //    initInfo.appKey = @"23a063ddadb1485a9a59f391b46bcb8b";
+//    initInfo.skillSetId = _groupIdTF.text;
+//    initInfo.skillSetName = _groupNameTF.text;
+//    initInfo.receptionistId = _aidTF.text;
+//    initInfo.robotId = _robotIdTF.text;
+//    initInfo.tranReceptionistFlag = _aidTurn;
+//    initInfo.scopeTime = [_historyScopeTF.text intValue];
+//    initInfo.titleType = titleType;
+//    initInfo.customTitle = _titleCustomTF.text;
+    UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.layer.cornerRadius = 5;
+    btn.layer.masksToBounds = YES;
+    
+}
 -(void)getloadzcCustomerService{
     
     ZCLibInitInfo *initInfo = [ZCLibInitInfo new];
     // Appkey    *必填*
-    initInfo.appKey  = @"75bdfe3a9f9c4b8a846e9edc282c92b4";//appKey;
+    //initInfo.appKey  = @"75bdfe3a9f9c4b8a846e9edc282c92b4";//appKey;
     initInfo.nickName     = [RHUserManager sharedInterface].username;
     //自定义用户参数
-//        [self customUserInformationWith:initInfo];
-    
+        [self customUserInformationWith:initInfo];
+    [self setZCLibInitInfoParam:initInfo];
     ZCKitInfo *uiInfo=[ZCKitInfo new];
-    uiInfo.info=initInfo;
+   // uiInfo.info=initInfo;
         uiInfo.isOpenEvaluation = YES;
+     [[ZCLibClient getZCLibClient] setLibInitInfo:initInfo];
     // 自定义UI
     //    [self customerUI:uiInfo];
     
@@ -843,52 +956,39 @@
     
     
     // 启动
-    [ZCSobot startZCChatView:uiInfo with:self pageBlock:^(ZCUIChatController *object, ZCPageBlockType type) {
+    [ZCSobot startZCChatView:uiInfo with:self target:nil pageBlock:^(ZCUIChatController *object, ZCPageBlockType type) {
         // 点击返回
         if(type==ZCPageBlockGoBack){
             NSLog(@"点击了关闭按钮");
-            
-//             [self.navigationController setNavigationBarHidden:NO];
-                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                            [self.navigationController setNavigationBarHidden:NO];
-                            [DQViewController Sharedbxtabar].tarbar.hidden = NO;
-                            [[DQViewController Sharedbxtabar].tabBar setHidden:YES];
-                        });
-            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                //                            [self.navigationController setNavigationBarHidden:NO];
+                [DQViewController Sharedbxtabar].tarbar.hidden = NO;
+                [[DQViewController Sharedbxtabar].tabBar setHidden:YES];
+                if ([UIScreen mainScreen].bounds.size.height >740) {
+                [DQViewController Sharedbxtabar].tarbar.frame = CGRectMake(self.tabBarController.tabBar.frame.origin.x, [DQViewController Sharedbxtabar].tabBar.frame.origin.y, [DQViewController Sharedbxtabar].tabBar.frame.size.width, self.tabBarController.tabBar.frame.size.height+35);
+                }
+            });
         }
         
         // 页面UI初始化完成，可以获取UIView，自定义UI
         if(type==ZCPageBlockLoadFinish){
-            
             [DQViewController Sharedbxtabar].tarbar.hidden = YES;
             //            object.navigationController.interactivePopGestureRecognizer.delegate = object;
             // banner 返回按钮
-                        [object.backButton setTitle:@"关闭" forState:UIControlStateNormal];
+            [object.backButton setTitle:@"关闭" forState:UIControlStateNormal];
             
-            // banner 标题
-            //            [object.titleLabel setFont:[UIFont systemFontOfSize:30]];
-            
-            // banner 底部View
-            //            [object.topView setBackgroundColor:[UIColor greenColor]];
-            
-            // 输入框
-            //            UITextView *tv=[object getChatTextView];
-            //            [tv setBackgroundColor:[UIColor redColor]];
-            //            [object.topView setBackgroundColor:[UIColor clearColor]];
             
         }
     } messageLinkClick:nil];
-
-    
 }
 -(void)loginryh{
-     if (![RHUserManager sharedInterface].username) {
-    RHALoginViewController * con = [[RHALoginViewController alloc]initWithNibName:@"RHALoginViewController" bundle:nil];
-    
-    
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
-    [self.navigationController pushViewController:con animated:YES];
-     }
+//     if (![RHUserManager sharedInterface].username) {
+//    RHALoginViewController * con = [[RHALoginViewController alloc]initWithNibName:@"RHALoginViewController" bundle:nil];
+//
+//
+//    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+//    [self.navigationController pushViewController:con animated:NO];
+//     }
 }
 
 
@@ -991,6 +1091,18 @@
 //响应升级提示按钮
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     //如果选择“现在升级”
+    if (actionSheet.tag == 8901) {
+        
+        
+        if (buttonIndex==0) {
+            [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+            RHDBSJViewController * vc = [[RHDBSJViewController alloc]initWithNibName:@"RHDBSJViewController" bundle:nil];
+            //        vc.str = @"cbx";
+            [self.navigationController pushViewController:vc animated:NO];
+        }
+        return;
+    }
+    
     if (actionSheet.tag==9900) {
         NSLog(@"111");
          if (buttonIndex == 0){
@@ -1021,124 +1133,7 @@
     }
 }
 
-//- (void)getAppBanner {
-//   
-////    self.mySCrorllView=[[XMyScrollView alloc]initWithFrame:self.headerScrollView.frame];
-////    
-////    self.mySCrorllView.delegate = self;
-////    self.mySCrorllView.datasource = self;
-////    
-////    //self.view= self.mySCrorllView;
-////    [self.view addSubview:self.mySCrorllView];
-//    
-//    [[RHNetworkService instance] POST:@"common/main/appBannerList" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        
-//        
-//        _bannersArray = @[];
-//        _bannersArray = responseObject;
-//        if (_bannersArray.count <= 1) {
-//            [self setBannersImageView];
-//        } else {
-////            [self removeScrollView];
-////            self.mySCrorllView = [[XMyScrollView alloc]initWithFrame:self.headerScrollView.frame];
-////            self.mySCrorllView.delegate = self;
-////            self.mySCrorllView.datasource = self;
-////        
-//////        self.view= self.mySCrorllView;
-////            [self.view addSubview:self.mySCrorllView];
-//            [self setAndAddScrollView];
-//        }
-////        [self setBannersImageView];
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        [_bannerImageView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"NewBanner"]];
-//    }];
-// 
-//
-////    return _bannersArray;
-//
-//}
-//
-//-(NSInteger)numberOfPages{
-////    NSLog(@"=============%ld",self.bannersArray.count);
-//    return self.bannersArray.count;
-//}
-//
-//- (UIView *)scrollViewPageAtIndex:(NSInteger)index{
-//        UIImageView* imagev=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), self.headerScrollView.frame.size.height)];
-//        if (self.bannersArray.count > 0) {
-//            RHNetworkService *netService = [RHNetworkService instance];
-//                 NSLog(@"===bannersArray=========%@",self.bannersArray[index][@"bg"]);
-//            NSString *urlString = [NSString stringWithFormat:@"%@%@%@",[netService doMain],@"common/main/attachment/",self.bannersArray[index][@"bg"]];
-//            [imagev sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"NewBanner"]];
-//            return imagev;
-//        } 
-//        return imagev;
-//}
-//
-//-(void)didClickPage:(XMyScrollView *)csView atIndex:(NSInteger)index {
-//    [self goForBannerDetailViewControllerWithIndex:index];
-//}
-//
-//- (void)setBannersImageView {
-//    if (_bannersArray.count > 0) {
-//         [_bannerImageView removeFromSuperview];
-//        for (int i = 0 ; i < 1; i ++) {
-//            UIImageView *bannerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * CGRectGetWidth([UIScreen mainScreen].bounds), 0,  CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight(_headerScrollView.frame))];
-//            bannerImageView.userInteractionEnabled = YES;
-//            bannerImageView.tag = i + 100;
-//            NSDictionary *dic = _bannersArray[i];
-////            NSLog(@"============%@",dic);
-//            RHNetworkService *netService = [RHNetworkService instance];
-//            NSString *urlString = [NSString stringWithFormat:@"%@%@%@",[netService doMain],@"common/main/attachment/",dic[@"bg"]];
-//            [bannerImageView sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"NewBanner"]];
-//            [_headerScrollView addSubview:bannerImageView];
-//            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goForBannerDetailViewControllerWithIndex:)];
-//            [bannerImageView addGestureRecognizer:tap];
-//        }
-//        _headerScrollView.contentSize = CGSizeMake(_bannersArray.count * CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight(_headerScrollView.frame));
-//    }else{
-//        [_bannerImageView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"NewBanner"]];
-//    }
-//}
-//
-//
-//- (void)goForBannerDetailViewControllerWithIndex:(NSInteger)index {
-//    NSDictionary *dic;
-//    if (_bannersArray.count > 1) {
-//        dic = _bannersArray[index];
-//    } else {
-//        dic = _bannersArray[0];
-//    }
-//   
-//    NSString *linkURl = dic[@"link"];
-//    NSString *logoUrl = dic[@"logo"];
-//    NSString *naviTitle = dic[@"title"];
-//    
-//    NSLog(@"=============%@",linkURl);
-//    NSLog(@"=============%@",logoUrl);
-//    NSLog(@"=============%@",naviTitle);
-//    if (linkURl.length > 0) {
-//        RHOfficeNetAndWeiBoViewController *office = [[RHOfficeNetAndWeiBoViewController alloc] initWithNibName:@"RHOfficeNetAndWeiBoViewController" bundle:nil];
-//        office.NavigationTitle = naviTitle;
-//        office.Type = 3;
-//        if (([linkURl rangeOfString:@"http://"].location == NSNotFound)) {
-////            office.urlString = [NSString stringWithFormat:@"http://%@",linkURl];
-////        } else if (([linkURl rangeOfString:@"https://"].location == NSNotFound)) {
-////             office.urlString = [NSString stringWithFormat:@"https://%@",linkURl];
-//        } else{
-//            office.urlString = linkURl;
-//        }
-//        [self.navigationController pushViewController:office animated:YES];
-//    }else if (logoUrl.length > 0 ) {
-//        RHLogoViewController *logo = [[RHLogoViewController alloc] initWithNibName:@"RHLogoViewController" bundle:nil];
-//        logo.logoRrl = [NSString stringWithFormat:@"%@%@%@",[[RHNetworkService instance] doMain],@"common/main/attachment/",logoUrl];
-//        logo.navigationTitle = naviTitle;
-//        [self.navigationController pushViewController:logo animated:YES];
-//    }
-//    
-//    
-//    
-//}
+
 
 -(void)mainbanner{
 //    self.view.userInteractionEnabled = NO;
@@ -1177,7 +1172,7 @@
         PageView *pageView = [[PageView alloc] initWithFrame:CGRectMake(0, 0,  CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight(_headerScrollView.frame))];
         
         if ([UIScreen mainScreen].bounds.size.width >321) {
-            pageView.frame =CGRectMake(0, 0,  CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight(_headerScrollView.frame)+90);
+            pageView.frame =CGRectMake(0, 0,  CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight(_headerScrollView.frame)+90+10);
         }else{
             
             pageView.frame =CGRectMake(0, 0,  CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight(_headerScrollView.frame)+40);
@@ -1194,6 +1189,26 @@
         pageView.delegate = self;
         
         [self.scrview addSubview:pageView];
+        if ([UIScreen mainScreen].bounds.size.width <321) {
+            self.newscollectionview.frame=CGRectMake(10, CGRectGetMaxY(_headerScrollView.frame)+40, [UIScreen mainScreen].applicationFrame.size.width-20,135);
+        }else{
+            self.newscollectionview.frame=CGRectMake(10, CGRectGetMaxY(_headerScrollView.frame)+90, [UIScreen mainScreen].applicationFrame.size.width-20,135);
+        }
+        //    self.newsView.frame=CGRectMake(0, CGRectGetMaxY(_headerScrollView.frame)+90, [UIScreen mainScreen].applicationFrame.size.width,39);
+        [self.scrview addSubview:self.newscollectionview];
+         self.tableView.frame=CGRectMake(0, CGRectGetMaxY(self.newscollectionview.frame)+5, [UIScreen mainScreen].applicationFrame.size.width, 1000-44-69+10+500);
+        self.mycollection.showsHorizontalScrollIndicator = NO;
+        self.mycollection.showsVerticalScrollIndicator = NO;
+        //    self.collectionview.backgroundColor = [UIColor redColor];
+        self.mycollection.bounces = NO;
+        self.mycollection.delegate = self;
+        self.mycollection.dataSource = self;
+        self.colleclayout.itemSize = CGSizeMake((RHScreeWidth-40)/4, 80);
+        [self.mycollection registerNib:[UINib nibWithNibName:@"RHProjectCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"collcellid1"];
+        self.colleclayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        self.colleclayout.minimumLineSpacing = 6;
+        self.collectionimage.layer.masksToBounds=YES;
+        self.collectionimage.layer.cornerRadius=10;
        // self.view.userInteractionEnabled = YES;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         ;
@@ -1270,7 +1285,7 @@
                 
                 office.urlString =linkURl;
             }
-            [self.navigationController pushViewController:office animated:YES];
+            [self.navigationController pushViewController:office animated:NO];
         }else{
         RHOfficeNetAndWeiBoViewController *office = [[RHOfficeNetAndWeiBoViewController alloc] initWithNibName:@"RHOfficeNetAndWeiBoViewController" bundle:nil];
         office.NavigationTitle = wentitle;
@@ -1287,7 +1302,7 @@
             
             office.urlString =linkURl;
         }
-        [self.navigationController pushViewController:office animated:YES];
+        [self.navigationController pushViewController:office animated:NO];
         }
     }else if (logoUrl.length > 0 ) {
 
@@ -1297,13 +1312,14 @@
     
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    self.navigationController.navigationBar.subviews.firstObject.alpha = 0;
+-(void)huifumoth{
+    
+    return;
     if ([[RHhelper ShraeHelp].moneystr doubleValue]>0) {
-     //   self.navigationController.navigationBar.subviews.firstObject.alpha = 1;
+        //   self.navigationController.navigationBar.subviews.firstObject.alpha = 1;
         self.zhuanyiview.hidden = NO;
         self.mengbanview.hidden = NO;
-     //  [[UIApplication sharedApplication].keyWindow addSubview:self.mengban2];
+        //  [[UIApplication sharedApplication].keyWindow addSubview:self.mengban2];
         [[UIApplication sharedApplication].keyWindow addSubview:self.zhuanyiview];
         if ([UIScreen mainScreen].bounds.size.width>376) {
             self.zhuanyiview.frame = CGRectMake(40, CGRectGetMinY(self.kaihuview.frame), [UIScreen mainScreen].bounds.size.width-80, 309);
@@ -1318,7 +1334,7 @@
         self.guanbihfbtn.hidden = YES;
     }
     if ([[RHhelper ShraeHelp].flag isEqualToString:@"0"]&&[[RHhelper ShraeHelp].moneystr doubleValue]>0) {
-//        return;
+        //        return;
         //self.navigationController.navigationBar.subviews.firstObject.alpha = 1;
         self.hfzylab.text = @"融益汇已完成江西银行资金系统的升级。由于您未及时在融益汇转出原有余额，请到汇付天下官网进行原有账户余额转出操作。\n 转出后将激活江西银行存管账户";
         
@@ -1341,6 +1357,19 @@
     }
     
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+//    [self stzfpush];
+    [self xmjlist];
+    
+    [self gethuifuyuemoth];
+    [self xmjswitch];
+    [self xmjdata];
+    [self huoquryhnews];
+    self.navigationController.navigationBar.subviews.firstObject.alpha = 0;
+   
+   
     [self scrollViewDidScroll:self.scrview];
     self.timers = [NSTimer scheduledTimerWithTimeInterval:6.0f
                                                    target:self
@@ -1351,34 +1380,9 @@
     
     [self getmyjxpassword];
     
-//    [self.navigationController setNavigationBarHidden:NO];
-//     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:NO];
-//    if ([RHUserManager sharedInterface].username) {
-//    
-////        UIBarButtonItem * btn = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(getloadzcCustomerService)];
-//        UIButton* button=[UIButton buttonWithType:UIButtonTypeCustom];
-//        [button addTarget:self action:@selector(getloadzcCustomerService) forControlEvents:UIControlEventTouchUpInside];
-//        //    [button setTitle:title forState:UIControlStateNormal];
-//       
-//        [button setBackgroundImage:[UIImage imageNamed:@"PNG_客服"] forState:UIControlStateNormal];
-//        [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-//        button.frame=CGRectMake(0, 0, 20, 20);
-//        self.navigationItem.rightBarButtonItem= [[UIBarButtonItem alloc] initWithCustomView:button];
-//        
-////         self.navigationItem.rightBarButtonItem = btn;
-////        [btn setTitle:@"登录"];
-//    }else{
-//        UIBarButtonItem * btn = [[UIBarButtonItem alloc]initWithTitle:@"登录" style:UIBarButtonItemStylePlain target:self action:@selector(loginryh)];
-//        
-//        [btn setTitle:@"登录"];
-//        [btn setTintColor:[RHUtility colorForHex:@"#44bbc1"]];
-//        
-//        
-//        self.navigationItem.rightBarButtonItem = btn;
-//        
-//    }
+
     [segment1Array removeAllObjects];
-    [dataArray removeAllObjects];
+//    [dataArray removeAllObjects];
     [super viewWillAppear:animated];
     [DQViewController Sharedbxtabar].tarbar.hidden = NO;
     
@@ -1393,39 +1397,7 @@
     [self segment1Post];
     [self newpeopledata];
     [self getnewsryhgw];
-   // [self getAppBanner];
-//    [self.mainScorllView.animationTimer fire];
-//    [[RHNetworkService instance] POST:@"front/payment/account/countUnReadMessage" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        //        DLog(@"%@",responseObject);
-//        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-//            NSString* numStr=nil;
-//            if (![[responseObject objectForKey:@"msgCount"] isKindOfClass:[NSNull class]]) {
-//                if ([[responseObject objectForKey:@"msgCount"] isKindOfClass:[NSNumber class]]) {
-//                    numStr=[[responseObject objectForKey:@"msgCount"] stringValue];
-//                }else{
-//                    numStr=[responseObject objectForKey:@"msgCount"];
-//                }
-//            }
-//            if (numStr) {
-//                [[NSUserDefaults standardUserDefaults] setObject:numStr forKey:@"RHMessageNumSave"];
-//                [[NSUserDefaults standardUserDefaults] synchronize];
-//                [[NSNotificationCenter defaultCenter] postNotificationName:@"RHMessageNum" object:numStr];
-//                
-//            }
-//        }
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//    }];
-//  
-//    if ([[RHmainModel ShareRHmainModel].maintest isEqualToString:@"qiangge"]) {
-//        
-//        [RHmainModel ShareRHmainModel].maintest = nil;
-//        
-//        return;
-//    }
-//    
-//    
-//    _shouyepanduan = 0;
-//    [self panduan];
+ 
 }
 
 
@@ -1433,48 +1405,7 @@
 
 
 - (void)refeshMainViewDataWithState:(int) state {
-//    CGFloat w = [UIScreen mainScreen].bounds.size.width;
-//    CGFloat h = [UIScreen mainScreen].bounds.size.height;
-//    self.act=[[UIActivityIndicatorView  alloc]initWithFrame:CGRectMake(w/2, h/2, 50, 50)];
-//    self.act.activityIndicatorViewStyle=UIActivityIndicatorViewStyleGray;
-//    self.act.hidesWhenStopped=NO;
-//    [self.view addSubview:self.act];
-    
-//    if (state == 0) {
-//        //刷新全部数据
-//        [self.segment1Array removeAllObjects];
-//        [self.segment2Array removeAllObjects];
-//        self.segmentView.segmentView1.userInteractionEnabled = NO;
-//        self.segmentView.segmentView2.userInteractionEnabled = NO;
-//    } else if (state == 1){
-//        
-//        
-//        self.tableView.userInteractionEnabled = NO;
-//        self.segmentView.segmentView1.userInteractionEnabled = NO;
-//        self.segmentView.segmentView2.userInteractionEnabled = NO;
-////        self.segmentView.segmentLabel4.userInteractionEnabled = NO;
-////        self.segmentView.segmentLabel3.userInteractionEnabled = NO;
-//       // [self.act startAnimating];
-//        //刷新商业贷数据
-//        [self.segment1Array removeAllObjects];
-//    } else {
-//        //[self.act startAnimating];
-//        self.segmentView.segmentView1.userInteractionEnabled = NO;
-//        self.segmentView.segmentView2.userInteractionEnabled = NO;
-////        self.segmentView.segmentLabel4.userInteractionEnabled = NO;
-////        self.segmentView.segmentLabel3.userInteractionEnabled = NO;
-//        
-//        self.tableView.userInteractionEnabled = NO;
-//        //刷新就业贷数据
-//        [self.segment2Array removeAllObjects];
-//    }
-//   // dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//    [self segment1Post];
-//    [self segment2Post];
-//    [self getSegmentnum1];
-//    [self getSegmentnum2];
-    
-   // [self getSegmentnum1];
+
 }
 
 #pragma mark-network
@@ -1483,72 +1414,7 @@
    
     NSDictionary* parameters=@{@"_search":@"true",@"rows":@"1000",@"page":@"1",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"percent\",\"op\":\"lt\",\"data\":100}]}"};
     
-//    AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
-//    [manager.operationQueue cancelAllOperations];
-//    //    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-//    //    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-//    NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
-//    if (session&&[session length]>0) {
-//        [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
-//        
-//    }
-//    [manager POST:[NSString stringWithFormat:@"%@common/main/shangListData",[RHNetworkService instance].doMain] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-//            int num=[[responseObject objectForKey:@"records"] intValue];
-//            _shangye = num;
-//            
-//            if (num>=0) {
-//                self.segmentView.segmentLabel.text=[NSString stringWithFormat:@"可投%d",num];
-//                self.segmentView.segmentLabel.hidden=NO;
-//                self.segmentView.segmentLabel3.text=[NSString stringWithFormat:@"可投%d",num];
-//                self.segmentView.segmentLabel3.hidden=NO;
-//                //[self panduan];
-//            } else {
-//                self.segmentView.segmentLabel.hidden = YES;
-//                self.segmentView.segmentLabel3.hidden = YES;
-//                //[self panduan];
-//            }
-//            
-//        }
-//        
-//        if (_shangye!=-1 &&_zhuxue!= 0 ) {
-//            [self panduan];
-//            
-//        }
-//
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        ;
-//    }];
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    [RHNetworkService instance].rhafn  = @"yanan";
-//    [[RHNetworkService instance] POST:@"app/common/main/shangListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-//            int num=[[responseObject objectForKey:@"records"] intValue];
-//            _shangye = num;
-//            
-//            if (num>=0) {
-//                self.segmentView.segmentLabel.text=[NSString stringWithFormat:@"可投%d",num];
-//                self.segmentView.segmentLabel.hidden=NO;
-//                self.segmentView.segmentLabel3.text=[NSString stringWithFormat:@"可投%d",num];
-//                self.segmentView.segmentLabel3.hidden=NO;
-//                //[self panduan];
-//            } else {
-//                self.segmentView.segmentLabel.hidden = YES;
-//                self.segmentView.segmentLabel3.hidden = YES;
-//                //[self panduan];
-//            }
-//            
-//        }
-//       
-//        if (_shangye!=-1 &&_zhuxue!= 0 ) {
-//            [self panduan];
-//            
-//        }
-//        
-//        //[RHNetworkService instance].rhafn  = nil;
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        //[RHNetworkService instance].rhafn  = nil;
-//    }];
+
 }
 
 - (void)getSegmentnum2 {
@@ -1557,74 +1423,7 @@
     
     
     NSDictionary* parameters=@{@"_search":@"true",@"rows":@"1000",@"page":@"1",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"percent\",\"op\":\"lt\",\"data\":100}]}"};
-//    AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
-//    [manager.operationQueue cancelAllOperations];
-//    //    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-//    //    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-//    NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
-//    if (session&&[session length]>0) {
-//        [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
-//        
-//    }
-//    
-//    
-//    [manager POST:[NSString stringWithFormat:@"%@common/main/xueListData",[RHNetworkService instance].doMain] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-//            int num=[[responseObject objectForKey:@"records"] intValue];
-//            _zhuxue = num;
-//            
-//            if (num>=0) {
-//                self.segmentView.segmentLabel1.text=[NSString stringWithFormat:@"可投%d",num];
-//                self.segmentView.segmentLabel1.hidden=NO;
-//                self.segmentView.segmentLabel4.text=[NSString stringWithFormat:@"可投%d",num];
-//                self.segmentView.segmentLabel4.hidden=NO;
-//                //[self panduan];
-//            } else {
-//                self.segmentView.segmentLabel1.hidden = YES;
-//                self.segmentView.segmentLabel4.hidden = YES;
-//                //[self panduan];
-//            }
-//            //[self panduan];
-//            
-//        }
-//        if (_shangye!=-1 &&_zhuxue!= 0 ) {
-//            [self panduan];
-//            
-//        }
-//
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        ;
-//    }];
-    
-    //[RHmainModel ShareRHmainModel].mainhide = @"mainhide";
-//     [RHNetworkService instance].rhafn  = @"yanan";
-//    [[RHNetworkService instance] POST:@"common/main/xueListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-//            int num=[[responseObject objectForKey:@"records"] intValue];
-//            _zhuxue = num;
-//           
-//            if (num>=0) {
-//                self.segmentView.segmentLabel1.text=[NSString stringWithFormat:@"可投%d",num];
-//                self.segmentView.segmentLabel1.hidden=NO;
-//                self.segmentView.segmentLabel4.text=[NSString stringWithFormat:@"可投%d",num];
-//                self.segmentView.segmentLabel4.hidden=NO;
-//                //[self panduan];
-//            } else {
-//                self.segmentView.segmentLabel1.hidden = YES;
-//                self.segmentView.segmentLabel4.hidden = YES;
-//                //[self panduan];
-//            }
-//            //[self panduan];
-//
-//        }
-//        if (_shangye!=-1 &&_zhuxue!= 0 ) {
-//            [self panduan];
-//            
-//        }
-//        [RHNetworkService instance].rhafn  = nil;
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//           [RHNetworkService instance].rhafn  = nil;
-//    }];
+
 }
 -(void)panduan1{
     
@@ -1635,36 +1434,31 @@
 }
 -(void)panduan{
     
-//    NSString * string =  [self.segmentView.segmentLabel.text substringFromIndex:2];
-//    NSString * string4 = [self.segmentView.segmentLabel4.text substringFromIndex:2];
-//    
-//    if ([string integerValue]< 15 &&[string4 intValue]> 0) {
-//        [self didSelectSegmentAtIndex:1];
-//        //[self didSelectSegmentAtIndex:1];
-//        [self.segmentView hidd];
-//    }
-//    NSLog(@"%d",_shouyepanduan++);
+
     
+}
+
+-(void)xmjlist{
+    NSDictionary* parameters=@{@"_search":@"false",@"rows":@"10",@"page":@"1",@"sidx":@"",@"sord":@""};
+    [[RHNetworkService instance] POST:@"app/common/appMain/projectListDataForApp" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            
+          
+            self.xmjarray = responseObject[@"rows"];
+            
+            [self.tableView reloadData];
+        }
+        
+        
+        //
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [RHUtility showTextWithText:@"网络异常,请重试"];
+        
+        
+    }];
     
-//    if (_shouyepanduan > 2) {
-//        return;
-//    }
-//    
-//    
-//    if (_shangye < 1 && _zhuxue > 0) {
-//        [self didSelectSegmentAtIndex:1];
-//    
-//        [self.segmentView hidd];
-//        _shouyepanduan++;
-//        //return;
-//    }else{
-//        
-//        [self didSelectSegmentAtIndex:0];
-//        _shouyepanduan++;
-//        
-//        [self.segmentView hiddd];
-//    }
-   //
     
 }
 - (void)segment1Post {
@@ -1672,52 +1466,7 @@
 //    NSString* page=[NSString stringWithFormat:@"%@",[NSNumber numberWithInt:(arrayCount/10+1)]];
     NSDictionary* parameters=@{@"_search":@"true",@"rows":@"10",@"page":@"1",@"sidx":@"",@"sord":@"",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};
     
-   // [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-   // [self.progressBox show:YES];
-//    AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
-//    [manager.operationQueue cancelAllOperations];
-//    //    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-//    //    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-//    NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
-//    if (session&&[session length]>0) {
-//        [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
-//        
-//    }
-//    
-//    
-//    [manager POST:[NSString stringWithFormat:@"%@common/main/shangListData",[RHNetworkService instance].doMain] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-//            NSArray* array=[responseObject objectForKey:@"rows"];
-//            if ([array isKindOfClass:[NSArray class]]) {
-//                for (NSDictionary* dic in array) {
-//                    if ([dic objectForKey:@"cell"]&&!([[dic objectForKey:@"cell"] isKindOfClass:[NSNull class]])) {
-//                        [self.segment1Array addObject:[dic objectForKey:@"cell"]];
-//                        // NSLog(@"-----1111-----%@",dic[@"id"]);
-//                    }
-//                }
-//            }
-//            NSString* records=[responseObject objectForKey:@"records"];
-//            if (records&&[records intValue]<10) {
-//                //已经到底了
-//            }
-//            if ([type isEqualToString:@"0"]) {
-//                [self.dataArray removeAllObjects];
-//                [self.dataArray addObjectsFromArray:self.segment1Array];
-//                [self.tableView reloadData];
-//                // self.progressBox.hidden = YES;
-//                self.tableView.userInteractionEnabled = YES;
-//                //[RHUtility showTextWithText:@"正在努力加载页面"];
-//              //  [self.progressBox hide:YES];
-//            }
-//        }
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        [RHUtility showTextWithText:@"请求失败"];
-//    }];
-//    self.progressBox = [[MBProgressHUD alloc] initWithView:self.view];
-//    [_progressBox setYOffset:-50];
-   // [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
-     //[RHNetworkService instance].rhafn  = @"yanan";
+ 
     
     
     
@@ -1742,8 +1491,9 @@
                 //已经到底了
             }
             if ([type isEqualToString:@"0"]) {
-                [self.dataArray removeAllObjects];
-                [self.dataArray addObjectsFromArray:self.segment1Array];
+//                [self.dataArray removeAllObjects];
+//                [self.dataArray addObjectsFromArray:self.segment1Array];
+                self.dataArray = self.segment1Array;
                 [self.tableView reloadData];
                 //self.progressBox.hidden = YES;
                 self.tableView.userInteractionEnabled = YES;
@@ -1774,123 +1524,15 @@
     int arrayCount=[[NSNumber numberWithInteger:[segment2Array count]] intValue];
     NSString* page=[NSString stringWithFormat:@"%@",[NSNumber numberWithInt:(arrayCount/10+1)]];
     NSDictionary* parameters=@{@"_search":@"true",@"rows":@"10",@"page":@"1",@"sidx":@"",@"sord":@"",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[]}"};
-    //[self.progressBox show:YES];
-     //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
-//    [manager.operationQueue cancelAllOperations];
-//    //    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-//    //    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-//    NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
-//    if (session&&[session length]>0) {
-//        [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
-//        
-//    }
-//    
-//    
-//    [manager POST:[NSString stringWithFormat:@"%@common/main/xueListData",[RHNetworkService instance].doMain] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-//            NSArray* array=[responseObject objectForKey:@"rows"];
-//            if ([array isKindOfClass:[NSArray class]]) {
-//                for (NSDictionary* dic in array) {
-//                    if ([dic objectForKey:@"cell"]&&!([[dic objectForKey:@"cell"] isKindOfClass:[NSNull class]])) {
-//                        [self.segment2Array addObject:[dic objectForKey:@"cell"]];
-//                    }
-//                }
-//            }
-//            NSString* records=[responseObject objectForKey:@"records"];
-//            if (records&&[records intValue]<10) {
-//                //已经到底了
-//            }
-//            if ([type isEqualToString:@"1"]) {
-//                //[RHUtility showTextWithText:@"正在努力加载页面"];
-//                [self.dataArray removeAllObjects];
-//                [self.dataArray addObjectsFromArray:self.segment2Array];
-//                [self.tableView reloadData];
-//                self.tableView.userInteractionEnabled = YES;
-//                
-//                [self.progressBox hide:YES];
-//            }
-//        }
-//
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//       [RHUtility showTextWithText:@"请求失败"];
-//    }];
-//    
-  //  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//     [RHNetworkService instance].rhafn  = @"yanan";
-//    [[RHNetworkService instance] POST:@"common/main/xueListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-////        DLog(@"%@",responseObject);
-//        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-//            NSArray* array=[responseObject objectForKey:@"rows"];
-//            if ([array isKindOfClass:[NSArray class]]) {
-//                for (NSDictionary* dic in array) {
-//                    if ([dic objectForKey:@"cell"]&&!([[dic objectForKey:@"cell"] isKindOfClass:[NSNull class]])) {
-//                        [self.segment2Array addObject:[dic objectForKey:@"cell"]];
-//                    }
-//                }
-//            }
-//            NSString* records=[responseObject objectForKey:@"records"];
-//            if (records&&[records intValue]<10) {
-//                //已经到底了
-//            }
-//            if ([type isEqualToString:@"1"]) {
-//                [self.dataArray removeAllObjects];
-//                [self.dataArray addObjectsFromArray:self.segment2Array];
-//                [self.tableView reloadData];
-//                self.tableView.userInteractionEnabled = YES;
-//               // [MBProgressHUD hideHUDForView:self.view animated:YES];
-//                self.segmentView.segmentView1.userInteractionEnabled = YES;
-//                self.segmentView.segmentView2.userInteractionEnabled = YES;
-////                self.segmentView.segmentLabel4.userInteractionEnabled = YES;
-////                self.segmentView.segmentLabel3.userInteractionEnabled = YES;
-//               NSLog(@"---------------------1");
-//                // [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-//            }
-//         }
-//        NSLog(@"--------------------2");
-//      
-//        //
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        [RHUtility showTextWithText:@"请求失败"];
-//    }];
+ 
 }
 
 #pragma mark-RHSegmentDelegate
-//- (void)didSelectSegmentAtIndex:(int)index {
-//    self.type=[NSString stringWithFormat:@"%d",index];
-//    switch (index) {
-//        case 0:
-////            self.progressBox = [[MBProgressHUD alloc] initWithView:self.view];
-////                [_progressBox setYOffset:-50];
-////                [self.view addSubview:_progressBox];
-////                [self.progressBox setLabelText:@"加载中。。。"];
-////            [self.progressBox show:YES];
-//            
-//            
-//            self.contentLabel.text=@"       借款方为经营良好的中小微企业及个体工商户。为保障投资人权益，融益汇通过评级严格筛选合作机构。所有借款项目均由合作机构评审后推荐，并经融益汇多轮再评审后发布。所有项目均由合作机构提供全额本息担保。";
-//            [self refeshMainViewDataWithState:1];
-//            break;
-//        case 1:
-////            self.progressBox = [[MBProgressHUD alloc] initWithView:self.view];
-////        
-////            [_progressBox setYOffset:-50];
-////            [self.view addSubview:_progressBox];
-////            [self.progressBox setLabelText:@"加载中。。。"];
-////            [self.progressBox show:YES];
-//            
-//            self.contentLabel.text=@"       借款方为接受就业培训的在读学生，贷款用于支付就业培训费用。培训机构承诺为学生就业提供保障，并承担未就业学生的全部还款本息；同时融益汇从每笔就业贷款的服务费中提取一定比例的资金作为就业贷专项风险保障金以备代偿。通过就业担保和风险保障金双重本息保障机制为您的投资保驾护航。";
-//            [self refeshMainViewDataWithState:2];
-//            break;
-//        default:
-//            break;
-//    }
-//    [self.tableView setContentOffset:CGPointMake(0,0) animated:YES];
-//}
 
 - (void)didSelectInvestment {
     
     RHProjectListViewController* controller=[[RHProjectListViewController alloc]initWithNibName:@"RHProjectListViewController" bundle:nil];
-    controller.type=self.type;
+    [RHhelper ShraeHelp].type=@"0";
     
     [[DQViewController Sharedbxtabar]tabBar:nil didSelectedIndex:1];
     UIButton *btn = [[UIButton alloc]init];
@@ -1898,12 +1540,25 @@
     [[DQview Shareview] btnClick:btn];
 //    [self.navigationController pushViewController:controller animated:YES];
 }
-
+- (void)didSelectInvestment1 {
+    
+    RHProjectListViewController* controller=[[RHProjectListViewController alloc]initWithNibName:@"RHProjectListViewController" bundle:nil];
+    [RHhelper ShraeHelp].type=@"1";
+    
+    [[DQViewController Sharedbxtabar]tabBar:nil didSelectedIndex:1];
+    UIButton *btn = [[UIButton alloc]init];
+    btn.tag = 1;
+    [[DQview Shareview] btnClick:btn];
+    //    [self.navigationController pushViewController:controller animated:YES];
+}
 -(void)getmyjxpassword{
     
     [[RHNetworkService instance] POST:@"app/front/payment/appJxAccount/isSetPassword" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"----===============-1111---%@",responseObject);
         self.passwordbool = [NSString stringWithFormat:@"%@",responseObject[@"setPwd"]];
+        
+        
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         ;
@@ -1912,7 +1567,7 @@
     }];
     
 }
-- (void)toubiao:(NSDictionary *)dic newpeople:(BOOL)res{
+- (void)toubiao:(NSDictionary *)dic newpeople:(BOOL)res myxmj:(BOOL)xmjres{
     //NSLog(@"----------");
    // NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@""] forBarMetrics:UIBarMetricsDefault];
@@ -1924,7 +1579,7 @@
         [DQViewController Sharedbxtabar].tarbar.hidden = YES;
         NSLog(@"ddddddd");
         RHALoginViewController* controller=[[RHALoginViewController alloc] initWithNibName:@"RHALoginViewController" bundle:nil];
-        [self.navigationController pushViewController:controller animated:YES];
+        [self.navigationController pushViewController:controller animated:NO];
     }else{
         if (![RHUserManager sharedInterface].custId) {
 //            [self.investmentButton setTitle:@"请先开户" forState:UIControlStateNormal];
@@ -1941,7 +1596,10 @@
             
         }else{
             
-            
+            NSString* session1=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHUSERpwd"];
+            if ([session1 isEqualToString:@"yes"]) {
+                self.passwordbool = @"yes";
+            }
             if (![self.passwordbool isEqualToString:@"yes"]) {
                 
                 [self.kaihubtn setTitle:@"设置交易密码" forState:UIControlStateNormal];
@@ -1966,6 +1624,9 @@
             
             if (res==YES) {
                 if (self.newpeoplebool == YES) {
+                    
+                    
+                    
                     RHInvestmentViewController* contoller=[[RHInvestmentViewController alloc]initWithNibName:@"RHInvestmentViewController" bundle:nil];
                     NSString * str = dic[@"available"];
                     int a = [str intValue];
@@ -1984,7 +1645,7 @@
                     //            }
                     NSString * str1 =  dic[@"investorRate"];
                     //contoller.lilv =str1;
-                    [self.navigationController pushViewController:contoller animated:YES];
+                    [self.navigationController pushViewController:contoller animated:NO];
                 }else{
                     
                     [RHUtility showTextWithText:@"您已投资过，请看其余项目。"];
@@ -1992,7 +1653,57 @@
                 }
                 
             }else{
+                
+                if ([[RHhelper ShraeHelp].dbsxstr isEqualToString:@"1"]) {
+                    UIAlertView* alertView=[[UIAlertView alloc]initWithTitle:@"提示"
+                                                                     message:@"您有待办事项未处理完毕，请尽快处理。"
+                                                                    delegate:self
+                                                           cancelButtonTitle:@"确定"
+                                                           otherButtonTitles:@"取消", nil];
+                    alertView.tag=8901;
+                    [alertView show];
+                    
+                    return;
+                }
+                
+                
+                if (xmjres==YES) {
+                    
+                    RHInvestmentViewController* contoller=[[RHInvestmentViewController alloc]initWithNibName:@"RHInvestmentViewController" bundle:nil];
+                    
+                    
+                   
+                        
+                    contoller.xmjres = @"xmj" ;
+                    
+                    NSString * str = dic[@"cell"][@"remainMoney"];
+                    
+                    int a = [str intValue];
+                    contoller.projectFund= a;
+                    contoller.dataDic=dic[@"cell"];
+                    //            if (self.panduan == 10) {
+                    // contoller.panduan = 10;
+                    //            }
+                    NSString * str1 =  dic[@"investorRate"];
+                    //contoller.lilv =str1;
+                    [self.navigationController pushViewController:contoller animated:NO];
+                    
+                    return;
+                    
+                }
+                
+                
             RHInvestmentViewController* contoller=[[RHInvestmentViewController alloc]initWithNibName:@"RHInvestmentViewController" bundle:nil];
+                
+                
+                NSString * xmjstr;
+                if (dic[@"isProjectList"]&&![dic[@"isProjectList"] isKindOfClass:[NSNull class]]) {
+                    xmjstr = [NSString stringWithFormat:@"%@",dic[@"isProjectList"]];
+                }
+                 if ([xmjstr isEqualToString:@"yes"]) {
+                     
+                     contoller.xmjres = @"xmj" ;
+                 }
             NSString * str = dic[@"available"];
                
             int a = [str intValue];
@@ -2003,7 +1714,7 @@
 //            }
            NSString * str1 =  dic[@"investorRate"];
             //contoller.lilv =str1;
-            [self.navigationController pushViewController:contoller animated:YES];
+            [self.navigationController pushViewController:contoller animated:NO];
             }
         }
     }
@@ -2023,77 +1734,180 @@
 //    return @[@"1111",@"2222"];
 //}
 
-
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView * headerview = [[UIView alloc]init];
+    
+    headerview.frame = CGRectMake(0, 0, RHScreeWidth, 45);
+    UIButton * btn = [[UIButton alloc]initWithFrame:CGRectMake(10, 3, RHScreeWidth-20, 40)];
+    [btn setTitle:@"查看更多项目" forState:UIControlStateNormal];
+    [btn setTitleColor:[RHUtility colorForHex:@"#09AEB0"]forState:UIControlStateNormal];
+//    [btn]
+    btn.tag = section;
+    btn.titleLabel.font = [UIFont systemFontOfSize: 13.0];
+    self.type = [NSString stringWithFormat:@"%ld",section];
+     if (self.newpeopleress == YES) {
+         
+         if (section==1) {
+             [btn addTarget:self action:@selector(pushProjectList:) forControlEvents:UIControlEventTouchUpInside];
+         }else if(section==2){
+             [btn addTarget:self action:@selector(didSelectInvestment1) forControlEvents:UIControlEventTouchUpInside];
+             
+         }
+     }else{
+        if (section==0) {
+            [btn addTarget:self action:@selector(pushProjectList:) forControlEvents:UIControlEventTouchUpInside];
+        }else{
+            [btn addTarget:self action:@selector(didSelectInvestment1) forControlEvents:UIControlEventTouchUpInside];
+        
+        }
+     }
+    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+    maskLayer.path = [UIBezierPath bezierPathWithRoundedRect:btn.bounds byRoundingCorners: UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadii: (CGSize){8.0f, 8.0f}].CGPath;
+    btn.layer.masksToBounds = YES;
+    btn.layer.mask = maskLayer;
+    
+    btn.backgroundColor =[UIColor whiteColor] ;
+    [headerview addSubview:btn];
+    return headerview;
+}
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView * headerview = [[UIView alloc]init];
-    headerview.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 30);
+    headerview.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 42);
+//    self.tableView.tableHeaderView = self.tbHeaderView;
     UILabel * newpersonlab = [[UILabel alloc]init];
-    newpersonlab.frame = CGRectMake(20,0, 100, 30);
-    //    newpersonlab.backgroundColor = [UIColor redColor];
+     UILabel * balcklab = [[UILabel alloc]init];
+    newpersonlab.frame = CGRectMake(RHScreeWidth/2-50,10, 100, 30);
+    balcklab.frame = CGRectMake(10,5, RHScreeWidth-20, 42);
+    balcklab.backgroundColor = [UIColor whiteColor];
+    newpersonlab.textAlignment = NSTextAlignmentCenter;
+    [headerview addSubview:balcklab];
     [headerview addSubview:newpersonlab];
-    newpersonlab.font =[UIFont systemFontOfSize: 14.0];
-    if (self.newpeopleress == YES) {
-       
-        
-        if (section ==0) {
-            newpersonlab.text = @"新手专享";
-        }else{
-            newpersonlab.text = @"最新标的";
-        }
-        
-    }else{
-        
-        newpersonlab.text = @"最新标的";
-        
-    }
-    return nil;
+    newpersonlab.font =[UIFont systemFontOfSize: 16.0];
     
+    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+    maskLayer.path = [UIBezierPath bezierPathWithRoundedRect:balcklab.bounds byRoundingCorners: UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii: (CGSize){8.0f, 8.0f}].CGPath;
+    balcklab.layer.masksToBounds = YES;
+    balcklab.layer.mask = maskLayer;
+    
+  
+    UIImageView * imageview = [[UIImageView alloc]init];
+    imageview.frame = CGRectMake(RHScreeWidth/2-70, 24, 30, 2);
+    UIImageView * imageview1 = [[UIImageView alloc]init];
+    imageview1.frame = CGRectMake(RHScreeWidth/2+40, 24, 30, 2);
+    imageview.image = [UIImage imageNamed:@"标题左侧线"];
+    imageview1.image = [UIImage imageNamed:@"标题右侧线"];
+    [headerview addSubview:imageview];
+    [headerview addSubview:imageview1];
+    
+    UILabel * downlab = [[UILabel alloc]init];
+    downlab.frame = CGRectMake(20,41,RHScreeWidth-40,1);
+    downlab.backgroundColor = [RHUtility colorForHex:@"#cccccc"];
+    [headerview addSubview:downlab];
+    
+    newpersonlab.textColor = [RHUtility colorForHex:@"#09AEB0"];
+    if (section ==0) {
+        newpersonlab.text = @"项目集合";
+    }else{
+        newpersonlab.text = @"散标专区";
+    }
+   
+    
+    if (self.newpeopleress == YES) {
+        
+        if (section ==1) {
+            newpersonlab.text = @"项目集合";
+        }else if(section==2){
+            newpersonlab.text = @"散标专区";
+        }else{
+            newpersonlab.text = @"新手专区";
+        }
+    
+    
+    }else{
+        if (section ==0) {
+            newpersonlab.text = @"项目集合";
+        }else{
+            newpersonlab.text = @"散标专区";
+        }
+    }
+    return headerview;
+    
+    
+//    return nil;
+
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     //分组数 也就是section数
-    if (self.newpeopleress == YES) {
-        return 1;
+    if (self.dataArray.count>0&&self.xmjarray.count>0) {
+        if (self.newpeopleress == YES) {
+            return 3;
+        }else{
+            
+            return 2;
+        }
     }else{
-        
-        return 1;
+        return 0;
     }
     
+    
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    
+    if (self.newpeopleress == YES) {
+        if (section==0) {
+            return 0;
+        }
+    }
+    
+    return 45;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     
-    return 0;
+    return 42;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (dataArray.count<3) {
-        return 150;
+        return 125;
     }
     if (indexPath.row==1) {
-        return 85;
+        return 125;
     }
     if (indexPath.row==0) {
-        return 143;
+        return 125;
     }
-    return 150;
+    return 125;
     
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
 //    self.scrview .contentSize =  CGSizeMake([UIScreen mainScreen].bounds.size.width,675*1.4+10-30+30+25+64+20+46);
+    
+    if (self.newpeopleress == YES) {
+        if (section==0) {
+            return 1;
+        }else if (section==2){
+            
+            return 2;
+        }else{
+            
+            return 2;
+        }
+    }else{
+        if (self.dataArray.count>0&&self.xmjarray.count>0) {
+            return 2;
+        }
+        return 0;
+        
+        
+    }
+    
     if (dataArray.count<3) {
         return 3;
     }
-//     if (self.newpeopleress == YES) {
-//         if ([UIScreen mainScreen].bounds.size.height > 670) {
-//             self.scrview .contentSize =  CGSizeMake([UIScreen mainScreen].bounds.size.width,[UIScreen mainScreen].bounds.size.height*1.1+140-30+30+25);
-//         }else if ([UIScreen mainScreen].bounds.size.height > 570 && [UIScreen mainScreen].bounds.size.height< 670){
-//             self.scrview .contentSize =  CGSizeMake([UIScreen mainScreen].bounds.size.width,[UIScreen mainScreen].bounds.size.height*1.4+10-30+30+25+64+20);
-//             
-//         }else{
-//             self.scrview .contentSize =  CGSizeMake([UIScreen mainScreen].bounds.size.width,[UIScreen mainScreen].bounds.size.height*1.4+120+30);
-//         }
+    return 3;
     
         if (section == 0) {
             if (self.newdic.count > 2) {
@@ -2129,17 +1943,146 @@
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (indexPath.row <2) {
-//        static NSString * inderfer = @"rhmaincell";
-//        RHNewMainCell *cell = (RHNewMainCell *)[tableView dequeueReusableCellWithIdentifier:inderfer];
-//        if (cell == nil) {
-//            cell = [[[NSBundle mainBundle] loadNibNamed:@"RHNewMainCell" owner:nil options:nil] objectAtIndex:0];
-//        }
-//        return cell;
-//    }
+
     
    // if ([UIScreen mainScreen].bounds.size.height >570) {
-    if (self.dataArray.count <3) {
+   
+    NSDictionary* dataDic;
+    if (self.newpeopleress == YES) {
+        
+        if (indexPath.section==0) {
+            dataDic = self.newdic;
+        }else if (indexPath.section==1){
+            
+            dataDic = [self.xmjarray objectAtIndex:indexPath.row];
+        }else{
+             dataDic = [self.dataArray objectAtIndex:indexPath.row];
+        }
+        
+        static NSString *CellIdentifier = @"CellIdentifier";
+        RHMainViewCell *cell = (RHMainViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RHMainViewCell" owner:nil options:nil] objectAtIndex:0];
+        }
+        NSString  * string = [NSString stringWithFormat:@"%@",dataDic[@"investorRate"]];
+        //dataDic[@"investorRate"] = (id)string
+        if (string.length > 5) {
+            NSArray *array = [string componentsSeparatedByString:@"."];
+            string = array.lastObject;
+            string =  [string substringToIndex:2];
+            
+            int a = [string intValue];
+            
+            int b  = a /10;
+            
+            int c = a - b * 10;
+            
+            if (c > 5) {
+                b= b+1;
+                
+                string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
+                // [dataDic setValue:string forKey:@"investorRate"];
+                // dataDic[@"investorRate"] = string;
+            }else{
+                
+                string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
+                //[dataDic setValue:string forKey:@"investorRate"];
+                
+            }
+        }
+        cell.lilv  = string;
+        
+        
+        if (indexPath.section==0) {
+             [cell updateCell:dataDic];
+            cell.myblock =^{
+                [self toubiao:dataDic newpeople:YES myxmj:NO];
+            };
+        }else if (indexPath.section==1){
+            
+             [cell updatexmjCell:dataDic[@"cell"]];
+            cell.myblock =^{
+                [self toubiao:dataDic newpeople:NO myxmj:YES];
+            };
+        }else{
+             [cell updateCell:dataDic];
+            cell.myblock =^{
+                [self toubiao:dataDic newpeople:NO myxmj:NO];
+            };
+        }
+        
+       
+        
+        
+        return cell;
+        
+    }else{
+        NSDictionary* dataDic;
+        if (indexPath.section==0) {
+            dataDic = [self.xmjarray objectAtIndex:indexPath.row];
+            
+            
+        }else{
+             dataDic = [self.dataArray objectAtIndex:indexPath.row];
+            
+        }
+        static NSString *CellIdentifier = @"CellIdentifier";
+        RHMainViewCell *cell = (RHMainViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RHMainViewCell" owner:nil options:nil] objectAtIndex:0];
+        }
+        NSString  * string = [NSString stringWithFormat:@"%@",dataDic[@"investorRate"]];
+        //dataDic[@"investorRate"] = (id)string
+        if (string.length > 5) {
+            NSArray *array = [string componentsSeparatedByString:@"."];
+            string = array.lastObject;
+            string =  [string substringToIndex:2];
+            
+            int a = [string intValue];
+            
+            int b  = a /10;
+            
+            int c = a - b * 10;
+            
+            if (c > 5) {
+                b= b+1;
+                
+                string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
+                // [dataDic setValue:string forKey:@"investorRate"];
+                // dataDic[@"investorRate"] = string;
+            }else{
+                
+                string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
+                //[dataDic setValue:string forKey:@"investorRate"];
+                
+            }
+        }
+        cell.lilv  = string;
+       
+        
+         if (indexPath.section==0){
+            
+            [cell updatexmjCell:dataDic[@"cell"]];
+             cell.myblock =^{
+                 [self toubiao:dataDic newpeople:NO myxmj:YES];
+             };
+        }else{
+            [cell updateCell:dataDic];
+            cell.myblock =^{
+                [self toubiao:dataDic newpeople:NO myxmj:NO];
+            };
+        }
+     
+        
+        
+        return cell;
+        
+    }
+    
+ 
+    
+    
+    
         static NSString *CellIdentifier = @"CellIdentifier";
         RHMainViewCell *cell = (RHMainViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
@@ -2147,10 +2090,10 @@
             
             
         }
-        cell.xiangouimage.hidden = YES;
-        
+//        cell.xiangouimage.hidden = YES;
+    
         return cell;
-    }
+    
     
     
     if (indexPath.row==1) {
@@ -2174,6 +2117,19 @@
             return cell;
             
         }else{
+            
+            if (indexPath.row==0&&[[RHhelper ShraeHelp].xmjswitch isEqualToString:@"ON"]) {
+                RHXMJTableViewCell * cell = (RHXMJTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"xmjcell"];
+                if (cell == nil) {
+                    cell = [[[NSBundle mainBundle] loadNibNamed:@"RHXMJTableViewCell" owner:nil options:nil] objectAtIndex:0];
+                    
+                }
+                [cell.didbtn addTarget:self action:@selector(pushxmj) forControlEvents:UIControlEventTouchUpInside];
+                cell.lilvlab.text = [RHhelper ShraeHelp].xmjlilv;
+                cell.mouthlab.text = [RHhelper ShraeHelp].xmjmouth;
+//                [cell updataNewPeopleCell:self.newdic];
+                return cell;
+            }
             
             static NSString *CellIdentifier = @"CellIdentifier";
             RHMainViewCell *cell = (RHMainViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -2221,7 +2177,7 @@
             }
             cell.lilv  = string;
             cell.myblock =^{
-                [self toubiao:dataDic newpeople:NO];
+                [self toubiao:dataDic newpeople:NO myxmj:NO];
             };
             [cell updateCell:dataDic];
           
@@ -2286,7 +2242,7 @@
             cell.newpeopleimage.hidden = NO;
             cell.lilv  = string;
             cell.myblock =^{
-                [self toubiao:self.newdic newpeople:YES] ;
+                [self toubiao:self.newdic newpeople:YES myxmj:NO] ;
             };
             [cell updateCell:self.newdic];
             cell.xiangouimage.hidden = YES;
@@ -2322,7 +2278,9 @@
     }
     cell.lilv  = string;
             cell.myblock =^{
-                [self toubiao:dataDic newpeople:NO];
+                cell.myblock =^{
+                    [self toubiao:dataDic newpeople:NO myxmj:NO];
+                };
             };
     [cell updateCell:dataDic];
     }
@@ -2365,7 +2323,9 @@
          }
          cell.lilv  = string;
          cell.myblock =^{
-             [self toubiao:dataDic newpeople:NO];
+             cell.myblock =^{
+                 [self toubiao:dataDic newpeople:NO myxmj:NO];
+             };
          };
          [cell updateCell:dataDic];
      
@@ -2380,6 +2340,337 @@
     self.navigationController.navigationBar.subviews.firstObject.alpha = 5.00;
 //    NSArray * allkearray = [self.newdic allKeys];
    // if ([UIScreen mainScreen].bounds.size.height>580) {
+    
+    NSDictionary* Dic;
+    NSDictionary* dataDic;
+    if (self.newpeopleress == YES) {
+        
+        if (indexPath.section==0) {
+//            dataDic = self.newdic;
+            
+            RHNEWpeopleViewController * controller = [[RHNEWpeopleViewController alloc]initWithNibName:@"RHNEWpeopleViewController" bundle:nil];
+            //            NSDictionary* dataDic=[self.segment1Array objectAtIndex:indexPath.row];
+            //            controller.newpeopletype = YES;
+            //
+            //
+            if (self.newpeoplebool == NO) {
+                controller.judge = @"ketou";
+            }
+            controller.dataDic=self.newdic;
+            controller.getType=type;
+            //            controller.newpeopletype =YES;
+            //            controller.postnewpeopletype = self.newpeoplebool;
+            //            //controller.view.frame = CGRectMake(0, 0, self.view.frame.size.width, 700);
+            //            //controller.view.backgroundColor = [UIColor orangeColor];
+            NSString * projectStatus;
+            if (![[self.newdic objectForKey:@"percent"] isKindOfClass:[NSNull class]]) {
+                projectStatus=[self.newdic objectForKey:@"projectStatus"] ;
+                
+            }
+            if ([projectStatus isEqualToString:@"finished"]) {
+                
+                controller.zhaungtaistr =  @"还款完毕";
+                
+            }else if ([projectStatus isEqualToString:@"repayment_normal"]||[projectStatus isEqualToString:@"repayment_abnormal"]){
+                
+                controller.zhaungtaistr =@"还款中";
+                
+            }else if ([projectStatus isEqualToString:@"loans"]||[projectStatus isEqualToString:@"loans_audit"]){
+                
+                controller.zhaungtaistr =@"项目审核";
+                
+            }else if ([projectStatus isEqualToString:@"full"]){
+                
+                controller.zhaungtaistr =@"已满标";
+                
+            }else if ([projectStatus isEqualToString:@"publishedWaiting"]){
+                
+                controller.zhaungtaistr =@"稍后出借";
+                
+            }
+            [self.navigationController pushViewController:controller animated:NO];
+            return;
+            
+        }else if (indexPath.section==1){
+            
+            Dic = [self.xmjarray objectAtIndex:indexPath.row];
+            dataDic = [self.xmjarray objectAtIndex:indexPath.row];
+            
+            RHXMJProjectViewController * xmjcontroller = [[RHXMJProjectViewController alloc]initWithNibName:@"RHXMJProjectViewController" bundle:nil];
+
+            
+//            xmjcontroller.lilv = string;
+            xmjcontroller.datadic=dataDic;
+            NSString * projectStatus;
+            if (![[Dic objectForKey:@"percent"] isKindOfClass:[NSNull class]]) {
+                projectStatus=[Dic objectForKey:@"projectStatus"] ;
+                
+            }
+            if ([projectStatus isEqualToString:@"finished"]) {
+                
+                xmjcontroller.zhuangtaistr =  @"还款完毕";
+                
+            }else if ([projectStatus isEqualToString:@"repayment_normal"]||[projectStatus isEqualToString:@"repayment_abnormal"]){
+                
+                xmjcontroller.zhuangtaistr =@"还款中";
+                
+            }else if ([projectStatus isEqualToString:@"loans"]||[projectStatus isEqualToString:@"loans_audit"]){
+                
+                xmjcontroller.zhuangtaistr =@"项目审核";
+                
+            }else if ([projectStatus isEqualToString:@"full"]){
+                
+                xmjcontroller.zhuangtaistr =@"已满标";
+                
+            }else if ([projectStatus isEqualToString:@"publishedWaiting"]){
+                
+                xmjcontroller.zhuangtaistr =@"稍后出借";
+                
+            }
+            [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+            
+            [self.navigationController pushViewController:xmjcontroller animated:NO];
+            
+        }else{
+            Dic = [self.dataArray objectAtIndex:indexPath.row];
+            dataDic =  [self.segment1Array objectAtIndex:indexPath.row];
+            RHProjectdetailthreeViewController * controller = [[RHProjectdetailthreeViewController alloc]initWithNibName:@"RHProjectdetailthreeViewController" bundle:nil];
+            
+            //        RHXMJProjectViewController * xmjcontroller = [[RHXMJProjectViewController alloc]initWithNibName:@"RHXMJProjectViewController" bundle:nil];
+            
+            
+            
+            
+            
+//            NSString * xmjstr;
+//            if (dataDic[@"isProjectList"]&&![dataDic[@"isProjectList"] isKindOfClass:[NSNull class]]) {
+//                xmjstr = [NSString stringWithFormat:@"%@",dataDic[@"isProjectList"]];
+//            }
+//            
+            
+            
+            NSString  * string = [NSString stringWithFormat:@"%@",dataDic[@"investorRate"]];
+            //dataDic[@"investorRate"] = (id)string
+            if (string.length > 5) {
+                NSArray *array = [string componentsSeparatedByString:@"."];
+                string = array.lastObject;
+                string =  [string substringToIndex:2];
+                
+                int a = [string intValue];
+                
+                int b  = a /10;
+                
+                int c = a - b * 10;
+                
+                if (c > 5) {
+                    b= b+1;
+                    
+                    string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
+                    // [dataDic setValue:string forKey:@"investorRate"];
+                    // dataDic[@"investorRate"] = string;
+                }else{
+                    
+                    string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
+                    //[dataDic setValue:string forKey:@"investorRate"];
+                    
+                }
+            }
+            
+            
+            controller.lilv = string;
+            
+            controller.dataDic=dataDic;
+            controller.getType=@"0";
+            
+            //controller.view.frame = CGRectMake(0, 0, self.view.frame.size.width, 700);
+            //controller.view.backgroundColor = [UIColor orangeColor];
+            NSString * projectStatus;
+            if (![[Dic objectForKey:@"percent"] isKindOfClass:[NSNull class]]) {
+                projectStatus=[Dic objectForKey:@"projectStatus"] ;
+                
+            }
+            if ([projectStatus isEqualToString:@"finished"]) {
+                
+                controller.zhaungtaistr =  @"还款完毕";
+                
+            }else if ([projectStatus isEqualToString:@"repayment_normal"]||[projectStatus isEqualToString:@"repayment_abnormal"]){
+                
+                controller.zhaungtaistr =@"还款中";
+                
+            }else if ([projectStatus isEqualToString:@"loans"]||[projectStatus isEqualToString:@"loans_audit"]){
+                
+                controller.zhaungtaistr =@"项目审核";
+                
+            }else if ([projectStatus isEqualToString:@"full"]){
+                
+                controller.zhaungtaistr =@"已满标";
+                
+            }else if ([projectStatus isEqualToString:@"publishedWaiting"]){
+                
+                controller.zhaungtaistr =@"稍后出借";
+                
+            }
+            
+            [self.navigationController pushViewController:controller animated:NO];
+        }
+        
+        
+        
+            return;
+        
+        
+        
+    }else{
+        
+        
+        if (indexPath.section==0){
+            
+            Dic = [self.xmjarray objectAtIndex:indexPath.row];
+            dataDic = [self.xmjarray objectAtIndex:indexPath.row];
+            
+            RHXMJProjectViewController * xmjcontroller = [[RHXMJProjectViewController alloc]initWithNibName:@"RHXMJProjectViewController" bundle:nil];
+            
+            
+            //            xmjcontroller.lilv = string;
+            xmjcontroller.datadic=dataDic;
+            NSString * projectStatus;
+            if (![[Dic objectForKey:@"cell"] isKindOfClass:[NSNull class]]) {
+                
+                
+                projectStatus=[Dic objectForKey:@"cell"][@"projectStatus"] ;
+                
+            }
+            if ([projectStatus isEqualToString:@"finished"]) {
+                
+                xmjcontroller.zhuangtaistr =  @"还款完毕";
+                
+            }else if ([projectStatus isEqualToString:@"repayment_normal"]||[projectStatus isEqualToString:@"repayment_abnormal"]){
+                
+                xmjcontroller.zhuangtaistr =@"还款中";
+                
+            }else if ([projectStatus isEqualToString:@"loans"]||[projectStatus isEqualToString:@"loans_audit"]){
+                
+                xmjcontroller.zhuangtaistr =@"项目审核";
+                
+            }else if ([projectStatus isEqualToString:@"full"]){
+                
+                xmjcontroller.zhuangtaistr =@"已满标";
+                
+            }else if ([projectStatus isEqualToString:@"publishedWaiting"]){
+                
+                xmjcontroller.zhuangtaistr =@"稍后出借";
+                
+            }
+            [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+            
+            [self.navigationController pushViewController:xmjcontroller animated:NO];
+            
+        }else{
+            Dic = [self.dataArray objectAtIndex:indexPath.row];
+            dataDic =  [self.segment1Array objectAtIndex:indexPath.row];
+            RHProjectdetailthreeViewController * controller = [[RHProjectdetailthreeViewController alloc]initWithNibName:@"RHProjectdetailthreeViewController" bundle:nil];
+            
+            //        RHXMJProjectViewController * xmjcontroller = [[RHXMJProjectViewController alloc]initWithNibName:@"RHXMJProjectViewController" bundle:nil];
+            
+            
+            
+            
+            
+            //            NSString * xmjstr;
+            //            if (dataDic[@"isProjectList"]&&![dataDic[@"isProjectList"] isKindOfClass:[NSNull class]]) {
+            //                xmjstr = [NSString stringWithFormat:@"%@",dataDic[@"isProjectList"]];
+            //            }
+            //
+            
+            
+            NSString  * string = [NSString stringWithFormat:@"%@",dataDic[@"investorRate"]];
+            //dataDic[@"investorRate"] = (id)string
+            if (string.length > 5) {
+                NSArray *array = [string componentsSeparatedByString:@"."];
+                string = array.lastObject;
+                string =  [string substringToIndex:2];
+                
+                int a = [string intValue];
+                
+                int b  = a /10;
+                
+                int c = a - b * 10;
+                
+                if (c > 5) {
+                    b= b+1;
+                    
+                    string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
+                    // [dataDic setValue:string forKey:@"investorRate"];
+                    // dataDic[@"investorRate"] = string;
+                }else{
+                    
+                    string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
+                    //[dataDic setValue:string forKey:@"investorRate"];
+                    
+                }
+            }
+            
+            
+            controller.lilv = string;
+            
+            controller.dataDic=dataDic;
+            controller.getType=type;
+            controller.getType=@"0";
+            //controller.view.frame = CGRectMake(0, 0, self.view.frame.size.width, 700);
+            //controller.view.backgroundColor = [UIColor orangeColor];
+            NSString * projectStatus;
+            if (![[Dic objectForKey:@"percent"] isKindOfClass:[NSNull class]]) {
+                projectStatus=[Dic objectForKey:@"projectStatus"] ;
+                
+            }
+            if ([projectStatus isEqualToString:@"finished"]) {
+                
+                controller.zhaungtaistr =  @"还款完毕";
+                
+            }else if ([projectStatus isEqualToString:@"repayment_normal"]||[projectStatus isEqualToString:@"repayment_abnormal"]){
+                
+                controller.zhaungtaistr =@"还款中";
+                
+            }else if ([projectStatus isEqualToString:@"loans"]||[projectStatus isEqualToString:@"loans_audit"]){
+                
+                controller.zhaungtaistr =@"项目审核";
+                
+            }else if ([projectStatus isEqualToString:@"full"]){
+                
+                controller.zhaungtaistr =@"已满标";
+                
+            }else if ([projectStatus isEqualToString:@"publishedWaiting"]){
+                
+                controller.zhaungtaistr =@"稍后出借";
+                
+            }
+            
+            [self.navigationController pushViewController:controller animated:NO];
+        }
+        
+        
+        
+        return;
+        
+        
+    }
+    
+    
+    
+    
+    
+    if (indexPath.row==0&&[[RHhelper ShraeHelp].xmjswitch isEqualToString:@"ON"]) {
+        
+        [self pushxmj];
+        return;
+    }
+    
+    
+    
+    
+    
+    
+    
     if (self.newdic.count<2) {
         long a=0;
         
@@ -2393,7 +2684,19 @@
         }
         NSDictionary* Dic=[self.dataArray objectAtIndex:a];
         RHProjectdetailthreeViewController * controller = [[RHProjectdetailthreeViewController alloc]initWithNibName:@"RHProjectdetailthreeViewController" bundle:nil];
+        
+        RHXMJProjectViewController * xmjcontroller = [[RHXMJProjectViewController alloc]initWithNibName:@"RHXMJProjectViewController" bundle:nil];
+        
+       
+        
         NSDictionary* dataDic=[self.segment1Array objectAtIndex:a];
+        
+        NSString * xmjstr;
+        if (dataDic[@"isProjectList"]&&![dataDic[@"isProjectList"] isKindOfClass:[NSNull class]]) {
+            xmjstr = [NSString stringWithFormat:@"%@",dataDic[@"isProjectList"]];
+        }
+        
+        
         
         NSString  * string = [NSString stringWithFormat:@"%@",dataDic[@"investorRate"]];
         //dataDic[@"investorRate"] = (id)string
@@ -2421,38 +2724,82 @@
                 
             }
         }
-        controller.lilv = string;
         
-        controller.dataDic=dataDic;
-        controller.getType=type;
-        
-        //controller.view.frame = CGRectMake(0, 0, self.view.frame.size.width, 700);
-        //controller.view.backgroundColor = [UIColor orangeColor];
-        NSString * projectStatus;
-        if (![[Dic objectForKey:@"percent"] isKindOfClass:[NSNull class]]) {
-            projectStatus=[Dic objectForKey:@"projectStatus"] ;
+        if ([xmjstr isEqualToString:@"yes"]) {
             
+            xmjcontroller.lilv = string;
+            xmjcontroller.datadic=dataDic;
+            NSString * projectStatus;
+            if (![[Dic objectForKey:@"percent"] isKindOfClass:[NSNull class]]) {
+                projectStatus=[Dic objectForKey:@"projectStatus"] ;
+                
+            }
+            if ([projectStatus isEqualToString:@"finished"]) {
+                
+                xmjcontroller.zhuangtaistr =  @"还款完毕";
+                
+            }else if ([projectStatus isEqualToString:@"repayment_normal"]||[projectStatus isEqualToString:@"repayment_abnormal"]){
+                
+                xmjcontroller.zhuangtaistr =@"还款中";
+                
+            }else if ([projectStatus isEqualToString:@"loans"]||[projectStatus isEqualToString:@"loans_audit"]){
+                
+                xmjcontroller.zhuangtaistr =@"项目审核";
+                
+            }else if ([projectStatus isEqualToString:@"full"]){
+                
+                xmjcontroller.zhuangtaistr =@"已满标";
+                
+            }else if ([projectStatus isEqualToString:@"publishedWaiting"]){
+                
+                xmjcontroller.zhuangtaistr =@"稍后出借";
+                
+            }
+            [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+            
+            [self.navigationController pushViewController:xmjcontroller animated:NO];
+            return;
+            
+        }else{
+            controller.lilv = string;
+            
+            controller.dataDic=dataDic;
+            controller.getType=type;
+            
+            //controller.view.frame = CGRectMake(0, 0, self.view.frame.size.width, 700);
+            //controller.view.backgroundColor = [UIColor orangeColor];
+            NSString * projectStatus;
+            if (![[Dic objectForKey:@"percent"] isKindOfClass:[NSNull class]]) {
+                projectStatus=[Dic objectForKey:@"projectStatus"] ;
+                
+            }
+            if ([projectStatus isEqualToString:@"finished"]) {
+                
+                controller.zhaungtaistr =  @"还款完毕";
+                
+            }else if ([projectStatus isEqualToString:@"repayment_normal"]||[projectStatus isEqualToString:@"repayment_abnormal"]){
+                
+                controller.zhaungtaistr =@"还款中";
+                
+            }else if ([projectStatus isEqualToString:@"loans"]||[projectStatus isEqualToString:@"loans_audit"]){
+                
+                controller.zhaungtaistr =@"项目审核";
+                
+            }else if ([projectStatus isEqualToString:@"full"]){
+                
+                controller.zhaungtaistr =@"已满标";
+                
+            }else if ([projectStatus isEqualToString:@"publishedWaiting"]){
+                
+                controller.zhaungtaistr =@"稍后出借";
+                
+            }
+            
+            [self.navigationController pushViewController:controller animated:NO];
+            return;
         }
-        if ([projectStatus isEqualToString:@"finished"]) {
-            
-            controller.zhaungtaistr =  @"还款完毕";
-            
-        }else if ([projectStatus isEqualToString:@"repayment_normal"]||[projectStatus isEqualToString:@"repayment_abnormal"]){
-            
-            controller.zhaungtaistr =@"还款中";
-            
-        }else if ([projectStatus isEqualToString:@"loans"]||[projectStatus isEqualToString:@"loans_audit"]){
-            
-            controller.zhaungtaistr =@"项目审核";
-            
-        }else if ([projectStatus isEqualToString:@"full"]){
-            
-            controller.zhaungtaistr =@"已满标";
-            
-        }
         
-        [self.navigationController pushViewController:controller animated:YES];
-        return;
+        
     }else{
         
    
@@ -2460,7 +2807,7 @@
     
     if (indexPath.row == 0) {
         
-//        if (self.newpeoplebool == YES) {
+
         
             RHNEWpeopleViewController * controller = [[RHNEWpeopleViewController alloc]initWithNibName:@"RHNEWpeopleViewController" bundle:nil];
 //            NSDictionary* dataDic=[self.segment1Array objectAtIndex:indexPath.row];
@@ -2497,8 +2844,12 @@
             
             controller.zhaungtaistr =@"已满标";
             
+        }else if ([projectStatus isEqualToString:@"publishedWaiting"]){
+            
+            controller.zhaungtaistr =@"稍后出借";
+            
         }
-            [self.navigationController pushViewController:controller animated:YES];
+            [self.navigationController pushViewController:controller animated:NO];
 //        }else{
 //
 //            [RHUtility showTextWithText:@"您已投资过，请看其余项目。"];
@@ -2567,124 +2918,20 @@
             
             controller.zhaungtaistr =@"已满标";
             
+        }else if ([projectStatus isEqualToString:@"publishedWaiting"]){
+            
+            controller.zhaungtaistr =@"稍后出借";
+            
         }
         
-        [self.navigationController pushViewController:controller animated:YES];
+        [self.navigationController pushViewController:controller animated:NO];
         
         
     }
         
         
     }
-//    }else{
-//        RHfourtestViewController * controller = [[RHfourtestViewController alloc]initWithNibName:@"RHfourtestViewController" bundle:nil];
-//        NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];
-//        
-//        NSString  * string = [NSString stringWithFormat:@"%@",dataDic[@"investorRate"]];
-//        //dataDic[@"investorRate"] = (id)string
-//        if (string.length > 5) {
-//            NSArray *array = [string componentsSeparatedByString:@"."];
-//            string = array.lastObject;
-//            string =  [string substringToIndex:2];
-//            
-//            int a = [string intValue];
-//            
-//            int b  = a /10;
-//            
-//            int c = a - b * 10;
-//            
-//            if (c > 5) {
-//                b= b+1;
-//                
-//                string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
-//                // [dataDic setValue:string forKey:@"investorRate"];
-//                // dataDic[@"investorRate"] = string;
-//            }else{
-//                
-//                string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
-//                //[dataDic setValue:string forKey:@"investorRate"];
-//                
-//            }
-//        }
-////        controller.lilv = string;
-////        
-////        controller.dataDic=dataDic;
-////        controller.getType=type;
-//        
-//        //controller.view.frame = CGRectMake(0, 0, self.view.frame.size.width, 700);
-//        //controller.view.backgroundColor = [UIColor orangeColor];
-//        [self.navigationController pushViewController:controller animated:YES];
-//    }
-//    
-    
-    
-    
-//    NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];
-//    
-//    NSString  * string = [NSString stringWithFormat:@"%@",dataDic[@"investorRate"]];
-//    //dataDic[@"investorRate"] = (id)string
-//    if (string.length > 5) {
-//        NSArray *array = [string componentsSeparatedByString:@"."];
-//        string = array.lastObject;
-//        string =  [string substringToIndex:2];
-//        
-//        int a = [string intValue];
-//        
-//        int b  = a /10;
-//        
-//        int c = a - b * 10;
-//        
-//        if (c > 5) {
-//            b= b+1;
-//            
-//            string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
-//            // [dataDic setValue:string forKey:@"investorRate"];
-//            // dataDic[@"investorRate"] = string;
-//        }else{
-//            
-//            string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
-//            //[dataDic setValue:string forKey:@"investorRate"];
-//            
-//        }
-//    }
-//    controller.lilv = string;
-//    
-//    controller.dataDic=dataDic;
-//    controller.getType=type;
-//    
-//    //controller.view.frame = CGRectMake(0, 0, self.view.frame.size.width, 700);
-//    //controller.view.backgroundColor = [UIColor orangeColor];
-//    [self.navigationController pushViewController:controller animated:YES];
 
-    
-    
-        
-        
-        
-        
-        
-    
-    // activityType = ActivityExclusive;
-//    available = 46200;
-//    beginAmount = 200;
-//    everyoneEndAmount = 30000;
-//    fullTime = "<null>";
-//    id = 900;
-//    insuranceId = 3;
-//    insuranceLogo = "pubNews/76782f6d-f85a-41e7-af4f-fd41ea0736d9.png";
-//    insuranceMethod = "\U4e91\U5357\U5408\U5174\U878d\U8d44\U62c5";
-//    insuranceName = "\U5c71\U897f\U4f01\U4e1a\U518d\U62c5\U4fdd";
-//    investorRate = 9;
-//    limitTime = 6;
-//    logo = "<null>";
-//    name = "\U62ff\U571f\U5730\U6765\U8bf4";
-//    paymentName = "\U5148\U606f\U540e\U672c";
-//    percent = "53.8";
-//    projectFund = 100000;
-//    projectStatus = published;
-//    singleEndAmount = 10000;
-//    studentLoan = 0;
-    
 }
 
 #pragma mark-Push
@@ -2735,10 +2982,7 @@
 //    }];
     NSLog(@"666666644343563645757");
 //    
-//    DQViewController * dq = [DQViewController new];
-//    
-//    [self.navigationController pushViewController:dq animated:YES];
-    
+
 }
 
 -(void)removeScrollView {
@@ -3070,28 +3314,69 @@
 -(void)newpeopledata{
     
     //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    [[RHNetworkService instance] POST:@"app/common/appMain/isXinshou" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            
+            NSString * str = [NSString stringWithFormat:@"%@",responseObject[@"msg"]];
+            if ([str isEqualToString:@"1"]) {
+                [self getNewPeopleProject];
+            }else{
+                
+                 self.newpeopleress = NO;
+            }
+          
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        ;
+        DLog(@"%@",[[NSString alloc] initWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] encoding:NSUTF8StringEncoding]);
+        
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    }];
+    
+    
+    
+    
+}
+
+-(void)getNewPeopleProject{
     [[RHNetworkService instance] POST:@"app/common/appMain/noviceData" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
-        
-           // NSLog(@"%@",responseObject);
+            
+            // NSLog(@"%@",responseObject);
             
             self.newdic = responseObject[@"rows"][0][@"cell"];
-        
             self.newpeopleress = YES;
+            
+            if ([UIScreen mainScreen].bounds.size.width <321) {
+                self.scrview .contentSize =  CGSizeMake([UIScreen mainScreen].bounds.size.width,675*1.4+10-30+30+25+64+20+6+10+80+180);
+                self.newslab.font = [UIFont systemFontOfSize:11];
+            }else{
+                self.scrview .contentSize =  CGSizeMake([UIScreen mainScreen].bounds.size.width,675*1.4+10-30+30+25+64+20+46+10+80+180);
+                
+            }
+            if ([UIScreen mainScreen].bounds.size.height>740) {
+                self.scrview .contentSize =  CGSizeMake([UIScreen mainScreen].bounds.size.width,675*1.4+10-30+30+25+64+20+46+10+80+20+180);
+            }
+            
             [self.tableView reloadData];
-           // NSLog(@"%@",self.newdic);
+            // NSLog(@"%@",self.newdic);
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         ;
+        DLog(@"%@",[[NSString alloc] initWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] encoding:NSUTF8StringEncoding]);
+        
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     
 }
-
 -(NSDictionary *)newdic{
     
     if (!_newdic) {
@@ -3148,6 +3433,94 @@
     
 }
 
+
+
+
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    
+    //    return 21;
+    return self.collectionArr.count;
+}
+
+
+
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    RHProjectCollectionViewCell * cell  = [collectionView dequeueReusableCellWithReuseIdentifier:@"collcellid1" forIndexPath:indexPath];
+    //    cell.backgroundColor = [UIColor redColor];
+    //    cell.backgroundColor = [UIColor whiteColor];
+    //    cell.backgroundColor = [UIColor colorWithRed:arc4random()%255/255.0 green:arc4random()%255/255.0 blue:arc4random()%255/255.0 alpha:1];
+    //    [cell update:self.dataArray[indexPath.row]];
+    
+    [cell.imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@common/main/attachment/%@",[RHNetworkService instance].newdoMain,self.collectionArr[indexPath.row][@"bg"]]]];
+    
+    cell.titlelab.text = [NSString stringWithFormat:@"%@",self.collectionArr[indexPath.row][@"title"]];
+    return cell;
+    
+}
+
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+//    [self.nav.navigationBar setBackgroundImage:[UIImage imageNamed:@""] forBarMetrics:UIBarMetricsDefault];
+//    self.nav.navigationBar.subviews.firstObject.alpha = 5.00;
+    NSString *linkURl = self.collectionArr[indexPath.row][@"link"];
+    //    NSString *logoUrl = self.array[indexPath.row][@""];
+    //    NSString *naviTitle =self.array[indexPath.row][@""];
+    
+    NSString * buttonstr = self.collectionArr[indexPath.row][@"buttonIs"];;
+    NSString * inviteCodeIsstr = self.collectionArr[indexPath.row][@"inviteCodeIs"];
+    NSString * shareLinkIdstr = self.collectionArr[indexPath.row][@"shareLinkId"];
+    
+    if (linkURl.length > 2) {
+        
+        if ([buttonstr isEqualToString:@"true"]) {
+            RHRNewShareWebViewController *office = [[RHRNewShareWebViewController alloc] initWithNibName:@"RHRNewShareWebViewController" bundle:nil];
+            //            office.NavigationTitle = naviTitle;
+            office.Type = 3;
+            office.pinjie = inviteCodeIsstr;
+            office.shareid = shareLinkIdstr;
+            if (([linkURl rangeOfString:@"https://"].location == NSNotFound)) {
+                //            office.urlString = [NSString stringWithFormat:@"http://%@",linkURl];
+                //        } else if (([linkURl rangeOfString:@"https://"].location == NSNotFound)) {
+                //             office.urlString = [NSString stringWithFormat:@"https://%@",linkURl];
+                NSArray * array = [linkURl componentsSeparatedByString:@"//"];
+                
+                office.urlString = [NSString stringWithFormat:@"https://%@",array[1]];
+            } else{
+                
+                
+                office.urlString =linkURl;
+            }
+            [self.navigationController pushViewController:office animated:YES];
+        }else{
+            RHOfficeNetAndWeiBoViewController *office = [[RHOfficeNetAndWeiBoViewController alloc] initWithNibName:@"RHOfficeNetAndWeiBoViewController" bundle:nil];
+            //            office.NavigationTitle = naviTitle;
+            if (self.collectionArr[indexPath.row][@"title"] &&![self.collectionArr[indexPath.row][@"title"] isKindOfClass:[NSNull class]]) {
+                office.NavigationTitle = self.collectionArr[indexPath.row][@"title"];
+            }
+            
+            if (([linkURl rangeOfString:@"https://"].location == NSNotFound)) {
+                //            office.urlString = [NSString stringWithFormat:@"http://%@",linkURl];
+                //        } else if (([linkURl rangeOfString:@"https://"].location == NSNotFound)) {
+                //             office.urlString = [NSString stringWithFormat:@"https://%@",linkURl];
+                NSArray * array = [linkURl componentsSeparatedByString:@"//"];
+                
+                office.urlString = [NSString stringWithFormat:@"https://%@",array[1]];
+            } else{
+                
+                
+                office.urlString =linkURl;
+            }
+            [self.navigationController pushViewController:office animated:YES];
+        }
+    }else{
+        
+        [DQViewController Sharedbxtabar].tarbar.hidden = NO;
+    }
+    
+    NSLog(@"111");
+}
 
 
 @end

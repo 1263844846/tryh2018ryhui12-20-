@@ -157,7 +157,11 @@
     manager.securityPolicy = [[RHNetworkService instance] customSecurityPolicy];
     NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
     NSLog(@"------------------%@",session);
+    NSString* session1=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHNEWMYSESSION"];
     
+    if (session1.length>12) {
+        session = [NSString stringWithFormat:@"%@,%@",session,session1];
+    }
     if (session&&[session length]>0) {
         [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
     }
@@ -175,7 +179,7 @@
 //                controller.amount=amount;
 //                [self.navigationController pushViewController:controller animated:NO];
                 self.giftView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) + 64);
-                self.giftMoneyLabel.text = [NSString stringWithFormat:@"%d元投资现金已放入账户",[amount intValue]];
+                self.giftMoneyLabel.text = [NSString stringWithFormat:@"%d元现金福利已放入账户",[amount intValue]];
                 [self setTheAttributeString:self.giftMoneyLabel.text];
                 [[[UIApplication sharedApplication].delegate window] addSubview:self.giftView];
                 self.view.userInteractionEnabled = NO;
@@ -184,12 +188,12 @@
                  NSNumber* lowest = [dic objectForKey:@"lowestMoney"];
                 if (lowest) {
                     if ([lowest integerValue] == 0) {
-                        self.giftNoticeLabel.text = @"快去充值投资吧～";
+                        self.giftNoticeLabel.text = @"快去充值出借吧～";
                     } else {
-                        self.giftNoticeLabel.text = [NSString stringWithFormat:@" 首次投资%@元以上立得返利现金哦！快去充值投资吧～",lowest];
+                        self.giftNoticeLabel.text = [NSString stringWithFormat:@" 首次投资%@元以上立得现金券哦！快去充值出借吧～",lowest];
                     }
                 } else {
-                    self.giftNoticeLabel.text = @"快去充值投资吧～";
+                    self.giftNoticeLabel.text = @"快去充值出借吧～";
                 }
                 [self performSelector:@selector(closeButtonClicked:) withObject:nil afterDelay:15.0];
             }

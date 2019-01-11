@@ -30,7 +30,7 @@
         }
     }
     
-    self.threshodLabel.text=[NSString stringWithFormat:@"单笔投资满%@元",threshold];
+    self.threshodLabel.text=[NSString stringWithFormat:@"单笔出借满%@元",threshold];
     if (investNum<[threshold intValue]) {
         self.bgImageView.image=[UIImage imageNamed:@"giftbg2.png"];
         self.moneyLabel.textColor=[UIColor whiteColor];

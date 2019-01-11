@@ -38,7 +38,8 @@
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@app/front/payment/appJxAccount/withdrawJxData",[RHNetworkService instance].newdoMain]];
-    NSString *body = [NSString stringWithFormat: @"cardNumber=%@&money=%@&txFee=%@&category=%@&cardBankCnaps=%@",self.bankcard,amount,captcha,category,self.cardBankCnaps];
+     NSString *deviceUUID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    NSString *body = [NSString stringWithFormat: @"cardNumber=%@&money=%@&txFee=%@&category=%@&cardBankCnaps=%@&popularizeCompany=appstore&equipment=%@",self.bankcard,amount,captcha,category,self.cardBankCnaps,deviceUUID];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
     [request setHTTPMethod: @"POST"];
     NSString* session = [[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];

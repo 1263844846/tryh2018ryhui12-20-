@@ -11,4 +11,6 @@
 
 @interface RHMyInvestmentViewController : RHBaseViewController<RHSegmentContentViewDelegate>
 
+@property(nonatomic,assign)UINavigationController *nav;
+@property(nonatomic,copy)NSString *resstr;
 @end

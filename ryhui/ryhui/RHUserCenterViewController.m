@@ -110,17 +110,7 @@
 
 - (IBAction)changePanPasswordAction:(id)sender {
     
-//    UIAlertView* alertView=[[UIAlertView alloc]initWithTitle:nil
-//                                                     message:@"修改手势密码需要退出登录验证账号密码"
-//                                                    delegate:self
-//                                           cancelButtonTitle:@"确定"
-//                                           otherButtonTitles:@"取消", nil];
-//    alertView.tag=998;
-//    [alertView show];
 
-//    RHGesturePasswordViewController* controller=[[RHGesturePasswordViewController alloc]init];
-//    controller.isReset=YES;
-//    [self.navigationController pushViewController:controller animated:YES];
     
     RHUserCountViewController * vc = [[RHUserCountViewController alloc]initWithNibName:@"RHUserCountViewController" bundle:nil];
     

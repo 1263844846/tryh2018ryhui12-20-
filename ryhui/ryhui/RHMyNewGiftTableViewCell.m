@@ -47,7 +47,96 @@
         
         a = 0;
     }
+      if ([type isEqualToString:@"app/front/payment/appGift/myCanCashGiftListDataWebForApp"]) {
+          self.coinView.addlab.textColor = [RHUtility colorForHex:@"4b4b4b"];
+          self.coinView.takelab.textColor = [RHUtility colorForHex:@"7d7d7d"];
+          self.coinView.fourlab.textColor = [RHUtility colorForHex:@"4b4b4b"];
+          self.typeLabel.textColor = [RHUtility colorForHex:@"303030"];
+          self.effectNoticeLabel.textColor = [RHUtility colorForHex:@"303030"];
+          self.coinView.shiyolab.hidden = YES;
+          self.coinView.timelab.textColor = [RHUtility colorForHex:@"4b4b4b"];
+          NSString * giftTypeId = dic[@"giftTypeId"];
+          if([giftTypeId isEqualToString:@"instead_cash"]){
+              self.coinView.namelab.text = @"红包券";
+               [self.coinView.button setImage:[UIImage imageNamed:@"icon_dui_red"] forState:UIControlStateNormal];
+               self.coinView.secondmonry.textColor = [RHUtility colorForHex:@"#f89779"];
+              self.coinView.twolab.text =[NSString stringWithFormat:@"1.出借时选择此红包，放款成功后可兑现，"];
+              
+              self.coinView.threelab.text = [NSString stringWithFormat:@"2.每笔出借仅可使用一张。"];
+              self.coinView.namelab1.text = @"可直接兑换";
+               self.coinView.fourlab.text = [NSString stringWithFormat:@"有效期至：%@",dic[@"exp"]];
+          }else{
+              self.coinView.namelab.text = @"现金券";
+              self.coinView.bximage.image = [UIImage imageNamed:@"红包页-08"];
+              self.profileView.image = [UIImage imageNamed:@"红包页-13"];
+                [self.coinView.button setImage:[UIImage imageNamed:@"红包页-10"] forState:UIControlStateNormal];
+              self.coinView.monerylab.textColor =  [RHUtility colorForHex:@"#ffb618"];
+               self.coinView.secondmonry.textColor = [RHUtility colorForHex:@"#ffb618"];
+              self.coinView.twolab.text =[NSString stringWithFormat:@"1.可直接兑换为账户余额，"];
+     
+              self.coinView.threelab.text = [NSString stringWithFormat:@"2.兑换后的余额可用于出借或提现。"];
+               self.coinView.fourlab.text = [NSString stringWithFormat:@"有效期至：%@",dic[@"exp"]];
+          }
+          NSString * staut = dic[@"status"];
+          if([staut isEqualToString:@"waitCash"]){
+              self.coinView.bximage.image = [UIImage imageNamed:@"红包页-12"];
+              self.profileView.image = [UIImage imageNamed:@"红包页-23"];
+              [self.coinView.button setImage:[UIImage imageNamed:@"icon_dui_hui"] forState:UIControlStateNormal];
+              self.coinView.bximage.image = [UIImage imageNamed:@"红包页-22"];
+              self.coinView.button.userInteractionEnabled = NO;
+               self.coinView.monerylab.textColor = [RHUtility colorForHex:@"bcbcbc"];
+              self.coinView.secondmonry.textColor = [RHUtility colorForHex:@"bcbcbc"];
+              
+              
+              self.coinView.twolab.text =[NSString stringWithFormat:@"使用红包券出借的项目放款成功后才可兑现，请稍后再试"];
+              self.coinView.threelab.hidden = YES;
+              self.coinView.namelab1.text = @"  待兑换";
+               self.coinView.fourlab.text = @"";
+          }
+          self.coinView.twolab.numberOfLines = 0;
+//          self.coinView.fourlab.hidden = YES;
+        
+          self.coinView.button.tag = [dic[@"id"] integerValue];
+          self.coinView.takelab.hidden  =YES;
+          //            self.coinView.timelab.hidden = YES;
+          
+          self.coinView.addlab.text =[NSString stringWithFormat:@"[%@]",dic[@"activityName"]];
+          
+          
+          
+          
+          self.coinView.monerylab.frame = CGRectMake(70 +a *20+15, 30, 140+a *10,40);
+          
+          
+         
+       
+          self.coinView.twolab.frame = CGRectMake(30 , 40, 250, 40);
+        
+          self.coinView.timelab.text =[NSString stringWithFormat:@"发放时间：%@",dic[@"pd"]];
+          
+          self.coinView.firlab.hidden = YES;
+          self.coinView.forlab.hidden = YES;
+          //self.coinView.addlab.frame =CGRectMake(70 +a *20+15, 65, 140+a *10, 20);
+          self.coinView.namelab1.textColor = [RHUtility colorForHex:@"7d7d7d"];
+          
+      }
+    
     if ([type isEqualToString:@"app/front/payment/appGift/appMyInitGiftListData"]) {
+        self.typeLabel.textColor = [RHUtility colorForHex:@"303030"];
+        self.effectNoticeLabel.textColor = [RHUtility colorForHex:@"303030"];
+        self.coinView.shiyolab.hidden = YES;
+        
+        self.coinView.namelab.textColor = [RHUtility colorForHex:@"3c3c3c"];
+        //        self.coinView.namelab1.textColor = [RHUtility colorForHex:@"7d7d7d"];
+        self.coinView.timelab.textColor = [RHUtility colorForHex:@"4b4b4b"];
+        if ([dic[@"giftType"] isEqualToString:@"现金券"]) {
+            
+        }else{
+            
+        }
+        self.coinView.addlab.textColor = [RHUtility colorForHex:@"4b4b4b"];
+        self.coinView.takelab.textColor = [RHUtility colorForHex:@"7d7d7d"];
+        self.coinView.fourlab.textColor = [RHUtility colorForHex:@"4b4b4b"];
         
         NSString * giftTypeId = dic[@"giftTypeId"];
         
@@ -87,71 +176,55 @@
             self.coinView.takelab.text = [NSString stringWithFormat:@"[%@]",dic[@"activityName"]];
             self.coinView.addlab.text =[NSString stringWithFormat:@"限%@个月(含)以上项目",dic[@"limitTime"]];
             self.coinView.timelab.text =[NSString stringWithFormat:@"参与加息的本金最大%@元",dic[@"upperMoney"]];
-            /*
-            self.coinView.addlab.text =[NSString stringWithFormat:@"红包来源：%@",dic[@"activityName"]];
-            self.coinView.takelab.text = [NSString stringWithFormat:@"使用条件：单笔投资满%@元",dic[@"threshold"]];
-            self.coinView.button.tag = 10;
-            self.coinView.twolab.text =[NSString stringWithFormat:@"2.单笔投资满%@元可用;",dic[@"threshold"]];
-             */
+           
             self.profileView.image = [UIImage imageNamed:@"红包页-14"];
-            self.coinView.firlab.text = @"1.投资时选择此红包可增加年化收益";
-            self.coinView.twolab.text = @"2.每笔投资仅可使用一张";
-            self.coinView.threelab.text = [NSString stringWithFormat:@"3.参与加息的投资本金最大为%@元",dic[@"upperMoney"]];
-            self.coinView.forlab.text = [NSString stringWithFormat:@"4.单笔投资满%@元可用",dic[@"threshold"]];
+            self.coinView.firlab.text = @"1.出借时选择此红包可增加目标年化利率";
+            self.coinView.twolab.text = @"2.每笔出借仅可使用一张";
+            self.coinView.threelab.text = [NSString stringWithFormat:@"3.参与加息的出借本金最大为%@元",dic[@"upperMoney"]];
+            self.coinView.forlab.text = [NSString stringWithFormat:@"4.单笔出借满%@元可用",dic[@"threshold"]];
             if (!dic[@"limitTime"]||![dic[@"limitTime"] isKindOfClass:[NSNull class]]) {
-//                self.coinView.threelab.text = [NSString stringWithFormat:@"3.限%@个月(含)以上项目",dic[@"limitTime"]];
+
                 self.coinView.addlab.text =[NSString stringWithFormat:@"限%@个月(含)以上项目",dic[@"limitTime"]];
             }else{
                 self.coinView.addlab.text =[NSString stringWithFormat:@"限1个月(含)以上项目"];
-//                self.coinView.threelab.text = [NSString stringWithFormat:@"3.限1个月(含)以上项目"];
+
             }
              
-        }else{
-        self.giftTypeButton.hidden=NO;
-        if ([dic[@"giftType"] isEqualToString:@"投资现金"]) {
-             self.coinView.button.tag = 10;
+        }else if([giftTypeId isEqualToString:@"instead_cash"]){
+            self.giftTypeButton.hidden=NO;
+            self.coinView.button.tag = 10;
             self.coinView.threelab.hidden = YES;
             self.coinView.forlab.hidden = YES;
-            ////            投资
-            //            self.backGroundImage.image=[UIImage imageNamed:@"giftChooseInvest"];
-            //            [self.giftTypeButton setBackgroundImage:[UIImage imageNamed:@"giftInvestButton"] forState:UIControlStateNormal];
-            //            self.clickButton.tag = 10;
-            //            self.moneyLabel.textColor=[RHUtility colorForHex:@"ff4a1f"];
-            //            self.RMBLabel.textColor = [RHUtility colorForHex:@"ff4a1f"];
-            //            self.validTimeLabel.text=[NSString stringWithFormat:@"有效期：%@至%@",[dic objectForKey:@"pd"],[dic objectForKey:@"exp"]];
+            self.coinView.namelab.text = @"红包券";
+            
+            
             
             self.coinView.secondmonry.textColor = [RHUtility colorForHex:@"#f89779"];
             self.coinView.fourlab.text = [NSString stringWithFormat:@"有效期至：%@",dic[@"exp"]];
             self.coinView.takelab.text = [NSString stringWithFormat:@"[%@]",dic[@"activityName"]];
             self.coinView.addlab.text =[NSString stringWithFormat:@"限%@个月(含)以上项目",dic[@"limitTime"]];
-            self.coinView.timelab.text =[NSString stringWithFormat:@"单笔投资满%@元可用",dic[@"threshold"]];
+            self.coinView.timelab.text =[NSString stringWithFormat:@"单笔出借满%@元可用",dic[@"threshold"]];
             self.coinView.namelab1.textColor = [RHUtility colorForHex:@"7d7d7d"];
-            self.coinView.twolab.text =@"2.每笔投资仅可使用一张";
-            /*
-             self.coinView.addlab.text =[NSString stringWithFormat:@"红包来源：%@",dic[@"activityName"]];
-             self.coinView.takelab.text = [NSString stringWithFormat:@"使用条件：单笔投资满%@元",dic[@"threshold"]];
-             self.coinView.button.tag = 10;
-             self.coinView.twolab.text =[NSString stringWithFormat:@"2.单笔投资满%@元可用;",dic[@"threshold"]];
-             */
+            self.coinView.twolab.text =@"2.每笔出借仅可使用一张";
             
+            self.coinView.firlab.text =[NSString stringWithFormat:@"1.出借时选择此红包，放款成功后可兑现，"];
             if (!dic[@"limitTime"]||![dic[@"limitTime"] isKindOfClass:[NSNull class]]) {
-               // self.coinView.threelab.text = [NSString stringWithFormat:@"3.限%@个月(含)以上项目",dic[@"limitTime"]];
+                
                 self.coinView.addlab.text =[NSString stringWithFormat:@"限%@个月(含)以上项目",dic[@"limitTime"]];
             }else{
                 self.coinView.addlab.text =[NSString stringWithFormat:@"限1个月(含)以上项目"];
-              //  self.coinView.threelab.text = [NSString stringWithFormat:@"3.限1个月(含)以上项目"];
+                
             }
-            
-        } else {
-            
-            //兑换
+//            self.coinView.addlab.textColor = [RHUtility colorForHex:@"7d7d7d"];
+       
+        }else if([giftTypeId isEqualToString:@"rebate_cash"]){
             self.coinView.fourlab.hidden = YES;
             [self.coinView.button setImage:[UIImage imageNamed:@"红包页-10"] forState:UIControlStateNormal];
             self.coinView.button.tag = [dic[@"id"] integerValue];
             self.coinView.takelab.hidden  =YES;
-//            self.coinView.timelab.hidden = YES;
-            self.coinView.namelab.text = @"返利现金";
-             self.coinView.addlab.text =[NSString stringWithFormat:@"[%@]",dic[@"activityName"]];
+            //            self.coinView.timelab.hidden = YES;
+            self.coinView.namelab.text = @"现金券";
+            self.coinView.addlab.text =[NSString stringWithFormat:@"[%@]",dic[@"activityName"]];
             self.coinView.namelab1.text = @"可直接兑换";
             self.coinView.bximage.image = [UIImage imageNamed:@"红包页-08"];
             self.profileView.image = [UIImage imageNamed:@"红包页-13"];
@@ -163,29 +236,38 @@
             self.coinView.secondmonry.textColor = [RHUtility colorForHex:@"#ffb618"];
             self.coinView.twolab.text =[NSString stringWithFormat:@"1.可直接兑换为账户余额，"];
             self.coinView.twolab.frame = CGRectMake(30 , 40, 240, 20);
-            self.coinView.threelab.text = [NSString stringWithFormat:@"2.兑换后的余额可用于投资或提现。"];
+            self.coinView.threelab.text = [NSString stringWithFormat:@"2.兑换后的余额可用于出借或提现。"];
             self.coinView.timelab.text =[NSString stringWithFormat:@"发放时间：%@",dic[@"pd"]];
             
             self.coinView.firlab.hidden = YES;
             self.coinView.forlab.hidden = YES;
             //self.coinView.addlab.frame =CGRectMake(70 +a *20+15, 65, 140+a *10, 20);
             self.coinView.namelab1.textColor = [RHUtility colorForHex:@"7d7d7d"];
-        }
-        }
-        self.typeLabel.textColor = [RHUtility colorForHex:@"303030"];
-        self.effectNoticeLabel.textColor = [RHUtility colorForHex:@"303030"];
-        self.coinView.shiyolab.hidden = YES;
-        
-        self.coinView.namelab.textColor = [RHUtility colorForHex:@"3c3c3c"];
-//        self.coinView.namelab1.textColor = [RHUtility colorForHex:@"7d7d7d"];
-        self.coinView.timelab.textColor = [RHUtility colorForHex:@"4b4b4b"];
-        if ([dic[@"giftType"] isEqualToString:@"返利现金"]) {
-            self.coinView.addlab.textColor = [RHUtility colorForHex:@"7d7d7d"];
         }else{
-        self.coinView.addlab.textColor = [RHUtility colorForHex:@"4b4b4b"];
+            self.coinView.bigbtn.hidden = YES;
+            self.coinView.secondmonry.textColor = [RHUtility colorForHex:@"bcbcbc"] ;
+            self.coinView.shiyolab.textColor = [RHUtility colorForHex:@"bcbcbc"] ;
+            self.coinView.namelab.textColor = [RHUtility colorForHex:@"bcbcbc"];
+            self.coinView.namelab1.textColor = [RHUtility colorForHex:@"bcbcbc"];
+            self.coinView.monerylab.textColor = [RHUtility colorForHex:@"bcbcbc"];
+            self.coinView.takelab.textColor = [RHUtility colorForHex:@"bcbcbc"];
+            self.coinView.addlab.textColor = [RHUtility colorForHex:@"bcbcbc"];
+            self.coinView.timelab.textColor = [RHUtility colorForHex:@"bcbcbc"];
+            self.coinView.fourlab.textColor = [RHUtility colorForHex:@"bcbcbc"];
+             self.coinView.addlab.text =[NSString stringWithFormat:@"无法识别红包类型，请升级APP或联系客服"];
+            self.coinView.bximage.hidden = YES;
+            self.coinView.button.hidden = YES;
+            self.coinView.forlab.text =@"";
+            self.coinView.namelab.text = @"";
+            self.coinView.namelab1.text = @"";
+            self.coinView.fourlab.text = @"";
+             self.coinView.takelab.text = @"";
+            self.coinView.monerylab.text = @"";
+            self.coinView.timelab.text =@"";
+            self.coinView.addlab.frame = CGRectMake(20, self.coinView.addlab.frame.origin.y-20,270 , self.coinView.addlab.frame.size.height);
+            return;
         }
-        self.coinView.takelab.textColor = [RHUtility colorForHex:@"7d7d7d"];
-        self.coinView.fourlab.textColor = [RHUtility colorForHex:@"4b4b4b"];
+        
     }
     
     //已使用
@@ -202,30 +284,29 @@
         self.coinView.timelab.textColor = [RHUtility colorForHex:@"bcbcbc"];
         self.coinView.fourlab.textColor = [RHUtility colorForHex:@"bcbcbc"];
         
-        //        self.coinView.namelab.textColor = [RHUtility colorForHex:@"bcbcbc"];
-        //        self.coinView.namelab.textColor = [RHUtility colorForHex:@"bcbcbc"];
+       
         self.coinView.bximage.hidden = YES;
         self.coinView.button.hidden = YES;
-        if ([dic[@"giftType"] isEqualToString:@"投资现金"]){
+        if ([dic[@"giftTypeId"] isEqualToString:@"instead_cash"]){
        self.coinView.fourlab.text = [NSString stringWithFormat:@"有效期至：%@",dic[@"exp"]];
-//            self.coinView.takelab.text = [NSString stringWithFormat:@"[%@]",dic[@"activityName"]];
+
             
             self.coinView.fourlab.text = [NSString stringWithFormat:@"有效期至：%@",dic[@"exp"]];
             self.coinView.takelab.text = [NSString stringWithFormat:@"[%@]",dic[@"activityName"]];
             
             if (!dic[@"limitTime"]||![dic[@"limitTime"] isKindOfClass:[NSNull class]]) {
-                // self.coinView.threelab.text = [NSString stringWithFormat:@"3.限%@个月(含)以上项目",dic[@"limitTime"]];
+              
                 self.coinView.addlab.text =[NSString stringWithFormat:@"限%@个月(含)以上项目",dic[@"limitTime"]];
             }else{
                 self.coinView.addlab.text =[NSString stringWithFormat:@"限1个月(含)以上项目"];
-                //  self.coinView.threelab.text = [NSString stringWithFormat:@"3.限1个月(含)以上项目"];
+              
             }
-            self.coinView.timelab.text =[NSString stringWithFormat:@"单笔投资满%@元可用",dic[@"threshold"]];
+            self.coinView.timelab.text =[NSString stringWithFormat:@"单笔出借满%@元可用",dic[@"threshold"]];
+             self.coinView.namelab.text = @"红包券";
+        }else if ([dic[@"giftTypeId"] isEqualToString:@"add_interest_voucher"]) {
             
-        }else{
-            if ([dic[@"giftTypeId"] isEqualToString:@"add_interest_voucher"]) {
-//                self.coinView.namelab.text = @"加息券";
-                self.coinView.namelab.text = dic[@"giftType"];
+                self.coinView.namelab.text = @"加息券";
+//                self.coinView.namelab.text = dic[@"giftType"];
                 self.coinView.fourlab.text = [NSString stringWithFormat:@"有效期至：%@",dic[@"exp"]];
                 NSString *str = [NSString stringWithFormat:@"%@",dic[@"upperDays"]];
                 if ([dic[@"upperDays"] isKindOfClass:[NSNull class]]) {
@@ -239,15 +320,15 @@
                 
                 
                 if (!dic[@"limitTime"]||![dic[@"limitTime"] isKindOfClass:[NSNull class]]) {
-                    //                self.coinView.threelab.text = [NSString stringWithFormat:@"3.限%@个月(含)以上项目",dic[@"limitTime"]];
+                   
                     self.coinView.addlab.text =[NSString stringWithFormat:@"限%@个月(含)以上项目",dic[@"limitTime"]];
                 }else{
                     self.coinView.addlab.text =[NSString stringWithFormat:@"限1个月(含)以上项目"];
-                    //                self.coinView.threelab.text = [NSString stringWithFormat:@"3.限1个月(含)以上项目"];
+                    
                 }
                 
-            }else{
-                self.coinView.namelab.text = @"返利现金";
+            }else if([dic[@"giftTypeId"] isEqualToString:@"rebate_cash"]){
+                self.coinView.namelab.text = @"现金券";
             self.coinView.fourlab.hidden = YES;
             self.coinView.bigbtn.hidden = YES;
     //        self.coinView.namelab.text = dic[@""];
@@ -257,13 +338,10 @@
             self.coinView.timelab.text =[NSString stringWithFormat:@"发放时间：%@",dic[@"pd"]];
             self.coinView.monerylab.frame = CGRectMake(70 +a *20+15, 30, 140+a *10, 40);
                 self.coinView.addlab.text = dic[@"activityName"];
-            // self.coinView.monerylab.textColor =  [RHUtility colorForHex:@"#ffb618"];
-            
-            //self.coinView.addlab.frame =CGRectMake(70 +a *20+15, 65, 140+a *10, 20);
-            //            self.coinView.monerylab.textColor =  [RHUtility colorForHex:@"#ffb618"];
+           
                 
             }
-        }
+        
         self.coinView.shiyolab.text = @"已使用";
     }
     
@@ -279,13 +357,12 @@
         self.coinView.addlab.textColor = [RHUtility colorForHex:@"bcbcbc"];
         self.coinView.timelab.textColor = [RHUtility colorForHex:@"bcbcbc"];
           self.coinView.fourlab.textColor = [RHUtility colorForHex:@"bcbcbc"];
-        //        self.coinView.namelab.textColor = [RHUtility colorForHex:@"bcbcbc"];
-        //        self.coinView.namelab.textColor = [RHUtility colorForHex:@"bcbcbc"];
+      
         self.coinView.bximage.hidden = YES;
         self.coinView.button.hidden = YES;
         
-        if ([dic[@"giftType"] isEqualToString:@"投资现金"]){
-//            self.coinView.fourlab.text = [NSString stringWithFormat:@"有效期至：%@",dic[@"exp"]];
+        if ([dic[@"giftTypeId"] isEqualToString:@"instead_cash"]){
+
             self.coinView.fourlab.text = [NSString stringWithFormat:@"有效期至：%@",dic[@"exp"]];
             self.coinView.takelab.text = [NSString stringWithFormat:@"[%@]",dic[@"activityName"]];
            
@@ -296,9 +373,9 @@
                 self.coinView.addlab.text =[NSString stringWithFormat:@"限1个月(含)以上项目"];
                 //  self.coinView.threelab.text = [NSString stringWithFormat:@"3.限1个月(含)以上项目"];
             }
-            self.coinView.timelab.text =[NSString stringWithFormat:@"单笔投资满%@元可用",dic[@"threshold"]];
-        }else{
-            if ([dic[@"giftTypeId"] isEqualToString:@"add_interest_voucher"]) {
+            self.coinView.timelab.text =[NSString stringWithFormat:@"单笔出借满%@元可用",dic[@"threshold"]];
+            self.coinView.namelab.text = @"红包券";
+        }else if ([dic[@"giftTypeId"] isEqualToString:@"add_interest_voucher"]) {
 //                self.coinView.namelab.text = @"加息券";
                 self.coinView.namelab.text = dic[@"giftType"];
                 self.coinView.fourlab.text = [NSString stringWithFormat:@"有效期至：%@",dic[@"exp"]];
@@ -330,7 +407,7 @@
                 }
                 
                 
-            }else{
+            }else if ([dic[@"giftTypeId"] isEqualToString:@"add_interest_voucher"]){
             self.coinView.fourlab.hidden = YES;
             self.coinView.bigbtn.hidden = YES;
             self.coinView.namelab.text = dic[@"giftType"];
@@ -347,40 +424,13 @@
             }
             self.coinView.monerylab.frame = CGRectMake(70 +a *20+15, 30, 140+a *10, 40);
             }
-            //self.coinView.monerylab.textColor =  [RHUtility colorForHex:@"#ffb618"];
-            
-            //self.coinView.addlab.frame =CGRectMake(70 +a *20+15, 65, 140+a *10, 20);
-        }
+        
+        
         self.coinView.shiyolab.text = @"已过期";
         self.coinView.shiyolab.textColor = [RHUtility colorForHex:@"bcbcbc"] ;
     }
     
-//    if ([dic[@"giftType"] isEqualToString:@"投资现金"]) {
-//        self.effectNoticeLabel.text = @" [投资时使用]";
-//        self.coinView.namelab.text = dic[@"giftType"];
-//        NSString* threshold=@"";
-//        if (![[dic objectForKey:@"threshold"] isKindOfClass:[NSNull class]]) {
-//            if ([[dic objectForKey:@"threshold"] isKindOfClass:[NSNumber class]]) {
-//                threshold=[NSString stringWithFormat:@"使用条件：单笔投资满%@元",[[dic objectForKey:@"threshold"] stringValue]];
-//            }else{
-//                threshold=[NSString stringWithFormat:@"使用条件：单笔投资满%@元",[dic objectForKey:@"threshold"]];
-//            }
-//        }
-//        self.conditionLabel.text=threshold;
-//        
-//        if ([[NSString stringWithFormat:@"%@",dic[@"activityId"]] isEqualToString:@"0"]) {
-//            NSLog(@"%@----",dic[@"voteActName"]);
-//            self.coinView.addlab.text =[NSString stringWithFormat:@"红包来源：%@",[NSString stringWithFormat:@"%@",dic[@"voteActName"]]];
-//        }else{
-//            
-//            self.coinView.addlab.text =[NSString stringWithFormat:@"红包来源：%@",dic[@"activityName"]];
-//        };
-//    } else {
-//        self.coinView.namelab.text = dic[@"giftType"];
-//        self.effectNoticeLabel.text = @" [可直接兑现为余额]";
-//        self.conditionLabel.text = [NSString stringWithFormat:@"红包来源：%@",dic[@"activityName"]];
-//        self.sourceLabel.text = @"";
-//    }
+
     
     NSString* money=@"";
     NSString * jiaxi = @"";
@@ -435,7 +485,7 @@
 //        
 //        self.coinView.addlab.text =[NSString stringWithFormat:@"红包来源：%@",dic[@"activityName"]];
 //    };
-//    self.coinView.takelab.text = [NSString stringWithFormat:@"使用条件：单笔投资满%@元",dic[@"threshold"]];
+//    self.coinView.takelab.text = [NSString stringWithFormat:@"使用条件：单笔出借满%@元",dic[@"threshold"]];
     
     CGSize size = [self.coinView.monerylab.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:self.coinView.monerylab.font,NSFontAttributeName, nil]];
     CGFloat nameW = size.width;

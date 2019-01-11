@@ -90,41 +90,62 @@
             self.captchaImageView.image=responseObject;
         }
         NSArray* array=[[operation.response.allHeaderFields objectForKey:@"Set-Cookie"] componentsSeparatedByString:@";"];
-        [[NSUserDefaults standardUserDefaults] setObject:[array objectAtIndex:0] forKey:@"RHSESSION"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        //        array = @[];
+        for (NSString * str in array) {
+            if(str.length>12){
+                
+                
+                if ([str rangeOfString:@"JSESSIONID="].location != NSNotFound) {
+                    
+                    NSArray *array1 = [str componentsSeparatedByString:@"="];
+                    
+                    NSString * string = [NSString stringWithFormat:@"JSESSIONID=%@",array1[1]];
+                    [[NSUserDefaults standardUserDefaults] setObject:string forKey:@"RHSESSION"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+                if ([str rangeOfString:@"MYSESSIONID="].location != NSNotFound) {
+                    
+                    NSArray *array1 = [str componentsSeparatedByString:@"="];
+                    
+                    NSString * string = [NSString stringWithFormat:@"MYSESSIONID=%@",array1[1]];
+                    [[NSUserDefaults standardUserDefaults] setObject:string forKey:@"RHNEWMYSESSION"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+            }
+        }
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
     }];
 }
 
-- (IBAction)changeAction:(id)sender {
-    if ([self.oldPasswordTF.text length]<=0) {
-        [RHUtility showTextWithText:@"请输入原密码"];
-        return;
-    }
-    if ([self.nnewPasswordTF.text length]<=0) {
-        [RHUtility showTextWithText:@"请输入新密码"];
-        return;
-    }
-    if ([self.rnewPasswordTF.text length]<=0) {
-        [RHUtility showTextWithText:@"请输入确认密码"];
-        return;
-    }
-    if ([self.captchaTF.text length]<=0) {
-        [RHUtility showTextWithText:@"请输入验证码"];
-        return;
-    }
-    if ([self.nnewPasswordTF.text length]<6||[self.nnewPasswordTF.text length]>16) {
-        [RHUtility showTextWithText:@"新密码长度必须为6-16位字符之间"];
-        return;
-    }
-    if ([self.rnewPasswordTF.text length]<6||[self.rnewPasswordTF.text length]>16) {
-        [RHUtility showTextWithText:@"确认密码长度必须为6-16位字符之间"];
-        return;
-    }
+-(void)getloginpassword{
     
-    
-   
+    NSDictionary *parameters = @{@"password":self.nnewPasswordTF.text};
+    [[RHNetworkService instance] POST:@"app/common/user/appRegister/checkPassword" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //        DLog(@"%@",responseObject);
+        
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            if ([responseObject[@"msg"] isEqualToString:@"success"]) {
+                [self getsuccesspassword];
+            }
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //        DLog(@"%@",error);
+        
+        if ([error.userInfo.allKeys containsObject:@"com.alamofire.serialization.response.error.data"]) {
+            NSDictionary* errorDic=[NSJSONSerialization JSONObjectWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] options:NSJSONReadingMutableContainers error:nil];
+            if ([errorDic objectForKey:@"msg"]) {
+                
+                [RHUtility showTextWithText:[errorDic objectForKey:@"msg"]];
+            }
+        }
+    }];
+}
+
+-(void)getsuccesspassword{
     
     NSDictionary *parameters = @{@"oldPassword":self.oldPasswordTF.text,@"newPassword":self.nnewPasswordTF.text,@"repeatPassword":self.rnewPasswordTF.text,@"captcha":self.captchaTF.text};
     
@@ -147,6 +168,38 @@
             }
         }
     }];
+}
+
+- (IBAction)changeAction:(id)sender {
+    if ([self.oldPasswordTF.text length]<=0) {
+        [RHUtility showTextWithText:@"请输入原密码"];
+        return;
+    }
+    if ([self.nnewPasswordTF.text length]<=0) {
+        [RHUtility showTextWithText:@"请输入新密码"];
+        return;
+    }
+    if ([self.rnewPasswordTF.text length]<=0) {
+        [RHUtility showTextWithText:@"请输入确认密码"];
+        return;
+    }
+    if ([self.captchaTF.text length]<=0) {
+        [RHUtility showTextWithText:@"请输入验证码"];
+        return;
+    }
+    if ([self.nnewPasswordTF.text length]<6||[self.nnewPasswordTF.text length]>16) {
+        [RHUtility showTextWithText:@"新密码长度必须为8-16位字符之间"];
+        return;
+    }
+    if ([self.rnewPasswordTF.text length]<6||[self.rnewPasswordTF.text length]>16) {
+        [RHUtility showTextWithText:@"确认密码长度必须为8-16位字符之间"];
+        return;
+    }
+    
+    [self getloginpassword];
+   
+    
+    
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {

@@ -47,15 +47,34 @@
     }
     return self;
 }
+
+-(void)stzfpush{
+    
+//    [[RHNetworkService instance] POST:@"front/payment/account/trusteePayAlter" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+//            NSString * str = [NSString stringWithFormat:@"%@",responseObject[@"flag"]];
+//            
+//           
+//            
+//            
+//        }
+//        
+//        NSLog(@"%@",responseObject);
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        ;
+//    }];
+    
+}
 -(void)getbankcard{
    
     //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-     NSDictionary* parameters=@{@"username":[RHUserManager sharedInterface].username};
     
-    self.view.userInteractionEnabled = NO;
+    NSDictionary* parameters=@{@"username":[RHUserManager sharedInterface].username};
+    
+    //  self.view.userInteractionEnabled = NO;
     [[RHNetworkService instance] POST:@"app/front/payment/appAccount/instantHuifu" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-         self.view.userInteractionEnabled = YES;
+        //   self.view.userInteractionEnabled = YES;
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             
             if (responseObject[@"msg"]&&![responseObject[@"msg"] isKindOfClass:[NSNull class]]) {
@@ -67,7 +86,7 @@
                 
             }else{
                 
-                 [RHhelper ShraeHelp].moneystr = @"0";
+                [RHhelper ShraeHelp].moneystr = @"0";
             }
             if (responseObject[@"flag"]&&![responseObject[@"flag"] isKindOfClass:[NSNull class]]) {
                 [RHhelper ShraeHelp].flag = [NSString stringWithFormat:@"%@",responseObject[@"flag"]];
@@ -76,12 +95,15 @@
         }
         //        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         NSLog(@"%@---",responseObject);
+        
+     //   [self huifumoth];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         ;
-        self.view.userInteractionEnabled = YES;
-      
+        // self.view.userInteractionEnabled = YES;
+        
         
     }];
+    
     
 }
 - (void)viewDidLoad
@@ -156,11 +178,12 @@
         
     }
     
-    
+    [self openappmydever];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [self stzfpush];
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden=YES;
 }
@@ -405,20 +428,60 @@
     return NO;
 }
 
+-(void)openappmydever{
+     NSString *deviceUUID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+      NSDictionary* parameters=@{@"popularizeCompany":@"appstore",@"equipment":deviceUUID,@"type":@"IOS",@"appVersion":[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]};
+    
+    [[RHNetworkService instance] POST:@"app/common/appMain/userOperation" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"%@",responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        ;
+    }];
+}
+
 -(void)sessionFailAndLoginAgain
 {
+    
+    NSLog(@"%f",RHScreeWidth);
+    
     NSString * str = @"app/common/user/appLogin/appLogin";
 //    NSString * str1 = @"common/user/login/appLogin";
     
     NSDictionary* parameters=@{@"account":[RHUserManager sharedInterface].username,@"password":[RHUserManager sharedInterface].md5};
-    
+
     [[RHNetworkService instance] POST:str parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //        DLog(@"%@",responseObject);
         NSArray* array=[[operation.response.allHeaderFields objectForKey:@"Set-Cookie"] componentsSeparatedByString:@";"];
-        [[NSUserDefaults standardUserDefaults] setObject:[array objectAtIndex:0] forKey:@"RHSESSION"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        //        DLog(@"%@",operation.response.allHeaderFields);
+//        array = @[];
+        for (NSString * str in array) {
+            if(str.length>12){
+                
+            
+                if ([str rangeOfString:@"JSESSIONID="].location != NSNotFound) {
+                    
+                    NSArray *array1 = [str componentsSeparatedByString:@"="];
+                    
+                    NSString * string = [NSString stringWithFormat:@"JSESSIONID=%@",array1[1]];
+                    [[NSUserDefaults standardUserDefaults] setObject:string forKey:@"RHSESSION"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+                if ([str rangeOfString:@"MYSESSIONID="].location != NSNotFound) {
+                    
+                    NSArray *array1 = [str componentsSeparatedByString:@"="];
+                    
+                    NSString * string = [NSString stringWithFormat:@"MYSESSIONID=%@",array1[1]];
+                    [[NSUserDefaults standardUserDefaults] setObject:string forKey:@"RHNEWMYSESSION"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+            }
+        }
         
+//        NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
+//        [[NSUserDefaults standardUserDefaults] setObject:[array objectAtIndex:0] forKey:@"RHSESSION"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//                DLog(@"%@",operation.response.allHeaderFields);
+        NSString *strin = [[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
+        NSLog(@"=========-session=========%@",strin);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSString* result=[responseObject objectForKey:@"md5"];
             if (result&&[result length]>0) {
@@ -465,6 +528,15 @@
                     [[NSUserDefaults standardUserDefaults] setObject:[RHUserManager sharedInterface].userId forKey:@"RHUSERID"];
                     [[NSUserDefaults standardUserDefaults] synchronize];
                 }
+                NSString* _userpwd=[responseObject objectForKey:@"isSetPwd"] ;
+                if (_userpwd&&[_userid length]>0) {
+                   
+                    [[NSUserDefaults standardUserDefaults] setObject: _userpwd forKey:@"RHUSERpwd"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+                NSString* session1=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHUSERpwd"];
+                NSLog(@"%@",session1);
+                
             }
         }
         if (self.isNotification == NO) {
@@ -472,11 +544,14 @@
             if (string && string.length > 0) {
                 [[[RHTabbarManager sharedInterface] selectTabbarMain] popToRootViewControllerAnimated:NO];
             } else {
-                [RHUtility showTextWithText:@"登录失败，请重新尝试！"];
+//                [RHUtility showTextWithText:@"登录失败，请重新尝试！"];
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSDictionary* errorDic=[NSJSONSerialization JSONObjectWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] options:NSJSONReadingMutableContainers error:nil];
+//        NSLog(@"%@",errorDic);
         [RHUtility showTextWithText:@"登录失败，请重新尝试！"];
+        
 //                DLog(@"%@",error);
     }];
 }

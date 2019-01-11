@@ -18,7 +18,7 @@
 #import "RHTabbarManager.h"
 #import "RHUserManager.h"
 #import "UIViewController+NoData.h"
-#import "APService.h"
+
 #import "MobClick.h"
 #import "RHMobHua.h"
 #ifdef DEBUG

@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "PNG-银行存管.png",
+      "filename" : "合规透明.png",
       "scale" : "1x"
     },
     {
@@ -11,6 +11,7 @@
     },
     {
       "idiom" : "universal",
+      "filename" : "合规透明@2x.png",
       "scale" : "3x"
     }
   ],

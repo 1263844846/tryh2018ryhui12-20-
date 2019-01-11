@@ -194,6 +194,11 @@
         
         [self.clearButton setHidden:YES];
         [self.enterButton setHidden:YES];
+        
+        
+        if ([UIScreen mainScreen].bounds.size.height>740) {
+            clearButton.frame = CGRectMake(frame.size.width/2-60, frame.size.height-70-60, 120, 30);
+        }
 
     }
     

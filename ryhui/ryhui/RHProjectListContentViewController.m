@@ -15,6 +15,12 @@
 #import "RHProjectdetailthreeViewController.h"
 #import "RHXFDViewController.h"
 #import "RHHFJXViewController.h"
+#import "RHXMJTableViewCell.h"
+#import "RHhelper.h"
+#import "RHXMJWebViewController.h"
+#import "RHALoginViewController.h"
+#import "RHXMJProjectViewController.h"
+
 @interface RHProjectListContentViewController ()
 {
     EGORefreshTableHeaderView *_headerView;
@@ -26,6 +32,8 @@
 @property (nonatomic,strong)NSString* currentSixd;
 @property (nonatomic, assign) int currentPageIndex;
 
+
+@property(nonatomic,strong)NSMutableArray * xmjarray;
 @end
 
 @implementation RHProjectListContentViewController
@@ -49,7 +57,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].applicationFrame.size.height-75-40-self.navigationController.navigationBar.frame.size.height+35) style:UITableViewStylePlain];
+    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].applicationFrame.size.height-140-40-self.navigationController.navigationBar.frame.size.height+35) style:UITableViewStylePlain];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     self.tableView.backgroundColor=[UIColor clearColor];
@@ -71,7 +79,15 @@
     showLoadMoreButton=YES;
 
 }
-
+-(NSMutableArray *)xmjarray{
+    
+    if (!_xmjarray) {
+        _xmjarray = [NSMutableArray array];
+        
+    }
+    return _xmjarray;
+    
+}
 -(void)refreshWithData:(NSString *)data
 {
     
@@ -112,7 +128,8 @@
     if ([type isEqualToString:@"0"]) {
         url=@"app/common/appMain/projectListAllData";
     }else{
-        url=@"common/main/xueListData";
+        url=@"app/common/appMain/projectListDataForApp";
+       parameters = @{@"_search":@"false",@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",_currentPageIndex],@"sidx":@"",@"sord":@""};
     }
 //    DLog(@"%@--url==%@",parameters,url);
 
@@ -155,14 +172,28 @@
         
         if (_reloading) {
             [self.dataArray removeAllObjects];
+            [self.xmjarray removeAllObjects];
+            
         }
         self.currentPageIndex++;
-
-        [dataArray addObjectsFromArray:tempArray];
-        if ([dataArray count] <= 6) {
-            _footerView.hidden = YES;
-        
+        if ([type isEqualToString:@"0"]) {
+            [dataArray addObjectsFromArray:tempArray];
+            if ([dataArray count] <= 6) {
+                _footerView.hidden = YES;
+                
+            }
+        }else{
+            [self.xmjarray addObjectsFromArray:tempArray];
+            if ([self.xmjarray count] <= 6) {
+                _footerView.hidden = YES;
+                
+            }
         }
+//        [dataArray addObjectsFromArray:tempArray];
+//        if ([dataArray count] <= 6) {
+//            _footerView.hidden = YES;
+//
+//        }
         [self reloadTableView];
         [_footerView.activityIndicatorView stopAnimating];
         
@@ -172,6 +203,30 @@
         _reloading = NO;
         [_headerView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
     }];
+    
+    
+    
+    
+//    NSDictionary* parameters1=@{@"_search":@"false",@"rows":@"10",@"page":[NSString stringWithFormat:@"%d",_currentPageIndex],@"sidx":@"",@"sord":@""};
+//    [[RHNetworkService instance] POST:@"app/common/appMain/projectListDataForApp" parameters:parameters1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//
+//
+//        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+//
+//
+////            self.xmjarray = responseObject[@"rows"];
+////
+////            [self.tableView reloadData];
+//        }
+//
+//
+//        //
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        [RHUtility showTextWithText:@"网络异常,请重试"];
+//
+//
+//    }];
+    
 }
 
 -(void)getinvestListData
@@ -255,23 +310,112 @@
 
 
 #pragma mark-TableViewDelegate
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
 
+
+  return nil;
+    UIView * headerview = [[UIView alloc]init];
+
+    if (![[RHhelper ShraeHelp].xmjswitch isEqualToString:@"ON"]) {
+        headerview.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 0);
+
+        return nil;
+    }
+    headerview.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 30);
+    UILabel * newpersonlab = [[UILabel alloc]init];
+    newpersonlab.frame = CGRectMake(20,0, 100, 30);
+    //    newpersonlab.backgroundColor = [UIColor redColor];
+    [headerview addSubview:newpersonlab];
+    newpersonlab.font =[UIFont systemFontOfSize: 14.0];
+
+    if (section ==0) {
+        newpersonlab.text = @"项目集";
+    }else{
+        newpersonlab.text = @"最新标的";
+    }
+
+    return headerview;
+}
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    //分组数 也就是section数
+     return 1;
+    if ([[RHhelper ShraeHelp].xmjswitch isEqualToString:@"ON"]) {
+        return 2;
+    }else{
+        
+        return 1;
+    }
+    
+}
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    return 125;
+    
+   if ([[RHhelper ShraeHelp].xmjswitch isEqualToString:@"ON"]&&indexPath.section==0) {
+       return 142;
+   }
     return 150;
 }
-
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+//    if ([[RHhelper ShraeHelp].xmjswitch isEqualToString:@"ON"]) {
+//        return 30;
+//    }
+    return 0;
+}
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+//    if ([[RHhelper ShraeHelp].xmjswitch isEqualToString:@"ON"]) {
+//        if (section==0) {
+//            return 1;
+//        }else{
+//
+//            if (self.dataArray.count>100) {
+//                return 99;
+//            }
+//            return self.dataArray.count;
+//        }
+//    }else{
+    
+    if ([type isEqualToString:@"0"]) {
+        if (self.dataArray.count>100) {
+            return 100;
+        }
+        return self.dataArray.count;
+    }else{
+        if (self.xmjarray.count>100) {
+            return 100;
+        }
+        return self.xmjarray.count;
+    }
+//    }
+    
+    if (self.dataArray.count>100) {
+        return 100;
+    }
     return self.dataArray.count;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
    // [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+//    if (indexPath.section==0&&[[RHhelper ShraeHelp].xmjswitch isEqualToString:@"ON"]) {
+//        RHXMJTableViewCell * cell = (RHXMJTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"xmjcell"];
+//        if (cell == nil) {
+//            cell = [[[NSBundle mainBundle] loadNibNamed:@"RHXMJTableViewCell" owner:nil options:nil] objectAtIndex:0];
+//
+//        }
+//        //                [cell updataNewPeopleCell:self.newdic];
+//        cell.lilvlab.text = [RHhelper ShraeHelp].xmjlilv;
+//        cell.mouthlab.text = [RHhelper ShraeHelp].xmjmouth;
+//        [cell.didbtn addTarget:self action:@selector(pushxmj) forControlEvents:UIControlEventTouchUpInside];
+//        return cell;
+//    }
     if ([self.type isEqualToString:@"0"]) {
      
-    if ([UIScreen mainScreen].bounds.size.width > 319) {
+  
         
     
     static NSString *CellIdentifier = @"CellIdentifier";
@@ -286,7 +430,11 @@
         self.myblock(dataDic);
     };
    
-    
+    if (indexPath.row==0) {
+       cell.newfirstlanhiden.hidden = YES;
+    }
+            
+            cell.listres = @"res";
     NSString  * string = [NSString stringWithFormat:@"%@",dataDic[@"investorRate"]];
     //dataDic[@"investorRate"] = (id)string
     if (string.length > 5) {
@@ -318,69 +466,23 @@
         }
     return cell;
     }else{
-        static NSString *CellIdentifier = @"CellIdentifier1";
         
-        RHMainTableViewCell *cell = (RHMainTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        static NSString *CellIdentifier = @"CellIdentifier";
+        
+        RHMainViewCell *cell = (RHMainViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"RHMainTableViewCell" owner:nil options:nil] objectAtIndex:0];
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"RHMainViewCell" owner:nil options:nil] objectAtIndex:0];
         }
-        NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row-2];
-//        cell.myblock = ^{
-//            self.myblock(dataDic);
-//        };
-        
-        
-        NSString  * string = [NSString stringWithFormat:@"%@",dataDic[@"investorRate"]];
-        //dataDic[@"investorRate"] = (id)string
-        if (string.length > 5) {
-            NSArray *array = [string componentsSeparatedByString:@"."];
-            string = array.lastObject;
-            string =  [string substringToIndex:2];
-            
-            int a = [string intValue];
-            
-            int b  = a /10;
-            
-            int c = a - b * 10;
-            
-            if (c > 5) {
-                b= b+1;
-                
-                string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
-                // [dataDic setValue:string forKey:@"investorRate"];
-                // dataDic[@"investorRate"] = string;
-            }else{
-                
-                string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
-                //[dataDic setValue:string forKey:@"investorRate"];
-                
-            }
-        }
-//        cell.lilv = string;
-        [cell updateCell:dataDic];
-        
-        return cell;
-
-
-        
-    }
-    }else{
-        
-       static NSString * CellIdentifier = @"rhzzlistcell";
-//        static NSString *CellIdentifier = @"CellIdentifier1";
-        
-        RHZZListTableViewCell *cell = (RHZZListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"RHZZListTableViewCell" owner:nil options:nil] objectAtIndex:0];
-        }
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        if (self.dataArray.count >0) {
-             NSDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];
+         cell.listres = @"res";
+        if (self.xmjarray.count >0) {
+            NSDictionary* dataDic=[self.xmjarray objectAtIndex:indexPath.row];
             cell.myblock = ^{
                 self.myblock(dataDic);
             };
             
-            
+            if (indexPath.row==0) {
+                cell.newfirstlanhiden.hidden = YES;
+            }
             NSString  * string = [NSString stringWithFormat:@"%@",dataDic[@"investorRate"]];
             //dataDic[@"investorRate"] = (id)string
             if (string.length > 5) {
@@ -406,17 +508,12 @@
                     //[dataDic setValue:string forKey:@"investorRate"];
                     
                 }
-                
             }
             cell.lilv = string;
-            [cell updateCell:dataDic];
-        }else{
-            
+            [cell updatexmjCell:dataDic];
         }
-        
-        
-        
         return cell;
+        
     }
     
 }
@@ -425,11 +522,15 @@
 {
     //if ([self.type isEqualToString:@"0"]) {
     
-    
+//    if (indexPath.row==0&&[[RHhelper ShraeHelp].xmjswitch isEqualToString:@"ON"]&&indexPath.section==0) {
+//
+//        [self pushxmj];
+//        return;
+//    }
     
    
    
-    
+    if ([self.type isEqualToString:@"0"]) {
     
     
    NSMutableDictionary* dataDic=[self.dataArray objectAtIndex:indexPath.row];
@@ -495,9 +596,53 @@
         
     }
     
-    [self.prarentNav pushViewController:controller animated:YES];
+    [self.prarentNav pushViewController:controller animated:NO];
 
-    
+    }else{
+        
+        NSMutableDictionary* dataDic;
+        NSMutableDictionary* Dic;
+        
+        Dic = [self.xmjarray objectAtIndex:indexPath.row];
+        dataDic = [self.xmjarray objectAtIndex:indexPath.row];
+        
+        RHXMJProjectViewController * xmjcontroller = [[RHXMJProjectViewController alloc]initWithNibName:@"RHXMJProjectViewController" bundle:nil];
+        
+        
+        //            xmjcontroller.lilv = string;
+        xmjcontroller.datadic=dataDic;
+        NSString * projectStatus;
+        if (![[Dic objectForKey:@"percent"] isKindOfClass:[NSNull class]]) {
+            projectStatus=[Dic objectForKey:@"projectStatus"] ;
+            
+        }
+        if ([projectStatus isEqualToString:@"finished"]) {
+            
+            xmjcontroller.zhuangtaistr =  @"还款完毕";
+            
+        }else if ([projectStatus isEqualToString:@"repayment_normal"]||[projectStatus isEqualToString:@"repayment_abnormal"]){
+            
+            xmjcontroller.zhuangtaistr =@"还款中";
+            
+        }else if ([projectStatus isEqualToString:@"loans"]||[projectStatus isEqualToString:@"loans_audit"]){
+            
+            xmjcontroller.zhuangtaistr =@"项目审核";
+            
+        }else if ([projectStatus isEqualToString:@"full"]){
+            
+            xmjcontroller.zhuangtaistr =@"已满标";
+            
+        }else if ([projectStatus isEqualToString:@"publishedWaiting"]){
+            
+            xmjcontroller.zhuangtaistr =@"稍后出借";
+            
+        }
+        xmjcontroller.listres = @"0";
+//        [xmjcontroller updata:dataDic];
+        [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+        [self.prarentNav pushViewController:xmjcontroller animated:NO];
+//        [self.navigationController pushViewController:xmjcontroller animated:NO];
+    }
     
     
 }
@@ -520,5 +665,20 @@
     [self startPost];
     
 }
-
+-(void)pushxmj{
+    
+    if (![RHUserManager sharedInterface].username) {
+        //        [self.investmentButton setTitle:@"请先登录" forState:UIControlStateNormal];
+        [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+        NSLog(@"ddddddd");
+        RHALoginViewController* controller=[[RHALoginViewController alloc] initWithNibName:@"RHALoginViewController" bundle:nil];
+        [self.prarentNav pushViewController:controller animated:NO];
+        return;
+    }
+    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    RHXMJWebViewController *office = [[RHXMJWebViewController alloc] initWithNibName:@"RHXMJWebViewController" bundle:nil];
+    office.nametitle = @"项目集";
+    office.xmjurl = [NSString stringWithFormat:@"%@%@",[RHNetworkService instance].newdoMain,[RHhelper ShraeHelp].xmjlink];
+    [self.prarentNav pushViewController:office animated:NO];
+}
 @end

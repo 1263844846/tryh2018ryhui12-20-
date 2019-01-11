@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#define RHScreeWidth   ([[UIScreen mainScreen] bounds].size.width)
+#define RHScreeHeight   ([[UIScreen mainScreen] bounds].size.height)
 @interface RHBaseViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UILabel *messageNumLabel;

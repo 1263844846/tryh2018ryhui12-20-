@@ -95,14 +95,14 @@ static RHTabbarManager* _instance =nil;
 
 -(UINavigationController*)selectTabbarMore
 {
-    AppDelegate* delegate=[UIApplication sharedApplication].delegate;
+//    AppDelegate* delegate=[UIApplication sharedApplication].delegate;
 //    delegate.window.rootViewController=self.tabbarMore;
     return self.tabbarMore;
 }
 -(UINavigationController *)selectTabbarProject
 {
-    AppDelegate* delegate=[UIApplication sharedApplication].delegate;
-    delegate.window.rootViewController=self.tabbarproject;
+//    AppDelegate* delegate=[UIApplication sharedApplication].delegate;
+//    delegate.window.rootViewController=self.tabbarproject;
     return self.tabbarproject;
     
 }

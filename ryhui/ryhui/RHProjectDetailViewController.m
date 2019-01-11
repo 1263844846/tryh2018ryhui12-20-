@@ -5,7 +5,7 @@
 ////  Created by stefan on 15/3/14.
 ////  Copyright (c) 2015年 stefan. All rights reserved.
 ////
-//
+//    539440
 //#import "RHProjectDetailViewController.h"
 //#import "RHALoginViewController.h"
 //#import "RHRegisterWebViewController.h"
@@ -125,8 +125,7 @@
 //    self.dataArray=[[NSMutableArray alloc] initWithCapacity:0];
 //    
 //   
-//    self.shouyexunhuan = @"qiangge";
-//    
+
 //    page = 1 ;
 //    isSegment2Click = NO;
 //    [self configBackButton];

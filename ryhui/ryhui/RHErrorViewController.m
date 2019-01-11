@@ -100,14 +100,16 @@
     self.giftTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     switch (type) {
         case RHInvestmentSucceed:
-            [self configTitleWithString:@"投资成功"];
+            [self configTitleWithString:@"出借成功"];
             [self succeed];
             //[self myInvestMent];
             
-            self.backlab.text = @"投资成功";
+            self.backlab.text = @"出借成功";
             //首次投资成功显示
 //            [self cheTheGift];
-            [self.secButton setTitle:@"投资记录" forState:UIControlStateNormal ];
+//            [self.secButton setTitle:@"出借记录" forState:UIControlStateNormal ];
+//             [self.firstbutton setTitle:@"我的出借" forState:UIControlStateNormal ];
+            [self.secButton setTitle:@"项目列表" forState:UIControlStateNormal ];
             [self cheTheGift];
 //
             break;
@@ -139,10 +141,10 @@
                 self.bankbacklab.text = [NSString stringWithFormat:@"银行返回值：%@",self.bankbackstr];
             }
             
-            [self configTitleWithString:@"投资失败"];
+            [self configTitleWithString:@"出借失败"];
             [self fail];
           //  [self myInvestMent];
-            self.backlab.text = @"投资失败";
+            self.backlab.text = @"出借失败";
             [self.firstbutton setTitle:@"我的账户" forState:UIControlStateNormal ];
             [self.secButton setTitle:@"项目列表" forState:UIControlStateNormal ];
             break;
@@ -194,11 +196,11 @@
             self.backlab.text = @"转出失败";
             break;
         case RHInvestmentchixu:
-            [self configTitleWithString:@"投资处理中"];
+            [self configTitleWithString:@"出借处理中"];
             [self chixu];
             //  [self myInvestMent];
-            self.backlab.text = @"投资持续处理中";
-            [self.firstbutton setTitle:@"我的账户" forState:UIControlStateNormal ];
+            self.backlab.text = @"出借持续处理中";
+            [self.firstbutton setTitle:@"我的出借" forState:UIControlStateNormal ];
             [self.secButton setTitle:@"项目列表" forState:UIControlStateNormal ];
             
         default:
@@ -221,7 +223,11 @@
     //关键语句
     CGSize expectSize = [self.tipsLabel sizeThatFits:maximumLabelSize];
     //别忘了把frame给回label，如果用xib加了约束的话可以只改一个约束的值
-    self.tipsLabel.frame = CGRectMake(5, CGRectGetMaxY(self.titleLabel.frame), [UIScreen mainScreen].bounds.size.width-10, expectSize.height);
+    self.tipsLabel.frame = CGRectMake(5, CGRectGetMaxY(self.titleLabel.frame), [UIScreen mainScreen].bounds.size.width-13, expectSize.height);
+    
+    if (RHScreeWidth >390) {
+        self.tipsLabel.frame = CGRectMake(5, CGRectGetMaxY(self.titleLabel.frame), [UIScreen mainScreen].bounds.size.width-50, expectSize.height);
+    }
     
 //    self.titleLabel.backgroundColor = [UIColor redColor];
 //    
@@ -239,7 +245,7 @@
     
     self.titleLabel.text = titleStr;
     self.tipsLabel.text = tipsStr;
-    
+//    self.tipsLabel.backgroundColor = [UIColor redColor];
     if (self.recongestrsec.length >2) {
         self.chongzhihiden.hidden = YES;
 //        self.tipsLabel.text = self.recongestrsec;
@@ -346,6 +352,11 @@
     manager.responseSerializer=[[AFCompoundResponseSerializer alloc]init];
     manager.securityPolicy = [[RHNetworkService instance] customSecurityPolicy];
     NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
+    NSString* session1=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHNEWMYSESSION"];
+    
+    if (session1.length>12) {
+        session = [NSString stringWithFormat:@"%@,%@",session,session1];
+    }
     NSLog(@"------------------%@",session);
     if (session&&[session length]>0) {
         [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
@@ -411,6 +422,11 @@
     manager.responseSerializer=[[AFCompoundResponseSerializer alloc]init];
     manager.securityPolicy = [[RHNetworkService instance] customSecurityPolicy];
     NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
+    NSString* session1=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHNEWMYSESSION"];
+    
+    if (session1.length>12) {
+        session = [NSString stringWithFormat:@"%@,%@",session,session1];
+    }
     NSLog(@"------------------%@",session);
     if (session&&[session length]>0) {
         [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
@@ -507,12 +523,13 @@
      UINavigationController* nav = [[RHTabbarManager sharedInterface] selectTabbarUser];
     UIButton * bttn ;
     bttn = sender;
-    if ([bttn.titleLabel.text isEqualToString:@"投资记录"]) {
+    if ([bttn.titleLabel.text isEqualToString:@"出借记录"]) {
         [RHhelper ShraeHelp].resss =1;
         
         RHMyInvestmentViewController*   controller = [[RHMyInvestmentViewController alloc] initWithNibName:@"RHMyInvestmentViewController" bundle:nil];
         // [DQViewController Sharedbxtabar].tarbar.hidden = YES;
-        
+//        controller.nav = self.navigationController;
+        controller.resstr = @"test";
         [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:2];
         UIButton *btn = [[UIButton alloc]init];
         btn.tag = 2;
@@ -538,7 +555,7 @@
 //            [self.navigationController popToRootViewControllerAnimated:NO];
 //            return;
         }
-        if ([self.backlab.text isEqualToString:@"投资失败"]) {
+        if ([self.backlab.text isEqualToString:@"出借失败"]) {
             [RHhelper ShraeHelp].resss =10;
             RHProjectListViewController *controller = [[RHProjectListViewController alloc]initWithNibName:@"RHProjectListViewController" bundle:nil];
             controller.type = @"0";
@@ -645,7 +662,7 @@
 
 -(void)myInvestMent {
     
-    [self.secButton setTitle:@"我的投资" forState:UIControlStateNormal];
+    [self.secButton setTitle:@"我的出借" forState:UIControlStateNormal];
     _secButton.tag = 10;
 //    [self.secButton addTarget:self action:@selector(pushMyAccount:) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -666,12 +683,12 @@
     UINavigationController* nav = [[RHTabbarManager sharedInterface] selectTabbarUser];
     UIButton * bttn ;
     bttn = sender;
-    if ([bttn.titleLabel.text isEqualToString:@"投资记录"]) {
+    if ([bttn.titleLabel.text isEqualToString:@"我的出借"]) {
         [RHhelper ShraeHelp].resss =1;
         
         RHMyInvestmentViewController*   controller = [[RHMyInvestmentViewController alloc] initWithNibName:@"RHMyInvestmentViewController" bundle:nil];
        // [DQViewController Sharedbxtabar].tarbar.hidden = YES;
-        
+        controller.nav = self.navigationController;
         [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:2];
         UIButton *btn = [[UIButton alloc]init];
         btn.tag = 2;
@@ -684,7 +701,7 @@
     }
 //     [self.navigationController popToRootViewControllerAnimated:YES];
     if ([bttn.titleLabel.text isEqualToString:@"我的账户"]) {
-        if( [self.backlab.text isEqualToString:@"投资成功"]){
+        if( [self.backlab.text isEqualToString:@"出借成功"]){
             [RHhelper ShraeHelp].resss =5;
             RHUserCountViewController *controller = [[RHUserCountViewController alloc]initWithNibName:@"RHUserCountViewController" bundle:nil];
             //            controller.type = @"0";
@@ -694,6 +711,19 @@
             btn.tag = 2;
             [[DQview Shareview] btnClick:btn];
                         [self.navigationController popToRootViewControllerAnimated:NO];
+            
+            
+            return;
+        }else{
+            [RHhelper ShraeHelp].resss =5;
+            RHUserCountViewController *controller = [[RHUserCountViewController alloc]initWithNibName:@"RHUserCountViewController" bundle:nil];
+            //            controller.type = @"0";
+            [nav pushViewController:controller animated:YES];
+            [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:2];
+            UIButton *btn = [[UIButton alloc]init];
+            btn.tag = 2;
+            [[DQview Shareview] btnClick:btn];
+            [self.navigationController popToRootViewControllerAnimated:NO];
             
             
             return;
@@ -710,6 +740,19 @@
         btn.tag = 1;
         [[DQview Shareview] btnClick:btn];
         
+        
+//        [RHhelper ShraeHelp].resss =10;
+//        RHProjectListViewController *controller = [[RHProjectListViewController alloc]initWithNibName:@"RHProjectListViewController" bundle:nil];
+//        controller.type = @"0";
+//        //    [nav pushViewController:controller animated:YES];
+//        [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:1];
+//        UIButton *btn = [[UIButton alloc]init];
+//        btn.tag = 1;
+//        [[DQview Shareview] btnClick:btn];
+//        [self.navigationController popToRootViewControllerAnimated:NO];
+//        return;
+        
+        
     }else{
 //        [RHmainModel ShareRHmainModel].maintest = @"";
 //        RHUserCountViewController *controller1 = [[RHUserCountViewController alloc]initWithNibName:@"RHUserCountViewController" bundle:nil];
@@ -720,7 +763,7 @@
         
         RHMyInvestmentViewController*   controller = [[RHMyInvestmentViewController alloc] initWithNibName:@"RHMyInvestmentViewController" bundle:nil];
         // [DQViewController Sharedbxtabar].tarbar.hidden = YES;
-        
+        controller.nav = self.navigationController;
         [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:2];
         UIButton *btn = [[UIButton alloc]init];
         btn.tag = 2;
@@ -745,9 +788,11 @@
     UINavigationController* nav = [[RHTabbarManager sharedInterface] selectTabbarUser];
     UIViewController *controller;
     if (sender.tag == 10) {
-        controller = [[RHMyInvestmentViewController alloc] initWithNibName:@"RHMyInvestmentViewController" bundle:nil];
+    RHMyInvestmentViewController*    controller = [[RHMyInvestmentViewController alloc] initWithNibName:@"RHMyInvestmentViewController" bundle:nil];
         [nav pushViewController:controller animated:YES];
         [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:2];
+        controller.nav = self.navigationController;
+        
         UIButton *btn = [[UIButton alloc]init];
         btn.tag = 2;
         [[DQview Shareview] btnClick:btn];

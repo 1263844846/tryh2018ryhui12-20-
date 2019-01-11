@@ -28,6 +28,11 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
     [request setHTTPMethod: @"POST"];
     NSString *session = [[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
+    NSString* session1=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHNEWMYSESSION"];
+    
+    if (session1.length>12) {
+        session = [NSString stringWithFormat:@"%@,%@",session,session1];
+    }
     if (session&&[session length] > 0) {
         [request setValue:session forHTTPHeaderField:@"cookie"];
     }

@@ -39,7 +39,7 @@
     self.RHbutton.frame = CGRectMake(CGRectGetMinX(self.progressView.frame), CGRectGetMaxY(self.progressView.frame)-5, 60, 20);
    // [self addSubview:self.RHbutton];
 //
-    [self.RHbutton setTitle:@"快捷投标" forState:UIControlStateNormal];
+    [self.RHbutton setTitle:@"立即出借" forState:UIControlStateNormal];
 //
     self.RHbutton.titleLabel.font =[UIFont systemFontOfSize: 10.0];
     self.RHbutton.backgroundColor = [RHUtility colorForHex:@"#f89779"];
@@ -59,6 +59,8 @@
     
     self.test=  self.firstlab.frame.size.width*([UIScreen mainScreen].bounds.size.width/320.00);
     self.firstlab.frame = CGRectMake(CGRectGetMinX(self.firstlab.frame), CGRectGetMinY(self.firstlab.frame), self.test, 1);
+    
+    
 }
 - (IBAction)rhtoubiao:(id)sender {
     self.myblock();
@@ -86,6 +88,11 @@
 //studentLoan = 0;
 -(void)updateCell:(NSDictionary*)dic
 {
+    self.listlab.hidden = YES;
+    if ([self.listres isEqualToString:@"res"]) {
+        self.listlab.hidden = NO;
+    }
+    
     if (![[dic objectForKey:@"monthOrDay"] isKindOfClass:[NSNull class]]&&[dic objectForKey:@"monthOrDay"]){
         
         self.mouthordaylab.text = dic[@"monthOrDay"];
@@ -148,13 +155,13 @@
         CGSize size = [investorRate sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:30],NSFontAttributeName, nil]];
         CGFloat nameW = size.width;
         
-        self.investorRateLabel.frame = CGRectMake(self.investorRateLabel.frame.origin.x, self.investorRateLabel.frame.origin.y, nameW+10, self.investorRateLabel.frame.size.height);
+        self.investorRateLabel.frame = CGRectMake(self.investorRateLabel.frame.origin.x, self.investorRateLabel.frame.origin.y, nameW+3, self.investorRateLabel.frame.size.height);
         self.fuhaolab.frame = CGRectMake(CGRectGetMaxX(self.investorRateLabel.frame), self.fuhaolab.frame.origin.y, self.fuhaolab.frame.size.width, self.fuhaolab.frame.size.height);
         if (![[dic objectForKey:@"investorAddRate"] isKindOfClass:[NSNull class]]){
             fuhaostr=[[dic objectForKey:@"investorAddRate"] stringValue];
             if ([fuhaostr isEqualToString:@"0"]) {
                 fuhaostr = @"%";
-                self.moveview.frame = CGRectMake(CGRectGetMinX(self.moveview.frame)-30, CGRectGetMinY(self.moveview.frame), self.moveview.frame.size.width, self.moveview.frame.size.height);
+//                self.moveview.frame = CGRectMake(CGRectGetMinX(self.moveview.frame)-30, CGRectGetMinY(self.moveview.frame), self.moveview.frame.size.width, self.moveview.frame.size.height);
                 
             }else{
                 fuhaostr = [NSString stringWithFormat:@"+%@%%",fuhaostr];
@@ -168,8 +175,10 @@
     self.hidenimage.frame = CGRectMake(CGRectGetMaxX(self.fuhaolab.frame)-5, self.hidenimage.frame.origin.y, self.hidenimage.frame.size.width, self.hidenimage.frame.size.height);
     self.investorRateLabel.text=[NSString stringWithFormat:@"%@",investorRate];
     NSString* limitTime=@"0";
-    if (![[dic objectForKey:@"limitTime"] isKindOfClass:[NSNull class]]) {
+    if (![[dic objectForKey:@"limitTime"] isKindOfClass:[NSNull class]]&&dic[@"limitTime"]) {
         limitTime=[[dic objectForKey:@"limitTime"] stringValue];
+        
+//        limitTime = [NSString stringWithFormat:@"%@",[dic objectForKey:@"limitTime"]];
                 NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:limitTime];
         
                 [str1 addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:25] range:NSMakeRange(0,str1.length)];
@@ -190,17 +199,20 @@
             
             NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:projectFund];
             
-            [str1 addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:25] range:NSMakeRange(0,str1.length)];
+            [str1 addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:16] range:NSMakeRange(0,str1.length)];
             self.projectFundLabel.attributedText = str1;
             
             
         }else{
             self.hidenimage.hidden = YES;
-        NSLog(@"%f",[[dic objectForKey:@"projectFund"] floatValue]);
-        projectFund=[NSString stringWithFormat:@"%.2f",([[dic objectForKey:@"projectFund"] floatValue]/10000.0)];
-            NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:projectFund];
-            
-            [str1 addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:23] range:NSMakeRange(0,str1.length)];
+        NSLog(@"%f",[[dic objectForKey:@"available"] floatValue]);
+        projectFund=[NSString stringWithFormat:@"剩余%.2f万元",([[dic objectForKey:@"available"] floatValue]/10000.0)];
+           
+        if (([[dic objectForKey:@"available"] floatValue]/10000.0)<=0) {
+                projectFund=[NSString stringWithFormat:@"总额%.2f万元",([[dic objectForKey:@"projectFund"] floatValue]/10000.0)];
+            }
+             NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:projectFund];
+            [str1 addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:16] range:NSMakeRange(0,str1.length)];
             self.projectFundLabel.attributedText = str1;
         }
     }
@@ -241,22 +253,33 @@
         
         [self.button setTitle:@"还款完毕" forState:UIControlStateNormal];
         self.button.userInteractionEnabled = NO;
-        self.button.backgroundColor = [RHUtility colorForHex:@"#bdbdbe"];
+      self.btnimage.image = [UIImage imageNamed:@"按钮点击后"];
+        //按钮点击后
     }else if ([projectStatus isEqualToString:@"repayment_normal"]||[projectStatus isEqualToString:@"repayment_abnormal"]){
         
         [self.button setTitle:@"还款中" forState:UIControlStateNormal];
         self.button.userInteractionEnabled = NO;
-        self.button.backgroundColor = [RHUtility colorForHex:@"#bdbdbe"];
+        self.btnimage.image = [UIImage imageNamed:@"按钮点击后"];
     }else if ([projectStatus isEqualToString:@"loans"]||[projectStatus isEqualToString:@"loans_audit"]){
         
         [self.button setTitle:@"放款审核" forState:UIControlStateNormal];
         self.button.userInteractionEnabled = NO;
-        self.button.backgroundColor = [RHUtility colorForHex:@"#bdbdbe"];
+        self.btnimage.image = [UIImage imageNamed:@"按钮点击后"];
     }else if ([projectStatus isEqualToString:@"full"]){
         
         [self.button setTitle:@"已满标" forState:UIControlStateNormal];
         self.button.userInteractionEnabled = NO;
-        self.button.backgroundColor = [RHUtility colorForHex:@"#bdbdbe"];
+        self.btnimage.image = [UIImage imageNamed:@"按钮点击后"];
+    }else if ([projectStatus isEqualToString:@"publishedWaiting"]){
+        
+       
+        [self.button setTitle:@"稍后出借" forState:UIControlStateNormal];
+        self.button.userInteractionEnabled = NO;
+//        self.button.backgroundColor = [RHUtility colorForHex:@"#bdbdbe"];
+//         [self.button setImage:[UIImage imageNamed:@"按钮点击后"] forState:UIControlStateNormal];
+        
+        self.btnimage.image = [UIImage imageNamed:@"按钮点击后"];
+        
     }
     
     NSLog(@"---%f-----%@",percent,self.nameLabel.text);
@@ -289,7 +312,7 @@
       
        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:self.investorRateLabel.text];
         
-        [str addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:30] range:NSMakeRange(0,str.length)];
+        [str addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Medium" size:30] range:NSMakeRange(0,str.length)];
         self.investorRateLabel.attributedText = str;
     
     
@@ -302,4 +325,128 @@
  
     
 }
+
+-(void)updatexmjCell:(NSDictionary*)dic{
+    self.listlab.hidden = YES;
+    if ([self.listres isEqualToString:@"res"]) {
+        self.listlab.hidden = NO;
+    }
+    
+    NSString* limitTime=@"0";
+    if (![[dic objectForKey:@"period"] isKindOfClass:[NSNull class]]&&dic[@"period"]) {
+        limitTime=[NSString stringWithFormat:@"%@",dic[@"period"]];
+        
+        //        limitTime = [NSString stringWithFormat:@"%@",[dic objectForKey:@"limitTime"]];
+        NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:limitTime];
+        
+        [str1 addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:25] range:NSMakeRange(0,str1.length)];
+        self.limitTimeLabel.attributedText = str1;
+    }
+    NSString* name=@"";
+    if (![[dic objectForKey:@"name"] isKindOfClass:[NSNull class]]) {
+        name=[dic objectForKey:@"name"];
+    }
+    self.nameLabel.text=name;
+    
+    NSString* paymentName=@"";
+    if (![[dic objectForKey:@"paymentType"] isKindOfClass:[NSNull class]]&&dic[@"paymentType"]) {
+        paymentName=[dic objectForKey:@"paymentType"];
+    }
+    self.huankuanfangshi.text = paymentName;
+    
+    
+    
+    NSString* projectFund=@"0";
+    if (![[dic objectForKey:@"remainMoney"] isKindOfClass:[NSNull class]]&&dic[@"remainMoney"]) {
+        //        DLog(@"%@",[NSString stringWithFormat:@"%.2f",([[dic objectForKey:@"projectFund"] floatValue]/10000.0)]);
+        
+        if (self.res) {
+            NSString * str = [[dic objectForKey:@"remainMoney"] stringByReplacingOccurrencesOfString:@"," withString:@""];
+            NSLog(@"%f",[str floatValue]);
+            projectFund=[NSString stringWithFormat:@"%.2f",([str floatValue]/10000.0)];
+            
+            
+            self.xiangouimage.hidden = NO;
+            self.xiangouimage.image = [UIImage imageNamed:@"hotxinshou"];
+            self.hidenimage.hidden = NO;
+            
+            NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:projectFund];
+            
+            [str1 addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:16] range:NSMakeRange(0,str1.length)];
+            self.projectFundLabel.attributedText = str1;
+            
+            
+        }else{
+            self.hidenimage.hidden = YES;
+            NSLog(@"%f",[[dic objectForKey:@"remainMoney"] floatValue]);
+            
+            
+            projectFund=[NSString stringWithFormat:@"剩余%.2f万元",([[dic objectForKey:@"remainMoney"] floatValue]/10000.0)];
+            if (([[dic objectForKey:@"remainMoney"] floatValue]/10000.0)<=0) {
+                projectFund=[NSString stringWithFormat:@"总额%.2f万元",([[dic objectForKey:@"totalMoney"] floatValue]/10000.0)];
+            }
+            
+            NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:projectFund];
+            
+            [str1 addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:16] range:NSMakeRange(0,str1.length)];
+            
+            self.projectFundLabel.attributedText = str1;
+        }
+    }
+    
+    NSString * projectStatus;
+    if (![[dic objectForKey:@"projectStatus"] isKindOfClass:[NSNull class]]) {
+        projectStatus=[dic objectForKey:@"projectStatus"] ;
+        self.button.userInteractionEnabled = YES;
+    }
+    if ([projectStatus isEqualToString:@"finished"]) {
+        
+        [self.button setTitle:@"还款完毕" forState:UIControlStateNormal];
+        self.button.userInteractionEnabled = NO;
+        self.btnimage.image = [UIImage imageNamed:@"按钮点击后"];
+        
+    }else if ([projectStatus isEqualToString:@"repayment_normal"]||[projectStatus isEqualToString:@"repayment_abnormal"]){
+        
+        [self.button setTitle:@"还款中" forState:UIControlStateNormal];
+        self.button.userInteractionEnabled = NO;
+        self.btnimage.image = [UIImage imageNamed:@"按钮点击后"];
+    }else if ([projectStatus isEqualToString:@"loans"]||[projectStatus isEqualToString:@"loans_audit"]){
+        
+        [self.button setTitle:@"放款审核" forState:UIControlStateNormal];
+        self.button.userInteractionEnabled = NO;
+        self.btnimage.image = [UIImage imageNamed:@"按钮点击后"];
+    }else if ([projectStatus isEqualToString:@"full"]){
+        
+        [self.button setTitle:@"已满标" forState:UIControlStateNormal];
+        self.button.userInteractionEnabled = NO;
+        self.btnimage.image = [UIImage imageNamed:@"按钮点击后"];
+    }else if ([projectStatus isEqualToString:@"publishedWaiting"]){
+        
+        
+        [self.button setTitle:@"稍后出借" forState:UIControlStateNormal];
+        self.button.userInteractionEnabled = NO;
+        self.btnimage.image = [UIImage imageNamed:@"按钮点击后"];
+        self.projectFundLabel.text = @"新额度发布中";
+        
+    }
+    
+    if (![[dic objectForKey:@"rate"] isKindOfClass:[NSNull class]]&&dic[@"rate"]) {
+        NSString *xmjlilv=[NSString stringWithFormat:@"%@",dic[@"rate"]];
+        
+//        //        limitTime = [NSString stringWithFormat:@"%@",[dic objectForKey:@"limitTime"]];
+//        NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:xmjlilv];
+//
+//        [str1 addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:25] range:NSMakeRange(0,str1.length)];
+        self.investorRateLabel.text = xmjlilv;
+        
+        CGSize size = [xmjlilv sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:30],NSFontAttributeName, nil]];
+        CGFloat nameW = size.width;
+        
+        self.investorRateLabel.frame = CGRectMake(self.investorRateLabel.frame.origin.x, self.investorRateLabel.frame.origin.y, nameW+3, self.investorRateLabel.frame.size.height);
+        self.fuhaolab.frame = CGRectMake(CGRectGetMaxX(self.investorRateLabel.frame), self.fuhaolab.frame.origin.y, self.fuhaolab.frame.size.width, self.fuhaolab.frame.size.height);
+    }
+    
+}
+
+
 @end

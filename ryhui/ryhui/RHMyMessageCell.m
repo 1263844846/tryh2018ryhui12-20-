@@ -22,7 +22,13 @@
 //title = "\U5145\U503c\U6210\U529f";
 //type = 2;
 -(void)updateCell:(NSDictionary *)dic{
-    self.titleLabel.text = [dic objectForKey:@"title"];
+    if ([dic objectForKey:@"title"]&&![[dic objectForKey:@"title"] isKindOfClass:[NSNull class]]) {
+        self.titleLabel.text = [dic objectForKey:@"title"];
+    }else{
+        self.titleLabel.text = @"";
+    }
+    
+    
     NSString * timestr = [[dic objectForKey:@"postDate"] substringToIndex:10];
     self.timeLabel.text = timestr;
     self.namelab.text = [dic objectForKey:@"content"];

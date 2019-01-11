@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -32,6 +32,7 @@
                 <outlet property="segmentView1" destination="qTj-Ch-kIW" id="tVQ-h2-7EB"/>
                 <outlet property="segmentView2" destination="y5g-IU-Lnw" id="kfL-hL-5Er"/>
                 <outlet property="sjlab" destination="som-mw-zqS" id="Ake-75-oIO"/>
+                <outlet property="sqview" destination="3s2-kJ-JHE" id="OO3-UC-9mp"/>
                 <outlet property="tishilabel" destination="HEn-ux-pPI" id="J47-tu-SFb"/>
                 <outlet property="tixianfangshilab" destination="AWn-2H-XZ0" id="0m1-Da-7Zp"/>
                 <outlet property="tixianmiaoshulab" destination="16t-5A-M5D" id="TM9-vQ-dRw"/>
@@ -432,7 +433,7 @@
                 </view>
                 <view alpha="0.80000000000000004" contentMode="scaleToFill" misplaced="YES" id="oyg-Rb-bAT">
                     <rect key="frame" x="0.0" y="-66" width="375" height="788"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <view contentMode="scaleToFill" misplaced="YES" id="l1U-AI-wIt">
@@ -479,9 +480,64 @@
                         </label>
                     </subviews>
                 </view>
+                <view contentMode="scaleToFill" misplaced="YES" id="3s2-kJ-JHE">
+                    <rect key="frame" x="40" y="150" width="294" height="230"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="解绑卡.png" id="u7G-bp-Xqh">
+                            <rect key="frame" x="-1" y="0.0" width="294" height="230"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="提示：" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hkd-RW-xeu">
+                            <rect key="frame" x="41" y="8" width="211" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DkX-hY-yZ7">
+                            <rect key="frame" x="26" y="188" width="98" height="34"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="取消">
+                                <color key="titleColor" red="0.035294117649999998" green="0.68235294120000001" blue="0.69019607839999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="hidennsqview:" destination="-1" eventType="touchUpInside" id="H7r-tj-Gfd"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="OQJ-B0-7lJ">
+                            <rect key="frame" x="162" y="188" width="112" height="34"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                            <state key="normal" title="确定">
+                                <color key="titleColor" red="0.035294117649999998" green="0.68235294120000001" blue="0.69019607839999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="gosq:" destination="-1" eventType="touchUpInside" id="cy4-rX-Hmf"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" 根据银行存管合规要求，如有涉及收取手续费的交易，请您先授权。授权后实际扣费为应收手续费，不会产生额外费用，请知悉。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ttb-Q3-0SJ">
+                            <rect key="frame" x="22" y="28" width="250" height="107"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eu4-oU-9ZJ">
+                            <rect key="frame" x="22" y="129" width="139" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="&lt;&lt;缴费授权协议&gt;&gt;">
+                                <color key="titleColor" red="0.2666666667" green="0.73333333329999995" blue="0.75686274509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="sqxieyi:" destination="-1" eventType="touchUpInside" id="KMo-8D-ZRs"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="-571" y="502"/>
+            <point key="canvasLocation" x="-571.5" y="501.5"/>
         </view>
         <tapGestureRecognizer id="Dt2-hu-Maz">
             <connections>

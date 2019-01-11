@@ -37,7 +37,12 @@
 #import <UserNotifications/UserNotifications.h>
 #define SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #import "FirstAnimationViewController.h"
-@interface AppDelegate ()<UNUserNotificationCenterDelegate>
+
+
+#import "JPUSHService.h"
+
+#import <AdSupport/AdSupport.h>
+@interface AppDelegate ()<UNUserNotificationCenterDelegate,JPUSHRegisterDelegate>
 @property(nonatomic,assign)BOOL updatares;
 @end
 
@@ -70,6 +75,8 @@
     [self.window makeKeyAndVisible];
     [self.window makeKeyWindow];
     
+    
+   
     [self chooseWindowToIndicate];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionFail:) name:@"RHSESSIONFAIL" object:nil];
@@ -80,8 +87,33 @@
     //推送
     [self registerJPushNotifyWithLauchOptions:launchOptions];
     // Required
-    [APService setupWithOption:launchOptions];
-    [APService setBadge:0];
+//    [APService setupWithOption:launchOptions];
+//    [APService setBadge:0];
+    
+    
+    JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
+    entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        // 可以添加自定义categories
+        // NSSet<UNNotificationCategory *> *categories for iOS10 or later
+        // NSSet<UIUserNotificationCategory *> *categories for iOS8 and iOS9
+    }
+    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
+    
+    [JPUSHService setupWithOption:launchOptions appKey:@"27ad7152ef89420330cf5ca4"
+                          channel:@"appstore"
+                 apsForProduction:NO
+            advertisingIdentifier:nil];
+    
+    [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
+        if(resCode == 0){
+            NSLog(@"registrationID获取成功：%@",registrationID);
+            
+        }
+        else{
+            NSLog(@"registrationID获取失败，code：%d",resCode);
+        }
+    }];
     
     //统计
     [MobClick startWithAppkey:@"554c126f67e58e7434007259" reportPolicy:BATCH   channelId:@""];
@@ -107,9 +139,8 @@
         [self registerPush:application];
     }
     
-    // 获取APPKEY
-    NSString *APPKEY = @"75bdfe3a9f9c4b8a846e9edc282c92b4";
-    [[ZCLibClient getZCLibClient] setAppKey:APPKEY];
+//     获取APPKEY
+//
     
     [self getaddress];
     
@@ -157,6 +188,9 @@
         
         [[NSUserDefaults standardUserDefaults] setObject:@"123" forKey:@"RHGUIDAN"];
     }else{
+       
+        
+        
         if ([RHUserManager sharedInterface].username&&[[RHUserManager sharedInterface].username length]>0) {
             [self sessionFail:nil];
             if ([[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]]&&[[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]] length]>0) {
@@ -210,6 +244,8 @@
         
         [[NSUserDefaults standardUserDefaults] setObject:@"123" forKey:@"RHGUIDAN"];
     }else{
+        
+         NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
         if ([RHUserManager sharedInterface].username&&[[RHUserManager sharedInterface].username length]>0) {
             [self sessionFail:nil];
             if ([[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]]&&[[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]] length]>0) {
@@ -239,27 +275,27 @@
 
 -(void)registerJPushNotifyWithLauchOptions:(NSDictionary *)launchOptions
 {
-#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-        //可以添加自定义categories
-        [APService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
-                                                       UIUserNotificationTypeSound |
-                                                       UIUserNotificationTypeAlert)
-                                           categories:nil];
-    } else {
-        //categories 必须为nil
-        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                                       UIRemoteNotificationTypeSound |
-                                                       UIRemoteNotificationTypeAlert)
-                                           categories:nil];
-    }
-#else
-    //categories 必须为nil
-    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                                   UIRemoteNotificationTypeSound |
-                                                   UIRemoteNotificationTypeAlert)
-                                       categories:nil];
-#endif
+//#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
+//    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+//        //可以添加自定义categories
+//        [APService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+//                                                       UIUserNotificationTypeSound |
+//                                                       UIUserNotificationTypeAlert)
+//                                           categories:nil];
+//    } else {
+//        //categories 必须为nil
+//        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+//                                                       UIRemoteNotificationTypeSound |
+//                                                       UIRemoteNotificationTypeAlert)
+//                                           categories:nil];
+//    }
+//#else
+//    //categories 必须为nil
+//    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+//                                                   UIRemoteNotificationTypeSound |
+//                                                   UIRemoteNotificationTypeAlert)
+//                                       categories:nil];
+//#endif
   
 }
 
@@ -347,16 +383,39 @@
 
 -(void)sessionFail:(NSNotification*)nots
 {
+    return;
     NSDictionary* parameters=@{@"account":[RHUserManager sharedInterface].username,@"password":[RHUserManager sharedInterface].md5};
 
     NSString * str = @"app/common/user/appLogin/appLogin";
 //    NSString * str1 = @"common/user/login/appLogin";
     [[RHNetworkService instance] POST:str parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        DLog(@"%@",responseObject);
+//        NSArray* array=[[operation.response.allHeaderFields objectForKey:@"Set-Cookie"] componentsSeparatedByString:@";"];
         NSArray* array=[[operation.response.allHeaderFields objectForKey:@"Set-Cookie"] componentsSeparatedByString:@";"];
-        [[NSUserDefaults standardUserDefaults] setObject:[array objectAtIndex:0] forKey:@"RHSESSION"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-//        DLog(@"%@",operation.response.allHeaderFields);
+        //        array = @[];
+        for (NSString * str in array) {
+            if(str.length>12){
+                
+                
+                if ([str rangeOfString:@"JSESSIONID="].location != NSNotFound) {
+                    
+                    NSArray *array1 = [str componentsSeparatedByString:@"="];
+                    
+                    NSString * string = [NSString stringWithFormat:@"JSESSIONID=%@",array1[1]];
+                    [[NSUserDefaults standardUserDefaults] setObject:string forKey:@"RHSESSION"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+                if ([str rangeOfString:@"MYSESSIONID="].location != NSNotFound) {
+                    
+                    NSArray *array1 = [str componentsSeparatedByString:@"="];
+                    
+                    NSString * string = [NSString stringWithFormat:@"MYSESSIONID=%@",array1[1]];
+                    [[NSUserDefaults standardUserDefaults] setObject:string forKey:@"RHNEWMYSESSION"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+            }
+        }
+        
         
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSString* result=[responseObject objectForKey:@"md5"];
@@ -502,8 +561,9 @@
 -(NSDate *)getInternetDate
 {
     
-    NSString *urlString = @"http://m.baidu.com";
     
+    NSString *urlString = [RHNetworkService instance].newdoMain;
+    //2018-03-14 02:22:52 +0000
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     
     // 实例化NSMutableURLRequest，并进行参数配置
@@ -563,6 +623,7 @@
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     [self openTheGesture];
      [self updataAPP];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"imagephoto" object:nil];
 }
 
 -(void)openTheGesture {
@@ -609,6 +670,7 @@
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     [self openTheGesture];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    
 }
 
 
@@ -642,7 +704,7 @@
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     [[ZCLibClient getZCLibClient] setToken:deviceToken];
-    [APService registerDeviceToken:deviceToken];
+    [JPUSHService registerDeviceToken:deviceToken];
 }
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
@@ -650,17 +712,17 @@
 //    NSString *message = [[userInfo objectForKey:@"aps"]objectForKey:@"alert"];
     
     
-    [APService handleRemoteNotification:userInfo];
-    [APService setBadge:0];
+    [JPUSHService handleRemoteNotification:userInfo];
+    [JPUSHService setBadge:0];
     [self didRecevieMessageWithUserInfo:userInfo];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
-    [APService handleRemoteNotification:userInfo];
+    [JPUSHService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
-    [APService setBadge:0];
+    [JPUSHService setBadge:0];
     [self didRecevieMessageWithUserInfo:userInfo];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }

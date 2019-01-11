@@ -17,18 +17,17 @@ static RHNetworkService* _instance;
 @synthesize niubiMd5;
 
 -(NSString *)newdoMain{
+    
+//    return @"http://116.213.168.185:9998/TinyFinance/";
     //zhouming
-//     return @"http://223.223.180.146:8096/TinyFinance/";
+//     return @"http://116.213.168.185:9001/TinyFinance/";
     
-    //laoniu
-//    return @"http://223.223.180.146:8093/TinyFinance/";
-    //wuzhiqiang
-    
-//    return @"http://39.106.110.53/";
+
+
 //  return @"http://223.223.180.146:8097/TinyFinance/";
-//
-//    return @"https://123.57.133.7/";
-   return @"https://123.57.133.7/TinyFinance4/";
+//    return @"https://47.95.48.223/";
+//    return @"https://60.205.154.45/";
+   return @"https://60.205.154.45/TinyFinance2/";
     return @"https://www.ryhui.com/";
 //    return @"http://223.223.180.146:8093/TinyFinance/";
 }
@@ -59,7 +58,7 @@ static RHNetworkService* _instance;
 - (AFSecurityPolicy*)customSecurityPolicy
 {
   
-    // /先导入证书
+    // /先导入证书 03141893
     NSString *cerPath = [[NSBundle mainBundle] pathForResource:@"server1" ofType:@"cer"];//证书的路径
     NSData *certData = [NSData dataWithContentsOfFile:cerPath];
     NSSet * certSet = [[NSSet alloc] initWithObjects:certData, nil];
@@ -167,10 +166,20 @@ static RHNetworkService* _instance;
     [manager.operationQueue cancelAllOperations];
     
     
+    
+    
+    
      
 //    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
 //    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
+    NSString* session1=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHNEWMYSESSION"];
+    
+    if (session1.length>12) {
+         session = [NSString stringWithFormat:@"%@,%@",session,session1];
+    }
+   
+    
     if (session&&[session length]>0) {
         [manager.requestSerializer setValue:session forHTTPHeaderField:@"cookie"];
         
@@ -185,7 +194,6 @@ static RHNetworkService* _instance;
                  failure:failure];
     
 }
-
 
 -(void)userTimeOut:(NSNotification *)noty {
     self.delegate = [UIApplication sharedApplication].delegate;

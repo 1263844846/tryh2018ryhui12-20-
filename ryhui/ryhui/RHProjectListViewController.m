@@ -17,7 +17,9 @@
 #import "RHZZBuyViewController.h"
 #import "RHOpenCountViewController.h"
 #import "RHJXPassWordViewController.h"
-
+#import "RHhelper.h"
+#import "RHMainViewController.h"
+#import "RHDBSJViewController.h"
 @interface RHProjectListViewController ()
 {
     int currentPage;
@@ -43,15 +45,98 @@
 
 @property(nonatomic,copy)NSString * passwordbool;
 - (void)didSelectSegmentAtIndex:(int)index;
-
+@property(nonatomic,copy)NSString * dbsxstr;
 @end
 
 @implementation RHProjectListViewController
 @synthesize segmentContentView=_segmentContentView;
 @synthesize viewControllers=_viewControllers;
 @synthesize type=_type;
-
+-(void)stzfpush{
+    
+    [[RHNetworkService instance] POST:@"front/payment/account/trusteePayAlter" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSString * str = [NSString stringWithFormat:@"%@",responseObject[@"flag"]];
+            
+            self.dbsxstr = str;
+            
+            [RHhelper ShraeHelp].dbsxstr = str;
+        }
+        
+        NSLog(@"%@",responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        ;
+    }];
+    
+}
 -(void)viewWillAppear:(BOOL)animated{
+//    [self stzfpush];
+    if ([[RHhelper ShraeHelp].type isEqualToString:@"1"]) {
+        
+        [self segmentContentView:_segmentContentView selectPage:1];
+        
+        self.segmentView1.hidden=YES;
+        self.segmentView2.hidden=NO;
+        [self didSelectSegmentAtIndex:1];
+        
+        if ([[RHhelper ShraeHelp].moneystr doubleValue]>0) {
+            
+            RHMainViewController *controller = [[RHMainViewController alloc]initWithNibName:@"RHMainViewController" bundle:nil];
+            //            controller.type = @"0";
+            [self.navigationController pushViewController:controller animated:YES];
+            [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:0];
+            UIButton *btn = [[UIButton alloc]init];
+            btn.tag = 0;
+            [[DQview Shareview] btnClick:btn];
+            // [self.navigationController popToRootViewControllerAnimated:NO]
+        }
+        if ([UIScreen mainScreen].bounds.size.height>740) {
+            [[DQViewController Sharedbxtabar] tabBar:(DQview *)self.view didSelectedIndex:1];
+        }
+        //    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:NO];
+        [[DQViewController Sharedbxtabar].tabBar setHidden:YES];
+        [[DQViewController Sharedbxtabar].tabBar removeFromSuperview];
+        [super viewWillAppear:animated];
+        [self.navigationController popViewControllerAnimated:NO];
+        [RHmainModel ShareRHmainModel].maintest = @"hehe";
+        
+        [DQViewController Sharedbxtabar].tarbar.hidden = NO;
+        //    UIButton*leftButton = [[UIButton alloc]initWithFrame:CGRectMake(0,0,30,20)];
+        //   // [leftButton setImage:[UIImage imageNamed:@"xiaoxipng.png"]forState:UIControlStateNormal];
+        //    //[leftButton addTarget:self action:@selector(chongzhi)forControlEvents:UIControlEventTouchUpInside];
+        //    UIBarButtonItem*leftItem = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
+        //
+        //    self.navigationItem.leftBarButtonItem = leftItem;
+        RHProjectListContentViewController* controller=[_viewControllers objectAtIndex:1];
+        self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
+        [self getmyjxpassword];
+        [controller startPost];
+        return;
+        
+    }else{
+        [self segmentContentView:_segmentContentView selectPage:0];
+        
+        self.segmentView1.hidden=NO;
+        self.segmentView2.hidden=YES;
+        [self didSelectSegmentAtIndex:0];
+        
+        
+    }
+    
+    if ([[RHhelper ShraeHelp].moneystr doubleValue]>0) {
+        
+        RHMainViewController *controller = [[RHMainViewController alloc]initWithNibName:@"RHMainViewController" bundle:nil];
+        //            controller.type = @"0";
+        [self.navigationController pushViewController:controller animated:YES];
+        [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:0];
+        UIButton *btn = [[UIButton alloc]init];
+        btn.tag = 0;
+        [[DQview Shareview] btnClick:btn];
+       // [self.navigationController popToRootViewControllerAnimated:NO]
+    }
+    if ([UIScreen mainScreen].bounds.size.height>740) {
+        [[DQViewController Sharedbxtabar] tabBar:(DQview *)self.view didSelectedIndex:1];
+    }
 //    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:NO];
     [[DQViewController Sharedbxtabar].tabBar setHidden:YES];
     [[DQViewController Sharedbxtabar].tabBar removeFromSuperview];
@@ -72,6 +157,8 @@
     [controller startPost];
 }
 - (void)viewDidLoad {
+    
+    [self stzfpush];
     [[UIApplication sharedApplication].keyWindow addSubview:self.mengban];
     [[UIApplication sharedApplication].keyWindow addSubview:self.kaihu];
     
@@ -96,7 +183,7 @@
    // [self configBackButton];
     [self configTitleWithString:@"项目列表"];
     
-    self.segmentContentView = [[RHSegmentContentView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].applicationFrame.size.height-75-40-self.navigationController.navigationBar.frame.size.height-10+35+35+4+5)];
+    self.segmentContentView = [[RHSegmentContentView alloc] initWithFrame:CGRectMake(0,51, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].applicationFrame.size.height-75-40-self.navigationController.navigationBar.frame.size.height-10+35+35+4+5)];
 //    DLog(@"%f----%f",[UIScreen mainScreen].applicationFrame.size.height-75-40-self.navigationController.navigationBar.frame.size.height,self.navigationController.navigationBar.frame.size.height);
     [_segmentContentView setDelegate:self];
     [self.view addSubview:_segmentContentView];
@@ -105,7 +192,7 @@
     controller1.myblock = ^(NSDictionary *dd){
         [self toubiao:dd];
     };
-    controller1.type=@"0";
+    controller1.type=@"1";
     controller1.prarentNav=self.navigationController;
 //    [controller1.dataArray removeAllObjects];
     [_viewControllers addObject:controller1];
@@ -114,9 +201,9 @@
     controller2.myblock = ^(NSDictionary *dd){
         [self toubiao:dd];
     };
-    controller2.type=@"1";
+    controller2.type=@"0";
     controller2.prarentNav=self.navigationController;
-//    [_viewControllers addObject:controller2];
+    [_viewControllers addObject:controller2];
     
 //    RHProjectListContentViewController* controller3=[[RHProjectListContentViewController alloc]init];
 //    controller3.type=@"2";
@@ -124,6 +211,10 @@
 //    [_viewControllers addObject:controller3];
 //    
     [_segmentContentView setViews:_viewControllers];
+//    [_segmentContentView setViews:_viewControllers];
+    
+    [self segmentContentView:_segmentContentView selectPage:0];
+    
     
     if ([_type isEqualToString:@"0"]) {
         [self segmentContentView:_segmentContentView selectPage:0];
@@ -191,10 +282,10 @@
 }
 -(void)getSegmentnum2
 {
-    NSDictionary* parameters=@{@"_search":@"true",@"rows":@"1000",@"page":@"1",@"filters":@"{\"groupOp\":\"AND\",\"rules\":[{\"field\":\"percent\",\"op\":\"lt\",\"data\":100}]}"};
+   NSDictionary* parameters=@{@"_search":@"false",@"rows":@"10",@"page":@"1",@"sidx":@"",@"sord":@""};
     int uu = 1;
     NSLog(@"%d",uu++);
-    [[RHNetworkService instance] POST:@"common/main/xueListData" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[RHNetworkService instance] POST:@"app/common/appMain/projectListDataForApp" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"----===============-1111---%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             int num=[[responseObject objectForKey:@"records"] intValue];
@@ -314,6 +405,7 @@
         self.segmentView1.hidden=NO;
         self.segmentView2.hidden=YES;
         [self didSelectSegmentAtIndex:0];
+        [RHhelper ShraeHelp].type = @"0";
         RHProjectListContentViewController* controller = _viewControllers[0];
         [controller.dataArray removeAllObjects];
         
@@ -323,11 +415,12 @@
 
 - (IBAction)segmentAction2:(id)sender {
     //11111
-    return;
+   
     if (self.segmentView2.hidden) {
         self.segmentView2.hidden=NO;
         self.segmentView1.hidden=YES;
         [self didSelectSegmentAtIndex:1];
+        [RHhelper ShraeHelp].type =@"1";
         RHProjectListContentViewController* controller = _viewControllers[1];
         [controller.dataArray removeAllObjects];
     }
@@ -369,7 +462,7 @@
         [DQViewController Sharedbxtabar].tarbar.hidden = YES;
         NSLog(@"ddddddd");
         RHALoginViewController* controller=[[RHALoginViewController alloc] initWithNibName:@"RHALoginViewController" bundle:nil];
-        [self.navigationController pushViewController:controller animated:YES];
+        [self.navigationController pushViewController:controller animated:NO];
     }else{
         if (![RHUserManager sharedInterface].custId) {
             //            [self.investmentButton setTitle:@"请先开户" forState:UIControlStateNormal];
@@ -380,32 +473,49 @@
             return;
             [DQViewController Sharedbxtabar].tarbar.hidden = YES;
             RHRegisterWebViewController* controller1=[[RHRegisterWebViewController alloc]initWithNibName:@"RHRegisterWebViewController" bundle:nil];
-            [self.navigationController pushViewController:controller1 animated:YES];
+            [self.navigationController pushViewController:controller1 animated:NO];
         }else{
             if (![self.passwordbool isEqualToString:@"yes"]) {
                 
                  [self.kaihubtn setTitle:@"设置交易密码" forState:UIControlStateNormal];
-               self.passwordlab.text = @"资金更安全，请先设置交易密码在进行投资／提现";
+               self.passwordlab.text = @"资金更安全，请先设置交易密码在进行出借／提现";
                 self.mengban.hidden = NO;
                 self.kaihu.hidden = NO;
             }else{
             
+                
+                if ([[RHhelper ShraeHelp].dbsxstr isEqualToString:@"1"]) {
+                    UIAlertView* alertView=[[UIAlertView alloc]initWithTitle:@"提示"
+                                                                     message:@"您有待办事项未处理完毕，请尽快处理。"
+                                                                    delegate:self
+                                                           cancelButtonTitle:@"确定"
+                                                           otherButtonTitles:@"取消", nil];
+                    alertView.tag=8901;
+                    [alertView show];
+                    
+                    return;
+                }
             if (currentPage ==0) {
                 //wb1083852544
-            
+               
+                
             RHInvestmentViewController* contoller=[[RHInvestmentViewController alloc]initWithNibName:@"RHInvestmentViewController" bundle:nil];
-            NSString * str = dic[@"available"];
-            int a = [str intValue];
-            contoller.projectFund= a;
-            contoller.dataDic=dic;
+                contoller.xmjres = @"xmj" ;
+                
+                NSString * str = dic[@"remainMoney"];
+                
+                int a = [str intValue];
+                contoller.projectFund= a;
+                contoller.dataDic=dic;
             //            if (self.panduan == 10) {
             // contoller.panduan = 10;
             //            }
+//                contoller.xmjres = @"0";
             NSString * str1 =  dic[@"investorRate"];
             //contoller.lilv =str1;
             [self.navigationController pushViewController:contoller animated:YES];
             }else{
-                RHZZBuyViewController* contoller=[[RHZZBuyViewController alloc]initWithNibName:@"RHZZBuyViewController" bundle:nil];
+                RHInvestmentViewController* contoller=[[RHInvestmentViewController alloc]initWithNibName:@"RHInvestmentViewController" bundle:nil];
                 NSString * str = dic[@"available"];
                 int a = [str intValue];
                 contoller.projectFund= a;
@@ -425,7 +535,21 @@
     
     
 }
-
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 8901) {
+        
+        
+        if (buttonIndex==0) {
+            [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+            RHDBSJViewController * vc = [[RHDBSJViewController alloc]initWithNibName:@"RHDBSJViewController" bundle:nil];
+            //        vc.str = @"cbx";
+            [self.navigationController pushViewController:vc animated:NO];
+        }
+    }
+    
+   
+}
 - (IBAction)hidenmengban:(id)sender {
     
     self.kaihu.hidden = YES;
