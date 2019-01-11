@@ -27,7 +27,7 @@ static RHNetworkService* _instance;
 //  return @"http://223.223.180.146:8097/TinyFinance/";
 //    return @"https://47.95.48.223/";
 //    return @"https://60.205.154.45/";
-   return @"https://60.205.154.45/TinyFinance2/";
+   return @"https://60.205.154.45/TinyFinance4/";
     return @"https://www.ryhui.com/";
 //    return @"http://223.223.180.146:8093/TinyFinance/";
 }

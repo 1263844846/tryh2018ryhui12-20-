@@ -101,6 +101,8 @@
         
     }];
     
+    NSLog(@"111");
+    
 }
 -(void)getmyphonenumber{
     
