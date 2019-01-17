@@ -2796,6 +2796,7 @@
 				00792C001C4CAEFB00F76A2E /* picture */,
 				F80E496B1A8E27CD00028CD1 /* Service */,
 				F80E49451A8E24C000028CD1 /* AppDelegate.h */,
+				F80E49741A8E3C3400028CD1 /* LoginViewController */,
 				F80E49461A8E24C000028CD1 /* AppDelegate.m */,
 				F80E49511A8E24C000028CD1 /* Images.xcassets */,
 				009F9EF02121829F00137E2A /* shoujihao.html */,
@@ -2894,7 +2895,6 @@
 				F86B8B001AA1823F000D2B8C /* MainViewController */,
 				F86B8AEC1AA16E38000D2B8C /* GesturePasswordViewController */,
 				F83865A41AA0522300001D1A /* RegisterViewController */,
-				F80E49741A8E3C3400028CD1 /* LoginViewController */,
 				F80E49701A8E393300028CD1 /* BaseViewController */,
 			);
 			name = ViewController;

@@ -217,8 +217,8 @@ NSString *const SZCalendarCellIdentifier = @"celltext";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     if (section == 0) {
-        return _weekDayArray.count;
         
+        return _weekDayArray.count;
         
     } else {
         return 42;
@@ -314,7 +314,10 @@ NSString *const SZCalendarCellIdentifier = @"celltext";
             
             if (day ==self.didinter) {
                 NSLog(@"-----%d",day);
-                cell.testlab.backgroundColor = [UIColor colorWithHexString:@"#F89779"];
+                cell.testlab.backgroundColor = [UIColor colorWithHexString:@"#44BBC1"];
+                [cell.dateLabel setTextColor:[UIColor whiteColor]];
+                
+                // xuanzhong
             }
             
        }

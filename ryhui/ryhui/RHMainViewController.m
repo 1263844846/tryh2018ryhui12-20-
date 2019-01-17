@@ -174,6 +174,8 @@
 @property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *colleclayout;
 @property (weak, nonatomic) IBOutlet UIImageView *collectionimage;
 
+@property(nonatomic,copy)NSString * projectLocal;
+
 @end
 
 @implementation RHMainViewController
@@ -1747,19 +1749,38 @@
     self.type = [NSString stringWithFormat:@"%ld",section];
      if (self.newpeopleress == YES) {
          
-         if (section==1) {
+      if ([self.projectLocal isEqualToString:@"LFSA"]) {
+           if (section==1) {
              [btn addTarget:self action:@selector(pushProjectList:) forControlEvents:UIControlEventTouchUpInside];
-         }else if(section==2){
+           }else if(section==2){
              [btn addTarget:self action:@selector(didSelectInvestment1) forControlEvents:UIControlEventTouchUpInside];
              
+            }
+         }else{
+             if (section==1) {
+                 [btn addTarget:self action:@selector(didSelectInvestment1) forControlEvents:UIControlEventTouchUpInside];
+             }else if(section==2){
+                 [btn addTarget:self action:@selector(pushProjectList:) forControlEvents:UIControlEventTouchUpInside];
+                 
+             }
          }
      }else{
-        if (section==0) {
-            [btn addTarget:self action:@selector(pushProjectList:) forControlEvents:UIControlEventTouchUpInside];
-        }else{
-            [btn addTarget:self action:@selector(didSelectInvestment1) forControlEvents:UIControlEventTouchUpInside];
+         
+         if ([self.projectLocal isEqualToString:@"LFSA"]) {
+            if (section==0) {
+               [btn addTarget:self action:@selector(pushProjectList:) forControlEvents:UIControlEventTouchUpInside];
+             }else{
+                [btn addTarget:self action:@selector(didSelectInvestment1) forControlEvents:UIControlEventTouchUpInside];
         
-        }
+            }
+         }else{
+             if (section==0) {
+                 [btn addTarget:self action:@selector(didSelectInvestment1) forControlEvents:UIControlEventTouchUpInside];
+             }else if(section==1){
+                 [btn addTarget:self action:@selector(pushProjectList:) forControlEvents:UIControlEventTouchUpInside];
+                 
+             }
+         }
      }
     CAShapeLayer *maskLayer = [CAShapeLayer layer];
     maskLayer.path = [UIBezierPath bezierPathWithRoundedRect:btn.bounds byRoundingCorners: UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadii: (CGSize){8.0f, 8.0f}].CGPath;
@@ -1824,11 +1845,21 @@
     
     
     }else{
-        if (section ==0) {
-            newpersonlab.text = @"项目集合";
+        if ([self.projectLocal isEqualToString:@"LFSA"]) {
+            if (section ==0) {
+                newpersonlab.text = @"项目集合";
+            }else{
+                newpersonlab.text = @"散标专区";
+            }
         }else{
-            newpersonlab.text = @"散标专区";
+            if (section ==0) {
+                newpersonlab.text = @"散标专区";
+            }else{
+                newpersonlab.text = @"项目集合";
+            }
         }
+        
+        
     }
     return headerview;
     
@@ -1953,10 +1984,20 @@
         if (indexPath.section==0) {
             dataDic = self.newdic;
         }else if (indexPath.section==1){
-            
+             if ([self.projectLocal isEqualToString:@"LFSA"]) {
             dataDic = [self.xmjarray objectAtIndex:indexPath.row];
+             }else{
+                  dataDic = [self.dataArray objectAtIndex:indexPath.row];
+             }
+            
         }else{
-             dataDic = [self.dataArray objectAtIndex:indexPath.row];
+            if ([self.projectLocal isEqualToString:@"LFSA"]) {
+                 dataDic = [self.dataArray objectAtIndex:indexPath.row];
+            }else{
+                dataDic = [self.xmjarray objectAtIndex:indexPath.row];
+            }
+            
+            
         }
         
         static NSString *CellIdentifier = @"CellIdentifier";
@@ -2000,15 +2041,38 @@
             };
         }else if (indexPath.section==1){
             
-             [cell updatexmjCell:dataDic[@"cell"]];
-            cell.myblock =^{
-                [self toubiao:dataDic newpeople:NO myxmj:YES];
-            };
+            if ([self.projectLocal isEqualToString:@"LFSA"]) {
+                [cell updatexmjCell:dataDic[@"cell"]];
+                cell.myblock =^{
+                    [self toubiao:dataDic newpeople:NO myxmj:YES];
+                };
+            }else{
+                [cell updateCell:dataDic];
+                cell.myblock =^{
+                    [self toubiao:dataDic newpeople:NO myxmj:NO];
+                };
+            }
+            
+            
+            
         }else{
-             [cell updateCell:dataDic];
-            cell.myblock =^{
-                [self toubiao:dataDic newpeople:NO myxmj:NO];
-            };
+            
+            if ([self.projectLocal isEqualToString:@"SALF"]) {
+                [cell updatexmjCell:dataDic[@"cell"]];
+                cell.myblock =^{
+                    [self toubiao:dataDic newpeople:NO myxmj:YES];
+                };
+            }else{
+                [cell updateCell:dataDic];
+                cell.myblock =^{
+                    [self toubiao:dataDic newpeople:NO myxmj:NO];
+                };
+            }
+            
+//             [cell updateCell:dataDic];
+//            cell.myblock =^{
+//                [self toubiao:dataDic newpeople:NO myxmj:NO];
+//            };
         }
         
        
@@ -2018,14 +2082,32 @@
         
     }else{
         NSDictionary* dataDic;
-        if (indexPath.section==0) {
-            dataDic = [self.xmjarray objectAtIndex:indexPath.row];
-            
+//        if (indexPath.section==0) {
+//            dataDic = [self.xmjarray objectAtIndex:indexPath.row];
+//
+//
+//        }else{
+//             dataDic = [self.dataArray objectAtIndex:indexPath.row];
+//
+//        }
+        
+        if (indexPath.section==0){
+            if ([self.projectLocal isEqualToString:@"LFSA"]) {
+                dataDic = [self.xmjarray objectAtIndex:indexPath.row];
+            }else{
+                dataDic = [self.dataArray objectAtIndex:indexPath.row];
+            }
             
         }else{
-             dataDic = [self.dataArray objectAtIndex:indexPath.row];
+            if ([self.projectLocal isEqualToString:@"LFSA"]) {
+                dataDic = [self.dataArray objectAtIndex:indexPath.row];
+            }else{
+                dataDic = [self.xmjarray objectAtIndex:indexPath.row];
+            }
+            
             
         }
+        
         static NSString *CellIdentifier = @"CellIdentifier";
         RHMainViewCell *cell = (RHMainViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
@@ -2060,20 +2142,54 @@
         cell.lilv  = string;
        
         
-         if (indexPath.section==0){
-            
-            [cell updatexmjCell:dataDic[@"cell"]];
-             cell.myblock =^{
-                 [self toubiao:dataDic newpeople:NO myxmj:YES];
-             };
-        }else{
-            [cell updateCell:dataDic];
-            cell.myblock =^{
-                [self toubiao:dataDic newpeople:NO myxmj:NO];
-            };
-        }
+//         if (indexPath.section==0){
+//
+//            [cell updatexmjCell:dataDic[@"cell"]];
+//             cell.myblock =^{
+//                 [self toubiao:dataDic newpeople:NO myxmj:YES];
+//             };
+//        }else{
+//            [cell updateCell:dataDic];
+//            cell.myblock =^{
+//                [self toubiao:dataDic newpeople:NO myxmj:NO];
+//            };
+//        }
      
-        
+        if (indexPath.section==0){
+            
+            if ([self.projectLocal isEqualToString:@"LFSA"]) {
+                [cell updatexmjCell:dataDic[@"cell"]];
+                cell.myblock =^{
+                    [self toubiao:dataDic newpeople:NO myxmj:YES];
+                };
+            }else{
+                [cell updateCell:dataDic];
+                cell.myblock =^{
+                    [self toubiao:dataDic newpeople:NO myxmj:NO];
+                };
+            }
+            
+            
+            
+        }else{
+            
+            if ([self.projectLocal isEqualToString:@"SALF"]) {
+                [cell updatexmjCell:dataDic[@"cell"]];
+                cell.myblock =^{
+                    [self toubiao:dataDic newpeople:NO myxmj:YES];
+                };
+            }else{
+                [cell updateCell:dataDic];
+                cell.myblock =^{
+                    [self toubiao:dataDic newpeople:NO myxmj:NO];
+                };
+            }
+            
+            //             [cell updateCell:dataDic];
+            //            cell.myblock =^{
+            //                [self toubiao:dataDic newpeople:NO myxmj:NO];
+            //            };
+        }
         
         return cell;
         
@@ -2187,10 +2303,7 @@
         }
     }
     
-    
-    
-    
-    
+
     
     
     //-----------------------
@@ -2358,10 +2471,7 @@
             }
             controller.dataDic=self.newdic;
             controller.getType=type;
-            //            controller.newpeopletype =YES;
-            //            controller.postnewpeopletype = self.newpeoplebool;
-            //            //controller.view.frame = CGRectMake(0, 0, self.view.frame.size.width, 700);
-            //            //controller.view.backgroundColor = [UIColor orangeColor];
+           
             NSString * projectStatus;
             if (![[self.newdic objectForKey:@"percent"] isKindOfClass:[NSNull class]]) {
                 projectStatus=[self.newdic objectForKey:@"projectStatus"] ;
@@ -2393,125 +2503,258 @@
             
         }else if (indexPath.section==1){
             
-            Dic = [self.xmjarray objectAtIndex:indexPath.row];
-            dataDic = [self.xmjarray objectAtIndex:indexPath.row];
-            
-            RHXMJProjectViewController * xmjcontroller = [[RHXMJProjectViewController alloc]initWithNibName:@"RHXMJProjectViewController" bundle:nil];
-
-            
-//            xmjcontroller.lilv = string;
-            xmjcontroller.datadic=dataDic;
-            NSString * projectStatus;
-            if (![[Dic objectForKey:@"percent"] isKindOfClass:[NSNull class]]) {
-                projectStatus=[Dic objectForKey:@"projectStatus"] ;
+            if ([self.projectLocal isEqualToString:@"LFSA"]) {
+                Dic = [self.xmjarray objectAtIndex:indexPath.row];
+                dataDic = [self.xmjarray objectAtIndex:indexPath.row];
                 
-            }
-            if ([projectStatus isEqualToString:@"finished"]) {
+                RHXMJProjectViewController * xmjcontroller = [[RHXMJProjectViewController alloc]initWithNibName:@"RHXMJProjectViewController" bundle:nil];
                 
-                xmjcontroller.zhuangtaistr =  @"还款完毕";
                 
-            }else if ([projectStatus isEqualToString:@"repayment_normal"]||[projectStatus isEqualToString:@"repayment_abnormal"]){
-                
-                xmjcontroller.zhuangtaistr =@"还款中";
-                
-            }else if ([projectStatus isEqualToString:@"loans"]||[projectStatus isEqualToString:@"loans_audit"]){
-                
-                xmjcontroller.zhuangtaistr =@"项目审核";
-                
-            }else if ([projectStatus isEqualToString:@"full"]){
-                
-                xmjcontroller.zhuangtaistr =@"已满标";
-                
-            }else if ([projectStatus isEqualToString:@"publishedWaiting"]){
-                
-                xmjcontroller.zhuangtaistr =@"稍后出借";
-                
-            }
-            [DQViewController Sharedbxtabar].tarbar.hidden = YES;
-            
-            [self.navigationController pushViewController:xmjcontroller animated:NO];
-            
-        }else{
-            Dic = [self.dataArray objectAtIndex:indexPath.row];
-            dataDic =  [self.segment1Array objectAtIndex:indexPath.row];
-            RHProjectdetailthreeViewController * controller = [[RHProjectdetailthreeViewController alloc]initWithNibName:@"RHProjectdetailthreeViewController" bundle:nil];
-            
-            //        RHXMJProjectViewController * xmjcontroller = [[RHXMJProjectViewController alloc]initWithNibName:@"RHXMJProjectViewController" bundle:nil];
-            
-            
-            
-            
-            
-//            NSString * xmjstr;
-//            if (dataDic[@"isProjectList"]&&![dataDic[@"isProjectList"] isKindOfClass:[NSNull class]]) {
-//                xmjstr = [NSString stringWithFormat:@"%@",dataDic[@"isProjectList"]];
-//            }
-//            
-            
-            
-            NSString  * string = [NSString stringWithFormat:@"%@",dataDic[@"investorRate"]];
-            //dataDic[@"investorRate"] = (id)string
-            if (string.length > 5) {
-                NSArray *array = [string componentsSeparatedByString:@"."];
-                string = array.lastObject;
-                string =  [string substringToIndex:2];
-                
-                int a = [string intValue];
-                
-                int b  = a /10;
-                
-                int c = a - b * 10;
-                
-                if (c > 5) {
-                    b= b+1;
-                    
-                    string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
-                    // [dataDic setValue:string forKey:@"investorRate"];
-                    // dataDic[@"investorRate"] = string;
-                }else{
-                    
-                    string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
-                    //[dataDic setValue:string forKey:@"investorRate"];
+                //            xmjcontroller.lilv = string;
+                xmjcontroller.datadic=dataDic;
+                NSString * projectStatus;
+                if (![[Dic objectForKey:@"percent"] isKindOfClass:[NSNull class]]) {
+                    projectStatus=[Dic objectForKey:@"projectStatus"] ;
                     
                 }
+                if ([projectStatus isEqualToString:@"finished"]) {
+                    
+                    xmjcontroller.zhuangtaistr =  @"还款完毕";
+                    
+                }else if ([projectStatus isEqualToString:@"repayment_normal"]||[projectStatus isEqualToString:@"repayment_abnormal"]){
+                    
+                    xmjcontroller.zhuangtaistr =@"还款中";
+                    
+                }else if ([projectStatus isEqualToString:@"loans"]||[projectStatus isEqualToString:@"loans_audit"]){
+                    
+                    xmjcontroller.zhuangtaistr =@"项目审核";
+                    
+                }else if ([projectStatus isEqualToString:@"full"]){
+                    
+                    xmjcontroller.zhuangtaistr =@"已满标";
+                    
+                }else if ([projectStatus isEqualToString:@"publishedWaiting"]){
+                    
+                    xmjcontroller.zhuangtaistr =@"稍后出借";
+                    
+                }
+                [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+                
+                [self.navigationController pushViewController:xmjcontroller animated:NO];
+            }else{
+                
+                Dic = [self.dataArray objectAtIndex:indexPath.row];
+                dataDic =  [self.segment1Array objectAtIndex:indexPath.row];
+                RHProjectdetailthreeViewController * controller = [[RHProjectdetailthreeViewController alloc]initWithNibName:@"RHProjectdetailthreeViewController" bundle:nil];
+                
+                //        RHXMJProjectViewController * xmjcontroller = [[RHXMJProjectViewController alloc]initWithNibName:@"RHXMJProjectViewController" bundle:nil];
+                
+                
+                
+                
+                
+                //            NSString * xmjstr;
+                //            if (dataDic[@"isProjectList"]&&![dataDic[@"isProjectList"] isKindOfClass:[NSNull class]]) {
+                //                xmjstr = [NSString stringWithFormat:@"%@",dataDic[@"isProjectList"]];
+                //            }
+                //
+                
+                
+                NSString  * string = [NSString stringWithFormat:@"%@",dataDic[@"investorRate"]];
+                //dataDic[@"investorRate"] = (id)string
+                if (string.length > 5) {
+                    NSArray *array = [string componentsSeparatedByString:@"."];
+                    string = array.lastObject;
+                    string =  [string substringToIndex:2];
+                    
+                    int a = [string intValue];
+                    
+                    int b  = a /10;
+                    
+                    int c = a - b * 10;
+                    
+                    if (c > 5) {
+                        b= b+1;
+                        
+                        string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
+                        // [dataDic setValue:string forKey:@"investorRate"];
+                        // dataDic[@"investorRate"] = string;
+                    }else{
+                        
+                        string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
+                        //[dataDic setValue:string forKey:@"investorRate"];
+                        
+                    }
+                }
+                
+                
+                controller.lilv = string;
+                
+                controller.dataDic=dataDic;
+                controller.getType=@"0";
+                
+                //controller.view.frame = CGRectMake(0, 0, self.view.frame.size.width, 700);
+                //controller.view.backgroundColor = [UIColor orangeColor];
+                NSString * projectStatus;
+                if (![[Dic objectForKey:@"percent"] isKindOfClass:[NSNull class]]) {
+                    projectStatus=[Dic objectForKey:@"projectStatus"] ;
+                    
+                }
+                if ([projectStatus isEqualToString:@"finished"]) {
+                    
+                    controller.zhaungtaistr =  @"还款完毕";
+                    
+                }else if ([projectStatus isEqualToString:@"repayment_normal"]||[projectStatus isEqualToString:@"repayment_abnormal"]){
+                    
+                    controller.zhaungtaistr =@"还款中";
+                    
+                }else if ([projectStatus isEqualToString:@"loans"]||[projectStatus isEqualToString:@"loans_audit"]){
+                    
+                    controller.zhaungtaistr =@"项目审核";
+                    
+                }else if ([projectStatus isEqualToString:@"full"]){
+                    
+                    controller.zhaungtaistr =@"已满标";
+                    
+                }else if ([projectStatus isEqualToString:@"publishedWaiting"]){
+                    
+                    controller.zhaungtaistr =@"稍后出借";
+                    
+                }
+                
+                [self.navigationController pushViewController:controller animated:NO];
+            }
+            
+           
+            
+        }else{
+            
+            if ([self.projectLocal isEqualToString:@"SALF"]) {
+                Dic = [self.xmjarray objectAtIndex:indexPath.row];
+                dataDic = [self.xmjarray objectAtIndex:indexPath.row];
+                
+                RHXMJProjectViewController * xmjcontroller = [[RHXMJProjectViewController alloc]initWithNibName:@"RHXMJProjectViewController" bundle:nil];
+                
+                
+                //            xmjcontroller.lilv = string;
+                xmjcontroller.datadic=dataDic;
+                NSString * projectStatus;
+                if (![[Dic objectForKey:@"percent"] isKindOfClass:[NSNull class]]) {
+                    projectStatus=[Dic objectForKey:@"projectStatus"] ;
+                    
+                }
+                if ([projectStatus isEqualToString:@"finished"]) {
+                    
+                    xmjcontroller.zhuangtaistr =  @"还款完毕";
+                    
+                }else if ([projectStatus isEqualToString:@"repayment_normal"]||[projectStatus isEqualToString:@"repayment_abnormal"]){
+                    
+                    xmjcontroller.zhuangtaistr =@"还款中";
+                    
+                }else if ([projectStatus isEqualToString:@"loans"]||[projectStatus isEqualToString:@"loans_audit"]){
+                    
+                    xmjcontroller.zhuangtaistr =@"项目审核";
+                    
+                }else if ([projectStatus isEqualToString:@"full"]){
+                    
+                    xmjcontroller.zhuangtaistr =@"已满标";
+                    
+                }else if ([projectStatus isEqualToString:@"publishedWaiting"]){
+                    
+                    xmjcontroller.zhuangtaistr =@"稍后出借";
+                    
+                }
+                [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+                
+                [self.navigationController pushViewController:xmjcontroller animated:NO];
+            }else{
+                
+                Dic = [self.dataArray objectAtIndex:indexPath.row];
+                dataDic =  [self.segment1Array objectAtIndex:indexPath.row];
+                RHProjectdetailthreeViewController * controller = [[RHProjectdetailthreeViewController alloc]initWithNibName:@"RHProjectdetailthreeViewController" bundle:nil];
+                
+                //        RHXMJProjectViewController * xmjcontroller = [[RHXMJProjectViewController alloc]initWithNibName:@"RHXMJProjectViewController" bundle:nil];
+                
+                
+                
+                
+                
+                //            NSString * xmjstr;
+                //            if (dataDic[@"isProjectList"]&&![dataDic[@"isProjectList"] isKindOfClass:[NSNull class]]) {
+                //                xmjstr = [NSString stringWithFormat:@"%@",dataDic[@"isProjectList"]];
+                //            }
+                //
+                
+                
+                NSString  * string = [NSString stringWithFormat:@"%@",dataDic[@"investorRate"]];
+                //dataDic[@"investorRate"] = (id)string
+                if (string.length > 5) {
+                    NSArray *array = [string componentsSeparatedByString:@"."];
+                    string = array.lastObject;
+                    string =  [string substringToIndex:2];
+                    
+                    int a = [string intValue];
+                    
+                    int b  = a /10;
+                    
+                    int c = a - b * 10;
+                    
+                    if (c > 5) {
+                        b= b+1;
+                        
+                        string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
+                        // [dataDic setValue:string forKey:@"investorRate"];
+                        // dataDic[@"investorRate"] = string;
+                    }else{
+                        
+                        string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
+                        //[dataDic setValue:string forKey:@"investorRate"];
+                        
+                    }
+                }
+                
+                
+                controller.lilv = string;
+                
+                controller.dataDic=dataDic;
+                controller.getType=@"0";
+                
+                //controller.view.frame = CGRectMake(0, 0, self.view.frame.size.width, 700);
+                //controller.view.backgroundColor = [UIColor orangeColor];
+                NSString * projectStatus;
+                if (![[Dic objectForKey:@"percent"] isKindOfClass:[NSNull class]]) {
+                    projectStatus=[Dic objectForKey:@"projectStatus"] ;
+                    
+                }
+                if ([projectStatus isEqualToString:@"finished"]) {
+                    
+                    controller.zhaungtaistr =  @"还款完毕";
+                    
+                }else if ([projectStatus isEqualToString:@"repayment_normal"]||[projectStatus isEqualToString:@"repayment_abnormal"]){
+                    
+                    controller.zhaungtaistr =@"还款中";
+                    
+                }else if ([projectStatus isEqualToString:@"loans"]||[projectStatus isEqualToString:@"loans_audit"]){
+                    
+                    controller.zhaungtaistr =@"项目审核";
+                    
+                }else if ([projectStatus isEqualToString:@"full"]){
+                    
+                    controller.zhaungtaistr =@"已满标";
+                    
+                }else if ([projectStatus isEqualToString:@"publishedWaiting"]){
+                    
+                    controller.zhaungtaistr =@"稍后出借";
+                    
+                }
+                
+                [self.navigationController pushViewController:controller animated:NO];
             }
             
             
-            controller.lilv = string;
             
-            controller.dataDic=dataDic;
-            controller.getType=@"0";
             
-            //controller.view.frame = CGRectMake(0, 0, self.view.frame.size.width, 700);
-            //controller.view.backgroundColor = [UIColor orangeColor];
-            NSString * projectStatus;
-            if (![[Dic objectForKey:@"percent"] isKindOfClass:[NSNull class]]) {
-                projectStatus=[Dic objectForKey:@"projectStatus"] ;
-                
-            }
-            if ([projectStatus isEqualToString:@"finished"]) {
-                
-                controller.zhaungtaistr =  @"还款完毕";
-                
-            }else if ([projectStatus isEqualToString:@"repayment_normal"]||[projectStatus isEqualToString:@"repayment_abnormal"]){
-                
-                controller.zhaungtaistr =@"还款中";
-                
-            }else if ([projectStatus isEqualToString:@"loans"]||[projectStatus isEqualToString:@"loans_audit"]){
-                
-                controller.zhaungtaistr =@"项目审核";
-                
-            }else if ([projectStatus isEqualToString:@"full"]){
-                
-                controller.zhaungtaistr =@"已满标";
-                
-            }else if ([projectStatus isEqualToString:@"publishedWaiting"]){
-                
-                controller.zhaungtaistr =@"稍后出借";
-                
-            }
-            
-            [self.navigationController pushViewController:controller animated:NO];
+         
         }
         
         
@@ -2525,127 +2768,362 @@
         
         if (indexPath.section==0){
             
-            Dic = [self.xmjarray objectAtIndex:indexPath.row];
-            dataDic = [self.xmjarray objectAtIndex:indexPath.row];
-            
-            RHXMJProjectViewController * xmjcontroller = [[RHXMJProjectViewController alloc]initWithNibName:@"RHXMJProjectViewController" bundle:nil];
-            
-            
-            //            xmjcontroller.lilv = string;
-            xmjcontroller.datadic=dataDic;
-            NSString * projectStatus;
-            if (![[Dic objectForKey:@"cell"] isKindOfClass:[NSNull class]]) {
+            if ([self.projectLocal isEqualToString:@"LFSA"]) {
+                Dic = [self.xmjarray objectAtIndex:indexPath.row];
+                dataDic = [self.xmjarray objectAtIndex:indexPath.row];
+                
+                RHXMJProjectViewController * xmjcontroller = [[RHXMJProjectViewController alloc]initWithNibName:@"RHXMJProjectViewController" bundle:nil];
                 
                 
-                projectStatus=[Dic objectForKey:@"cell"][@"projectStatus"] ;
-                
-            }
-            if ([projectStatus isEqualToString:@"finished"]) {
-                
-                xmjcontroller.zhuangtaistr =  @"还款完毕";
-                
-            }else if ([projectStatus isEqualToString:@"repayment_normal"]||[projectStatus isEqualToString:@"repayment_abnormal"]){
-                
-                xmjcontroller.zhuangtaistr =@"还款中";
-                
-            }else if ([projectStatus isEqualToString:@"loans"]||[projectStatus isEqualToString:@"loans_audit"]){
-                
-                xmjcontroller.zhuangtaistr =@"项目审核";
-                
-            }else if ([projectStatus isEqualToString:@"full"]){
-                
-                xmjcontroller.zhuangtaistr =@"已满标";
-                
-            }else if ([projectStatus isEqualToString:@"publishedWaiting"]){
-                
-                xmjcontroller.zhuangtaistr =@"稍后出借";
-                
-            }
-            [DQViewController Sharedbxtabar].tarbar.hidden = YES;
-            
-            [self.navigationController pushViewController:xmjcontroller animated:NO];
-            
-        }else{
-            Dic = [self.dataArray objectAtIndex:indexPath.row];
-            dataDic =  [self.segment1Array objectAtIndex:indexPath.row];
-            RHProjectdetailthreeViewController * controller = [[RHProjectdetailthreeViewController alloc]initWithNibName:@"RHProjectdetailthreeViewController" bundle:nil];
-            
-            //        RHXMJProjectViewController * xmjcontroller = [[RHXMJProjectViewController alloc]initWithNibName:@"RHXMJProjectViewController" bundle:nil];
-            
-            
-            
-            
-            
-            //            NSString * xmjstr;
-            //            if (dataDic[@"isProjectList"]&&![dataDic[@"isProjectList"] isKindOfClass:[NSNull class]]) {
-            //                xmjstr = [NSString stringWithFormat:@"%@",dataDic[@"isProjectList"]];
-            //            }
-            //
-            
-            
-            NSString  * string = [NSString stringWithFormat:@"%@",dataDic[@"investorRate"]];
-            //dataDic[@"investorRate"] = (id)string
-            if (string.length > 5) {
-                NSArray *array = [string componentsSeparatedByString:@"."];
-                string = array.lastObject;
-                string =  [string substringToIndex:2];
-                
-                int a = [string intValue];
-                
-                int b  = a /10;
-                
-                int c = a - b * 10;
-                
-                if (c > 5) {
-                    b= b+1;
-                    
-                    string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
-                    // [dataDic setValue:string forKey:@"investorRate"];
-                    // dataDic[@"investorRate"] = string;
-                }else{
-                    
-                    string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
-                    //[dataDic setValue:string forKey:@"investorRate"];
+                //            xmjcontroller.lilv = string;
+                xmjcontroller.datadic=dataDic;
+                NSString * projectStatus;
+                if (![[Dic objectForKey:@"percent"] isKindOfClass:[NSNull class]]) {
+                    projectStatus=[Dic objectForKey:@"projectStatus"] ;
                     
                 }
+                if ([projectStatus isEqualToString:@"finished"]) {
+                    
+                    xmjcontroller.zhuangtaistr =  @"还款完毕";
+                    
+                }else if ([projectStatus isEqualToString:@"repayment_normal"]||[projectStatus isEqualToString:@"repayment_abnormal"]){
+                    
+                    xmjcontroller.zhuangtaistr =@"还款中";
+                    
+                }else if ([projectStatus isEqualToString:@"loans"]||[projectStatus isEqualToString:@"loans_audit"]){
+                    
+                    xmjcontroller.zhuangtaistr =@"项目审核";
+                    
+                }else if ([projectStatus isEqualToString:@"full"]){
+                    
+                    xmjcontroller.zhuangtaistr =@"已满标";
+                    
+                }else if ([projectStatus isEqualToString:@"publishedWaiting"]){
+                    
+                    xmjcontroller.zhuangtaistr =@"稍后出借";
+                    
+                }
+                [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+                
+                [self.navigationController pushViewController:xmjcontroller animated:NO];
+            }else{
+                
+                
+                
+                
+                
+                Dic = [self.dataArray objectAtIndex:indexPath.row];
+                dataDic =  [self.segment1Array objectAtIndex:indexPath.row];
+                RHProjectdetailthreeViewController * controller = [[RHProjectdetailthreeViewController alloc]initWithNibName:@"RHProjectdetailthreeViewController" bundle:nil];
+                
+                //        RHXMJProjectViewController * xmjcontroller = [[RHXMJProjectViewController alloc]initWithNibName:@"RHXMJProjectViewController" bundle:nil];
+                
+                
+                
+                
+                
+                //            NSString * xmjstr;
+                //            if (dataDic[@"isProjectList"]&&![dataDic[@"isProjectList"] isKindOfClass:[NSNull class]]) {
+                //                xmjstr = [NSString stringWithFormat:@"%@",dataDic[@"isProjectList"]];
+                //            }
+                //
+                
+                
+                NSString  * string = [NSString stringWithFormat:@"%@",dataDic[@"investorRate"]];
+                //dataDic[@"investorRate"] = (id)string
+                if (string.length > 5) {
+                    NSArray *array = [string componentsSeparatedByString:@"."];
+                    string = array.lastObject;
+                    string =  [string substringToIndex:2];
+                    
+                    int a = [string intValue];
+                    
+                    int b  = a /10;
+                    
+                    int c = a - b * 10;
+                    
+                    if (c > 5) {
+                        b= b+1;
+                        
+                        string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
+                        // [dataDic setValue:string forKey:@"investorRate"];
+                        // dataDic[@"investorRate"] = string;
+                    }else{
+                        
+                        string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
+                        //[dataDic setValue:string forKey:@"investorRate"];
+                        
+                    }
+                }
+                
+                
+                controller.lilv = string;
+                
+                controller.dataDic=dataDic;
+                controller.getType=@"0";
+                
+                //controller.view.frame = CGRectMake(0, 0, self.view.frame.size.width, 700);
+                //controller.view.backgroundColor = [UIColor orangeColor];
+                NSString * projectStatus;
+                if (![[Dic objectForKey:@"percent"] isKindOfClass:[NSNull class]]) {
+                    projectStatus=[Dic objectForKey:@"projectStatus"] ;
+                    
+                }
+                if ([projectStatus isEqualToString:@"finished"]) {
+                    
+                    controller.zhaungtaistr =  @"还款完毕";
+                    
+                }else if ([projectStatus isEqualToString:@"repayment_normal"]||[projectStatus isEqualToString:@"repayment_abnormal"]){
+                    
+                    controller.zhaungtaistr =@"还款中";
+                    
+                }else if ([projectStatus isEqualToString:@"loans"]||[projectStatus isEqualToString:@"loans_audit"]){
+                    
+                    controller.zhaungtaistr =@"项目审核";
+                    
+                }else if ([projectStatus isEqualToString:@"full"]){
+                    
+                    controller.zhaungtaistr =@"已满标";
+                    
+                }else if ([projectStatus isEqualToString:@"publishedWaiting"]){
+                    
+                    controller.zhaungtaistr =@"稍后出借";
+                    
+                }
+                
+                [self.navigationController pushViewController:controller animated:NO];
             }
             
             
-            controller.lilv = string;
             
-            controller.dataDic=dataDic;
-            controller.getType=type;
-            controller.getType=@"0";
-            //controller.view.frame = CGRectMake(0, 0, self.view.frame.size.width, 700);
-            //controller.view.backgroundColor = [UIColor orangeColor];
-            NSString * projectStatus;
-            if (![[Dic objectForKey:@"percent"] isKindOfClass:[NSNull class]]) {
-                projectStatus=[Dic objectForKey:@"projectStatus"] ;
+            
+//            Dic = [self.xmjarray objectAtIndex:indexPath.row];
+//            dataDic = [self.xmjarray objectAtIndex:indexPath.row];
+//
+//            RHXMJProjectViewController * xmjcontroller = [[RHXMJProjectViewController alloc]initWithNibName:@"RHXMJProjectViewController" bundle:nil];
+//
+//
+//            //            xmjcontroller.lilv = string;
+//            xmjcontroller.datadic=dataDic;
+//            NSString * projectStatus;
+//            if (![[Dic objectForKey:@"cell"] isKindOfClass:[NSNull class]]) {
+//
+//
+//                projectStatus=[Dic objectForKey:@"cell"][@"projectStatus"] ;
+//
+//            }
+//            if ([projectStatus isEqualToString:@"finished"]) {
+//
+//                xmjcontroller.zhuangtaistr =  @"还款完毕";
+//
+//            }else if ([projectStatus isEqualToString:@"repayment_normal"]||[projectStatus isEqualToString:@"repayment_abnormal"]){
+//
+//                xmjcontroller.zhuangtaistr =@"还款中";
+//
+//            }else if ([projectStatus isEqualToString:@"loans"]||[projectStatus isEqualToString:@"loans_audit"]){
+//
+//                xmjcontroller.zhuangtaistr =@"项目审核";
+//
+//            }else if ([projectStatus isEqualToString:@"full"]){
+//
+//                xmjcontroller.zhuangtaistr =@"已满标";
+//
+//            }else if ([projectStatus isEqualToString:@"publishedWaiting"]){
+//
+//                xmjcontroller.zhuangtaistr =@"稍后出借";
+//
+//            }
+//            [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+//
+//            [self.navigationController pushViewController:xmjcontroller animated:NO];
+            
+        }else{
+            
+            
+            
+            
+            if ([self.projectLocal isEqualToString:@"SALF"]) {
+                Dic = [self.xmjarray objectAtIndex:indexPath.row];
+                dataDic = [self.xmjarray objectAtIndex:indexPath.row];
                 
-            }
-            if ([projectStatus isEqualToString:@"finished"]) {
+                RHXMJProjectViewController * xmjcontroller = [[RHXMJProjectViewController alloc]initWithNibName:@"RHXMJProjectViewController" bundle:nil];
                 
-                controller.zhaungtaistr =  @"还款完毕";
                 
-            }else if ([projectStatus isEqualToString:@"repayment_normal"]||[projectStatus isEqualToString:@"repayment_abnormal"]){
+                //            xmjcontroller.lilv = string;
+                xmjcontroller.datadic=dataDic;
+                NSString * projectStatus;
+                if (![[Dic objectForKey:@"percent"] isKindOfClass:[NSNull class]]) {
+                    projectStatus=[Dic objectForKey:@"projectStatus"] ;
+                    
+                }
+                if ([projectStatus isEqualToString:@"finished"]) {
+                    
+                    xmjcontroller.zhuangtaistr =  @"还款完毕";
+                    
+                }else if ([projectStatus isEqualToString:@"repayment_normal"]||[projectStatus isEqualToString:@"repayment_abnormal"]){
+                    
+                    xmjcontroller.zhuangtaistr =@"还款中";
+                    
+                }else if ([projectStatus isEqualToString:@"loans"]||[projectStatus isEqualToString:@"loans_audit"]){
+                    
+                    xmjcontroller.zhuangtaistr =@"项目审核";
+                    
+                }else if ([projectStatus isEqualToString:@"full"]){
+                    
+                    xmjcontroller.zhuangtaistr =@"已满标";
+                    
+                }else if ([projectStatus isEqualToString:@"publishedWaiting"]){
+                    
+                    xmjcontroller.zhuangtaistr =@"稍后出借";
+                    
+                }
+                [DQViewController Sharedbxtabar].tarbar.hidden = YES;
                 
-                controller.zhaungtaistr =@"还款中";
+                [self.navigationController pushViewController:xmjcontroller animated:NO];
+            }else{
                 
-            }else if ([projectStatus isEqualToString:@"loans"]||[projectStatus isEqualToString:@"loans_audit"]){
+                Dic = [self.dataArray objectAtIndex:indexPath.row];
+                dataDic =  [self.segment1Array objectAtIndex:indexPath.row];
+                RHProjectdetailthreeViewController * controller = [[RHProjectdetailthreeViewController alloc]initWithNibName:@"RHProjectdetailthreeViewController" bundle:nil];
                 
-                controller.zhaungtaistr =@"项目审核";
+             
                 
-            }else if ([projectStatus isEqualToString:@"full"]){
+                NSString  * string = [NSString stringWithFormat:@"%@",dataDic[@"investorRate"]];
+                //dataDic[@"investorRate"] = (id)string
+                if (string.length > 5) {
+                    NSArray *array = [string componentsSeparatedByString:@"."];
+                    string = array.lastObject;
+                    string =  [string substringToIndex:2];
+                    
+                    int a = [string intValue];
+                    
+                    int b  = a /10;
+                    
+                    int c = a - b * 10;
+                    
+                    if (c > 5) {
+                        b= b+1;
+                        
+                        string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
+                        // [dataDic setValue:string forKey:@"investorRate"];
+                        // dataDic[@"investorRate"] = string;
+                    }else{
+                        
+                        string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
+                        //[dataDic setValue:string forKey:@"investorRate"];
+                        
+                    }
+                }
                 
-                controller.zhaungtaistr =@"已满标";
                 
-            }else if ([projectStatus isEqualToString:@"publishedWaiting"]){
+                controller.lilv = string;
                 
-                controller.zhaungtaistr =@"稍后出借";
+                controller.dataDic=dataDic;
+                controller.getType=@"0";
                 
+                //controller.view.frame = CGRectMake(0, 0, self.view.frame.size.width, 700);
+                //controller.view.backgroundColor = [UIColor orangeColor];
+                NSString * projectStatus;
+                if (![[Dic objectForKey:@"percent"] isKindOfClass:[NSNull class]]) {
+                    projectStatus=[Dic objectForKey:@"projectStatus"] ;
+                    
+                }
+                if ([projectStatus isEqualToString:@"finished"]) {
+                    
+                    controller.zhaungtaistr =  @"还款完毕";
+                    
+                }else if ([projectStatus isEqualToString:@"repayment_normal"]||[projectStatus isEqualToString:@"repayment_abnormal"]){
+                    
+                    controller.zhaungtaistr =@"还款中";
+                    
+                }else if ([projectStatus isEqualToString:@"loans"]||[projectStatus isEqualToString:@"loans_audit"]){
+                    
+                    controller.zhaungtaistr =@"项目审核";
+                    
+                }else if ([projectStatus isEqualToString:@"full"]){
+                    
+                    controller.zhaungtaistr =@"已满标";
+                    
+                }else if ([projectStatus isEqualToString:@"publishedWaiting"]){
+                    
+                    controller.zhaungtaistr =@"稍后出借";
+                    
+                }
+                
+                [self.navigationController pushViewController:controller animated:NO];
             }
             
-            [self.navigationController pushViewController:controller animated:NO];
+            
+//            Dic = [self.dataArray objectAtIndex:indexPath.row];
+//            dataDic =  [self.segment1Array objectAtIndex:indexPath.row];
+//            RHProjectdetailthreeViewController * controller = [[RHProjectdetailthreeViewController alloc]initWithNibName:@"RHProjectdetailthreeViewController" bundle:nil];
+//
+//
+//
+//
+//            NSString  * string = [NSString stringWithFormat:@"%@",dataDic[@"investorRate"]];
+//            //dataDic[@"investorRate"] = (id)string
+//            if (string.length > 5) {
+//                NSArray *array = [string componentsSeparatedByString:@"."];
+//                string = array.lastObject;
+//                string =  [string substringToIndex:2];
+//
+//                int a = [string intValue];
+//
+//                int b  = a /10;
+//
+//                int c = a - b * 10;
+//
+//                if (c > 5) {
+//                    b= b+1;
+//
+//                    string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
+//                    // [dataDic setValue:string forKey:@"investorRate"];
+//                    // dataDic[@"investorRate"] = string;
+//                }else{
+//
+//                    string = [NSString stringWithFormat:@"%@.%d",array.firstObject,b];
+//                    //[dataDic setValue:string forKey:@"investorRate"];
+//
+//                }
+//            }
+//
+//
+//            controller.lilv = string;
+//
+//            controller.dataDic=dataDic;
+//            controller.getType=type;
+//            controller.getType=@"0";
+//            //controller.view.frame = CGRectMake(0, 0, self.view.frame.size.width, 700);
+//            //controller.view.backgroundColor = [UIColor orangeColor];
+//            NSString * projectStatus;
+//            if (![[Dic objectForKey:@"percent"] isKindOfClass:[NSNull class]]) {
+//                projectStatus=[Dic objectForKey:@"projectStatus"] ;
+//
+//            }
+//            if ([projectStatus isEqualToString:@"finished"]) {
+//
+//                controller.zhaungtaistr =  @"还款完毕";
+//
+//            }else if ([projectStatus isEqualToString:@"repayment_normal"]||[projectStatus isEqualToString:@"repayment_abnormal"]){
+//
+//                controller.zhaungtaistr =@"还款中";
+//
+//            }else if ([projectStatus isEqualToString:@"loans"]||[projectStatus isEqualToString:@"loans_audit"]){
+//
+//                controller.zhaungtaistr =@"项目审核";
+//
+//            }else if ([projectStatus isEqualToString:@"full"]){
+//
+//                controller.zhaungtaistr =@"已满标";
+//
+//            }else if ([projectStatus isEqualToString:@"publishedWaiting"]){
+//
+//                controller.zhaungtaistr =@"稍后出借";
+//
+//            }
+//
+//            [self.navigationController pushViewController:controller animated:NO];
         }
         
         
@@ -3337,7 +3815,22 @@
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     
-    
+    [[RHNetworkService instance] POST:@"app/common/appMain/getProjectLocal" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            
+            // NSLog(@"%@",responseObject);
+            
+            self.projectLocal = responseObject[@"projectLocal"];
+            [self.tableView reloadData];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        ;
+        DLog(@"%@",[[NSString alloc] initWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] encoding:NSUTF8StringEncoding]);
+        
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    }];
     
     
 }
@@ -3375,6 +3868,9 @@
         
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
+    
+    
+   
     
 }
 -(NSDictionary *)newdic{

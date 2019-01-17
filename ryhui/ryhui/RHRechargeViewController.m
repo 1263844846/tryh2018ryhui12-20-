@@ -369,7 +369,7 @@
     self.controller3.albtn2.hidden = YES;
     float  versonfl = [[[UIDevice currentDevice] systemVersion] floatValue];
     if (versonfl < 8.3) {
-        
+         
     
     
     UIActionSheet *actionSheet = [[UIActionSheet alloc]
