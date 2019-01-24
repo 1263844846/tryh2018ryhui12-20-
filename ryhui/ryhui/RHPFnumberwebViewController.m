@@ -21,7 +21,7 @@
 @implementation RHPFnumberwebViewController
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [DQViewController Sharedbxtabar].tabBar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tabBar.hidden = YES;
     
 }
 - (void)viewDidLoad {

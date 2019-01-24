@@ -285,7 +285,7 @@
     RHJXPassWordViewController * controller =[[RHJXPassWordViewController alloc]initWithNibName:@"RHJXPassWordViewController" bundle:nil];
     
     controller.urlstr = @"app/front/payment/appJxAccount/passwordSetJxData";
-//    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+//    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
 //    self.mengbanview.hidden = YES;
 //    self.kaihuview.hidden = YES;
     [self.navigationController pushViewController:controller animated:YES];
@@ -368,10 +368,10 @@
         RHMainViewController *controller = [[RHMainViewController alloc]initWithNibName:@"RHMainViewController" bundle:nil];
         [RHhelper ShraeHelp].dbsxstr = @"0";
         //    [nav pushViewController:controller animated:YES];
-        [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:0];
+        [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:0];
         UIButton *btn = [[UIButton alloc]init];
         btn.tag = 0;
-        [[DQview Shareview] btnClick:btn];
+        [[RYHView Shareview] btnClick:btn];
         
         [self.navigationController popViewControllerAnimated:NO];
        

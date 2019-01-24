@@ -11,7 +11,7 @@
 #import "RHAccountValidateViewController.h"
 #import "RHRegisterViewController.h"
 #import "MBProgressHUD.h"
-#import "DQViewController.h"
+#import "RYHViewController.h"
 #import "RHMainViewController.h"
 
 @interface RHALoginViewController ()
@@ -36,7 +36,7 @@
 @synthesize isPan;
 -(void)viewWillAppear:(BOOL)animated{
     
-     [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+     [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     [super viewWillAppear:animated];
     self.loginNum = 0;
     if (self.loginNum <2) {
@@ -51,7 +51,7 @@
     self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
   // [ UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     [super viewDidLoad];
-//     [DQViewController Sharedbxtabar].tarbar.hidden = NO;
+//     [RYHViewController Sharedbxtabar].tarbar.hidden = NO;
     
     NSString* session=[[NSUserDefaults standardUserDefaults] objectForKey:@"RHSESSION"];
     NSLog(@"------------------%@",session);
@@ -136,10 +136,10 @@
         RHMainViewController *controller = [[RHMainViewController alloc]initWithNibName:@"RHMainViewController" bundle:nil];
 //        controller.type = @"0";
         //    [nav pushViewController:controller animated:YES];
-        [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:0];
+        [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:0];
         UIButton *btn = [[UIButton alloc]init];
         btn.tag = 0;
-        [[DQview Shareview] btnClick:btn];
+        [[RYHView Shareview] btnClick:btn];
         
 //    }else{
 //        [self.navigationController popToRootViewControllerAnimated:YES];

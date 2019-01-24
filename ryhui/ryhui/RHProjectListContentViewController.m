@@ -639,7 +639,7 @@
         }
         xmjcontroller.listres = @"0";
 //        [xmjcontroller updata:dataDic];
-        [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+        [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
         [self.prarentNav pushViewController:xmjcontroller animated:NO];
 //        [self.navigationController pushViewController:xmjcontroller animated:NO];
     }
@@ -669,13 +669,13 @@
     
     if (![RHUserManager sharedInterface].username) {
         //        [self.investmentButton setTitle:@"请先登录" forState:UIControlStateNormal];
-        [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+        [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
         NSLog(@"ddddddd");
         RHALoginViewController* controller=[[RHALoginViewController alloc] initWithNibName:@"RHALoginViewController" bundle:nil];
         [self.prarentNav pushViewController:controller animated:NO];
         return;
     }
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     RHXMJWebViewController *office = [[RHXMJWebViewController alloc] initWithNibName:@"RHXMJWebViewController" bundle:nil];
     office.nametitle = @"项目集";
     office.xmjurl = [NSString stringWithFormat:@"%@%@",[RHNetworkService instance].newdoMain,[RHhelper ShraeHelp].xmjlink];

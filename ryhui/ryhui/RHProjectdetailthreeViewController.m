@@ -9,7 +9,7 @@
 #import "RHProjectdetailthreeViewController.h"
 #import "CircleProgressView.h"
 #import "AppDelegate.h"
-#import "DQViewController.h"
+#import "RYHViewController.h"
 #import "RHALoginViewController.h"
 #import "RHmainModel.h"
 #import "RHRegisterWebViewController.h"
@@ -199,7 +199,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     [super viewWillAppear:animated];
     self.toubiaobtn.hidden = NO;
     self.jsqimage.hidden = NO;
@@ -333,7 +333,7 @@
    
     [RHmainModel ShareRHmainModel].tabbarstr = @"cbx";
     self.view.backgroundColor = [UIColor whiteColor];
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     [self configBackButton];
     [self configTitleWithString:@"项目详情"];
     [self creat];
@@ -472,7 +472,7 @@ _controller3.projectid = self.projectId;
     self.jsqimage.hidden = YES;
     self.hidenbtnview.hidden= YES;
     if ([[RHmainModel ShareRHmainModel].tabbarstr isEqualToString:@"cbx"]) {
-        //[DQViewController Sharedbxtabar].tarbar.hidden = NO;
+        //[RYHViewController Sharedbxtabar].tarbar.hidden = NO;
     }
     
     if ([self.shouyexunhuan isEqualToString:@"qiangge"]) {
@@ -1394,7 +1394,7 @@ _controller3.projectid = self.projectId;
         
         
         if (buttonIndex==0) {
-            [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+            [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
             RHDBSJViewController * vc = [[RHDBSJViewController alloc]initWithNibName:@"RHDBSJViewController" bundle:nil];
             //        vc.str = @"cbx";
             [self.navigationController pushViewController:vc animated:NO];

@@ -75,10 +75,10 @@
 //                [nav pushViewController:controller animated:YES];
                
                 
-                [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:2];
+                [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:2];
                 UIButton *btn = [[UIButton alloc]init];
                 btn.tag = 2;
-                [[DQview Shareview] btnClick:btn];
+                [[RYHView Shareview] btnClick:btn];
 //
                 
                 

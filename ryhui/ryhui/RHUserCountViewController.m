@@ -364,7 +364,7 @@
         
         
     }else{
-        [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+        [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
         RHALoginViewController * vc = [[RHALoginViewController alloc]initWithNibName:@"RHALoginViewController" bundle:nil];
         vc.str = @"cbx";
         [self.navigationController pushViewController:vc animated:NO];
@@ -514,13 +514,13 @@
 //     self.tabBarController.tabBar.hidden = YES;
     hfvc.myswitch = self.sqswitch;
    // RHMyAccountGetViewController * vc = [[RHMyAccountGetViewController alloc]initWithNibName:@"RHMyAccountGetViewController" bundle:nil];
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     [self.navigationController pushViewController:hfvc animated:NO];
     
 }
 - (void)chongzhi{
 //    if ([RHUserManager sharedInterface].custId.length>0) {
-     [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+     [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     RHMyMessageViewController * vc = [[RHMyMessageViewController alloc]initWithNibName:@"RHMyMessageViewController" bundle:nil];
     [self.navigationController pushViewController:vc animated:NO];
 //    }else{
@@ -537,7 +537,7 @@
     self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
     self.navigationController.navigationBar.translucent = NO;
 //    [self getnavagation];
-    [DQViewController Sharedbxtabar].tarbar.hidden = NO;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = NO;
 }
 - (void)getMyMessage {
    
@@ -568,7 +568,7 @@
             NSString * str = [NSString stringWithFormat:@"%@",responseObject[@"flag"]];
             [RHhelper ShraeHelp].dbsxstr = str;
             if ([str isEqualToString:@"1"]) {
-                [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+                [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
                 RHDBSJViewController * vc = [[RHDBSJViewController alloc]initWithNibName:@"RHDBSJViewController" bundle:nil];
                 //        vc.str = @"cbx";
                 [self.navigationController pushViewController:vc animated:NO];
@@ -588,17 +588,17 @@
      [self startAnimation];
     
     [self stzfpush];
-     [[DQViewController Sharedbxtabar].tabBar setHidden:YES];
+     [[RYHViewController Sharedbxtabar].tabBar setHidden:YES];
     [super viewWillAppear:animated];
     
     if ([[RHhelper ShraeHelp].moneystr doubleValue] >0) {
         RHMainViewController *controller = [[RHMainViewController alloc]initWithNibName:@"RHMainViewController" bundle:nil];
        // controller.type = @"0";
         //    [nav pushViewController:controller animated:YES];
-        [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:0];
+        [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:0];
         UIButton *btn = [[UIButton alloc]init];
         btn.tag = 0;
-        [[DQview Shareview] btnClick:btn];
+        [[RYHView Shareview] btnClick:btn];
         // [self.navigationController popToRootViewControllerAnimated:NO];
        // return;
     }
@@ -611,11 +611,11 @@
     [self getnavagation];
 
     [RHmainModel ShareRHmainModel].maintest = @"";
-    [DQViewController Sharedbxtabar].tarbar.hidden = NO;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = NO;
 
     if ([RHhelper ShraeHelp].resss==1) {
         
-      //  [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+      //  [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     }
     
     if ([RHhelper ShraeHelp].giftres ==1) {
@@ -647,13 +647,13 @@
  
     
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
-    if ([DQViewController Sharedbxtabar].tarbar.hidden == YES) {
+    if ([RYHViewController Sharedbxtabar].tarbar.hidden == YES) {
        
     }
      if ([RHhelper ShraeHelp].invertres==1111) {
 //         [RHhelper ShraeHelp].invertres==0
          RHMyInvestmentViewController* controller=[[RHMyInvestmentViewController alloc]initWithNibName:@"RHMyInvestmentViewController" bundle:nil];
-         [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+         [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
          //  self.tabBarController.tabBar.hidden = YES;
          [self.navigationController pushViewController:controller animated:NO];
          controller.hidesBottomBarWhenPushed = YES;
@@ -662,8 +662,8 @@
          NSLog(@"我的出借");
      }
     
-     NSLog(@"%d===---",[DQViewController Sharedbxtabar].tarbar.hidden );
-//    [DQViewController Sharedbxtabar].tarbar.hidden = NO;
+     NSLog(@"%d===---",[RYHViewController Sharedbxtabar].tarbar.hidden );
+//    [RYHViewController Sharedbxtabar].tarbar.hidden = NO;
     
 }
 -(void)zhangtai{
@@ -1549,7 +1549,7 @@
 }
 
 -(void)khbutton:(UIButton *)sender{
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
 
     RHOpenCountViewController* controller1=[[RHOpenCountViewController alloc]initWithNibName:@"RHOpenCountViewController" bundle:nil];
     [self.navigationController pushViewController:controller1 animated:NO];
@@ -1575,7 +1575,7 @@
             return ;
         }
         self.navigationController.navigationBar.subviews.firstObject.alpha = 1;
-        [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+        [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     RHRechargeViewController* controller=[[RHRechargeViewController alloc]initWithNibName:@"RHRechargeViewController" bundle:nil];
     controller.balance=self.kymoneyLab.text;
         controller.bankdic = self.bankdic;
@@ -1680,7 +1680,7 @@
     if (sender.tag == 1111) {
         
         RHMyInvestmentViewController* controller=[[RHMyInvestmentViewController alloc]initWithNibName:@"RHMyInvestmentViewController" bundle:nil];
-        [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+        [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
       //  self.tabBarController.tabBar.hidden = YES;
         [self.navigationController pushViewController:controller animated:NO];
          controller.hidesBottomBarWhenPushed = YES;
@@ -1695,7 +1695,7 @@
 //        return;
         RHRLViewController * vc = [RHRLViewController new];
         
-        [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+        [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
         
          [self.navigationController pushViewController:vc animated:NO];
          NSLog(@"回款计划");
@@ -1704,7 +1704,7 @@
 //         [RHUtility showTextWithText:@"敬请期待"];
 //        RHZQZRViewController * vc = [[RHZQZRViewController alloc]initWithNibName:@"RHZQZRViewController" bundle:nil];
 //    
-//        [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+//        [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
 //        [self.navigationController pushViewController:vc animated:YES];
         if ([RHUserManager sharedInterface].custId.length>0) {
             [self myaccount];
@@ -1717,7 +1717,7 @@
          NSLog(@"债权转让");
     }else if (sender.tag==1114){
         
-        [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+        [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
         
 //        if ([self.giftswitch isEqualToString:@"ON"]) {
 //            RHXMJWebViewController *office = [[RHXMJWebViewController alloc] initWithNibName:@"RHXMJWebViewController" bundle:nil];
@@ -1734,14 +1734,14 @@
         
          NSLog(@"我的红包");
     }else if (sender.tag==1115){
-        [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+        [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
 //        RHJPTableViewController * vc = [[RHJPTableViewController alloc] initWithNibName:@"RHJPTableViewController" bundle:nil];
         RHMynewgiftViewController * controller=[[RHMynewgiftViewController alloc] initWithNibName:@"RHMynewgiftViewController" bundle:nil];
         [self.navigationController pushViewController:controller animated:NO];
         
          NSLog(@"我的奖品");
     }else if (sender.tag==1116){
-        [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+        [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
         RHFriendViewController * controller=[[RHFriendViewController alloc] initWithNibName:@"RHFriendViewController" bundle:nil];
         [self.navigationController pushViewController:controller animated:NO];
         
@@ -1752,13 +1752,13 @@
         if ([RHUserManager sharedInterface].custId.length>0) {
             
             if ([UIScreen mainScreen].bounds.size.height < 300){
-                [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+                [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
                 RHsmallMybankViewController * controller = [[RHsmallMybankViewController alloc]initWithNibName:@"RHsmallMybankViewController" bundle:nil];
                 [self.navigationController pushViewController:controller animated:NO];
             }else{
                 
                 
-            [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+            [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
             RHBngkCardDetailViewController * controller = [[RHBngkCardDetailViewController alloc]initWithNibName:@"RHBngkCardDetailViewController" bundle:nil];
                 
                 controller.passwordress = self.passwordbool;
@@ -1776,8 +1776,8 @@
         
     }else if (sender.tag==1118){
         
-        [DQViewController Sharedbxtabar].tarbar.hidden = YES;
-        // [[DQViewController Sharedbxtabar].tabBar setHidden:NO];
+        [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
+        // [[RYHViewController Sharedbxtabar].tabBar setHidden:NO];
       
         RHTradingViewController * vc = [[RHTradingViewController alloc]initWithNibName:@"RHTradingViewController" bundle:nil];
         [self.navigationController pushViewController:vc animated:NO];
@@ -1807,7 +1807,7 @@
                             self.navigationController.navigationBar.subviews.firstObject.alpha = 0;
                             return ;
                         }
-                        [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+                        [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
                         RHSLBViewController * vc = [[RHSLBViewController alloc]initWithNibName:@"RHSLBViewController" bundle:nil];
                         
                         
@@ -2059,7 +2059,7 @@
 //    mytestsyViewController * vc = [[mytestsyViewController  alloc]initWithNibName:@"mytestsyViewController" bundle:nil];
     RHMyMoneyViewController * vc = [[RHMyMoneyViewController  alloc]initWithNibName:@"RHMyMoneyViewController" bundle:nil];
     
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     [self.navigationController pushViewController:vc animated:NO];
     
 }
@@ -2078,7 +2078,7 @@
         RHJXPassWordViewController * controller =[[RHJXPassWordViewController alloc]initWithNibName:@"RHJXPassWordViewController" bundle:nil];
         
         controller.urlstr = @"app/front/payment/appJxAccount/passwordSetJxData";
-        [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+        [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
         self.mengbanview.hidden = YES;
         self.kaihuview.hidden = YES;
         [self.navigationController pushViewController:controller animated:NO];
@@ -2088,13 +2088,13 @@
         self.mengbanview.hidden = YES;
         self.kaihuview.hidden = YES;
         RHBngkCardDetailViewController * controller = [[RHBngkCardDetailViewController alloc]initWithNibName:@"RHBngkCardDetailViewController" bundle:nil];
-         [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+         [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
         controller.ress = self.bankress;
         [self.navigationController pushViewController:controller animated:NO];
-        [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+        [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
         //[self.navigationController pushViewController:vc animated:YES];
     }else{
-     [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+     [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     self.mengbanview.hidden = YES;
     self.kaihuview.hidden = YES;
         RHOpenCountViewController* controller1=[[RHOpenCountViewController alloc]initWithNibName:@"RHOpenCountViewController" bundle:nil];

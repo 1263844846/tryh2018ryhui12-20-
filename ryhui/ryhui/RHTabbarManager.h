@@ -12,7 +12,7 @@
 #import "RHMoreViewController.h"
 #import "RHProjectListViewController.h"
 #import "RHUserCountViewController.h"
-#import "DQViewController.h"
+#import "RYHViewController.h"
 @interface RHTabbarManager : NSObject
 
 {
@@ -23,7 +23,7 @@
     RHMoreViewController* moreController;
     RHProjectListViewController * projectvc;
 }
-@property(nonatomic,strong) DQViewController * tabbar ;
+@property(nonatomic,strong) RYHViewController * tabbar ;
 @property(nonatomic,strong)RHUserCountViewController * usercon;
 
 +(instancetype)sharedInterface;

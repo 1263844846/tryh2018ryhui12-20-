@@ -124,7 +124,7 @@
     
     [super viewWillDisappear:animated];
      self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
-     [DQViewController Sharedbxtabar].tabBar.hidden = YES;
+     [RYHViewController Sharedbxtabar].tabBar.hidden = YES;
     
 }
 -(void)getmyjxpassword{
@@ -484,7 +484,7 @@
         
         
         if (buttonIndex==0) {
-            [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+            [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
             RHDBSJViewController * vc = [[RHDBSJViewController alloc]initWithNibName:@"RHDBSJViewController" bundle:nil];
             //        vc.str = @"cbx";
             [self.navigationController pushViewController:vc animated:NO];

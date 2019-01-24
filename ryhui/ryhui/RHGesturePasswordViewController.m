@@ -12,7 +12,7 @@
 #import "RHMyMessageViewController.h"
 #import "RHProjectListViewController.h"
 #import "RHMyGiftViewController.h"
-#import "DQViewController.h"
+#import "RYHViewController.h"
 #import <LocalAuthentication/LocalAuthentication.h>
 #import "RHhelper.h"
 #import "RHMainViewController.h"
@@ -116,7 +116,7 @@
     previousString = [NSString string];
     app = [UIApplication sharedApplication].delegate;
     password = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@Gesture",[RHUserManager sharedInterface].username]];
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     self.navigationController.navigationBar.hidden = YES;
 //    UILabel * lab = [[UILabel alloc]initWithFrame:CGRectMake(30, 100, 300, 40)];
 //    
@@ -672,10 +672,10 @@
              RHUserCountViewController *controller = [[RHUserCountViewController alloc]initWithNibName:@"RHUserCountViewController" bundle:nil];
             [[RHTabbarManager sharedInterface] initTabbar];
             [[[RHTabbarManager sharedInterface] selectTabbarMain] popToRootViewControllerAnimated:NO];
-            [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:2];
+            [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:2];
             UIButton *btn = [[UIButton alloc]init];
             btn.tag = 2;
-            [[DQview Shareview] btnClick:btn];
+            [[RYHView Shareview] btnClick:btn];
         }else{
         [[RHTabbarManager sharedInterface] initTabbar];
         [[[RHTabbarManager sharedInterface] selectTabbarUser] popToRootViewControllerAnimated:NO];

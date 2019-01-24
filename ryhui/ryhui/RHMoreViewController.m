@@ -57,7 +57,7 @@
 //    [self stzfpush];
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden=YES;
-    [DQViewController Sharedbxtabar].tarbar.hidden = NO;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = NO;
     [[RHNetworkService instance] POST:@"front/payment/account/countUnReadMessage" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //        DLog(@"%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
@@ -100,7 +100,7 @@
 }
 
 - (IBAction)pushAbout:(id)sender {
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     RHAboutViewController* controller=[[RHAboutViewController alloc]initWithNibName:@"RHAboutViewController" bundle:nil];
     [self.navigationController pushViewController:controller animated:YES];
 }
@@ -121,7 +121,7 @@
 
 //平台介绍
 - (IBAction)pushIntroduction:(id)sender {
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     RHIntroductionViewController* controller=[[RHIntroductionViewController alloc]initWithNibName:@"RHIntroductionViewController" bundle:nil];
     [self.navigationController pushViewController:controller animated:YES];
 }
@@ -209,14 +209,14 @@
 
 - (IBAction)help:(id)sender {
     
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     RHHelpCenterViewController * vc = [[RHHelpCenterViewController alloc]initWithNibName:@"RHHelpCenterViewController" bundle:nil];
     
     [self.navigationController pushViewController:vc animated:NO];
     
 }
 - (IBAction)yijianfankui:(id)sender {
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
 //     RHHelpCenterViewController * vc = [[RHHelpCenterViewController alloc]initWithNibName:@"RHHelpCenterViewController" bundle:nil];
     RHFeedbackViewController * vc = [[RHFeedbackViewController alloc]initWithNibName:@"RHFeedbackViewController" bundle:nil];
     

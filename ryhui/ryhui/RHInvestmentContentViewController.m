@@ -483,10 +483,10 @@
         [self.nav pushViewController:controller animated:YES];
             
             
-//            [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:1];
+//            [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:1];
 //            UIButton *btn = [[UIButton alloc]init];
 //            btn.tag = 1;
-//            [[DQview Shareview] btnClick:btn];
+//            [[RYHView Shareview] btnClick:btn];
 //            nav.navigationController.navigationBar.alpha = 1.00;
 //            [self.navigationController pushViewController:controller animated:YES];
             

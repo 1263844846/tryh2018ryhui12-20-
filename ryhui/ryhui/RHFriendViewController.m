@@ -167,7 +167,7 @@
     
       
         
-        [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+        [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
    
     [super viewWillAppear:animated];
     if ([UIScreen mainScreen].bounds.size.height < 481){

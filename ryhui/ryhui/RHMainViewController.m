@@ -15,7 +15,7 @@
 #import "XMyScrollView.h"
 #import "CycleScrollView.h"
 #import "NSTimer+Addition.h"
-//#import "DQViewController.h"
+//#import "RYHViewController.h"
 #import "MBProgressHUD.h"
 #import "RHmainModel.h"
 #import "PageView.h"
@@ -26,11 +26,11 @@
 #import "RHALoginViewController.h"
 #import "RHRegisterWebViewController.h"
 //#import "RHProjectdetailtwoViewController.h"
-#import "DQViewController.h"
+#import "RYHViewController.h"
 #import "RHProjectdetailthreeViewController.h"
 #import "RHfourtestViewController.h"
 #import "RHMainTableViewCell.h"
-#import "DQview.h"
+#import "RYHView.h"
 #import "RHInvestmentViewController.h"
 #import "RHNEWpeopleViewController.h"
 #import <SobotKit/SobotKit.h>
@@ -321,14 +321,14 @@
 -(void)pushxmj{
     if (![RHUserManager sharedInterface].username) {
         //        [self.investmentButton setTitle:@"请先登录" forState:UIControlStateNormal];
-        [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+        [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
         NSLog(@"ddddddd");
         RHALoginViewController* controller=[[RHALoginViewController alloc] initWithNibName:@"RHALoginViewController" bundle:nil];
         [self.navigationController pushViewController:controller animated:NO];
         return;
     }
     
-     [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+     [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     RHXMJWebViewController *office = [[RHXMJWebViewController alloc] initWithNibName:@"RHXMJWebViewController" bundle:nil];
     office.nametitle = @"项目集";
     office.xmjurl = [NSString stringWithFormat:@"%@%@",[RHNetworkService instance].newdoMain,[RHhelper ShraeHelp].xmjlink];
@@ -343,7 +343,7 @@
 - (IBAction)hfkaihu:(id)sender {
     self.mengbanview.hidden = YES;
     self.kaihuview.hidden = YES;
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
 //    RHRegisterWebViewController* controller1=[[RHRegisterWebViewController alloc]initWithNibName:@"RHRegisterWebViewController" bundle:nil];
 //    [self.navigationController pushViewController:controller1 animated:YES];
     if ([self.kaihubtn.titleLabel.text isEqualToString:@"设置交易密码"]) {
@@ -536,7 +536,7 @@
         [subView removeFromSuperview];
         UIView *subView1 = [self.view viewWithTag:10112];
         [subView1 removeFromSuperview];
-        [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+        [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
         [self.navigationController pushViewController:vc animated:YES];
         
         return;
@@ -551,7 +551,7 @@
     [subView removeFromSuperview];
     UIView *subView1 = [self.view viewWithTag:10112];
     [subView1 removeFromSuperview];
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     [self.navigationController pushViewController:vc animated:NO];
 }
 
@@ -596,7 +596,7 @@
 
     
 //    self.navgationrightView.hidden = YES;
-    [[DQViewController Sharedbxtabar] tabBar:(DQview *)self.view didSelectedIndex:0];
+    [[RYHViewController Sharedbxtabar] tabBar:(RYHView *)self.view didSelectedIndex:0];
     self.tableView.scrollEnabled = NO;
  
      [self rightleftbuttonwhithimagrstring:@"公告" str:@"客服1" action:@selector(gonggao) actions:@selector(getloadzcCustomerService)];
@@ -964,17 +964,17 @@
             NSLog(@"点击了关闭按钮");
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 //                            [self.navigationController setNavigationBarHidden:NO];
-                [DQViewController Sharedbxtabar].tarbar.hidden = NO;
-                [[DQViewController Sharedbxtabar].tabBar setHidden:YES];
+                [RYHViewController Sharedbxtabar].tarbar.hidden = NO;
+                [[RYHViewController Sharedbxtabar].tabBar setHidden:YES];
                 if ([UIScreen mainScreen].bounds.size.height >740) {
-                [DQViewController Sharedbxtabar].tarbar.frame = CGRectMake(self.tabBarController.tabBar.frame.origin.x, [DQViewController Sharedbxtabar].tabBar.frame.origin.y, [DQViewController Sharedbxtabar].tabBar.frame.size.width, self.tabBarController.tabBar.frame.size.height+35);
+                [RYHViewController Sharedbxtabar].tarbar.frame = CGRectMake(self.tabBarController.tabBar.frame.origin.x, [RYHViewController Sharedbxtabar].tabBar.frame.origin.y, [RYHViewController Sharedbxtabar].tabBar.frame.size.width, self.tabBarController.tabBar.frame.size.height+35);
                 }
             });
         }
         
         // 页面UI初始化完成，可以获取UIView，自定义UI
         if(type==ZCPageBlockLoadFinish){
-            [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+            [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
             //            object.navigationController.interactivePopGestureRecognizer.delegate = object;
             // banner 返回按钮
             [object.backButton setTitle:@"关闭" forState:UIControlStateNormal];
@@ -988,7 +988,7 @@
 //    RHALoginViewController * con = [[RHALoginViewController alloc]initWithNibName:@"RHALoginViewController" bundle:nil];
 //
 //
-//    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+//    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
 //    [self.navigationController pushViewController:con animated:NO];
 //     }
 }
@@ -1097,7 +1097,7 @@
         
         
         if (buttonIndex==0) {
-            [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+            [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
             RHDBSJViewController * vc = [[RHDBSJViewController alloc]initWithNibName:@"RHDBSJViewController" bundle:nil];
             //        vc.str = @"cbx";
             [self.navigationController pushViewController:vc animated:NO];
@@ -1253,7 +1253,7 @@
 - (void)didSelectPageViewWithNumber:(NSInteger)selectNumber
 {    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@""] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.subviews.firstObject.alpha = 5.00;
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     NSString *linkURl = self.didbannerarray[selectNumber];
     NSString *logoUrl = self.bannerlogoArray[selectNumber];
     NSString *naviTitle =self.didbannerarray[selectNumber];
@@ -1386,10 +1386,10 @@
     [segment1Array removeAllObjects];
 //    [dataArray removeAllObjects];
     [super viewWillAppear:animated];
-    [DQViewController Sharedbxtabar].tarbar.hidden = NO;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = NO;
     
     [self getnewpeoplegetproject];
-//    [[DQViewController Sharedbxtabar] tabBar:(DQview *)self.view didSelectedIndex:0];
+//    [[RYHViewController Sharedbxtabar] tabBar:(RYHView *)self.view didSelectedIndex:0];
     [self.tableView reloadData];
     
    // [self refeshMainViewDataWithState:0];
@@ -1536,10 +1536,10 @@
     RHProjectListViewController* controller=[[RHProjectListViewController alloc]initWithNibName:@"RHProjectListViewController" bundle:nil];
     [RHhelper ShraeHelp].type=@"0";
     
-    [[DQViewController Sharedbxtabar]tabBar:nil didSelectedIndex:1];
+    [[RYHViewController Sharedbxtabar]tabBar:nil didSelectedIndex:1];
     UIButton *btn = [[UIButton alloc]init];
     btn.tag = 1;
-    [[DQview Shareview] btnClick:btn];
+    [[RYHView Shareview] btnClick:btn];
 //    [self.navigationController pushViewController:controller animated:YES];
 }
 - (void)didSelectInvestment1 {
@@ -1547,10 +1547,10 @@
     RHProjectListViewController* controller=[[RHProjectListViewController alloc]initWithNibName:@"RHProjectListViewController" bundle:nil];
     [RHhelper ShraeHelp].type=@"1";
     
-    [[DQViewController Sharedbxtabar]tabBar:nil didSelectedIndex:1];
+    [[RYHViewController Sharedbxtabar]tabBar:nil didSelectedIndex:1];
     UIButton *btn = [[UIButton alloc]init];
     btn.tag = 1;
-    [[DQview Shareview] btnClick:btn];
+    [[RYHView Shareview] btnClick:btn];
     //    [self.navigationController pushViewController:controller animated:YES];
 }
 -(void)getmyjxpassword{
@@ -1578,7 +1578,7 @@
     
     if (![RHUserManager sharedInterface].username) {
 //        [self.investmentButton setTitle:@"请先登录" forState:UIControlStateNormal];
-        [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+        [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
         NSLog(@"ddddddd");
         RHALoginViewController* controller=[[RHALoginViewController alloc] initWithNibName:@"RHALoginViewController" bundle:nil];
         [self.navigationController pushViewController:controller animated:NO];
@@ -2538,7 +2538,7 @@
                     xmjcontroller.zhuangtaistr =@"稍后出借";
                     
                 }
-                [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+                [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
                 
                 [self.navigationController pushViewController:xmjcontroller animated:NO];
             }else{
@@ -2664,7 +2664,7 @@
                     xmjcontroller.zhuangtaistr =@"稍后出借";
                     
                 }
-                [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+                [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
                 
                 [self.navigationController pushViewController:xmjcontroller animated:NO];
             }else{
@@ -2803,7 +2803,7 @@
                     xmjcontroller.zhuangtaistr =@"稍后出借";
                     
                 }
-                [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+                [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
                 
                 [self.navigationController pushViewController:xmjcontroller animated:NO];
             }else{
@@ -2933,7 +2933,7 @@
 //                xmjcontroller.zhuangtaistr =@"稍后出借";
 //
 //            }
-//            [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+//            [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
 //
 //            [self.navigationController pushViewController:xmjcontroller animated:NO];
             
@@ -2977,7 +2977,7 @@
                     xmjcontroller.zhuangtaistr =@"稍后出借";
                     
                 }
-                [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+                [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
                 
                 [self.navigationController pushViewController:xmjcontroller animated:NO];
             }else{
@@ -3233,7 +3233,7 @@
                 xmjcontroller.zhuangtaistr =@"稍后出借";
                 
             }
-            [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+            [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
             
             [self.navigationController pushViewController:xmjcontroller animated:NO];
             return;
@@ -3957,7 +3957,7 @@
 
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
 //    [self.nav.navigationBar setBackgroundImage:[UIImage imageNamed:@""] forBarMetrics:UIBarMetricsDefault];
 //    self.nav.navigationBar.subviews.firstObject.alpha = 5.00;
     NSString *linkURl = self.collectionArr[indexPath.row][@"link"];
@@ -4012,7 +4012,7 @@
         }
     }else{
         
-        [DQViewController Sharedbxtabar].tarbar.hidden = NO;
+        [RYHViewController Sharedbxtabar].tarbar.hidden = NO;
     }
     
     NSLog(@"111");

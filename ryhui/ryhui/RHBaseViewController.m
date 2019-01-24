@@ -10,7 +10,7 @@
 #import "RHMainViewController.h"
 #import "RHmainModel.h"
 #import "UIColor+ZXLazy.h"
-#import "DQViewController.h"
+#import "RYHViewController.h"
 #import "RHALoginViewController.h"
 #import "RHhelper.h"
 @interface RHBaseViewController ()<UIGestureRecognizerDelegate>
@@ -162,7 +162,7 @@
 -(void)myback{
     [RHhelper ShraeHelp].resss=2;
     if ([[RHmainModel ShareRHmainModel].tabbarstr isEqualToString:@"cbx"]) {
-        //[DQViewController Sharedbxtabar].tarbar.hidden = NO;
+        //[RYHViewController Sharedbxtabar].tarbar.hidden = NO;
         
         NSLog(@"232323232");
     }
@@ -213,7 +213,7 @@
 {
     [RHhelper ShraeHelp].resss=2;
     if ([[RHmainModel ShareRHmainModel].tabbarstr isEqualToString:@"cbx"]) {
-        //[DQViewController Sharedbxtabar].tarbar.hidden = NO;
+        //[RYHViewController Sharedbxtabar].tarbar.hidden = NO;
         
         NSLog(@"232323232");
     }

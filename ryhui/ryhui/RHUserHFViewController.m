@@ -11,7 +11,7 @@
 //#import "RHHFDLViewController.h"
 #import "RHHFLoginPasswordViewController.h"
 #import "RHHFphonenumberViewController.h"
-#import "DQViewController.h"
+#import "RYHViewController.h"
 #import "RHForgotPasswordViewController.h"
 #import "AppDelegate.h"
 #import "RHRegisterWebViewController.h"
@@ -153,10 +153,10 @@
     self.hidenview.frame = CGRectMake(self.hidenview.frame.origin.x, self.hidenview.frame.origin.y-30, [UIScreen mainScreen].bounds.size.width, self.hidenview.frame.size.height);
     }
   */
-    [DQViewController Sharedbxtabar].tabBar.translucent = YES;
+    [RYHViewController Sharedbxtabar].tabBar.translucent = YES;
     
     self.tabBarController.tabBar.translucent = YES;
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
    // [self configBackButton];
     /*
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
@@ -369,7 +369,7 @@
      [self shouquanyanzhengxmj];
      [[UIApplication sharedApplication].keyWindow addSubview:self.hidenview];
     
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     
     [self getmyphonenumber];
     [super viewWillDisappear:animated];

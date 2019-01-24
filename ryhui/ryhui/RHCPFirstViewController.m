@@ -108,10 +108,10 @@
         RHProjectListViewController *controller = [[RHProjectListViewController alloc]initWithNibName:@"RHProjectListViewController" bundle:nil];
         controller.type = @"0";
         //    [nav pushViewController:controller animated:YES];
-        [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:1];
+        [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:1];
         UIButton *btn = [[UIButton alloc]init];
         btn.tag = 1;
-        [[DQview Shareview] btnClick:btn];
+        [[RYHView Shareview] btnClick:btn];
         [self.navigationController popToRootViewControllerAnimated:NO];
         return NO;
     }

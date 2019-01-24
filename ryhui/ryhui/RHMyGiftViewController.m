@@ -56,7 +56,7 @@
     self.kaihuview.hidden = YES;
     self.mengbanview.hidden = YES;
     self.duihuanview.hidden = YES;
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     [self configBackButton];
     [self configTitleWithString:@"我的红包"];
     [self.yuanbtn.layer  setMasksToBounds:YES];
@@ -284,7 +284,7 @@
     
    // [self viewDidAppear:YES];
     [self segmentContentView:_segmentContentView selectPage:0];
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
 }
 
 -(void)initData
@@ -417,7 +417,7 @@
     
     self.mengbanview.hidden = YES;
     self.kaihuview.hidden = YES;
-//    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+//    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     RHOpenCountViewController* controller1=[[RHOpenCountViewController alloc]initWithNibName:@"RHOpenCountViewController" bundle:nil];
     [self.navigationController pushViewController:controller1 animated:YES];
 }

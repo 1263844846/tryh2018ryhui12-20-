@@ -9,7 +9,7 @@
 #import "RHNEWpeopleViewController.h"
 #import "CircleProgressView.h"
 #import "AppDelegate.h"
-#import "DQViewController.h"
+#import "RYHViewController.h"
 #import "RHALoginViewController.h"
 #import "RHmainModel.h"
 #import "RHRegisterWebViewController.h"
@@ -99,7 +99,7 @@
     [super viewDidLoad];
     [self getmyjxpassword];
     [self getnewpeoplegetproject];
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     [self configBackButton];
     if (self.zhaungtaistr) {
         [self.touzibtn setTitle:self.zhaungtaistr forState:UIControlStateNormal] ;

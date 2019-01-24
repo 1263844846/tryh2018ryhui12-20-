@@ -356,14 +356,14 @@
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //                [self.navigationController setNavigationBarHidden:NO];
                 //                            [self.navigationController setNavigationBarHidden:NO];
-//                [DQViewController Sharedbxtabar].tarbar.hidden = NO;
-                [[DQViewController Sharedbxtabar].tabBar setHidden:YES];
+//                [RYHViewController Sharedbxtabar].tarbar.hidden = NO;
+                [[RYHViewController Sharedbxtabar].tabBar setHidden:YES];
             });
         }
         
         // 页面UI初始化完成，可以获取UIView，自定义UI
         if(type==ZCPageBlockLoadFinish){
-            [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+            [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
             //            object.navigationController.interactivePopGestureRecognizer.delegate = object;
             // banner 返回按钮
             [object.backButton setTitle:@"关闭" forState:UIControlStateNormal];
@@ -452,7 +452,7 @@
 {
     [super viewWillAppear:animated];
     
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
 }
 
 

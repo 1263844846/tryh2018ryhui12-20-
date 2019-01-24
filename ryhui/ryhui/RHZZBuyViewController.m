@@ -8,7 +8,7 @@
 
 #import "RHZZBuyViewController.h"
 #import "AppDelegate.h"
-#import "DQViewController.h"
+#import "RYHViewController.h"
 
 @interface RHZZBuyViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *tesbutton;
@@ -32,7 +32,7 @@
         self.tesbutton.hidden = YES;
     }
     
-    [DQViewController Sharedbxtabar].tarbar.hidden =YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden =YES;
     [self configBackButton];
     [self configTitleWithString:@"我要认购"];
 }

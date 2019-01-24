@@ -9,7 +9,7 @@
 #import "RHWithdrawViewController.h"
 #import "RHWithdrawWebViewController.h"
 #import "RHBindCardWebViewController.h"
-#import "DQViewController.h"
+#import "RYHViewController.h"
 #import "RHTXTableViewCell.h"
 #import "MBProgressHUD.h"
 #import "RHWitdrawJLViewController.h"
@@ -230,7 +230,7 @@
     [super viewWillAppear:animated];
 
         
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     [self getworktime];
     
     [self.dataArray removeAllObjects];
@@ -302,7 +302,7 @@
 //
 //    self.yhktableview.delegate = self;
 //    
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     [self configBackButton];
     [self configTitleWithString:@"提现"];
 //    self.overView.hidden = YES;
@@ -542,8 +542,8 @@
                     NSLog(@"点击了关闭按钮");
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                         [self.navigationController setNavigationBarHidden:NO];
-                        //[DQViewController Sharedbxtabar].tarbar.hidden = NO;
-                        // [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+                        //[RYHViewController Sharedbxtabar].tarbar.hidden = NO;
+                        // [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
                         
                      //   self.secondview.frame = CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height+50);
                     });
@@ -551,7 +551,7 @@
                 
                 // 页面UI初始化完成，可以获取UIView，自定义UI
                 if(type==ZCPageBlockLoadFinish){
-                    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+                    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
                     //            object.navigationController.interactivePopGestureRecognizer.delegate = object;
                     // banner 返回按钮
                     [object.backButton setTitle:@"关闭" forState:UIControlStateNormal];
@@ -581,8 +581,8 @@
                     //             [self.navigationController setNavigationBarHidden:NO];
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                                     [self.navigationController setNavigationBarHidden:NO];
-                        //[DQViewController Sharedbxtabar].tarbar.hidden = NO;
-                       // [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+                        //[RYHViewController Sharedbxtabar].tarbar.hidden = NO;
+                       // [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
                         
                     self.secondview.frame = CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height+50);
                     });

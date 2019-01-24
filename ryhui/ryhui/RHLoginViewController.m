@@ -69,11 +69,11 @@
   RHMainViewController  * controller=[[RHMainViewController alloc]initWithNibName:@"RHMainViewController" bundle:nil];
     // controller.type= @"4";
     
-    DQview * aview = [DQview Shareview];
+    RYHView * aview = [RYHView Shareview];
     //aview.str = @"cbx";
     //aview.delegate = self;
     [aview btnClick:[[UIButton alloc]init]];
-    [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:0];
+    [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:0];
     
     [[RHTabbarManager sharedInterface] initTabbar];
     

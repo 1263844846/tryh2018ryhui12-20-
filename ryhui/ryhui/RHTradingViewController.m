@@ -49,8 +49,8 @@
     [super viewWillAppear:animated];
    
         
-        [DQViewController Sharedbxtabar].tarbar.hidden = YES;
-//      [[DQViewController Sharedbxtabar].tabBar setHidden:YES];
+        [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
+//      [[RYHViewController Sharedbxtabar].tabBar setHidden:YES];
     
     self.removea = 1;
     self.dataArray=[[NSMutableArray alloc]initWithCapacity:0];

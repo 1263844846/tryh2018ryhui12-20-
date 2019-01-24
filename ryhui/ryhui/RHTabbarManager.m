@@ -12,7 +12,7 @@
 #import "RHLoginViewController.h"
 #import "RHALoginViewController.h"
 #import "RHGuidanceViewController.h"
-#import "DQViewController.h"
+#import "RYHViewController.h"
 
 static RHTabbarManager* _instance =nil;
 
@@ -69,7 +69,7 @@ static RHTabbarManager* _instance =nil;
 //    UIViewController * vc = [UIViewController new];
 //    self.tabbarproject = [[UINavigationController alloc]initWithRootViewController:vc];
 //    self.tabbarproject.navigationBar.hidden = YES;
-    self.tabbar = [DQViewController Sharedbxtabar];
+    self.tabbar = [RYHViewController Sharedbxtabar];
     self.tabbar.tarbar.hidden = NO;
     self.tabbar.viewControllers = @[self.tabbarMain,self.tabbarproject,self.tabbarUser,self.tabbarMore];
     AppDelegate* delegate=[UIApplication sharedApplication].delegate;
@@ -79,7 +79,7 @@ static RHTabbarManager* _instance =nil;
 -(UINavigationController*)selectTabbarMain
 {
   //  AppDelegate* delegate=[UIApplication sharedApplication].delegate;
-   // delegate.window.rootViewController= [DQViewController Sharedbxtabar];
+   // delegate.window.rootViewController= [RYHViewController Sharedbxtabar];
     
     return  self.tabbarMain;
 }

@@ -10,7 +10,7 @@
 #import "RHInvestmentWebViewController.h"
 #import "RHRechargeViewController.h"
 #import "RHContractViewContoller.h"
-#import "DQViewController.h"
+#import "RYHViewController.h"
 #import "RHCPFirstViewController.h"
 #import "RHInverstWebViewController.h"
 #import "RHXMJTBSQViewController.h"
@@ -125,7 +125,7 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     [self checkout];
     [self getprojectdata];
      [self getceping];
@@ -779,7 +779,7 @@
     RHRechargeViewController* controller=[[RHRechargeViewController alloc]initWithNibName:@"RHRechargeViewController" bundle:nil];
     //controller.balance=self.balanceLabel.text;
     controller.balance=self.keyonglable.text;
-    [DQViewController Sharedbxtabar].tabBar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tabBar.hidden = YES;
     controller.bankdic = self.bankdic;
     controller.bankress = self.bankress;
     [self.navigationController pushViewController:controller animated:YES];

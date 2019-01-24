@@ -108,10 +108,10 @@
     //    RHUserCountViewController *controller = [[RHUserCountViewController alloc]initWithNibName:@"RHUserCountViewController" bundle:nil];
     //    //            controller.type = @"0";
     //    [nav pushViewController:controller animated:YES];
-    //    [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:2];
+    //    [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:2];
     //    UIButton *btn = [[UIButton alloc]init];
     //    btn.tag = 2;
-    //    [[DQview Shareview] btnClick:btn];
+    //    [[RYHView Shareview] btnClick:btn];
     //  [self.navigationController popToRootViewControllerAnimated:NO];
     
     
@@ -122,10 +122,10 @@
     ////                    [nav pushViewController:controller animated:YES];
     //
     //
-    //    [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:2];
+    //    [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:2];
     //    UIButton *btn = [[UIButton alloc]init];
     //    btn.tag = 2;
-    //    [[DQview Shareview] btnClick:btn];
+    //    [[RYHView Shareview] btnClick:btn];
     //    [nav popToRootViewControllerAnimated:NO];
     
     
@@ -137,10 +137,10 @@
         //                [nav pushViewController:controller animated:YES];
         
         
-        [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:2];
+        [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:2];
         UIButton *btn = [[UIButton alloc]init];
         btn.tag = 2;
-        [[DQview Shareview] btnClick:btn];
+        [[RYHView Shareview] btnClick:btn];
         //
         
         

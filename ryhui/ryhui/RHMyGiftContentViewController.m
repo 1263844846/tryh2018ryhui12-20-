@@ -11,8 +11,8 @@
 #import "RHMyNewGiftTableViewCell.h"
 #import "RHProjectListViewController.h"
 #import "MBProgressHUD.h"
-#import "DQViewController.h"
-#import "DQview.h"
+#import "RYHViewController.h"
+#import "RYHView.h"
 
 //#import "RHContractViewContoller.h"
 @interface RHMyGiftContentViewController () <UIAlertViewDelegate,DQviewDelegate>
@@ -265,19 +265,19 @@
     
     if (btn.tag == 10) {
         //投资
-      //  [DQViewController Sharedbxtabar].tarbar.hidden = NO;
+      //  [RYHViewController Sharedbxtabar].tarbar.hidden = NO;
         RHProjectListViewController* controller=[[RHProjectListViewController alloc]initWithNibName:@"RHProjectListViewController" bundle:nil];
        // controller.type= @"4";
         
-        DQview * aview = [DQview Shareview];
+        RYHView * aview = [RYHView Shareview];
         aview.str = @"cbx";
         //aview.delegate = self;
         [aview btnClick:[[UIButton alloc]init]];
-        [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:1];
+        [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:1];
         [nav popViewControllerAnimated:NO];
-          [[DQViewController Sharedbxtabar].tabBar setHidden:YES];
+          [[RYHViewController Sharedbxtabar].tabBar setHidden:YES];
 //        [nav pushViewController:controller animated:YES];
-        [DQViewController Sharedbxtabar].tabBar.hidden = NO;
+        [RYHViewController Sharedbxtabar].tabBar.hidden = NO;
 //        [self presentViewController:controller animated:YES completion:nil];
 //        [[[RHTabbarManager sharedInterface] selectTabbarMain] pushViewController:controller animated:YES];
         

@@ -10,7 +10,7 @@
 #import "RHRechargeWebViewController.h"
 #import "MBProgressHUD.h"
 #import "RHBindCardViewController.h"
-#import "DQViewController.h"
+#import "RYHViewController.h"
 #import "RHRechangejiluViewController.h"
 #import "RHBankwebviewViewController.h"
 #import "RHBankNameTableViewCell.h"
@@ -434,15 +434,15 @@
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                         //                [self.navigationController setNavigationBarHidden:NO];
                         //                            [self.navigationController setNavigationBarHidden:NO];
-                        //                [DQViewController Sharedbxtabar].tarbar.hidden = NO;
-                        [[DQViewController Sharedbxtabar].tabBar setHidden:YES];
+                        //                [RYHViewController Sharedbxtabar].tarbar.hidden = NO;
+                        [[RYHViewController Sharedbxtabar].tabBar setHidden:YES];
                         [self.navigationController setNavigationBarHidden:NO];
                     });
                 }
                 
                 // 页面UI初始化完成，可以获取UIView，自定义UI
                 if(type==ZCPageBlockLoadFinish){
-                    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+                    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
                     //            object.navigationController.interactivePopGestureRecognizer.delegate = object;
                     // banner 返回按钮
                     [object.backButton setTitle:@"关闭" forState:UIControlStateNormal];
@@ -472,10 +472,10 @@
                     
                     //             [self.navigationController setNavigationBarHidden:NO];
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                         [[DQViewController Sharedbxtabar].tabBar setHidden:YES];
+                         [[RYHViewController Sharedbxtabar].tabBar setHidden:YES];
                         [self.navigationController setNavigationBarHidden:NO];
-                        //[DQViewController Sharedbxtabar].tarbar.hidden = NO;
-                        // [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+                        //[RYHViewController Sharedbxtabar].tarbar.hidden = NO;
+                        // [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
                         
                       //  self.secondview.frame = CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height+50);
                     });
@@ -615,7 +615,7 @@
 //    NSString * str = @"front/payment/account/myAccountData";
 //    NSString * newstr = @"front/payment/appAccount/appMyAccountData";
     
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden=NO;
     self.rechargeButton.userInteractionEnabled = YES;

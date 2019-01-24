@@ -12,7 +12,7 @@
 #import "RHALoginViewController.h"
 #import "RHRegisterWebViewController.h"
 #import "RHInvestmentViewController.h"
-#import "DQViewController.h"
+#import "RYHViewController.h"
 #import "RHmainModel.h"
 #import "RHZZBuyViewController.h"
 #import "RHOpenCountViewController.h"
@@ -84,23 +84,23 @@
             RHMainViewController *controller = [[RHMainViewController alloc]initWithNibName:@"RHMainViewController" bundle:nil];
             //            controller.type = @"0";
             [self.navigationController pushViewController:controller animated:YES];
-            [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:0];
+            [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:0];
             UIButton *btn = [[UIButton alloc]init];
             btn.tag = 0;
-            [[DQview Shareview] btnClick:btn];
+            [[RYHView Shareview] btnClick:btn];
             // [self.navigationController popToRootViewControllerAnimated:NO]
         }
         if ([UIScreen mainScreen].bounds.size.height>740) {
-            [[DQViewController Sharedbxtabar] tabBar:(DQview *)self.view didSelectedIndex:1];
+            [[RYHViewController Sharedbxtabar] tabBar:(RYHView *)self.view didSelectedIndex:1];
         }
         //    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:NO];
-        [[DQViewController Sharedbxtabar].tabBar setHidden:YES];
-        [[DQViewController Sharedbxtabar].tabBar removeFromSuperview];
+        [[RYHViewController Sharedbxtabar].tabBar setHidden:YES];
+        [[RYHViewController Sharedbxtabar].tabBar removeFromSuperview];
         [super viewWillAppear:animated];
         [self.navigationController popViewControllerAnimated:NO];
         [RHmainModel ShareRHmainModel].maintest = @"hehe";
         
-        [DQViewController Sharedbxtabar].tarbar.hidden = NO;
+        [RYHViewController Sharedbxtabar].tarbar.hidden = NO;
         //    UIButton*leftButton = [[UIButton alloc]initWithFrame:CGRectMake(0,0,30,20)];
         //   // [leftButton setImage:[UIImage imageNamed:@"xiaoxipng.png"]forState:UIControlStateNormal];
         //    //[leftButton addTarget:self action:@selector(chongzhi)forControlEvents:UIControlEventTouchUpInside];
@@ -128,23 +128,23 @@
         RHMainViewController *controller = [[RHMainViewController alloc]initWithNibName:@"RHMainViewController" bundle:nil];
         //            controller.type = @"0";
         [self.navigationController pushViewController:controller animated:YES];
-        [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:0];
+        [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:0];
         UIButton *btn = [[UIButton alloc]init];
         btn.tag = 0;
-        [[DQview Shareview] btnClick:btn];
+        [[RYHView Shareview] btnClick:btn];
        // [self.navigationController popToRootViewControllerAnimated:NO]
     }
     if ([UIScreen mainScreen].bounds.size.height>740) {
-        [[DQViewController Sharedbxtabar] tabBar:(DQview *)self.view didSelectedIndex:1];
+        [[RYHViewController Sharedbxtabar] tabBar:(RYHView *)self.view didSelectedIndex:1];
     }
 //    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:NO];
-    [[DQViewController Sharedbxtabar].tabBar setHidden:YES];
-    [[DQViewController Sharedbxtabar].tabBar removeFromSuperview];
+    [[RYHViewController Sharedbxtabar].tabBar setHidden:YES];
+    [[RYHViewController Sharedbxtabar].tabBar removeFromSuperview];
     [super viewWillAppear:animated];
     [self.navigationController popViewControllerAnimated:NO];
     [RHmainModel ShareRHmainModel].maintest = @"hehe";
     
-    [DQViewController Sharedbxtabar].tarbar.hidden = NO;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = NO;
 //    UIButton*leftButton = [[UIButton alloc]initWithFrame:CGRectMake(0,0,30,20)];
 //   // [leftButton setImage:[UIImage imageNamed:@"xiaoxipng.png"]forState:UIControlStateNormal];
 //    //[leftButton addTarget:self action:@selector(chongzhi)forControlEvents:UIControlEventTouchUpInside];
@@ -454,12 +454,12 @@
     
     controller.urlstr = @"app/front/payment/appJxAccount/passwordSetJxData";
     [self.navigationController pushViewController:controller animated:YES];
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     return;
   */
     if (![RHUserManager sharedInterface].username) {
         //        [self.investmentButton setTitle:@"请先登录" forState:UIControlStateNormal];
-        [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+        [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
         NSLog(@"ddddddd");
         RHALoginViewController* controller=[[RHALoginViewController alloc] initWithNibName:@"RHALoginViewController" bundle:nil];
         [self.navigationController pushViewController:controller animated:NO];
@@ -471,7 +471,7 @@
             self.kaihu.hidden = NO;
             
             return;
-            [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+            [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
             RHRegisterWebViewController* controller1=[[RHRegisterWebViewController alloc]initWithNibName:@"RHRegisterWebViewController" bundle:nil];
             [self.navigationController pushViewController:controller1 animated:NO];
         }else{
@@ -541,7 +541,7 @@
         
         
         if (buttonIndex==0) {
-            [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+            [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
             RHDBSJViewController * vc = [[RHDBSJViewController alloc]initWithNibName:@"RHDBSJViewController" bundle:nil];
             //        vc.str = @"cbx";
             [self.navigationController pushViewController:vc animated:NO];
@@ -558,7 +558,7 @@
 - (IBAction)kaihu:(id)sender {
     self.kaihu.hidden = YES;
     self.mengban.hidden = YES;
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     
     if ([self.kaihubtn.titleLabel.text isEqualToString:@"设置交易密码"]) {
         

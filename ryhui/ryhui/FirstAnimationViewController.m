@@ -7,7 +7,7 @@
 //
 
 #import "FirstAnimationViewController.h"
-#import "DQViewController.h"
+#import "RYHViewController.h"
 #import "RHGesturePasswordViewController.h"
 #import "AnimationWebViewController.h"
 #import "RHmainModel.h"

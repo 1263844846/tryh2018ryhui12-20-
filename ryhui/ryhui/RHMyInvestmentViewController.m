@@ -47,7 +47,7 @@
 -(void)viewWillAppear:(BOOL)animated{
    self.navigationController.navigationBar.hidden=YES;
     
-        [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+        [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
    
     [super viewWillAppear:animated];
 
@@ -86,7 +86,7 @@
     [self configTitleWithString:@"我的出借"];
 //    self.tabBarController.tabBar.hidden = YES;
    
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     self.segmentContentView = [[RHSegmentContentView alloc] initWithFrame:CGRectMake(0, 110, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].applicationFrame.size.height-50-40-self.navigationController.navigationBar.frame.size.height-10+40)];
     
     if ([UIScreen mainScreen].bounds.size.height>740) {

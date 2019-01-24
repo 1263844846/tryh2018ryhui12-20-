@@ -192,8 +192,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-//    [DQViewController Sharedbxtabar].tabBar.hidden = YES;
-//    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+//    [RYHViewController Sharedbxtabar].tabBar.hidden = YES;
+//    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     
     
 //    self.myview.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height-80);
@@ -203,9 +203,9 @@
 -(void)viewWillDisappear:(BOOL)animated{
     
     [super viewWillDisappear:animated];
-    [DQViewController Sharedbxtabar].tabBar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tabBar.hidden = YES;
 //    self.hidesBottomBarWhenPushed = NO;
-//    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+//    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     
 }
 @end

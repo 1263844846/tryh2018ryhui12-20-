@@ -114,8 +114,8 @@
 		0057BA161F307A1600160FC9 /* RHOpenAccountScuessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0057BA141F307A1600160FC9 /* RHOpenAccountScuessViewController.xib */; };
 		0057BA181F307FAF00160FC9 /* appryhui_03openaccount.png in Resources */ = {isa = PBXBuildFile; fileRef = 0057BA171F307FAF00160FC9 /* appryhui_03openaccount.png */; };
 		0057BA1A1F30813700160FC9 /* appryhui_04kaihuhongbao.png in Resources */ = {isa = PBXBuildFile; fileRef = 0057BA191F30813700160FC9 /* appryhui_04kaihuhongbao.png */; };
-		00585C811C45F3E200AE3BC4 /* DQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00585C7E1C45F3E200AE3BC4 /* DQViewController.m */; };
-		00585C821C45F3E200AE3BC4 /* DQview.m in Sources */ = {isa = PBXBuildFile; fileRef = 00585C801C45F3E200AE3BC4 /* DQview.m */; };
+		00585C811C45F3E200AE3BC4 /* RYHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00585C7E1C45F3E200AE3BC4 /* RYHViewController.m */; };
+		00585C821C45F3E200AE3BC4 /* RYHView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00585C801C45F3E200AE3BC4 /* RYHView.m */; };
 		00585C8C1C45FA6600AE3BC4 /* ICN_Nav-Home1.png in Resources */ = {isa = PBXBuildFile; fileRef = 00585C841C45FA6600AE3BC4 /* ICN_Nav-Home1.png */; };
 		00585C901C45FA6600AE3BC4 /* ICN_Nav-Home3.png in Resources */ = {isa = PBXBuildFile; fileRef = 00585C881C45FA6600AE3BC4 /* ICN_Nav-Home3.png */; };
 		00585C921C45FA6600AE3BC4 /* ICN_Nav-Home2.png in Resources */ = {isa = PBXBuildFile; fileRef = 00585C8A1C45FA6600AE3BC4 /* ICN_Nav-Home2.png */; };
@@ -909,10 +909,10 @@
 		0057BA141F307A1600160FC9 /* RHOpenAccountScuessViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHOpenAccountScuessViewController.xib; sourceTree = "<group>"; };
 		0057BA171F307FAF00160FC9 /* appryhui_03openaccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appryhui_03openaccount.png; sourceTree = "<group>"; };
 		0057BA191F30813700160FC9 /* appryhui_04kaihuhongbao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appryhui_04kaihuhongbao.png; sourceTree = "<group>"; };
-		00585C7D1C45F3E200AE3BC4 /* DQViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DQViewController.h; sourceTree = "<group>"; };
-		00585C7E1C45F3E200AE3BC4 /* DQViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DQViewController.m; sourceTree = "<group>"; };
-		00585C7F1C45F3E200AE3BC4 /* DQview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DQview.h; sourceTree = "<group>"; };
-		00585C801C45F3E200AE3BC4 /* DQview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DQview.m; sourceTree = "<group>"; };
+		00585C7D1C45F3E200AE3BC4 /* RYHViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYHViewController.h; sourceTree = "<group>"; };
+		00585C7E1C45F3E200AE3BC4 /* RYHViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYHViewController.m; sourceTree = "<group>"; };
+		00585C7F1C45F3E200AE3BC4 /* RYHView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYHView.h; sourceTree = "<group>"; };
+		00585C801C45F3E200AE3BC4 /* RYHView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYHView.m; sourceTree = "<group>"; };
 		00585C841C45FA6600AE3BC4 /* ICN_Nav-Home1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ICN_Nav-Home1.png"; sourceTree = "<group>"; };
 		00585C881C45FA6600AE3BC4 /* ICN_Nav-Home3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ICN_Nav-Home3.png"; sourceTree = "<group>"; };
 		00585C8A1C45FA6600AE3BC4 /* ICN_Nav-Home2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ICN_Nav-Home2.png"; sourceTree = "<group>"; };
@@ -2843,10 +2843,10 @@
 			children = (
 				F80E496C1A8E27F600028CD1 /* RHNetworkService.h */,
 				F80E496D1A8E27F600028CD1 /* RHNetworkService.m */,
-				00585C7D1C45F3E200AE3BC4 /* DQViewController.h */,
-				00585C7E1C45F3E200AE3BC4 /* DQViewController.m */,
-				00585C7F1C45F3E200AE3BC4 /* DQview.h */,
-				00585C801C45F3E200AE3BC4 /* DQview.m */,
+				00585C7D1C45F3E200AE3BC4 /* RYHViewController.h */,
+				00585C7E1C45F3E200AE3BC4 /* RYHViewController.m */,
+				00585C7F1C45F3E200AE3BC4 /* RYHView.h */,
+				00585C801C45F3E200AE3BC4 /* RYHView.m */,
 				0054BF6F1C476F0000A6E66E /* UIColor+ZXLazy.h */,
 				0054BF701C476F0000A6E66E /* UIColor+ZXLazy.m */,
 			);
@@ -4389,7 +4389,7 @@
 				00974661201876D1008C666F /* RHBFBKTableViewCell.m in Sources */,
 				0027715B1DC1ABB700F8C3F7 /* RHNewPeopleJLViewController.m in Sources */,
 				0082DC141E6EAF01006EC241 /* PNRadarChart.m in Sources */,
-				00585C811C45F3E200AE3BC4 /* DQViewController.m in Sources */,
+				00585C811C45F3E200AE3BC4 /* RYHViewController.m in Sources */,
 				0059BB9D1D5078F300234E27 /* ResultViewController.m in Sources */,
 				0070A360201B0D1D00BAEBC7 /* RHBFLastTableViewCell.m in Sources */,
 				F86B8AF51AA16F75000D2B8C /* RHGesturePasswordButton.m in Sources */,
@@ -4423,7 +4423,7 @@
 				F8C38D901AC98112005C3B1F /* RHRepaymentScheduleCell.m in Sources */,
 				0082DC151E6EAF01006EC241 /* PNRadarChartDataItem.m in Sources */,
 				0054BF711C476F0000A6E66E /* UIColor+ZXLazy.m in Sources */,
-				00585C821C45F3E200AE3BC4 /* DQview.m in Sources */,
+				00585C821C45F3E200AE3BC4 /* RYHView.m in Sources */,
 				007E90632152475E00E42A82 /* RHUnbundlingBankCardsViewController.m in Sources */,
 				00059DFE1CC0C168007508E0 /* RHFriendViewController.m in Sources */,
 				0029B1791D6D8215002C4376 /* RHWitdrawJLViewController.m in Sources */,

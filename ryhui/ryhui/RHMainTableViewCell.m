@@ -80,7 +80,7 @@
 
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     [self.nav.navigationBar setBackgroundImage:[UIImage imageNamed:@""] forBarMetrics:UIBarMetricsDefault];
     self.nav.navigationBar.subviews.firstObject.alpha = 5.00;
     NSString *linkURl = self.array[indexPath.row][@"link"];
@@ -135,7 +135,7 @@
         }
     }else{
         
-         [DQViewController Sharedbxtabar].tarbar.hidden = NO;
+         [RYHViewController Sharedbxtabar].tarbar.hidden = NO;
     }
     
     NSLog(@"111");

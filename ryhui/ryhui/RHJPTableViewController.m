@@ -90,7 +90,7 @@
 {
     [super viewWillAppear:animated];
     
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
 }
 -(void)getuser{
     

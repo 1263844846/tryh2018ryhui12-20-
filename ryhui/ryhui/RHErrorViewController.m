@@ -527,13 +527,13 @@
         [RHhelper ShraeHelp].resss =1;
         
         RHMyInvestmentViewController*   controller = [[RHMyInvestmentViewController alloc] initWithNibName:@"RHMyInvestmentViewController" bundle:nil];
-        // [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+        // [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
 //        controller.nav = self.navigationController;
         controller.resstr = @"test";
-        [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:2];
+        [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:2];
         UIButton *btn = [[UIButton alloc]init];
         btn.tag = 2;
-        [[DQview Shareview] btnClick:btn];
+        [[RYHView Shareview] btnClick:btn];
         nav.navigationController.navigationBar.alpha = 1.00;
         [nav pushViewController:controller animated:YES];
         
@@ -560,10 +560,10 @@
             RHProjectListViewController *controller = [[RHProjectListViewController alloc]initWithNibName:@"RHProjectListViewController" bundle:nil];
             controller.type = @"0";
             //    [nav pushViewController:controller animated:YES];
-            [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:1];
+            [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:1];
             UIButton *btn = [[UIButton alloc]init];
             btn.tag = 1;
-            [[DQview Shareview] btnClick:btn];
+            [[RYHView Shareview] btnClick:btn];
             [self.navigationController popToRootViewControllerAnimated:NO];
             return;
         }
@@ -571,10 +571,10 @@
         RHProjectListViewController *controller = [[RHProjectListViewController alloc]initWithNibName:@"RHProjectListViewController" bundle:nil];
         controller.type = @"0";
         //    [nav pushViewController:controller animated:YES];
-        [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:1];
+        [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:1];
         UIButton *btn = [[UIButton alloc]init];
         btn.tag = 1;
-        [[DQview Shareview] btnClick:btn];
+        [[RYHView Shareview] btnClick:btn];
         [self.navigationController popToRootViewControllerAnimated:NO];
     }else{
         
@@ -599,11 +599,11 @@
             }
 //            [self.navigationController popViewControllerAnimated:YES];
             return;
-//            [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:2];
+//            [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:2];
 //            UIButton *btn = [[UIButton alloc]init];
 //            btn.tag = 2;
-//            [[DQview Shareview] btnClick:btn];
-//            [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+//            [[RYHView Shareview] btnClick:btn];
+//            [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
         }else{
             
             RHWithdrawViewController*   controller = [[RHWithdrawViewController alloc] initWithNibName:@"RHWithdrawViewController" bundle:nil];
@@ -622,11 +622,11 @@
                 }
                 
             }
-//            [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:2];
+//            [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:2];
 //            UIButton *btn = [[UIButton alloc]init];
 //            btn.tag = 2;
-//            [[DQview Shareview] btnClick:btn];
-//            [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+//            [[RYHView Shareview] btnClick:btn];
+//            [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
 //            [nav pushViewController:controller animated:NO];
             return;
         }
@@ -687,12 +687,12 @@
         [RHhelper ShraeHelp].resss =1;
         
         RHMyInvestmentViewController*   controller = [[RHMyInvestmentViewController alloc] initWithNibName:@"RHMyInvestmentViewController" bundle:nil];
-       // [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+       // [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
         controller.nav = self.navigationController;
-        [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:2];
+        [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:2];
         UIButton *btn = [[UIButton alloc]init];
         btn.tag = 2;
-        [[DQview Shareview] btnClick:btn];
+        [[RYHView Shareview] btnClick:btn];
         [nav pushViewController:controller animated:YES];
         
          [self.navigationController popToRootViewControllerAnimated:NO];
@@ -706,10 +706,10 @@
             RHUserCountViewController *controller = [[RHUserCountViewController alloc]initWithNibName:@"RHUserCountViewController" bundle:nil];
             //            controller.type = @"0";
             [nav pushViewController:controller animated:YES];
-            [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:2];
+            [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:2];
             UIButton *btn = [[UIButton alloc]init];
             btn.tag = 2;
-            [[DQview Shareview] btnClick:btn];
+            [[RYHView Shareview] btnClick:btn];
                         [self.navigationController popToRootViewControllerAnimated:NO];
             
             
@@ -719,10 +719,10 @@
             RHUserCountViewController *controller = [[RHUserCountViewController alloc]initWithNibName:@"RHUserCountViewController" bundle:nil];
             //            controller.type = @"0";
             [nav pushViewController:controller animated:YES];
-            [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:2];
+            [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:2];
             UIButton *btn = [[UIButton alloc]init];
             btn.tag = 2;
-            [[DQview Shareview] btnClick:btn];
+            [[RYHView Shareview] btnClick:btn];
             [self.navigationController popToRootViewControllerAnimated:NO];
             
             
@@ -735,20 +735,20 @@
         RHProjectListViewController *controller = [[RHProjectListViewController alloc]initWithNibName:@"RHProjectListViewController" bundle:nil];
         controller.type = @"0";
         //    [nav pushViewController:controller animated:YES];
-        [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:1];
+        [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:1];
         UIButton *btn = [[UIButton alloc]init];
         btn.tag = 1;
-        [[DQview Shareview] btnClick:btn];
+        [[RYHView Shareview] btnClick:btn];
         
         
 //        [RHhelper ShraeHelp].resss =10;
 //        RHProjectListViewController *controller = [[RHProjectListViewController alloc]initWithNibName:@"RHProjectListViewController" bundle:nil];
 //        controller.type = @"0";
 //        //    [nav pushViewController:controller animated:YES];
-//        [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:1];
+//        [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:1];
 //        UIButton *btn = [[UIButton alloc]init];
 //        btn.tag = 1;
-//        [[DQview Shareview] btnClick:btn];
+//        [[RYHView Shareview] btnClick:btn];
 //        [self.navigationController popToRootViewControllerAnimated:NO];
 //        return;
         
@@ -762,12 +762,12 @@
         [RHhelper ShraeHelp].resss =1;
         
         RHMyInvestmentViewController*   controller = [[RHMyInvestmentViewController alloc] initWithNibName:@"RHMyInvestmentViewController" bundle:nil];
-        // [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+        // [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
         controller.nav = self.navigationController;
-        [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:2];
+        [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:2];
         UIButton *btn = [[UIButton alloc]init];
         btn.tag = 2;
-        [[DQview Shareview] btnClick:btn];
+        [[RYHView Shareview] btnClick:btn];
         [nav pushViewController:controller animated:NO];
         
         [self.navigationController popToRootViewControllerAnimated:NO];
@@ -790,24 +790,24 @@
     if (sender.tag == 10) {
     RHMyInvestmentViewController*    controller = [[RHMyInvestmentViewController alloc] initWithNibName:@"RHMyInvestmentViewController" bundle:nil];
         [nav pushViewController:controller animated:YES];
-        [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:2];
+        [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:2];
         controller.nav = self.navigationController;
         
         UIButton *btn = [[UIButton alloc]init];
         btn.tag = 2;
-        [[DQview Shareview] btnClick:btn];
-        [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+        [[RYHView Shareview] btnClick:btn];
+        [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
         
     } else {
         controller = [[RHMyAccountViewController alloc]initWithNibName:@"RHMyAccountViewController" bundle:nil];
         //[nav pushViewController:controller animated:YES];
-        [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:2];
+        [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:2];
         UIButton *btn = [[UIButton alloc]init];
         btn.tag = 2;
-        [[DQview Shareview] btnClick:btn];
+        [[RYHView Shareview] btnClick:btn];
     }
     
-//    [DQViewController Sharedbxtabar]
+//    [RYHViewController Sharedbxtabar]
     
    
 }
@@ -825,11 +825,11 @@
     UINavigationController* nav = [[RHTabbarManager sharedInterface] selectTabbarUser];
     RHMyGiftViewController *   controller = [[RHMyGiftViewController alloc] initWithNibName:@"RHMyGiftViewController" bundle:nil];
     
-    [[DQViewController Sharedbxtabar]tabBar:(DQview *)controller.view didSelectedIndex:2];
+    [[RYHViewController Sharedbxtabar]tabBar:(RYHView *)controller.view didSelectedIndex:2];
     UIButton *btn = [[UIButton alloc]init];
     btn.tag = 2;
-    [[DQview Shareview] btnClick:btn];
-    [DQViewController Sharedbxtabar].tarbar.hidden = YES;
+    [[RYHView Shareview] btnClick:btn];
+    [RYHViewController Sharedbxtabar].tarbar.hidden = YES;
     [self.navigationController popToRootViewControllerAnimated:NO];
 //    [nav pushViewController:controller animated:NO];
     
