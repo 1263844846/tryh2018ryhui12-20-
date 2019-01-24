@@ -7,7 +7,7 @@
 //
 
 #import "RHJsqViewController.h"
-#import "rhmytestiosViewController.h"
+
 @interface RHJsqViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIView *cbxjsqView;
 @property (weak, nonatomic) IBOutlet UILabel *topyearlab;
@@ -102,8 +102,7 @@
 //    self.shouyilab.text = [NSString stringWithFormat:@"%.2f",money];
 //    
     
-//    rhmytestiosViewController * vc = [[rhmytestiosViewController alloc]initWithNibName:@"rhmytestiosViewController" bundle:nil];
-//    [self.navigationController pushViewController:vc animated:YES];
+
 //    
 }
 /*

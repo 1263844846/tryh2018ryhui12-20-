@@ -8,7 +8,7 @@
 
 #import "RHTradingViewController.h"
 #import "RHTradViewCell.h"
-#import "biaxueViewController.h"
+
 
 @interface RHTradingViewController ()
 
@@ -450,8 +450,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-//    biaxueViewController * vc = [[biaxueViewController alloc]initWithNibName:@"biaxueViewController" bundle:nil];
-//    [self.navigationController pushViewController:vc animated:YES];
+
     
 }
 

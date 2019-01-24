@@ -15,7 +15,7 @@
 #import "RYHView.h"
 #import "RHZZTableViewCell.h"
 #import "RHZZDetailViewController.h"
-@interface RHZZCONViewController ()<UIAlertViewDelegate,DQviewDelegate>
+@interface RHZZCONViewController ()<UIAlertViewDelegate,RYHviewDelegate>
 
 {
     EGORefreshTableHeaderView *_headerView;

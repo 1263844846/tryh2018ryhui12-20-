@@ -7,7 +7,7 @@
 //
 
 #import "RHMyAccountViewController.h"
-#import "TestViewController.h"
+
 
 @interface RHMyAccountViewController ()
 
@@ -169,8 +169,7 @@
 //    UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"666" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"ok", nil];
 //    [alertView show];
 //
-    TestViewController * test = [[TestViewController alloc]initWithNibName:@"TestViewController" bundle:nil];
-    [self.navigationController pushViewController:test animated:YES];
+   
    // [self presentViewController:test animated:YES completion:nil];
     
 }

@@ -12,7 +12,7 @@
 #import "MBProgressHUD.h"
 #import "SHLineGraphView.h"
 #import "SHPlot.h"
-#import "mytestsyViewController.h"
+
 
 @interface RHMyMoneyViewController ()<UIActionSheetDelegate>
 @property (nonatomic,strong) PNPieChart *pieChart;
@@ -547,9 +547,7 @@
 //    aimageview.backgroundColor = [UIColor redColor];
     [self.ScrollView addSubview:aimageview];
     [self.ScrollView addSubview:mylab];
-//    mytestsyViewController * vc = [[mytestsyViewController alloc]initWithNibName:@"mytestsyViewController" bundle:nil];
-//    
-//    [self.navigationController pushViewController:vc animated:YES];
+
     
 }
 

@@ -16,7 +16,7 @@
 #import "WeiboSDK.h"
 #import "RHHelpCenterViewController.h"
 #import "RHFeedbackViewController.h"
-#import "hehehtestViewController.h"
+
 #import "RHhelper.h"
 
 @interface RHMoreViewController ()
@@ -220,8 +220,7 @@
 //     RHHelpCenterViewController * vc = [[RHHelpCenterViewController alloc]initWithNibName:@"RHHelpCenterViewController" bundle:nil];
     RHFeedbackViewController * vc = [[RHFeedbackViewController alloc]initWithNibName:@"RHFeedbackViewController" bundle:nil];
     
-//    hehehtestViewController * vc = [[hehehtestViewController alloc]initWithNibName:@"hehehtestViewController" bundle:nil];
-    
+
     [self.navigationController pushViewController:vc animated:YES];
 }
 

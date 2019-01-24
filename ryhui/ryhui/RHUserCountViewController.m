@@ -26,7 +26,6 @@
 #import "RHBankListViewController.h"
 #import "RHBngkCardDetailViewController.h"
 #import "RHMyMoneyyViewController.h"
-#import "mytestsyViewController.h"
 #import "RHSLBViewController.h"
 #import "RHRegisterWebViewController.h"
 #import "RHMynewgiftViewController.h"
@@ -2054,9 +2053,7 @@
 
 -(void)myaccount{
     
-//    RHMyMoneyyViewController * vc = [[RHMyMoneyyViewController alloc]initWithNibName:@"RHMyMoneyyViewController" bundle:nil];
-    
-//    mytestsyViewController * vc = [[mytestsyViewController  alloc]initWithNibName:@"mytestsyViewController" bundle:nil];
+
     RHMyMoneyViewController * vc = [[RHMyMoneyViewController  alloc]initWithNibName:@"RHMyMoneyViewController" bundle:nil];
     
     [RYHViewController Sharedbxtabar].tarbar.hidden = YES;

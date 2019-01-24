@@ -15,7 +15,7 @@
 #import "RYHView.h"
 
 //#import "RHContractViewContoller.h"
-@interface RHMyGiftContentViewController () <UIAlertViewDelegate,DQviewDelegate>
+@interface RHMyGiftContentViewController () <UIAlertViewDelegate,RYHviewDelegate>
 
 {
     EGORefreshTableHeaderView *_headerView;

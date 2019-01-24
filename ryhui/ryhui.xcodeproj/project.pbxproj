@@ -32,8 +32,6 @@
 		000E93F81CBCC038007BC61A /* RHDetailJLTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 000E93F61CBCC038007BC61A /* RHDetailJLTableViewCell.xib */; };
 		0010500E1DE6B82F00DB8C27 /* maxiaoxia2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0010500D1DE6B82F00DB8C27 /* maxiaoxia2.png */; };
 		001050101DE6B84500DB8C27 /* myxiaoxia.png in Resources */ = {isa = PBXBuildFile; fileRef = 0010500F1DE6B84500DB8C27 /* myxiaoxia.png */; };
-		001081FD1D0FE6B600B62657 /* mytestsyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 001081FB1D0FE6B600B62657 /* mytestsyViewController.m */; };
-		001081FE1D0FE6B600B62657 /* mytestsyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 001081FC1D0FE6B600B62657 /* mytestsyViewController.xib */; };
 		0012E91C1DDB0EB0004A369B /* RHsmallbankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0012E91A1DDB0EB0004A369B /* RHsmallbankViewController.m */; };
 		0012E91D1DDB0EB0004A369B /* RHsmallbankViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0012E91B1DDB0EB0004A369B /* RHsmallbankViewController.xib */; };
 		0012E9211DDB14CE004A369B /* RHsmallMybankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0012E91F1DDB14CE004A369B /* RHsmallMybankViewController.m */; };
@@ -82,8 +80,6 @@
 		0035DF481BC7BE4300AEB900 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0035DF471BC7BE4300AEB900 /* AdSupport.framework */; };
 		003668381BFF2D3E00301B5F /* RHCashCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 003668361BFF2D3E00301B5F /* RHCashCardViewController.m */; };
 		003668391BFF2D3E00301B5F /* RHCashCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 003668371BFF2D3E00301B5F /* RHCashCardViewController.xib */; };
-		0037D5F81DAB971B007ADED1 /* rhmytestiosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0037D5F61DAB971B007ADED1 /* rhmytestiosViewController.m */; };
-		0037D5F91DAB971B007ADED1 /* rhmytestiosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0037D5F71DAB971B007ADED1 /* rhmytestiosViewController.xib */; };
 		00387B081C6319A60048C268 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 00387B071C6319A60048C268 /* down.png */; };
 		00388CE51DC220A400E02A68 /* RHXIANEWEBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00388CE31DC220A400E02A68 /* RHXIANEWEBViewController.m */; };
 		00388CE61DC220A400E02A68 /* RHXIANEWEBViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00388CE41DC220A400E02A68 /* RHXIANEWEBViewController.xib */; };
@@ -270,8 +266,6 @@
 		0070B4D51F5D58E200A5434E /* 更多.png in Resources */ = {isa = PBXBuildFile; fileRef = 0070B4D41F5D58E200A5434E /* 更多.png */; };
 		0070E1011D1CDF7F00C31405 /* RHHFWebviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0070E0FF1D1CDF7F00C31405 /* RHHFWebviewViewController.m */; };
 		0070E1021D1CDF7F00C31405 /* RHHFWebviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0070E1001D1CDF7F00C31405 /* RHHFWebviewViewController.xib */; };
-		0070E1061D1D16E300C31405 /* biaxueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0070E1041D1D16E300C31405 /* biaxueViewController.m */; };
-		0070E1071D1D16E300C31405 /* biaxueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0070E1051D1D16E300C31405 /* biaxueViewController.xib */; };
 		00721C9A1FCFE63D00144E4B /* SobotKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 00721C961FCFE63B00144E4B /* SobotKit.bundle */; };
 		00721C9B1FCFE63D00144E4B /* SobotKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00721C971FCFE63D00144E4B /* SobotKit.framework */; };
 		00721C9C1FCFE63D00144E4B /* SobotLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 00721C981FCFE63D00144E4B /* SobotLocalizable.strings */; };
@@ -299,8 +293,6 @@
 		007432B51D1934BC00E85608 /* RHFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 007432B31D1934BC00E85608 /* RHFeedbackViewController.m */; };
 		007432B61D1934BC00E85608 /* RHFeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 007432B41D1934BC00E85608 /* RHFeedbackViewController.xib */; };
 		007432B91D193A3B00E85608 /* RHTextVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 007432B81D193A3B00E85608 /* RHTextVIew.m */; };
-		007432BD1D19419000E85608 /* hehehtestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 007432BB1D19419000E85608 /* hehehtestViewController.m */; };
-		007432BE1D19419000E85608 /* hehehtestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 007432BC1D19419000E85608 /* hehehtestViewController.xib */; };
 		0074911720BE42A100BD4301 /* RHJXZZWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0074911520BE42A100BD4301 /* RHJXZZWebViewViewController.m */; };
 		0074911820BE42A100BD4301 /* RHJXZZWebViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0074911620BE42A100BD4301 /* RHJXZZWebViewViewController.xib */; };
 		0075B4AC1DFA889F00DAFF66 /* AnimationWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0075B4AA1DFA889F00DAFF66 /* AnimationWebViewController.m */; };
@@ -473,8 +465,6 @@
 		009A9009200C8B7B0074ED7D /* RHzhuanzhangViewController1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 009A9007200C8B7B0074ED7D /* RHzhuanzhangViewController1.xib */; };
 		009A900D200CA5190074ED7D /* RHzhuangzhangalpayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 009A900B200CA5190074ED7D /* RHzhuangzhangalpayViewController.m */; };
 		009A900E200CA5190074ED7D /* RHzhuangzhangalpayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 009A900C200CA5190074ED7D /* RHzhuangzhangalpayViewController.xib */; };
-		009AF1181BCE04F50087C825 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 009AF1161BCE04F50087C825 /* TestViewController.m */; };
-		009AF1191BCE04F50087C825 /* TestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 009AF1171BCE04F50087C825 /* TestViewController.xib */; };
 		009B8E9B20DCF1D30077D8F2 /* RHXMJxqjhViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 009B8E9920DCF1D20077D8F2 /* RHXMJxqjhViewController.m */; };
 		009B8E9C20DCF1D40077D8F2 /* RHXMJxqjhViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 009B8E9A20DCF1D20077D8F2 /* RHXMJxqjhViewController.xib */; };
 		009BEF18205657EE00BE7943 /* RHInverstWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 009BEF16205657EE00BE7943 /* RHInverstWebViewController.m */; };
@@ -803,9 +793,6 @@
 		000E93F61CBCC038007BC61A /* RHDetailJLTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHDetailJLTableViewCell.xib; sourceTree = "<group>"; };
 		0010500D1DE6B82F00DB8C27 /* maxiaoxia2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = maxiaoxia2.png; sourceTree = "<group>"; };
 		0010500F1DE6B84500DB8C27 /* myxiaoxia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myxiaoxia.png; sourceTree = "<group>"; };
-		001081FA1D0FE6B600B62657 /* mytestsyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mytestsyViewController.h; sourceTree = "<group>"; };
-		001081FB1D0FE6B600B62657 /* mytestsyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mytestsyViewController.m; sourceTree = "<group>"; };
-		001081FC1D0FE6B600B62657 /* mytestsyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = mytestsyViewController.xib; sourceTree = "<group>"; };
 		0012E9191DDB0EB0004A369B /* RHsmallbankViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHsmallbankViewController.h; sourceTree = "<group>"; };
 		0012E91A1DDB0EB0004A369B /* RHsmallbankViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHsmallbankViewController.m; sourceTree = "<group>"; };
 		0012E91B1DDB0EB0004A369B /* RHsmallbankViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHsmallbankViewController.xib; sourceTree = "<group>"; };
@@ -867,9 +854,6 @@
 		003668351BFF2D3E00301B5F /* RHCashCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHCashCardViewController.h; sourceTree = "<group>"; };
 		003668361BFF2D3E00301B5F /* RHCashCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHCashCardViewController.m; sourceTree = "<group>"; };
 		003668371BFF2D3E00301B5F /* RHCashCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHCashCardViewController.xib; sourceTree = "<group>"; };
-		0037D5F51DAB971B007ADED1 /* rhmytestiosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rhmytestiosViewController.h; sourceTree = "<group>"; };
-		0037D5F61DAB971B007ADED1 /* rhmytestiosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rhmytestiosViewController.m; sourceTree = "<group>"; };
-		0037D5F71DAB971B007ADED1 /* rhmytestiosViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = rhmytestiosViewController.xib; sourceTree = "<group>"; };
 		00387B071C6319A60048C268 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
 		00388CE21DC220A400E02A68 /* RHXIANEWEBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHXIANEWEBViewController.h; sourceTree = "<group>"; };
 		00388CE31DC220A400E02A68 /* RHXIANEWEBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHXIANEWEBViewController.m; sourceTree = "<group>"; };
@@ -1117,9 +1101,6 @@
 		0070E0FE1D1CDF7F00C31405 /* RHHFWebviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHHFWebviewViewController.h; sourceTree = "<group>"; };
 		0070E0FF1D1CDF7F00C31405 /* RHHFWebviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHHFWebviewViewController.m; sourceTree = "<group>"; };
 		0070E1001D1CDF7F00C31405 /* RHHFWebviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHHFWebviewViewController.xib; sourceTree = "<group>"; };
-		0070E1031D1D16E300C31405 /* biaxueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = biaxueViewController.h; sourceTree = "<group>"; };
-		0070E1041D1D16E300C31405 /* biaxueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = biaxueViewController.m; sourceTree = "<group>"; };
-		0070E1051D1D16E300C31405 /* biaxueViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = biaxueViewController.xib; sourceTree = "<group>"; };
 		00721C961FCFE63B00144E4B /* SobotKit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SobotKit.bundle; sourceTree = "<group>"; };
 		00721C971FCFE63D00144E4B /* SobotKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SobotKit.framework; sourceTree = "<group>"; };
 		00721C981FCFE63D00144E4B /* SobotLocalizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = SobotLocalizable.strings; sourceTree = "<group>"; };
@@ -1154,9 +1135,6 @@
 		007432B41D1934BC00E85608 /* RHFeedbackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHFeedbackViewController.xib; sourceTree = "<group>"; };
 		007432B71D193A3B00E85608 /* RHTextVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHTextVIew.h; sourceTree = "<group>"; };
 		007432B81D193A3B00E85608 /* RHTextVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHTextVIew.m; sourceTree = "<group>"; };
-		007432BA1D19419000E85608 /* hehehtestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hehehtestViewController.h; sourceTree = "<group>"; };
-		007432BB1D19419000E85608 /* hehehtestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hehehtestViewController.m; sourceTree = "<group>"; };
-		007432BC1D19419000E85608 /* hehehtestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = hehehtestViewController.xib; sourceTree = "<group>"; };
 		0074911420BE42A100BD4301 /* RHJXZZWebViewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RHJXZZWebViewViewController.h; sourceTree = "<group>"; };
 		0074911520BE42A100BD4301 /* RHJXZZWebViewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RHJXZZWebViewViewController.m; sourceTree = "<group>"; };
 		0074911620BE42A100BD4301 /* RHJXZZWebViewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RHJXZZWebViewViewController.xib; sourceTree = "<group>"; };
@@ -1401,9 +1379,6 @@
 		009A900A200CA5190074ED7D /* RHzhuangzhangalpayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RHzhuangzhangalpayViewController.h; sourceTree = "<group>"; };
 		009A900B200CA5190074ED7D /* RHzhuangzhangalpayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RHzhuangzhangalpayViewController.m; sourceTree = "<group>"; };
 		009A900C200CA5190074ED7D /* RHzhuangzhangalpayViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RHzhuangzhangalpayViewController.xib; sourceTree = "<group>"; };
-		009AF1151BCE04F50087C825 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
-		009AF1161BCE04F50087C825 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
-		009AF1171BCE04F50087C825 /* TestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestViewController.xib; sourceTree = "<group>"; };
 		009B8E9820DCF1D20077D8F2 /* RHXMJxqjhViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RHXMJxqjhViewController.h; sourceTree = "<group>"; };
 		009B8E9920DCF1D20077D8F2 /* RHXMJxqjhViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RHXMJxqjhViewController.m; sourceTree = "<group>"; };
 		009B8E9A20DCF1D20077D8F2 /* RHXMJxqjhViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RHXMJxqjhViewController.xib; sourceTree = "<group>"; };
@@ -2226,9 +2201,6 @@
 				007432B41D1934BC00E85608 /* RHFeedbackViewController.xib */,
 				007432B71D193A3B00E85608 /* RHTextVIew.h */,
 				007432B81D193A3B00E85608 /* RHTextVIew.m */,
-				007432BA1D19419000E85608 /* hehehtestViewController.h */,
-				007432BB1D19419000E85608 /* hehehtestViewController.m */,
-				007432BC1D19419000E85608 /* hehehtestViewController.xib */,
 			);
 			name = "意见反馈";
 			sourceTree = "<group>";
@@ -3264,9 +3236,6 @@
 				007046FA1D77D095009E0883 /* RHXFDTableViewCell.h */,
 				007046FB1D77D095009E0883 /* RHXFDTableViewCell.m */,
 				007046FC1D77D095009E0883 /* RHXFDTableViewCell.xib */,
-				0037D5F51DAB971B007ADED1 /* rhmytestiosViewController.h */,
-				0037D5F61DAB971B007ADED1 /* rhmytestiosViewController.m */,
-				0037D5F71DAB971B007ADED1 /* rhmytestiosViewController.xib */,
 				00269C5E1DC0C97D0033B6B8 /* RYHStudentDetailViewController.h */,
 				00269C5F1DC0C97D0033B6B8 /* RYHStudentDetailViewController.m */,
 				00269C601DC0C97D0033B6B8 /* RYHStudentDetailViewController.xib */,
@@ -3352,9 +3321,6 @@
 				0082DC1A1E6EB012006EC241 /* RHMyMoneyViewController.h */,
 				006AB4021E71001A006A5CB6 /* RHMyMoneyViewController.m */,
 				0082DC1C1E6EB012006EC241 /* RHMyMoneyViewController.xib */,
-				001081FA1D0FE6B600B62657 /* mytestsyViewController.h */,
-				001081FB1D0FE6B600B62657 /* mytestsyViewController.m */,
-				001081FC1D0FE6B600B62657 /* mytestsyViewController.xib */,
 				00652C871D3DCBDC008A36DB /* RHSLBViewController.h */,
 				00652C881D3DCBDC008A36DB /* RHSLBViewController.m */,
 				00652C891D3DCBDC008A36DB /* RHSLBViewController.xib */,
@@ -3427,9 +3393,6 @@
 				F8B6DA7A1AB55BA300CCB13D /* RHMyAccountViewController.h */,
 				F8B6DA7B1AB55BA300CCB13D /* RHMyAccountViewController.m */,
 				F8B6DA7C1AB55BA300CCB13D /* RHMyAccountViewController.xib */,
-				009AF1151BCE04F50087C825 /* TestViewController.h */,
-				009AF1161BCE04F50087C825 /* TestViewController.m */,
-				009AF1171BCE04F50087C825 /* TestViewController.xib */,
 			);
 			name = myAccountViewController;
 			sourceTree = "<group>";
@@ -3456,9 +3419,6 @@
 				F8B6DA901AB563BA00CCB13D /* RHTradViewCell.h */,
 				F8B6DA911AB563BA00CCB13D /* RHTradViewCell.m */,
 				F8B6DA921AB563BA00CCB13D /* RHTradViewCell.xib */,
-				0070E1031D1D16E300C31405 /* biaxueViewController.h */,
-				0070E1041D1D16E300C31405 /* biaxueViewController.m */,
-				0070E1051D1D16E300C31405 /* biaxueViewController.xib */,
 			);
 			name = mytradViewController;
 			sourceTree = "<group>";
@@ -3744,7 +3704,6 @@
 				008CA95A1D7EA3B200C6C2C2 /* sjt.png in Resources */,
 				F815ED5C1AB7557E004B2053 /* 8-1.png in Resources */,
 				0059BBAB1D5081B900234E27 /* 红包页-08.png in Resources */,
-				009AF1191BCE04F50087C825 /* TestViewController.xib in Resources */,
 				0072818220AEC01A008E5403 /* RHSTZFWebViewController.xib in Resources */,
 				00AB9F401CA9294800402416 /* more_3.png in Resources */,
 				00721C9C1FCFE63D00144E4B /* SobotLocalizable.strings in Resources */,
@@ -3848,7 +3807,6 @@
 				00A5162B1EADD66E002B554A /* RHNewPeopleCell.xib in Resources */,
 				F87B83571AC84AD700EB73A6 /* CMBC.jpg in Resources */,
 				00721C9D1FCFE63D00144E4B /* ZCEmojiExpression.bundle in Resources */,
-				001081FE1D0FE6B600B62657 /* mytestsyViewController.xib in Resources */,
 				F8B6DA601AB51BE600CCB13D /* RHUserCenterViewController.xib in Resources */,
 				F87B83541AC84AD700EB73A6 /* CEB.jpg in Resources */,
 				001A0E2C1CAD25CA008EFB39 /* xiaoxipng.png in Resources */,
@@ -3914,7 +3872,6 @@
 				005C06241C7C019700A1122E /* RHJsqViewController.xib in Resources */,
 				F815ED5D1AB7557E004B2053 /* 8.png in Resources */,
 				007432B01D192B7200E85608 /* RHBankwebviewViewController.xib in Resources */,
-				0070E1071D1D16E300C31405 /* biaxueViewController.xib in Resources */,
 				00269C641DC0DCEF0033B6B8 /* xinerweima.png in Resources */,
 				D537C3791ADD41E2009D3433 /* giftcellBg.png in Resources */,
 				0059BBAE1D5081B900234E27 /* 红包页-11.png in Resources */,
@@ -4032,7 +3989,6 @@
 				009A900E200CA5190074ED7D /* RHzhuangzhangalpayViewController.xib in Resources */,
 				008EA200209C2C7700E73451 /* RHOpenCountWebViewController.xib in Resources */,
 				F815ED4B1AB749FF004B2053 /* RHGuidanceViewController.xib in Resources */,
-				007432BE1D19419000E85608 /* hehehtestViewController.xib in Resources */,
 				0059D2711C7EDF84007526C6 /* acount6.png in Resources */,
 				F88831081AB43369001E4AD1 /* RHMainViewCell.xib in Resources */,
 				0059BBAA1D5081B900234E27 /* 红包页-07.png in Resources */,
@@ -4079,7 +4035,6 @@
 				0062C0581EBC74350099A08C /* 融益汇app完整-3-61.png in Resources */,
 				F87B833D1AC83C6300EB73A6 /* RHWithdrawViewController.xib in Resources */,
 				0059BBB01D5081B900234E27 /* 红包页-13.png in Resources */,
-				0037D5F91DAB971B007ADED1 /* rhmytestiosViewController.xib in Resources */,
 				0009D26C1CC7259F006A6ECB /* RHBANKTableViewCell.xib in Resources */,
 				0012E91D1DDB0EB0004A369B /* RHsmallbankViewController.xib in Resources */,
 				00730D3820A2A24500C421E2 /* RHOpenAccountScuessViewController1.xib in Resources */,
@@ -4305,7 +4260,6 @@
 				00B57D261D82A4CD003F5759 /* RHMynewgiftViewController.m in Sources */,
 				F8B6DAAF1AB56F7C00CCB13D /* RHMyInvestmentViewCell.m in Sources */,
 				007FFD7E1D91671300C586FB /* RHProjectDetailViewController.m in Sources */,
-				007432BD1D19419000E85608 /* hehehtestViewController.m in Sources */,
 				00093F551CC4E67A0069FE20 /* RHBngkCardDetailViewController.m in Sources */,
 				005E4FC11F331D2500FECC0A /* RHALpayViewController.m in Sources */,
 				D537C36D1ADD3E1F009D3433 /* RHMyGiftViewController.m in Sources */,
@@ -4354,7 +4308,6 @@
 				F8B6DAB51AB5740600CCB13D /* RHRechargeViewController.m in Sources */,
 				000A21C01CB7B8AD0005F872 /* RHDetaisecondViewController.m in Sources */,
 				00CCC6EF1AE9F61E009CE0B2 /* RHOfficeNetAndWeiBoViewController.m in Sources */,
-				0070E1061D1D16E300C31405 /* biaxueViewController.m in Sources */,
 				F8C38DBB1AC9991E005C3B1F /* RHBindCardWebViewController.m in Sources */,
 				007C71A71F417E6A001D048B /* RHShiShiTXViewController.m in Sources */,
 				F80E49731A8E3A0300028CD1 /* RHBaseViewController.m in Sources */,
@@ -4374,7 +4327,6 @@
 				F8B6DA701AB54D7100CCB13D /* RHMoreViewController.m in Sources */,
 				006E21131C883882003DCF3E /* RHProjectdetailthreeViewController.m in Sources */,
 				00059E101CC0EE1A007508E0 /* RHJPTableViewCell.m in Sources */,
-				001081FD1D0FE6B600B62657 /* mytestsyViewController.m in Sources */,
 				007C7E0A20C6784A00982F66 /* RHXMJTableViewCell.m in Sources */,
 				00FD71BE1C05C4D900276294 /* RHmainModel.m in Sources */,
 				D58A74131AD6BBCC0076D3FB /* RHInvestDetaiTableViewCell.m in Sources */,
@@ -4415,7 +4367,6 @@
 				004BF2151C07080700260CD9 /* RHmaintestAfn.m in Sources */,
 				00680FB11F15ED150054C5A8 /* RHXFDZRViewController.m in Sources */,
 				00059E0B1CC0EDE0007508E0 /* RHJPTableViewController.m in Sources */,
-				009AF1181BCE04F50087C825 /* TestViewController.m in Sources */,
 				0082DC111E6EAF01006EC241 /* PNLineChartDataItem.m in Sources */,
 				006AB3FF1E70FE9C006A5CB6 /* PopoverView.m in Sources */,
 				006F49E41D895B9600D0111C /* RHCZJLTableViewCell.m in Sources */,
@@ -4435,7 +4386,6 @@
 				F89A3D901AB5DA0300B92DF3 /* RHRechargeWebViewController.m in Sources */,
 				00B3D5BC1B171DE700BEF703 /* MJPhoto.m in Sources */,
 				0066F3E41D0032D6009F4E9C /* RHADressViewController.m in Sources */,
-				0037D5F81DAB971B007ADED1 /* rhmytestiosViewController.m in Sources */,
 				F80E498E1A8E46CA00028CD1 /* RHUtility.m in Sources */,
 				F8C38DA71AC98DA8005C3B1F /* RHErrorViewController.m in Sources */,
 				00972C5A20E3829900BBC3B5 /* RHXMJTBSQViewController.m in Sources */,
