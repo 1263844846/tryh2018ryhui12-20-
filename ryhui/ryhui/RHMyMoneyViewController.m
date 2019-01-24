@@ -14,7 +14,7 @@
 #import "SHPlot.h"
 #import "mytestsyViewController.h"
 
-@interface RHMyMoneyViewController ()
+@interface RHMyMoneyViewController ()<UIActionSheetDelegate>
 @property (nonatomic,strong) PNPieChart *pieChart;
 @property (weak, nonatomic) IBOutlet UIButton *MoneyButton;
 @property (weak, nonatomic) IBOutlet UIButton *SyButton;
@@ -162,6 +162,12 @@
     zichanglab.textColor = [RHUtility colorForHex:@"#bcbcbc"];
     zichanglab.font = [UIFont systemFontOfSize:15];
     [self.MyView1 addSubview:zichanglab];
+    UIButton * btn = [[UIButton alloc]init];
+    btn.frame = CGRectMake( b/2 + 40, CGRectGetMaxY(self.moneylab.frame)-9, 18, 18);
+    [btn setImage:[UIImage imageNamed:@"PNG_问号.png"] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(didshuoming) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.MyView1 addSubview:btn];
     //背景色
 //    self.pieChart.backgroundColor = [UIColor colorWithWhite:0.1 alpha:0.2];
     //图内描述文字颜色
@@ -198,6 +204,25 @@
 //    self.MyView2.hidden = YES;
     
    
+}
+-(void)didshuoming{
+    
+    UIAlertView* alertView=[[UIAlertView alloc]initWithTitle:@"总资产增加说明："
+                                                    message:@"进行充值、出借、回款、提现等交易时，平台与银行的交易传输时段或导致总资产短时间显示波动，等平台接收交易返回后显示正确总资产金额"
+                                                   delegate:self
+                                          cancelButtonTitle:@"确定"
+                                          otherButtonTitles: nil];
+    alertView.tag=2029;
+    [alertView show];
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex==0) {
+       
+        if (alertView.tag==2019) {
+          
+        }
+    }
 }
 - (IBAction)zongzichan:(id)sender {
     self.MyView2.hidden = YES;
