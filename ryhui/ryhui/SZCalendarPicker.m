@@ -320,6 +320,12 @@ NSString *const SZCalendarCellIdentifier = @"celltext";
                 // xuanzhong
             }
             
+            if (day== self.didinter) {
+                [cell.dateLabel setTextColor:[UIColor whiteColor]];
+                cell.dateLabel.text = @"今";
+            }
+            
+            
        }
     }
    

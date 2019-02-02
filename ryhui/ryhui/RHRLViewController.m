@@ -80,6 +80,28 @@
        // [self updatemydata:dic];
     }];
     
+    
+    NSDictionary *parameters1 = @{@"date":self.daystr};
+
+   
+    [[RHNetworkService instance] POST:@"app/common/user/appGatheringCalendar/getDayMoneyByDate" parameters:parameters1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if ([responseObject isKindOfClass:[NSArray class]]) {
+            
+            //            self.datadic = responseObject;
+            
+            
+            
+        }
+      
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+       
+    }];
+    
+    
 }
 
 - (void)viewDidLoad {
@@ -127,104 +149,167 @@
     };
     [self.scollView addSubview:calendarPicker];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.twoview = [[UIView alloc]init];
+    self.twoview.frame = CGRectMake(0,CGRectGetMaxY(calendarPicker.frame), calendarPicker.frame.size.width, 135);
+    self.twoview.backgroundColor = [UIColor whiteColor];
+
+    [self.scollView addSubview:self.twoview];
+
+    self.bryhlab = [[UILabel alloc]init];
+    self.bryhlab.frame = CGRectMake(0, 11, [UIScreen mainScreen].bounds.size.width/2-1, 30);
+    self.bryhlab.textAlignment = NSTextAlignmentCenter;
+    self.bryhlab.text = @"0.00";
+    self.bryhlab.font = [UIFont systemFontOfSize: 24.0];
+    self.bryhlab.textColor = [RHUtility colorForHex:@"#44bbc1"];
+    [self.twoview addSubview:self.bryhlab];
+    self.bryihuilab = [[UILabel alloc]init];
+    self.bryihuilab.frame = CGRectMake([UIScreen mainScreen].bounds.size.width/2, CGRectGetMinY(self.bryhlab.frame),[UIScreen mainScreen].bounds.size.width/2-1, 30);
+    self.bryihuilab.textAlignment = NSTextAlignmentCenter;
+    self.bryihuilab.text = @"0.00";
+    self.bryihuilab.font = [UIFont systemFontOfSize: 24.0];
+    self.bryihuilab.textColor = [RHUtility colorForHex:@"#44bbc1"];
+
+    [self.twoview addSubview:self.bryihuilab];
+
+    UILabel * bryhlab = [[UILabel alloc]init];
+    bryhlab.frame = CGRectMake(0, CGRectGetMaxY(self.bryhlab.frame)+5, [UIScreen mainScreen].bounds.size.width/2-1, 14);
+    bryhlab.textColor = [RHUtility colorForHex:@"#cccccc"];
+    bryhlab.textAlignment = NSTextAlignmentCenter;
+    bryhlab.text = @"本日应回(元)";
+    bryhlab.font = [UIFont systemFontOfSize: 13.0];
+    [self.twoview addSubview:bryhlab];
+
+    UILabel * bryhlab1 = [[UILabel alloc]init];
+    bryhlab1.frame = CGRectMake([UIScreen mainScreen].bounds.size.width/2, CGRectGetMaxY(self.bryhlab.frame)+5, [UIScreen mainScreen].bounds.size.width/2-1, 15);
+    bryhlab1.textColor = [RHUtility colorForHex:@"#cccccc"];
+    bryhlab1.textAlignment = NSTextAlignmentCenter;
+    bryhlab1.text = @"本日已回(元)";
+    bryhlab1.font = [UIFont systemFontOfSize: 13.0];
+
+    [self.twoview addSubview:bryhlab1];
+
+    UILabel * fengelab = [[UILabel alloc]init];
+    fengelab.frame = CGRectMake(0, CGRectGetMaxY(bryhlab.frame)+20, [UIScreen mainScreen].bounds.size.width, 1);
+    fengelab.backgroundColor = [RHUtility colorForHex:@"#cccccc"];
+    [self.twoview addSubview:fengelab];
+
+    UILabel * yhlab = [[UILabel alloc]init];
+    yhlab.frame = CGRectMake(0, CGRectGetMaxY(fengelab.frame)+8, [UIScreen mainScreen].bounds.size.width/2-1, 15);
+    yhlab.textColor = [RHUtility colorForHex:@"#cccccc"];
+    yhlab.textAlignment = NSTextAlignmentCenter;
+    yhlab.text = @"本月应回(元)";
+    yhlab.font = [UIFont systemFontOfSize: 13.0];
+
+    [self.twoview addSubview:yhlab];
+
+    UIImageView * backimage1 = [[UIImageView alloc]init];
+    backimage1.frame = CGRectMake(CGRectGetMaxX(yhlab.frame),CGRectGetMaxY(fengelab.frame)+3 , 1, 42) ;
+    backimage1.backgroundColor = [RHUtility colorForHex:@"#cccccc"];
+    [self.twoview addSubview:backimage1];
+
+    UILabel * yhlab1 = [[UILabel alloc]init];
+    yhlab1.frame = CGRectMake(CGRectGetMaxX(backimage1.frame), CGRectGetMaxY(fengelab.frame)+8, [UIScreen mainScreen].bounds.size.width/2-1, 15);
+    yhlab1.textColor = [RHUtility colorForHex:@"#cccccc"];
+    yhlab1.textAlignment = NSTextAlignmentCenter;
+    yhlab1.text = @"本月已回(元)";
+    yhlab1.font = [UIFont systemFontOfSize: 13.0];
+
+    [self.twoview addSubview:yhlab1];
+
+    self.yhlab = [[UILabel alloc]init];
+    self.yhlab.frame = CGRectMake(0, CGRectGetMaxY(yhlab.frame), [UIScreen mainScreen].bounds.size.width/2-1, 20);
+    self.yhlab.textAlignment = NSTextAlignmentCenter;
+    self.yhlab.text = @"0.00";
+    self.yhlab.font = [UIFont systemFontOfSize: 18.0];
+    self.yhlab.textColor = [UIColor blackColor];
+
+    [self.twoview addSubview:self.yhlab];
+
+
+
+
+
+    self.yihuilab = [[UILabel alloc]init];
+    self.yihuilab.frame = CGRectMake(CGRectGetMaxX(backimage1.frame), CGRectGetMinY(self.yhlab.frame),[UIScreen mainScreen].bounds.size.width/2-1, 20);
+    self.yihuilab.textAlignment = NSTextAlignmentCenter;
+    self.yihuilab.text = @"0.00";
+    self.yihuilab.font = [UIFont systemFontOfSize: 18.0];
+    self.yihuilab.textColor = [UIColor blackColor];
+
+    [self.twoview addSubview:self.yihuilab];
+
+
+    UILabel * fengelab1 = [[UILabel alloc]init];
+    fengelab1.frame = CGRectMake(0, 134, [UIScreen mainScreen].bounds.size.width, 1);
+    fengelab1.backgroundColor = [RHUtility colorForHex:@"#cccccc"];
+    [self.twoview addSubview:fengelab1];
+    UILabel * fengelab2 = [[UILabel alloc]init];
+    fengelab2.frame = CGRectMake(0, 1, [UIScreen mainScreen].bounds.size.width, 1);
+    fengelab2.backgroundColor = [RHUtility colorForHex:@"#cccccc"];
+    [self.twoview addSubview:fengelab2];
+
+    if ([UIScreen mainScreen].bounds.size.height < 570) {
+
+        self.tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.twoview.frame), calendarPicker.frame.size.width, [UIScreen mainScreen].bounds.size.height/10*5-45) style:UITableViewStylePlain];
+    }else if([UIScreen mainScreen].bounds.size.height > 670){
+        NSLog(@"%f",[UIScreen mainScreen].bounds.size.height);
+
+        self.tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.twoview.frame), calendarPicker.frame.size.width, [UIScreen mainScreen].bounds.size.height/12*7-20-15-50) style:UITableViewStylePlain];
+    }else{
+       self.tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.twoview.frame), calendarPicker.frame.size.width, [UIScreen mainScreen].bounds.size.height/12*7-50) style:UITableViewStylePlain];
+    }
+
+    if ([UIScreen mainScreen].bounds.size.height < 481){
+        self.tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.twoview.frame), calendarPicker.frame.size.width, [UIScreen mainScreen].bounds.size.height/12*7-50-30-43) style:UITableViewStylePlain];
+    }
+    
+    
 //    self.twoview = [[UIView alloc]init];
-//    self.twoview.frame = CGRectMake(0,CGRectGetMaxY(calendarPicker.frame), calendarPicker.frame.size.width, 135);
-//    self.twoview.backgroundColor = [UIColor whiteColor];
+//    self.twoview.frame = CGRectMake(0,CGRectGetMaxY(calendarPicker.frame), calendarPicker.frame.size.width, 65);
+//    self.twoview.backgroundColor = [RHUtility colorForHex:@"#44bbc1"];
 //
 //    [self.scollView addSubview:self.twoview];
+//    self.yhlab = [[UILabel alloc]init];
+//    self.yhlab.frame = CGRectMake(0, 13, [UIScreen mainScreen].bounds.size.width/2-1, 20);
+//    self.yhlab.textAlignment = NSTextAlignmentCenter;
+//    self.yhlab.text = @"0.00";
+//    self.yhlab.font = [UIFont systemFontOfSize: 18.0];
+//    self.yhlab.textColor = [UIColor whiteColor];
 //
-//    self.bryhlab = [[UILabel alloc]init];
-//    self.bryhlab.frame = CGRectMake(0, 11, [UIScreen mainScreen].bounds.size.width/2-1, 30);
-//    self.bryhlab.textAlignment = NSTextAlignmentCenter;
-//    self.bryhlab.text = @"0.00";
-//    self.bryhlab.font = [UIFont systemFontOfSize: 24.0];
-//    self.bryhlab.textColor = [RHUtility colorForHex:@"#44bbc1"];
-//    [self.twoview addSubview:self.bryhlab];
-//    self.bryihuilab = [[UILabel alloc]init];
-//    self.bryihuilab.frame = CGRectMake([UIScreen mainScreen].bounds.size.width/2, CGRectGetMinY(self.bryhlab.frame),[UIScreen mainScreen].bounds.size.width/2-1, 30);
-//    self.bryihuilab.textAlignment = NSTextAlignmentCenter;
-//    self.bryihuilab.text = @"0.00";
-//    self.bryihuilab.font = [UIFont systemFontOfSize: 24.0];
-//    self.bryihuilab.textColor = [RHUtility colorForHex:@"#44bbc1"];
-//
-//    [self.twoview addSubview:self.bryihuilab];
-//
-//    UILabel * bryhlab = [[UILabel alloc]init];
-//    bryhlab.frame = CGRectMake(0, CGRectGetMaxY(self.bryhlab.frame)+5, [UIScreen mainScreen].bounds.size.width/2-1, 14);
-//    bryhlab.textColor = [RHUtility colorForHex:@"#cccccc"];
-//    bryhlab.textAlignment = NSTextAlignmentCenter;
-//    bryhlab.text = @"本日应回(元)";
-//    bryhlab.font = [UIFont systemFontOfSize: 13.0];
-//    [self.twoview addSubview:bryhlab];
-//
-//    UILabel * bryhlab1 = [[UILabel alloc]init];
-//    bryhlab1.frame = CGRectMake([UIScreen mainScreen].bounds.size.width/2, CGRectGetMaxY(self.bryhlab.frame)+5, [UIScreen mainScreen].bounds.size.width/2-1, 15);
-//    bryhlab1.textColor = [RHUtility colorForHex:@"#cccccc"];
-//    bryhlab1.textAlignment = NSTextAlignmentCenter;
-//    bryhlab1.text = @"本日已回(元)";
-//    bryhlab1.font = [UIFont systemFontOfSize: 13.0];
-//
-//    [self.twoview addSubview:bryhlab1];
-//
-//    UILabel * fengelab = [[UILabel alloc]init];
-//    fengelab.frame = CGRectMake(0, CGRectGetMaxY(bryhlab.frame)+20, [UIScreen mainScreen].bounds.size.width, 1);
-//    fengelab.backgroundColor = [RHUtility colorForHex:@"#cccccc"];
-//    [self.twoview addSubview:fengelab];
+//    [self.twoview addSubview:self.yhlab];
 //
 //    UILabel * yhlab = [[UILabel alloc]init];
-//    yhlab.frame = CGRectMake(0, CGRectGetMaxY(fengelab.frame)+8, [UIScreen mainScreen].bounds.size.width/2-1, 15);
-//    yhlab.textColor = [RHUtility colorForHex:@"#cccccc"];
+//    yhlab.frame = CGRectMake(0, CGRectGetMaxY(self.yhlab.frame)+5, [UIScreen mainScreen].bounds.size.width/2-1, 15);
+//    yhlab.textColor = [UIColor whiteColor];
 //    yhlab.textAlignment = NSTextAlignmentCenter;
 //    yhlab.text = @"本月应回(元)";
-//    yhlab.font = [UIFont systemFontOfSize: 13.0];
+//    yhlab.font = [UIFont systemFontOfSize: 16.0];
 //
 //    [self.twoview addSubview:yhlab];
 //
 //    UIImageView * backimage1 = [[UIImageView alloc]init];
-//    backimage1.frame = CGRectMake(CGRectGetMaxX(yhlab.frame),CGRectGetMaxY(fengelab.frame)+3 , 1, 42) ;
-//    backimage1.backgroundColor = [RHUtility colorForHex:@"#cccccc"];
+//    backimage1.frame = CGRectMake(CGRectGetMaxX(self.yhlab.frame), 5, 1, 55) ;
+//    backimage1.backgroundColor = [RHUtility colorForHex:@"#e4e6e6"];
 //    [self.twoview addSubview:backimage1];
-//
-//    UILabel * yhlab1 = [[UILabel alloc]init];
-//    yhlab1.frame = CGRectMake(CGRectGetMaxX(backimage1.frame), CGRectGetMaxY(fengelab.frame)+8, [UIScreen mainScreen].bounds.size.width/2-1, 15);
-//    yhlab1.textColor = [RHUtility colorForHex:@"#cccccc"];
-//    yhlab1.textAlignment = NSTextAlignmentCenter;
-//    yhlab1.text = @"本月已回(元)";
-//    yhlab1.font = [UIFont systemFontOfSize: 13.0];
-//
-//    [self.twoview addSubview:yhlab1];
-//
-//    self.yhlab = [[UILabel alloc]init];
-//    self.yhlab.frame = CGRectMake(0, CGRectGetMaxY(yhlab.frame), [UIScreen mainScreen].bounds.size.width/2-1, 20);
-//    self.yhlab.textAlignment = NSTextAlignmentCenter;
-//    self.yhlab.text = @"0.00";
-//    self.yhlab.font = [UIFont systemFontOfSize: 18.0];
-//    self.yhlab.textColor = [UIColor blackColor];
-//
-//    [self.twoview addSubview:self.yhlab];
-//
-//
-//
-//
 //
 //    self.yihuilab = [[UILabel alloc]init];
 //    self.yihuilab.frame = CGRectMake(CGRectGetMaxX(backimage1.frame), CGRectGetMinY(self.yhlab.frame),[UIScreen mainScreen].bounds.size.width/2-1, 20);
 //    self.yihuilab.textAlignment = NSTextAlignmentCenter;
 //    self.yihuilab.text = @"0.00";
 //    self.yihuilab.font = [UIFont systemFontOfSize: 18.0];
-//    self.yihuilab.textColor = [UIColor blackColor];
+//    self.yihuilab.textColor = [UIColor whiteColor];
 //
 //    [self.twoview addSubview:self.yihuilab];
 //
 //
-//    UILabel * fengelab1 = [[UILabel alloc]init];
-//    fengelab1.frame = CGRectMake(0, 134, [UIScreen mainScreen].bounds.size.width, 1);
-//    fengelab1.backgroundColor = [RHUtility colorForHex:@"#cccccc"];
-//    [self.twoview addSubview:fengelab1];
-//    UILabel * fengelab2 = [[UILabel alloc]init];
-//    fengelab2.frame = CGRectMake(0, 1, [UIScreen mainScreen].bounds.size.width, 1);
-//    fengelab2.backgroundColor = [RHUtility colorForHex:@"#cccccc"];
-//    [self.twoview addSubview:fengelab2];
+//    UILabel * yhlab1 = [[UILabel alloc]init];
+//    yhlab1.frame = CGRectMake(CGRectGetMaxX(backimage1.frame), CGRectGetMaxY(self.yhlab.frame)+5, [UIScreen mainScreen].bounds.size.width/2-1, 15);
+//    yhlab1.textColor = [UIColor whiteColor];
+//    yhlab1.textAlignment = NSTextAlignmentCenter;
+//    yhlab1.text = @"本月已回(元)";
+//    yhlab1.font = [UIFont systemFontOfSize: 16.0];
+//
+//    [self.twoview addSubview:yhlab1];
 //
 //    if ([UIScreen mainScreen].bounds.size.height < 570) {
 //
@@ -232,78 +317,15 @@
 //    }else if([UIScreen mainScreen].bounds.size.height > 670){
 //        NSLog(@"%f",[UIScreen mainScreen].bounds.size.height);
 //
-//        self.tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.twoview.frame), calendarPicker.frame.size.width, [UIScreen mainScreen].bounds.size.height/12*7-20-15-50) style:UITableViewStylePlain];
+//        self.tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.twoview.frame), calendarPicker.frame.size.width, [UIScreen mainScreen].bounds.size.height/12*7-20-15) style:UITableViewStylePlain];
 //    }else{
-//       self.tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.twoview.frame), calendarPicker.frame.size.width, [UIScreen mainScreen].bounds.size.height/12*7-50) style:UITableViewStylePlain];
+//        self.tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.twoview.frame), calendarPicker.frame.size.width, [UIScreen mainScreen].bounds.size.height/12*7-50) style:UITableViewStylePlain];
 //    }
 //
 //    if ([UIScreen mainScreen].bounds.size.height < 481){
 //        self.tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.twoview.frame), calendarPicker.frame.size.width, [UIScreen mainScreen].bounds.size.height/12*7-50-30-43) style:UITableViewStylePlain];
 //    }
-    
-    
-    self.twoview = [[UIView alloc]init];
-    self.twoview.frame = CGRectMake(0,CGRectGetMaxY(calendarPicker.frame), calendarPicker.frame.size.width, 65);
-    self.twoview.backgroundColor = [RHUtility colorForHex:@"#44bbc1"];
-    
-    [self.scollView addSubview:self.twoview];
-    self.yhlab = [[UILabel alloc]init];
-    self.yhlab.frame = CGRectMake(0, 13, [UIScreen mainScreen].bounds.size.width/2-1, 20);
-    self.yhlab.textAlignment = NSTextAlignmentCenter;
-    self.yhlab.text = @"0.00";
-    self.yhlab.font = [UIFont systemFontOfSize: 18.0];
-    self.yhlab.textColor = [UIColor whiteColor];
-    
-    [self.twoview addSubview:self.yhlab];
-    
-    UILabel * yhlab = [[UILabel alloc]init];
-    yhlab.frame = CGRectMake(0, CGRectGetMaxY(self.yhlab.frame)+5, [UIScreen mainScreen].bounds.size.width/2-1, 15);
-    yhlab.textColor = [UIColor whiteColor];
-    yhlab.textAlignment = NSTextAlignmentCenter;
-    yhlab.text = @"本月应回(元)";
-    yhlab.font = [UIFont systemFontOfSize: 16.0];
-    
-    [self.twoview addSubview:yhlab];
-    
-    UIImageView * backimage1 = [[UIImageView alloc]init];
-    backimage1.frame = CGRectMake(CGRectGetMaxX(self.yhlab.frame), 5, 1, 55) ;
-    backimage1.backgroundColor = [RHUtility colorForHex:@"#e4e6e6"];
-    [self.twoview addSubview:backimage1];
-    
-    self.yihuilab = [[UILabel alloc]init];
-    self.yihuilab.frame = CGRectMake(CGRectGetMaxX(backimage1.frame), CGRectGetMinY(self.yhlab.frame),[UIScreen mainScreen].bounds.size.width/2-1, 20);
-    self.yihuilab.textAlignment = NSTextAlignmentCenter;
-    self.yihuilab.text = @"0.00";
-    self.yihuilab.font = [UIFont systemFontOfSize: 18.0];
-    self.yihuilab.textColor = [UIColor whiteColor];
-    
-    [self.twoview addSubview:self.yihuilab];
-    
-    
-    UILabel * yhlab1 = [[UILabel alloc]init];
-    yhlab1.frame = CGRectMake(CGRectGetMaxX(backimage1.frame), CGRectGetMaxY(self.yhlab.frame)+5, [UIScreen mainScreen].bounds.size.width/2-1, 15);
-    yhlab1.textColor = [UIColor whiteColor];
-    yhlab1.textAlignment = NSTextAlignmentCenter;
-    yhlab1.text = @"本月已回(元)";
-    yhlab1.font = [UIFont systemFontOfSize: 16.0];
-    
-    [self.twoview addSubview:yhlab1];
-    
-    if ([UIScreen mainScreen].bounds.size.height < 570) {
-        
-        self.tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.twoview.frame), calendarPicker.frame.size.width, [UIScreen mainScreen].bounds.size.height/10*5-45) style:UITableViewStylePlain];
-    }else if([UIScreen mainScreen].bounds.size.height > 670){
-        NSLog(@"%f",[UIScreen mainScreen].bounds.size.height);
-        
-        self.tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.twoview.frame), calendarPicker.frame.size.width, [UIScreen mainScreen].bounds.size.height/12*7-20-15) style:UITableViewStylePlain];
-    }else{
-        self.tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.twoview.frame), calendarPicker.frame.size.width, [UIScreen mainScreen].bounds.size.height/12*7-50) style:UITableViewStylePlain];
-    }
-    
-    if ([UIScreen mainScreen].bounds.size.height < 481){
-        self.tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.twoview.frame), calendarPicker.frame.size.width, [UIScreen mainScreen].bounds.size.height/12*7-50-30-43) style:UITableViewStylePlain];
-    }
-    
+//
     
     self.tableview.delegate = self ;
     

@@ -482,6 +482,8 @@
 		009F9EF1212182A100137E2A /* shoujihao.html in Resources */ = {isa = PBXBuildFile; fileRef = 009F9EF02121829F00137E2A /* shoujihao.html */; };
 		009F9EF5212185DD00137E2A /* RHPFnumberwebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 009F9EF3212185DC00137E2A /* RHPFnumberwebViewController.m */; };
 		009F9EF6212185DD00137E2A /* RHPFnumberwebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 009F9EF4212185DC00137E2A /* RHPFnumberwebViewController.xib */; };
+		00A0150821FEFBBB004005CF /* xmjpicture.png in Resources */ = {isa = PBXBuildFile; fileRef = 00A0150721FEFBBA004005CF /* xmjpicture.png */; };
+		00A0150A21FEFF39004005CF /* xmjpicture1.png in Resources */ = {isa = PBXBuildFile; fileRef = 00A0150921FEFF38004005CF /* xmjpicture1.png */; };
 		00A5162A1EADD66E002B554A /* RHNewPeopleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A516281EADD66E002B554A /* RHNewPeopleCell.m */; };
 		00A5162B1EADD66E002B554A /* RHNewPeopleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00A516291EADD66E002B554A /* RHNewPeopleCell.xib */; };
 		00A5162F1EADFE90002B554A /* RHProjectCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A5162D1EADFE90002B554A /* RHProjectCollectionViewCell.m */; };
@@ -1406,6 +1408,8 @@
 		009F9EF2212185DC00137E2A /* RHPFnumberwebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RHPFnumberwebViewController.h; sourceTree = "<group>"; };
 		009F9EF3212185DC00137E2A /* RHPFnumberwebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RHPFnumberwebViewController.m; sourceTree = "<group>"; };
 		009F9EF4212185DC00137E2A /* RHPFnumberwebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RHPFnumberwebViewController.xib; sourceTree = "<group>"; };
+		00A0150721FEFBBA004005CF /* xmjpicture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xmjpicture.png; sourceTree = "<group>"; };
+		00A0150921FEFF38004005CF /* xmjpicture1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xmjpicture1.png; sourceTree = "<group>"; };
 		00A516271EADD66E002B554A /* RHNewPeopleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHNewPeopleCell.h; sourceTree = "<group>"; };
 		00A516281EADD66E002B554A /* RHNewPeopleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHNewPeopleCell.m; sourceTree = "<group>"; };
 		00A516291EADD66E002B554A /* RHNewPeopleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RHNewPeopleCell.xib; sourceTree = "<group>"; };
@@ -2230,6 +2234,8 @@
 		00792C001C4CAEFB00F76A2E /* picture */ = {
 			isa = PBXGroup;
 			children = (
+				00A0150921FEFF38004005CF /* xmjpicture1.png */,
+				00A0150721FEFBBA004005CF /* xmjpicture.png */,
 				009848CA218C494500BB240E /* quanbuduihuan.png */,
 				008C94AC1B2982380046FB83 /* smallPhone.png */,
 				007BF9311DB6193300CFE86D /* 565767.png */,
@@ -3876,6 +3882,7 @@
 				D537C3791ADD41E2009D3433 /* giftcellBg.png in Resources */,
 				0059BBAE1D5081B900234E27 /* 红包页-11.png in Resources */,
 				00CB33A51DDDB67F0042F07A /* fenxiang1.png in Resources */,
+				00A0150821FEFBBB004005CF /* xmjpicture.png in Resources */,
 				F86B8AFF1AA17DB2000D2B8C /* GestureIcon.png in Resources */,
 				F87B83581AC84AD700EB73A6 /* ICBC.jpg in Resources */,
 				00970A291D476B5600351F1E /* 融益汇app完整hk.png in Resources */,
@@ -4135,6 +4142,7 @@
 				F8A0EBF41AB8718900F65A7F /* project2@2x.png in Resources */,
 				006D69881F9485B900C8F7B2 /* PNG_DropDown.png in Resources */,
 				007FFD7F1D91671300C586FB /* RHProjectDetailViewController.xib in Resources */,
+				00A0150A21FEFF39004005CF /* xmjpicture1.png in Resources */,
 				006ED53B205258BC00CF4B9A /* Path3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

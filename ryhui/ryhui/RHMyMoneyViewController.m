@@ -207,7 +207,7 @@
 }
 -(void)didshuoming{
     
-    UIAlertView* alertView=[[UIAlertView alloc]initWithTitle:@"总资产增加说明："
+    UIAlertView* alertView=[[UIAlertView alloc]initWithTitle:@""
                                                     message:@"进行充值、出借、回款、提现等交易时，平台与银行的交易传输时段或导致总资产短时间显示波动，等平台接收交易返回后显示正确总资产金额"
                                                    delegate:self
                                           cancelButtonTitle:@"确定"
