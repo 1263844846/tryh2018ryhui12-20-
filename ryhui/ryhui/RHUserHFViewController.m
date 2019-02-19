@@ -28,7 +28,7 @@
 #import "RHPFnumberwebViewController.h"
 #import "RHXMJUserViewController.h"
 #import "RHPhoneKHxiugaiViewController.h"
-
+#import "RHXYWebviewViewController.h"
 
 @interface RHUserHFViewController ()<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *cbxView;
@@ -251,7 +251,7 @@
                 self.xmjsqlab.text = @"请授权";
             }else{
                 self.xmjsqlab.text = @"已授权";
-                self.xmjsqbtn.userInteractionEnabled = NO;
+//                self.xmjsqbtn.userInteractionEnabled = NO;
             }
             
             NSString *str = [RHUserManager sharedInterface].telephone;
@@ -309,9 +309,21 @@
         return;
     }
     
-    RHXMJUserViewController * vc = [[RHXMJUserViewController alloc]initWithNibName:@"RHXMJUserViewController" bundle:nil];
-    vc.phonenumber = self.xmjphonenumber ;
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([self.xmjsqlab.text isEqualToString: @"已授权"]) {
+        RHXYWebviewViewController * controller = [[RHXYWebviewViewController alloc]initWithNibName:@"RHXYWebviewViewController" bundle:nil];
+        
+        controller.namestr = @"融益汇自动投标服务协议";
+        
+        
+        [self.navigationController pushViewController:controller animated:YES];
+    }else{
+    
+          RHXMJUserViewController * vc = [[RHXMJUserViewController alloc]initWithNibName:@"RHXMJUserViewController" bundle:nil];
+           vc.phonenumber = self.xmjphonenumber ;
+          [self.navigationController pushViewController:vc animated:YES];
+    
+    
+    }
     
 }
 

@@ -517,22 +517,12 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" 根据银行存管合规要求，如有涉及收取手续费的交易，请您先授权。授权后实际扣费为应收手续费，不会产生额外费用，请知悉。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ttb-Q3-0SJ">
-                            <rect key="frame" x="22" y="28" width="250" height="107"/>
+                            <rect key="frame" x="22" y="39" width="250" height="107"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eu4-oU-9ZJ">
-                            <rect key="frame" x="22" y="129" width="139" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="&lt;&lt;缴费授权协议&gt;&gt;">
-                                <color key="titleColor" red="0.2666666667" green="0.73333333329999995" blue="0.75686274509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="sqxieyi:" destination="-1" eventType="touchUpInside" id="KMo-8D-ZRs"/>
-                            </connections>
-                        </button>
                     </subviews>
                 </view>
             </subviews>

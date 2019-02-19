@@ -29,6 +29,12 @@ NSString *const SZCalendarCellIdentifier = @"celltext";
 @property(nonatomic,strong)NSMutableArray * didarray;
 @property(nonatomic,copy)NSString * strmonth;
 
+@property(nonatomic,copy)NSString *mytodaymoth;
+@property(nonatomic,copy)NSString *mytodaydate;
+@property(nonatomic,assign)int myday;
+
+
+@property(nonatomic,copy)NSString * todayfirststr;
 @end
 
 @implementation SZCalendarPicker
@@ -52,6 +58,9 @@ NSString *const SZCalendarCellIdentifier = @"celltext";
     [self show];
     
     [self loaddata];
+    
+    [self getmydaydate];
+    self.myday = 0;
 }
 -(void)loaddata{
 //    NSDictionary *parameters = @{@"monthDate":@"2016-06"};
@@ -105,6 +114,23 @@ NSString *const SZCalendarCellIdentifier = @"celltext";
     self.todaystr =[dateformatter stringFromDate:senddate];
 }
 
+-(void)getmydaydate{
+    NSDate *now = [NSDate date];
+    NSLog(@"now date is: %@", now);
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSDateComponents *dateComponent = [calendar components:unitFlags fromDate:now];
+    
+    int year =(int) [dateComponent year];
+    int month = (int) [dateComponent month];
+    int day = (int) [dateComponent day];
+   
+    self.mytodaymoth = [NSString stringWithFormat:@"%d年%02d月",year,month];
+    self.mytodaydate = [NSString stringWithFormat:@"%02d",day];
+    
+    
+}
 - (void)customInterface
 {
     CGFloat itemWidth = _collectionView.frame.size.width / 7;
@@ -189,6 +215,7 @@ NSString *const SZCalendarCellIdentifier = @"celltext";
 }
 
 - (NSDate *)lastMonth:(NSDate *)date{
+    self.myday = 0;
     [MBProgressHUD showHUDAddedTo:self.mask animated:YES];
     [self.didarray removeAllObjects];
      self.didinter= -1;
@@ -199,6 +226,7 @@ NSString *const SZCalendarCellIdentifier = @"celltext";
 }
 
 - (NSDate*)nextMonth:(NSDate *)date{
+    self.myday = 0;
     [MBProgressHUD showHUDAddedTo:self.mask animated:YES];
      self.didinter= -1;
     [self.didarray removeAllObjects];
@@ -263,6 +291,8 @@ NSString *const SZCalendarCellIdentifier = @"celltext";
             cell.backgroundColor = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
 
             cell.backgroundColor = [UIColor whiteColor];
+            
+            
 //            for (NSDate * dada in _datearray) {
 //                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             
@@ -283,10 +313,29 @@ NSString *const SZCalendarCellIdentifier = @"celltext";
 //                    cell.backgroundColor = [UIColor colorWithHexString:@"#f89779"];
                     
                     [self.didarray addObject:cell.dateLabel.text];
+                    
+                    
+                    
                     [cell setlablarly];
 //                    cell.testlab.backgroundColor = [UIColor redColor];
                     NSLog(@"%@------",cell.dateLabel.text);
                     NSLog(@"%@===",cell.testlab.backgroundColor);
+                    
+                    if (self.myday==0) {
+                        self.myday++;
+                        cell.testlab.backgroundColor = [UIColor colorWithHexString:@"#44BBC1"];
+                        [cell.dateLabel setTextColor:[UIColor whiteColor]];
+                        
+                        NSString * daystring = [NSString stringWithFormat:@"%@-%02ld",_strmonth,[cell.dateLabel.text integerValue] ];
+                        
+                        self.todayfirststr = daystring;
+                        self.dayblock(daystring);
+                        
+//                        [self collectionView:self.collectionView didHighlightItemAtIndexPath:indexPath];
+                    }
+                    
+                    
+                    self.myday++;
 //                    NSLog(@"%@----",self.datearray);
 //                    if ([self.todaystr integerValue] > day) {
 //                        
@@ -300,6 +349,8 @@ NSString *const SZCalendarCellIdentifier = @"celltext";
 //            }
             
 
+           
+            
             if ([_today isEqualToDate:_date]) {
                 if (day == [self day:_date]) {
                    // [cell.dateLabel setTextColor:[UIColor redColor]];
@@ -310,22 +361,29 @@ NSString *const SZCalendarCellIdentifier = @"celltext";
             } else if ([_today compare:_date] == NSOrderedAscending) {
                // [cell.dateLabel setTextColor:[UIColor colorWithHexString:@"#cbcbcb"]];
                 //cell.backgroundColor = [UIColor greenColor];
+               
+                
             }
             
+           
             if (day ==self.didinter) {
                 NSLog(@"-----%d",day);
                 cell.testlab.backgroundColor = [UIColor colorWithHexString:@"#44BBC1"];
                 [cell.dateLabel setTextColor:[UIColor whiteColor]];
+               
                 
                 // xuanzhong
             }
             
-            if (day== self.didinter) {
-                [cell.dateLabel setTextColor:[UIColor whiteColor]];
-                cell.dateLabel.text = @"今";
+//            if (day== self.didinter) {
+//                [cell.dateLabel setTextColor:[UIColor whiteColor]];
+////                cell.dateLabel.text = @"今";
+//            }
+            
+            if (day == [self.mytodaydate longLongValue] && [self.mytodaymoth isEqualToString:self.monthLabel.text]) {
+//                cell.testlab.backgroundColor = [UIColor colorWithHexString:@"#44BBC1"];
+                                cell.dateLabel.text = @"今";
             }
-            
-            
        }
     }
    

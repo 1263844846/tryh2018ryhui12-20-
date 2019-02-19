@@ -28,6 +28,9 @@
 
 @property(nonatomic,strong)UILabel * bryhlab;
 @property(nonatomic,strong)UILabel * bryihuilab;
+
+
+
 @end
 
 @implementation RHRLViewController
@@ -86,11 +89,13 @@
    
     [[RHNetworkService instance] POST:@"app/common/user/appGatheringCalendar/getDayMoneyByDate" parameters:parameters1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        if ([responseObject isKindOfClass:[NSArray class]]) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]&&responseObject) {
             
             //            self.datadic = responseObject;
             
             
+            self.bryhlab.text = [NSString stringWithFormat:@"%.2f",[responseObject[@"should"] doubleValue]];
+            self.bryihuilab.text = [NSString stringWithFormat:@"%.2f",[responseObject[@"already"] doubleValue]];
             
         }
       
@@ -398,6 +403,7 @@
 
 -(void)loaddata{
     
+//    return;
 //    [self.cbxArray removeAllObjects];
     NSDictionary *parameters = @{@"monthDate":self.mouthstr};
 //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -474,7 +480,7 @@
     
         
     self.cbxArray = dic[@"dayGathers"];
-    [self.tableview reloadData];
+//    [self.tableview reloadData];
 
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
