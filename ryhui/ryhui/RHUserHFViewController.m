@@ -312,7 +312,7 @@
     if ([self.xmjsqlab.text isEqualToString: @"已授权"]) {
         RHXYWebviewViewController * controller = [[RHXYWebviewViewController alloc]initWithNibName:@"RHXYWebviewViewController" bundle:nil];
         
-        controller.namestr = @"融益汇自动投标服务协议";
+        controller.namestr = @"项目集合投标协议";
         
         
         [self.navigationController pushViewController:controller animated:YES];

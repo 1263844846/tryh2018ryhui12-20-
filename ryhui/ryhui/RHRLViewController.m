@@ -85,7 +85,7 @@
     
     
     NSDictionary *parameters1 = @{@"date":self.daystr};
-
+    
    
     [[RHNetworkService instance] POST:@"app/common/user/appGatheringCalendar/getDayMoneyByDate" parameters:parameters1 success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -131,7 +131,7 @@
     self.scollView.frame = CGRectMake(0, 1, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height-66);
     self.scollView.contentSize=CGSizeMake(self.view.frame.size.width,[UIScreen mainScreen].bounds.size.height+40);
     self.scollView.bounces = NO;
-    self.scollView.backgroundColor = [UIColor grayColor];
+    self.scollView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.scollView];
     SZCalendarPicker *calendarPicker = [SZCalendarPicker showOnView:self.scollView];
     calendarPicker.today = [NSDate date];
@@ -336,6 +336,11 @@
     
     self.tableview.dataSource = self;
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    UILabel * lbb = [[UILabel alloc]init];
+    lbb.backgroundColor = [UIColor whiteColor];
+    lbb.frame = self.tableview.frame;
+    [self.scollView addSubview:lbb];
     [self.scollView addSubview:self.tableview];
     calendarPicker.myblock = ^(NSString * bx){
         
@@ -367,6 +372,7 @@
     if (cell == nil) {
        cell = [[[NSBundle mainBundle] loadNibNamed:@"RHRLTableViewCell" owner:nil options:nil] objectAtIndex:0];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (self.cbxArray.count <6) {
 //        cell.datelab.text = self.cbxArray[indexPath.row];
         
@@ -381,7 +387,7 @@
     
 //    [self.cbxArray removeAllObjects];
     
-    [tableView reloadData];
+//    [tableView reloadData];
     
     NSLog(@"%ld",(long)indexPath.row);
 }
@@ -450,8 +456,12 @@
     if (!dic[@"should"]|| ![dic[@"should"] isKindOfClass:[NSNull class]]) {
         //CGFloat mony = [dic[@"should"][0] integerValue];
         self.yhlab.text = [NSString stringWithFormat:@"%.@",dic[@"should"]];
+      
+        
     }else{
          self.yhlab.text =@"0.00";
+        
+       
         
     }
     if (!dic[@"already"]|| ![dic[@"already"] isKindOfClass:[NSNull class]]) {
@@ -481,7 +491,14 @@
         
     self.cbxArray = dic[@"dayGathers"];
 //    [self.tableview reloadData];
-
+     self.tableview.hidden = NO;
+    if ([self.yhlab.text intValue]==0) {
+        self.bryhlab.text = @"0.00";
+        self.bryihuilab.text =@"0.00";
+        self.tableview.hidden = YES;
+//                    [self.cbxArray removeAllObjects];
+//                    [self.tableview reloadData];
+    }
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 

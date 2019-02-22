@@ -1275,7 +1275,7 @@
 
 - (IBAction)opentoubiaosq:(id)sender {
     if (![self.xzbtnres isEqualToString:@"1"]) {
-        [RHUtility showTextWithText:@"请先同意融益汇自动投标服务协议"];
+        [RHUtility showTextWithText:@"请先同意项目集合投标协议"];
         return;
     }
 //    if (self.xmjtf.text.length<1) {
@@ -1304,7 +1304,7 @@
 //    NSString *stringWithoutQuotation = [str
 //                                        stringByReplacingOccurrencesOfString:@"《" withString:@""];
 //    str =  [stringWithoutQuotation stringByReplacingOccurrencesOfString:@"》" withString:@""];
-    controller.namestr = @"融益汇自动投标服务协议";
+    controller.namestr = @"项目集合投标协议";
 //    controller.projectid = self.projectId;
     
     [self.navigationController pushViewController:controller animated:YES];

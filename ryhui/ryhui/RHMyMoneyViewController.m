@@ -213,6 +213,11 @@
                                           cancelButtonTitle:@"确定"
                                           otherButtonTitles: nil];
     alertView.tag=2029;
+//    alertView.tintColor = [RHUtility colorForHex:@"#40bac0"];
+    
+//    [[UIView appearance] setTintColor: [RHUtility colorForHex:@"#40bac0"]];
+    
+//    [alertView setTintColor:[UIColor redColor]];
     [alertView show];
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

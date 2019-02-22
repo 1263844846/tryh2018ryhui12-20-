@@ -366,14 +366,7 @@ NSString *const SZCalendarCellIdentifier = @"celltext";
             }
             
            
-            if (day ==self.didinter) {
-                NSLog(@"-----%d",day);
-                cell.testlab.backgroundColor = [UIColor colorWithHexString:@"#44BBC1"];
-                [cell.dateLabel setTextColor:[UIColor whiteColor]];
-               
-                
-                // xuanzhong
-            }
+            
             
 //            if (day== self.didinter) {
 //                [cell.dateLabel setTextColor:[UIColor whiteColor]];
@@ -383,6 +376,15 @@ NSString *const SZCalendarCellIdentifier = @"celltext";
             if (day == [self.mytodaydate longLongValue] && [self.mytodaymoth isEqualToString:self.monthLabel.text]) {
 //                cell.testlab.backgroundColor = [UIColor colorWithHexString:@"#44BBC1"];
                                 cell.dateLabel.text = @"今";
+                  [cell.dateLabel setTextColor:[UIColor colorWithHexString:@"#44BBC1"]];
+            }
+            if (day ==self.didinter) {
+                NSLog(@"-----%d",day);
+                cell.testlab.backgroundColor = [UIColor colorWithHexString:@"#44BBC1"];
+                [cell.dateLabel setTextColor:[UIColor whiteColor]];
+                
+                
+                // xuanzhong
             }
        }
     }
